@@ -6,37 +6,10 @@ const stringRequired = {
 
 const USERS = 'users';
 
-const interestsOptions = [
-  'PHP',
-  'Javascript',
-  'Python',
-  'Flask',
-  'C',
-  'C++',
-  'Golang',
-  'React',
-  'Node',
-  'Express',
-  'MongoDB',
-  'Vue',
-  'Angular',
-  'MySQL',
-  'PostgreSQL',
-  'Ruby',
-  'Sinatra',
-  'Scala',
-  'Scalatra',
-  'Slim',
-  'Rust',
-  'Java',
-  'Crow',
-  null,
-];
-
 const usersModel = async db => {
   await db.createCollection(USERS);
-  // await db.collection(USERS).createIndex({ username: 1 }, { unique: true, sparse: true })
-  // await db.collection(USERS).createIndex({ email: 1 }, { unique: true, sparse: true })
+  await db.collection(USERS).createIndex({ username: 1 }, { unique: true, sparse: true });
+  await db.collection(USERS).createIndex({ email: 1 }, { unique: true, sparse: true });
   return db.command({
     collMod: USERS,
     validator: {
@@ -62,7 +35,7 @@ const usersModel = async db => {
             bsonType: 'string',
             maxLength: 200,
           },
-          images: { bsonType: 'binData' },
+          images: { bsonType: 'array' },
         },
       },
     },

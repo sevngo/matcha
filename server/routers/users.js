@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { ObjectID } = require('mongodb');
-const { omit } = require('ramda');
+const { omit, split } = require('ramda');
 const multer = require('multer');
 const sharp = require('sharp');
 const {
@@ -10,7 +10,7 @@ const {
   auth,
   isMyId,
   query,
-  createObjectId,
+  newObjectId,
   hashNewPassword,
 } = require('../middlewares');
 const { Users } = require('../database');
@@ -43,7 +43,7 @@ router.get('/', auth, query, async (req, res) => {
   }
 });
 
-router.get('/:id', auth, isValidObjectId, createObjectId, async (req, res) => {
+router.get('/:id', auth, isValidObjectId, newObjectId, async (req, res) => {
   try {
     const user = await Users().findOne({ _id: req.id }, { projection });
     if (!user) return res.status(404).send();
@@ -56,9 +56,9 @@ router.get('/:id', auth, isValidObjectId, createObjectId, async (req, res) => {
 router.patch(
   '/:id',
   auth,
-  isMyId,
   isValidObjectId,
-  createObjectId,
+  isMyId,
+  newObjectId,
   hashNewPassword,
   async (req, res) => {
     try {
@@ -75,7 +75,7 @@ router.patch(
   },
 );
 
-router.delete('/:id', auth, isMyId, isValidObjectId, createObjectId, async (req, res) => {
+router.delete('/:id', auth, isValidObjectId, isMyId, newObjectId, async (req, res) => {
   try {
     const { value: user } = await Users().findOneAndDelete({ _id: req.id }, { projection });
     if (!user) return res.status(404).send();
@@ -103,37 +103,46 @@ const upload = multer({
 });
 
 router.post(
-  '/:id/image',
+  '/:id/images',
   upload.single('image'),
-  createObjectId,
+  newObjectId,
   async (req, res) => {
-    const buffer = await sharp(req.file.buffer)
-      .png()
-      .toBuffer();
-    const { value: user } = await Users().findOneAndUpdate(
-      { _id: req.id },
-      { $set: { images: buffer } },
-      { returnOriginal: false },
-      { projection },
-    );
-    res.send(user);
+    try {
+      const buffer = await sharp(req.file.buffer)
+        .png()
+        .toBuffer();
+      const imageId = new ObjectID();
+      const { value: user } = await Users().findOneAndUpdate(
+        { _id: req.id },
+        { $push: { images: { _id: imageId, buffer } } },
+        { returnOriginal: false, projection },
+      );
+      if (!user) return res.status(404).send();
+      res.send(user);
+    } catch (e) {
+      res.status(400).send(e);
+    }
   },
   (error, req, res, next) => {
     res.status(400).send({ error: error.message });
   },
 );
 
-router.delete('/:id/image', createObjectId, async (req, res) => {
-  const { value: user } = await Users().findOneAndUpdate(
-    { _id: req.id },
-    { $unset: { images: '' } },
-    { returnOriginal: false },
-    { projection },
-  );
-  res.send(user);
+router.delete('/:id/images', newObjectId, async (req, res) => {
+  try {
+    const { value: user } = await Users().findOneAndUpdate(
+      { _id: req.id },
+      { $unset: { images: '' } },
+      { returnOriginal: false, projection },
+    );
+    if (!user) return res.status(404).send();
+    res.send(user);
+  } catch {
+    res.status(500).send();
+  }
 });
 
-router.get('/:id/image', async (req, res) => {
+router.get('/:id/images', async (req, res) => {
   try {
     const _id = new ObjectID(req.params.id);
     const user = await Users().findOne({ _id });

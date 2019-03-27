@@ -4,9 +4,10 @@ const { connectDb } = require('./database');
 const usersRouter = require('./routers/users');
 
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
+
 app.use('/api/users', usersRouter);
 
 app.use(express.static('dist'));

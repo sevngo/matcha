@@ -14,8 +14,9 @@ const reducer = combineReducers({
 
 const initialState = {
   // auth: {
+  //   _id: '5c93ea0c325c2c05da2f720e',
   //   token:
-  //     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YzhkNDBhYWQwYTRkODFlMDJmM2RkNWYiLCJpYXQiOjE1NTI4MzY3MDN9.dWaAzT-ULKY4SDmoIFkFtsv9uAgbQEr2es1cvBZtBKE',
+  //     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YzkzZWEzZDMyNWMyYzA1ZGEyZjcyMTEiLCJpYXQiOjE1NTM3MDk2OTZ9.OeHT16WwlAmhMfG9DtyVIODsKwvpu_FS9aiS8jCcKtk',
   // },
   app: { snackbars: [] },
   users: { data: [], filter: constants.filter },

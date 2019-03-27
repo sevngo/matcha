@@ -13,9 +13,9 @@ const styles = theme => ({
   },
 });
 
-const Component = ({ classes, users, loadUsers, auth: { _id } }) => {
+const Component = ({ classes, users, loadUsers, auth: { token } }) => {
   useEffect(() => {
-    loadUsers();
+    loadUsers(token);
   }, []);
   return (
     <div className={classes.root}>

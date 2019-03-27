@@ -9,7 +9,7 @@ const isValidObjectId = (req, res, next) => {
   next();
 };
 
-const createObjectId = (req, res, next) => {
+const newObjectId = (req, res, next) => {
   req.id = new ObjectID(req.params.id);
   next();
 };
@@ -94,5 +94,5 @@ module.exports = {
   auth,
   isMyId,
   query,
-  createObjectId,
+  newObjectId,
 };

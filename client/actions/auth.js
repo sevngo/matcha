@@ -1,3 +1,4 @@
+import { omit } from 'ramda';
 import { enqueueSnackbar, success, error } from './app';
 import { createUser, loginUser, patchUser } from '../api';
 
@@ -30,13 +31,10 @@ export const login = user => async dispatch => {
   }
 };
 
-export const updateAccount = account => async (dispatch, getState) => {
+export const updateAccount = account => async dispatch => {
   try {
-    const {
-      auth: { token, _id },
-    } = getState();
     dispatch({ type: USER_UPDATE });
-    const { data } = await patchUser(token, _id, account);
+    const { data } = await patchUser(account.token, account._id, omit(['_id', 'token'])(account));
     dispatch({ type: USER_UPDATED, data });
   } catch (e) {
     dispatch(enqueueSnackbar(error));

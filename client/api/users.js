@@ -10,13 +10,27 @@ export const getUsers = (token, filter) => {
 };
 
 export const getUser = (token, id) => {
-  const headers = { Authorization: `Bearer ${token}` };
+  const headers = {
+    Authorization: `Bearer ${token}`,
+    'Content-Type': 'application/json',
+  };
   return axios.get(`/api/users/${id}`, { headers });
 };
 
 export const patchUser = (token, id, user) => {
   const headers = {
     Authorization: `Bearer ${token}`,
+    'Content-Type': 'application/json',
   };
   return axios.patch(`/api/users/${id}`, user, { headers });
+};
+
+export const uploadImage = (token, id, image) => {
+  const headers = {
+    Authorization: `Bearer ${token}`,
+    'Content-Type': 'multipart/form-data',
+  };
+  let formData = new FormData();
+  formData.append('image', image);
+  return axios.post(`/api/users/${id}/images`, formData, { headers });
 };
