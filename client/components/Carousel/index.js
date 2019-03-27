@@ -4,6 +4,7 @@ import { Button, MobileStepper, withStyles } from '@material-ui/core';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import * as constants from '../../utils/constants';
+import userImage from '../../images/user.png';
 
 const styles = theme => ({
   img: {
@@ -47,7 +48,7 @@ const Component = ({ images, classes }) => {
 };
 
 Component.defaultProps = {
-  images: ['https://picsum.photos/600/400?random'],
+  images: [userImage],
 };
 
 export default withStyles(styles)(Component);

@@ -1,19 +1,18 @@
 import { enqueueSnackbar, error } from './app';
-import { getUsers, getUser } from '../api';
+import { getUsers, getUser, uploadImage } from '../api';
 
 export const USERS_LOAD = 'USERS_LOAD';
 export const USERS_LOADED = 'USERS_LOADED';
 export const USER_LOAD = 'USER_LOAD';
 export const USER_LOADED = 'USER_LOADED';
 export const HANDLE_FILTER = 'HANDLE_FILTER';
+export const IMAGE_UPLOAD = 'IMAGE_UPLOAD';
+export const IMAGE_UPLOADED = 'IMAGE_UPLOADED';
 
 export const handleFilter = filter => ({ type: HANDLE_FILTER, filter });
 
-export const loadUsers = () => async (dispatch, getState) => {
+export const loadUsers = token => async dispatch => {
   try {
-    const {
-      auth: { token },
-    } = getState();
     dispatch({ type: USERS_LOAD });
     const { data } = await getUsers(token);
     dispatch({ type: USERS_LOADED, data });
@@ -22,15 +21,23 @@ export const loadUsers = () => async (dispatch, getState) => {
   }
 };
 
-export const loadUser = id => async (dispatch, getState) => {
+export const loadUser = (token, id) => async dispatch => {
   try {
-    const {
-      auth: { token },
-    } = getState();
     dispatch({ type: USER_LOAD });
     const { data } = await getUser(token, id);
     dispatch({ type: USER_LOADED, data });
-  } catch (e) {
+  } catch {
+    dispatch(enqueueSnackbar(error));
+  }
+};
+
+export const addImage = (token, id, image) => async dispatch => {
+  try {
+    dispatch({ type: IMAGE_UPLOAD });
+    const { data } = await uploadImage(token, id, image);
+    dispatch({ type: IMAGE_UPLOADED });
+    console.log(data);
+  } catch {
     dispatch(enqueueSnackbar(error));
   }
 };
