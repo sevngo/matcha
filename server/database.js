@@ -8,7 +8,7 @@ let db;
 const connectDb = async () => {
   const client = await MongoClient.connect(url, { useNewUrlParser: true });
   db = client.db(databaseName);
-  console.log('Database connected');
+  console.log('Database connected'); // eslint-disable-line no-console
   return await usersModel(db);
 };
 

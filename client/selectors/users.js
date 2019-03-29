@@ -1,13 +1,4 @@
-import {
-  prop,
-  path,
-  filter as rFilter,
-  compose,
-  intersection,
-  length,
-  reject,
-  propEq,
-} from 'ramda';
+import { prop, path, compose, reject, propEq } from 'ramda';
 import { createSelector } from 'reselect';
 
 const root = prop('users');

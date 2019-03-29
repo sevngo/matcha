@@ -1,11 +1,11 @@
 import React from 'react';
 import { withStyles, Chip } from '@material-ui/core';
 
-const styles = theme => ({
+const styles = {
   chip: {
     color: 'white',
   },
-});
+};
 
 const color = {
   PHP: '#3f51b5',

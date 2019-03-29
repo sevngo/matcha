@@ -16,8 +16,8 @@ app.get('*', (req, res) => res.sendFile(path.join(__dirname, '..', 'dist', 'inde
 (async () => {
   try {
     await connectDb();
-    await app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
+    await app.listen(PORT, () => console.log(`Server listening on port ${PORT}`)); // eslint-disable-line no-console
   } catch (err) {
-    console.log(err);
+    console.log(err); // eslint-disable-line no-console
   }
 })();

@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { ObjectID } = require('mongodb');
-const { omit, split } = require('ramda');
+const { omit } = require('ramda');
 const multer = require('multer');
 const sharp = require('sharp');
 const {
@@ -123,6 +123,7 @@ router.post(
       res.status(400).send(e);
     }
   },
+  // eslint-disable-next-line no-unused-vars
   (error, req, res, next) => {
     res.status(400).send({ error: error.message });
   },

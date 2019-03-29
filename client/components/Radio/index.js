@@ -1,5 +1,5 @@
 import React from 'react';
-import { RadioGroup, FormControl, FormLabel, FormHelperText } from '@material-ui/core';
+import { RadioGroup, FormControl, FormLabel } from '@material-ui/core';
 
 const Component = ({ field, form: { touched, errors }, label, children, ...rest }) => {
   const { name } = field;

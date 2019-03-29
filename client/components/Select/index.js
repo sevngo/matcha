@@ -1,20 +1,10 @@
 import React from 'react';
-import {
-  withStyles,
-  InputLabel,
-  FormControl,
-  Select,
-  FormHelperText,
-  OutlinedInput,
-} from '@material-ui/core';
-
-const styles = theme => ({});
+import { InputLabel, FormControl, Select, FormHelperText, OutlinedInput } from '@material-ui/core';
 
 const Component = ({
   field,
   form: { touched, errors },
   label,
-  classes,
   fullWidth,
   children,
   className,
@@ -39,4 +29,4 @@ const Component = ({
   );
 };
 
-export default withStyles(styles)(Component);
+export default Component;
