@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { compose } from 'ramda';
-import { withStyles, Grid, Drawer, Hidden } from '@material-ui/core';
+import { withStyles, Drawer } from '@material-ui/core';
 import UserForm from '../../components/UserForm';
 import { createStructuredSelector } from 'reselect';
 import { getFilter } from '../../selectors';

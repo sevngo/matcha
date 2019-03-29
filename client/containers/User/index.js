@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { compose, omit } from 'ramda';
+import { compose } from 'ramda';
 import { connect } from 'react-redux';
 import { withStyles, Paper, Grid } from '@material-ui/core';
 import UserForm from '../../components/UserForm';

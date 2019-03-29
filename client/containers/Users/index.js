@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { compose, reject, propEq, not } from 'ramda';
+import { compose } from 'ramda';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core';
 import Users from '../../components/Users';

@@ -34,9 +34,8 @@ export const loadUser = (token, id) => async dispatch => {
 export const addImage = (token, id, image) => async dispatch => {
   try {
     dispatch({ type: IMAGE_UPLOAD });
-    const { data } = await uploadImage(token, id, image);
+    await uploadImage(token, id, image);
     dispatch({ type: IMAGE_UPLOADED });
-    console.log(data);
   } catch {
     dispatch(enqueueSnackbar(error));
   }

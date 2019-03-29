@@ -4,7 +4,7 @@ export const createUser = user => axios.post('/api/users', user);
 
 export const loginUser = user => axios.post('/api/users/login', user);
 
-export const getUsers = (token, filter) => {
+export const getUsers = token => {
   const headers = { Authorization: `Bearer ${token}` };
   return axios.get('/api/users', { headers });
 };

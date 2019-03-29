@@ -6,7 +6,7 @@ export const composeValidators = (...validators) => value =>
 export const isRequired = value => !value && 'Required';
 
 export const isEmail = value =>
-  !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value) && 'Invalid';
+  !/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) && 'Invalid';
 
 export const isShort = value => value && length(value) <= 3 && 'Too short';
 

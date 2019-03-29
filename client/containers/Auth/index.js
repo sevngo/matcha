@@ -67,7 +67,7 @@ const Component = ({ classes, login, register }) => {
                   </Typography>
                   <DialogContent>
                     <DialogContentText>{constants.enterEmail}</DialogContentText>
-                    <UserForm initialValues={{ email: '' }} submit={console.log} />
+                    <UserForm initialValues={{ email: '' }} submit={() => {}} />
                   </DialogContent>
                 </Dialog>
               </Fragment>

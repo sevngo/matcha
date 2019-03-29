@@ -6,11 +6,11 @@ import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import * as constants from '../../utils/constants';
 import userImage from '../../images/user.png';
 
-const styles = theme => ({
+const styles = {
   img: {
     width: '100%',
   },
-});
+};
 
 const Component = ({ images, classes }) => {
   const [activeStep, handleStep] = useState(0);

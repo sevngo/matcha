@@ -1,4 +1,4 @@
-import { LOGGED, LOGOUT, HANDLE_FILTER, USER_UPDATED } from '../actions';
+import { LOGGED, LOGOUT, USER_UPDATED } from '../actions';
 
 export default (state = {}, action) => {
   switch (action.type) {
