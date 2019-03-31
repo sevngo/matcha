@@ -1,83 +1,44 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { compose } from 'ramda';
 import { connect } from 'react-redux';
 import { withStyles, Paper, Grid } from '@material-ui/core';
+import MyUser from '../MyUser';
 import UserForm from '../../components/UserForm';
 import Carousel from '../../components/Carousel';
-import Icon from '../../components/Icon';
 import withAuth from '../../hoc/withAuth';
-import { loadUser, updateAccount, addImage } from '../../actions';
+import { loadUser } from '../../actions';
 import { getUser, getAuth } from '../../selectors';
-
-const styles = theme => ({
-  p3: {
-    padding: theme.spacing(3),
-  },
-  width: {
-    maxWidth: 500,
-  },
-  header: {
-    backgroundColor: theme.palette.background.default,
-  },
-  hide: {
-    display: 'none',
-  },
-});
+import styles from './styles';
 
 const Component = ({
   user,
   classes,
+  loadUser,
   match: {
     params: { id },
   },
-  loadUser,
   auth,
-  updateAccount,
-  addImage,
 }) => {
-  const isMyAccount = id === auth._id;
-  const inputEl = useRef(null);
+  if (id === auth._id) return <MyUser />;
+  const [activeStep, handleStep] = useState(0);
   useEffect(() => {
-    if (!isMyAccount) loadUser(auth.token, id);
+    loadUser(auth.token, id);
   }, []);
   return (
     <Grid container spacing={3} justify="center" direction="row" className={classes.p3}>
-      <Grid item xs={12} md={6}>
-        {isMyAccount && (
-          <Paper square elevation={24} className={classes.header}>
-            <input
-              ref={inputEl}
-              type="file"
-              onChange={event => addImage(auth.token, auth._id, event.target.files[0])}
-              accept="image/png, image/jpeg"
-              className={classes.hide}
-            />
-            <Icon color="inherit">delete</Icon>
-            <Icon onClick={() => inputEl.current.click()} color="inherit">
-              add_a_photo
-            </Icon>
-          </Paper>
-        )}
+      <Grid item className={classes.width}>
         <Paper elevation={24}>
-          <Carousel images={user.images} />
+          <Carousel
+            userId={user._id}
+            images={user.images}
+            activeStep={activeStep}
+            handleStep={handleStep}
+          />
         </Paper>
       </Grid>
-      <Grid item xs={12} md={6} className={classes.width}>
+      <Grid item className={classes.width}>
         <Paper elevation={24} className={classes.p3}>
-          {isMyAccount ? (
-            <UserForm
-              initialValues={{
-                interests: [],
-                biography: '',
-                ...auth,
-                newPassword: '',
-              }}
-              newPassword
-              submit={updateAccount}
-            />
-          ) : (
-            <UserForm initialValues={user} readOnly />
-          )}
+          <UserForm initialValues={user} readOnly />
         </Paper>
       </Grid>
     </Grid>
@@ -97,7 +58,7 @@ export default compose(
   withStyles(styles),
   connect(
     mapStateToProps,
-    { loadUser, updateAccount, addImage },
+    { loadUser },
   ),
   withAuth,
 )(Component);

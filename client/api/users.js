@@ -34,3 +34,10 @@ export const uploadImage = (token, id, image) => {
   formData.append('image', image);
   return axios.post(`/api/users/${id}/images`, formData, { headers });
 };
+
+export const deleteImage = (token, id, imageId) => {
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
+  return axios.delete(`/api/users/${id}/images/${imageId}`, { headers });
+};

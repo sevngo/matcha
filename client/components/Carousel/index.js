@@ -1,5 +1,5 @@
-import React, { useState, Fragment } from 'react';
-import { length } from 'ramda';
+import React, { Fragment } from 'react';
+import { length, path } from 'ramda';
 import { Button, MobileStepper, withStyles } from '@material-ui/core';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
@@ -12,12 +12,13 @@ const styles = {
   },
 };
 
-const Component = ({ images, classes }) => {
-  const [activeStep, handleStep] = useState(0);
+const Component = ({ userId, images, classes, activeStep, handleStep }) => {
   const maxSteps = length(images);
+  const imageId = path([activeStep, '_id'])(images);
+  const image = imageId ? `/api/users/${userId}/images/${images[activeStep]._id}` : userImage;
   return (
     <Fragment>
-      <img className={classes.img} src={images[activeStep]} alt={images[activeStep]} />
+      <img className={classes.img} src={image} alt="image" />
       <MobileStepper
         steps={maxSteps}
         position="static"
@@ -26,7 +27,7 @@ const Component = ({ images, classes }) => {
           <Button
             size="small"
             onClick={() => handleStep(activeStep + 1)}
-            disabled={activeStep === maxSteps - 1}
+            disabled={activeStep === maxSteps - 1 || !imageId}
           >
             {constants.next}
             <KeyboardArrowRight />
@@ -36,7 +37,7 @@ const Component = ({ images, classes }) => {
           <Button
             size="small"
             onClick={() => handleStep(activeStep - 1)}
-            disabled={activeStep === 0}
+            disabled={activeStep === 0 || !imageId}
           >
             <KeyboardArrowLeft />
             {constants.back}
@@ -48,7 +49,7 @@ const Component = ({ images, classes }) => {
 };
 
 Component.defaultProps = {
-  images: [userImage],
+  images: [],
 };
 
 export default withStyles(styles)(Component);

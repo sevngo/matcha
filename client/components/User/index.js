@@ -8,6 +8,7 @@ import {
   CardMedia,
   Typography,
 } from '@material-ui/core';
+import { path } from 'ramda';
 import userImage from '../../images/user.png';
 import Interests from '../Interests';
 
@@ -27,7 +28,9 @@ const styles = theme => ({
 });
 
 const Component = ({ user, classes }) => {
-  const image = user.image ? user.images[0] : userImage;
+  const { images } = user;
+  const imageId = path([0, '_id'])(images);
+  const image = imageId ? `/api/users/${user._id}/images/${imageId}` : userImage;
   return (
     <Card className={classes.card} elevation={24}>
       <CardActionArea component={Link} to={`/user/${user._id}`}>
