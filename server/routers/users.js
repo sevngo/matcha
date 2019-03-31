@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { ObjectID } = require('mongodb');
-const { omit } = require('ramda');
+const { omit, find, propEq } = require('ramda');
 const multer = require('multer');
 const sharp = require('sharp');
 const {
@@ -17,7 +17,7 @@ const { Users } = require('../database');
 
 const router = new Router();
 
-const projection = { password: 0, email: 0 };
+const projection = { password: 0, email: 0, 'images.data': 0 };
 
 router.post('/', hashPassword, async (req, res) => {
   try {
@@ -86,8 +86,8 @@ router.delete('/:id', auth, isValidObjectId, isMyId, newObjectId, async (req, re
 });
 
 router.post('/login', generateAuthToken, (req, res) => {
-  const { myAccount, token } = req;
-  res.send({ ...omit(['password'])(myAccount), token });
+  const { myUser, token } = req;
+  res.send({ ...omit(['password'])(myUser), token });
   res.status(400).send();
 });
 
@@ -109,13 +109,14 @@ router.post(
   async (req, res) => {
     try {
       const buffer = await sharp(req.file.buffer)
+        .resize({ width: 500, fit: 'outside' })
         .png()
         .toBuffer();
       const imageId = new ObjectID();
       const { value: user } = await Users().findOneAndUpdate(
         { _id: req.id },
-        { $push: { images: { _id: imageId, buffer } } },
-        { returnOriginal: false, projection },
+        { $push: { images: { _id: imageId, data: buffer } } },
+        { returnOriginal: false, projection: { password: 0 } },
       );
       if (!user) return res.status(404).send();
       res.send(user);
@@ -129,12 +130,13 @@ router.post(
   },
 );
 
-router.delete('/:id/images', newObjectId, async (req, res) => {
+router.delete('/:id/images/:imageId', newObjectId, async (req, res) => {
   try {
+    const imageId = new ObjectID(req.params.imageId);
     const { value: user } = await Users().findOneAndUpdate(
       { _id: req.id },
-      { $unset: { images: '' } },
-      { returnOriginal: false, projection },
+      { $pull: { images: { _id: imageId } } },
+      { returnOriginal: false, projection: { password: 0 } },
     );
     if (!user) return res.status(404).send();
     res.send(user);
@@ -143,15 +145,16 @@ router.delete('/:id/images', newObjectId, async (req, res) => {
   }
 });
 
-router.get('/:id/images', async (req, res) => {
+router.get('/:id/images/:imageId', newObjectId, async (req, res) => {
   try {
-    const _id = new ObjectID(req.params.id);
-    const user = await Users().findOne({ _id });
-    if (!user || !user.images) throw new Error();
+    const imageId = new ObjectID(req.params.imageId);
+    const user = await Users().findOne({ _id: req.id, 'images._id': imageId });
+    if (!user) return res.status(404).send();
+    const { data } = find(image => propEq('_id', imageId)(image))(user.images);
     res.type('png');
-    res.send(user.images.buffer);
+    res.send(data.buffer);
   } catch {
-    res.status(404).send();
+    res.status(500).send();
   }
 });
 

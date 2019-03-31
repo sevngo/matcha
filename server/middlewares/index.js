@@ -37,15 +37,14 @@ const generateAuthToken = async (req, res, next) => {
   try {
     const { username, password } = req.body;
 
-    const myAccount = await Users().findOne({ username });
-    if (!myAccount) throw new Error();
-
-    const isMatch = await bcrypt.compare(password, myAccount.password);
+    const myUser = await Users().findOne({ username }, { projection: { 'images.data': 0 } });
+    if (!myUser) throw new Error();
+    const isMatch = await bcrypt.compare(password, myUser.password);
     if (!isMatch) throw new Error();
 
-    const token = await jwt.sign({ _id: toString(myAccount._id) }, 'ofjqikfipqoejf');
+    const token = await jwt.sign({ _id: toString(myUser._id) }, 'ofjqikfipqoejf');
 
-    req.myAccount = myAccount;
+    req.myUser = myUser;
     req.token = token;
     next();
   } catch {

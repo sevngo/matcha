@@ -10,6 +10,10 @@ import {
   USERS_LOADED,
   USER_LOAD,
   USER_LOADED,
+  IMAGE_UPLOAD,
+  IMAGE_UPLOADED,
+  IMAGE_DELETE,
+  IMAGE_DELETED,
 } from '../actions';
 
 const defaultState = {
@@ -38,11 +42,15 @@ export default (state = defaultState, action) => {
     case USER_UPDATE:
     case USERS_LOAD:
     case USER_LOAD:
+    case IMAGE_UPLOAD:
+    case IMAGE_DELETE:
       return { ...state, isLoading: true };
     case LOGGED:
     case USER_UPDATED:
     case USERS_LOADED:
     case USER_LOADED:
+    case IMAGE_UPLOADED:
+    case IMAGE_DELETED:
       return { ...state, isLoading: false };
     default:
       return state;
