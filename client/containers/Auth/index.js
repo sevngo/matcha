@@ -25,9 +25,6 @@ const styles = theme => ({
   mt1: {
     marginTop: theme.spacing(1),
   },
-  mt4: {
-    marginTop: theme.spacing(4),
-  },
   item: {
     maxWidth: 500,
   },
@@ -62,13 +59,15 @@ const Component = ({ classes, login, register }) => {
                   {constants.forgotPassword}
                 </Button>
                 <Dialog open={isDialogOpen} onClose={() => toggleDialog(false)}>
-                  <Typography gutterBottom align="center" variant="h6" className={classes.mt4}>
-                    {constants.forgotPassword}
-                  </Typography>
-                  <DialogContent>
-                    <DialogContentText>{constants.enterEmail}</DialogContentText>
-                    <UserForm initialValues={{ email: '' }} submit={() => {}} />
-                  </DialogContent>
+                  <div className={classes.p3}>
+                    <Typography gutterBottom align="center" variant="h6">
+                      {constants.forgotPassword}
+                    </Typography>
+                    <DialogContent>
+                      <DialogContentText>{constants.enterEmail}</DialogContentText>
+                      <UserForm initialValues={{ email: '' }} submit={() => {}} />
+                    </DialogContent>
+                  </div>
                 </Dialog>
               </Fragment>
             ) : (

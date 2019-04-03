@@ -8,6 +8,7 @@ import {
   FormControlLabel,
   Radio as MRadio,
   MenuItem,
+  Divider,
 } from '@material-ui/core';
 import Icon from '../Icon';
 import TextField from '../TextField';
@@ -28,6 +29,9 @@ import * as constants from '../../utils/constants';
 const styles = theme => ({
   mt1: {
     marginTop: theme.spacing(1),
+  },
+  mb1: {
+    marginBottom: theme.spacing(1),
   },
   gender: {
     marginTop: theme.spacing(1),
@@ -161,8 +165,17 @@ const Component = ({
         </div>
       )}
       {has('ageRange', initialValues) && (
-        <div className={classes.p1}>
-          <Field name="ageRange" component={Range} min={0} max={50} setFieldValue={setFieldValue} />
+        <div>
+          <Divider className={classes.mb1} />
+          <div className={classes.p1}>
+            <Field
+              name="ageRange"
+              component={Range}
+              min={0}
+              max={50}
+              setFieldValue={setFieldValue}
+            />
+          </div>
         </div>
       )}
       {has('interests', initialValues) && (
@@ -215,7 +228,6 @@ const Component = ({
             color="primary"
             size="large"
             fullWidth
-            className={classes.mt1}
             disabled={!dirty}
             onClick={() => resetForm(initialValues)}
           >
