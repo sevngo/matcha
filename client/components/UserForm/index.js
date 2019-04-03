@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { withFormik, Field } from 'formik';
-import { has, compose, map, range } from 'ramda';
+import { has, compose, map } from 'ramda';
 import {
   Grid,
   withStyles,
@@ -14,6 +14,7 @@ import TextField from '../TextField';
 import Radio from '../Radio';
 import Select from '../Select';
 import Interests from '../Interests';
+import Range from '../Range';
 import {
   composeValidators,
   isRequired,
@@ -39,6 +40,9 @@ const styles = theme => ({
   width: {
     width: '50%',
   },
+  p1: {
+    padding: theme.spacing(1),
+  },
 });
 
 const Component = ({
@@ -50,6 +54,7 @@ const Component = ({
   newPassword,
   resetForm,
   dirty,
+  setFieldValue,
 }) => {
   const [showPassword, toggleShowPassword] = useState(false);
   return (
@@ -155,24 +160,11 @@ const Component = ({
           </Field>
         </div>
       )}
-      {has('ageMin', initialValues) &&
-        has('ageMax', initialValues) &&
-        map(({ name, label }) => (
-          <Field
-            key={name}
-            name={name}
-            label={label}
-            labelWidth={65}
-            component={Select}
-            className={classes.width}
-          >
-            {map(age => (
-              <MenuItem key={age} value={age}>
-                {age}
-              </MenuItem>
-            ))(range(18, 50))}
-          </Field>
-        ))(constants.ageDifference)}
+      {has('ageRange', initialValues) && (
+        <div className={classes.p1}>
+          <Field name="ageRange" component={Range} min={0} max={50} setFieldValue={setFieldValue} />
+        </div>
+      )}
       {has('interests', initialValues) && (
         <Field
           name="interests"
@@ -242,5 +234,5 @@ export default compose(
     displayName: 'UserForm',
     enableReinitialize: true,
   }),
-  withStyles(styles),
+  withStyles(styles, { withTheme: true }),
 )(Component);
