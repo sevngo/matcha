@@ -69,14 +69,8 @@ export const next = 'Next';
 
 export const back = 'Back';
 
-export const ageDifference = [
-  { name: 'ageMin', label: 'Age Min' },
-  { name: 'ageMax', label: 'Age Max' },
-];
-
 export const filter = {
   gender: 'male',
   interests: [],
-  ageMin: 18,
-  ageMax: 49,
+  ageRange: [0, 50],
 };
