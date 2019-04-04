@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core';
 import Users from '../../components/Users';
 import withAuth from '../../hoc/withAuth';
-import { getUsers, getAuth } from '../../selectors';
+import { getUsers, getAuth, getFilter } from '../../selectors';
 import { loadUsers } from '../../actions';
 
 const styles = theme => ({
@@ -13,10 +13,10 @@ const styles = theme => ({
   },
 });
 
-const Component = ({ classes, users, loadUsers, auth: { token } }) => {
+const Component = ({ classes, users, loadUsers, auth: { token }, filter }) => {
   useEffect(() => {
-    loadUsers(token);
-  }, []);
+    loadUsers(token, filter);
+  }, [filter]);
   return (
     <div className={classes.root}>
       <Users users={users} />
@@ -31,6 +31,7 @@ Component.defaultProps = {
 const mapStateToProps = (state, { auth: { _id } }) => ({
   auth: getAuth(state),
   users: getUsers(_id)(state),
+  filter: getFilter(state),
 });
 
 export default compose(

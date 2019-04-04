@@ -68,7 +68,7 @@ const Component = ({
           name="username"
           label={constants.username}
           component={TextField}
-          validate={composeValidators(isRequired, isShort, isLong(20))}
+          validate={composeValidators(isRequired, isShort, isLong(30))}
           fullWidth
           startAdornment="account_circle"
           readOnly={readOnly}
@@ -79,7 +79,7 @@ const Component = ({
           name="password"
           label={newPassword ? constants.newPassword : constants.password}
           component={TextField}
-          validate={composeValidators(isRequired, isShort, isLong(20))}
+          validate={composeValidators(isRequired, isShort, isLong(30))}
           type={showPassword ? 'text' : 'password'}
           fullWidth
           startAdornment="vpn_key"
@@ -95,7 +95,7 @@ const Component = ({
           name="newPassword"
           label={constants.newPassword}
           component={TextField}
-          validate={composeValidators(isShort, isLong(20))}
+          validate={composeValidators(isShort, isLong(30))}
           type={showPassword ? 'text' : 'password'}
           fullWidth
           startAdornment="vpn_key"
@@ -111,7 +111,7 @@ const Component = ({
           name="email"
           label={constants.email}
           component={TextField}
-          validate={composeValidators(isRequired, isEmail, isLong(20))}
+          validate={composeValidators(isRequired, isEmail, isLong(30))}
           fullWidth
           startAdornment="alternate_email"
           readOnly={readOnly}
@@ -122,7 +122,7 @@ const Component = ({
           name="firstName"
           label={constants.firstName}
           component={TextField}
-          validate={composeValidators(isRequired, isLong(20))}
+          validate={composeValidators(isRequired, isLong(30))}
           fullWidth
           readOnly={readOnly}
         />
@@ -132,7 +132,7 @@ const Component = ({
           name="lastName"
           label={constants.lastName}
           component={TextField}
-          validate={composeValidators(isRequired, isLong(20))}
+          validate={composeValidators(isRequired, isLong(30))}
           fullWidth
           readOnly={readOnly}
         />
@@ -201,7 +201,7 @@ const Component = ({
           name="biography"
           label="Biography"
           component={TextField}
-          validate={isLong(200)}
+          validate={isLong(300)}
           fullWidth
           multiline
           rows="3"

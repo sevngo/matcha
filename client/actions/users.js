@@ -13,10 +13,10 @@ export const IMAGE_DELETED = 'IMAGE_DELETED';
 
 export const handleFilter = filter => ({ type: HANDLE_FILTER, filter });
 
-export const loadUsers = token => async dispatch => {
+export const loadUsers = (token, filter) => async dispatch => {
   try {
     dispatch({ type: USERS_LOAD });
-    const { data } = await getUsers(token);
+    const { data } = await getUsers(token, filter);
     dispatch({ type: USERS_LOADED, data });
   } catch {
     dispatch(enqueueSnackbar(error));

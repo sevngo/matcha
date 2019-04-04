@@ -34,7 +34,11 @@ export const login = user => async dispatch => {
 export const updateAccount = account => async dispatch => {
   try {
     dispatch({ type: USER_UPDATE });
-    const { data } = await patchUser(account.token, account._id, omit(['_id', 'token'])(account));
+    const { data } = await patchUser(
+      account.token,
+      account._id,
+      omit(['_id', 'token', 'images'])(account),
+    );
     dispatch({ type: USER_UPDATED, data });
   } catch (e) {
     dispatch(enqueueSnackbar(error));
