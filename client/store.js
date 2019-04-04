@@ -12,11 +12,11 @@ const reducer = combineReducers({
 });
 
 const initialState = {
-  auth: {
-    _id: '5c93ea0c325c2c05da2f720e',
-    token:
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YzkzZWEzZDMyNWMyYzA1ZGEyZjcyMTEiLCJpYXQiOjE1NTM3MDk2OTZ9.OeHT16WwlAmhMfG9DtyVIODsKwvpu_FS9aiS8jCcKtk',
-  },
+  // auth: {
+  //   _id: '5c9b4cc37bd6c53d7feacd14',
+  //   token:
+  //     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YzliNGNjMzdiZDZjNTNkN2ZlYWNkMTQiLCJpYXQiOjE1NTQzNzk4MjF9.Cxg0HIjPpbbd2A05CP8naMDudQCPDlZI47VCjEeTrCQ',
+  // },
   app: { snackbars: [] },
   users: {
     data: [],

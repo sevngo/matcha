@@ -1,12 +1,16 @@
 import axios from 'axios';
+import { reduce } from 'ramda';
 
 export const createUser = user => axios.post('/api/users', user);
 
 export const loginUser = user => axios.post('/api/users/login', user);
 
-export const getUsers = token => {
+export const getUsers = (token, filter) => {
   const headers = { Authorization: `Bearer ${token}` };
-  return axios.get('/api/users', { headers });
+  const { gender, interests } = filter;
+  const genderQuery = `/?gender=${gender}`;
+  const interestsQuery = reduce((acc, interest) => acc + '&interests=' + interest, '')(interests);
+  return axios.get(`/api/users${genderQuery}${interestsQuery}`, { headers });
 };
 
 export const getUser = (token, id) => {

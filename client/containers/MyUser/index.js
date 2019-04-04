@@ -29,7 +29,10 @@ const Component = ({ classes, auth, updateAccount, addImage, removeImage }) => {
           />
           <Icon
             color="inherit"
-            onClick={() => removeImage(token, _id, path([activeStep, '_id'])(images))}
+            onClick={() => {
+              removeImage(token, _id, path([activeStep, '_id'])(images));
+              handleStep(0);
+            }}
             disabled={!images || isEmpty(images)}
           >
             delete
@@ -37,7 +40,7 @@ const Component = ({ classes, auth, updateAccount, addImage, removeImage }) => {
           <Icon
             onClick={() => inputEl.current.click()}
             color="inherit"
-            disabled={length(auth.images) === 5}
+            disabled={length(images) === 5}
           >
             add_a_photo
           </Icon>

@@ -1,7 +1,7 @@
 const stringRequired = {
   bsonType: 'string',
   minLength: 3,
-  maxLength: 20,
+  maxLength: 30,
 };
 
 const USERS = 'users';
@@ -20,7 +20,7 @@ const usersModel = async db => {
         properties: {
           _id: { bsonType: 'objectId' },
           username: stringRequired,
-          birthDate: { bsonType: 'string', minLength: 10, maxLength: 10 },
+          birthDate: { bsonType: 'date' },
           firstName: stringRequired,
           lastName: stringRequired,
           email: stringRequired,
@@ -33,7 +33,7 @@ const usersModel = async db => {
           },
           biography: {
             bsonType: 'string',
-            maxLength: 200,
+            maxLength: 300,
           },
           images: { bsonType: 'array' },
         },
