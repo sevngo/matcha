@@ -5,7 +5,8 @@ const limit = (req, res, next) => {
   const {
     query: { limit },
   } = req;
-  req.limit = defaultToNull(parseInt(limit)) && { $limit: limit };
+  const intLimit = defaultToNull(parseInt(limit));
+  req.limit = intLimit && { $limit: intLimit };
   next();
 };
 
@@ -13,7 +14,8 @@ const skip = (req, res, next) => {
   const {
     query: { skip },
   } = req;
-  req.skip = defaultToNull(parseInt(skip)) && { $skip: skip };
+  const intSkip = defaultToNull(parseInt(skip));
+  req.skip = intSkip && { $skip: intSkip };
   next();
 };
 
