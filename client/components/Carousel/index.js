@@ -4,7 +4,7 @@ import { Button, MobileStepper, withStyles } from '@material-ui/core';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import * as constants from '../../utils/constants';
-import userImage from '../../images/user.png';
+import emptyImage from '../../images/emptyImage.png';
 
 const styles = {
   img: {
@@ -15,7 +15,7 @@ const styles = {
 const Component = ({ userId, images, classes, activeStep, handleStep }) => {
   const maxSteps = length(images);
   const imageId = path([activeStep, '_id'])(images);
-  const image = imageId ? `/api/users/${userId}/images/${images[activeStep]._id}` : userImage;
+  const image = imageId ? `/api/users/${userId}/images/${images[activeStep]._id}` : emptyImage;
   return (
     <Fragment>
       <img className={classes.img} src={image} alt="image" />
