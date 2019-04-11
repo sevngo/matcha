@@ -45,10 +45,23 @@ const gender = (req, res, next) => {
   next();
 };
 
+const birthRange = (req, res, next) => {
+  const {
+    query: { birthRange },
+  } = req;
+  if (birthRange) {
+    const [birthMin, birthMax] = split(':')(birthRange);
+    req.birthRange = birthMin &&
+      birthMax && { $match: { birthDate: { $gt: new Date(birthMin), $lt: new Date(birthMax) } } };
+  }
+  next();
+};
+
 module.exports = {
   limit,
   skip,
   sort,
   gender,
   interests,
+  birthRange,
 };
