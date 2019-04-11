@@ -11,8 +11,8 @@ const {
   uploadImage,
 } = require('../middlewares/data');
 const { generateAuthToken, auth, isMyId } = require('../middlewares/auth');
-const { gender, interests, limit, skip, sort } = require('../middlewares/query');
-const { usersPipeline, userPipeline, myUserPipeline } = require('../aggregations/users');
+const { gender, interests, birthRange, limit, skip, sort } = require('../middlewares/query');
+const { usersPipeline, matchById, project } = require('../aggregations/users');
 const { Users } = require('../database');
 
 const router = new Router();
@@ -26,11 +26,12 @@ router.post('/', newDateBirth, hashPassword, async (req, res) => {
   }
 });
 
-router.get('/', auth, gender, interests, limit, skip, sort, async (req, res) => {
+router.get('/', auth, gender, interests, birthRange, limit, skip, sort, async (req, res) => {
   try {
-    const { gender, interests, limit, skip, sort } = req;
+    const { gender, interests, limit, skip, sort, birthRange } = req;
+    const projection = project({ password: 0, 'images.data': 0, email: 0 });
     const users = await Users()
-      .aggregate(usersPipeline(gender, interests, limit, skip, sort))
+      .aggregate(usersPipeline(gender, interests, birthRange, limit, skip, sort, projection))
       .toArray();
     res.status(200).send(users);
   } catch {
@@ -40,8 +41,9 @@ router.get('/', auth, gender, interests, limit, skip, sort, async (req, res) => 
 
 router.get('/:id', auth, isValidObjectId, newObjectId, async (req, res) => {
   try {
+    const projection = project({ password: 0, 'images.data': 0, email: 0 });
     const [data] = await Users()
-      .aggregate(userPipeline(req._id))
+      .aggregate(usersPipeline(matchById(req._id), projection))
       .toArray();
     if (!data) return res.status(404).send();
     res.send(data);
@@ -63,8 +65,9 @@ router.patch(
       const { _id } = req;
       const { value: user } = await Users().findOneAndUpdate({ _id }, { $set: req.body });
       if (!user) return res.status(404).send();
+      const projection = project({ password: 0, 'images.data': 0 });
       const [data] = await Users()
-        .aggregate(myUserPipeline(_id))
+        .aggregate(usersPipeline(matchById(_id), projection))
         .toArray();
       res.send(data);
     } catch (e) {
@@ -78,8 +81,9 @@ router.delete('/:id', auth, isValidObjectId, isMyId, newObjectId, async (req, re
     const { _id } = req;
     const { value: user } = await Users().findOneAndDelete({ _id });
     if (!user) return res.status(404).send();
+    const projection = project({ password: 0, 'images.data': 0 });
     const [data] = await Users()
-      .aggregate(myUserPipeline(_id))
+      .aggregate(usersPipeline(matchById(_id), projection))
       .toArray();
     res.send(data);
   } catch {
@@ -89,8 +93,9 @@ router.delete('/:id', auth, isValidObjectId, isMyId, newObjectId, async (req, re
 
 router.post('/login', generateAuthToken, async (req, res) => {
   const { user, token } = req;
+  const projection = project({ password: 0, 'images.data': 0 });
   const [data] = await Users()
-    .aggregate(myUserPipeline(user._id))
+    .aggregate(usersPipeline(matchById(user._id), projection))
     .toArray();
   res.send({ ...data, token });
   res.status(400).send();
@@ -116,8 +121,9 @@ router.post(
         { $push: { images: { _id: imageId, data: buffer } } },
       );
       if (!user) return res.status(404).send();
+      const projection = project({ password: 0, 'images.data': 0 });
       const [data] = await Users()
-        .aggregate(myUserPipeline(_id))
+        .aggregate(usersPipeline(matchById(_id), projection))
         .toArray();
       res.send(data);
     } catch (e) {
@@ -145,8 +151,9 @@ router.delete(
         { $pull: { images: { _id: imageId } } },
       );
       if (!user) return res.status(404).send();
+      const projection = project({ password: 0, 'images.data': 0 });
       const [data] = await Users()
-        .aggregate(myUserPipeline(_id))
+        .aggregate(usersPipeline(matchById(_id), projection))
         .toArray();
       res.send(data);
     } catch {

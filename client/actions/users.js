@@ -1,3 +1,4 @@
+import { reduce } from 'ramda';
 import { enqueueSnackbar, error } from './app';
 import { getUsers, getUser, uploadImage, deleteImage } from '../api';
 
@@ -15,8 +16,16 @@ export const handleFilter = filter => ({ type: HANDLE_FILTER, filter });
 
 export const loadUsers = (token, filter) => async dispatch => {
   try {
+    const { gender, interests, ageRange } = filter;
+    const genderQuery = `/?gender=${gender}`;
+    const interestsQuery = reduce((acc, interest) => `${acc}&interests=${interest}`, '')(interests);
+    const today = new Date().getFullYear();
+    const birthMin = today - ageRange[1] - 1;
+    const birthMax = today - ageRange[0] + 1;
+    const ageQuery = `&birthRange=${birthMin}:${birthMax}`;
+    const query = `${genderQuery}${interestsQuery}${ageQuery}`;
     dispatch({ type: USERS_LOAD });
-    const { data } = await getUsers(token, filter);
+    const { data } = await getUsers(token, query);
     dispatch({ type: USERS_LOADED, data });
   } catch {
     dispatch(enqueueSnackbar(error));

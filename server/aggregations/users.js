@@ -1,7 +1,6 @@
 const { filter: rFilter } = require('ramda');
 
-const myUserProjection = { password: 0, 'images.data': 0 };
-const projection = { ...myUserProjection, email: 0 };
+const matchById = _id => ({ $match: { _id } });
 
 const birthDate = {
   $addFields: {
@@ -9,23 +8,11 @@ const birthDate = {
   },
 };
 
-const matchById = _id => ({ $match: { _id } });
+const project = fields => ({ $project: fields });
 
-const usersPipeline = (gender, interests, limit, skip, sort) => {
-  const pipeline = rFilter(stage => stage)([
-    gender,
-    interests,
-    { $project: projection },
-    limit,
-    skip,
-    sort,
-    birthDate,
-  ]);
+const usersPipeline = (...stages) => {
+  const pipeline = rFilter(stage => stage)([...stages, birthDate]);
   return pipeline;
 };
 
-const userPipeline = _id => [matchById(_id), { $project: projection }, birthDate];
-
-const myUserPipeline = _id => [matchById(_id), { $project: myUserProjection }, birthDate];
-
-module.exports = { usersPipeline, userPipeline, myUserPipeline };
+module.exports = { usersPipeline, matchById, project };
