@@ -9,7 +9,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import { path } from 'ramda';
-import userImage from '../../images/user.png';
+import emptyImage from '../../images/emptyImage.png';
 import Interests from '../Interests';
 
 const styles = theme => ({
@@ -30,7 +30,7 @@ const styles = theme => ({
 const Component = ({ user, classes }) => {
   const { images } = user;
   const imageId = path([0, '_id'])(images);
-  const image = imageId ? `/api/users/${user._id}/images/${imageId}` : userImage;
+  const image = imageId ? `/api/users/${user._id}/images/${imageId}` : emptyImage;
   return (
     <Card className={classes.card} elevation={24}>
       <CardActionArea component={Link} to={`/user/${user._id}`}>
