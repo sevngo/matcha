@@ -11,6 +11,7 @@ import {
 import { path } from 'ramda';
 import emptyImage from '../../images/emptyImage.png';
 import Interests from '../Interests';
+import { getAge } from '../../utils';
 
 const styles = theme => ({
   card: {
@@ -37,7 +38,7 @@ const Component = ({ user, classes }) => {
         <CardMedia className={classes.media} image={image} title={user.username} />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            {user.firstName} {user.lastName}
+            {user.firstName} {user.lastName}, {getAge(user.birthDate)}
           </Typography>
           <Interests interests={user.interests} />
           <Typography noWrap className={classes.mt1}>
