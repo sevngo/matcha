@@ -1,6 +1,6 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
-import Icon from '../Icon';
+import IconButton from '../IconButton';
 
 export default ({
   field,
@@ -21,9 +21,9 @@ export default ({
       {...rest}
       InputProps={{
         startAdornment: startAdornment && (
-          <Icon color="inherit" disableRipple>
+          <IconButton color="inherit" disableRipple>
             {startAdornment}
-          </Icon>
+          </IconButton>
         ),
         endAdornment,
         readOnly,

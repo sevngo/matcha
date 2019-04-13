@@ -9,7 +9,7 @@ import {
   Radio as MRadio,
   MenuItem,
 } from '@material-ui/core';
-import Icon from '../Icon';
+import IconButton from '../IconButton';
 import TextField from '../TextField';
 import Radio from '../Radio';
 import Select from '../Select';
@@ -84,9 +84,9 @@ const Component = ({
           fullWidth
           startAdornment="vpn_key"
           endAdornment={
-            <Icon color="inherit" onClick={() => toggleShowPassword(!showPassword)}>
+            <IconButton color="inherit" onClick={() => toggleShowPassword(!showPassword)}>
               {showPassword ? 'visibility' : 'visibility_off'}
-            </Icon>
+            </IconButton>
           }
         />
       )}
@@ -100,9 +100,9 @@ const Component = ({
           fullWidth
           startAdornment="vpn_key"
           endAdornment={
-            <Icon color="inherit" onClick={() => toggleShowPassword(!showPassword)}>
+            <IconButton color="inherit" onClick={() => toggleShowPassword(!showPassword)}>
               {showPassword ? 'visibility' : 'visibility_off'}
-            </Icon>
+            </IconButton>
           }
         />
       )}
