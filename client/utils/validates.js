@@ -12,4 +12,14 @@ export const isShort = value => value && length(value) <= 3 && 'Too short';
 
 export const isLong = max => value => length(value) >= max && 'Too long';
 
-export const isDate = value => new Date(value) > new Date() && 'Invalid';
+export const isOld = value => {
+  const today = new Date();
+  if (new Date(today.getFullYear() - 50, today.getMonth(), today.getDate()) > new Date(value))
+    return 'Too old';
+};
+
+export const isYoung = value => {
+  const today = new Date();
+  if (new Date(today.getFullYear() - 18, today.getMonth(), today.getDate()) < new Date(value))
+    return 'Too young';
+};

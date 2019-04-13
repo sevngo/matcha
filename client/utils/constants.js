@@ -54,6 +54,13 @@ export const interestsOptions = [
   'Crow',
 ];
 
+export const sortByOptions = [
+  { label: 'Younger', value: 'birthDate:desc' },
+  { label: 'Older', value: 'birthDate:asc' },
+  { label: 'Famous', value: 'popularity:desc' },
+  { label: 'Inconspicuous', value: 'popularity:asc' },
+];
+
 export const biography = 'Biography';
 
 export const submit = 'SUBMIT';

@@ -8,7 +8,6 @@ import {
   FormControlLabel,
   Radio as MRadio,
   MenuItem,
-  Divider,
 } from '@material-ui/core';
 import Icon from '../Icon';
 import TextField from '../TextField';
@@ -22,7 +21,8 @@ import {
   isEmail,
   isShort,
   isLong,
-  isDate,
+  isYoung,
+  isOld,
 } from '../../utils/validates';
 import * as constants from '../../utils/constants';
 
@@ -142,7 +142,7 @@ const Component = ({
           name="birthDate"
           label={constants.birthDate}
           component={TextField}
-          validate={composeValidators(isRequired, isDate)}
+          validate={composeValidators(isRequired, isYoung, isOld)}
           fullWidth
           type="date"
           startAdornment="date_range"
@@ -165,17 +165,14 @@ const Component = ({
         </div>
       )}
       {has('ageRange', initialValues) && (
-        <div>
-          <Divider className={classes.mb1} />
-          <div className={classes.p1}>
-            <Field
-              name="ageRange"
-              component={Range}
-              min={0}
-              max={50}
-              setFieldValue={setFieldValue}
-            />
-          </div>
+        <div className={classes.p1}>
+          <Field
+            name="ageRange"
+            component={Range}
+            min={18}
+            max={50}
+            setFieldValue={setFieldValue}
+          />
         </div>
       )}
       {has('interests', initialValues) && (
@@ -185,7 +182,7 @@ const Component = ({
           component={Select}
           multiple
           fullWidth
-          validate={isLong(5)}
+          validate={isLong(4)}
           readOnly={readOnly}
           renderValue={selected => <Interests interests={selected} />}
         >
@@ -207,6 +204,24 @@ const Component = ({
           rows="3"
           readOnly={readOnly}
         />
+      )}
+      {has('sortBy', initialValues) && (
+        <Field
+          name="sortBy"
+          label="Sort By"
+          component={Select}
+          // multiple
+          fullWidth
+          // validate={isLong(5)}
+          readOnly={readOnly}
+          // renderValue={selected => selected}
+        >
+          {map(option => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))(constants.sortByOptions)}
+        </Field>
       )}
       <Grid container justify="center">
         {!readOnly && (
