@@ -16,19 +16,20 @@ export const handleFilter = filter => ({ type: HANDLE_FILTER, filter });
 
 export const loadUsers = (token, filter) => async dispatch => {
   try {
-    const { gender, interests, ageRange } = filter;
+    const { gender, interests, ageRange, sortBy } = filter;
 
-    const genderQuery = `/?gender=${gender}`;
+    const genderQuery = `?gender=${gender}`;
     const interestsQuery = reduce((acc, interest) => `${acc}&interests=${interest}`, '')(interests);
+    const sortQuery = `&sortBy=${sortBy}`;
 
     const today = new Date();
     const todayYear = today.getFullYear();
-    const todayDayMonth = `-${today.getDay()}-${today.getMonth()}`;
-    const birthMin = `${todayYear - ageRange[1] - 1}${todayDayMonth}`;
-    const birthMax = `${todayYear - ageRange[0]}${todayDayMonth}`;
+    const todayMonthDay = `-${today.getMonth() + 1}-${today.getDate()}`;
+    const birthMin = `${todayYear - ageRange[1] - 1}${todayMonthDay}`;
+    const birthMax = `${todayYear - ageRange[0]}${todayMonthDay}`;
     const birthQuery = `&birthRange=${birthMin}:${birthMax}`;
 
-    const query = `${genderQuery}${interestsQuery}${birthQuery}`;
+    const query = `${genderQuery}${birthQuery}${sortQuery}${interestsQuery}`;
     dispatch({ type: USERS_LOAD });
     const { data } = await getUsers(token, query);
     dispatch({ type: USERS_LOADED, data });

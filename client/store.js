@@ -23,7 +23,8 @@ const initialState = {
     filter: {
       gender: 'male',
       interests: [],
-      ageRange: [0, 50],
+      ageRange: [18, 50],
+      sortBy: 'popularity:desc',
     },
   },
 };
