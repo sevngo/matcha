@@ -9,12 +9,12 @@ import {
   Tab,
   Paper,
   Button,
-  Dialog,
   Typography,
   DialogContent,
   DialogContentText,
 } from '@material-ui/core';
 import UserForm from '../../components/UserForm';
+import Dialog from '../../components/Dialog';
 import { register, login } from '../../actions';
 import * as constants from '../../utils/constants';
 
@@ -59,15 +59,13 @@ const Component = ({ classes, login, register }) => {
                   {constants.forgotPassword}
                 </Button>
                 <Dialog open={isDialogOpen} onClose={() => toggleDialog(false)}>
-                  <div className={classes.p3}>
-                    <Typography gutterBottom align="center" variant="h6">
-                      {constants.forgotPassword}
-                    </Typography>
-                    <DialogContent>
-                      <DialogContentText>{constants.enterEmail}</DialogContentText>
-                      <UserForm initialValues={{ email: '' }} submit={() => {}} />
-                    </DialogContent>
-                  </div>
+                  <Typography gutterBottom align="center" variant="h6">
+                    {constants.forgotPassword}
+                  </Typography>
+                  <DialogContent>
+                    <DialogContentText>{constants.enterEmail}</DialogContentText>
+                    <UserForm initialValues={{ email: '' }} submit={() => {}} />
+                  </DialogContent>
                 </Dialog>
               </Fragment>
             ) : (

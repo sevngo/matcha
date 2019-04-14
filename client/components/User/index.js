@@ -37,7 +37,7 @@ const Component = ({ user, classes }) => {
       <CardActionArea component={Link} to={`/user/${user._id}`}>
         <CardMedia className={classes.media} image={image} title={user.username} />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
+          <Typography gutterBottom variant="h5">
             {user.firstName} {user.lastName}, {getAge(user.birthDate)}
           </Typography>
           <Interests interests={user.interests} />

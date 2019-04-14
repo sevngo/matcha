@@ -25,7 +25,7 @@ const styles = theme => ({
 
 const Component = ({ classes, auth, logout, location: { pathname } }) => {
   const [isDrawerOpen, toggleDrawer] = useState(false);
-  const [anchorEl, handleMenu] = useState(null);
+  const [anchorEl, handleMenu] = useState();
   return (
     <Fragment>
       <AppBar position="static" className={classes.appBar}>
@@ -47,17 +47,13 @@ const Component = ({ classes, auth, logout, location: { pathname } }) => {
               <IconButton>email_icon</IconButton>
               <IconButton>notifications_icon</IconButton>
               <IconButton onClick={e => handleMenu(e.currentTarget)}>account_circle</IconButton>
-              <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={() => handleMenu(null)}>
-                <MenuItem
-                  onClick={() => handleMenu(null)}
-                  component={Link}
-                  to={`/user/${auth._id}`}
-                >
+              <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={() => handleMenu()}>
+                <MenuItem onClick={() => handleMenu()} component={Link} to={`/user/${auth._id}`}>
                   {constants.myAccount}
                 </MenuItem>
                 <MenuItem
                   onClick={() => {
-                    handleMenu(null);
+                    handleMenu();
                     logout();
                   }}
                 >

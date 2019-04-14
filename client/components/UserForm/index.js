@@ -206,16 +206,7 @@ const Component = ({
         />
       )}
       {has('sortBy', initialValues) && (
-        <Field
-          name="sortBy"
-          label="Sort By"
-          component={Select}
-          // multiple
-          fullWidth
-          // validate={isLong(5)}
-          readOnly={readOnly}
-          // renderValue={selected => selected}
-        >
+        <Field name="sortBy" label="Sort By" component={Select} fullWidth readOnly={readOnly}>
           {map(option => (
             <MenuItem key={option.value} value={option.value}>
               {option.label}
