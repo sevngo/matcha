@@ -1,11 +1,12 @@
 import React, { useRef, useState } from 'react';
 import { compose, length, isEmpty, path } from 'ramda';
 import { connect } from 'react-redux';
-import { withStyles, Paper, Grid, Button } from '@material-ui/core';
+import { withStyles, Paper, Grid, Button, Typography, Icon } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import UserForm from '../../components/UserForm';
 import Carousel from '../../components/Carousel';
+import Popover from '../../components/Popover';
 import { updateAccount, addImage, removeImage } from '../../actions';
 import { getAuth } from '../../selectors';
 import styles from './styles';
@@ -13,7 +14,8 @@ import styles from './styles';
 const Component = ({ classes, auth, updateAccount, addImage, removeImage }) => {
   const { _id, token, images } = auth;
   const [activeStep, handleStep] = useState(0);
-  const inputEl = useRef(null);
+  const [anchorEl, handlePopover] = useState();
+  const inputEl = useRef();
   const uploadImage = image => {
     if (image) addImage(token, _id, image);
   };
@@ -30,15 +32,40 @@ const Component = ({ classes, auth, updateAccount, addImage, removeImage }) => {
           />
           <Button
             variant="outlined"
-            onClick={() => {
-              removeImage(token, _id, path([activeStep, '_id'])(images));
-              handleStep(0);
-            }}
+            onClick={event => handlePopover(event.currentTarget)}
             disabled={!images || isEmpty(images)}
           >
             Delete
             <DeleteIcon className={classes.ml1} />
           </Button>
+          <Popover
+            id="simple-popper"
+            open={Boolean(anchorEl)}
+            anchorEl={anchorEl}
+            onClose={() => handlePopover()}
+          >
+            <Grid container>
+              <Icon>info</Icon>
+              <Typography variant="subtitle1" align="center" className={classes.ml1}>
+                Are you sure to delete this image ?
+              </Typography>
+            </Grid>
+            <Grid container justify="flex-end">
+              <Button size="small" onClick={() => handlePopover()}>
+                No
+              </Button>
+              <Button
+                size="small"
+                onClick={() => {
+                  removeImage(token, _id, path([activeStep, '_id'])(images));
+                  handleStep(0);
+                  handlePopover();
+                }}
+              >
+                Yes
+              </Button>
+            </Grid>
+          </Popover>
           <Button
             variant="outlined"
             color="inherit"
