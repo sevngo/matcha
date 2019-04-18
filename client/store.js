@@ -26,6 +26,7 @@ const initialState = {
       ageRange: [18, 50],
       sortBy: 'popularity:desc',
     },
+    user: {},
   },
 };
 

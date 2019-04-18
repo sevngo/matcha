@@ -1,4 +1,5 @@
 import React from 'react';
+import { path, split } from 'ramda';
 import { TextField, Icon, withStyles } from '@material-ui/core';
 
 const styles = theme => ({
@@ -18,12 +19,15 @@ const Component = ({
   ...rest
 }) => {
   const { name } = field;
+  const names = split('.')(name);
+  const isTouched = path(names)(touched);
+  const error = path(names)(errors);
   return (
     <TextField
       margin="dense"
       variant="outlined"
-      error={errors[name] && touched[name]}
-      helperText={touched[name] && errors[name]}
+      error={error && isTouched}
+      helperText={isTouched && error}
       {...field}
       {...rest}
       InputProps={{

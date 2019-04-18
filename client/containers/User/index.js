@@ -45,10 +45,6 @@ const Component = ({
   );
 };
 
-Component.defaultProps = {
-  user: {},
-};
-
 const mapStateToProps = state => ({
   user: getUser(state),
   auth: getAuth(state),
