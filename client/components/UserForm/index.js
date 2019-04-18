@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { withFormik, Field } from 'formik';
-import { has, compose, map } from 'ramda';
+import { has, compose, map, isNil, path } from 'ramda';
 import {
   Grid,
   withStyles,
@@ -15,6 +15,7 @@ import Radio from '../Radio';
 import Select from '../Select';
 import Interests from '../Interests';
 import Range from '../Range';
+import withGooglePlaces from '../../hoc/withGooglePlaces';
 import {
   composeValidators,
   isRequired,
@@ -59,8 +60,10 @@ const Component = ({
   resetForm,
   dirty,
   setFieldValue,
+  values,
 }) => {
   const [showPassword, toggleShowPassword] = useState(false);
+  const isAddresNull = isNil(path(['address', 'lat'])(values));
   return (
     <form onSubmit={handleSubmit}>
       {has('username', initialValues) && (
@@ -164,6 +167,25 @@ const Component = ({
           </Field>
         </div>
       )}
+      {has('address', initialValues) && (
+        <Field
+          name="address.name"
+          id="address"
+          label={constants.address}
+          component={TextField}
+          fullWidth
+          readOnly={readOnly || !isAddresNull}
+          validate={() => isAddresNull && 'Required'}
+          endAdornment={
+            !isAddresNull &&
+            !readOnly && (
+              <IconButton color="inherit" onClick={() => setFieldValue('address', { name: '' })}>
+                clear
+              </IconButton>
+            )
+          }
+        />
+      )}
       {has('ageRange', initialValues) && (
         <div className={classes.p1}>
           <Field
@@ -252,5 +274,6 @@ export default compose(
     displayName: 'UserForm',
     enableReinitialize: true,
   }),
-  withStyles(styles, { withTheme: true }),
+  withGooglePlaces('address'),
+  withStyles(styles),
 )(Component);

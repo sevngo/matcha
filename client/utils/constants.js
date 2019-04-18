@@ -24,6 +24,8 @@ export const birthDate = 'Birth date';
 
 export const gender = 'Gender';
 
+export const address = 'Address';
+
 export const genders = [{ label: 'Male', value: 'male' }, { label: 'Female', value: 'female' }];
 
 export const interests = 'Interests';

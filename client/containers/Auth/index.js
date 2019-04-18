@@ -77,6 +77,7 @@ const Component = ({ classes, login, register }) => {
                   lastName: '',
                   gender: '',
                   birthDate: '',
+                  address: { name: '' },
                 }}
                 submit={register}
               />

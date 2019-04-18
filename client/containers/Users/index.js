@@ -24,10 +24,6 @@ const Component = ({ classes, users, loadUsers, auth: { token }, filter }) => {
   );
 };
 
-Component.defaultProps = {
-  users: [],
-};
-
 const mapStateToProps = (state, { auth: { _id } }) => ({
   auth: getAuth(state),
   users: getUsers(_id)(state),
