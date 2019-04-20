@@ -1,6 +1,7 @@
 import React from 'react';
-import { path, split } from 'ramda';
+import { compose } from 'ramda';
 import { TextField, Icon, withStyles } from '@material-ui/core';
+import withMetaData from '../../hoc/withMetaData';
 
 const styles = theme => ({
   icon: {
@@ -11,32 +12,29 @@ const styles = theme => ({
 
 const Component = ({
   field,
-  form: { touched, errors },
+  meta: { error, isError },
   startAdornment,
   endAdornment,
   readOnly,
   classes,
   ...rest
-}) => {
-  const { name } = field;
-  const names = split('.')(name);
-  const isTouched = path(names)(touched);
-  const error = path(names)(errors);
-  return (
-    <TextField
-      margin="dense"
-      variant="outlined"
-      error={error && isTouched}
-      helperText={isTouched && error}
-      {...field}
-      {...rest}
-      InputProps={{
-        startAdornment: startAdornment && <Icon className={classes.icon}>{startAdornment}</Icon>,
-        endAdornment,
-        readOnly,
-      }}
-    />
-  );
-};
+}) => (
+  <TextField
+    margin="dense"
+    variant="outlined"
+    error={isError}
+    helperText={isError && error}
+    InputProps={{
+      startAdornment: startAdornment && <Icon className={classes.icon}>{startAdornment}</Icon>,
+      endAdornment,
+      readOnly,
+    }}
+    {...field}
+    {...rest}
+  />
+);
 
-export default withStyles(styles)(Component);
+export default compose(
+  withStyles(styles),
+  withMetaData,
+)(Component);
