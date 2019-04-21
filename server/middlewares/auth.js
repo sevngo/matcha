@@ -2,6 +2,7 @@ const { toString, replace } = require('ramda');
 const jwt = require('jsonwebtoken');
 const { ObjectID } = require('mongodb');
 const bcrypt = require('bcryptjs');
+const { path } = require('ramda');
 const { Users } = require('../database');
 
 const generateAuthToken = async (req, res, next) => {
@@ -19,8 +20,9 @@ const generateAuthToken = async (req, res, next) => {
     req.user = user;
     req.token = token;
     next();
-  } catch {
+  } catch (e) {
     res.status(400).send();
+    console.log(e); // eslint-disable-line no-console
   }
 };
 
@@ -32,13 +34,14 @@ const auth = async (req, res, next) => {
     if (!user) throw new Error();
     req.user = user;
     next();
-  } catch {
+  } catch (e) {
     res.status(401).send();
+    console.log(e); // eslint-disable-line no-console
   }
 };
 
 const isMyId = async (req, res, next) => {
-  if (req.params.id !== toString(req.user._id)) return res.status(401).send();
+  if (req.params.id !== toString(path(['user', '_id'])(req))) return res.status(401).send();
   next();
 };
 

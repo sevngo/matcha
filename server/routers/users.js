@@ -22,7 +22,8 @@ router.post('/', newDateBirth, hashPassword, async (req, res) => {
     await Users().insertOne(req.body);
     res.status(201).send();
   } catch (e) {
-    res.status(400).send(e);
+    res.status(400).send();
+    console.log(e); // eslint-disable-line no-console
   }
 });
 
@@ -34,8 +35,9 @@ router.get('/', auth, gender, interests, birthRange, limit, skip, sort, async (r
       .aggregate(usersPipeline(gender, interests, birthRange, limit, skip, sort, projection))
       .toArray();
     res.status(200).send(users);
-  } catch {
+  } catch (e) {
     res.status(500).send();
+    console.log(e); // eslint-disable-line no-console
   }
 });
 
@@ -47,8 +49,9 @@ router.get('/:id', auth, isValidObjectId, newObjectId, async (req, res) => {
       .toArray();
     if (!data) return res.status(404).send();
     res.send(data);
-  } catch {
+  } catch (e) {
     res.status(500).send();
+    console.log(e); // eslint-disable-line no-console
   }
 });
 
@@ -71,7 +74,8 @@ router.patch(
         .toArray();
       res.send(data);
     } catch (e) {
-      res.status(400).send(e);
+      res.status(400).send();
+      console.log(e); // eslint-disable-line no-console
     }
   },
 );
@@ -86,19 +90,24 @@ router.delete('/:id', auth, isValidObjectId, isMyId, newObjectId, async (req, re
       .aggregate(usersPipeline(matchById(_id), projection))
       .toArray();
     res.send(data);
-  } catch {
+  } catch (e) {
     res.status(500).send();
+    console.log(e); // eslint-disable-line no-console
   }
 });
 
 router.post('/login', generateAuthToken, async (req, res) => {
-  const { user, token } = req;
-  const projection = project({ password: 0, 'images.data': 0 });
-  const [data] = await Users()
-    .aggregate(usersPipeline(matchById(user._id), projection))
-    .toArray();
-  res.send({ ...data, token });
-  res.status(400).send();
+  try {
+    const { user, token } = req;
+    const projection = project({ password: 0, 'images.data': 0 });
+    const [data] = await Users()
+      .aggregate(usersPipeline(matchById(user._id), projection))
+      .toArray();
+    res.send({ ...data, token });
+  } catch (e) {
+    res.status(400).send();
+    console.log(e); // eslint-disable-line no-console
+  }
 });
 
 router.post(
@@ -127,12 +136,14 @@ router.post(
         .toArray();
       res.send(data);
     } catch (e) {
-      res.status(400).send(e);
+      res.status(400).send();
+      console.log(e); // eslint-disable-line no-console
     }
   },
   // eslint-disable-next-line no-unused-vars
   (error, req, res, next) => {
-    res.status(400).send({ error: error.message });
+    res.status(400).send();
+    console.log(error); // eslint-disable-line no-console
   },
 );
 
@@ -156,8 +167,9 @@ router.delete(
         .aggregate(usersPipeline(matchById(_id), projection))
         .toArray();
       res.send(data);
-    } catch {
+    } catch (e) {
       res.status(500).send();
+      console.log(e); // eslint-disable-line no-console
     }
   },
 );
@@ -170,8 +182,9 @@ router.get('/:id/images/:imageId', newObjectId, async (req, res) => {
     const { data } = find(image => propEq('_id', imageId)(image))(user.images);
     res.type('png');
     res.send(data.buffer);
-  } catch {
+  } catch (e) {
     res.status(500).send();
+    console.log(e); // eslint-disable-line no-console
   }
 });
 
