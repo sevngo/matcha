@@ -24,6 +24,7 @@ const Component = ({
     variant="outlined"
     error={isError}
     helperText={isError && error}
+    fullWidth
     InputProps={{
       startAdornment: startAdornment && <Icon className={classes.icon}>{startAdornment}</Icon>,
       endAdornment,

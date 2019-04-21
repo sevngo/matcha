@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { isNil } from 'ramda';
+import { isNil, path } from 'ramda';
 
 const withGooglePlaces = fieldName => Component => {
   const EnhancedComponent = props => {
@@ -7,11 +7,13 @@ const withGooglePlaces = fieldName => Component => {
     let autocomplete;
     const handlePlace = () => {
       const newAddress = autocomplete.getPlace();
-      if (!newAddress.geometry) return setFieldValue(fieldName, { name: '' });
+      const { formatted_address } = newAddress;
+      const location = path(['geometry', 'location'])(newAddress);
+      if (!location) return;
       const address = {
-        name: newAddress.formatted_address,
-        lat: newAddress.geometry.location.lat(),
-        lng: newAddress.geometry.location.lng(),
+        name: formatted_address,
+        type: 'Point',
+        coordinates: [location.lng(), location.lat()],
       };
       setFieldValue(fieldName, address);
     };

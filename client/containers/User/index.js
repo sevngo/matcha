@@ -38,7 +38,7 @@ const Component = ({
       </Grid>
       <Grid item className={classes.width}>
         <Paper elevation={24} className={classes.p3}>
-          <UserForm initialValues={user} readOnly />
+          <UserForm initialValues={user} disabled />
         </Paper>
       </Grid>
     </Grid>

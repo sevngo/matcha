@@ -2,22 +2,8 @@ import React from 'react';
 import { InputLabel, FormControl, Select, FormHelperText, OutlinedInput } from '@material-ui/core';
 import withMetaData from '../../hoc/withMetaData';
 
-const Component = ({
-  field,
-  meta: { error, isError },
-  label,
-  fullWidth,
-  children,
-  className,
-  ...rest
-}) => (
-  <FormControl
-    margin="dense"
-    className={className}
-    fullWidth={fullWidth}
-    error={isError}
-    variant="outlined"
-  >
+const Component = ({ field, meta: { error, isError }, label, children, className, ...rest }) => (
+  <FormControl margin="dense" className={className} fullWidth error={isError} variant="outlined">
     <InputLabel>{label}</InputLabel>
     <Select input={<OutlinedInput labelWidth={65} />} {...field} {...rest}>
       {children}

@@ -55,7 +55,7 @@ const Component = ({
   initialValues,
   classes,
   isValid,
-  readOnly,
+  disabled,
   newPassword,
   resetForm,
   dirty,
@@ -63,7 +63,7 @@ const Component = ({
   values,
 }) => {
   const [showPassword, toggleShowPassword] = useState(false);
-  const isAddresNull = isNil(path(['address', 'lat'])(values));
+  const isAddresNull = isNil(path(['address', 'coordinates'])(values));
   return (
     <form onSubmit={handleSubmit}>
       {has('username', initialValues) && (
@@ -72,9 +72,8 @@ const Component = ({
           label={constants.username}
           component={TextField}
           validate={composeValidators(isRequired, isShort, isLong(30))}
-          fullWidth
           startAdornment="account_circle"
-          readOnly={readOnly}
+          disabled={disabled}
         />
       )}
       {has('password', initialValues) && (
@@ -84,7 +83,6 @@ const Component = ({
           component={TextField}
           validate={composeValidators(isRequired, isShort, isLong(30))}
           type={showPassword ? 'text' : 'password'}
-          fullWidth
           startAdornment="vpn_key"
           endAdornment={
             <IconButton color="inherit" onClick={() => toggleShowPassword(!showPassword)}>
@@ -100,7 +98,6 @@ const Component = ({
           component={TextField}
           validate={composeValidators(isShort, isLong(30))}
           type={showPassword ? 'text' : 'password'}
-          fullWidth
           startAdornment="vpn_key"
           endAdornment={
             <IconButton color="inherit" onClick={() => toggleShowPassword(!showPassword)}>
@@ -115,9 +112,8 @@ const Component = ({
           label={constants.email}
           component={TextField}
           validate={composeValidators(isRequired, isEmail, isLong(30))}
-          fullWidth
           startAdornment="alternate_email"
-          readOnly={readOnly}
+          disabled={disabled}
         />
       )}
       {has('firstName', initialValues) && (
@@ -126,8 +122,7 @@ const Component = ({
           label={constants.firstName}
           component={TextField}
           validate={composeValidators(isRequired, isLong(30))}
-          fullWidth
-          readOnly={readOnly}
+          disabled={disabled}
         />
       )}
       {has('lastName', initialValues) && (
@@ -136,8 +131,7 @@ const Component = ({
           label={constants.lastName}
           component={TextField}
           validate={composeValidators(isRequired, isLong(30))}
-          fullWidth
-          readOnly={readOnly}
+          disabled={disabled}
         />
       )}
       {has('birthDate', initialValues) && (
@@ -146,10 +140,9 @@ const Component = ({
           label={constants.birthDate}
           component={TextField}
           validate={composeValidators(isRequired, isYoung, isOld)}
-          fullWidth
           type="date"
           startAdornment="date_range"
-          readOnly={readOnly}
+          disabled={disabled}
         />
       )}
       {has('gender', initialValues) && (
@@ -161,7 +154,7 @@ const Component = ({
                 value={gender.value}
                 control={<MRadio color="primary" />}
                 label={gender.label}
-                disabled={readOnly}
+                disabled={disabled}
               />
             ))(constants.genders)}
           </Field>
@@ -173,12 +166,11 @@ const Component = ({
           id="address"
           label={constants.address}
           component={TextField}
-          fullWidth
-          readOnly={readOnly || !isAddresNull}
+          disabled={disabled || !isAddresNull}
           validate={() => isAddresNull && 'Required'}
           endAdornment={
             !isAddresNull &&
-            !readOnly && (
+            !disabled && (
               <IconButton color="inherit" onClick={() => setFieldValue('address', { name: '' })}>
                 clear
               </IconButton>
@@ -203,9 +195,8 @@ const Component = ({
           label="Interests"
           component={Select}
           multiple
-          fullWidth
           validate={isLong(4)}
-          readOnly={readOnly}
+          disabled={disabled}
           renderValue={selected => <Interests interests={selected} />}
         >
           {map(option => (
@@ -221,14 +212,13 @@ const Component = ({
           label="Biography"
           component={TextField}
           validate={isLong(300)}
-          fullWidth
           multiline
           rows="3"
-          readOnly={readOnly}
+          disabled={disabled}
         />
       )}
       {has('sortBy', initialValues) && (
-        <Field name="sortBy" label="Sort By" component={Select} fullWidth readOnly={readOnly}>
+        <Field name="sortBy" label="Sort By" component={Select}>
           {map(option => (
             <MenuItem key={option.value} value={option.value}>
               {option.label}
@@ -237,27 +227,27 @@ const Component = ({
         </Field>
       )}
       <Grid container justify="center">
-        {!readOnly && (
+        {!disabled && (
           <Button
             type="submit"
             variant="contained"
             color="primary"
             size="large"
-            fullWidth
             disabled={!isValid}
             className={classes.mt1}
+            fullWidth
           >
             {constants.submit}
           </Button>
         )}
-        {!readOnly && (
+        {!disabled && (
           <Button
             variant="outlined"
             color="primary"
             size="large"
-            fullWidth
             disabled={!dirty}
             onClick={() => resetForm(initialValues)}
+            fullWidth
           >
             {constants.reset}
           </Button>
