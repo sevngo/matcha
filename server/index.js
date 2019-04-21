@@ -2,10 +2,12 @@ const express = require('express');
 const path = require('path');
 const { connectDb } = require('./database');
 const usersRouter = require('./routers/users');
+const morgan = require('morgan');
 
 const app = express();
 const PORT = process.env.PORT || 8080;
 
+app.use(morgan('dev'));
 app.use(express.json());
 
 app.use('/api/users', usersRouter);
