@@ -2,8 +2,6 @@ import React, { useRef, useState } from 'react';
 import { compose, length, isEmpty, path } from 'ramda';
 import { connect } from 'react-redux';
 import { withStyles, Paper, Grid, Button, Typography, Icon } from '@material-ui/core';
-import DeleteIcon from '@material-ui/icons/Delete';
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import UserForm from '../../components/UserForm';
 import Carousel from '../../components/Carousel';
 import Popover from '../../components/Popover';
@@ -36,7 +34,7 @@ const Component = ({ classes, auth, updateAccount, addImage, removeImage }) => {
             disabled={!images || isEmpty(images)}
           >
             Delete
-            <DeleteIcon className={classes.ml1} />
+            <Icon className={classes.ml1}>delete</Icon>
           </Button>
           <Popover
             id="simple-popper"
@@ -74,7 +72,7 @@ const Component = ({ classes, auth, updateAccount, addImage, removeImage }) => {
             className={classes.ml1}
           >
             Upload
-            <CloudUploadIcon className={classes.ml1} />
+            <Icon className={classes.ml1}>cloud_upload</Icon>
           </Button>
         </Paper>
         <Paper elevation={24}>
