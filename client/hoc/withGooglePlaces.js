@@ -21,7 +21,7 @@ const withGooglePlaces = fieldName => Component => {
       if (values[fieldName]) {
         /*global google*/
         autocomplete = new google.maps.places.Autocomplete(document.getElementById(fieldName));
-        autocomplete.setTypes(['(cities)']);
+        autocomplete.setTypes(['address']);
         autocomplete.setFields(['formatted_address', 'geometry']);
         autocomplete.addListener('place_changed', handlePlace);
       }

@@ -1,8 +1,6 @@
 import React, { Fragment } from 'react';
 import { length, path } from 'ramda';
-import { Button, MobileStepper, withStyles } from '@material-ui/core';
-import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
-import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
+import { Button, MobileStepper, withStyles, Icon } from '@material-ui/core';
 import * as constants from '../../utils/constants';
 import emptyImage from '../../images/emptyImage.png';
 
@@ -30,7 +28,7 @@ const Component = ({ userId, images, classes, activeStep, handleStep }) => {
             disabled={activeStep === maxSteps - 1 || !imageId}
           >
             {constants.next}
-            <KeyboardArrowRight />
+            <Icon>keyboard_arrow_right</Icon>
           </Button>
         }
         backButton={
@@ -39,7 +37,7 @@ const Component = ({ userId, images, classes, activeStep, handleStep }) => {
             onClick={() => handleStep(activeStep - 1)}
             disabled={activeStep === 0 || !imageId}
           >
-            <KeyboardArrowLeft />
+            <Icon>keyboard_arrow_left</Icon>
             {constants.back}
           </Button>
         }

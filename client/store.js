@@ -15,6 +15,7 @@ const initialState = {
     filter: {
       gender: 'male',
       interests: [],
+      maxDistance: 20000,
       ageRange: [18, 50],
       sortBy: 'popularity:desc',
     },

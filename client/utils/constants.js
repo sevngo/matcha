@@ -30,6 +30,14 @@ export const genders = [{ label: 'Male', value: 'male' }, { label: 'Female', val
 
 export const interests = 'Interests';
 
+export const ageRange = 'Age Range :';
+
+export const maxDistance = 'Max Distance :';
+
+export const ageUnit = 'Years';
+
+export const distanceUnit = 'Km';
+
 export const interestsOptions = [
   'PHP',
   'Javascript',
@@ -57,10 +65,12 @@ export const interestsOptions = [
 ];
 
 export const sortByOptions = [
-  { label: 'Younger', value: 'birthDate:desc' },
-  { label: 'Older', value: 'birthDate:asc' },
-  { label: 'Famous', value: 'popularity:desc' },
-  { label: 'Inconspicuous', value: 'popularity:asc' },
+  { label: 'Age (Younger)', value: 'birthDate:desc' },
+  { label: 'Age (Older)', value: 'birthDate:asc' },
+  { label: 'Popularity (Famous)', value: 'popularity:desc' },
+  { label: 'Popularity (Inconspicuous)', value: 'popularity:asc' },
+  { label: 'Distance (Nearest)', value: 'distance:asc' },
+  { label: 'Distance (Farest)', value: 'distance:desc' },
 ];
 
 export const biography = 'Biography';

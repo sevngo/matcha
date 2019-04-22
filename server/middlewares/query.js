@@ -57,6 +57,25 @@ const birthRange = (req, res, next) => {
   next();
 };
 
+const maxDistance = (req, res, next) => {
+  const {
+    query: { coordinates, maxDistance },
+  } = req;
+  if (coordinates) {
+    const [lng, lat] = split(':')(coordinates);
+    req.maxDistance = {
+      $geoNear: {
+        near: { type: 'Point', coordinates: [parseFloat(lng), parseFloat(lat)] },
+        distanceField: 'distance',
+        distanceMultiplier: 0.001,
+        maxDistance: parseInt(maxDistance),
+        spherical: true,
+      },
+    };
+  }
+  next();
+};
+
 module.exports = {
   limit,
   skip,
@@ -64,4 +83,5 @@ module.exports = {
   gender,
   interests,
   birthRange,
+  maxDistance,
 };

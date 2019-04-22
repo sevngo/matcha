@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
 import { FormLabel, withStyles } from '@material-ui/core';
-import { repeat } from 'ramda';
-import { Range } from 'rc-slider';
+import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 
 const styles = theme => ({
@@ -26,20 +25,14 @@ const Component = ({
   return (
     <Fragment>
       <FormLabel className={classes.gender}>
-        {label}{' '}
-        <span className={classes.values}>
-          {value[0]} - {value[1]}
-        </span>{' '}
-        {unitLabel}
+        {label} <span className={classes.values}>{value}</span> {unitLabel}
       </FormLabel>
       <div className={classes.m1}>
-        <Range
+        <Slider
           defaultValue={value}
           value={value}
-          allowCross={false}
-          pushable
-          trackStyle={[{ backgroundColor: 'darkgray' }]}
-          handleStyle={repeat({ backgroundColor: main, borderColor: main })(2)}
+          trackStyle={{ backgroundColor: 'darkgray' }}
+          handleStyle={{ backgroundColor: main, borderColor: main }}
           onChange={value => setFieldValue(name, value)}
           {...rest}
         />

@@ -15,6 +15,7 @@ import Radio from '../Radio';
 import Select from '../Select';
 import Interests from '../Interests';
 import Range from '../Range';
+import Slider from '../Slider';
 import withGooglePlaces from '../../hoc/withGooglePlaces';
 import {
   composeValidators,
@@ -182,9 +183,25 @@ const Component = ({
         <div className={classes.p1}>
           <Field
             name="ageRange"
+            label={constants.ageRange}
+            unitLabel={constants.ageUnit}
             component={Range}
             min={18}
             max={50}
+            setFieldValue={setFieldValue}
+          />
+        </div>
+      )}
+      {has('maxDistance', initialValues) && (
+        <div className={classes.p1}>
+          <Field
+            name="maxDistance"
+            label={constants.maxDistance}
+            unitLabel={constants.distanceUnit}
+            component={Slider}
+            min={50}
+            max={20000}
+            step={50}
             setFieldValue={setFieldValue}
           />
         </div>

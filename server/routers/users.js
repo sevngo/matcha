@@ -11,7 +11,15 @@ const {
   uploadImage,
 } = require('../middlewares/data');
 const { generateAuthToken, auth, isMyId } = require('../middlewares/auth');
-const { gender, interests, birthRange, limit, skip, sort } = require('../middlewares/query');
+const {
+  maxDistance,
+  gender,
+  interests,
+  birthRange,
+  limit,
+  skip,
+  sort,
+} = require('../middlewares/query');
 const { usersPipeline, matchById, project } = require('../aggregations/users');
 const { Users } = require('../database');
 
@@ -27,19 +35,32 @@ router.post('/', newDateBirth, hashPassword, async (req, res) => {
   }
 });
 
-router.get('/', auth, gender, interests, birthRange, limit, skip, sort, async (req, res) => {
-  try {
-    const { gender, interests, limit, skip, sort, birthRange } = req;
-    const projection = project({ password: 0, 'images.data': 0, email: 0 });
-    const users = await Users()
-      .aggregate(usersPipeline(gender, interests, birthRange, limit, skip, sort, projection))
-      .toArray();
-    res.status(200).send(users);
-  } catch (e) {
-    res.status(500).send();
-    console.log(e); // eslint-disable-line no-console
-  }
-});
+router.get(
+  '/',
+  auth,
+  maxDistance,
+  gender,
+  interests,
+  birthRange,
+  limit,
+  skip,
+  sort,
+  async (req, res) => {
+    try {
+      const { maxDistance, gender, interests, limit, skip, sort, birthRange } = req;
+      const projection = project({ password: 0, 'images.data': 0, email: 0 });
+      const users = await Users()
+        .aggregate(
+          usersPipeline(maxDistance, gender, interests, birthRange, limit, skip, sort, projection),
+        )
+        .toArray();
+      res.status(200).send(users);
+    } catch (e) {
+      res.status(500).send();
+      console.log(e); // eslint-disable-line no-console
+    }
+  },
+);
 
 router.get('/:id', auth, isValidObjectId, newObjectId, async (req, res) => {
   try {
