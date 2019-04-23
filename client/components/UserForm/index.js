@@ -25,6 +25,7 @@ import {
   isLong,
   isYoung,
   isOld,
+  isTrimmed,
 } from '../../utils/validates';
 import * as constants from '../../utils/constants';
 
@@ -72,7 +73,7 @@ const Component = ({
           name="username"
           label={constants.username}
           component={TextField}
-          validate={composeValidators(isRequired, isShort, isLong(30))}
+          validate={composeValidators(isRequired, isShort, isLong(30), isTrimmed)}
           startAdornment="account_circle"
           disabled={disabled}
         />
@@ -82,7 +83,7 @@ const Component = ({
           name="password"
           label={newPassword ? constants.newPassword : constants.password}
           component={TextField}
-          validate={composeValidators(isRequired, isShort, isLong(30))}
+          validate={composeValidators(isRequired, isShort, isLong(30), isTrimmed)}
           type={showPassword ? 'text' : 'password'}
           startAdornment="vpn_key"
           endAdornment={
@@ -97,7 +98,7 @@ const Component = ({
           name="newPassword"
           label={constants.newPassword}
           component={TextField}
-          validate={composeValidators(isShort, isLong(30))}
+          validate={composeValidators(isShort, isLong(30), isTrimmed)}
           type={showPassword ? 'text' : 'password'}
           startAdornment="vpn_key"
           endAdornment={
@@ -112,7 +113,7 @@ const Component = ({
           name="email"
           label={constants.email}
           component={TextField}
-          validate={composeValidators(isRequired, isEmail, isLong(30))}
+          validate={composeValidators(isRequired, isEmail, isLong(30), isTrimmed)}
           startAdornment="alternate_email"
           disabled={disabled}
         />
@@ -122,7 +123,7 @@ const Component = ({
           name="firstName"
           label={constants.firstName}
           component={TextField}
-          validate={composeValidators(isRequired, isLong(30))}
+          validate={composeValidators(isRequired, isLong(30), isTrimmed)}
           disabled={disabled}
         />
       )}
@@ -131,7 +132,7 @@ const Component = ({
           name="lastName"
           label={constants.lastName}
           component={TextField}
-          validate={composeValidators(isRequired, isLong(30))}
+          validate={composeValidators(isRequired, isLong(30), isTrimmed)}
           disabled={disabled}
         />
       )}
@@ -228,7 +229,7 @@ const Component = ({
           name="biography"
           label="Biography"
           component={TextField}
-          validate={isLong(300)}
+          validate={composeValidators(isLong(300), isTrimmed)}
           multiline
           rows="3"
           disabled={disabled}
