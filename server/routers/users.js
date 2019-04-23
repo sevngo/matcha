@@ -9,6 +9,7 @@ const {
   hashNewPassword,
   newDateBirth,
   uploadImage,
+  trimBody,
 } = require('../middlewares/data');
 const { generateAuthToken, auth, isMyId } = require('../middlewares/auth');
 const {
@@ -82,6 +83,7 @@ router.patch(
   isValidObjectId,
   isMyId,
   newObjectId,
+  trimBody,
   newDateBirth,
   hashNewPassword,
   async (req, res) => {
@@ -117,7 +119,7 @@ router.delete('/:id', auth, isValidObjectId, isMyId, newObjectId, async (req, re
   }
 });
 
-router.post('/login', generateAuthToken, async (req, res) => {
+router.post('/login', trimBody, generateAuthToken, async (req, res) => {
   try {
     const { user, token } = req;
     const projection = project({ password: 0, 'images.data': 0 });
