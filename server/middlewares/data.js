@@ -1,5 +1,5 @@
 const { ObjectID } = require('mongodb');
-const { omit } = require('ramda');
+const { omit, reduce, trim, keys, is } = require('ramda');
 const bcrypt = require('bcryptjs');
 const multer = require('multer');
 
@@ -50,6 +50,16 @@ const uploadImage = multer({
   },
 });
 
+const trimBody = (req, res, next) => {
+  const { body } = req;
+  const BodyTrimmed = reduce(
+    (acc, key) => ({ ...acc, [key]: is(String, body[key]) ? trim(body[key]) : body[key] }),
+    {},
+  )(keys(body));
+  req.body = BodyTrimmed;
+  next();
+};
+
 module.exports = {
   isValidObjectId,
   hashPassword,
@@ -57,4 +67,5 @@ module.exports = {
   hashNewPassword,
   newDateBirth,
   uploadImage,
+  trimBody,
 };
