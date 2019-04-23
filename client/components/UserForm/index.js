@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { withFormik, Field } from 'formik';
+import { FormattedMessage } from 'react-intl';
 import { has, compose, map, isNil, path } from 'ramda';
 import {
   Grid,
@@ -58,7 +59,6 @@ const Component = ({
   classes,
   isValid,
   disabled,
-  newPassword,
   resetForm,
   dirty,
   setFieldValue,
@@ -71,7 +71,7 @@ const Component = ({
       {has('username', initialValues) && (
         <Field
           name="username"
-          label={constants.username}
+          label={<FormattedMessage id="components.userForm.username" />}
           component={TextField}
           validate={composeValidators(isRequired, isShort, isLong(30), isTrimmed)}
           startAdornment="account_circle"
@@ -81,7 +81,7 @@ const Component = ({
       {has('password', initialValues) && (
         <Field
           name="password"
-          label={newPassword ? constants.newPassword : constants.password}
+          label={<FormattedMessage id="components.userForm.password" />}
           component={TextField}
           validate={composeValidators(isRequired, isShort, isLong(30), isTrimmed)}
           type={showPassword ? 'text' : 'password'}
@@ -96,7 +96,7 @@ const Component = ({
       {has('newPassword', initialValues) && (
         <Field
           name="newPassword"
-          label={constants.newPassword}
+          label={<FormattedMessage id="components.userForm.newPassword" />}
           component={TextField}
           validate={composeValidators(isShort, isLong(30), isTrimmed)}
           type={showPassword ? 'text' : 'password'}
@@ -111,7 +111,7 @@ const Component = ({
       {has('email', initialValues) && (
         <Field
           name="email"
-          label={constants.email}
+          label={<FormattedMessage id="components.userForm.email" />}
           component={TextField}
           validate={composeValidators(isRequired, isEmail, isLong(30), isTrimmed)}
           startAdornment="alternate_email"
@@ -121,7 +121,7 @@ const Component = ({
       {has('firstName', initialValues) && (
         <Field
           name="firstName"
-          label={constants.firstName}
+          label={<FormattedMessage id="components.userForm.firstName" />}
           component={TextField}
           validate={composeValidators(isRequired, isLong(30), isTrimmed)}
           disabled={disabled}
@@ -130,7 +130,7 @@ const Component = ({
       {has('lastName', initialValues) && (
         <Field
           name="lastName"
-          label={constants.lastName}
+          label={<FormattedMessage id="components.userForm.lastName" />}
           component={TextField}
           validate={composeValidators(isRequired, isLong(30), isTrimmed)}
           disabled={disabled}
@@ -139,7 +139,7 @@ const Component = ({
       {has('birthDate', initialValues) && (
         <Field
           name="birthDate"
-          label={constants.birthDate}
+          label={<FormattedMessage id="components.userForm.birthDate" />}
           component={TextField}
           validate={composeValidators(isRequired, isYoung, isOld)}
           type="date"
@@ -149,7 +149,12 @@ const Component = ({
       )}
       {has('gender', initialValues) && (
         <div className={classes.gender}>
-          <Field name="gender" label={constants.gender} component={Radio} validate={isRequired}>
+          <Field
+            name="gender"
+            label={<FormattedMessage id="components.userForm.gender" />}
+            component={Radio}
+            validate={isRequired}
+          >
             {map(gender => (
               <FormControlLabel
                 key={gender.label}
@@ -166,7 +171,7 @@ const Component = ({
         <Field
           name="address.name"
           id="address"
-          label={constants.address}
+          label={<FormattedMessage id="components.userForm.address" />}
           component={TextField}
           disabled={disabled || !isAddresNull}
           validate={() => isAddresNull && 'Required'}
@@ -184,8 +189,7 @@ const Component = ({
         <div className={classes.p1}>
           <Field
             name="ageRange"
-            label={constants.ageRange}
-            unitLabel={constants.ageUnit}
+            label={<FormattedMessage id="components.userForm.ageRange" />}
             component={Range}
             min={18}
             max={50}
@@ -197,8 +201,8 @@ const Component = ({
         <div className={classes.p1}>
           <Field
             name="maxDistance"
-            label={constants.maxDistance}
-            unitLabel={constants.distanceUnit}
+            label={<FormattedMessage id="components.userForm.maxDistance" />}
+            unitLabel={<FormattedMessage id="components.userForm.unitDistance" />}
             component={Slider}
             min={50}
             max={20000}
@@ -210,7 +214,7 @@ const Component = ({
       {has('interests', initialValues) && (
         <Field
           name="interests"
-          label="Interests"
+          label={<FormattedMessage id="components.userForm.interests" />}
           component={Select}
           multiple
           validate={isLong(4)}
@@ -227,7 +231,7 @@ const Component = ({
       {has('biography', initialValues) && (
         <Field
           name="biography"
-          label="Biography"
+          label={<FormattedMessage id="components.userForm.biography" />}
           component={TextField}
           validate={composeValidators(isLong(300), isTrimmed)}
           multiline
@@ -236,7 +240,11 @@ const Component = ({
         />
       )}
       {has('sortBy', initialValues) && (
-        <Field name="sortBy" label="Sort By" component={Select}>
+        <Field
+          name="sortBy"
+          label={<FormattedMessage id="components.userForm.sortBy" />}
+          component={Select}
+        >
           {map(option => (
             <MenuItem key={option.value} value={option.value}>
               {option.label}
@@ -255,7 +263,7 @@ const Component = ({
             className={classes.mt1}
             fullWidth
           >
-            {constants.submit}
+            <FormattedMessage id="components.userForm.submit" />
           </Button>
         )}
         {!disabled && (
@@ -267,7 +275,7 @@ const Component = ({
             onClick={() => resetForm(initialValues)}
             fullWidth
           >
-            {constants.reset}
+            <FormattedMessage id="components.userForm.reset" />
           </Button>
         )}
       </Grid>

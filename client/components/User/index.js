@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
 import {
   withStyles,
   Card,
@@ -12,8 +13,7 @@ import {
 import { path } from 'ramda';
 import emptyImage from '../../images/emptyImage.png';
 import Interests from '../Interests';
-import { getAge } from '../../utils';
-import * as constants from '../../utils/constants';
+import { getAge } from '../../utils/functions';
 
 const styles = theme => ({
   card: {
@@ -44,7 +44,8 @@ const Component = ({ user, classes }) => {
               {user.firstName} {user.lastName}, {getAge(user.birthDate)}
             </Typography>
             <Typography variant="caption">
-              {parseFloat(user.distance).toFixed(1)} {constants.distanceUnit}
+              {parseFloat(user.distance).toFixed(1)}{' '}
+              <FormattedMessage id="components.user.unitDistance" />
             </Typography>
           </Grid>
           <Interests interests={user.interests} />

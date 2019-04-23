@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { compose, length, isEmpty, path } from 'ramda';
 import { connect } from 'react-redux';
+import { FormattedMessage } from 'react-intl';
 import { withStyles, Paper, Grid, Button, Typography, Icon } from '@material-ui/core';
 import UserForm from '../../components/UserForm';
 import Carousel from '../../components/Carousel';
@@ -33,7 +34,7 @@ const Component = ({ classes, auth, updateAccount, addImage, removeImage }) => {
             onClick={event => handlePopover(event.currentTarget)}
             disabled={!images || isEmpty(images)}
           >
-            Delete
+            <FormattedMessage id="containers.myUser.delete" />
             <Icon className={classes.ml1}>delete</Icon>
           </Button>
           <Popover
@@ -45,12 +46,12 @@ const Component = ({ classes, auth, updateAccount, addImage, removeImage }) => {
             <Grid container>
               <Icon>info</Icon>
               <Typography variant="subtitle1" align="center" className={classes.ml1}>
-                Are you sure to delete this image ?
+                <FormattedMessage id="containers.myUser.sure" />
               </Typography>
             </Grid>
             <Grid container justify="flex-end">
               <Button size="small" onClick={() => handlePopover()}>
-                No
+                <FormattedMessage id="containers.myUser.no" />
               </Button>
               <Button
                 size="small"
@@ -60,7 +61,7 @@ const Component = ({ classes, auth, updateAccount, addImage, removeImage }) => {
                   handlePopover();
                 }}
               >
-                Yes
+                <FormattedMessage id="containers.myUser.yes" />
               </Button>
             </Grid>
           </Popover>
@@ -71,7 +72,7 @@ const Component = ({ classes, auth, updateAccount, addImage, removeImage }) => {
             disabled={length(images) === 5}
             className={classes.ml1}
           >
-            Upload
+            <FormattedMessage id="containers.myUser.upload" />
             <Icon className={classes.ml1}>cloud_upload</Icon>
           </Button>
         </Paper>
