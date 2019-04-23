@@ -1,4 +1,4 @@
-import { reduce, length } from 'ramda';
+import { reduce, length, trim } from 'ramda';
 
 export const composeValidators = (...validators) => value =>
   reduce((error, validator) => error || validator(value), undefined)(validators);
@@ -23,3 +23,5 @@ export const isYoung = value => {
   if (new Date(today.getFullYear() - 18, today.getMonth(), today.getDate()) < new Date(value))
     return 'Too young';
 };
+
+export const isTrimmed = value => value !== trim(value) && 'Invalid';
