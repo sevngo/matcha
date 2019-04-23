@@ -1,6 +1,7 @@
 import React, { useState, Fragment } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { FormattedMessage } from 'react-intl';
 import {
   withStyles,
   Grid,
@@ -16,7 +17,6 @@ import {
 import UserForm from '../../components/UserForm';
 import Dialog from '../../components/Dialog';
 import { register, login } from '../../actions';
-import * as constants from '../../utils/constants';
 
 const styles = theme => ({
   p3: {
@@ -43,8 +43,8 @@ const Component = ({ classes, login, register }) => {
         <Paper elevation={24}>
           <AppBar position="static">
             <Tabs variant="fullWidth" value={tab} onChange={(e, tab) => handleTab(tab)}>
-              <Tab label={constants.login} />
-              <Tab label={constants.register} />
+              <Tab label={<FormattedMessage id="containers.auth.login" />} />
+              <Tab label={<FormattedMessage id="containers.auth.register" />} />
             </Tabs>
           </AppBar>
           <div className={classes.p3}>
@@ -56,14 +56,16 @@ const Component = ({ classes, login, register }) => {
                   variant="outlined"
                   className={classes.mt1}
                 >
-                  {constants.forgotPassword}
+                  <FormattedMessage id="containers.auth.forgotPassword" />
                 </Button>
                 <Dialog open={isDialogOpen} onClose={() => toggleDialog(false)}>
                   <Typography gutterBottom align="center" variant="h6">
-                    {constants.forgotPassword}
+                    <FormattedMessage id="containers.auth.forgotPassword" />
                   </Typography>
                   <DialogContent>
-                    <DialogContentText>{constants.enterEmail}</DialogContentText>
+                    <DialogContentText>
+                      <FormattedMessage id="containers.auth.enterEmail" />
+                    </DialogContentText>
                     <UserForm initialValues={{ email: '' }} submit={() => {}} />
                   </DialogContent>
                 </Dialog>

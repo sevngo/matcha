@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { length, path } from 'ramda';
+import { FormattedMessage } from 'react-intl';
 import { Button, MobileStepper, withStyles, Icon } from '@material-ui/core';
-import * as constants from '../../utils/constants';
 import emptyImage from '../../images/emptyImage.png';
 
 const styles = {
@@ -27,7 +27,7 @@ const Component = ({ userId, images, classes, activeStep, handleStep }) => {
             onClick={() => handleStep(activeStep + 1)}
             disabled={activeStep === maxSteps - 1 || !imageId}
           >
-            {constants.next}
+            <FormattedMessage id="components.carousel.next" />
             <Icon>keyboard_arrow_right</Icon>
           </Button>
         }
@@ -38,7 +38,7 @@ const Component = ({ userId, images, classes, activeStep, handleStep }) => {
             disabled={activeStep === 0 || !imageId}
           >
             <Icon>keyboard_arrow_left</Icon>
-            {constants.back}
+            <FormattedMessage id="components.carousel.back" />
           </Button>
         }
       />

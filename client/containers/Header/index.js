@@ -3,12 +3,12 @@ import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose, isEmpty } from 'ramda';
+import { FormattedMessage } from 'react-intl';
 import { AppBar, Toolbar, Typography, withStyles, MenuItem, Menu } from '@material-ui/core';
 import Drawer from '../Drawer';
 import IconButton from '../../components/IconButton';
 import { logout } from '../../actions';
 import { getAuth } from '../../selectors';
-import * as constants from '../../utils/constants';
 
 const styles = theme => ({
   appBar: {
@@ -40,7 +40,7 @@ const Component = ({ classes, auth, logout, location: { pathname } }) => {
             </IconButton>
           )}
           <Typography variant="h6" color="secondary" className={classes.title}>
-            {constants.title}
+            <FormattedMessage id="containers.header.title" />
           </Typography>
           {!isEmpty(auth) && (
             <Fragment>
@@ -49,7 +49,7 @@ const Component = ({ classes, auth, logout, location: { pathname } }) => {
               <IconButton onClick={e => handleMenu(e.currentTarget)}>account_circle</IconButton>
               <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={() => handleMenu()}>
                 <MenuItem onClick={() => handleMenu()} component={Link} to={`/user/${auth._id}`}>
-                  {constants.myAccount}
+                  <FormattedMessage id="containers.header.myAccount" />
                 </MenuItem>
                 <MenuItem
                   onClick={() => {
@@ -57,7 +57,7 @@ const Component = ({ classes, auth, logout, location: { pathname } }) => {
                     logout();
                   }}
                 >
-                  {constants.logout}
+                  <FormattedMessage id="containers.header.logout" />
                 </MenuItem>
               </Menu>
             </Fragment>
