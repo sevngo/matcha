@@ -44,8 +44,10 @@ const Component = ({ user, classes }) => {
               {user.firstName} {user.lastName}, {getAge(user.birthDate)}
             </Typography>
             <Typography variant="caption">
-              {parseFloat(user.distance).toFixed(1)}{' '}
-              <FormattedMessage id="components.user.unitDistance" />
+              <FormattedMessage
+                id="components.user.unitDistance"
+                values={{ distance: parseFloat(user.distance).toFixed(1) }}
+              />
             </Typography>
           </Grid>
           <Interests interests={user.interests} />
