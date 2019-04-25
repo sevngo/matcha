@@ -2,13 +2,7 @@ import React from 'react';
 import { compose } from 'ramda';
 import { TextField, Icon, withStyles } from '@material-ui/core';
 import withMetaData from '../../hoc/withMetaData';
-
-const styles = theme => ({
-  icon: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(2),
-  },
-});
+import styles from './styles';
 
 const Component = ({
   field,

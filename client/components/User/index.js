@@ -14,21 +14,7 @@ import { path } from 'ramda';
 import emptyImage from '../../images/emptyImage.png';
 import Interests from '../Interests';
 import { getAge } from '../../utils/functions';
-
-const styles = theme => ({
-  card: {
-    width: 300,
-  },
-  media: {
-    height: 250,
-  },
-  root: {
-    padding: theme.spacing(3),
-  },
-  mt1: {
-    marginTop: theme.spacing(1),
-  },
-});
+import styles from './styles';
 
 const Component = ({ user, classes }) => {
   const { images } = user;

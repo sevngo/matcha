@@ -3,15 +3,7 @@ import { FormLabel, withStyles } from '@material-ui/core';
 import { repeat } from 'ramda';
 import { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
-
-const styles = theme => ({
-  values: {
-    color: 'black',
-  },
-  m1: {
-    marginTop: theme.spacing(1),
-  },
-});
+import styles from './styles';
 
 const Component = ({
   field: { name, value },

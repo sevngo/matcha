@@ -3,12 +3,7 @@ import { length, path } from 'ramda';
 import { FormattedMessage } from 'react-intl';
 import { Button, MobileStepper, withStyles, Icon } from '@material-ui/core';
 import emptyImage from '../../images/emptyImage.png';
-
-const styles = {
-  img: {
-    width: '100%',
-  },
-};
+import styles from './styles';
 
 const Component = ({ userId, images, classes, activeStep, handleStep }) => {
   const maxSteps = length(images);

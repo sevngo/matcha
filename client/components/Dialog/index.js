@@ -1,11 +1,6 @@
 import React from 'react';
 import { Dialog, withStyles } from '@material-ui/core';
-
-const styles = theme => ({
-  p3: {
-    padding: theme.spacing(3),
-  },
-});
+import styles from './styles';
 
 const Component = ({ classes, children, ...rest }) => (
   <Dialog {...rest}>

@@ -6,15 +6,7 @@ import { createStructuredSelector } from 'reselect';
 import { getFilter } from '../../selectors';
 import { connect } from 'react-redux';
 import { handleFilter } from '../../actions';
-
-const drawerWidth = 300;
-
-const styles = theme => ({
-  root: {
-    padding: theme.spacing(3),
-    width: drawerWidth,
-  },
-});
+import styles from './styles';
 
 const Component = ({ classes, filter, handleFilter, isDrawerOpen, toggleDrawer }) => {
   return (

@@ -9,19 +9,7 @@ import Drawer from '../Drawer';
 import IconButton from '../../components/IconButton';
 import { logout } from '../../actions';
 import { getAuth } from '../../selectors';
-
-const styles = theme => ({
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-  },
-  title: {
-    flexGrow: 1,
-  },
-  icon: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(4),
-  },
-});
+import styles from './styles';
 
 const Component = ({ classes, auth, logout, location: { pathname } }) => {
   const [isDrawerOpen, toggleDrawer] = useState(false);
