@@ -17,7 +17,8 @@ import Select from '../Select';
 import Interests from '../Interests';
 import Range from '../Range';
 import Slider from '../Slider';
-import withGooglePlaces from '../../hoc/withGooglePlaces';
+import withAutocomplete from '../../hoc/withAutocomplete';
+import withGeolocation from '../../hoc/withGeolocation';
 import {
   composeValidators,
   isRequired,
@@ -290,6 +291,7 @@ export default compose(
     displayName: 'UserForm',
     enableReinitialize: true,
   }),
-  withGooglePlaces('address'),
+  withAutocomplete('address'),
+  withGeolocation('address'),
   withStyles(styles),
 )(Component);
