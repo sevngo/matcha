@@ -71,6 +71,7 @@ const Component = ({ classes, login, register }) => {
                   address: { name: '' },
                 }}
                 submit={register}
+                withGeolocation
               />
             )}
           </div>

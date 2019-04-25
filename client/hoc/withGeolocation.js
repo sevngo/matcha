@@ -3,9 +3,9 @@ import { isNil } from 'ramda';
 
 const withGeolocation = fieldName => Component => {
   const EnhancedComponent = props => {
-    const { setFieldValue, values } = props;
+    const { setFieldValue, values, withGeolocation } = props;
     useEffect(() => {
-      if (values[fieldName]) {
+      if (values[fieldName] && withGeolocation) {
         navigator.geolocation.getCurrentPosition(({ coords: { longitude, latitude } }) => {
           /*global google*/
           const geocoder = new google.maps.Geocoder();
