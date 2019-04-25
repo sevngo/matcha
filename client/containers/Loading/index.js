@@ -4,23 +4,8 @@ import { connect } from 'react-redux';
 import Progress from '../../components/Progress';
 import { getIsLoading } from '../../selectors';
 import { withStyles } from '@material-ui/core';
+import styles from './styles';
 
-const styles = {
-  root: {
-    position: 'absolute',
-    height: '100%',
-    width: '100%',
-    backgroundColor: 'white',
-    top: '0',
-    left: '0',
-  },
-  loader: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-  },
-};
 const Component = ({ classes, isLoading }) => {
   if (!isLoading) return false;
   return (
