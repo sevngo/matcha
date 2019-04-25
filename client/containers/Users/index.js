@@ -6,12 +6,7 @@ import Users from '../../components/Users';
 import withAuth from '../../hoc/withAuth';
 import { getUsers, getAuth, getFilter } from '../../selectors';
 import { loadUsers } from '../../actions';
-
-const styles = theme => ({
-  root: {
-    padding: theme.spacing(3),
-  },
-});
+import styles from './styles';
 
 const Component = ({ classes, users, loadUsers, auth: { token }, filter }) => {
   useEffect(() => {

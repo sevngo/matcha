@@ -1,11 +1,6 @@
 import React from 'react';
 import { withStyles, Popover } from '@material-ui/core';
-
-const styles = theme => ({
-  p2: {
-    padding: theme.spacing(2),
-  },
-});
+import styles from './styles';
 
 const Component = ({ classes, children, ...rest }) => (
   <Popover {...rest}>

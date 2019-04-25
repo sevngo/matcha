@@ -17,18 +17,7 @@ import {
 import UserForm from '../../components/UserForm';
 import Dialog from '../../components/Dialog';
 import { register, login } from '../../actions';
-
-const styles = theme => ({
-  p3: {
-    padding: theme.spacing(3),
-  },
-  mt1: {
-    marginTop: theme.spacing(1),
-  },
-  item: {
-    maxWidth: 500,
-  },
-});
+import styles from './styles';
 
 const Component = ({ classes, login, register }) => {
   const [tab, handleTab] = useState(0);
