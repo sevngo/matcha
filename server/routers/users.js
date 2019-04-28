@@ -20,6 +20,7 @@ const {
   limit,
   skip,
   sort,
+  notMyUser,
 } = require('../middlewares/query');
 const { usersPipeline, matchById, project } = require('../aggregations/users');
 const { Users } = require('../database');
@@ -43,16 +44,27 @@ router.get(
   gender,
   interests,
   birthRange,
+  notMyUser,
   limit,
   skip,
   sort,
   async (req, res) => {
     try {
-      const { maxDistance, gender, interests, limit, skip, sort, birthRange } = req;
+      const { maxDistance, gender, interests, limit, skip, sort, birthRange, notMyUser } = req;
       const projection = project({ password: 0, 'images.data': 0, email: 0 });
       const users = await Users()
         .aggregate(
-          usersPipeline(maxDistance, gender, interests, birthRange, limit, skip, sort, projection),
+          usersPipeline(
+            maxDistance,
+            gender,
+            interests,
+            birthRange,
+            notMyUser,
+            limit,
+            skip,
+            sort,
+            projection,
+          ),
         )
         .toArray();
       res.status(200).send(users);

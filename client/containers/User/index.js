@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { compose } from 'ramda';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 import { withStyles, Paper, Grid } from '@material-ui/core';
 import MyUser from '../MyUser';
 import UserForm from '../../components/UserForm';
@@ -45,9 +46,9 @@ const Component = ({
   );
 };
 
-const mapStateToProps = state => ({
-  user: getUser(state),
-  auth: getAuth(state),
+const mapStateToProps = createStructuredSelector({
+  user: getUser,
+  auth: getAuth,
 });
 
 export default compose(

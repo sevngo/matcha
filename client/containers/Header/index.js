@@ -2,6 +2,7 @@ import React, { useState, Fragment } from 'react';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 import { compose, isEmpty } from 'ramda';
 import { FormattedMessage } from 'react-intl';
 import { AppBar, Toolbar, Typography, withStyles, MenuItem, Menu } from '@material-ui/core';
@@ -57,12 +58,12 @@ const Component = ({ classes, auth, logout, location: { pathname } }) => {
   );
 };
 
-const mapDispatchToProps = state => ({ auth: getAuth(state) });
+const mapStateToProps = createStructuredSelector({ auth: getAuth });
 
 export default compose(
   withRouter,
   connect(
-    mapDispatchToProps,
+    mapStateToProps,
     { logout },
   ),
   withStyles(styles),
