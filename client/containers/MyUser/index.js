@@ -22,63 +22,62 @@ const Component = ({ classes, auth, updateAccount, addImage, removeImage }) => {
   return (
     <Grid container spacing={3} justify="center" direction="row" className={classes.p3}>
       <Grid item className={classes.width}>
-        <Paper square elevation={24} className={classes.header}>
-          <input
-            ref={inputEl}
-            type="file"
-            onChange={event => uploadImage(event.target.files[0])}
-            accept="image/png, image/jpeg"
-            className={classes.hide}
-          />
-          <Button
-            variant="outlined"
-            onClick={event => handlePopover(event.currentTarget)}
-            disabled={!images || isEmpty(images)}
-          >
-            <FormattedMessage id="containers.myUser.delete" />
-            <Icon className={classes.ml1}>delete</Icon>
-          </Button>
-          <Popover
-            id="simple-popper"
-            open={Boolean(anchorEl)}
-            anchorEl={anchorEl}
-            onClose={() => handlePopover()}
-          >
-            <Grid container>
-              <Icon>info</Icon>
-              <Typography variant="subtitle1" align="center" className={classes.ml1}>
-                <FormattedMessage id="containers.myUser.sure" />
-              </Typography>
-            </Grid>
-            <Grid container justify="flex-end">
-              <Button size="small" onClick={() => handlePopover()}>
-                <FormattedMessage id="containers.myUser.no" />
-              </Button>
-              <Button
-                size="small"
-                onClick={() => {
-                  removeImage(token, _id, path([activeStep, '_id'])(images));
-                  handleStep(0);
-                  handlePopover();
-                }}
-              >
-                <FormattedMessage id="containers.myUser.yes" />
-              </Button>
-            </Grid>
-          </Popover>
-          <Button
-            variant="outlined"
-            color="inherit"
-            onClick={() => inputEl.current.click()}
-            disabled={length(images) === 5}
-            className={classes.ml1}
-          >
-            <FormattedMessage id="containers.myUser.upload" />
-            <Icon className={classes.ml1}>cloud_upload</Icon>
-          </Button>
-        </Paper>
         <Paper elevation={24}>
-          <Carousel userId={_id} images={images} activeStep={activeStep} handleStep={handleStep} />
+          <Carousel userId={_id} images={images} activeStep={activeStep} handleStep={handleStep}>
+            <input
+              ref={inputEl}
+              type="file"
+              onChange={event => uploadImage(event.target.files[0])}
+              accept="image/png, image/jpeg"
+              className={classes.hide}
+            />
+            <Button
+              variant="outlined"
+              onClick={event => handlePopover(event.currentTarget)}
+              disabled={!images || isEmpty(images)}
+            >
+              <FormattedMessage id="containers.myUser.delete" />
+              <Icon className={classes.ml1}>delete</Icon>
+            </Button>
+            <Popover
+              id="simple-popper"
+              open={Boolean(anchorEl)}
+              anchorEl={anchorEl}
+              onClose={() => handlePopover()}
+            >
+              <Grid container>
+                <Icon>info</Icon>
+                <Typography variant="subtitle1" align="center" className={classes.ml1}>
+                  <FormattedMessage id="containers.myUser.sure" />
+                </Typography>
+              </Grid>
+              <Grid container justify="flex-end">
+                <Button size="small" onClick={() => handlePopover()}>
+                  <FormattedMessage id="containers.myUser.no" />
+                </Button>
+                <Button
+                  size="small"
+                  onClick={() => {
+                    removeImage(token, _id, path([activeStep, '_id'])(images));
+                    handleStep(0);
+                    handlePopover();
+                  }}
+                >
+                  <FormattedMessage id="containers.myUser.yes" />
+                </Button>
+              </Grid>
+            </Popover>
+            <Button
+              variant="outlined"
+              color="inherit"
+              onClick={() => inputEl.current.click()}
+              disabled={length(images) === 5}
+              className={classes.ml1}
+            >
+              <FormattedMessage id="containers.myUser.upload" />
+              <Icon className={classes.ml1}>cloud_upload</Icon>
+            </Button>
+          </Carousel>
         </Paper>
       </Grid>
       <Grid item className={classes.width}>

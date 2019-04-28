@@ -1,4 +1,4 @@
-import { reduce, path } from 'ramda';
+import { reduce } from 'ramda';
 import { enqueueSnackbar, error } from './app';
 import { getUsers, getUser, uploadImage, deleteImage } from '../api';
 
@@ -14,11 +14,10 @@ export const IMAGE_DELETED = 'IMAGE_DELETED';
 
 export const handleFilter = filter => ({ type: HANDLE_FILTER, filter });
 
-export const loadUsers = (token, filter) => async (dispatch, getState) => {
+export const loadUsers = (token, filter, coordinates) => async dispatch => {
   try {
     const { gender, interests, ageRange, sortBy, maxDistance } = filter;
 
-    const coordinates = path(['auth', 'address', 'coordinates'])(getState());
     const coordinatesQuery = `&coordinates=${coordinates[0]}:${coordinates[1]}`;
 
     const genderQuery = `?gender=${gender}`;
