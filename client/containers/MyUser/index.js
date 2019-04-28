@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { compose, length, isEmpty, path } from 'ramda';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 import { FormattedMessage } from 'react-intl';
 import { withStyles, Paper, Grid, Button, Typography, Icon } from '@material-ui/core';
 import UserForm from '../../components/UserForm';
@@ -98,8 +99,8 @@ const Component = ({ classes, auth, updateAccount, addImage, removeImage }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  auth: getAuth(state),
+const mapStateToProps = createStructuredSelector({
+  auth: getAuth,
 });
 
 export default compose(

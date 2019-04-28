@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { compose } from 'ramda';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 import { withStyles } from '@material-ui/core';
 import Users from '../../components/Users';
 import withAuth from '../../hoc/withAuth';
@@ -19,10 +20,10 @@ const Component = ({ classes, users, loadUsers, auth: { token }, filter }) => {
   );
 };
 
-const mapStateToProps = (state, { auth: { _id } }) => ({
-  auth: getAuth(state),
-  users: getUsers(_id)(state),
-  filter: getFilter(state),
+const mapStateToProps = createStructuredSelector({
+  auth: getAuth,
+  users: getUsers,
+  filter: getFilter,
 });
 
 export default compose(

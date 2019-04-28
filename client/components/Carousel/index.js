@@ -20,7 +20,7 @@ const Component = ({ userId, images, classes, activeStep, handleStep }) => {
           <Button
             size="small"
             onClick={() => handleStep(activeStep + 1)}
-            disabled={activeStep === maxSteps - 1 || !imageId}
+            disabled={activeStep === maxSteps - 1 || !maxSteps}
           >
             <FormattedMessage id="components.carousel.next" />
             <Icon>keyboard_arrow_right</Icon>
@@ -30,7 +30,7 @@ const Component = ({ userId, images, classes, activeStep, handleStep }) => {
           <Button
             size="small"
             onClick={() => handleStep(activeStep - 1)}
-            disabled={activeStep === 0 || !imageId}
+            disabled={activeStep === 0 || !maxSteps}
           >
             <Icon>keyboard_arrow_left</Icon>
             <FormattedMessage id="components.carousel.back" />

@@ -1,4 +1,5 @@
 const { pick, split, is } = require('ramda');
+const { ObjectID } = require('mongodb');
 const { defaultToNull } = require('../utils');
 
 const limit = (req, res, next) => {
@@ -76,6 +77,11 @@ const maxDistance = (req, res, next) => {
   next();
 };
 
+const notMyUser = (req, res, next) => {
+  req.notMyUser = { $match: { _id: { $not: { $eq: new ObjectID(req.user._id) } } } };
+  next();
+};
+
 module.exports = {
   limit,
   skip,
@@ -84,4 +90,5 @@ module.exports = {
   interests,
   birthRange,
   maxDistance,
+  notMyUser,
 };

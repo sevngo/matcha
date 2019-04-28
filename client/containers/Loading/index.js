@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { compose } from 'ramda';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 import Progress from '../../components/Progress';
 import { getIsLoading } from '../../selectors';
 import { withStyles } from '@material-ui/core';
@@ -18,8 +19,8 @@ const Component = ({ classes, isLoading }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  isLoading: getIsLoading(state),
+const mapStateToProps = createStructuredSelector({
+  isLoading: getIsLoading,
 });
 
 export default compose(

@@ -23,7 +23,7 @@ const Component = ({ classes, filter, handleFilter, isDrawerOpen, toggleDrawer }
 };
 
 const mapStateToProps = createStructuredSelector({
-  filter: getFilter(),
+  filter: getFilter,
 });
 
 export default compose(

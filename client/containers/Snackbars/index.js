@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 import { withSnackbar } from 'notistack';
 import { forEach, includes } from 'ramda';
 import { removeSnackbar } from '../../actions';
@@ -18,8 +19,8 @@ const Component = ({ snackbars, enqueueSnackbar, removeSnackbar }) => {
   return false;
 };
 
-const mapStateToProps = state => ({
-  snackbars: getSnackbars(state),
+const mapStateToProps = createStructuredSelector({
+  snackbars: getSnackbars,
 });
 
 export default connect(
