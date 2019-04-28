@@ -28,8 +28,8 @@ const color = {
   Crow: '#cddc39',
 };
 
-const Component = ({ interest, classes }) => (
+const Interest = ({ interest, classes }) => (
   <Chip label={interest} style={{ backgroundColor: color[interest] }} className={classes.chip} />
 );
 
-export default withStyles(styles)(Component);
+export default withStyles(styles)(Interest);

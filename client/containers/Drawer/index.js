@@ -1,6 +1,6 @@
 import React from 'react';
 import { compose } from 'ramda';
-import { withStyles, Drawer } from '@material-ui/core';
+import { withStyles, Drawer as MDrawer } from '@material-ui/core';
 import UserForm from '../../components/UserForm';
 import { createStructuredSelector } from 'reselect';
 import { getFilter } from '../../selectors';
@@ -8,9 +8,9 @@ import { connect } from 'react-redux';
 import { handleFilter } from '../../actions';
 import styles from './styles';
 
-const Component = ({ classes, filter, handleFilter, isDrawerOpen, toggleDrawer }) => {
+const Drawer = ({ classes, filter, handleFilter, isDrawerOpen, toggleDrawer }) => {
   return (
-    <Drawer
+    <MDrawer
       open={isDrawerOpen}
       onClose={() => toggleDrawer(false)}
       onKeyDown={() => toggleDrawer(false)}
@@ -18,7 +18,7 @@ const Component = ({ classes, filter, handleFilter, isDrawerOpen, toggleDrawer }
       <div className={classes.root}>
         <UserForm initialValues={filter} submit={handleFilter} />
       </div>
-    </Drawer>
+    </MDrawer>
   );
 };
 
@@ -32,4 +32,4 @@ export default compose(
     { handleFilter },
   ),
   withStyles(styles),
-)(Component);
+)(Drawer);

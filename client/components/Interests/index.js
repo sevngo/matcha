@@ -3,7 +3,7 @@ import { map } from 'ramda';
 import { Grid } from '@material-ui/core';
 import Interest from '../Interest';
 
-const Component = ({ interests }) => (
+const Interests = ({ interests }) => (
   <Grid container spacing={1}>
     {map(interest => (
       <Grid item key={interest}>
@@ -13,8 +13,8 @@ const Component = ({ interests }) => (
   </Grid>
 );
 
-Component.defaultProps = {
+Interests.defaultProps = {
   interests: [],
 };
 
-export default Component;
+export default Interests;

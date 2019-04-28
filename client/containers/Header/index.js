@@ -13,7 +13,7 @@ import { getAuth } from '../../selectors';
 import styles from './styles';
 import messages from './messages';
 
-const Component = ({ classes, auth, logout, location: { pathname } }) => {
+const Header = ({ classes, auth, logout, location: { pathname } }) => {
   const [isDrawerOpen, toggleDrawer] = useState(false);
   const [anchorEl, handleMenu] = useState();
   return (
@@ -68,4 +68,4 @@ export default compose(
     { logout },
   ),
   withStyles(styles),
-)(Component);
+)(Header);

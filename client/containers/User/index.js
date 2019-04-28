@@ -11,7 +11,7 @@ import { loadUser } from '../../actions';
 import { getUser, getAuth } from '../../selectors';
 import styles from './styles';
 
-const Component = ({
+const User = ({
   user,
   classes,
   loadUser,
@@ -60,4 +60,4 @@ export default compose(
     { loadUser },
   ),
   withAuth,
-)(Component);
+)(User);

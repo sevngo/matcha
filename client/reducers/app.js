@@ -1,7 +1,7 @@
 import { filter } from 'ramda';
 import {
-  ENQUEUE_SNACKBAR,
-  REMOVE_SNACKBAR,
+  ENQUEUE_NOTIFICATION,
+  REMOVE_NOTIFICATION,
   LOGIN,
   LOGGED,
   USER_UPDATE,
@@ -17,26 +17,26 @@ import {
 } from '../actions';
 
 const defaultState = {
-  snackbars: [],
+  notifications: [],
 };
 
 export default (state = defaultState, action) => {
   switch (action.type) {
-    case ENQUEUE_SNACKBAR:
+    case ENQUEUE_NOTIFICATION:
       return {
         ...state,
         isLoading: false,
-        snackbars: [
-          ...state.snackbars,
+        notifications: [
+          ...state.notifications,
           {
-            ...action.snackbar,
+            ...action.notification,
           },
         ],
       };
-    case REMOVE_SNACKBAR:
+    case REMOVE_NOTIFICATION:
       return {
         ...state,
-        snackbars: filter(snackbar => snackbar.key !== action.key)(state.snackbars),
+        notifications: filter(notification => notification.key !== action.key)(state.notifications),
       };
     case LOGIN:
     case USER_UPDATE:

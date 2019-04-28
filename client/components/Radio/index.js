@@ -1,7 +1,7 @@
 import React from 'react';
 import { RadioGroup, FormControl, FormLabel } from '@material-ui/core';
 
-const Component = ({ field, form: { touched, errors }, label, children, ...rest }) => {
+const Radio = ({ field, form: { touched, errors }, label, children, ...rest }) => {
   const { name } = field;
   return (
     <FormControl error={errors[name] && touched[name]}>
@@ -13,4 +13,4 @@ const Component = ({ field, form: { touched, errors }, label, children, ...rest 
   );
 };
 
-export default Component;
+export default Radio;

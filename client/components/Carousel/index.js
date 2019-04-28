@@ -6,7 +6,7 @@ import emptyImage from '../../images/emptyImage.png';
 import styles from './styles';
 import messages from './messages';
 
-const Component = ({ children, userId, images, classes, activeStep, handleStep }) => {
+const Carousel = ({ children, userId, images, classes, activeStep, handleStep }) => {
   const maxSteps = length(images);
   const imageId = path([activeStep, '_id'])(images);
   const image = imageId ? `/api/users/${userId}/images/${images[activeStep]._id}` : emptyImage;
@@ -43,8 +43,8 @@ const Component = ({ children, userId, images, classes, activeStep, handleStep }
   );
 };
 
-Component.defaultProps = {
+Carousel.defaultProps = {
   images: [],
 };
 
-export default withStyles(styles)(Component);
+export default withStyles(styles)(Carousel);

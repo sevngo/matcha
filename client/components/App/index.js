@@ -4,11 +4,11 @@ import { withStyles } from '@material-ui/core';
 import Header from '../../containers/Header';
 import Users from '../../containers/Users';
 import User from '../../containers/User';
-import SnackBars from '../../containers/Snackbars';
+import Notifications from '../../containers/Notifications';
 import Loading from '../../containers/Loading';
 import styles from './styles';
 
-const Component = ({ classes }) => (
+const App = ({ classes }) => (
   <div className={classes.root}>
     <Header />
     <Switch>
@@ -16,9 +16,9 @@ const Component = ({ classes }) => (
       <Route path="/user/:id" exact render={({ match }) => <User match={match} />} />
       <Redirect to="/" />
     </Switch>
-    <SnackBars />
+    <Notifications />
     <Loading />
   </div>
 );
 
-export default withStyles(styles)(Component);
+export default withStyles(styles)(App);

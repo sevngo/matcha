@@ -12,7 +12,7 @@ import { getAuth } from '../../selectors';
 import styles from './styles';
 import messages from './messages';
 
-const Component = ({ classes, auth, updateAccount, addImage, removeImage }) => {
+const MyUser = ({ classes, auth, updateAccount, addImage, removeImage }) => {
   const { _id, token, images } = auth;
   const [activeStep, handleStep] = useState(0);
   const [anchorEl, handlePopover] = useState();
@@ -109,4 +109,4 @@ export default compose(
     mapStateToProps,
     { updateAccount, addImage, removeImage },
   ),
-)(Component);
+)(MyUser);

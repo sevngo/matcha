@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
 import { FormLabel, withStyles } from '@material-ui/core';
-import Slider from 'rc-slider';
+import RcSlider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import styles from './styles';
 
-const Component = ({
+const Slider = ({
   field: { name, value },
   label,
   unitLabel,
@@ -20,7 +20,7 @@ const Component = ({
         {label} <span className={classes.values}>{value}</span> {unitLabel}
       </FormLabel>
       <div className={classes.m1}>
-        <Slider
+        <RcSlider
           defaultValue={value}
           value={value}
           trackStyle={{ backgroundColor: 'darkgray' }}
@@ -33,4 +33,4 @@ const Component = ({
   );
 };
 
-export default withStyles(styles, { withTheme: true })(Component);
+export default withStyles(styles, { withTheme: true })(Slider);
