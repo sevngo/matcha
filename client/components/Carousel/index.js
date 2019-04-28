@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { Button, MobileStepper, withStyles, Icon, Paper } from '@material-ui/core';
 import emptyImage from '../../images/emptyImage.png';
 import styles from './styles';
+import messages from './messages';
 
 const Component = ({ children, userId, images, classes, activeStep, handleStep }) => {
   const maxSteps = length(images);
@@ -23,7 +24,7 @@ const Component = ({ children, userId, images, classes, activeStep, handleStep }
             onClick={() => handleStep(activeStep + 1)}
             disabled={activeStep === maxSteps - 1 || !maxSteps}
           >
-            <FormattedMessage id="components.carousel.next" />
+            <FormattedMessage {...messages.next} />
             <Icon>keyboard_arrow_right</Icon>
           </Button>
         }
@@ -34,7 +35,7 @@ const Component = ({ children, userId, images, classes, activeStep, handleStep }
             disabled={activeStep === 0 || !maxSteps}
           >
             <Icon>keyboard_arrow_left</Icon>
-            <FormattedMessage id="components.carousel.back" />
+            <FormattedMessage {...messages.back} />
           </Button>
         }
       />

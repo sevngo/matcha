@@ -8,9 +8,9 @@ import localeEn from 'react-intl/locale-data/en';
 import localeFr from 'react-intl/locale-data/fr';
 import { MuiThemeProvider, CssBaseline } from '@material-ui/core';
 import { SnackbarProvider } from 'notistack';
-import { locale, messages } from './utils/intl';
-import store from './utils/store';
-import theme from './utils/theme';
+import { locale, messages } from './intl';
+import store from './store';
+import theme from './theme';
 import App from './components/App';
 
 addLocaleData([...localeEn, ...localeFr]);
