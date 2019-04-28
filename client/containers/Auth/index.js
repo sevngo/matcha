@@ -18,6 +18,7 @@ import UserForm from '../../components/UserForm';
 import Dialog from '../../components/Dialog';
 import { register, login } from '../../actions';
 import styles from './styles';
+import messages from './messages';
 
 const Component = ({ classes, login, register }) => {
   const [tab, handleTab] = useState(0);
@@ -32,8 +33,8 @@ const Component = ({ classes, login, register }) => {
         <Paper elevation={24}>
           <AppBar position="static">
             <Tabs variant="fullWidth" value={tab} onChange={(e, tab) => handleTab(tab)}>
-              <Tab label={<FormattedMessage id="containers.auth.login" />} />
-              <Tab label={<FormattedMessage id="containers.auth.register" />} />
+              <Tab label={<FormattedMessage {...messages.login} />} />
+              <Tab label={<FormattedMessage {...messages.register} />} />
             </Tabs>
           </AppBar>
           <div className={classes.p3}>
@@ -45,15 +46,15 @@ const Component = ({ classes, login, register }) => {
                   variant="outlined"
                   className={classes.mt1}
                 >
-                  <FormattedMessage id="containers.auth.forgotPassword" />
+                  <FormattedMessage {...messages.forgotPassword} />
                 </Button>
                 <Dialog open={isDialogOpen} onClose={() => toggleDialog(false)}>
                   <Typography gutterBottom align="center" variant="h6">
-                    <FormattedMessage id="containers.auth.forgotPassword" />
+                    <FormattedMessage {...messages.forgotPassword} />
                   </Typography>
                   <DialogContent>
                     <DialogContentText>
-                      <FormattedMessage id="containers.auth.enterEmail" />
+                      <FormattedMessage {...messages.enterEmail} />
                     </DialogContentText>
                     <UserForm initialValues={{ email: '' }} submit={() => {}} />
                   </DialogContent>

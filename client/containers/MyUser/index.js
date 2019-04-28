@@ -10,6 +10,7 @@ import Popover from '../../components/Popover';
 import { updateAccount, addImage, removeImage } from '../../actions';
 import { getAuth } from '../../selectors';
 import styles from './styles';
+import messages from './messages';
 
 const Component = ({ classes, auth, updateAccount, addImage, removeImage }) => {
   const { _id, token, images } = auth;
@@ -36,7 +37,7 @@ const Component = ({ classes, auth, updateAccount, addImage, removeImage }) => {
               onClick={event => handlePopover(event.currentTarget)}
               disabled={!images || isEmpty(images)}
             >
-              <FormattedMessage id="containers.myUser.delete" />
+              <FormattedMessage {...messages.delete} />
               <Icon className={classes.ml1}>delete</Icon>
             </Button>
             <Popover
@@ -48,12 +49,12 @@ const Component = ({ classes, auth, updateAccount, addImage, removeImage }) => {
               <Grid container>
                 <Icon>info</Icon>
                 <Typography variant="subtitle1" align="center" className={classes.ml1}>
-                  <FormattedMessage id="containers.myUser.sure" />
+                  <FormattedMessage {...messages.sure} />
                 </Typography>
               </Grid>
               <Grid container justify="flex-end">
                 <Button size="small" onClick={() => handlePopover()}>
-                  <FormattedMessage id="containers.myUser.no" />
+                  <FormattedMessage {...messages.no} />
                 </Button>
                 <Button
                   size="small"
@@ -63,7 +64,7 @@ const Component = ({ classes, auth, updateAccount, addImage, removeImage }) => {
                     handlePopover();
                   }}
                 >
-                  <FormattedMessage id="containers.myUser.yes" />
+                  <FormattedMessage {...messages.yes} />
                 </Button>
               </Grid>
             </Popover>
@@ -74,7 +75,7 @@ const Component = ({ classes, auth, updateAccount, addImage, removeImage }) => {
               disabled={length(images) === 5}
               className={classes.ml1}
             >
-              <FormattedMessage id="containers.myUser.upload" />
+              <FormattedMessage {...messages.upload} />
               <Icon className={classes.ml1}>cloud_upload</Icon>
             </Button>
           </Carousel>

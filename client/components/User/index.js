@@ -15,6 +15,7 @@ import emptyImage from '../../images/emptyImage.png';
 import Interests from '../Interests';
 import { getAge } from '../../utils/functions';
 import styles from './styles';
+import messages from './messages';
 
 const Component = ({ user, classes }) => {
   const { images } = user;
@@ -31,7 +32,7 @@ const Component = ({ user, classes }) => {
             </Typography>
             <Typography variant="caption">
               <FormattedMessage
-                id="components.user.unitDistance"
+                {...messages.unitDistance}
                 values={{ distance: parseFloat(user.distance).toFixed(1) }}
               />
             </Typography>

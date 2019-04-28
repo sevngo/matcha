@@ -11,6 +11,7 @@ import IconButton from '../../components/IconButton';
 import { logout } from '../../actions';
 import { getAuth } from '../../selectors';
 import styles from './styles';
+import messages from './messages';
 
 const Component = ({ classes, auth, logout, location: { pathname } }) => {
   const [isDrawerOpen, toggleDrawer] = useState(false);
@@ -29,7 +30,7 @@ const Component = ({ classes, auth, logout, location: { pathname } }) => {
             </IconButton>
           )}
           <Typography variant="h6" color="secondary" className={classes.title}>
-            <FormattedMessage id="containers.header.title" />
+            <FormattedMessage {...messages.title} />
           </Typography>
           {!isEmpty(auth) && (
             <Fragment>
@@ -38,7 +39,7 @@ const Component = ({ classes, auth, logout, location: { pathname } }) => {
               <IconButton onClick={e => handleMenu(e.currentTarget)}>account_circle</IconButton>
               <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={() => handleMenu()}>
                 <MenuItem onClick={() => handleMenu()} component={Link} to={`/user/${auth._id}`}>
-                  <FormattedMessage id="containers.header.myAccount" />
+                  <FormattedMessage {...messages.myAccount} />
                 </MenuItem>
                 <MenuItem
                   onClick={() => {
@@ -46,7 +47,7 @@ const Component = ({ classes, auth, logout, location: { pathname } }) => {
                     logout();
                   }}
                 >
-                  <FormattedMessage id="containers.header.logout" />
+                  <FormattedMessage {...messages.logout} />
                 </MenuItem>
               </Menu>
             </Fragment>
