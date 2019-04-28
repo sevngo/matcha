@@ -15,14 +15,14 @@ import {
   DialogContentText,
 } from '@material-ui/core';
 import UserForm from '../../components/UserForm';
-import Dialog from '../../components/Dialog';
+import Modal from '../../components/Modal';
 import { register, login } from '../../actions';
 import styles from './styles';
 import messages from './messages';
 
-const Component = ({ classes, login, register }) => {
+const Auth = ({ classes, login, register }) => {
   const [tab, handleTab] = useState(0);
-  const [isDialogOpen, toggleDialog] = useState(false);
+  const [isModalOpen, toggleModal] = useState(false);
   const initialValues = {
     username: '',
     password: '',
@@ -42,13 +42,13 @@ const Component = ({ classes, login, register }) => {
               <Fragment>
                 <UserForm initialValues={initialValues} submit={login} />
                 <Button
-                  onClick={() => toggleDialog(true)}
+                  onClick={() => toggleModal(true)}
                   variant="outlined"
                   className={classes.mt1}
                 >
                   <FormattedMessage {...messages.forgotPassword} />
                 </Button>
-                <Dialog open={isDialogOpen} onClose={() => toggleDialog(false)}>
+                <Modal open={isModalOpen} onClose={() => toggleModal(false)}>
                   <Typography gutterBottom align="center" variant="h6">
                     <FormattedMessage {...messages.forgotPassword} />
                   </Typography>
@@ -58,7 +58,7 @@ const Component = ({ classes, login, register }) => {
                     </DialogContentText>
                     <UserForm initialValues={{ email: '' }} submit={() => {}} />
                   </DialogContent>
-                </Dialog>
+                </Modal>
               </Fragment>
             ) : (
               <UserForm
@@ -88,4 +88,4 @@ export default compose(
     null,
     { register, login },
   ),
-)(Component);
+)(Auth);

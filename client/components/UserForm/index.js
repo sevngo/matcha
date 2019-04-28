@@ -11,7 +11,7 @@ import {
   MenuItem,
 } from '@material-ui/core';
 import IconButton from '../IconButton';
-import TextField from '../TextField';
+import Input from '../Input';
 import Radio from '../Radio';
 import Select from '../Select';
 import Interests from '../Interests';
@@ -52,7 +52,7 @@ const Component = ({
         <Field
           name="username"
           label={<FormattedMessage {...messages.username} />}
-          component={TextField}
+          component={Input}
           validate={composeValidators(isRequired, isShort, isLong(30), isTrimmed)}
           startAdornment="account_circle"
           disabled={disabled}
@@ -62,7 +62,7 @@ const Component = ({
         <Field
           name="password"
           label={<FormattedMessage {...messages.password} />}
-          component={TextField}
+          component={Input}
           validate={composeValidators(isRequired, isShort, isLong(30), isTrimmed)}
           type={showPassword ? 'text' : 'password'}
           startAdornment="vpn_key"
@@ -77,7 +77,7 @@ const Component = ({
         <Field
           name="newPassword"
           label={<FormattedMessage {...messages.newPassword} />}
-          component={TextField}
+          component={Input}
           validate={composeValidators(isShort, isLong(30), isTrimmed)}
           type={showPassword ? 'text' : 'password'}
           startAdornment="vpn_key"
@@ -92,7 +92,7 @@ const Component = ({
         <Field
           name="email"
           label={<FormattedMessage {...messages.email} />}
-          component={TextField}
+          component={Input}
           validate={composeValidators(isRequired, isEmail, isLong(30), isTrimmed)}
           startAdornment="alternate_email"
           disabled={disabled}
@@ -102,7 +102,7 @@ const Component = ({
         <Field
           name="firstName"
           label={<FormattedMessage {...messages.firstName} />}
-          component={TextField}
+          component={Input}
           validate={composeValidators(isRequired, isLong(30), isTrimmed)}
           disabled={disabled}
         />
@@ -111,7 +111,7 @@ const Component = ({
         <Field
           name="lastName"
           label={<FormattedMessage {...messages.lastName} />}
-          component={TextField}
+          component={Input}
           validate={composeValidators(isRequired, isLong(30), isTrimmed)}
           disabled={disabled}
         />
@@ -120,7 +120,7 @@ const Component = ({
         <Field
           name="birthDate"
           label={<FormattedMessage {...messages.birthDate} />}
-          component={TextField}
+          component={Input}
           validate={composeValidators(isRequired, isYoung, isOld)}
           type="date"
           startAdornment="date_range"
@@ -152,7 +152,7 @@ const Component = ({
           name="address.name"
           id="address"
           label={<FormattedMessage {...messages.address} />}
-          component={TextField}
+          component={Input}
           disabled={disabled || !isAddresNull}
           validate={() => isAddresNull && 'Required'}
           endAdornment={
@@ -212,7 +212,7 @@ const Component = ({
         <Field
           name="biography"
           label={<FormattedMessage {...messages.biography} />}
-          component={TextField}
+          component={Input}
           validate={composeValidators(isLong(300), isTrimmed)}
           multiline
           rows="3"

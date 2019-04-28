@@ -1,5 +1,5 @@
 import { omit } from 'ramda';
-import { enqueueSnackbar, success, error } from './app';
+import { enqueueNotification, success, error } from './app';
 import { createUser, loginUser, patchUser } from '../api';
 
 export const REGISTER = 'REGISTER';
@@ -15,9 +15,9 @@ export const register = user => async dispatch => {
   try {
     dispatch({ type: REGISTER });
     await createUser(user);
-    dispatch(enqueueSnackbar(success('Email sent')));
+    dispatch(enqueueNotification(success('Email sent')));
   } catch {
-    dispatch(enqueueSnackbar(error));
+    dispatch(enqueueNotification(error));
   }
 };
 
@@ -27,7 +27,7 @@ export const login = user => async dispatch => {
     const { data } = await loginUser(user);
     dispatch({ type: LOGGED, data });
   } catch {
-    dispatch(enqueueSnackbar(error));
+    dispatch(enqueueNotification(error));
   }
 };
 
@@ -41,6 +41,6 @@ export const updateAccount = account => async dispatch => {
     );
     dispatch({ type: USER_UPDATED, data });
   } catch (e) {
-    dispatch(enqueueSnackbar(error));
+    dispatch(enqueueNotification(error));
   }
 };

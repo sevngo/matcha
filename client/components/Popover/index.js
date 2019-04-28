@@ -1,11 +1,11 @@
 import React from 'react';
-import { withStyles, Popover } from '@material-ui/core';
+import { withStyles, Popover as MPopover } from '@material-ui/core';
 import styles from './styles';
 
-const Component = ({ classes, children, ...rest }) => (
-  <Popover {...rest}>
+const Popover = ({ classes, children, ...rest }) => (
+  <MPopover {...rest}>
     <div className={classes.p2}>{children}</div>
-  </Popover>
+  </MPopover>
 );
 
-export default withStyles(styles)(Component);
+export default withStyles(styles)(Popover);

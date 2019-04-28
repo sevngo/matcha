@@ -1,8 +1,10 @@
 import React from 'react';
-import { Icon, IconButton } from '@material-ui/core';
+import { Icon, IconButton as MIconButton } from '@material-ui/core';
 
-export default ({ children, ...rest }) => (
-  <IconButton color="secondary" {...rest}>
+const IconButton = ({ children, ...rest }) => (
+  <MIconButton color="secondary" {...rest}>
     <Icon>{children}</Icon>
-  </IconButton>
+  </MIconButton>
 );
+
+export default IconButton;

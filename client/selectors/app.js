@@ -3,9 +3,9 @@ import { createSelector } from 'reselect';
 
 export const getApp = prop('app');
 
-export const getSnackbars = createSelector(
+export const getNotifications = createSelector(
   getApp,
-  prop('snackbars'),
+  prop('notifications'),
 );
 
 export const getIsLoading = createSelector(

@@ -9,7 +9,7 @@ const initialState = {
   //   token:
   //     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YzliNGNjMzdiZDZjNTNkN2ZlYWNkMTQiLCJpYXQiOjE1NTQzNzk4MjF9.Cxg0HIjPpbbd2A05CP8naMDudQCPDlZI47VCjEeTrCQ',
   // },
-  app: { snackbars: [] },
+  app: { notifications: [] },
   users: {
     data: [],
     filter: {

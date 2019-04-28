@@ -4,7 +4,7 @@ import { TextField, Icon, withStyles } from '@material-ui/core';
 import withMetaData from '../../hoc/withMetaData';
 import styles from './styles';
 
-const Component = ({
+const Input = ({
   field,
   meta: { error, isError },
   startAdornment,
@@ -32,4 +32,4 @@ const Component = ({
 export default compose(
   withStyles(styles),
   withMetaData,
-)(Component);
+)(Input);

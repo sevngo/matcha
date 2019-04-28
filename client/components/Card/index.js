@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import {
   withStyles,
-  Card,
+  Card as MCard,
   CardActionArea,
   CardContent,
   CardMedia,
@@ -17,12 +17,12 @@ import { getAge } from '../../utils/functions';
 import styles from './styles';
 import messages from './messages';
 
-const Component = ({ user, classes }) => {
+const Card = ({ user, classes }) => {
   const { images } = user;
   const imageId = path([0, '_id'])(images);
   const image = imageId ? `/api/users/${user._id}/images/${imageId}` : emptyImage;
   return (
-    <Card className={classes.card} elevation={24}>
+    <MCard className={classes.card} elevation={24}>
       <CardActionArea component={Link} to={`/user/${user._id}`}>
         <CardMedia className={classes.media} image={image} title={user.username} />
         <CardContent>
@@ -43,8 +43,8 @@ const Component = ({ user, classes }) => {
           </Typography>
         </CardContent>
       </CardActionArea>
-    </Card>
+    </MCard>
   );
 };
 
-export default withStyles(styles)(Component);
+export default withStyles(styles)(Card);

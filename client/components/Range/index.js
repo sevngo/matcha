@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
 import { FormLabel, withStyles } from '@material-ui/core';
 import { repeat } from 'ramda';
-import { Range } from 'rc-slider';
+import { Range as RcRange } from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import styles from './styles';
 
-const Component = ({
+const Range = ({
   field: { name, value },
   label,
   unitLabel,
@@ -25,7 +25,7 @@ const Component = ({
         {unitLabel}
       </FormLabel>
       <div className={classes.m1}>
-        <Range
+        <RcRange
           defaultValue={value}
           value={value}
           allowCross={false}
@@ -40,4 +40,4 @@ const Component = ({
   );
 };
 
-export default withStyles(styles, { withTheme: true })(Component);
+export default withStyles(styles, { withTheme: true })(Range);

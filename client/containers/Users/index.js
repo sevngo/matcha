@@ -3,13 +3,13 @@ import { compose } from 'ramda';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { withStyles } from '@material-ui/core';
-import Users from '../../components/Users';
+import Cards from '../../components/Cards';
 import withAuth from '../../hoc/withAuth';
 import { getUsers, getAuth, getFilter } from '../../selectors';
 import { loadUsers } from '../../actions';
 import styles from './styles';
 
-const Component = ({
+const Users = ({
   classes,
   users,
   loadUsers,
@@ -24,7 +24,7 @@ const Component = ({
   }, [filter]);
   return (
     <div className={classes.root}>
-      <Users users={users} />
+      <Cards users={users} />
     </div>
   );
 };
@@ -42,4 +42,4 @@ export default compose(
     mapStateToProps,
     { loadUsers },
   ),
-)(Component);
+)(Users);
