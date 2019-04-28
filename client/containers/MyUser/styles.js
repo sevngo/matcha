@@ -8,10 +8,6 @@ export default theme => ({
   width: {
     maxWidth: 500,
   },
-  header: {
-    padding: theme.spacing(1),
-    backgroundColor: theme.palette.background.default,
-  },
   hide: {
     display: 'none',
   },

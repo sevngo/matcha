@@ -1,16 +1,17 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { length, path } from 'ramda';
 import { FormattedMessage } from 'react-intl';
-import { Button, MobileStepper, withStyles, Icon } from '@material-ui/core';
+import { Button, MobileStepper, withStyles, Icon, Paper } from '@material-ui/core';
 import emptyImage from '../../images/emptyImage.png';
 import styles from './styles';
 
-const Component = ({ userId, images, classes, activeStep, handleStep }) => {
+const Component = ({ children, userId, images, classes, activeStep, handleStep }) => {
   const maxSteps = length(images);
   const imageId = path([activeStep, '_id'])(images);
   const image = imageId ? `/api/users/${userId}/images/${images[activeStep]._id}` : emptyImage;
   return (
-    <Fragment>
+    <Paper elevation={24}>
+      <div className={classes.header}>{children}</div>
       <img className={classes.img} src={image} alt="image" />
       <MobileStepper
         steps={maxSteps}
@@ -37,7 +38,7 @@ const Component = ({ userId, images, classes, activeStep, handleStep }) => {
           </Button>
         }
       />
-    </Fragment>
+    </Paper>
   );
 };
 

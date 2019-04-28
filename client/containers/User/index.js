@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { compose } from 'ramda';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { withStyles, Paper, Grid } from '@material-ui/core';
+import { withStyles, Paper, Grid, Button } from '@material-ui/core';
 import MyUser from '../MyUser';
 import UserForm from '../../components/UserForm';
 import Carousel from '../../components/Carousel';
@@ -34,7 +34,9 @@ const Component = ({
             images={user.images}
             activeStep={activeStep}
             handleStep={handleStep}
-          />
+          >
+            <Button variant="outlined">Block</Button>
+          </Carousel>
         </Paper>
       </Grid>
       <Grid item className={classes.width}>
