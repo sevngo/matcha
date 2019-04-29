@@ -1,10 +1,10 @@
-import { USERS_LOADED, HANDLE_FILTER, USER_LOADED } from '../actions';
+import { LOADED_USERS, HANDLE_FILTER, LOADED_USER } from '../actions';
 
 export default (state = {}, action) => {
   switch (action.type) {
-    case USERS_LOADED:
+    case LOADED_USERS:
       return { ...state, data: action.data };
-    case USER_LOADED:
+    case LOADED_USER:
       return { ...state, user: action.data };
     case HANDLE_FILTER:
       return { ...state, filter: action.filter };

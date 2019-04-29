@@ -7,18 +7,18 @@ import { withStyles, Paper, Grid, Button, Typography, Icon } from '@material-ui/
 import UserForm from '../../components/UserForm';
 import Carousel from '../../components/Carousel';
 import Popover from '../../components/Popover';
-import { updateAccount, addImage, removeImage } from '../../actions';
+import { updateUser, uploadImage, removeImage } from '../../actions';
 import { getAuth } from '../../selectors';
 import styles from './styles';
 import messages from './messages';
 
-const MyUser = ({ classes, auth, updateAccount, addImage, removeImage }) => {
+const MyUser = ({ classes, auth, updateUser, uploadImage, removeImage }) => {
   const { _id, token, images } = auth;
   const [activeStep, handleStep] = useState(0);
   const [anchorEl, handlePopover] = useState();
   const inputEl = useRef();
-  const uploadImage = image => {
-    if (image) addImage(token, _id, image);
+  const addImage = image => {
+    if (image) uploadImage(token, _id, image);
   };
   return (
     <Grid container spacing={3} justify="center" direction="row" className={classes.p3}>
@@ -28,7 +28,7 @@ const MyUser = ({ classes, auth, updateAccount, addImage, removeImage }) => {
             <input
               ref={inputEl}
               type="file"
-              onChange={event => uploadImage(event.target.files[0])}
+              onChange={event => addImage(event.target.files[0])}
               accept="image/png, image/jpeg"
               className={classes.hide}
             />
@@ -90,7 +90,7 @@ const MyUser = ({ classes, auth, updateAccount, addImage, removeImage }) => {
               newPassword: '',
             }}
             newPassword
-            submit={updateAccount}
+            submit={updateUser}
           />
         </Paper>
       </Grid>
@@ -106,6 +106,6 @@ export default compose(
   withStyles(styles),
   connect(
     mapStateToProps,
-    { updateAccount, addImage, removeImage },
+    { updateUser, uploadImage, removeImage },
   ),
 )(MyUser);

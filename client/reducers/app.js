@@ -4,16 +4,16 @@ import {
   REMOVE_NOTIFICATION,
   LOGIN,
   LOGGED,
-  USER_UPDATE,
-  USER_UPDATED,
-  USERS_LOAD,
-  USERS_LOADED,
-  USER_LOAD,
-  USER_LOADED,
-  IMAGE_UPLOAD,
-  IMAGE_UPLOADED,
-  IMAGE_DELETE,
-  IMAGE_DELETED,
+  UPDATE_USER,
+  UPDATED_USER,
+  LOAD_USERS,
+  LOADED_USERS,
+  LOAD_LOAD,
+  LOADED_USER,
+  UPLOAD_IMAGE,
+  UPLOADED_IMAGE,
+  DELETE_IMAGE,
+  DELETED_IMAGE,
   BLOCK_USER,
   UNBLOCK_USER,
   BLOCKED_USER,
@@ -43,20 +43,20 @@ export default (state = defaultState, action) => {
         notifications: filter(notification => notification.key !== action.key)(state.notifications),
       };
     case LOGIN:
-    case USER_UPDATE:
-    case USERS_LOAD:
-    case USER_LOAD:
-    case IMAGE_UPLOAD:
-    case IMAGE_DELETE:
+    case UPDATE_USER:
+    case LOAD_USERS:
+    case LOAD_LOAD:
+    case UPLOAD_IMAGE:
+    case DELETE_IMAGE:
     case BLOCK_USER:
     case UNBLOCK_USER:
       return { ...state, isLoading: true };
     case LOGGED:
-    case USER_UPDATED:
-    case USERS_LOADED:
-    case USER_LOADED:
-    case IMAGE_UPLOADED:
-    case IMAGE_DELETED:
+    case UPDATED_USER:
+    case LOADED_USERS:
+    case LOADED_USER:
+    case UPLOADED_IMAGE:
+    case DELETED_IMAGE:
     case BLOCKED_USER:
     case UNBLOCKED_USER:
       return { ...state, isLoading: false };

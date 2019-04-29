@@ -1,16 +1,16 @@
 import { reduce } from 'ramda';
 import { enqueueNotification, error } from './app';
-import { getUsers, getUser, uploadImage, deleteImage } from '../api';
+import { getUsers, getUser, postUsersImages, deleteUsersImages } from '../api';
 
-export const USERS_LOAD = 'USERS_LOAD';
-export const USERS_LOADED = 'USERS_LOADED';
-export const USER_LOAD = 'USER_LOAD';
-export const USER_LOADED = 'USER_LOADED';
+export const LOAD_USERS = 'LOAD_USERS';
+export const LOADED_USERS = 'LOADED_USERS';
+export const LOAD_LOAD = 'LOAD_LOAD';
+export const LOADED_USER = 'LOADED_USER';
 export const HANDLE_FILTER = 'HANDLE_FILTER';
-export const IMAGE_UPLOAD = 'IMAGE_UPLOAD';
-export const IMAGE_UPLOADED = 'IMAGE_UPLOADED';
-export const IMAGE_DELETE = 'IMAGE_DELETE';
-export const IMAGE_DELETED = 'IMAGE_DELETED';
+export const UPLOAD_IMAGE = 'UPLOAD_IMAGE';
+export const UPLOADED_IMAGE = 'UPLOADED_IMAGE';
+export const DELETE_IMAGE = 'DELETE_IMAGE';
+export const DELETED_IMAGE = 'DELETED_IMAGE';
 
 export const handleFilter = filter => ({ type: HANDLE_FILTER, filter });
 
@@ -34,9 +34,9 @@ export const loadUsers = (token, filter) => async dispatch => {
     const birthQuery = `&birthRange=${birthMin}:${birthMax}`;
 
     const query = `${genderQuery}${birthQuery}${sortQuery}${interestsQuery}${maxDistanceQuery}`;
-    dispatch({ type: USERS_LOAD });
+    dispatch({ type: LOAD_USERS });
     const { data } = await getUsers(token, query);
-    dispatch({ type: USERS_LOADED, data });
+    dispatch({ type: LOADED_USERS, data });
   } catch {
     dispatch(enqueueNotification(error));
   }
@@ -44,19 +44,19 @@ export const loadUsers = (token, filter) => async dispatch => {
 
 export const loadUser = (token, id) => async dispatch => {
   try {
-    dispatch({ type: USER_LOAD });
+    dispatch({ type: LOAD_LOAD });
     const { data } = await getUser(token, id);
-    dispatch({ type: USER_LOADED, data });
+    dispatch({ type: LOADED_USER, data });
   } catch {
     dispatch(enqueueNotification(error));
   }
 };
 
-export const addImage = (token, id, image) => async dispatch => {
+export const uploadImage = (token, id, image) => async dispatch => {
   try {
-    dispatch({ type: IMAGE_UPLOAD });
-    const { data } = await uploadImage(token, id, image);
-    dispatch({ type: IMAGE_UPLOADED, data });
+    dispatch({ type: UPLOAD_IMAGE });
+    const { data } = await postUsersImages(token, id, image);
+    dispatch({ type: UPLOADED_IMAGE, data });
   } catch {
     dispatch(enqueueNotification(error));
   }
@@ -64,9 +64,9 @@ export const addImage = (token, id, image) => async dispatch => {
 
 export const removeImage = (token, id, imageId) => async dispatch => {
   try {
-    dispatch({ type: IMAGE_DELETE });
-    const { data } = await deleteImage(token, id, imageId);
-    dispatch({ type: IMAGE_DELETED, data });
+    dispatch({ type: DELETE_IMAGE });
+    const { data } = await deleteUsersImages(token, id, imageId);
+    dispatch({ type: DELETED_IMAGE, data });
   } catch {
     dispatch(enqueueNotification(error));
   }
