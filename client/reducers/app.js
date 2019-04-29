@@ -14,6 +14,10 @@ import {
   IMAGE_UPLOADED,
   IMAGE_DELETE,
   IMAGE_DELETED,
+  BLOCK_USER,
+  UNBLOCK_USER,
+  BLOCKED_USER,
+  UNBLOCKED_USER,
 } from '../actions';
 
 const defaultState = {
@@ -44,6 +48,8 @@ export default (state = defaultState, action) => {
     case USER_LOAD:
     case IMAGE_UPLOAD:
     case IMAGE_DELETE:
+    case BLOCK_USER:
+    case UNBLOCK_USER:
       return { ...state, isLoading: true };
     case LOGGED:
     case USER_UPDATED:
@@ -51,6 +57,8 @@ export default (state = defaultState, action) => {
     case USER_LOADED:
     case IMAGE_UPLOADED:
     case IMAGE_DELETED:
+    case BLOCKED_USER:
+    case UNBLOCKED_USER:
       return { ...state, isLoading: false };
     default:
       return state;

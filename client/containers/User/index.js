@@ -8,7 +8,7 @@ import MyUser from '../MyUser';
 import UserForm from '../../components/UserForm';
 import Carousel from '../../components/Carousel';
 import withAuth from '../../hoc/withAuth';
-import { loadUser, blockUser, unblockUser, updateAccount } from '../../actions';
+import { loadUser, blockUser, unblockUser } from '../../actions';
 import { getUser, getAuth } from '../../selectors';
 import styles from './styles';
 import messages from './messages';
@@ -23,7 +23,6 @@ const User = ({
   auth,
   blockUser,
   unblockUser,
-  updateAccount,
 }) => {
   if (id === auth._id) return <MyUser />;
   const [activeStep, handleStep] = useState(0);
@@ -44,10 +43,7 @@ const User = ({
             {isBlocked ? (
               <Button
                 variant="outlined"
-                onClick={() => {
-                  unblockUser(user._id);
-                  updateAccount(auth);
-                }}
+                onClick={() => unblockUser(auth, user._id)}
                 className={classes.unblock}
               >
                 <FormattedMessage {...messages.unblockUser} />
@@ -55,10 +51,7 @@ const User = ({
             ) : (
               <Button
                 variant="outlined"
-                onClick={() => {
-                  blockUser(user._id);
-                  updateAccount(auth);
-                }}
+                onClick={() => blockUser(auth, user._id)}
                 className={classes.block}
               >
                 <FormattedMessage {...messages.blockUser} />
@@ -85,7 +78,7 @@ export default compose(
   withStyles(styles),
   connect(
     mapStateToProps,
-    { loadUser, blockUser, unblockUser, updateAccount },
+    { loadUser, blockUser, unblockUser },
   ),
   withAuth,
 )(User);
