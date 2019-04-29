@@ -8,6 +8,8 @@ export const LOGGED = 'LOGGED';
 export const LOGOUT = 'LOGOUT';
 export const USER_UPDATE = 'USER_UPDATE';
 export const USER_UPDATED = 'USER_UPDATED';
+export const BLOCK_USER = 'BLOCK_USER';
+export const UNBLOCK_USER = 'UNBLOCK_USER';
 
 export const logout = () => ({ type: LOGOUT });
 
@@ -44,3 +46,7 @@ export const updateAccount = account => async dispatch => {
     dispatch(enqueueNotification(error));
   }
 };
+
+export const blockUser = userId => ({ type: BLOCK_USER, userId });
+
+export const unblockUser = userId => ({ type: UNBLOCK_USER, userId });

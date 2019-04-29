@@ -70,7 +70,6 @@ const MyUser = ({ classes, auth, updateAccount, addImage, removeImage }) => {
             </Popover>
             <Button
               variant="outlined"
-              color="inherit"
               onClick={() => inputEl.current.click()}
               disabled={length(images) === 5}
               className={classes.ml1}

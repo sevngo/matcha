@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { compose } from 'ramda';
+import { compose, includes } from 'ramda';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import { FormattedMessage } from 'react-intl';
 import { withStyles, Paper, Grid, Button } from '@material-ui/core';
 import MyUser from '../MyUser';
 import UserForm from '../../components/UserForm';
 import Carousel from '../../components/Carousel';
 import withAuth from '../../hoc/withAuth';
-import { loadUser } from '../../actions';
+import { loadUser, blockUser, unblockUser, updateAccount } from '../../actions';
 import { getUser, getAuth } from '../../selectors';
 import styles from './styles';
+import messages from './messages';
 
 const User = ({
   user,
@@ -19,12 +21,16 @@ const User = ({
     params: { id },
   },
   auth,
+  blockUser,
+  unblockUser,
+  updateAccount,
 }) => {
   if (id === auth._id) return <MyUser />;
   const [activeStep, handleStep] = useState(0);
   useEffect(() => {
     loadUser(auth.token, id);
   }, []);
+  const isBlocked = includes(user._id)(auth.usersBlocked);
   return (
     <Grid container spacing={3} justify="center" direction="row" className={classes.p3}>
       <Grid item className={classes.width}>
@@ -35,7 +41,29 @@ const User = ({
             activeStep={activeStep}
             handleStep={handleStep}
           >
-            <Button variant="outlined">Block user</Button>
+            {isBlocked ? (
+              <Button
+                variant="outlined"
+                onClick={() => {
+                  unblockUser(user._id);
+                  updateAccount(auth);
+                }}
+                className={classes.unblock}
+              >
+                <FormattedMessage {...messages.unblockUser} />
+              </Button>
+            ) : (
+              <Button
+                variant="outlined"
+                onClick={() => {
+                  blockUser(user._id);
+                  updateAccount(auth);
+                }}
+                className={classes.block}
+              >
+                <FormattedMessage {...messages.blockUser} />
+              </Button>
+            )}
           </Carousel>
         </Paper>
       </Grid>
@@ -57,7 +85,7 @@ export default compose(
   withStyles(styles),
   connect(
     mapStateToProps,
-    { loadUser },
+    { loadUser, blockUser, unblockUser, updateAccount },
   ),
   withAuth,
 )(User);

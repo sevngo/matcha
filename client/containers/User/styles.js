@@ -5,4 +5,10 @@ export default theme => ({
   width: {
     maxWidth: 500,
   },
+  block: {
+    color: 'crimson',
+  },
+  unblock: {
+    color: 'green',
+  },
 });

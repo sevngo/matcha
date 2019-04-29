@@ -1,9 +1,7 @@
 import { split, keys, includes } from 'ramda';
-import enMessages from './translations/en.json';
 import frMessages from './translations/fr.json';
 
 const translations = {
-  en: enMessages,
   fr: frMessages,
 };
 
