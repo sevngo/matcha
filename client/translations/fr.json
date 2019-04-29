@@ -27,6 +27,10 @@
   "components.userForm.submit": "Confirmer",
   "components.userForm.unitDistance": "Km",
   "components.userForm.username": "Pseudo",
+  "containers.auth.enterEmail": "Please enter the e-mail address connected to your Matcha account and click on submit.",
+  "containers.auth.forgotPassword": "Mot de passe oublié ?",
+  "containers.auth.login": "Se connecter",
+  "containers.auth.register": "Créer un compte",
   "containers.header.logout": "Se Déconnecter",
   "containers.header.myAccount": "Mon Compte",
   "containers.header.title": "Matcha",
@@ -35,8 +39,6 @@
   "containers.myUser.sure": "Etes-vous sur de vouloir supprimer cette image ?",
   "containers.myUser.upload": "Uploader",
   "containers.myUser.yes": "Oui",
-  "containers.auth.enterEmail": "Please enter the e-mail address connected to your Matcha account and click on submit.",
-  "containers.auth.forgotPassword": "Mot de passe oublié ?",
-  "containers.auth.login": "Se connecter",
-  "containers.auth.register": "Créer un compte"
+  "containers.user.blockUser": "Bloquer utilisateur",
+  "containers.user.unblockUser": "Débloquer utilisateur"
 }
