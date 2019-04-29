@@ -1,13 +1,13 @@
 import { omit, reject } from 'ramda';
 import { enqueueNotification, success, error } from './app';
-import { createUser, loginUser, patchUser } from '../api';
+import { postUsers, postUsersLogin, patchUser } from '../api';
 
 export const REGISTER = 'REGISTER';
 export const LOGIN = 'LOGIN';
 export const LOGGED = 'LOGGED';
 export const LOGOUT = 'LOGOUT';
-export const USER_UPDATE = 'USER_UPDATE';
-export const USER_UPDATED = 'USER_UPDATED';
+export const UPDATE_USER = 'UPDATE_USER';
+export const UPDATED_USER = 'UPDATED_USER';
 export const BLOCK_USER = 'BLOCK_USER';
 export const BLOCKED_USER = 'BLOCKED_USER';
 export const UNBLOCK_USER = 'UNBLOCK_USER';
@@ -18,7 +18,7 @@ export const logout = () => ({ type: LOGOUT });
 export const register = user => async dispatch => {
   try {
     dispatch({ type: REGISTER });
-    await createUser(user);
+    await postUsers(user);
     dispatch(enqueueNotification(success('Email sent')));
   } catch {
     dispatch(enqueueNotification(error));
@@ -28,22 +28,22 @@ export const register = user => async dispatch => {
 export const login = user => async dispatch => {
   try {
     dispatch({ type: LOGIN });
-    const { data } = await loginUser(user);
+    const { data } = await postUsersLogin(user);
     dispatch({ type: LOGGED, data });
   } catch {
     dispatch(enqueueNotification(error));
   }
 };
 
-export const updateAccount = account => async dispatch => {
+export const updateUser = account => async dispatch => {
   try {
-    dispatch({ type: USER_UPDATE });
+    dispatch({ type: UPDATE_USER });
     const { data } = await patchUser(
       account.token,
       account._id,
       omit(['_id', 'token', 'images'])(account),
     );
-    dispatch({ type: USER_UPDATED, data });
+    dispatch({ type: UPDATED_USER, data });
   } catch (e) {
     dispatch(enqueueNotification(error));
   }

@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-export const createUser = user => axios.post('/api/users', user);
+export const postUsers = user => axios.post('/api/users', user);
 
-export const loginUser = user => axios.post('/api/users/login', user);
+export const postUsersLogin = user => axios.post('/api/users/login', user);
 
 export const getUsers = (token, query = '') => {
   const headers = { Authorization: `Bearer ${token}` };
@@ -24,7 +24,7 @@ export const patchUser = (token, id, user) => {
   return axios.patch(`/api/users/${id}`, user, { headers });
 };
 
-export const uploadImage = (token, id, image) => {
+export const postUsersImages = (token, id, image) => {
   const headers = {
     Authorization: `Bearer ${token}`,
     'Content-Type': 'multipart/form-data',
@@ -34,7 +34,7 @@ export const uploadImage = (token, id, image) => {
   return axios.post(`/api/users/${id}/images`, formData, { headers });
 };
 
-export const deleteImage = (token, id, imageId) => {
+export const deleteUsersImages = (token, id, imageId) => {
   const headers = {
     Authorization: `Bearer ${token}`,
   };

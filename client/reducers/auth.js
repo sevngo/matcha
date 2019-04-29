@@ -1,9 +1,9 @@
 import {
   LOGGED,
   LOGOUT,
-  USER_UPDATED,
-  IMAGE_UPLOADED,
-  IMAGE_DELETED,
+  UPDATED_USER,
+  UPLOADED_IMAGE,
+  DELETED_IMAGE,
   BLOCKED_USER,
   UNBLOCKED_USER,
 } from '../actions';
@@ -14,11 +14,11 @@ export default (state = {}, action) => {
       return action.data;
     case LOGOUT:
       return {};
-    case USER_UPDATED:
+    case UPDATED_USER:
       return { ...state, ...action.data };
-    case IMAGE_UPLOADED:
+    case UPLOADED_IMAGE:
       return { ...state, ...action.data };
-    case IMAGE_DELETED:
+    case DELETED_IMAGE:
       return { ...state, ...action.data };
     case BLOCKED_USER:
       return { ...state, ...action.data };
