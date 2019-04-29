@@ -60,20 +60,21 @@ const birthRange = (req, res, next) => {
 
 const maxDistance = (req, res, next) => {
   const {
-    query: { coordinates, maxDistance },
+    query: { maxDistance },
+    user: {
+      address: { coordinates },
+    },
   } = req;
-  if (coordinates) {
-    const [lng, lat] = split(':')(coordinates);
-    req.maxDistance = {
-      $geoNear: {
-        near: { type: 'Point', coordinates: [parseFloat(lng), parseFloat(lat)] },
-        distanceField: 'distance',
-        distanceMultiplier: 0.001,
-        maxDistance: parseInt(maxDistance),
-        spherical: true,
-      },
-    };
-  }
+  const [lng, lat] = coordinates;
+  req.maxDistance = {
+    $geoNear: {
+      near: { type: 'Point', coordinates: [parseFloat(lng), parseFloat(lat)] },
+      distanceField: 'distance',
+      distanceMultiplier: 0.001,
+      maxDistance: parseInt(maxDistance),
+      spherical: true,
+    },
+  };
   next();
 };
 

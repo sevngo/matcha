@@ -9,18 +9,9 @@ import { getUsers, getAuth, getFilter } from '../../selectors';
 import { loadUsers } from '../../actions';
 import styles from './styles';
 
-const Users = ({
-  classes,
-  users,
-  loadUsers,
-  auth: {
-    token,
-    address: { coordinates },
-  },
-  filter,
-}) => {
+const Users = ({ classes, users, loadUsers, auth: { token }, filter }) => {
   useEffect(() => {
-    loadUsers(token, filter, coordinates);
+    loadUsers(token, filter);
   }, [filter]);
   return (
     <div className={classes.root}>

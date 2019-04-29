@@ -14,11 +14,9 @@ export const IMAGE_DELETED = 'IMAGE_DELETED';
 
 export const handleFilter = filter => ({ type: HANDLE_FILTER, filter });
 
-export const loadUsers = (token, filter, coordinates) => async dispatch => {
+export const loadUsers = (token, filter) => async dispatch => {
   try {
     const { gender, interests, ageRange, sortBy, maxDistance } = filter;
-
-    const coordinatesQuery = `&coordinates=${coordinates[0]}:${coordinates[1]}`;
 
     const genderQuery = `?gender=${gender}`;
 
@@ -35,7 +33,7 @@ export const loadUsers = (token, filter, coordinates) => async dispatch => {
     const birthMax = `${todayYear - ageRange[0]}${todayMonthDay}`;
     const birthQuery = `&birthRange=${birthMin}:${birthMax}`;
 
-    const query = `${genderQuery}${birthQuery}${sortQuery}${interestsQuery}${coordinatesQuery}${maxDistanceQuery}`;
+    const query = `${genderQuery}${birthQuery}${sortQuery}${interestsQuery}${maxDistanceQuery}`;
     dispatch({ type: USERS_LOAD });
     const { data } = await getUsers(token, query);
     dispatch({ type: USERS_LOADED, data });

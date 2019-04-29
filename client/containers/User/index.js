@@ -35,7 +35,7 @@ const User = ({
             activeStep={activeStep}
             handleStep={handleStep}
           >
-            <Button variant="outlined">Block</Button>
+            <Button variant="outlined">Block user</Button>
           </Carousel>
         </Paper>
       </Grid>
