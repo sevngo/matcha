@@ -29,7 +29,7 @@ const User = ({
   useEffect(() => {
     loadUser(auth.token, id);
   }, []);
-  const isBlocked = includes(user._id)(auth.usersBlocked);
+  const isBlocked = includes(user._id)(auth.usersBlockedId);
   return (
     <Grid container spacing={3} justify="center" direction="row" className={classes.p3}>
       <Grid item className={classes.width}>

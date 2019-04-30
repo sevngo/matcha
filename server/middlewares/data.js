@@ -1,5 +1,5 @@
 const { ObjectID } = require('mongodb');
-const { omit, reduce, trim, keys, is } = require('ramda');
+const { omit, reduce, trim, keys, is, map } = require('ramda');
 const bcrypt = require('bcryptjs');
 const multer = require('multer');
 
@@ -60,6 +60,14 @@ const trimBody = (req, res, next) => {
   next();
 };
 
+const newUsersBlockedId = (req, res, next) => {
+  const {
+    body: { usersBlockedId },
+  } = req;
+  req.body.usersBlockedId = map(id => new ObjectID(id))(usersBlockedId);
+  next();
+};
+
 module.exports = {
   isValidObjectId,
   hashPassword,
@@ -68,4 +76,5 @@ module.exports = {
   newDateBirth,
   uploadImage,
   trimBody,
+  newUsersBlockedId,
 };
