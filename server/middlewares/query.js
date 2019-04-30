@@ -79,7 +79,7 @@ const maxDistance = (req, res, next) => {
 };
 
 const notMyUser = (req, res, next) => {
-  req.notMyUser = { $match: { _id: { $not: { $eq: new ObjectID(req.user._id) } } } };
+  req.notMyUser = { $match: { _id: { $ne: new ObjectID(req.user._id) } } };
   next();
 };
 
@@ -88,12 +88,17 @@ const usersBlocked = (req, res, next) => {
     {
       $lookup: {
         from: 'users',
-        localField: 'usersBlockedId',
+        localField: 'usersBlockedIds',
         foreignField: '_id',
         as: 'usersBlocked',
       },
     },
   ];
+  next();
+};
+
+const hideUsersBlocked = (req, res, next) => {
+  req.hideUsersBlocked = { $match: { _id: { $nin: req.user.usersBlockedIds } } };
   next();
 };
 
@@ -107,4 +112,5 @@ module.exports = {
   maxDistance,
   notMyUser,
   usersBlocked,
+  hideUsersBlocked,
 };
