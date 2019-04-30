@@ -50,7 +50,7 @@ export const updateUser = account => async dispatch => {
 export const blockUser = (account, userId) => async dispatch => {
   try {
     dispatch({ type: BLOCK_USER });
-    const myAccount = { ...account, usersBlockedId: [...account.usersBlockedId, userId] };
+    const myAccount = { ...account, usersBlockedIds: [...account.usersBlockedIds, userId] };
     const user = toOmit(myAccount);
     const { data } = await patchUser(account.token, account._id, user);
     dispatch({ type: BLOCKED_USER, data });
@@ -64,7 +64,7 @@ export const unblockUser = (account, userId) => async dispatch => {
     dispatch({ type: UNBLOCK_USER });
     const myAccount = {
       ...account,
-      usersBlockedId: reject(user => userId === user)(account.usersBlockedId),
+      usersBlockedIds: reject(user => userId === user)(account.usersBlockedIds),
     };
     const user = toOmit(myAccount);
     const { data } = await patchUser(account.token, account._id, user);
