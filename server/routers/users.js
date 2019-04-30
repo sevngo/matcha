@@ -24,7 +24,7 @@ const {
   notMyUser,
   usersBlocked,
   hideUsersBlocked,
-} = require('../middlewares/query');
+} = require('../middlewares/stages');
 const { usersPipeline, matchById, project } = require('../aggregations/users');
 const { Users } = require('../database');
 
@@ -114,14 +114,15 @@ router.patch(
   newDateBirth,
   hashNewPassword,
   newUsersBlockedId,
+  usersBlocked,
   async (req, res) => {
     try {
-      const { _id } = req;
+      const { _id, usersBlocked } = req;
       const { value: user } = await Users().findOneAndUpdate({ _id }, { $set: req.body });
       if (!user) return res.status(404).send();
       const projection = project({ password: 0, 'images.data': 0 });
       const [data] = await Users()
-        .aggregate(usersPipeline(matchById(_id), projection))
+        .aggregate(usersPipeline(matchById(_id), usersBlocked, projection))
         .toArray();
       res.send(data);
     } catch (e) {
@@ -158,7 +159,7 @@ router.post('/login', trimBody, generateAuthToken, usersBlocked, async (req, res
       'usersBlocked.images.data': 0,
     });
     const [data] = await Users()
-      .aggregate(usersPipeline(matchById(user._id), ...usersBlocked, projection))
+      .aggregate(usersPipeline(matchById(user._id), usersBlocked, projection))
       .toArray();
     res.send({ ...data, token });
   } catch (e) {
