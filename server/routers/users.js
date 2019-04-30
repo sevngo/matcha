@@ -10,6 +10,7 @@ const {
   newDateBirth,
   uploadImage,
   trimBody,
+  newUsersBlockedId,
 } = require('../middlewares/data');
 const { generateAuthToken, auth, isMyId } = require('../middlewares/auth');
 const {
@@ -21,6 +22,7 @@ const {
   skip,
   sort,
   notMyUser,
+  usersBlocked,
 } = require('../middlewares/query');
 const { usersPipeline, matchById, project } = require('../aggregations/users');
 const { Users } = require('../database');
@@ -98,6 +100,7 @@ router.patch(
   trimBody,
   newDateBirth,
   hashNewPassword,
+  newUsersBlockedId,
   async (req, res) => {
     try {
       const { _id } = req;
@@ -131,12 +134,18 @@ router.delete('/:id', auth, isValidObjectId, isMyId, newObjectId, async (req, re
   }
 });
 
-router.post('/login', trimBody, generateAuthToken, async (req, res) => {
+router.post('/login', trimBody, generateAuthToken, usersBlocked, async (req, res) => {
   try {
-    const { user, token } = req;
-    const projection = project({ password: 0, 'images.data': 0 });
+    const { user, token, usersBlocked } = req;
+    const projection = project({
+      password: 0,
+      'images.data': 0,
+      'usersBlocked.password': 0,
+      'usersBlocked.email': 0,
+      'usersBlocked.images.data': 0,
+    });
     const [data] = await Users()
-      .aggregate(usersPipeline(matchById(user._id), projection))
+      .aggregate(usersPipeline(matchById(user._id), ...usersBlocked, projection))
       .toArray();
     res.send({ ...data, token });
   } catch (e) {

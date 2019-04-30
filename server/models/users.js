@@ -47,7 +47,7 @@ const usersModel = async db => {
           },
           images: { bsonType: 'array' },
           address: { bsonType: 'object' },
-          usersBlocked: { bsonType: 'array' },
+          usersBlockedId: { bsonType: 'array' },
         },
       },
     },

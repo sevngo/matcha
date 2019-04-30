@@ -83,6 +83,20 @@ const notMyUser = (req, res, next) => {
   next();
 };
 
+const usersBlocked = (req, res, next) => {
+  req.usersBlocked = [
+    {
+      $lookup: {
+        from: 'users',
+        localField: 'usersBlockedId',
+        foreignField: '_id',
+        as: 'usersBlocked',
+      },
+    },
+  ];
+  next();
+};
+
 module.exports = {
   limit,
   skip,
@@ -92,4 +106,5 @@ module.exports = {
   birthRange,
   maxDistance,
   notMyUser,
+  usersBlocked,
 };

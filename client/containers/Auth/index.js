@@ -70,7 +70,7 @@ const Auth = ({ classes, login, register }) => {
                   gender: '',
                   birthDate: '',
                   address: { name: '' },
-                  usersBlocked: [],
+                  usersBlockedId: [],
                 }}
                 submit={register}
                 withGeolocation
