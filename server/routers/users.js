@@ -27,12 +27,17 @@ const {
 } = require('../middlewares/stages');
 const { usersPipeline, matchById, project } = require('../aggregations/users');
 const { Users } = require('../database');
+const { sendEmailConfirmation } = require('../emails/account');
 
 const router = new Router();
 
 router.post('/', newDateBirth, hashPassword, async (req, res) => {
   try {
-    await Users().insertOne(req.body);
+    const {
+      ops: [user],
+    } = await Users().insertOne(req.body);
+    const { email, firstName, lastName } = user;
+    await sendEmailConfirmation(email, firstName, lastName);
     res.status(201).send();
   } catch (e) {
     res.status(400).send();

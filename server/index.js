@@ -5,7 +5,7 @@ const usersRouter = require('./routers/users');
 const morgan = require('morgan');
 
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT;
 
 app.use(morgan('dev'));
 app.use(express.json());

@@ -5,6 +5,8 @@ const bcrypt = require('bcryptjs');
 const { path } = require('ramda');
 const { Users } = require('../database');
 
+const jwtSecret = process.env.JWT_SECRET;
+
 const generateAuthToken = async (req, res, next) => {
   try {
     const { username, password } = req.body;
@@ -15,7 +17,7 @@ const generateAuthToken = async (req, res, next) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) throw new Error();
 
-    const token = await jwt.sign({ _id: toString(user._id) }, 'ofjqikfipqoejf');
+    const token = await jwt.sign({ _id: toString(user._id) }, jwtSecret);
 
     req.user = user;
     req.token = token;
@@ -29,7 +31,7 @@ const generateAuthToken = async (req, res, next) => {
 const auth = async (req, res, next) => {
   try {
     const token = replace('Bearer ', '')(req.header('Authorization'));
-    const decoded = jwt.verify(token, 'ofjqikfipqoejf');
+    const decoded = jwt.verify(token, jwtSecret);
     const user = await Users().findOne({ _id: new ObjectID(decoded._id) });
     if (!user) throw new Error();
     req.user = user;

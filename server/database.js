@@ -1,8 +1,8 @@
 const { MongoClient } = require('mongodb');
 const { usersModel, USERS } = require('./models/users');
 
-const url = 'mongodb://127.0.0.1:27017';
-const databaseName = 'matcha';
+const url = process.env.MONGODB_URL;
+const databaseName = process.env.DATABASE_NAME;
 let db;
 
 const connectDb = async () => {
