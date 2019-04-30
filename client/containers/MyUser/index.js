@@ -1,19 +1,19 @@
 import React, { useRef, useState } from 'react';
-import { compose, length, isEmpty, path } from 'ramda';
+import { compose, length, isEmpty, path, map } from 'ramda';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { FormattedMessage } from 'react-intl';
-import { withStyles, Paper, Grid, Button, Typography, Icon } from '@material-ui/core';
+import { withStyles, Paper, Grid, Button, Typography, Icon, Divider } from '@material-ui/core';
 import UserForm from '../../components/UserForm';
 import Carousel from '../../components/Carousel';
 import Popover from '../../components/Popover';
-import { updateUser, uploadImage, removeImage } from '../../actions';
+import { updateUser, uploadImage, removeImage, unblockUser } from '../../actions';
 import { getAuth } from '../../selectors';
 import styles from './styles';
 import messages from './messages';
 
-const MyUser = ({ classes, auth, updateUser, uploadImage, removeImage }) => {
-  const { _id, token, images } = auth;
+const MyUser = ({ classes, auth, updateUser, uploadImage, removeImage, unblockUser }) => {
+  const { _id, token, images, usersBlocked } = auth;
   const [activeStep, handleStep] = useState(0);
   const [anchorEl, handlePopover] = useState();
   const inputEl = useRef();
@@ -79,6 +79,31 @@ const MyUser = ({ classes, auth, updateUser, uploadImage, removeImage }) => {
             </Button>
           </Carousel>
         </Paper>
+        {usersBlocked[0] && (
+          <Paper elevation={24} className={classes.usersBlocked}>
+            <Typography variant="h5">Users blocked :</Typography>
+            <Divider className={classes.mt1} />
+            {map(user => (
+              <Grid
+                key={user._id}
+                container
+                justify="space-between"
+                alignItems="center"
+                className={classes.mt1}
+              >
+                <Typography>{user.firstName}</Typography>
+                <Typography className={classes.ml1}>{user.lastName}</Typography>
+                <Button
+                  variant="outlined"
+                  onClick={() => unblockUser(auth, user._id)}
+                  className={classes.unblock}
+                >
+                  <FormattedMessage {...messages.unblockUser} />
+                </Button>
+              </Grid>
+            ))(usersBlocked)}
+          </Paper>
+        )}
       </Grid>
       <Grid item className={classes.width}>
         <Paper elevation={24} className={classes.p3}>
@@ -106,6 +131,6 @@ export default compose(
   withStyles(styles),
   connect(
     mapStateToProps,
-    { updateUser, uploadImage, removeImage },
+    { updateUser, uploadImage, removeImage, unblockUser },
   ),
 )(MyUser);

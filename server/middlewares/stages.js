@@ -84,16 +84,14 @@ const notMyUser = (req, res, next) => {
 };
 
 const usersBlocked = (req, res, next) => {
-  req.usersBlocked = [
-    {
-      $lookup: {
-        from: 'users',
-        localField: 'usersBlockedIds',
-        foreignField: '_id',
-        as: 'usersBlocked',
-      },
+  req.usersBlocked = {
+    $lookup: {
+      from: 'users',
+      localField: 'usersBlockedIds',
+      foreignField: '_id',
+      as: 'usersBlocked',
     },
-  ];
+  };
   next();
 };
 

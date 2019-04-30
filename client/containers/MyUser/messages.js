@@ -21,4 +21,8 @@ export default defineMessages({
     id: 'containers.myUser.yes',
     defaultMessage: 'Yes',
   },
+  unblockUser: {
+    id: 'containers.myUser.unblock',
+    defaultMessage: 'Unblock',
+  },
 });
