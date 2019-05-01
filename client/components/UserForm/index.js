@@ -28,7 +28,7 @@ import {
   isYoung,
   isOld,
   isTrimmed,
-} from '../../utils/validates';
+} from '../../utils';
 import { genderOptions, sortByOptions, interestsOptions } from './constants';
 import styles from './styles';
 import messages from './messages';
