@@ -1,8 +1,10 @@
 import React from 'react';
 import { compose } from 'ramda';
+import { FormattedMessage } from 'react-intl';
 import { TextField, Icon, withStyles } from '@material-ui/core';
 import withMetaData from '../../hoc/withMetaData';
 import styles from './styles';
+import messages from '../../utils/messages';
 
 const Input = ({
   field,
@@ -17,7 +19,7 @@ const Input = ({
     margin="dense"
     variant="outlined"
     error={isError}
-    helperText={isError && error}
+    helperText={isError && <FormattedMessage {...messages[error]} />}
     fullWidth
     InputProps={{
       startAdornment: startAdornment && <Icon className={classes.icon}>{startAdornment}</Icon>,

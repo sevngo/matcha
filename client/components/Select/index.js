@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 import {
   InputLabel,
   FormControl,
@@ -7,6 +8,7 @@ import {
   OutlinedInput,
 } from '@material-ui/core';
 import withMetaData from '../../hoc/withMetaData';
+import messages from '../../utils/messages';
 
 const Select = ({ field, meta: { error, isError }, label, children, className, ...rest }) => (
   <FormControl margin="dense" className={className} fullWidth error={isError} variant="outlined">
@@ -14,7 +16,11 @@ const Select = ({ field, meta: { error, isError }, label, children, className, .
     <MSelect input={<OutlinedInput labelWidth={65} />} {...field} {...rest}>
       {children}
     </MSelect>
-    {isError && <FormHelperText>{error}</FormHelperText>}
+    {isError && (
+      <FormHelperText>
+        <FormattedMessage {...messages[error]} />
+      </FormHelperText>
+    )}
   </FormControl>
 );
 
