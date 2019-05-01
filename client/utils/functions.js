@@ -1,3 +1,5 @@
+import { reduce } from 'ramda';
+
 export const getAge = dateString => {
   const today = new Date();
   const birthDate = new Date(dateString);
@@ -6,3 +8,5 @@ export const getAge = dateString => {
   if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) age--;
   return age;
 };
+
+export const reduceIds = reduce((acc, object) => [...acc, object._id], []);

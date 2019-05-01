@@ -62,9 +62,9 @@ const trimBody = (req, res, next) => {
 
 const newUsersBlockedId = (req, res, next) => {
   const {
-    body: { usersBlockedIds },
+    body: { usersBlocked },
   } = req;
-  req.body.usersBlockedIds = map(id => new ObjectID(id))(usersBlockedIds);
+  req.body.usersBlocked = map(id => new ObjectID(id))(usersBlocked);
   next();
 };
 

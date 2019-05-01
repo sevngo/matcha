@@ -87,7 +87,7 @@ const usersBlocked = (req, res, next) => {
   req.usersBlocked = {
     $lookup: {
       from: 'users',
-      localField: 'usersBlockedIds',
+      localField: 'usersBlocked',
       foreignField: '_id',
       as: 'usersBlocked',
     },
@@ -96,7 +96,7 @@ const usersBlocked = (req, res, next) => {
 };
 
 const hideUsersBlocked = (req, res, next) => {
-  req.hideUsersBlocked = { $match: { _id: { $nin: req.user.usersBlockedIds } } };
+  req.hideUsersBlocked = { $match: { _id: { $nin: req.user.usersBlocked } } };
   next();
 };
 

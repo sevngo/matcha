@@ -27,11 +27,11 @@ export default defineMessages({
   },
   distanceDescending: {
     id: 'components.userForm.distanceDescending',
-    defaultMessage: 'Popularity (descending)',
+    defaultMessage: 'Distance (descending)',
   },
   distanceIncreasing: {
     id: 'components.userForm.distanceIncreasing',
-    defaultMessage: 'Popularity (increasing)',
+    defaultMessage: 'Distance (increasing)',
   },
   email: {
     id: 'components.userForm.email',
@@ -71,11 +71,11 @@ export default defineMessages({
   },
   popularityDescending: {
     id: 'components.userForm.popularityDescending',
-    defaultMessage: 'Distance (descending)',
+    defaultMessage: 'Popularity (descending)',
   },
   popularityIncreasing: {
     id: 'components.userForm.popularityIncreasing',
-    defaultMessage: 'Distance (increasing)',
+    defaultMessage: 'Popularity (increasing)',
   },
   password: {
     id: 'components.userForm.password',

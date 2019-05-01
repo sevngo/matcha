@@ -1,6 +1,7 @@
-import { omit, reject } from 'ramda';
+import { omit, reject, compose, append, propEq } from 'ramda';
 import { enqueueNotification, success, error } from './app';
 import { postUsers, postUsersLogin, patchUser } from '../api';
+import { reduceIds } from '../utils';
 
 export const REGISTER = 'REGISTER';
 export const LOGIN = 'LOGIN';
@@ -13,7 +14,7 @@ export const BLOCKED_USER = 'BLOCKED_USER';
 export const UNBLOCK_USER = 'UNBLOCK_USER';
 export const UNBLOCKED_USER = 'UNBLOCKED_USER';
 
-export const toOmit = omit(['_id', 'token', 'images', 'usersBlocked']);
+export const extract = omit(['_id', 'token', 'images']);
 
 export const logout = () => ({ type: LOGOUT });
 
@@ -40,7 +41,7 @@ export const login = user => async dispatch => {
 export const updateUser = account => async dispatch => {
   try {
     dispatch({ type: UPDATE_USER });
-    const { data } = await patchUser(account.token, account._id, toOmit(account));
+    const { data } = await patchUser(account.token, account._id, extract(account));
     dispatch({ type: UPDATED_USER, data });
   } catch (e) {
     dispatch(enqueueNotification(error));
@@ -50,8 +51,12 @@ export const updateUser = account => async dispatch => {
 export const blockUser = (account, userId) => async dispatch => {
   try {
     dispatch({ type: BLOCK_USER });
-    const myAccount = { ...account, usersBlockedIds: [...account.usersBlockedIds, userId] };
-    const user = toOmit(myAccount);
+    const usersBlocked = compose(
+      append(userId),
+      reduceIds,
+    )(account.usersBlocked);
+    const myAccount = { ...account, usersBlocked };
+    const user = extract(myAccount);
     const { data } = await patchUser(account.token, account._id, user);
     dispatch({ type: BLOCKED_USER, data });
   } catch (e) {
@@ -62,11 +67,12 @@ export const blockUser = (account, userId) => async dispatch => {
 export const unblockUser = (account, userId) => async dispatch => {
   try {
     dispatch({ type: UNBLOCK_USER });
-    const myAccount = {
-      ...account,
-      usersBlockedIds: reject(user => userId === user)(account.usersBlockedIds),
-    };
-    const user = toOmit(myAccount);
+    const usersBlocked = compose(
+      reject(propEq('_id', userId)),
+      reduceIds,
+    )(account.usersBlocked);
+    const myAccount = { ...account, usersBlocked };
+    const user = extract(myAccount);
     const { data } = await patchUser(account.token, account._id, user);
     dispatch({ type: UNBLOCKED_USER, data });
   } catch (e) {
