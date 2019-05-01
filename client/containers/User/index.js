@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { compose, includes } from 'ramda';
+import { compose, find } from 'ramda';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { FormattedMessage } from 'react-intl';
@@ -29,7 +29,7 @@ const User = ({
   useEffect(() => {
     loadUser(auth.token, id);
   }, []);
-  const isBlocked = includes(user._id)(auth.usersBlockedIds);
+  const isBlocked = find(userBlocked => userBlocked._id === user._id)(auth.usersBlocked);
   return (
     <Grid container spacing={3} justify="center" direction="row" className={classes.p3}>
       <Grid item className={classes.width}>
