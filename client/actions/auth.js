@@ -1,4 +1,4 @@
-import { omit, reject, compose, append, propEq } from 'ramda';
+import { omit, reject, compose, append, equals } from 'ramda';
 import { enqueueNotification, success, error } from './app';
 import { postUsers, postUsersLogin, patchUser } from '../api';
 import { reduceIds } from '../utils';
@@ -68,7 +68,7 @@ export const unblockUser = (account, userId) => async dispatch => {
   try {
     dispatch({ type: UNBLOCK_USER });
     const usersBlocked = compose(
-      reject(propEq('_id', userId)),
+      reject(equals(userId)),
       reduceIds,
     )(account.usersBlocked);
     const myAccount = { ...account, usersBlocked };

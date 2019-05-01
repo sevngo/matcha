@@ -13,7 +13,7 @@ import {
 import { path } from 'ramda';
 import emptyImage from '../../images/emptyImage.png';
 import Interests from '../Interests';
-import { getAge } from '../../utils/functions';
+import { getAge } from '../../utils';
 import styles from './styles';
 import messages from './messages';
 
