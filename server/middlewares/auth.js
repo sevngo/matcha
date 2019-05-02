@@ -30,8 +30,8 @@ const generateAuthToken = async (req, res, next) => {
 const auth = async (req, res, next) => {
   try {
     const token = replace('Bearer ', '')(req.header('Authorization'));
-    const decoded = jwt.verify(token, JWT_SECRET);
-    const user = await Users().findOne({ _id: new ObjectID(decoded._id) });
+    const { _id } = jwt.verify(token, JWT_SECRET);
+    const user = await Users().findOne({ _id: new ObjectID(_id) });
     if (!user) throw new Error();
     req.user = user;
     next();
@@ -46,4 +46,9 @@ const isMyId = async (req, res, next) => {
   next();
 };
 
-module.exports = { generateAuthToken, auth, isMyId };
+const emailVerified = async (req, res, next) => {
+  if (!req.user.emailVerified) return res.status(400).send();
+  next();
+};
+
+module.exports = { generateAuthToken, auth, isMyId, emailVerified };
