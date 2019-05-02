@@ -45,7 +45,7 @@ const Component = ({
   values,
 }) => {
   const [showPassword, toggleShowPassword] = useState(false);
-  const isAddresNull = isNil(path(['address', 'coordinates'])(values));
+  const hasAddress = !isNil(path(['address', 'coordinates'])(values));
   return (
     <form onSubmit={handleSubmit}>
       {has('username', initialValues) && (
@@ -153,10 +153,10 @@ const Component = ({
           id="address"
           label={<FormattedMessage {...messages.address} />}
           component={Input}
-          disabled={disabled || !isAddresNull}
-          validate={() => isAddresNull && 'Required'}
+          disabled={disabled || hasAddress}
+          validate={() => isRequired(hasAddress)}
           endAdornment={
-            !isAddresNull &&
+            hasAddress &&
             !disabled && (
               <IconButton color="inherit" onClick={() => setFieldValue('address', { name: '' })}>
                 clear
