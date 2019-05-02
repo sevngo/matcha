@@ -25,6 +25,7 @@ const usersModel = async db => {
           'password',
           'gender',
           'address',
+          'usersBlocked',
         ],
         additionalProperties: false,
         properties: {
@@ -34,6 +35,7 @@ const usersModel = async db => {
           firstName: stringRequired,
           lastName: stringRequired,
           email: stringRequired,
+          emailVerified: { bsonType: 'bool' },
           password: { bsonType: 'string' },
           gender: {
             enum: ['male', 'female'],

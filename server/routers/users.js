@@ -13,7 +13,7 @@ const {
   trimBody,
   newUsersBlockedId,
 } = require('../middlewares/data');
-const { generateAuthToken, auth, isMyId } = require('../middlewares/auth');
+const { generateAuthToken, auth, isMyId, emailVerified } = require('../middlewares/auth');
 const {
   maxDistance,
   gender,
@@ -23,7 +23,7 @@ const {
   skip,
   sort,
   notMyUser,
-  usersBlocked,
+  lookupUsersBlocked,
   hideUsersBlocked,
 } = require('../middlewares/stages');
 const { usersPipeline, matchById, project } = require('../aggregations/users');
@@ -37,10 +37,10 @@ router.post('/', newDateBirth, hashPassword, async (req, res) => {
   try {
     const {
       ops: [user],
-    } = await Users().insertOne(req.body);
+    } = await Users().insertOne({ usersBlocked: [], ...req.body });
     const { email, firstName, lastName } = user;
     const token = await jwt.sign({ email }, JWT_SECRET);
-    const url = `${getAppUrl(req)}/api/users/confirm/${token}`;
+    const url = `${getAppUrl(req)}/api/users/verify/${token}`;
     await sendEmailConfirmation(email, firstName, lastName, url);
     res.status(201).send();
   } catch (e) {
@@ -123,15 +123,15 @@ router.patch(
   newDateBirth,
   hashNewPassword,
   newUsersBlockedId,
-  usersBlocked,
+  lookupUsersBlocked,
   async (req, res) => {
     try {
-      const { _id, usersBlocked } = req;
+      const { _id, lookupUsersBlocked } = req;
       const { value: user } = await Users().findOneAndUpdate({ _id }, { $set: req.body });
       if (!user) return res.status(404).send();
       const projection = project({ password: 0, 'images.data': 0 });
       const [data] = await Users()
-        .aggregate(usersPipeline(matchById(_id), usersBlocked, projection))
+        .aggregate(usersPipeline(matchById(_id), lookupUsersBlocked, projection))
         .toArray();
       res.send(data);
     } catch (e) {
@@ -157,20 +157,42 @@ router.delete('/:id', auth, isValidObjectId, isMyId, newObjectId, async (req, re
   }
 });
 
-router.post('/login', trimBody, generateAuthToken, usersBlocked, async (req, res) => {
+router.post(
+  '/login',
+  trimBody,
+  generateAuthToken,
+  emailVerified,
+  lookupUsersBlocked,
+  async (req, res) => {
+    try {
+      const { user, token, lookupUsersBlocked } = req;
+      const projection = project({
+        password: 0,
+        'images.data': 0,
+        'usersBlocked.password': 0,
+        'usersBlocked.email': 0,
+        'usersBlocked.images.data': 0,
+      });
+      const [data] = await Users()
+        .aggregate(usersPipeline(matchById(user._id), lookupUsersBlocked, projection))
+        .toArray();
+      res.send({ ...data, token });
+    } catch (e) {
+      res.status(400).send();
+      console.log(e); // eslint-disable-line no-console
+    }
+  },
+);
+
+router.get('/verify/:token', async (req, res) => {
   try {
-    const { user, token, usersBlocked } = req;
-    const projection = project({
-      password: 0,
-      'images.data': 0,
-      'usersBlocked.password': 0,
-      'usersBlocked.email': 0,
-      'usersBlocked.images.data': 0,
-    });
-    const [data] = await Users()
-      .aggregate(usersPipeline(matchById(user._id), usersBlocked, projection))
-      .toArray();
-    res.send({ ...data, token });
+    const { email } = jwt.verify(req.params.token, JWT_SECRET);
+    const { value: user } = await Users().findOneAndUpdate(
+      { email },
+      { $set: { emailVerified: true } },
+    );
+    if (!user) throw new Error();
+    res.status(200).send('Email confirmed');
   } catch (e) {
     res.status(400).send();
     console.log(e); // eslint-disable-line no-console
