@@ -1,4 +1,3 @@
-require('dotenv').config();
 const Bundler = require('parcel-bundler');
 const app = require('express')();
 const proxy = require('http-proxy-middleware');

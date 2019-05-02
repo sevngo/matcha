@@ -12,7 +12,7 @@
   "devDependencies": {
     "babel-eslint": "^10.0.1",
     "concurrently": "^4.1.0",
-    "dotenv": "^7.0.0",
+    "env-cmd": "^8.0.2",
     "eslint": "^5.16.0",
     "eslint-plugin-react": "^7.12.4",
     "http-proxy-middleware": "^0.19.1",
@@ -52,7 +52,7 @@
   },
   "scripts": {
     "start": "parcel build client/index.html && node server",
-    "dev": "concurrently --kill-others \"node client/devServer\" \"nodemon server\""
+    "dev": "env-cmd ./.env concurrently --kill-others \"node client/devServer\" \"nodemon server\""
   },
   "browserslist": [
     "since 2017-06"

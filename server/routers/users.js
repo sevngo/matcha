@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const { ObjectID } = require('mongodb');
 const { find, propEq } = require('ramda');
+const jwt = require('jsonwebtoken');
 const sharp = require('sharp');
 const {
   isValidObjectId,
@@ -28,6 +29,7 @@ const {
 const { usersPipeline, matchById, project } = require('../aggregations/users');
 const { Users } = require('../database');
 const { sendEmailConfirmation } = require('../emails/account');
+const { getAppUrl, JWT_SECRET } = require('../utils');
 
 const router = new Router();
 
@@ -37,7 +39,9 @@ router.post('/', newDateBirth, hashPassword, async (req, res) => {
       ops: [user],
     } = await Users().insertOne(req.body);
     const { email, firstName, lastName } = user;
-    await sendEmailConfirmation(email, firstName, lastName);
+    const token = await jwt.sign({ email }, JWT_SECRET);
+    const url = `${getAppUrl(req)}/api/users/confirm/${token}`;
+    await sendEmailConfirmation(email, firstName, lastName, url);
     res.status(201).send();
   } catch (e) {
     res.status(400).send();
