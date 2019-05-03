@@ -18,6 +18,7 @@ import {
   UNBLOCK_USER,
   BLOCKED_USER,
   UNBLOCKED_USER,
+  FORGOT_PASSWORD,
 } from '../actions';
 
 const defaultState = {
@@ -50,6 +51,7 @@ export default (state = defaultState, action) => {
     case DELETE_IMAGE:
     case BLOCK_USER:
     case UNBLOCK_USER:
+    case FORGOT_PASSWORD:
       return { ...state, isLoading: true };
     case LOGGED:
     case UPDATED_USER:

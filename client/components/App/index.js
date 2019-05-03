@@ -6,6 +6,7 @@ import Users from '../../containers/Users';
 import User from '../../containers/User';
 import Notifications from '../../containers/Notifications';
 import Loading from '../../containers/Loading';
+import Reset from '../../containers/Reset';
 import styles from './styles';
 
 const App = ({ classes }) => (
@@ -14,6 +15,7 @@ const App = ({ classes }) => (
     <Switch>
       <Route path="/" exact component={Users} />
       <Route path="/user/:id" exact render={({ match }) => <User match={match} />} />
+      <Route path="/reset/:token" exact render={({ match }) => <Reset match={match} />} />
       <Redirect to="/" />
     </Switch>
     <Notifications />

@@ -81,9 +81,9 @@ export default defineMessages({
     id: 'components.userForm.password',
     defaultMessage: 'Password',
   },
-  reset: {
-    id: 'components.userForm.reset',
-    defaultMessage: 'Reset',
+  cancel: {
+    id: 'components.userForm.cancel',
+    defaultMessage: 'Cancel',
   },
   sortBy: {
     id: 'components.userForm.sortBy',

@@ -28,7 +28,7 @@ const {
 } = require('../middlewares/stages');
 const { usersPipeline, matchById, project } = require('../aggregations/users');
 const { Users } = require('../database');
-const { sendEmailConfirmation } = require('../emails/account');
+const { sendEmailConfirmation, sendResetPassword } = require('../emails/account');
 const { getAppUrl, JWT_SECRET } = require('../utils');
 
 const router = new Router();
@@ -38,8 +38,8 @@ router.post('/', newDateBirth, hashPassword, async (req, res) => {
     const {
       ops: [user],
     } = await Users().insertOne({ usersBlocked: [], ...req.body });
-    const { email, firstName, lastName } = user;
-    const token = await jwt.sign({ email }, JWT_SECRET);
+    const { _id, email, firstName, lastName } = user;
+    const token = await jwt.sign({ _id }, JWT_SECRET);
     const url = `${getAppUrl(req)}/api/users/verify/${token}`;
     await sendEmailConfirmation(email, firstName, lastName, url);
     res.status(201).send();
@@ -186,13 +186,43 @@ router.post(
 
 router.get('/verify/:token', async (req, res) => {
   try {
-    const { email } = jwt.verify(req.params.token, JWT_SECRET);
+    const { _id } = jwt.verify(req.params.token, JWT_SECRET);
     const { value: user } = await Users().findOneAndUpdate(
-      { email },
+      { _id: new ObjectID(_id) },
       { $set: { emailVerified: true } },
     );
     if (!user) throw new Error();
     res.status(200).send('Email confirmed');
+  } catch (e) {
+    res.status(400).send();
+    console.log(e); // eslint-disable-line no-console
+  }
+});
+
+router.post('/forgot', trimBody, async (req, res) => {
+  try {
+    const user = await Users().findOne({ email: req.body.email });
+    if (!user) throw new Error();
+    const { _id, email, firstName, lastName } = user;
+    const token = await jwt.sign({ _id }, JWT_SECRET);
+    const url = `${getAppUrl(req)}/reset/${token}`;
+    await sendResetPassword(email, firstName, lastName, url);
+    res.status(200).send();
+  } catch (e) {
+    res.status(400).send();
+    console.log(e); // eslint-disable-line no-console
+  }
+});
+
+router.patch('/reset/:token', trimBody, hashNewPassword, async (req, res) => {
+  try {
+    const { _id } = jwt.verify(req.params.token, JWT_SECRET);
+    const { value: user } = await Users().findOneAndUpdate(
+      { _id: new ObjectID(_id) },
+      { $set: req.body },
+    );
+    if (!user) throw new Error();
+    res.status(200).send('Password changed');
   } catch (e) {
     res.status(400).send();
     console.log(e); // eslint-disable-line no-console

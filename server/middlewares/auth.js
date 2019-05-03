@@ -16,7 +16,7 @@ const generateAuthToken = async (req, res, next) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) throw new Error();
 
-    const token = await jwt.sign({ _id: toString(user._id) }, JWT_SECRET);
+    const token = await jwt.sign({ _id: user._id }, JWT_SECRET);
 
     req.user = user;
     req.token = token;

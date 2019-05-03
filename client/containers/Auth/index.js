@@ -16,11 +16,11 @@ import {
 } from '@material-ui/core';
 import UserForm from '../../components/UserForm';
 import Modal from '../../components/Modal';
-import { register, login } from '../../actions';
+import { register, login, forgotPassword } from '../../actions';
 import styles from './styles';
 import messages from './messages';
 
-const Auth = ({ classes, login, register }) => {
+const Auth = ({ classes, login, register, forgotPassword }) => {
   const [tab, handleTab] = useState(0);
   const [isModalOpen, toggleModal] = useState(false);
   const initialValues = {
@@ -56,7 +56,7 @@ const Auth = ({ classes, login, register }) => {
                     <DialogContentText>
                       <FormattedMessage {...messages.enterEmail} />
                     </DialogContentText>
-                    <UserForm initialValues={{ email: '' }} submit={() => {}} />
+                    <UserForm initialValues={{ email: '' }} submit={forgotPassword} />
                   </DialogContent>
                 </Modal>
               </Fragment>
@@ -86,6 +86,6 @@ export default compose(
   withStyles(styles),
   connect(
     null,
-    { register, login },
+    { register, login, forgotPassword },
   ),
 )(Auth);

@@ -251,7 +251,7 @@ const Component = ({
             onClick={() => resetForm(initialValues)}
             fullWidth
           >
-            <FormattedMessage {...messages.reset} />
+            <FormattedMessage {...messages.cancel} />
           </Button>
         )}
       </Grid>
