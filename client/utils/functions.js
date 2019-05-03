@@ -9,4 +9,4 @@ export const getAge = dateString => {
   return age;
 };
 
-export const reduceIds = reduce((acc, object) => [...acc, object._id], []);
+export const getIds = reduce((acc, object) => [...acc, object._id], []);

@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { TextField, Icon, withStyles } from '@material-ui/core';
 import withMetaData from '../../hoc/withMetaData';
 import styles from './styles';
-import messages from '../../utils/messages';
+import messages from './messages';
 
 const Input = ({
   field,

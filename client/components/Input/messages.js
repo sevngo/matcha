@@ -2,27 +2,27 @@ import { defineMessages } from 'react-intl';
 
 export default defineMessages({
   required: {
-    id: 'utils.validates.required',
+    id: 'components.input.required',
     defaultMessage: 'Required',
   },
   invalid: {
-    id: 'utils.validates.invalid',
+    id: 'components.input.invalid',
     defaultMessage: 'Invalid',
   },
   tooShort: {
-    id: 'utils.validates.tooShort',
+    id: 'components.input.tooShort',
     defaultMessage: 'Too short',
   },
   tooLong: {
-    id: 'utils.validates.tooLong',
+    id: 'components.input.tooLong',
     defaultMessage: 'Too long',
   },
   tooOld: {
-    id: 'utils.validates.tooOld',
+    id: 'components.input.tooOld',
     defaultMessage: 'Too old',
   },
   tooYoung: {
-    id: 'utils.validates.tooYoung',
+    id: 'components.input.tooYoung',
     defaultMessage: 'Too young',
   },
 });

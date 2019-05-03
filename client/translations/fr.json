@@ -42,10 +42,11 @@
   "containers.myUser.yes": "Oui",
   "containers.user.blockUser": "Bloquer utilisateur",
   "containers.user.unblockUser": "Débloquer utilisateur",
-  "utils.validates.required": "Requis",
-  "utils.validates.invalid": "Invalide",
-  "utils.validates.tooShort": "Trop court",
-  "utils.validates.tooLong": "Trop long",
-  "utils.validates.tooOld": "Trop vieux",
-  "utils.validates.tooYoung": "Trop jeune"
+  "components.input.required": "Requis",
+  "components.input.invalid": "Invalide",
+  "components.input.tooShort": "Trop court",
+  "components.input.tooLong": "Trop long",
+  "components.input.tooOld": "Trop vieux",
+  "components.input.tooYoung": "Trop jeune",
+  "components.select.tooLong": "Trop long"
 }
