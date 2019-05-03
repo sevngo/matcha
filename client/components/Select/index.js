@@ -8,7 +8,7 @@ import {
   OutlinedInput,
 } from '@material-ui/core';
 import withMetaData from '../../hoc/withMetaData';
-import messages from '../../utils/messages';
+import messages from './messages';
 
 const Select = ({ field, meta: { error, isError }, label, children, className, ...rest }) => (
   <FormControl margin="dense" className={className} fullWidth error={isError} variant="outlined">

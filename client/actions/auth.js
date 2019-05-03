@@ -1,7 +1,7 @@
 import { omit, reject, compose, append, equals } from 'ramda';
 import { enqueueNotification, success, error } from './app';
 import { postUsers, postUsersLogin, patchUser, postUsersForgot, postUsersReset } from '../api';
-import { reduceIds } from '../utils';
+import { getIds } from '../utils';
 
 export const REGISTER = 'REGISTER';
 export const LOGIN = 'LOGIN';
@@ -55,7 +55,7 @@ export const blockUser = (account, userId) => async dispatch => {
     dispatch({ type: BLOCK_USER });
     const usersBlocked = compose(
       append(userId),
-      reduceIds,
+      getIds,
     )(account.usersBlocked);
     const myAccount = { ...account, usersBlocked };
     const user = extract(myAccount);
@@ -71,7 +71,7 @@ export const unblockUser = (account, userId) => async dispatch => {
     dispatch({ type: UNBLOCK_USER });
     const usersBlocked = compose(
       reject(equals(userId)),
-      reduceIds,
+      getIds,
     )(account.usersBlocked);
     const myAccount = { ...account, usersBlocked };
     const user = extract(myAccount);
