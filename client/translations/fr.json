@@ -22,7 +22,7 @@
   "components.userForm.popularityDescending": "Popularité (décroissant)",
   "components.userForm.popularityIncreasing": "Popularité (croissant)",
   "components.userForm.password": "Mot de passe",
-  "components.userForm.reset": "Annuler",
+  "components.userForm.cancel": "Annuler",
   "components.userForm.sortBy": "Trier par",
   "components.userForm.submit": "Confirmer",
   "components.userForm.unitDistance": "Km",
