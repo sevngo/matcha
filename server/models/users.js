@@ -1,4 +1,4 @@
-const { STRING, OBJECTID, DATE, BOOL, ARRAY, OBJECT } = require('../utils/constants');
+const { STRING, OBJECTID, DATE, BOOL, ARRAY, OBJECT, BINDATA } = require('../utils/constants');
 
 const USERS = 'users';
 
@@ -39,7 +39,12 @@ const usersModel = async db => {
           interests: ARRAY,
           biography: STRING,
           images: ARRAY,
+          'images._id': OBJECTID,
+          'images.data': BINDATA,
           address: OBJECT,
+          'address.name': STRING,
+          'address.type': STRING,
+          'address.coordinates': ARRAY,
           usersBlocked: ARRAY,
           token: STRING,
         },
