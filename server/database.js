@@ -1,14 +1,13 @@
 const { MongoClient } = require('mongodb');
 const { usersModel, USERS } = require('./models/users');
+const { MONGODB_URL, DATABASE_NAME } = require('./utils/constants');
 
-const url = process.env.MONGODB_URL;
-const databaseName = process.env.DATABASE_NAME;
 let db;
 let client;
 
 const connectDb = async () => {
-  client = await MongoClient.connect(url, { useNewUrlParser: true });
-  db = client.db(databaseName);
+  client = await MongoClient.connect(MONGODB_URL, { useNewUrlParser: true });
+  db = client.db(DATABASE_NAME);
   console.log('Database connected'); // eslint-disable-line no-console
   return await usersModel(db);
 };

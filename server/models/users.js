@@ -1,8 +1,4 @@
-const stringRequired = {
-  bsonType: 'string',
-  minLength: 3,
-  maxLength: 30,
-};
+const { string, objectId, date, bool, array, object } = require('../utils/constants');
 
 const USERS = 'users';
 
@@ -29,28 +25,23 @@ const usersModel = async db => {
         ],
         additionalProperties: false,
         properties: {
-          _id: { bsonType: 'objectId' },
-          username: stringRequired,
-          birthDate: { bsonType: 'date' },
-          firstName: stringRequired,
-          lastName: stringRequired,
-          email: stringRequired,
-          emailVerified: { bsonType: 'bool' },
-          password: { bsonType: 'string' },
+          _id: objectId,
+          username: string,
+          birthDate: date,
+          firstName: string,
+          lastName: string,
+          email: string,
+          emailVerified: bool,
+          password: string,
           gender: {
             enum: ['male', 'female'],
           },
-          interests: {
-            bsonType: 'array',
-          },
-          biography: {
-            bsonType: 'string',
-            maxLength: 300,
-          },
-          images: { bsonType: 'array' },
-          address: { bsonType: 'object' },
-          usersBlocked: { bsonType: 'array' },
-          token: { bsonType: 'string' },
+          interests: array,
+          biography: string,
+          images: array,
+          address: object,
+          usersBlocked: array,
+          token: string,
         },
       },
     },

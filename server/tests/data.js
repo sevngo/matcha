@@ -2,7 +2,7 @@ const faker = require('faker');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { ObjectID } = require('mongodb');
-const { JWT_SECRET } = require('../utils');
+const { JWT_SECRET } = require('../utils/constants');
 
 const initialPassword = faker.internet.password();
 const initialId = faker.random.alphaNumeric(12);

@@ -1,6 +1,6 @@
 const { pick, split, is } = require('ramda');
 const { ObjectID } = require('mongodb');
-const { defaultToNull } = require('../utils');
+const { defaultToNull } = require('../utils/functions');
 
 const limit = (req, res, next) => {
   const {

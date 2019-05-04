@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const { ObjectID } = require('mongodb');
 const bcrypt = require('bcryptjs');
 const { Users } = require('../database');
-const { JWT_SECRET } = require('../utils');
+const { JWT_SECRET } = require('../utils/constants');
 
 const generateAuthToken = async (req, res, next) => {
   try {

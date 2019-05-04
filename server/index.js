@@ -1,7 +1,6 @@
 const app = require('./app');
 const { connectDb } = require('./database');
-
-const PORT = process.env.PORT;
+const { PORT } = require('./utils/constants');
 
 (async () => {
   try {
