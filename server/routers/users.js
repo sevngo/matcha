@@ -40,7 +40,7 @@ router.post('/', newDateBirth, hashPassword, async (req, res) => {
     } = await Users().insertOne({ usersBlocked: [], ...req.body });
     const { _id, email, firstName, lastName } = user;
     const token = await jwt.sign({ _id }, JWT_SECRET);
-    const url = `${getAppUrl(req)}/api/users/verify/${token}`;
+    const url = `${getAppUrl(req)}/verify/${token}`;
     await sendEmailConfirmation(email, firstName, lastName, url);
     res.status(201).send();
   } catch (e) {
@@ -185,21 +185,6 @@ router.post(
     }
   },
 );
-
-router.get('/verify/:token', async (req, res) => {
-  try {
-    const { _id } = jwt.verify(req.params.token, JWT_SECRET);
-    const { value: user } = await Users().findOneAndUpdate(
-      { _id: ObjectID(_id) },
-      { $set: { emailVerified: true } },
-    );
-    if (!user) throw new Error();
-    res.status(200).send('Email confirmed');
-  } catch (e) {
-    res.status(400).send();
-    console.log(e); // eslint-disable-line no-console
-  }
-});
 
 router.post('/forgot', trimBody, async (req, res) => {
   try {

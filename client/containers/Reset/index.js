@@ -8,7 +8,7 @@ import { updateUser } from '../../actions/auth';
 import styles from './styles';
 
 const Reset = ({
-  classes = {},
+  classes,
   match: {
     params: { token },
   },
