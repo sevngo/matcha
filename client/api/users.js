@@ -42,6 +42,3 @@ export const deleteUsersImages = (token, imageId) => {
 };
 
 export const postUsersForgot = user => axios.post('/api/users/forgot', user);
-
-export const postUsersReset = ({ token, newPassword }) =>
-  axios.patch(`/api/users/reset/${token}`, { newPassword });

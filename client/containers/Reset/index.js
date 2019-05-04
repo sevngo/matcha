@@ -3,7 +3,7 @@ import { compose } from 'ramda';
 import { connect } from 'react-redux';
 import { withStyles, Paper, Grid } from '@material-ui/core';
 import UserForm from '../../components/UserForm';
-import { resetPassword } from '../../actions/auth';
+import { updateUser } from '../../actions/auth';
 import styles from './styles';
 
 const Reset = ({
@@ -11,12 +11,12 @@ const Reset = ({
   match: {
     params: { token },
   },
-  resetPassword,
+  updateUser,
 }) => {
   return (
     <Grid container justify="center" className={classes.p3}>
       <Paper elevation={24} className={classes.paper}>
-        <UserForm initialValues={{ token, newPassword: '' }} submit={resetPassword} />
+        <UserForm initialValues={{ token, newPassword: '' }} submit={updateUser} />
       </Paper>
     </Grid>
   );
@@ -26,6 +26,6 @@ export default compose(
   withStyles(styles),
   connect(
     null,
-    { resetPassword },
+    { updateUser },
   ),
 )(Reset);

@@ -1,6 +1,6 @@
 import { omit, reject, compose, append, equals } from 'ramda';
 import { enqueueNotification, success, error } from './app';
-import { postUsers, postUsersLogin, patchUser, postUsersForgot, postUsersReset } from '../api';
+import { postUsers, postUsersLogin, patchUser, postUsersForgot } from '../api';
 import { getIds } from '../utils';
 
 export const REGISTER = 'REGISTER';
@@ -14,9 +14,8 @@ export const BLOCKED_USER = 'BLOCKED_USER';
 export const UNBLOCK_USER = 'UNBLOCK_USER';
 export const UNBLOCKED_USER = 'UNBLOCKED_USER';
 export const FORGOT_PASSWORD = 'FORGOT_PASSWORD';
-export const RESET_PASSWORD = 'RESET_PASSWORD';
 
-export const extract = omit(['_id', 'token', 'images']);
+export const extract = omit(['_id', 'images']);
 
 export const logout = () => ({ type: LOGOUT });
 
@@ -45,7 +44,7 @@ export const updateUser = account => async dispatch => {
     dispatch({ type: UPDATE_USER });
     const { data } = await patchUser(account.token, extract(account));
     dispatch({ type: UPDATED_USER, data });
-  } catch (e) {
+  } catch {
     dispatch(enqueueNotification(error));
   }
 };
@@ -61,7 +60,7 @@ export const blockUser = (account, userId) => async dispatch => {
     const user = extract(myAccount);
     const { data } = await patchUser(account.token, user);
     dispatch({ type: BLOCKED_USER, data });
-  } catch (e) {
+  } catch {
     dispatch(enqueueNotification(error));
   }
 };
@@ -77,7 +76,7 @@ export const unblockUser = (account, userId) => async dispatch => {
     const user = extract(myAccount);
     const { data } = await patchUser(account.token, user);
     dispatch({ type: UNBLOCKED_USER, data });
-  } catch (e) {
+  } catch {
     dispatch(enqueueNotification(error));
   }
 };
@@ -87,16 +86,6 @@ export const forgotPassword = user => async dispatch => {
     dispatch({ type: FORGOT_PASSWORD });
     await postUsersForgot(user);
     dispatch(enqueueNotification(success('Email sent !')));
-  } catch {
-    dispatch(enqueueNotification(error));
-  }
-};
-
-export const resetPassword = user => async dispatch => {
-  try {
-    dispatch({ type: RESET_PASSWORD });
-    await postUsersReset(user);
-    dispatch(enqueueNotification(success('Success !')));
   } catch {
     dispatch(enqueueNotification(error));
   }
