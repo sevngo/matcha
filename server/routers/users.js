@@ -125,9 +125,10 @@ router.patch(
     try {
       const {
         user: { _id },
+        body,
         lookupUsersBlocked,
       } = req;
-      const { value: user } = await Users().findOneAndUpdate({ _id }, { $set: req.body });
+      const { value: user } = await Users().findOneAndUpdate({ _id }, { $set: body });
       if (!user) return res.status(404).send();
       const projection = project({ password: 0, 'images.data': 0 });
       const [data] = await Users()
@@ -141,7 +142,7 @@ router.patch(
   },
 );
 
-router.delete('/:id', auth, async (req, res) => {
+router.delete('/', auth, async (req, res) => {
   try {
     const {
       user: { _id },
