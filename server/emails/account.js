@@ -1,6 +1,7 @@
 const sgMail = require('@sendgrid/mail');
+const { SENDGRID_API_KEY } = require('../utils/constants');
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+sgMail.setApiKey(SENDGRID_API_KEY);
 
 const sendEmailConfirmation = (email, firstName, lastName, url) => {
   const message = {

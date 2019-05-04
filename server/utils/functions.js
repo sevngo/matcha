@@ -1,8 +1,7 @@
 const { defaultTo } = require('ramda');
+const { NODE_ENV, DEVSERVER_PORT } = require('./constants');
 
 const defaultToNull = defaultTo(null);
-
-const { JWT_SECRET, DEVSERVER_PORT, NODE_ENV } = process.env;
 
 const getAppUrl = req => {
   const { protocol, hostname } = req;
@@ -12,4 +11,8 @@ const getAppUrl = req => {
       : `${protocol}://${req.get('host')}`;
   return fullUrl;
 };
-module.exports = { defaultToNull, getAppUrl, JWT_SECRET };
+
+module.exports = {
+  getAppUrl,
+  defaultToNull,
+};

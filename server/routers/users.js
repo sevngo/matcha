@@ -29,7 +29,8 @@ const {
 const { usersPipeline, matchById, project } = require('../aggregations/users');
 const { Users } = require('../database');
 const { sendEmailConfirmation, sendResetPassword } = require('../emails/account');
-const { getAppUrl, JWT_SECRET } = require('../utils');
+const { JWT_SECRET } = require('../utils/constants');
+const { getAppUrl } = require('../utils/functions');
 
 const router = new Router();
 
