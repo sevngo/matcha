@@ -18,7 +18,7 @@ const MyUser = ({ classes, auth, updateUser, uploadImage, removeImage, unblockUs
   const [anchorEl, handlePopover] = useState();
   const inputEl = useRef();
   const addImage = image => {
-    if (image) uploadImage(token, _id, image);
+    if (image) uploadImage(token, image);
   };
   return (
     <Grid container spacing={3} justify="center" direction="row" className={classes.p3}>
@@ -59,7 +59,7 @@ const MyUser = ({ classes, auth, updateUser, uploadImage, removeImage, unblockUs
                 <Button
                   size="small"
                   onClick={() => {
-                    removeImage(token, _id, path([activeStep, '_id'])(images));
+                    removeImage(token, path([activeStep, '_id'])(images));
                     handleStep(0);
                     handlePopover();
                   }}

@@ -13,7 +13,7 @@ const {
   trimBody,
   newUsersBlockedId,
 } = require('../middlewares/data');
-const { generateAuthToken, auth, isMyId, emailVerified } = require('../middlewares/auth');
+const { generateAuthToken, auth, emailVerified } = require('../middlewares/auth');
 const {
   maxDistance,
   gender,
@@ -114,11 +114,8 @@ router.get('/:id', auth, isValidObjectId, newObjectId, async (req, res) => {
 });
 
 router.patch(
-  '/:id',
+  '/',
   auth,
-  isValidObjectId,
-  isMyId,
-  newObjectId,
   trimBody,
   newDateBirth,
   hashNewPassword,
@@ -126,7 +123,10 @@ router.patch(
   lookupUsersBlocked,
   async (req, res) => {
     try {
-      const { _id, lookupUsersBlocked } = req;
+      const {
+        user: { _id },
+        lookupUsersBlocked,
+      } = req;
       const { value: user } = await Users().findOneAndUpdate({ _id }, { $set: req.body });
       if (!user) return res.status(404).send();
       const projection = project({ password: 0, 'images.data': 0 });
@@ -141,9 +141,11 @@ router.patch(
   },
 );
 
-router.delete('/:id', auth, isValidObjectId, isMyId, newObjectId, async (req, res) => {
+router.delete('/:id', auth, async (req, res) => {
   try {
-    const { _id } = req;
+    const {
+      user: { _id },
+    } = req;
     const { value: user } = await Users().findOneAndDelete({ _id });
     if (!user) return res.status(404).send();
     const projection = project({ password: 0, 'images.data': 0 });
@@ -188,7 +190,7 @@ router.get('/verify/:token', async (req, res) => {
   try {
     const { _id } = jwt.verify(req.params.token, JWT_SECRET);
     const { value: user } = await Users().findOneAndUpdate(
-      { _id: new ObjectID(_id) },
+      { _id: ObjectID(_id) },
       { $set: { emailVerified: true } },
     );
     if (!user) throw new Error();
@@ -218,7 +220,7 @@ router.patch('/reset/:token', trimBody, hashNewPassword, async (req, res) => {
   try {
     const { _id } = jwt.verify(req.params.token, JWT_SECRET);
     const { value: user } = await Users().findOneAndUpdate(
-      { _id: new ObjectID(_id) },
+      { _id: ObjectID(_id) },
       { $set: req.body },
     );
     if (!user) throw new Error();
@@ -230,20 +232,19 @@ router.patch('/reset/:token', trimBody, hashNewPassword, async (req, res) => {
 });
 
 router.post(
-  '/:id/images',
+  '/images',
   auth,
-  isValidObjectId,
-  isMyId,
-  newObjectId,
   uploadImage.single('image'),
   async (req, res) => {
     try {
-      const { _id } = req;
+      const {
+        user: { _id },
+      } = req;
       const buffer = await sharp(req.file.buffer)
         .resize({ width: 500, fit: 'outside' })
         .png()
         .toBuffer();
-      const imageId = new ObjectID();
+      const imageId = ObjectID();
       const { value: user } = await Users().findOneAndUpdate(
         { _id },
         { $push: { images: { _id: imageId, data: buffer } } },
@@ -266,36 +267,31 @@ router.post(
   },
 );
 
-router.delete(
-  '/:id/images/:imageId',
-  auth,
-  isValidObjectId,
-  isMyId,
-  newObjectId,
-  async (req, res) => {
-    try {
-      const { _id } = req;
-      const imageId = new ObjectID(req.params.imageId);
-      const { value: user } = await Users().findOneAndUpdate(
-        { _id },
-        { $pull: { images: { _id: imageId } } },
-      );
-      if (!user) return res.status(404).send();
-      const projection = project({ password: 0, 'images.data': 0 });
-      const [data] = await Users()
-        .aggregate(usersPipeline(matchById(_id), projection))
-        .toArray();
-      res.send(data);
-    } catch (e) {
-      res.status(500).send();
-      console.log(e); // eslint-disable-line no-console
-    }
-  },
-);
+router.delete('/images/:imageId', auth, async (req, res) => {
+  try {
+    const {
+      user: { _id },
+    } = req;
+    const imageId = ObjectID(req.params.imageId);
+    const { value: user } = await Users().findOneAndUpdate(
+      { _id },
+      { $pull: { images: { _id: imageId } } },
+    );
+    if (!user) return res.status(404).send();
+    const projection = project({ password: 0, 'images.data': 0 });
+    const [data] = await Users()
+      .aggregate(usersPipeline(matchById(_id), projection))
+      .toArray();
+    res.send(data);
+  } catch (e) {
+    res.status(500).send();
+    console.log(e); // eslint-disable-line no-console
+  }
+});
 
 router.get('/:id/images/:imageId', newObjectId, async (req, res) => {
   try {
-    const imageId = new ObjectID(req.params.imageId);
+    const imageId = ObjectID(req.params.imageId);
     const user = await Users().findOne({ _id: req._id, 'images._id': imageId });
     if (!user) return res.status(404).send();
     const { data } = find(image => propEq('_id', imageId)(image))(user.images);

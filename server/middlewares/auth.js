@@ -1,8 +1,7 @@
-const { toString, replace } = require('ramda');
+const { replace } = require('ramda');
 const jwt = require('jsonwebtoken');
 const { ObjectID } = require('mongodb');
 const bcrypt = require('bcryptjs');
-const { path } = require('ramda');
 const { Users } = require('../database');
 const { JWT_SECRET } = require('../utils');
 
@@ -41,14 +40,9 @@ const auth = async (req, res, next) => {
   }
 };
 
-const isMyId = async (req, res, next) => {
-  if (req.params.id !== toString(path(['user', '_id'])(req))) return res.status(401).send();
-  next();
-};
-
 const emailVerified = async (req, res, next) => {
   if (!req.user.emailVerified) return res.status(400).send();
   next();
 };
 
-module.exports = { generateAuthToken, auth, isMyId, emailVerified };
+module.exports = { generateAuthToken, auth, emailVerified };

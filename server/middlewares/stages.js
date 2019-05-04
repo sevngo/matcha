@@ -79,7 +79,7 @@ const maxDistance = (req, res, next) => {
 };
 
 const notMyUser = (req, res, next) => {
-  req.notMyUser = { $match: { _id: { $ne: new ObjectID(req.user._id) } } };
+  req.notMyUser = { $match: { _id: { $ne: ObjectID(req.user._id) } } };
   next();
 };
 

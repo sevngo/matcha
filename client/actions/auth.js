@@ -43,7 +43,7 @@ export const login = user => async dispatch => {
 export const updateUser = account => async dispatch => {
   try {
     dispatch({ type: UPDATE_USER });
-    const { data } = await patchUser(account.token, account._id, extract(account));
+    const { data } = await patchUser(account.token, extract(account));
     dispatch({ type: UPDATED_USER, data });
   } catch (e) {
     dispatch(enqueueNotification(error));
@@ -59,7 +59,7 @@ export const blockUser = (account, userId) => async dispatch => {
     )(account.usersBlocked);
     const myAccount = { ...account, usersBlocked };
     const user = extract(myAccount);
-    const { data } = await patchUser(account.token, account._id, user);
+    const { data } = await patchUser(account.token, user);
     dispatch({ type: BLOCKED_USER, data });
   } catch (e) {
     dispatch(enqueueNotification(error));
@@ -75,7 +75,7 @@ export const unblockUser = (account, userId) => async dispatch => {
     )(account.usersBlocked);
     const myAccount = { ...account, usersBlocked };
     const user = extract(myAccount);
-    const { data } = await patchUser(account.token, account._id, user);
+    const { data } = await patchUser(account.token, user);
     dispatch({ type: UNBLOCKED_USER, data });
   } catch (e) {
     dispatch(enqueueNotification(error));
