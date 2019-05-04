@@ -3,6 +3,7 @@ import { compose } from 'ramda';
 import { connect } from 'react-redux';
 import { withStyles, Paper, Grid } from '@material-ui/core';
 import UserForm from '../../components/UserForm';
+import withoutAuth from '../../hoc/withoutAuth';
 import { updateUser } from '../../actions/auth';
 import styles from './styles';
 
@@ -28,4 +29,5 @@ export default compose(
     null,
     { updateUser },
   ),
+  withoutAuth,
 )(Reset);
