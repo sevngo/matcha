@@ -30,7 +30,7 @@ const auth = async (req, res, next) => {
   try {
     const token = replace('Bearer ', '')(req.header('Authorization'));
     const { _id } = jwt.verify(token, JWT_SECRET);
-    const user = await Users().findOne({ _id: new ObjectID(_id) });
+    const user = await Users().findOne({ _id: ObjectID(_id) });
     if (!user) throw new Error();
     req.user = user;
     next();
