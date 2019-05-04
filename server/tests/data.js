@@ -1,11 +1,13 @@
 const faker = require('faker');
-const { omit } = require('ramda');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const { ObjectID } = require('mongodb');
+const { JWT_SECRET } = require('../utils');
 
-const initalPassword = faker.internet.password();
+const initialPassword = faker.internet.password();
+const initialId = faker.random.alphaNumeric(12);
 
-const initialUser = {
+const userOne = {
   username: faker.internet.userName(),
   birthDate: faker.date.past(),
   firstName: faker.name.firstName(),
@@ -17,13 +19,30 @@ const initialUser = {
     name: faker.address.streetAddress(),
     coordinates: [parseFloat(faker.address.longitude()), parseFloat(faker.address.latitude())],
   },
-  password: bcrypt.hashSync(initalPassword, 8),
-  _id: ObjectID(faker.random.alphaNumeric(12)),
+  password: bcrypt.hashSync(initialPassword, 8),
+  _id: ObjectID(initialId),
+  usersBlocked: [],
+  emailVerified: true,
+  token: jwt.sign({ _id: initialId }, JWT_SECRET),
+};
+
+const userTwo = {
+  username: faker.internet.userName(),
+  birthDate: faker.date.past(),
+  firstName: faker.name.firstName(),
+  lastName: faker.name.lastName(),
+  email: faker.internet.email(),
+  gender: 'male',
+  address: {
+    type: 'Point',
+    name: faker.address.streetAddress(),
+    coordinates: [parseFloat(faker.address.longitude()), parseFloat(faker.address.latitude())],
+  },
+  password: bcrypt.hashSync(initialPassword, 8),
+  _id: ObjectID(),
   usersBlocked: [],
   emailVerified: true,
 };
-
-const loggedUser = omit(['birthDate', 'password', '_id'])(initialUser);
 
 const newUser = {
   username: faker.internet.userName(),
@@ -41,8 +60,9 @@ const newUser = {
 };
 
 module.exports = {
-  initialUser,
-  initalPassword,
+  userOne,
+  userTwo,
+  initialPassword,
   newUser,
-  loggedUser,
+  initialId,
 };
