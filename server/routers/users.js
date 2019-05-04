@@ -216,21 +216,6 @@ router.post('/forgot', trimBody, async (req, res) => {
   }
 });
 
-router.patch('/reset/:token', trimBody, hashNewPassword, async (req, res) => {
-  try {
-    const { _id } = jwt.verify(req.params.token, JWT_SECRET);
-    const { value: user } = await Users().findOneAndUpdate(
-      { _id: ObjectID(_id) },
-      { $set: req.body },
-    );
-    if (!user) throw new Error();
-    res.status(200).send('Password changed');
-  } catch (e) {
-    res.status(400).send();
-    console.log(e); // eslint-disable-line no-console
-  }
-});
-
 router.post(
   '/images',
   auth,

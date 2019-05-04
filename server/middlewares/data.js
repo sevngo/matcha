@@ -64,7 +64,7 @@ const newUsersBlockedId = (req, res, next) => {
   const {
     body: { usersBlocked },
   } = req;
-  req.body.usersBlocked = map(id => ObjectID(id))(usersBlocked);
+  if (usersBlocked) req.body.usersBlocked = map(id => ObjectID(id))(usersBlocked);
   next();
 };
 

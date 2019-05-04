@@ -50,6 +50,7 @@ const usersModel = async db => {
           images: { bsonType: 'array' },
           address: { bsonType: 'object' },
           usersBlocked: { bsonType: 'array' },
+          token: { bsonType: 'string' },
         },
       },
     },
