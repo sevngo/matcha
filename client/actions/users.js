@@ -52,20 +52,20 @@ export const loadUser = (token, id) => async dispatch => {
   }
 };
 
-export const uploadImage = (token, id, image) => async dispatch => {
+export const uploadImage = (token, image) => async dispatch => {
   try {
     dispatch({ type: UPLOAD_IMAGE });
-    const { data } = await postUsersImages(token, id, image);
+    const { data } = await postUsersImages(token, image);
     dispatch({ type: UPLOADED_IMAGE, data });
   } catch {
     dispatch(enqueueNotification(error));
   }
 };
 
-export const removeImage = (token, id, imageId) => async dispatch => {
+export const removeImage = (token, imageId) => async dispatch => {
   try {
     dispatch({ type: DELETE_IMAGE });
-    const { data } = await deleteUsersImages(token, id, imageId);
+    const { data } = await deleteUsersImages(token, imageId);
     dispatch({ type: DELETED_IMAGE, data });
   } catch {
     dispatch(enqueueNotification(error));

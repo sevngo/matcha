@@ -9,7 +9,7 @@ const isValidObjectId = (req, res, next) => {
 };
 
 const newObjectId = (req, res, next) => {
-  req._id = new ObjectID(req.params.id);
+  req._id = ObjectID(req.params.id);
   next();
 };
 
@@ -64,7 +64,7 @@ const newUsersBlockedId = (req, res, next) => {
   const {
     body: { usersBlocked },
   } = req;
-  req.body.usersBlocked = map(id => new ObjectID(id))(usersBlocked);
+  req.body.usersBlocked = map(id => ObjectID(id))(usersBlocked);
   next();
 };
 
