@@ -5,20 +5,16 @@ const { omit } = require('ramda');
 const app = require('../app');
 const { connectDb, disconnectDb } = require('../database');
 const { Users } = require('../database');
-const { newUser, initialPassword, initialId, userOne, userTwo } = require('./data');
+const { newUser, initialPassword, initialId, userOne, userTwo } = require('./fixtures/db');
 
-beforeAll(async () => {
-  await connectDb();
-});
+beforeAll(connectDb);
 
 beforeEach(async () => {
   await Users().deleteMany();
   await Users().insertMany([userOne, userTwo]);
 });
 
-afterAll(async () => {
-  await disconnectDb();
-});
+afterAll(disconnectDb);
 
 describe('/api/users', () => {
   test('POST /api/users', async () => {
@@ -72,5 +68,17 @@ describe('/api/users', () => {
       .post(`/api/users/forgot`)
       .send({ email: userOne.email })
       .expect(200);
+  });
+
+  test('POST /api/users/images', async () => {
+    const myUser = omit(['birthDate', 'password', '_id', 'token'])(userOne);
+    const { body: user } = await request(app)
+      .post(`/api/users/images`)
+      .set('Authorization', `Bearer ${userOne.token}`)
+      .attach('image', 'server/tests/fixtures/profile-pic.jpg')
+      .expect(200);
+    expect(user).toMatchObject(myUser);
+    const userData = await Users().findOne({ _id: userOne._id });
+    expect(userData.images[0].data.buffer).toEqual(expect.any(Buffer));
   });
 });

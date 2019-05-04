@@ -1,4 +1,4 @@
-const { string, objectId, date, bool, array, object } = require('../utils/constants');
+const { STRING, OBJECTID, DATE, BOOL, ARRAY, OBJECT } = require('../utils/constants');
 
 const USERS = 'users';
 
@@ -25,23 +25,23 @@ const usersModel = async db => {
         ],
         additionalProperties: false,
         properties: {
-          _id: objectId,
-          username: string,
-          birthDate: date,
-          firstName: string,
-          lastName: string,
-          email: string,
-          emailVerified: bool,
-          password: string,
+          _id: OBJECTID,
+          username: STRING,
+          birthDate: DATE,
+          firstName: STRING,
+          lastName: STRING,
+          email: STRING,
+          emailVerified: BOOL,
+          password: STRING,
           gender: {
             enum: ['male', 'female'],
           },
-          interests: array,
-          biography: string,
-          images: array,
-          address: object,
-          usersBlocked: array,
-          token: string,
+          interests: ARRAY,
+          biography: STRING,
+          images: ARRAY,
+          address: OBJECT,
+          usersBlocked: ARRAY,
+          token: STRING,
         },
       },
     },

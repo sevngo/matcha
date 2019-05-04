@@ -8,12 +8,15 @@ const {
   SENDGRID_API_KEY,
 } = process.env;
 
-const string = { bsonType: 'string' };
-const objectId = { bsonType: 'objectId' };
-const date = { bsonType: 'date' };
-const bool = { bsonType: 'bool' };
-const array = { bsonType: 'array' };
-const object = { bsonType: 'object' };
+const DEVELOPMENT = 'development';
+const PRODUCTION = 'production';
+
+const STRING = { bsonType: 'string' };
+const OBJECTID = { bsonType: 'objectId' };
+const DATE = { bsonType: 'date' };
+const BOOL = { bsonType: 'bool' };
+const ARRAY = { bsonType: 'array' };
+const OBJECT = { bsonType: 'object' };
 
 module.exports = {
   JWT_SECRET,
@@ -23,10 +26,12 @@ module.exports = {
   DATABASE_NAME,
   PORT,
   SENDGRID_API_KEY,
-  string,
-  objectId,
-  date,
-  bool,
-  array,
-  object,
+  DEVELOPMENT,
+  PRODUCTION,
+  STRING,
+  OBJECTID,
+  DATE,
+  BOOL,
+  ARRAY,
+  OBJECT,
 };
