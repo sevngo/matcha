@@ -7,6 +7,7 @@ import User from '../../containers/User';
 import Notifications from '../../containers/Notifications';
 import Loading from '../../containers/Loading';
 import Reset from '../../containers/Reset';
+import Verify from '../../containers/Verify';
 import styles from './styles';
 
 const App = ({ classes }) => (
@@ -16,6 +17,7 @@ const App = ({ classes }) => (
       <Route path="/" exact component={Users} />
       <Route path="/user/:id" exact render={({ match }) => <User match={match} />} />
       <Route path="/reset/:token" exact render={({ match }) => <Reset match={match} />} />
+      <Route path="/verify/:token" exact render={({ match }) => <Verify match={match} />} />
       <Redirect to="/" />
     </Switch>
     <Notifications />
