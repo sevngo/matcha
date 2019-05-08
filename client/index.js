@@ -13,6 +13,10 @@ import store from './store';
 import theme from './theme';
 import App from './components/App';
 
+import io from 'socket.io-client';
+
+io('http://localhost:8080');
+
 addLocaleData([...localeEn, ...localeFr]);
 
 const ROOT = (
