@@ -12,7 +12,7 @@ const connectDb = async () => {
   return await usersModel(db);
 };
 
-const disconnectDb = async () => await client.close();
+const disconnectDb = () => client.close();
 
 const Users = () => db.collection(USERS);
 
