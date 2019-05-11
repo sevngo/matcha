@@ -1,8 +1,8 @@
 import { random } from 'faker';
 
 export const LOADING = 'LOADING';
-export const ENQUEUE_NOTIFICATION = 'ENQUEUE_NOTIFICATION';
-export const REMOVE_NOTIFICATION = 'REMOVE_NOTIFICATION';
+export const ENQUEUE_SNACKBAR = 'ENQUEUE_SNACKBAR';
+export const REMOVE_SNACKBAR = 'REMOVE_SNACKBAR';
 
 export const success = message => ({
   message,
@@ -14,15 +14,15 @@ export const error = {
   options: { variant: 'error' },
 };
 
-export const enqueueNotification = notification => ({
-  type: ENQUEUE_NOTIFICATION,
-  notification: {
+export const enqueueSnackbar = snackbar => ({
+  type: ENQUEUE_SNACKBAR,
+  snackbar: {
     key: random.uuid(),
-    ...notification,
+    ...snackbar,
   },
 });
 
-export const removeNotification = key => ({
-  type: REMOVE_NOTIFICATION,
+export const removeSnackbar = key => ({
+  type: REMOVE_SNACKBAR,
   key,
 });

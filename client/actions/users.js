@@ -1,5 +1,5 @@
 import { reduce } from 'ramda';
-import { enqueueNotification, error } from './app';
+import { enqueueSnackbar, error } from './app';
 import { getUsers, getUser, postUsersImages, deleteUsersImages } from '../api';
 
 export const LOAD_USERS = 'LOAD_USERS';
@@ -38,7 +38,7 @@ export const loadUsers = (token, filter) => async dispatch => {
     const { data } = await getUsers(token, query);
     dispatch({ type: LOADED_USERS, data });
   } catch {
-    dispatch(enqueueNotification(error));
+    dispatch(enqueueSnackbar(error));
   }
 };
 
@@ -48,7 +48,7 @@ export const loadUser = (token, id) => async dispatch => {
     const { data } = await getUser(token, id);
     dispatch({ type: LOADED_USER, data });
   } catch {
-    dispatch(enqueueNotification(error));
+    dispatch(enqueueSnackbar(error));
   }
 };
 
@@ -58,7 +58,7 @@ export const uploadImage = (token, image) => async dispatch => {
     const { data } = await postUsersImages(token, image);
     dispatch({ type: UPLOADED_IMAGE, data });
   } catch {
-    dispatch(enqueueNotification(error));
+    dispatch(enqueueSnackbar(error));
   }
 };
 
@@ -68,6 +68,6 @@ export const removeImage = (token, imageId) => async dispatch => {
     const { data } = await deleteUsersImages(token, imageId);
     dispatch({ type: DELETED_IMAGE, data });
   } catch {
-    dispatch(enqueueNotification(error));
+    dispatch(enqueueSnackbar(error));
   }
 };

@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core';
 import Header from '../../containers/Header';
 import Users from '../../containers/Users';
 import User from '../../containers/User';
-import Notifications from '../../containers/Notifications';
+import Snackbars from '../../containers/Snackbars';
 import Loading from '../../containers/Loading';
 import Reset from '../../containers/Reset';
 import Verify from '../../containers/Verify';
@@ -20,7 +20,7 @@ const App = ({ classes }) => (
       <Route path="/verify/:token" exact render={({ match }) => <Verify match={match} />} />
       <Redirect to="/" />
     </Switch>
-    <Notifications />
+    <Snackbars />
     <Loading />
   </div>
 );

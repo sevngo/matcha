@@ -1,7 +1,7 @@
 import { filter } from 'ramda';
 import {
-  ENQUEUE_NOTIFICATION,
-  REMOVE_NOTIFICATION,
+  ENQUEUE_SNACKBAR,
+  REMOVE_SNACKBAR,
   LOGIN,
   LOGGED,
   UPDATE_USER,
@@ -21,27 +21,23 @@ import {
   FORGOT_PASSWORD,
 } from '../actions';
 
-const defaultState = {
-  notifications: [],
-};
-
-export default (state = defaultState, action) => {
+export default (state = {}, action) => {
   switch (action.type) {
-    case ENQUEUE_NOTIFICATION:
+    case ENQUEUE_SNACKBAR:
       return {
         ...state,
         isLoading: false,
-        notifications: [
-          ...state.notifications,
+        snackbars: [
+          ...state.snackbars,
           {
-            ...action.notification,
+            ...action.snackbar,
           },
         ],
       };
-    case REMOVE_NOTIFICATION:
+    case REMOVE_SNACKBAR:
       return {
         ...state,
-        notifications: filter(notification => notification.key !== action.key)(state.notifications),
+        snackbars: filter(snackbar => snackbar.key !== action.key)(state.snackbars),
       };
     case LOGIN:
     case UPDATE_USER:

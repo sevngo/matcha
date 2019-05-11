@@ -1,5 +1,5 @@
 import { reject, compose, append, equals, pick } from 'ramda';
-import { enqueueNotification, success, error } from './app';
+import { enqueueSnackbar, success, error } from './app';
 import { postUsers, postUsersLogin, patchUser, postUsersForgot } from '../api';
 import { getIds } from '../utils';
 
@@ -21,9 +21,9 @@ export const register = user => async dispatch => {
   try {
     dispatch({ type: REGISTER });
     await postUsers(user);
-    dispatch(enqueueNotification(success('Email sent !')));
+    dispatch(enqueueSnackbar(success('Email sent !')));
   } catch {
-    dispatch(enqueueNotification(error));
+    dispatch(enqueueSnackbar(error));
   }
 };
 
@@ -33,7 +33,7 @@ export const login = user => async dispatch => {
     const { data } = await postUsersLogin(user);
     dispatch({ type: LOGGED, data });
   } catch {
-    dispatch(enqueueNotification(error));
+    dispatch(enqueueSnackbar(error));
   }
 };
 
@@ -56,7 +56,7 @@ export const updateUser = account => async dispatch => {
     const { data } = await patchUser(account.token, user);
     dispatch({ type: UPDATED_USER, data });
   } catch {
-    dispatch(enqueueNotification(error));
+    dispatch(enqueueSnackbar(error));
   }
 };
 
@@ -71,7 +71,7 @@ export const blockUser = (account, blockId) => async dispatch => {
     const { data } = await patchUser(account.token, user);
     dispatch({ type: BLOCKED_USER, data });
   } catch {
-    dispatch(enqueueNotification(error));
+    dispatch(enqueueSnackbar(error));
   }
 };
 
@@ -86,7 +86,7 @@ export const unblockUser = (account, userId) => async dispatch => {
     const { data } = await patchUser(account.token, user);
     dispatch({ type: UNBLOCKED_USER, data });
   } catch {
-    dispatch(enqueueNotification(error));
+    dispatch(enqueueSnackbar(error));
   }
 };
 
@@ -94,8 +94,8 @@ export const forgotPassword = user => async dispatch => {
   try {
     dispatch({ type: FORGOT_PASSWORD });
     await postUsersForgot(user);
-    dispatch(enqueueNotification(success('Email sent !')));
+    dispatch(enqueueSnackbar(success('Email sent !')));
   } catch {
-    dispatch(enqueueNotification(error));
+    dispatch(enqueueSnackbar(error));
   }
 };
