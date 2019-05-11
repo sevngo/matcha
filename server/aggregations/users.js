@@ -1,4 +1,4 @@
-const { filter: rFilter } = require('ramda');
+const { compact } = require('../utils/functions');
 
 const matchById = _id => ({ $match: { _id } });
 
@@ -11,7 +11,7 @@ const birthDate = {
 const project = fields => ({ $project: fields });
 
 const usersPipeline = (...stages) => {
-  const pipeline = rFilter(stage => stage)([...stages, birthDate]);
+  const pipeline = compact([...stages, birthDate]);
   return pipeline;
 };
 

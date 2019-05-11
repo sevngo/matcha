@@ -7,7 +7,7 @@ import { getAuth } from '../selectors';
 
 const withoutAuth = Component => {
   const EnhancedComponent = props =>
-    isEmpty(props.auth) ? <Component {...props} /> : <Redirect to="/users" />;
+    isEmpty(props.auth) ? <Component {...props} /> : <Redirect to="/" />;
   const mapStateToProps = createStructuredSelector({ auth: getAuth });
   return connect(mapStateToProps)(EnhancedComponent);
 };
