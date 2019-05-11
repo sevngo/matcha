@@ -52,7 +52,6 @@ export const updateUser = account => async dispatch => {
       'emailVerified',
       'interests',
       'biography',
-      'token',
     ])(account);
     const { data } = await patchUser(account.token, user);
     dispatch({ type: UPDATED_USER, data });
