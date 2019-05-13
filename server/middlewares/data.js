@@ -60,11 +60,19 @@ const trimBody = (req, res, next) => {
   next();
 };
 
-const newUsersBlockedId = (req, res, next) => {
+const newUsersLikedId = (req, res, next) => {
   const {
-    body: { usersBlocked },
+    body: { usersLiked },
   } = req;
-  if (usersBlocked) req.body.usersBlocked = map(id => ObjectID(id))(usersBlocked);
+  if (usersLiked) req.body.usersLiked = map(id => ObjectID(id))(usersLiked);
+  next();
+};
+
+const newUsersDislikedId = (req, res, next) => {
+  const {
+    body: { usersDisliked },
+  } = req;
+  if (usersDisliked) req.body.usersDisliked = map(id => ObjectID(id))(usersDisliked);
   next();
 };
 
@@ -76,5 +84,6 @@ module.exports = {
   newDateBirth,
   uploadImage,
   trimBody,
-  newUsersBlockedId,
+  newUsersLikedId,
+  newUsersDislikedId,
 };

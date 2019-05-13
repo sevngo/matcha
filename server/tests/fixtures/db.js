@@ -21,7 +21,7 @@ const userOne = {
   },
   password: bcrypt.hashSync(initialPassword, 8),
   _id: ObjectID(initialId),
-  usersBlocked: [],
+  usersDisliked: [],
   emailVerified: true,
   token: jwt.sign({ _id: initialId }, JWT_SECRET),
 };
@@ -40,7 +40,7 @@ const userTwo = {
   },
   password: bcrypt.hashSync(initialPassword, 8),
   _id: ObjectID(),
-  usersBlocked: [],
+  usersDisliked: [],
   emailVerified: true,
 };
 

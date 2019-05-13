@@ -7,13 +7,13 @@ import { withStyles, Paper, Grid, Button, Typography, Icon, Divider } from '@mat
 import UserForm from '../../components/UserForm';
 import Carousel from '../../components/Carousel';
 import Popover from '../../components/Popover';
-import { updateUser, uploadImage, removeImage, unblockUser } from '../../actions';
+import { updateUser, uploadImage, removeImage, likeUser } from '../../actions';
 import { getAuth } from '../../selectors';
 import styles from './styles';
 import messages from './messages';
 
-const MyUser = ({ classes, auth, updateUser, uploadImage, removeImage, unblockUser }) => {
-  const { _id, token, images, usersBlocked } = auth;
+const MyUser = ({ classes, auth, updateUser, uploadImage, removeImage, likeUser }) => {
+  const { _id, token, images, usersDisliked } = auth;
   const [activeStep, handleStep] = useState(0);
   const [anchorEl, handlePopover] = useState();
   const inputEl = useRef();
@@ -79,9 +79,11 @@ const MyUser = ({ classes, auth, updateUser, uploadImage, removeImage, unblockUs
             </Button>
           </Carousel>
         </Paper>
-        {usersBlocked[0] && (
-          <Paper elevation={24} className={classes.usersBlocked}>
-            <Typography variant="h5">Users blocked :</Typography>
+        {usersDisliked[0] && (
+          <Paper elevation={24} className={classes.usersDisliked}>
+            <Typography variant="h5">
+              <FormattedMessage {...messages.usersDisliked} />
+            </Typography>
             <Divider className={classes.mt1} />
             {map(user => (
               <Grid
@@ -95,13 +97,13 @@ const MyUser = ({ classes, auth, updateUser, uploadImage, removeImage, unblockUs
                 <Typography className={classes.ml1}>{user.lastName}</Typography>
                 <Button
                   variant="outlined"
-                  onClick={() => unblockUser(auth, user._id)}
-                  className={classes.unblock}
+                  onClick={() => likeUser(auth, user._id)}
+                  className={classes.like}
                 >
-                  <FormattedMessage {...messages.unblockUser} />
+                  <FormattedMessage {...messages.likeUser} />
                 </Button>
               </Grid>
-            ))(usersBlocked)}
+            ))(usersDisliked)}
           </Paper>
         )}
       </Grid>
@@ -131,6 +133,6 @@ export default compose(
   withStyles(styles),
   connect(
     mapStateToProps,
-    { updateUser, uploadImage, removeImage, unblockUser },
+    { updateUser, uploadImage, removeImage, likeUser },
   ),
 )(MyUser);

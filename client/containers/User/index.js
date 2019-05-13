@@ -8,7 +8,7 @@ import MyUser from '../MyUser';
 import UserForm from '../../components/UserForm';
 import Carousel from '../../components/Carousel';
 import withAuth from '../../hoc/withAuth';
-import { loadUser, blockUser, unblockUser } from '../../actions';
+import { loadUser, likeUser, dislikeUser } from '../../actions';
 import { getUser, getAuth } from '../../selectors';
 import styles from './styles';
 import messages from './messages';
@@ -21,33 +21,43 @@ const User = ({
     params: { id },
   },
   auth,
-  blockUser,
+  likeUser,
+  dislikeUser,
 }) => {
   if (id === auth._id) return <MyUser />;
   const [activeStep, handleStep] = useState(0);
   useEffect(() => {
     loadUser(auth.token, id);
   }, []);
-  const isBlocked = find(userBlocked => userBlocked._id === user._id)(auth.usersBlocked);
+  const isLiked = find(userLiked => userLiked._id === user._id)(auth.usersLiked);
+  const isDisliked = find(userDisliked => userDisliked._id === user._id)(auth.usersDisliked);
   return (
     <Grid container justify="center" spacing={2} className={classes.p3}>
-      <Grid item xs={12} className={classes.width}>
-        <Button color="primary" variant="contained" size="large" className={classes.like}>
-          <FormattedMessage {...messages.likeUser} />
-        </Button>
-      </Grid>
-      <Grid item xs={12} className={classes.width}>
-        {!isBlocked && (
+      {!isLiked && (
+        <Grid item xs={12} className={classes.width}>
+          <Button
+            color="primary"
+            variant="contained"
+            size="large"
+            className={classes.like}
+            onClick={() => likeUser(auth, user._id)}
+          >
+            <FormattedMessage {...messages.likeUser} />
+          </Button>
+        </Grid>
+      )}
+      {!isDisliked && (
+        <Grid item xs={12} className={classes.width}>
           <Button
             size="large"
             variant="contained"
-            onClick={() => blockUser(auth, user._id)}
-            className={classes.block}
+            onClick={() => dislikeUser(auth, user._id)}
+            className={classes.dislike}
           >
-            <FormattedMessage {...messages.blockUser} />
+            <FormattedMessage {...messages.dislikeUser} />
           </Button>
-        )}
-      </Grid>
+        </Grid>
+      )}
       <Grid item className={classes.width}>
         <Paper elevation={24}>
           <Carousel
@@ -76,7 +86,7 @@ export default compose(
   withStyles(styles),
   connect(
     mapStateToProps,
-    { loadUser, blockUser, unblockUser },
+    { loadUser, likeUser, dislikeUser },
   ),
   withAuth,
 )(User);

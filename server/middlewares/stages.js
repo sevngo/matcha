@@ -83,20 +83,32 @@ const notMyUser = (req, res, next) => {
   next();
 };
 
-const lookupUsersBlocked = (req, res, next) => {
-  req.lookupUsersBlocked = {
+const lookupUsersLiked = (req, res, next) => {
+  req.lookupUsersLiked = {
     $lookup: {
       from: 'users',
-      localField: 'usersBlocked',
+      localField: 'usersLiked',
       foreignField: '_id',
-      as: 'usersBlocked',
+      as: 'usersLiked',
     },
   };
   next();
 };
 
-const hideUsersBlocked = (req, res, next) => {
-  req.hideUsersBlocked = { $match: { _id: { $nin: req.user.usersBlocked } } };
+const lookupUsersDisliked = (req, res, next) => {
+  req.lookupUsersDisliked = {
+    $lookup: {
+      from: 'users',
+      localField: 'usersDisliked',
+      foreignField: '_id',
+      as: 'usersDisliked',
+    },
+  };
+  next();
+};
+
+const hideUsersDisliked = (req, res, next) => {
+  req.hideUsersDisliked = { $match: { _id: { $nin: req.user.usersDisliked } } };
   next();
 };
 
@@ -109,6 +121,7 @@ module.exports = {
   birthRange,
   maxDistance,
   notMyUser,
-  lookupUsersBlocked,
-  hideUsersBlocked,
+  lookupUsersLiked,
+  lookupUsersDisliked,
+  hideUsersDisliked,
 };

@@ -11,7 +11,8 @@ const {
   newDateBirth,
   uploadImage,
   trimBody,
-  newUsersBlockedId,
+  newUsersLikedId,
+  newUsersDislikedId,
 } = require('../middlewares/data');
 const { generateAuthToken, auth, emailVerified } = require('../middlewares/auth');
 const {
@@ -23,8 +24,9 @@ const {
   skip,
   sort,
   notMyUser,
-  lookupUsersBlocked,
-  hideUsersBlocked,
+  lookupUsersLiked,
+  lookupUsersDisliked,
+  hideUsersDisliked,
 } = require('../middlewares/stages');
 const { usersPipeline, matchById, project } = require('../aggregations/users');
 const { Users } = require('../database');
@@ -38,7 +40,7 @@ router.post('/', newDateBirth, hashPassword, async (req, res) => {
   try {
     const {
       ops: [user],
-    } = await Users().insertOne({ usersBlocked: [], usersLiked: [], ...req.body });
+    } = await Users().insertOne({ usersDisliked: [], usersLiked: [], ...req.body });
     const { _id, email, firstName, lastName } = user;
     const token = await jwt.sign({ _id }, JWT_SECRET);
     const url = `${getAppUrl(req)}/verify/${token}`;
@@ -57,7 +59,7 @@ router.get(
   gender,
   interests,
   birthRange,
-  hideUsersBlocked,
+  hideUsersDisliked,
   notMyUser,
   limit,
   skip,
@@ -73,7 +75,7 @@ router.get(
         sort,
         birthRange,
         notMyUser,
-        hideUsersBlocked,
+        hideUsersDisliked,
       } = req;
       const projection = project({ password: 0, 'images.data': 0, email: 0 });
       const users = await Users()
@@ -83,7 +85,7 @@ router.get(
             gender,
             interests,
             birthRange,
-            hideUsersBlocked,
+            hideUsersDisliked,
             notMyUser,
             limit,
             skip,
@@ -120,20 +122,32 @@ router.patch(
   trimBody,
   newDateBirth,
   hashNewPassword,
-  newUsersBlockedId,
-  lookupUsersBlocked,
+  newUsersLikedId,
+  newUsersDislikedId,
+  lookupUsersLiked,
+  lookupUsersDisliked,
   async (req, res) => {
     try {
       const {
         user: { _id },
         body,
-        lookupUsersBlocked,
+        lookupUsersLiked,
+        lookupUsersDisliked,
       } = req;
       const { value: user } = await Users().findOneAndUpdate({ _id }, { $set: body });
       if (!user) return res.status(404).send();
-      const projection = project({ password: 0, 'images.data': 0 });
+      const projection = project({
+        password: 0,
+        'images.data': 0,
+        'usersDisliked.password': 0,
+        'usersDisliked.email': 0,
+        'usersDisliked.images.data': 0,
+        'usersLiked.password': 0,
+        'usersLiked.email': 0,
+        'usersLiked.images.data': 0,
+      });
       const [data] = await Users()
-        .aggregate(usersPipeline(matchById(_id), lookupUsersBlocked, projection))
+        .aggregate(usersPipeline(matchById(_id), lookupUsersLiked, lookupUsersDisliked, projection))
         .toArray();
       res.send(data);
     } catch (e) {
@@ -166,19 +180,25 @@ router.post(
   trimBody,
   generateAuthToken,
   emailVerified,
-  lookupUsersBlocked,
+  lookupUsersLiked,
+  lookupUsersDisliked,
   async (req, res) => {
     try {
-      const { user, token, lookupUsersBlocked } = req;
+      const { user, token, lookupUsersLiked, lookupUsersDisliked } = req;
       const projection = project({
         password: 0,
         'images.data': 0,
-        'usersBlocked.password': 0,
-        'usersBlocked.email': 0,
-        'usersBlocked.images.data': 0,
+        'usersDisliked.password': 0,
+        'usersDisliked.email': 0,
+        'usersDisliked.images.data': 0,
+        'usersLiked.password': 0,
+        'usersLiked.email': 0,
+        'usersLiked.images.data': 0,
       });
       const [data] = await Users()
-        .aggregate(usersPipeline(matchById(user._id), lookupUsersBlocked, projection))
+        .aggregate(
+          usersPipeline(matchById(user._id), lookupUsersLiked, lookupUsersDisliked, projection),
+        )
         .toArray();
       res.send({ ...data, token });
     } catch (e) {

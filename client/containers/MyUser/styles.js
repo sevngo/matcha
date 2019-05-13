@@ -8,7 +8,7 @@ export default theme => ({
   mt1: {
     marginTop: theme.spacing(1),
   },
-  usersBlocked: {
+  usersDisliked: {
     padding: theme.spacing(3),
     marginTop: theme.spacing(3),
   },
@@ -18,7 +18,7 @@ export default theme => ({
   hide: {
     display: 'none',
   },
-  unblock: {
+  like: {
     color: 'green',
     marginLeft: theme.spacing(1),
   },
