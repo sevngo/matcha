@@ -12,7 +12,7 @@ const Carousel = ({ children, userId, images, classes, activeStep, handleStep })
   const image = imageId ? `/api/users/${userId}/images/${images[activeStep]._id}` : emptyImage;
   return (
     <Paper elevation={24}>
-      <div className={classes.header}>{children}</div>
+      {children && <div className={classes.header}>{children}</div>}
       <img className={classes.img} src={image} alt="image" />
       <MobileStepper
         steps={maxSteps}

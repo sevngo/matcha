@@ -8,7 +8,7 @@ export default theme => ({
   width: {
     maxWidth: 500,
   },
-  block: {
+  dislike: {
     color: theme.palette.getContrastText(red[700]),
     backgroundColor: red[700],
     '&:hover': {

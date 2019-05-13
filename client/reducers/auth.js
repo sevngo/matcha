@@ -4,8 +4,8 @@ import {
   UPDATED_USER,
   UPLOADED_IMAGE,
   DELETED_IMAGE,
-  BLOCKED_USER,
-  UNBLOCKED_USER,
+  DISLIKED_USER,
+  LIKED_USER,
 } from '../actions';
 
 export default (state = {}, action) => {
@@ -20,9 +20,9 @@ export default (state = {}, action) => {
       return { ...state, ...action.data };
     case DELETED_IMAGE:
       return { ...state, ...action.data };
-    case BLOCKED_USER:
+    case DISLIKED_USER:
       return { ...state, ...action.data };
-    case UNBLOCKED_USER:
+    case LIKED_USER:
       return { ...state, ...action.data };
     default:
       return state;

@@ -4,23 +4,24 @@ import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import reducer from './reducers';
 
 const initialState = {
-  auth: {
-    _id: '5ca7a8e6485d2a0e845260f4',
-    username: 'asdasd',
-    email: 'asdasd@asdasd.fr',
-    firstName: 'asdasd',
-    lastName: 'asdasd',
-    gender: 'male',
-    birthDate: '2000-04-01',
-    address: {
-      name: 'Paris, France',
-      type: 'Point',
-      coordinates: [2.35222190000002, 48.856614],
-    },
-    usersBlocked: [],
-    token:
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1Y2E3YThlNjQ4NWQyYTBlODQ1MjYwZjQiLCJpYXQiOjE1NTY3MTc5MDd9.VAjTjSsVoG95-p0bVIjgTlasuHQK60pGfUUWsFJoikM',
-  },
+  // auth: {
+  //   _id: '5ca7a8e6485d2a0e845260f4',
+  //   username: 'asdasd',
+  //   email: 'asdasd@asdasd.fr',
+  //   firstName: 'asdasd',
+  //   lastName: 'asdasd',
+  //   gender: 'male',
+  //   birthDate: '2000-04-01',
+  //   address: {
+  //     name: 'Paris, France',
+  //     type: 'Point',
+  //     coordinates: [2.35222190000002, 48.856614],
+  //   },
+  //   usersLiked: [],
+  //   usersDisliked: [],
+  //   token:
+  //     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1Y2E3YThlNjQ4NWQyYTBlODQ1MjYwZjQiLCJpYXQiOjE1NTY3MTc5MDd9.VAjTjSsVoG95-p0bVIjgTlasuHQK60pGfUUWsFJoikM',
+  // },
   app: { snackbars: [] },
   users: {
     data: [],
