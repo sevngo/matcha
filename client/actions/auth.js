@@ -14,6 +14,10 @@ export const BLOCKED_USER = 'BLOCKED_USER';
 export const UNBLOCK_USER = 'UNBLOCK_USER';
 export const UNBLOCKED_USER = 'UNBLOCKED_USER';
 export const FORGOT_PASSWORD = 'FORGOT_PASSWORD';
+export const LIKE_USER = 'LIKE_USER';
+export const LIKED_USER = 'LIKED_USER';
+export const UNLIKE_USER = 'UNLIKE_USER';
+export const UNLIKED_USER = 'UNLIKED_USER';
 
 export const logout = () => ({ type: LOGOUT });
 
@@ -95,6 +99,36 @@ export const forgotPassword = user => async dispatch => {
     dispatch({ type: FORGOT_PASSWORD });
     await postUsersForgot(user);
     dispatch(enqueueSnackbar(success('Email sent !')));
+  } catch {
+    dispatch(enqueueSnackbar(error));
+  }
+};
+
+export const likeUser = (account, userId) => async dispatch => {
+  try {
+    dispatch({ type: LIKE_USER });
+    const usersLiked = compose(
+      append(userId),
+      getIds,
+    )(account.usersLiked);
+    const user = { usersLiked };
+    const { data } = await patchUser(account.token, user);
+    dispatch({ type: LIKED_USER, data });
+  } catch {
+    dispatch(enqueueSnackbar(error));
+  }
+};
+
+export const unlikeUser = (account, userId) => async dispatch => {
+  try {
+    dispatch({ type: UNLIKE_USER });
+    const usersLiked = compose(
+      reject(equals(userId)),
+      getIds,
+    )(account.usersLiked);
+    const user = { usersLiked };
+    const { data } = await patchUser(account.token, user);
+    dispatch({ type: UNLIKED_USER, data });
   } catch {
     dispatch(enqueueSnackbar(error));
   }

@@ -38,7 +38,7 @@ router.post('/', newDateBirth, hashPassword, async (req, res) => {
   try {
     const {
       ops: [user],
-    } = await Users().insertOne({ usersBlocked: [], ...req.body });
+    } = await Users().insertOne({ usersBlocked: [], usersLiked: [], ...req.body });
     const { _id, email, firstName, lastName } = user;
     const token = await jwt.sign({ _id }, JWT_SECRET);
     const url = `${getAppUrl(req)}/verify/${token}`;
