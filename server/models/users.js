@@ -22,6 +22,7 @@ const usersModel = async db => {
           'gender',
           'address',
           'usersBlocked',
+          'usersLiked',
         ],
         additionalProperties: false,
         properties: {
@@ -47,6 +48,7 @@ const usersModel = async db => {
           'address.coordinates': ARRAY,
           usersBlocked: ARRAY,
           token: STRING,
+          usersLiked: ARRAY,
         },
       },
     },

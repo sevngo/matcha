@@ -22,7 +22,6 @@ const User = ({
   },
   auth,
   blockUser,
-  unblockUser,
 }) => {
   if (id === auth._id) return <MyUser />;
   const [activeStep, handleStep] = useState(0);
@@ -31,7 +30,24 @@ const User = ({
   }, []);
   const isBlocked = find(userBlocked => userBlocked._id === user._id)(auth.usersBlocked);
   return (
-    <Grid container spacing={3} justify="center" direction="row" className={classes.p3}>
+    <Grid container justify="center" spacing={2} className={classes.p3}>
+      <Grid item xs={12} className={classes.width}>
+        <Button color="primary" variant="contained" size="large" className={classes.like}>
+          <FormattedMessage {...messages.likeUser} />
+        </Button>
+      </Grid>
+      <Grid item xs={12} className={classes.width}>
+        {!isBlocked && (
+          <Button
+            size="large"
+            variant="contained"
+            onClick={() => blockUser(auth, user._id)}
+            className={classes.block}
+          >
+            <FormattedMessage {...messages.blockUser} />
+          </Button>
+        )}
+      </Grid>
       <Grid item className={classes.width}>
         <Paper elevation={24}>
           <Carousel
@@ -39,25 +55,7 @@ const User = ({
             images={user.images}
             activeStep={activeStep}
             handleStep={handleStep}
-          >
-            {isBlocked ? (
-              <Button
-                variant="outlined"
-                onClick={() => unblockUser(auth, user._id)}
-                className={classes.unblock}
-              >
-                <FormattedMessage {...messages.unblockUser} />
-              </Button>
-            ) : (
-              <Button
-                variant="outlined"
-                onClick={() => blockUser(auth, user._id)}
-                className={classes.block}
-              >
-                <FormattedMessage {...messages.blockUser} />
-              </Button>
-            )}
-          </Carousel>
+          />
         </Paper>
       </Grid>
       <Grid item className={classes.width}>

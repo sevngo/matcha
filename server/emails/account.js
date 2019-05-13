@@ -14,10 +14,6 @@ const sendEmailConfirmation = (email, firstName, lastName, url) => {
   return sgMail.send(message);
 };
 
-module.exports = {
-  sendEmailConfirmation,
-};
-
 const sendResetPassword = (email, firstName, lastName, url) => {
   const message = {
     // to: email,
