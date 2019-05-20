@@ -8,7 +8,7 @@ import MyUser from '../MyUser';
 import UserForm from '../../components/UserForm';
 import Carousel from '../../components/Carousel';
 import withAuth from '../../hoc/withAuth';
-import { loadUser, likeUser, dislikeUser } from '../../actions';
+import { loadUser, likeUser, blockUser } from '../../actions';
 import { getUser, getAuth } from '../../selectors';
 import styles from './styles';
 import messages from './messages';
@@ -22,7 +22,7 @@ const User = ({
   },
   auth,
   likeUser,
-  dislikeUser,
+  blockUser,
 }) => {
   if (id === auth._id) return <MyUser />;
   const [activeStep, handleStep] = useState(0);
@@ -30,7 +30,7 @@ const User = ({
     loadUser(auth.token, id);
   }, []);
   const isLiked = find(userLiked => userLiked._id === user._id)(auth.usersLiked);
-  const isDisliked = find(userDisliked => userDisliked._id === user._id)(auth.usersDisliked);
+  const isBlocked = find(userBlocked => userBlocked._id === user._id)(auth.usersBlocked);
   return (
     <Grid container justify="center" spacing={2} className={classes.p3}>
       {!isLiked && (
@@ -46,15 +46,15 @@ const User = ({
           </Button>
         </Grid>
       )}
-      {!isDisliked && (
+      {!isBlocked && (
         <Grid item xs={12} className={classes.width}>
           <Button
             size="large"
             variant="contained"
-            onClick={() => dislikeUser(auth, user._id)}
-            className={classes.dislike}
+            onClick={() => blockUser(auth, user._id)}
+            className={classes.block}
           >
-            <FormattedMessage {...messages.dislikeUser} />
+            <FormattedMessage {...messages.blockUser} />
           </Button>
         </Grid>
       )}
@@ -86,7 +86,7 @@ export default compose(
   withStyles(styles),
   connect(
     mapStateToProps,
-    { loadUser, likeUser, dislikeUser },
+    { loadUser, likeUser, blockUser },
   ),
   withAuth,
 )(User);

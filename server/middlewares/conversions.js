@@ -63,10 +63,10 @@ exports.newUsersLikedId = (req, res, next) => {
   next();
 };
 
-exports.newUsersDislikedId = (req, res, next) => {
+exports.newUsersBlockedId = (req, res, next) => {
   const {
-    body: { usersDisliked },
+    body: { usersBlocked },
   } = req;
-  if (usersDisliked) req.body.usersDisliked = map(id => ObjectID(id))(usersDisliked);
+  if (usersBlocked) req.body.usersBlocked = map(id => ObjectID(id))(usersBlocked);
   next();
 };

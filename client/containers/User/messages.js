@@ -1,9 +1,9 @@
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
-  dislikeUser: {
-    id: 'containers.user.dislikeUser',
-    defaultMessage: 'Dislike',
+  blockUser: {
+    id: 'containers.user.blockUser',
+    defaultMessage: 'Block',
   },
   likeUser: {
     id: 'containers.user.likeUser',

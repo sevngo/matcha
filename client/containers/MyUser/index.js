@@ -13,7 +13,7 @@ import styles from './styles';
 import messages from './messages';
 
 const MyUser = ({ classes, auth, updateUser, uploadImage, removeImage, likeUser }) => {
-  const { _id, token, images, usersDisliked } = auth;
+  const { _id, token, images, usersBlocked } = auth;
   const [activeStep, handleStep] = useState(0);
   const [anchorEl, handlePopover] = useState();
   const inputEl = useRef();
@@ -79,10 +79,10 @@ const MyUser = ({ classes, auth, updateUser, uploadImage, removeImage, likeUser 
             </Button>
           </Carousel>
         </Paper>
-        {usersDisliked[0] && (
-          <Paper elevation={24} className={classes.usersDisliked}>
+        {usersBlocked[0] && (
+          <Paper elevation={24} className={classes.usersBlocked}>
             <Typography variant="h5">
-              <FormattedMessage {...messages.usersDisliked} />
+              <FormattedMessage {...messages.usersBlocked} />
             </Typography>
             <Divider className={classes.mt1} />
             {map(user => (
@@ -103,7 +103,7 @@ const MyUser = ({ classes, auth, updateUser, uploadImage, removeImage, likeUser 
                   <FormattedMessage {...messages.likeUser} />
                 </Button>
               </Grid>
-            ))(usersDisliked)}
+            ))(usersBlocked)}
           </Paper>
         )}
       </Grid>

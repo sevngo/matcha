@@ -8,7 +8,7 @@ export default theme => ({
   mt1: {
     marginTop: theme.spacing(1),
   },
-  usersDisliked: {
+  usersBlocked: {
     padding: theme.spacing(3),
     marginTop: theme.spacing(3),
   },

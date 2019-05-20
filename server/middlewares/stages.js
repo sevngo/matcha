@@ -95,19 +95,19 @@ exports.lookupUsersLiked = (req, res, next) => {
   next();
 };
 
-exports.lookupUsersDisliked = (req, res, next) => {
-  req.lookupUsersDisliked = {
+exports.lookupUsersBlocked = (req, res, next) => {
+  req.lookupUsersBlocked = {
     $lookup: {
       from: 'users',
-      localField: 'usersDisliked',
+      localField: 'usersBlocked',
       foreignField: '_id',
-      as: 'usersDisliked',
+      as: 'usersBlocked',
     },
   };
   next();
 };
 
-exports.hideUsersDisliked = (req, res, next) => {
-  req.hideUsersDisliked = { $match: { _id: { $nin: req.user.usersDisliked } } };
+exports.hideUsersBlocked = (req, res, next) => {
+  req.hideUsersBlocked = { $match: { _id: { $nin: req.user.usersBlocked } } };
   next();
 };
