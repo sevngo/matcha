@@ -45,7 +45,7 @@ exports.isValidObjectId = (req, res, next) => {
   next();
 };
 
-exports.emailVerified = async (req, res, next) => {
+exports.emailVerified = (req, res, next) => {
   if (!req.user.emailVerified) return res.status(400).send();
   next();
 };

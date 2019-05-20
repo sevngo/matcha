@@ -18,6 +18,7 @@ exports.SENDGRID_API_KEY = SENDGRID_API_KEY;
 
 exports.DEVELOPMENT = 'development';
 exports.PRODUCTION = 'production';
+exports.TEST = 'test';
 
 exports.USERS = 'users';
 

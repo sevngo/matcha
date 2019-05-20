@@ -2,10 +2,17 @@
 const request = require('supertest');
 const faker = require('faker');
 const { omit } = require('ramda');
-const app = require('../app');
+const app = require('../index');
 const { connectDb, disconnectDb } = require('../database');
 const { Users } = require('../database');
-const { newUser, initialPassword, initialId, userOne, userTwo } = require('./fixtures/db');
+const {
+  newUser,
+  initialPassword,
+  initialId,
+  userOne,
+  userTwo,
+  userOneToken,
+} = require('./fixtures/db');
 
 beforeAll(connectDb);
 
@@ -25,7 +32,7 @@ describe('/api/users', () => {
   });
 
   test('POST /api/users/login', async () => {
-    const myUser = omit(['birthDate', 'password', '_id', 'token'])(userOne);
+    const myUser = omit(['birthDate', 'password', '_id'])(userOne);
     const { body: user } = await request(app)
       .post('/api/users/login')
       .send({ username: userOne.username, password: initialPassword })
@@ -34,31 +41,31 @@ describe('/api/users', () => {
   });
 
   test('GET /api/users', async () => {
-    const userRegistered = omit(['birthDate', 'password', '_id', 'token', 'email'])(userTwo);
+    const userRegistered = omit(['birthDate', 'password', '_id', 'email'])(userTwo);
     const { body: users } = await request(app)
       .get('/api/users')
-      .set('Authorization', `Bearer ${userOne.token}`)
+      .set('Authorization', `Bearer ${userOneToken}`)
       .expect(200);
     expect(users).toHaveLength(1);
     expect(users).toMatchObject([userRegistered]);
   });
 
   test('GET /api/users/:id', async () => {
-    const userRegistered = omit(['birthDate', 'password', '_id', 'token', 'email'])(userOne);
+    const userRegistered = omit(['birthDate', 'password', '_id', 'email'])(userOne);
     const { body: user } = await request(app)
       .get(`/api/users/${initialId}`)
-      .set('Authorization', `Bearer ${userOne.token}`)
+      .set('Authorization', `Bearer ${userOneToken}`)
       .expect(200);
     expect(user).toMatchObject(userRegistered);
   });
 
   test('PATCH /api/users', async () => {
-    const myUser = omit(['birthDate', 'password', '_id', 'token'])(userOne);
+    const myUser = omit(['birthDate', 'password', '_id'])(userOne);
     const newValue = { username: faker.internet.userName() };
     const { body: user } = await request(app)
       .patch(`/api/users`)
       .send(newValue)
-      .set('Authorization', `Bearer ${userOne.token}`)
+      .set('Authorization', `Bearer ${userOneToken}`)
       .expect(200);
     expect(user).toMatchObject({ ...myUser, ...newValue });
   });
@@ -71,10 +78,10 @@ describe('/api/users', () => {
   });
 
   test('POST /api/users/images', async () => {
-    const myUser = omit(['birthDate', 'password', '_id', 'token'])(userOne);
+    const myUser = omit(['birthDate', 'password', '_id'])(userOne);
     const { body: user } = await request(app)
       .post(`/api/users/images`)
-      .set('Authorization', `Bearer ${userOne.token}`)
+      .set('Authorization', `Bearer ${userOneToken}`)
       .attach('image', 'server/tests/fixtures/profile-pic.jpg')
       .expect(200);
     expect(user).toMatchObject(myUser);

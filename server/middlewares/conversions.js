@@ -8,7 +8,7 @@ exports.newObjectId = (req, res, next) => {
   next();
 };
 
-exports.newDateBirth = async (req, res, next) => {
+exports.newDateBirth = (req, res, next) => {
   const { birthDate } = req.body;
   if (!birthDate) return next();
   req.body.birthDate = new Date(birthDate);
