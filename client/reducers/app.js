@@ -14,8 +14,8 @@ import {
   UPLOADED_IMAGE,
   DELETE_IMAGE,
   DELETED_IMAGE,
-  DISLIKE_USER,
-  DISLIKED_USER,
+  BLOCK_USER,
+  BLOCKED_USER,
   LIKE_USER,
   LIKED_USER,
   FORGOT_PASSWORD,
@@ -46,7 +46,7 @@ export default (state = {}, action) => {
     case UPLOAD_IMAGE:
     case DELETE_IMAGE:
     case LIKE_USER:
-    case DISLIKE_USER:
+    case BLOCK_USER:
     case FORGOT_PASSWORD:
       return { ...state, isLoading: true };
     case LOGGED:
@@ -56,7 +56,7 @@ export default (state = {}, action) => {
     case UPLOADED_IMAGE:
     case DELETED_IMAGE:
     case LIKED_USER:
-    case DISLIKED_USER:
+    case BLOCKED_USER:
       return { ...state, isLoading: false };
     default:
       return state;

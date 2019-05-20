@@ -18,7 +18,7 @@ const initialState = {
   //     coordinates: [2.35222190000002, 48.856614],
   //   },
   //   usersLiked: [],
-  //   usersDisliked: [],
+  //   usersBlocked: [],
   //   token:
   //     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1Y2E3YThlNjQ4NWQyYTBlODQ1MjYwZjQiLCJpYXQiOjE1NTY3MTc5MDd9.VAjTjSsVoG95-p0bVIjgTlasuHQK60pGfUUWsFJoikM',
   // },

@@ -21,7 +21,7 @@ exports.usersModel = async db => {
           'gender',
           'address',
           'usersLiked',
-          'usersDisliked',
+          'usersBlocked',
         ],
         additionalProperties: false,
         properties: {
@@ -46,7 +46,7 @@ exports.usersModel = async db => {
           'address.type': STRING,
           'address.coordinates': ARRAY,
           usersLiked: ARRAY,
-          usersDisliked: ARRAY,
+          usersBlocked: ARRAY,
         },
       },
     },

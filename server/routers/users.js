@@ -15,7 +15,7 @@ router.get(
   stages.gender,
   stages.interests,
   stages.birthRange,
-  stages.hideUsersDisliked,
+  stages.hideUsersBlocked,
   stages.notMyUser,
   stages.limit,
   stages.skip,
@@ -38,9 +38,9 @@ router.patch(
   conversions.newDateBirth,
   conversions.hashNewPassword,
   conversions.newUsersLikedId,
-  conversions.newUsersDislikedId,
+  conversions.newUsersBlockedId,
   stages.lookupUsersLiked,
-  stages.lookupUsersDisliked,
+  stages.lookupUsersBlocked,
   usersControllers.patchUsers,
 );
 
@@ -50,7 +50,7 @@ router.post(
   auth.generateAuthToken,
   auth.emailVerified,
   stages.lookupUsersLiked,
-  stages.lookupUsersDisliked,
+  stages.lookupUsersBlocked,
   usersControllers.postUsersLogin,
 );
 

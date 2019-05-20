@@ -12,7 +12,7 @@ exports.postUsers = async (req, res) => {
   try {
     const {
       ops: [user],
-    } = await Users().insertOne({ usersDisliked: [], usersLiked: [], ...req.body });
+    } = await Users().insertOne({ usersBlocked: [], usersLiked: [], ...req.body });
     const { _id, email, firstName, lastName } = user;
     const token = await jwt.sign({ _id }, JWT_SECRET);
     const url = `${getAppUrl(req)}/verify/${token}`;
@@ -35,7 +35,7 @@ exports.getUsers = async (req, res) => {
       sort,
       birthRange,
       notMyUser,
-      hideUsersDisliked,
+      hideUsersBlocked,
     } = req;
     const projection = project({ password: 0, 'images.data': 0, email: 0 });
     const users = await Users()
@@ -45,7 +45,7 @@ exports.getUsers = async (req, res) => {
           gender,
           interests,
           birthRange,
-          hideUsersDisliked,
+          hideUsersBlocked,
           notMyUser,
           limit,
           skip,
@@ -81,22 +81,22 @@ exports.patchUsers = async (req, res) => {
       user: { _id },
       body,
       lookupUsersLiked,
-      lookupUsersDisliked,
+      lookupUsersBlocked,
     } = req;
     const { value: user } = await Users().findOneAndUpdate({ _id }, { $set: body });
     if (!user) return res.status(404).send();
     const projection = project({
       password: 0,
       'images.data': 0,
-      'usersDisliked.password': 0,
-      'usersDisliked.email': 0,
-      'usersDisliked.images.data': 0,
+      'usersBlocked.password': 0,
+      'usersBlocked.email': 0,
+      'usersBlocked.images.data': 0,
       'usersLiked.password': 0,
       'usersLiked.email': 0,
       'usersLiked.images.data': 0,
     });
     const [data] = await Users()
-      .aggregate(usersPipeline(matchById(_id), lookupUsersLiked, lookupUsersDisliked, projection))
+      .aggregate(usersPipeline(matchById(_id), lookupUsersLiked, lookupUsersBlocked, projection))
       .toArray();
     res.send(data);
   } catch (e) {
@@ -107,20 +107,20 @@ exports.patchUsers = async (req, res) => {
 
 exports.postUsersLogin = async (req, res) => {
   try {
-    const { user, token, lookupUsersLiked, lookupUsersDisliked } = req;
+    const { user, token, lookupUsersLiked, lookupUsersBlocked } = req;
     const projection = project({
       password: 0,
       'images.data': 0,
-      'usersDisliked.password': 0,
-      'usersDisliked.email': 0,
-      'usersDisliked.images.data': 0,
+      'usersBlocked.password': 0,
+      'usersBlocked.email': 0,
+      'usersBlocked.images.data': 0,
       'usersLiked.password': 0,
       'usersLiked.email': 0,
       'usersLiked.images.data': 0,
     });
     const [data] = await Users()
       .aggregate(
-        usersPipeline(matchById(user._id), lookupUsersLiked, lookupUsersDisliked, projection),
+        usersPipeline(matchById(user._id), lookupUsersLiked, lookupUsersBlocked, projection),
       )
       .toArray();
     res.send({ ...data, token });

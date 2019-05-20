@@ -12,8 +12,8 @@ export const UPDATED_USER = 'UPDATED_USER';
 export const FORGOT_PASSWORD = 'FORGOT_PASSWORD';
 export const LIKE_USER = 'LIKE_USER';
 export const LIKED_USER = 'LIKED_USER';
-export const DISLIKE_USER = 'DISLIKE_USER';
-export const DISLIKED_USER = 'DISLIKED_USER';
+export const BLOCK_USER = 'BLOCK_USER';
+export const BLOCKED_USER = 'BLOCKED_USER';
 
 export const logout = () => ({ type: LOGOUT });
 
@@ -77,11 +77,11 @@ export const likeUser = (account, userId) => async dispatch => {
       append(userId),
       getIds,
     )(account.usersLiked);
-    const usersDisliked = compose(
+    const usersBlocked = compose(
       reject(equals(userId)),
       getIds,
-    )(account.usersDisliked);
-    const user = { usersLiked, usersDisliked };
+    )(account.usersBlocked);
+    const user = { usersLiked, usersBlocked };
     const { data } = await patchUser(account.token, user);
     dispatch({ type: LIKED_USER, data });
   } catch {
@@ -89,20 +89,20 @@ export const likeUser = (account, userId) => async dispatch => {
   }
 };
 
-export const dislikeUser = (account, userId) => async dispatch => {
+export const blockUser = (account, userId) => async dispatch => {
   try {
-    dispatch({ type: DISLIKE_USER });
+    dispatch({ type: BLOCK_USER });
     const usersLiked = compose(
       reject(equals(userId)),
       getIds,
     )(account.usersLiked);
-    const usersDisliked = compose(
+    const usersBlocked = compose(
       append(userId),
       getIds,
-    )(account.usersDisliked);
-    const user = { usersLiked, usersDisliked };
+    )(account.usersBlocked);
+    const user = { usersLiked, usersBlocked };
     const { data } = await patchUser(account.token, user);
-    dispatch({ type: DISLIKED_USER, data });
+    dispatch({ type: BLOCKED_USER, data });
   } catch {
     dispatch(enqueueSnackbar(error));
   }
