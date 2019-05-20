@@ -1,93 +1,66 @@
 const { Router } = require('express');
-const {
-  isValidObjectId,
-  hashPassword,
-  newObjectId,
-  hashNewPassword,
-  newDateBirth,
-  uploadImage,
-  trimBody,
-  newUsersLikedId,
-  newUsersDislikedId,
-} = require('../middlewares/data');
-const { generateAuthToken, auth, emailVerified } = require('../middlewares/auth');
-const {
-  maxDistance,
-  gender,
-  interests,
-  birthRange,
-  limit,
-  skip,
-  sort,
-  notMyUser,
-  lookupUsersLiked,
-  lookupUsersDisliked,
-  hideUsersDisliked,
-} = require('../middlewares/stages');
-
-const {
-  postUsers,
-  getUsers,
-  getUser,
-  patchUsers,
-  postUsersLogin,
-  postUsersForgot,
-  postUsersImages,
-  deleteUsersImages,
-  getUsersImages,
-} = require('../controllers/users');
+const conversions = require('../middlewares/conversions');
+const auth = require('../middlewares/auth');
+const stages = require('../middlewares/stages');
+const usersControllers = require('../controllers/users');
 
 const router = new Router();
 
-router.post('/', newDateBirth, hashPassword, postUsers);
+router.post('/', conversions.newDateBirth, conversions.hashPassword, usersControllers.postUsers);
 
 router.get(
   '/',
-  auth,
-  maxDistance,
-  gender,
-  interests,
-  birthRange,
-  hideUsersDisliked,
-  notMyUser,
-  limit,
-  skip,
-  sort,
-  getUsers,
+  auth.authenticate,
+  stages.maxDistance,
+  stages.gender,
+  stages.interests,
+  stages.birthRange,
+  stages.hideUsersDisliked,
+  stages.notMyUser,
+  stages.limit,
+  stages.skip,
+  stages.sort,
+  usersControllers.getUsers,
 );
 
-router.get('/:id', auth, isValidObjectId, newObjectId, getUser);
+router.get(
+  '/:id',
+  auth.authenticate,
+  auth.isValidObjectId,
+  conversions.newObjectId,
+  usersControllers.getUser,
+);
 
 router.patch(
   '/',
-  auth,
-  trimBody,
-  newDateBirth,
-  hashNewPassword,
-  newUsersLikedId,
-  newUsersDislikedId,
-  lookupUsersLiked,
-  lookupUsersDisliked,
-  patchUsers,
+  auth.authenticate,
+  conversions.trimBody,
+  conversions.newDateBirth,
+  conversions.hashNewPassword,
+  conversions.newUsersLikedId,
+  conversions.newUsersDislikedId,
+  stages.lookupUsersLiked,
+  stages.lookupUsersDisliked,
+  usersControllers.patchUsers,
 );
 
 router.post(
   '/login',
-  trimBody,
-  generateAuthToken,
-  emailVerified,
-  lookupUsersLiked,
-  lookupUsersDisliked,
-  postUsersLogin,
+  conversions.trimBody,
+  auth.generateAuthToken,
+  auth.emailVerified,
+  stages.lookupUsersLiked,
+  stages.lookupUsersDisliked,
+  usersControllers.postUsersLogin,
 );
 
-router.post('/forgot', trimBody, postUsersForgot);
+router.post('/forgot', conversions.trimBody, usersControllers.postUsersForgot);
 
 router.post(
   '/images',
-  auth,
-  uploadImage.single('image'),
-  postUsersImages,
+  auth.authenticate,
+  conversions.uploadImage.single('image'),
+  usersControllers.postUsersImages,
   // eslint-disable-next-line no-unused-vars
   (error, req, res, next) => {
     res.status(400).send();
@@ -95,8 +68,13 @@ router.post(
   },
 );
 
-router.delete('/images/:imageId', auth, deleteUsersImages);
+router.delete('/images/:imageId', auth.authenticate, usersControllers.deleteUsersImages);
 
-router.get('/:id/images/:imageId', newObjectId, getUsersImages);
+router.get(
+  '/:id/images/:imageId',
+  auth.isValidObjectId,
+  conversions.newObjectId,
+  usersControllers.getUsersImages,
+);
 
 module.exports = router;

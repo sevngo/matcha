@@ -26,7 +26,7 @@ exports.generateAuthToken = async (req, res, next) => {
   }
 };
 
-exports.auth = async (req, res, next) => {
+exports.authenticate = async (req, res, next) => {
   try {
     const token = replace('Bearer ', '')(req.header('Authorization'));
     const { _id } = jwt.verify(token, JWT_SECRET);
@@ -38,6 +38,11 @@ exports.auth = async (req, res, next) => {
     res.status(401).send();
     console.log(e); // eslint-disable-line no-console
   }
+};
+
+exports.isValidObjectId = (req, res, next) => {
+  if (!ObjectID.isValid(req.params.id)) return res.status(400).send();
+  next();
 };
 
 exports.emailVerified = async (req, res, next) => {

@@ -3,11 +3,6 @@ const { omit, reduce, trim, keys, is, map } = require('ramda');
 const bcrypt = require('bcryptjs');
 const multer = require('multer');
 
-exports.isValidObjectId = (req, res, next) => {
-  if (!ObjectID.isValid(req.params.id)) return res.status(400).send();
-  next();
-};
-
 exports.newObjectId = (req, res, next) => {
   req._id = ObjectID(req.params.id);
   next();

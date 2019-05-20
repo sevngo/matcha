@@ -1,6 +1,7 @@
 const { MongoClient } = require('mongodb');
-const { usersModel, USERS } = require('./models/users');
+const { usersModel } = require('./models/users');
 const { MONGODB_URL, DATABASE_NAME } = require('./utils/constants');
+const { USERS } = require('./utils/constants');
 
 let db;
 let client;
