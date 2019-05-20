@@ -8,32 +8,23 @@ const {
   SENDGRID_API_KEY,
 } = process.env;
 
-const DEVELOPMENT = 'development';
-const PRODUCTION = 'production';
+exports.JWT_SECRET = JWT_SECRET;
+exports.DEVSERVER_PORT = DEVSERVER_PORT;
+exports.NODE_ENV = NODE_ENV;
+exports.MONGODB_URL = MONGODB_URL;
+exports.DATABASE_NAME = DATABASE_NAME;
+exports.PORT = PORT;
+exports.SENDGRID_API_KEY = SENDGRID_API_KEY;
 
-const STRING = { bsonType: 'string' };
-const OBJECTID = { bsonType: 'objectId' };
-const DATE = { bsonType: 'date' };
-const BOOL = { bsonType: 'bool' };
-const ARRAY = { bsonType: 'array' };
-const OBJECT = { bsonType: 'object' };
-const BINDATA = { bsonType: 'binData' };
+exports.DEVELOPMENT = 'development';
+exports.PRODUCTION = 'production';
 
-module.exports = {
-  JWT_SECRET,
-  DEVSERVER_PORT,
-  NODE_ENV,
-  MONGODB_URL,
-  DATABASE_NAME,
-  PORT,
-  SENDGRID_API_KEY,
-  DEVELOPMENT,
-  PRODUCTION,
-  STRING,
-  OBJECTID,
-  DATE,
-  BOOL,
-  ARRAY,
-  OBJECT,
-  BINDATA,
-};
+exports.USERS = 'users';
+
+exports.STRING = { bsonType: 'string' };
+exports.OBJECTID = { bsonType: 'objectId' };
+exports.DATE = { bsonType: 'date' };
+exports.BOOL = { bsonType: 'bool' };
+exports.ARRAY = { bsonType: 'array' };
+exports.OBJECT = { bsonType: 'object' };
+exports.BINDATA = { bsonType: 'binData' };

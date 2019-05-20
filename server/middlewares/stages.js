@@ -2,7 +2,7 @@ const { pick, split, is } = require('ramda');
 const { ObjectID } = require('mongodb');
 const { defaultToNull } = require('../utils/functions');
 
-const limit = (req, res, next) => {
+exports.limit = (req, res, next) => {
   const {
     query: { limit },
   } = req;
@@ -11,7 +11,7 @@ const limit = (req, res, next) => {
   next();
 };
 
-const skip = (req, res, next) => {
+exports.skip = (req, res, next) => {
   const {
     query: { skip },
   } = req;
@@ -20,7 +20,7 @@ const skip = (req, res, next) => {
   next();
 };
 
-const sort = (req, res, next) => {
+exports.sort = (req, res, next) => {
   const {
     query: { sortBy },
   } = req;
@@ -31,7 +31,7 @@ const sort = (req, res, next) => {
   next();
 };
 
-const interests = (req, res, next) => {
+exports.interests = (req, res, next) => {
   const { query } = req;
   const { interests } = query;
   req.interests = {
@@ -40,13 +40,13 @@ const interests = (req, res, next) => {
   next();
 };
 
-const gender = (req, res, next) => {
+exports.gender = (req, res, next) => {
   const { query } = req;
   req.gender = query.gender && { $match: pick(['gender'])(query) };
   next();
 };
 
-const birthRange = (req, res, next) => {
+exports.birthRange = (req, res, next) => {
   const {
     query: { birthRange },
   } = req;
@@ -58,7 +58,7 @@ const birthRange = (req, res, next) => {
   next();
 };
 
-const maxDistance = (req, res, next) => {
+exports.maxDistance = (req, res, next) => {
   const {
     query: { maxDistance },
     user: {
@@ -78,12 +78,12 @@ const maxDistance = (req, res, next) => {
   next();
 };
 
-const notMyUser = (req, res, next) => {
+exports.notMyUser = (req, res, next) => {
   req.notMyUser = { $match: { _id: { $ne: ObjectID(req.user._id) } } };
   next();
 };
 
-const lookupUsersLiked = (req, res, next) => {
+exports.lookupUsersLiked = (req, res, next) => {
   req.lookupUsersLiked = {
     $lookup: {
       from: 'users',
@@ -95,7 +95,7 @@ const lookupUsersLiked = (req, res, next) => {
   next();
 };
 
-const lookupUsersDisliked = (req, res, next) => {
+exports.lookupUsersDisliked = (req, res, next) => {
   req.lookupUsersDisliked = {
     $lookup: {
       from: 'users',
@@ -107,21 +107,7 @@ const lookupUsersDisliked = (req, res, next) => {
   next();
 };
 
-const hideUsersDisliked = (req, res, next) => {
+exports.hideUsersDisliked = (req, res, next) => {
   req.hideUsersDisliked = { $match: { _id: { $nin: req.user.usersDisliked } } };
   next();
-};
-
-module.exports = {
-  limit,
-  skip,
-  sort,
-  gender,
-  interests,
-  birthRange,
-  maxDistance,
-  notMyUser,
-  lookupUsersLiked,
-  lookupUsersDisliked,
-  hideUsersDisliked,
 };

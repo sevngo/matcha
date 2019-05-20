@@ -3,31 +3,31 @@ const { omit, reduce, trim, keys, is, map } = require('ramda');
 const bcrypt = require('bcryptjs');
 const multer = require('multer');
 
-const isValidObjectId = (req, res, next) => {
+exports.isValidObjectId = (req, res, next) => {
   if (!ObjectID.isValid(req.params.id)) return res.status(400).send();
   next();
 };
 
-const newObjectId = (req, res, next) => {
+exports.newObjectId = (req, res, next) => {
   req._id = ObjectID(req.params.id);
   next();
 };
 
-const newDateBirth = async (req, res, next) => {
+exports.newDateBirth = async (req, res, next) => {
   const { birthDate } = req.body;
   if (!birthDate) return next();
   req.body.birthDate = new Date(birthDate);
   next();
 };
 
-const hashPassword = async (req, res, next) => {
+exports.hashPassword = async (req, res, next) => {
   const { password } = req.body;
   if (!password) return next();
   req.body.password = await bcrypt.hash(password, 8);
   next();
 };
 
-const hashNewPassword = async (req, res, next) => {
+exports.hashNewPassword = async (req, res, next) => {
   const { body } = req;
   const { newPassword } = body;
   if (!newPassword) {
@@ -39,7 +39,7 @@ const hashNewPassword = async (req, res, next) => {
   next();
 };
 
-const uploadImage = multer({
+exports.uploadImage = multer({
   limits: {
     fileSize: 1000000,
   },
@@ -50,7 +50,7 @@ const uploadImage = multer({
   },
 });
 
-const trimBody = (req, res, next) => {
+exports.trimBody = (req, res, next) => {
   const { body } = req;
   const BodyTrimmed = reduce(
     (acc, key) => ({ ...acc, [key]: is(String, body[key]) ? trim(body[key]) : body[key] }),
@@ -60,7 +60,7 @@ const trimBody = (req, res, next) => {
   next();
 };
 
-const newUsersLikedId = (req, res, next) => {
+exports.newUsersLikedId = (req, res, next) => {
   const {
     body: { usersLiked },
   } = req;
@@ -68,22 +68,10 @@ const newUsersLikedId = (req, res, next) => {
   next();
 };
 
-const newUsersDislikedId = (req, res, next) => {
+exports.newUsersDislikedId = (req, res, next) => {
   const {
     body: { usersDisliked },
   } = req;
   if (usersDisliked) req.body.usersDisliked = map(id => ObjectID(id))(usersDisliked);
   next();
-};
-
-module.exports = {
-  isValidObjectId,
-  hashPassword,
-  newObjectId,
-  hashNewPassword,
-  newDateBirth,
-  uploadImage,
-  trimBody,
-  newUsersLikedId,
-  newUsersDislikedId,
 };

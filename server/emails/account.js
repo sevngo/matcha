@@ -3,7 +3,7 @@ const { SENDGRID_API_KEY } = require('../utils/constants');
 
 sgMail.setApiKey(SENDGRID_API_KEY);
 
-const sendEmailConfirmation = (email, firstName, lastName, url) => {
+exports.sendEmailConfirmation = (email, firstName, lastName, url) => {
   const message = {
     // to: email,
     to: 'sevngo@gmail.com',
@@ -14,7 +14,7 @@ const sendEmailConfirmation = (email, firstName, lastName, url) => {
   return sgMail.send(message);
 };
 
-const sendResetPassword = (email, firstName, lastName, url) => {
+exports.sendResetPassword = (email, firstName, lastName, url) => {
   const message = {
     // to: email,
     to: 'sevngo@gmail.com',
@@ -23,9 +23,4 @@ const sendResetPassword = (email, firstName, lastName, url) => {
     text: `Hello ${firstName} ${lastName}. Click on this link to reset your password : ${url}`,
   };
   return sgMail.send(message);
-};
-
-module.exports = {
-  sendEmailConfirmation,
-  sendResetPassword,
 };

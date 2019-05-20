@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs');
 const { Users } = require('../database');
 const { JWT_SECRET } = require('../utils/constants');
 
-const generateAuthToken = async (req, res, next) => {
+exports.generateAuthToken = async (req, res, next) => {
   try {
     const { username, password } = req.body;
 
@@ -26,7 +26,7 @@ const generateAuthToken = async (req, res, next) => {
   }
 };
 
-const auth = async (req, res, next) => {
+exports.auth = async (req, res, next) => {
   try {
     const token = replace('Bearer ', '')(req.header('Authorization'));
     const { _id } = jwt.verify(token, JWT_SECRET);
@@ -40,9 +40,7 @@ const auth = async (req, res, next) => {
   }
 };
 
-const emailVerified = async (req, res, next) => {
+exports.emailVerified = async (req, res, next) => {
   if (!req.user.emailVerified) return res.status(400).send();
   next();
 };
-
-module.exports = { generateAuthToken, auth, emailVerified };

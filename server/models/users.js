@@ -1,8 +1,7 @@
 const { STRING, OBJECTID, DATE, BOOL, ARRAY, OBJECT, BINDATA } = require('../utils/constants');
+const { USERS } = require('../utils/constants');
 
-const USERS = 'users';
-
-const usersModel = async db => {
+exports.usersModel = async db => {
   await db.createCollection(USERS);
   await db.collection(USERS).createIndex({ username: 1 }, { unique: true, sparse: true });
   await db.collection(USERS).createIndex({ email: 1 }, { unique: true, sparse: true });
@@ -53,5 +52,3 @@ const usersModel = async db => {
     },
   });
 };
-
-module.exports = { usersModel, USERS };
