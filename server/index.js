@@ -17,5 +17,5 @@ const io = socketIo(server);
 })();
 
 io.on('connection', () => {
-  console.log('new websocket connection');
+  // console.log('new websocket connection');
 });

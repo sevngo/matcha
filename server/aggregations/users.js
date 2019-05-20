@@ -1,6 +1,6 @@
 const { compact } = require('../utils/functions');
 
-const matchById = _id => ({ $match: { _id } });
+exports.matchById = _id => ({ $match: { _id } });
 
 const birthDate = {
   $addFields: {
@@ -8,11 +8,9 @@ const birthDate = {
   },
 };
 
-const project = fields => ({ $project: fields });
+exports.project = fields => ({ $project: fields });
 
-const usersPipeline = (...stages) => {
+exports.usersPipeline = (...stages) => {
   const pipeline = compact([...stages, birthDate]);
   return pipeline;
 };
-
-module.exports = { usersPipeline, matchById, project };

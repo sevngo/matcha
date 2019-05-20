@@ -1,9 +1,9 @@
 const { defaultTo, filter, isEmpty } = require('ramda');
 const { NODE_ENV, DEVSERVER_PORT } = require('./constants');
 
-const defaultToNull = defaultTo(null);
+exports.defaultToNull = defaultTo(null);
 
-const getAppUrl = req => {
+exports.getAppUrl = req => {
   const { protocol, hostname } = req;
   const fullUrl =
     NODE_ENV === 'development'
@@ -12,10 +12,4 @@ const getAppUrl = req => {
   return fullUrl;
 };
 
-const compact = filter(value => value && !isEmpty(value));
-
-module.exports = {
-  getAppUrl,
-  defaultToNull,
-  compact,
-};
+exports.compact = filter(value => value && !isEmpty(value));
