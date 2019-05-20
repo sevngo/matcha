@@ -6,6 +6,7 @@ const { JWT_SECRET } = require('../../utils/constants');
 
 const initialPassword = faker.internet.password();
 const initialId = faker.random.alphaNumeric(12);
+const userOneToken = jwt.sign({ _id: initialId }, JWT_SECRET);
 
 const userOne = {
   username: faker.internet.userName(),
@@ -21,9 +22,9 @@ const userOne = {
   },
   password: bcrypt.hashSync(initialPassword, 8),
   _id: ObjectID(initialId),
+  usersLiked: [],
   usersBlocked: [],
   emailVerified: true,
-  token: jwt.sign({ _id: initialId }, JWT_SECRET),
 };
 
 const userTwo = {
@@ -40,6 +41,7 @@ const userTwo = {
   },
   password: bcrypt.hashSync(initialPassword, 8),
   _id: ObjectID(),
+  usersLiked: [],
   usersBlocked: [],
   emailVerified: true,
 };
@@ -65,4 +67,5 @@ module.exports = {
   initialPassword,
   newUser,
   initialId,
+  userOneToken,
 };
