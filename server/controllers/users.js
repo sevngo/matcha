@@ -10,9 +10,10 @@ const { getAppUrl } = require('../utils/functions');
 
 exports.postUsers = async (req, res) => {
   try {
+    const UsersCollection = Users();
     const {
       ops: [user],
-    } = await Users().insertOne({ usersBlocked: [], usersLiked: [], ...req.body });
+    } = await UsersCollection.insertOne({ usersBlocked: [], usersLiked: [], ...req.body });
     const { _id, email, firstName, lastName } = user;
     const token = await jwt.sign({ _id }, JWT_SECRET);
     const url = `${getAppUrl(req)}/verify/${token}`;
@@ -37,23 +38,22 @@ exports.getUsers = async (req, res) => {
       mismatchMyUser,
       mismatchUsersBlocked,
     } = req;
+    const UsersCollection = Users();
     const projection = project({ password: 0, 'images.data': 0, email: 0 });
-    const users = await Users()
-      .aggregate(
-        usersPipeline(
-          maxDistance,
-          matchGender,
-          matchInterests,
-          matchBirthRange,
-          mismatchUsersBlocked,
-          mismatchMyUser,
-          limit,
-          skip,
-          sort,
-          projection,
-        ),
-      )
-      .toArray();
+    const users = await UsersCollection.aggregate(
+      usersPipeline(
+        maxDistance,
+        matchGender,
+        matchInterests,
+        matchBirthRange,
+        mismatchUsersBlocked,
+        mismatchMyUser,
+        limit,
+        skip,
+        sort,
+        projection,
+      ),
+    ).toArray();
     res.status(200).send(users);
   } catch (e) {
     res.status(500).send();
@@ -63,10 +63,11 @@ exports.getUsers = async (req, res) => {
 
 exports.getUser = async (req, res) => {
   try {
+    const UsersCollection = Users();
     const projection = project({ password: 0, 'images.data': 0, email: 0 });
-    const [data] = await Users()
-      .aggregate(usersPipeline(matchById(req._id), projection))
-      .toArray();
+    const [data] = await UsersCollection.aggregate(
+      usersPipeline(matchById(req._id), projection),
+    ).toArray();
     if (!data) return res.status(404).send();
     res.send(data);
   } catch (e) {
@@ -83,7 +84,8 @@ exports.patchUsers = async (req, res) => {
       lookupUsersLiked,
       lookupUsersBlocked,
     } = req;
-    const { value: user } = await Users().findOneAndUpdate({ _id }, { $set: body });
+    const UsersCollection = Users();
+    const { value: user } = await UsersCollection.findOneAndUpdate({ _id }, { $set: body });
     if (!user) return res.status(404).send();
     const projection = project({
       password: 0,
@@ -95,16 +97,14 @@ exports.patchUsers = async (req, res) => {
       'usersLiked.email': 0,
       'usersLiked.images.data': 0,
     });
-    const [data] = await Users()
-      .aggregate(usersPipeline(matchById(_id), lookupUsersLiked, lookupUsersBlocked, projection))
-      .toArray();
-    const friends = await Users()
-      .aggregate([
-        { $match: { _id: { $in: user.usersLiked } } },
-        { $match: { usersLiked: ObjectID(data._id) } },
-        projection,
-      ])
-      .toArray();
+    const [data] = await UsersCollection.aggregate(
+      usersPipeline(matchById(_id), lookupUsersLiked, lookupUsersBlocked, projection),
+    ).toArray();
+    const friends = await UsersCollection.aggregate([
+      { $match: { _id: { $in: user.usersLiked } } },
+      { $match: { usersLiked: ObjectID(data._id) } },
+      projection,
+    ]).toArray();
     res.send({ ...data, friends });
   } catch (e) {
     res.status(400).send();
@@ -115,6 +115,7 @@ exports.patchUsers = async (req, res) => {
 exports.postUsersLogin = async (req, res) => {
   try {
     const { user, token, lookupUsersLiked, lookupUsersBlocked } = req;
+    const UsersCollection = Users();
     const projection = project({
       password: 0,
       'images.data': 0,
@@ -125,18 +126,14 @@ exports.postUsersLogin = async (req, res) => {
       'usersLiked.email': 0,
       'usersLiked.images.data': 0,
     });
-    const [data] = await Users()
-      .aggregate(
-        usersPipeline(matchById(user._id), lookupUsersLiked, lookupUsersBlocked, projection),
-      )
-      .toArray();
-    const friends = await Users()
-      .aggregate([
-        { $match: { _id: { $in: user.usersLiked } } },
-        { $match: { usersLiked: ObjectID(data._id) } },
-        projection,
-      ])
-      .toArray();
+    const [data] = await UsersCollection.aggregate(
+      usersPipeline(matchById(user._id), lookupUsersLiked, lookupUsersBlocked, projection),
+    ).toArray();
+    const friends = await UsersCollection.aggregate([
+      { $match: { _id: { $in: user.usersLiked } } },
+      { $match: { usersLiked: ObjectID(data._id) } },
+      projection,
+    ]).toArray();
     res.send({ ...data, friends, token });
   } catch (e) {
     res.status(400).send();
@@ -146,7 +143,8 @@ exports.postUsersLogin = async (req, res) => {
 
 exports.postUsersForgot = async (req, res) => {
   try {
-    const user = await Users().findOne({ email: req.body.email });
+    const UsersCollection = Users();
+    const user = await UsersCollection.findOne({ email: req.body.email });
     if (!user) throw new Error();
     const { _id, email, firstName, lastName } = user;
     const token = await jwt.sign({ _id }, JWT_SECRET);
@@ -164,20 +162,21 @@ exports.postUsersImages = async (req, res) => {
     const {
       user: { _id },
     } = req;
+    const UsersCollection = Users();
     const buffer = await sharp(req.file.buffer)
       .resize({ width: 500, fit: 'outside' })
       .png()
       .toBuffer();
     const imageId = ObjectID();
-    const { value: user } = await Users().findOneAndUpdate(
+    const { value: user } = await UsersCollection.findOneAndUpdate(
       { _id },
       { $push: { images: { _id: imageId, data: buffer } } },
     );
     if (!user) return res.status(404).send();
     const projection = project({ password: 0, 'images.data': 0 });
-    const [data] = await Users()
-      .aggregate(usersPipeline(matchById(_id), projection))
-      .toArray();
+    const [data] = await UsersCollection.aggregate(
+      usersPipeline(matchById(_id), projection),
+    ).toArray();
     res.send(data);
   } catch (e) {
     res.status(400).send();
@@ -190,16 +189,17 @@ exports.deleteUsersImages = async (req, res) => {
     const {
       user: { _id },
     } = req;
+    const UsersCollection = Users();
     const imageId = ObjectID(req.params.imageId);
-    const { value: user } = await Users().findOneAndUpdate(
+    const { value: user } = await UsersCollection.findOneAndUpdate(
       { _id },
       { $pull: { images: { _id: imageId } } },
     );
     if (!user) return res.status(404).send();
     const projection = project({ password: 0, 'images.data': 0 });
-    const [data] = await Users()
-      .aggregate(usersPipeline(matchById(_id), projection))
-      .toArray();
+    const [data] = await UsersCollection.aggregate(
+      usersPipeline(matchById(_id), projection),
+    ).toArray();
     res.send(data);
   } catch (e) {
     res.status(500).send();
@@ -209,8 +209,9 @@ exports.deleteUsersImages = async (req, res) => {
 
 exports.getUsersImages = async (req, res) => {
   try {
+    const UsersCollection = Users();
     const imageId = ObjectID(req.params.imageId);
-    const user = await Users().findOne({ _id: req._id, 'images._id': imageId });
+    const user = await UsersCollection.findOne({ _id: req._id, 'images._id': imageId });
     if (!user) return res.status(404).send();
     const { data } = find(image => propEq('_id', imageId)(image))(user.images);
     res.type('png');
