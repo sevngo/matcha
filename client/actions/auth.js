@@ -2,6 +2,7 @@ import { reject, compose, append, equals, pick } from 'ramda';
 import { enqueueSnackbar, success, error } from './app';
 import { postUsers, postUsersLogin, patchUser, postUsersForgot } from '../api';
 import { getIds } from '../utils';
+import { socket } from '../index';
 
 export const REGISTER = 'REGISTER';
 export const LOGIN = 'LOGIN';
@@ -15,7 +16,10 @@ export const LIKED_USER = 'LIKED_USER';
 export const BLOCK_USER = 'BLOCK_USER';
 export const BLOCKED_USER = 'BLOCKED_USER';
 
-export const logout = () => ({ type: LOGOUT });
+export const logout = _id => dispatch => {
+  dispatch({ type: LOGOUT });
+  socket.emit('logout', _id);
+};
 
 export const register = user => async dispatch => {
   try {
@@ -32,6 +36,7 @@ export const login = user => async dispatch => {
     dispatch({ type: LOGIN });
     const { data } = await postUsersLogin(user);
     dispatch({ type: LOGGED, data });
+    socket.emit('login', data);
   } catch {
     dispatch(enqueueSnackbar(error));
   }

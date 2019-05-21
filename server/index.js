@@ -7,6 +7,7 @@ const { connectDb } = require('./database');
 const { PORT } = require('./utils/constants');
 const usersRouter = require('./routers/users');
 const { NODE_ENV, DEVELOPMENT, PRODUCTION, TEST } = require('./utils/constants');
+const socketEvents = require('./socketEvents');
 
 const app = express();
 
@@ -23,6 +24,7 @@ if (NODE_ENV === PRODUCTION) {
 
 const server = http.createServer(app);
 const io = socketIo(server);
+socketEvents(io);
 
 if (NODE_ENV !== TEST) {
   (async () => {
@@ -34,9 +36,5 @@ if (NODE_ENV !== TEST) {
     }
   })();
 }
-
-io.on('connection', () => {
-  // console.log('new websocket connection');
-});
 
 module.exports = app;
