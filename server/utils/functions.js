@@ -1,4 +1,4 @@
-const { defaultTo, filter, isEmpty } = require('ramda');
+const { defaultTo, filter, isEmpty, reduce } = require('ramda');
 const { NODE_ENV, DEVSERVER_PORT } = require('./constants');
 
 exports.defaultToNull = defaultTo(null);
@@ -13,3 +13,5 @@ exports.getAppUrl = req => {
 };
 
 exports.compact = filter(value => value && !isEmpty(value));
+
+exports.getIds = reduce((acc, object) => [...acc, object._id], []);
