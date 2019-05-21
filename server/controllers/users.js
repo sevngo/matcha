@@ -28,25 +28,25 @@ exports.getUsers = async (req, res) => {
   try {
     const {
       maxDistance,
-      gender,
-      interests,
+      matchGender,
+      matchInterests,
       limit,
       skip,
       sort,
-      birthRange,
-      notMyUser,
-      hideUsersBlocked,
+      matchBirthRange,
+      mismatchMyUser,
+      mismatchUsersBlocked,
     } = req;
     const projection = project({ password: 0, 'images.data': 0, email: 0 });
     const users = await Users()
       .aggregate(
         usersPipeline(
           maxDistance,
-          gender,
-          interests,
-          birthRange,
-          hideUsersBlocked,
-          notMyUser,
+          matchGender,
+          matchInterests,
+          matchBirthRange,
+          mismatchUsersBlocked,
+          mismatchMyUser,
           limit,
           skip,
           sort,
@@ -123,6 +123,20 @@ exports.postUsersLogin = async (req, res) => {
         usersPipeline(matchById(user._id), lookupUsersLiked, lookupUsersBlocked, projection),
       )
       .toArray();
+    // const friends = await Users()
+    //   .find({
+    //     _id: { $in: user.usersLiked },
+    //     usersLiked: ObjectID(data._id),
+    //   })
+    //   .toArray();
+    const friends = await Users()
+      .aggregate([
+        { $match: { _id: { $in: user.usersLiked } } },
+        { $match: { usersLiked: ObjectID(data._id) } },
+        projection,
+      ])
+      .toArray();
+    console.log(friends);
     res.send({ ...data, token });
   } catch (e) {
     res.status(400).send();
