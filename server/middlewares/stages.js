@@ -31,28 +31,28 @@ exports.sort = (req, res, next) => {
   next();
 };
 
-exports.interests = (req, res, next) => {
+exports.matchInterests = (req, res, next) => {
   const { query } = req;
   const { interests } = query;
-  req.interests = {
+  req.matchInterests = {
     $match: is(Array)(interests) ? { interests: { $all: interests } } : pick(['interests'])(query),
   };
   next();
 };
 
-exports.gender = (req, res, next) => {
+exports.matchGender = (req, res, next) => {
   const { query } = req;
-  req.gender = query.gender && { $match: pick(['gender'])(query) };
+  req.matchGender = query.gender && { $match: pick(['gender'])(query) };
   next();
 };
 
-exports.birthRange = (req, res, next) => {
+exports.matchBirthRange = (req, res, next) => {
   const {
     query: { birthRange },
   } = req;
   if (birthRange) {
     const [birthMin, birthMax] = split(':')(birthRange);
-    req.birthRange = birthMin &&
+    req.matchBirthRange = birthMin &&
       birthMax && { $match: { birthDate: { $gt: new Date(birthMin), $lt: new Date(birthMax) } } };
   }
   next();
@@ -78,8 +78,8 @@ exports.maxDistance = (req, res, next) => {
   next();
 };
 
-exports.notMyUser = (req, res, next) => {
-  req.notMyUser = { $match: { _id: { $ne: ObjectID(req.user._id) } } };
+exports.mismatchMyUser = (req, res, next) => {
+  req.mismatchMyUser = { $match: { _id: { $ne: ObjectID(req.user._id) } } };
   next();
 };
 
@@ -107,7 +107,7 @@ exports.lookupUsersBlocked = (req, res, next) => {
   next();
 };
 
-exports.hideUsersBlocked = (req, res, next) => {
-  req.hideUsersBlocked = { $match: { _id: { $nin: req.user.usersBlocked } } };
+exports.mismatchUsersBlocked = (req, res, next) => {
+  req.mismatchUsersBlocked = { $match: { _id: { $nin: req.user.usersBlocked } } };
   next();
 };
