@@ -15,7 +15,7 @@ import App from './components/App';
 
 import io from 'socket.io-client';
 
-io('http://localhost:8080');
+export const socket = io('http://localhost:8080');
 
 addLocaleData([...localeEn, ...localeFr]);
 
