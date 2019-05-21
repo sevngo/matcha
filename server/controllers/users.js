@@ -98,7 +98,14 @@ exports.patchUsers = async (req, res) => {
     const [data] = await Users()
       .aggregate(usersPipeline(matchById(_id), lookupUsersLiked, lookupUsersBlocked, projection))
       .toArray();
-    res.send(data);
+    const friends = await Users()
+      .aggregate([
+        { $match: { _id: { $in: user.usersLiked } } },
+        { $match: { usersLiked: ObjectID(data._id) } },
+        projection,
+      ])
+      .toArray();
+    res.send({ ...data, friends });
   } catch (e) {
     res.status(400).send();
     console.log(e); // eslint-disable-line no-console
@@ -123,12 +130,6 @@ exports.postUsersLogin = async (req, res) => {
         usersPipeline(matchById(user._id), lookupUsersLiked, lookupUsersBlocked, projection),
       )
       .toArray();
-    // const friends = await Users()
-    //   .find({
-    //     _id: { $in: user.usersLiked },
-    //     usersLiked: ObjectID(data._id),
-    //   })
-    //   .toArray();
     const friends = await Users()
       .aggregate([
         { $match: { _id: { $in: user.usersLiked } } },
@@ -136,8 +137,7 @@ exports.postUsersLogin = async (req, res) => {
         projection,
       ])
       .toArray();
-    console.log(friends);
-    res.send({ ...data, token });
+    res.send({ ...data, friends, token });
   } catch (e) {
     res.status(400).send();
     console.log(e); // eslint-disable-line no-console
