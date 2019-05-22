@@ -36,7 +36,7 @@ export const login = user => async dispatch => {
     dispatch({ type: LOGIN });
     const { data } = await postUsersLogin(user);
     dispatch({ type: LOGGED, data });
-    socket.emit('login', data);
+    socket.emit('login', pick(['_id', 'username', 'friends'])(data));
   } catch {
     dispatch(enqueueSnackbar(error));
   }
@@ -89,6 +89,7 @@ export const likeUser = (account, userId) => async dispatch => {
     const user = { usersLiked, usersBlocked };
     const { data } = await patchUser(account.token, user);
     dispatch({ type: LIKED_USER, data });
+    socket.emit('likeUser', pick(['_id', 'username', 'friends'])(data));
   } catch {
     dispatch(enqueueSnackbar(error));
   }
