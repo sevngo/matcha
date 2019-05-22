@@ -9,4 +9,8 @@ export default defineMessages({
     id: 'containers.user.likeUser',
     defaultMessage: 'Like',
   },
+  friend: {
+    id: 'containers.user.friend',
+    defaultMessage: 'Friend',
+  },
 });

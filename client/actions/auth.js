@@ -75,21 +75,21 @@ export const forgotPassword = user => async dispatch => {
   }
 };
 
-export const likeUser = (account, userId) => async dispatch => {
+export const likeUser = (account, userLikedId) => async dispatch => {
   try {
     dispatch({ type: LIKE_USER });
     const usersLiked = compose(
-      append(userId),
+      append(userLikedId),
       getIds,
     )(account.usersLiked);
     const usersBlocked = compose(
-      reject(equals(userId)),
+      reject(equals(userLikedId)),
       getIds,
     )(account.usersBlocked);
     const user = { usersLiked, usersBlocked };
     const { data } = await patchUser(account.token, user);
     dispatch({ type: LIKED_USER, data });
-    socket.emit('likeUser', pick(['_id', 'username', 'friends'])(data));
+    socket.emit('likeUser', { user: pick(['_id', 'username'])(data), userLikedId });
   } catch {
     dispatch(enqueueSnackbar(error));
   }

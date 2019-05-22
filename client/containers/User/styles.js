@@ -1,5 +1,6 @@
 import red from '@material-ui/core/colors/red';
 import blue from '@material-ui/core/colors/blue';
+import green from '@material-ui/core/colors/green';
 
 export default theme => ({
   p3: {
@@ -21,6 +22,14 @@ export default theme => ({
     backgroundColor: blue[700],
     '&:hover': {
       backgroundColor: blue[900],
+    },
+    width: '100%',
+  },
+  friend: {
+    color: theme.palette.getContrastText(green[700]),
+    backgroundColor: green[700],
+    '&:hover': {
+      backgroundColor: green[900],
     },
     width: '100%',
   },

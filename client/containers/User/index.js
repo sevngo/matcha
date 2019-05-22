@@ -31,33 +31,39 @@ const User = ({
   }, []);
   const isLiked = find(userLiked => userLiked._id === user._id)(auth.usersLiked);
   const isBlocked = find(userBlocked => userBlocked._id === user._id)(auth.usersBlocked);
+  const isFriend = find(friend => friend._id === user._id)(auth.friends);
   return (
     <Grid container justify="center" spacing={2} className={classes.p3}>
-      {!isLiked && (
+      {isFriend && (
         <Grid item xs={12} className={classes.width}>
-          <Button
-            color="primary"
-            variant="contained"
-            size="large"
-            className={classes.like}
-            onClick={() => likeUser(auth, user._id)}
-          >
-            <FormattedMessage {...messages.likeUser} />
+          <Button color="primary" variant="contained" size="large" className={classes.friend}>
+            <FormattedMessage {...messages.friend} />
           </Button>
         </Grid>
       )}
-      {!isBlocked && (
-        <Grid item xs={12} className={classes.width}>
-          <Button
-            size="large"
-            variant="contained"
-            onClick={() => blockUser(auth, user._id)}
-            className={classes.block}
-          >
-            <FormattedMessage {...messages.blockUser} />
-          </Button>
-        </Grid>
-      )}
+      <Grid item xs={12} className={classes.width}>
+        <Button
+          color="primary"
+          variant="contained"
+          size="large"
+          className={classes.like}
+          onClick={() => likeUser(auth, user._id)}
+          disabled={isLiked}
+        >
+          <FormattedMessage {...messages.likeUser} />
+        </Button>
+      </Grid>
+      <Grid item xs={12} className={classes.width}>
+        <Button
+          size="large"
+          variant="contained"
+          onClick={() => blockUser(auth, user._id)}
+          className={classes.block}
+          disabled={isBlocked}
+        >
+          <FormattedMessage {...messages.blockUser} />
+        </Button>
+      </Grid>
       <Grid item className={classes.width}>
         <Paper elevation={24}>
           <Carousel

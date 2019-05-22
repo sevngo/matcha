@@ -6,7 +6,7 @@ const { usersPipeline, matchById, project } = require('../aggregations/users');
 const { Users } = require('../database');
 const { sendEmailConfirmation, sendResetPassword } = require('../emails/account');
 const { JWT_SECRET } = require('../utils/constants');
-const { getAppUrl } = require('../utils/functions');
+const { getAppUrl, getIds } = require('../utils/functions');
 
 exports.postUsers = async (req, res) => {
   try {
@@ -100,8 +100,9 @@ exports.patchUsers = async (req, res) => {
     const [data] = await UsersCollection.aggregate(
       usersPipeline(matchById(_id), lookupUsersLiked, lookupUsersBlocked, projection),
     ).toArray();
+    const usersLikedIds = getIds(data.usersLiked);
     const friends = await UsersCollection.aggregate([
-      { $match: { _id: { $in: user.usersLiked } } },
+      { $match: { _id: { $in: usersLikedIds } } },
       { $match: { usersLiked: ObjectID(data._id) } },
       projection,
     ]).toArray();
