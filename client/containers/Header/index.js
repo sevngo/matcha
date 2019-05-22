@@ -45,7 +45,7 @@ const Header = ({ classes, auth, logout, location: { pathname } }) => {
                 <MenuItem
                   onClick={() => {
                     handleMenu();
-                    logout(_id);
+                    logout();
                   }}
                 >
                   <FormattedMessage {...messages.logout} />

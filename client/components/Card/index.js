@@ -28,7 +28,7 @@ const Card = ({ user, classes }) => {
         <CardContent>
           <Grid container justify="space-between" alignItems="center">
             <Typography variant="h6" gutterBottom>
-              {user.firstName} {user.lastName}, {getAge(user.birthDate)}
+              {user.username}, {getAge(user.birthDate)}
             </Typography>
             <Typography variant="caption">
               <FormattedMessage

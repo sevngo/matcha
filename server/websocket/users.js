@@ -1,21 +1,14 @@
 const { append, reject, includes, omit, path } = require('ramda');
-const { getIds } = require('../utils/functions');
+const { getIds, addCreatedAt } = require('../utils/functions');
 
 let users = [];
 
-exports.addUser = (_id, socketId) => {
-  users = append({ _id, socketId })(users);
-  return users;
+exports.addUser = (socketId, user) => {
+  users = append({ socketId, ...user })(users);
 };
 
-exports.removeUserById = _id => {
-  users = reject(object => _id === object._id)(users);
-  return users;
-};
-
-exports.removeUserBySocketId = socketId => {
+exports.removeUserBySocketId = socketId => () => {
   users = reject(object => socketId === object.socketId)(users);
-  return users;
 };
 
 exports.emitToFriendsConnected = (io, friends, eventName) => {
@@ -23,7 +16,9 @@ exports.emitToFriendsConnected = (io, friends, eventName) => {
   const usersIds = getIds(users);
   usersIds.forEach((userId, index) => {
     if (includes(userId)(friendsIds)) {
-      io.to(path([index, 'socketId'])(users)).emit(eventName, omit(['socketId'])(users[index]));
+      const user = addCreatedAt(omit(['socketId'])(users[index]));
+      const socketId = path([index, 'socketId'])(users);
+      io.to(socketId).emit(eventName, user);
     }
   });
 };

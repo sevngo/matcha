@@ -16,9 +16,9 @@ export const LIKED_USER = 'LIKED_USER';
 export const BLOCK_USER = 'BLOCK_USER';
 export const BLOCKED_USER = 'BLOCKED_USER';
 
-export const logout = _id => dispatch => {
+export const logout = () => dispatch => {
   dispatch({ type: LOGOUT });
-  socket.emit('logout', _id);
+  socket.emit('logout');
 };
 
 export const register = user => async dispatch => {
