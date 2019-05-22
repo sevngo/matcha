@@ -1,18 +1,14 @@
-const {
-  addUser,
-  removeUserById,
-  removeUserBySocketId,
-  emitToFriendsConnected,
-} = require('./users');
+const { pick } = require('ramda');
+const { addUser, removeUserBySocketId, emitToFriendsConnected } = require('./users');
 
 const socketEvents = io => {
   io.on('connection', socket => {
     socket.on('login', user => {
-      addUser(user._id, socket.id);
+      addUser(socket.id, pick(['_id', 'username'])(user));
       emitToFriendsConnected(io, user.friends, 'friendConnected');
     });
-    socket.on('logout', removeUserById);
-    socket.on('disconnect', () => removeUserBySocketId(socket.id));
+    socket.on('logout', removeUserBySocketId(socket.id));
+    socket.on('disconnect', removeUserBySocketId(socket.id));
   });
 };
 

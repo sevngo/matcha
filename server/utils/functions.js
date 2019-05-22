@@ -15,3 +15,5 @@ exports.getAppUrl = req => {
 exports.compact = filter(value => value && !isEmpty(value));
 
 exports.getIds = reduce((acc, object) => [...acc, object._id], []);
+
+exports.addCreatedAt = object => ({ ...object, createdAt: new Date() });

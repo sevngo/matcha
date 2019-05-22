@@ -93,8 +93,7 @@ const MyUser = ({ classes, auth, updateUser, uploadImage, removeImage, likeUser 
                 alignItems="center"
                 className={classes.mt1}
               >
-                <Typography>{user.firstName}</Typography>
-                <Typography className={classes.ml1}>{user.lastName}</Typography>
+                <Typography>{user.username}</Typography>
                 <Button
                   variant="outlined"
                   onClick={() => likeUser(auth, user._id)}
