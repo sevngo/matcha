@@ -42,6 +42,7 @@
   "containers.myUser.usersBlocked": "Utilisateurs bloqués",
   "containers.myUser.yes": "Oui",
   "containers.user.blockUser": "Bloquer",
+  "containers.user.friend": "Ami",
   "containers.user.likeUser": "Aimer",
   "components.input.required": "Requis",
   "components.input.invalid": "Invalide",

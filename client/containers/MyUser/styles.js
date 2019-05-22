@@ -1,3 +1,5 @@
+import blue from '@material-ui/core/colors/blue';
+
 export default theme => ({
   p3: {
     padding: theme.spacing(3),
@@ -19,7 +21,7 @@ export default theme => ({
     display: 'none',
   },
   like: {
-    color: 'green',
+    color: blue[700],
     marginLeft: theme.spacing(1),
   },
 });
