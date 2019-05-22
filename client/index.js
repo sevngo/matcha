@@ -17,7 +17,7 @@ import io from 'socket.io-client';
 
 export const socket = io('http://localhost:8080');
 
-socket.on('friendConnected', () => console.log('friendConnected'));
+socket.on('friendConnected', friend => console.log('friendConnected', friend));
 
 addLocaleData([...localeEn, ...localeFr]);
 

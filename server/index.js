@@ -7,7 +7,7 @@ const { connectDb } = require('./database');
 const { PORT } = require('./utils/constants');
 const usersRouter = require('./routers/users');
 const { NODE_ENV, DEVELOPMENT, PRODUCTION, TEST } = require('./utils/constants');
-const socketEvents = require('./socketEvents');
+const socketEvents = require('./websocket');
 
 const app = express();
 
