@@ -16,6 +16,10 @@ const socketEvents = io => {
       emitToUserConnected(io, user, userLikedId, 'userLiked');
     });
 
+    socket.on('blockUser', ({ user, userBlockedId }) => {
+      emitToUserConnected(io, user, userBlockedId, 'userBlocked');
+    });
+
     socket.on('logout', removeUserBySocketId(socket.id));
     socket.on('disconnect', removeUserBySocketId(socket.id));
   });

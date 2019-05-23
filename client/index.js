@@ -19,6 +19,7 @@ export const socket = io('http://localhost:8080');
 
 socket.on('friendLogged', user => console.log('friendLogged', user));
 socket.on('userLiked', user => console.log('userLiked', user));
+socket.on('userBlocked', user => console.log('userBlocked', user));
 
 addLocaleData([...localeEn, ...localeFr]);
 
