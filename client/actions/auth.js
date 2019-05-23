@@ -89,26 +89,33 @@ export const likeUser = (account, userLikedId) => async dispatch => {
     const user = { usersLiked, usersBlocked };
     const { data } = await patchUser(account.token, user);
     dispatch({ type: LIKED_USER, data });
-    socket.emit('likeUser', { user: pick(['_id', 'username'])(data), userLikedId });
+    socket.emit('likeUser', {
+      user: pick(['_id', 'username'])(data),
+      userLikedId,
+    });
   } catch {
     dispatch(enqueueSnackbar(error));
   }
 };
 
-export const blockUser = (account, userId) => async dispatch => {
+export const blockUser = (account, userBlockedId) => async dispatch => {
   try {
     dispatch({ type: BLOCK_USER });
     const usersLiked = compose(
-      reject(equals(userId)),
+      reject(equals(userBlockedId)),
       getIds,
     )(account.usersLiked);
     const usersBlocked = compose(
-      append(userId),
+      append(userBlockedId),
       getIds,
     )(account.usersBlocked);
     const user = { usersLiked, usersBlocked };
     const { data } = await patchUser(account.token, user);
     dispatch({ type: BLOCKED_USER, data });
+    socket.emit('blockUser', {
+      user: pick(['_id', 'username'])(data),
+      userBlockedId,
+    });
   } catch {
     dispatch(enqueueSnackbar(error));
   }

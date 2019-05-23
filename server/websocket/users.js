@@ -24,8 +24,8 @@ exports.emitToFriendsConnected = (io, user, eventName) => {
   });
 };
 
-exports.emitToUserConnected = (io, user, userLikedId, eventName) => {
-  const userLikedConnected = find(userConnected => userConnected._id === userLikedId)(
+exports.emitToUserConnected = (io, user, receiverId, eventName) => {
+  const userLikedConnected = find(userConnected => userConnected._id === receiverId)(
     usersConnected,
   );
   if (userLikedConnected) io.to(userLikedConnected.socketId).emit(eventName, addCreatedAt(user));
