@@ -18,8 +18,10 @@ import io from 'socket.io-client';
 export const socket = io('http://localhost:8080');
 
 socket.on('friendLogged', user => console.log('friendLogged', user));
-socket.on('gotLiked', user => console.log('userLiked', user));
-socket.on('gotBlocked', user => console.log('userBlocked', user));
+socket.on('gotLiked', user => console.log('gotLiked', user));
+socket.on('gotBlocked', user => console.log('gotBlocked', user));
+socket.on('gotNewFriend', user => console.log('gotNewFriend', user));
+socket.on('gotUnfriended', user => console.log('gotUnfriended', user));
 
 addLocaleData([...localeEn, ...localeFr]);
 

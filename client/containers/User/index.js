@@ -29,8 +29,8 @@ const User = ({
   useEffect(() => {
     loadUser(auth.token, id);
   }, []);
-  const isLiked = find(userLiked => userLiked._id === user._id)(auth.usersLiked);
-  const isBlocked = find(userBlocked => userBlocked._id === user._id)(auth.usersBlocked);
+  const isLiked = Boolean(find(userLiked => userLiked._id === user._id)(auth.usersLiked));
+  const isBlocked = Boolean(find(userBlocked => userBlocked._id === user._id)(auth.usersBlocked));
   const isFriend = find(friend => friend._id === user._id)(auth.friends);
   return (
     <Grid container justify="center" spacing={2} className={classes.p3}>
