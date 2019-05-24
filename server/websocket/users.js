@@ -30,9 +30,3 @@ exports.emitToUserConnected = (io, data, receiverId, eventName) => {
   );
   if (userLikedConnected) io.to(userLikedConnected.socketId).emit(eventName, addCreatedAt(data));
 };
-
-exports.checkIsFriend = (userId, friends) => {
-  const friendsIds = getIds(friends);
-  const isFriend = find(friendId => userId === friendId)(friendsIds);
-  return isFriend;
-};
