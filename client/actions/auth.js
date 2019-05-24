@@ -1,4 +1,4 @@
-import { reject, compose, append, equals, pick } from 'ramda';
+import { reject, compose, append, equals, pick, find } from 'ramda';
 import { enqueueSnackbar, success, error } from './app';
 import { postUsers, postUsersLogin, patchUser, postUsersForgot } from '../api';
 import { getIds } from '../utils';
@@ -90,9 +90,13 @@ export const likeUser = (account, userLikedId) => async dispatch => {
     const { data } = await patchUser(account.token, user);
     dispatch({ type: LIKED_USER, data });
     socket.emit('userLiked', {
-      user: pick(['_id', 'username', 'friends'])(data),
+      user: pick(['_id', 'username'])(data),
       userLikedId,
     });
+    const friendsIds = getIds(data.friends);
+    const isFriended = find(friendId => userLikedId === friendId)(friendsIds);
+    if (isFriended)
+      socket.emit('userFriended', { user: pick(['_id', 'username'])(data), userLikedId });
   } catch {
     dispatch(enqueueSnackbar(error));
   }
@@ -113,9 +117,13 @@ export const blockUser = (account, userBlockedId) => async dispatch => {
     const { data } = await patchUser(account.token, user);
     dispatch({ type: BLOCKED_USER, data });
     socket.emit('userBlocked', {
-      user: pick(['_id', 'username', 'friends'])(data),
+      user: pick(['_id', 'username'])(data),
       userBlockedId,
     });
+    const friendsIds = getIds(account.friends);
+    const isUnfriended = find(friendId => userBlockedId === friendId)(friendsIds);
+    if (isUnfriended)
+      socket.emit('userUnfriended', { user: pick(['_id', 'username'])(data), userBlockedId });
   } catch {
     dispatch(enqueueSnackbar(error));
   }
