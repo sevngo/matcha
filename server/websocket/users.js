@@ -24,9 +24,15 @@ exports.emitToFriendsConnected = (io, user, eventName) => {
   });
 };
 
-exports.emitToUserConnected = (io, user, receiverId, eventName) => {
+exports.emitToUserConnected = (io, data, receiverId, eventName) => {
   const userLikedConnected = find(userConnected => userConnected._id === receiverId)(
     usersConnected,
   );
-  if (userLikedConnected) io.to(userLikedConnected.socketId).emit(eventName, addCreatedAt(user));
+  if (userLikedConnected) io.to(userLikedConnected.socketId).emit(eventName, addCreatedAt(data));
+};
+
+exports.checkIsFriend = (userId, friends) => {
+  const friendsIds = getIds(friends);
+  const isFriend = find(friendId => userId === friendId)(friendsIds);
+  return isFriend;
 };

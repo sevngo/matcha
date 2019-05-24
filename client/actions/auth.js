@@ -90,7 +90,7 @@ export const likeUser = (account, userLikedId) => async dispatch => {
     const { data } = await patchUser(account.token, user);
     dispatch({ type: LIKED_USER, data });
     socket.emit('userLiked', {
-      user: pick(['_id', 'username'])(data),
+      user: pick(['_id', 'username', 'friends'])(data),
       userLikedId,
     });
   } catch {
@@ -113,7 +113,7 @@ export const blockUser = (account, userBlockedId) => async dispatch => {
     const { data } = await patchUser(account.token, user);
     dispatch({ type: BLOCKED_USER, data });
     socket.emit('userBlocked', {
-      user: pick(['_id', 'username'])(data),
+      user: pick(['_id', 'username', 'friends'])(data),
       userBlockedId,
     });
   } catch {
