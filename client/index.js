@@ -22,6 +22,7 @@ socket.on('gotLiked', user => console.log('gotLiked', user));
 socket.on('gotBlocked', user => console.log('gotBlocked', user));
 socket.on('gotFriended', user => console.log('gotFriended', user));
 socket.on('gotUnfriended', user => console.log('gotUnfriended', user));
+socket.on('gotVisited', user => console.log('gotVisited', user));
 
 addLocaleData([...localeEn, ...localeFr]);
 

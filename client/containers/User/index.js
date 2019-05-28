@@ -27,7 +27,7 @@ const User = ({
   if (id === auth._id) return <MyUser />;
   const [activeStep, handleStep] = useState(0);
   useEffect(() => {
-    loadUser(auth.token, id);
+    loadUser(auth, id);
   }, []);
   const isLiked = Boolean(find(userLiked => userLiked._id === user._id)(auth.usersLiked));
   const isBlocked = Boolean(find(userBlocked => userBlocked._id === user._id)(auth.usersBlocked));

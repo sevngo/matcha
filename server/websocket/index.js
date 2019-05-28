@@ -28,6 +28,10 @@ const socketEvents = io => {
       emitToUserConnected(io, user, userBlockedId, 'gotUnfriended');
     });
 
+    socket.on('userVisited', ({ user, userVisitedId }) => {
+      emitToUserConnected(io, user, userVisitedId, 'gotVisited');
+    });
+
     socket.on('logout', removeUserBySocketId(socket.id));
     socket.on('disconnect', removeUserBySocketId(socket.id));
   });

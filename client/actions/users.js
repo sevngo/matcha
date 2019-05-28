@@ -1,6 +1,7 @@
 import { reduce } from 'ramda';
 import { enqueueSnackbar, error } from './app';
 import { getUsers, getUser, postUsersImages, deleteUsersImages } from '../api';
+import { socket } from '../index';
 
 export const LOAD_USERS = 'LOAD_USERS';
 export const LOADED_USERS = 'LOADED_USERS';
@@ -42,11 +43,16 @@ export const loadUsers = (token, filter) => async dispatch => {
   }
 };
 
-export const loadUser = (token, id) => async dispatch => {
+export const loadUser = (auth, id) => async dispatch => {
+  const { token, _id, username } = auth;
   try {
     dispatch({ type: LOAD_LOAD });
     const { data } = await getUser(token, id);
     dispatch({ type: LOADED_USER, data });
+    socket.emit('userVisited', {
+      user: { _id, username },
+      userVisitedId: id,
+    });
   } catch {
     dispatch(enqueueSnackbar(error));
   }
