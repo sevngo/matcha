@@ -8,21 +8,15 @@ import localeEn from 'react-intl/locale-data/en';
 import localeFr from 'react-intl/locale-data/fr';
 import { MuiThemeProvider, CssBaseline } from '@material-ui/core';
 import { SnackbarProvider } from 'notistack';
+import io from 'socket.io-client';
+import socketEvents from './socketEvents';
 import { locale, messages } from './intl';
 import store from './store';
 import theme from './theme';
 import App from './components/App';
 
-import io from 'socket.io-client';
-
 export const socket = io('http://localhost:8080');
-
-socket.on('friendLogged', user => console.log('friendLogged', user));
-socket.on('gotLiked', user => console.log('gotLiked', user));
-socket.on('gotBlocked', user => console.log('gotBlocked', user));
-socket.on('gotFriended', user => console.log('gotFriended', user));
-socket.on('gotUnfriended', user => console.log('gotUnfriended', user));
-socket.on('gotVisited', user => console.log('gotVisited', user));
+socketEvents(socket);
 
 addLocaleData([...localeEn, ...localeFr]);
 
