@@ -79,7 +79,7 @@ exports.getUser = async (req, res) => {
 exports.patchUsers = async (req, res) => {
   try {
     const {
-      user: { _id },
+      myUser: { _id },
       body,
       lookupUsersLiked,
       lookupUsersBlocked,
@@ -115,7 +115,12 @@ exports.patchUsers = async (req, res) => {
 
 exports.postUsersLogin = async (req, res) => {
   try {
-    const { user, token, lookupUsersLiked, lookupUsersBlocked } = req;
+    const {
+      myUser: { _id, usersLiked },
+      token,
+      lookupUsersLiked,
+      lookupUsersBlocked,
+    } = req;
     const UsersCollection = Users();
     const projection = project({
       password: 0,
@@ -128,10 +133,10 @@ exports.postUsersLogin = async (req, res) => {
       'usersLiked.images.data': 0,
     });
     const [data] = await UsersCollection.aggregate(
-      usersPipeline(matchById(user._id), lookupUsersLiked, lookupUsersBlocked, projection),
+      usersPipeline(matchById(_id), lookupUsersLiked, lookupUsersBlocked, projection),
     ).toArray();
     const friends = await UsersCollection.aggregate([
-      { $match: { _id: { $in: user.usersLiked } } },
+      { $match: { _id: { $in: usersLiked } } },
       { $match: { usersLiked: ObjectID(data._id) } },
       projection,
     ]).toArray();
@@ -161,7 +166,7 @@ exports.postUsersForgot = async (req, res) => {
 exports.postUsersImages = async (req, res) => {
   try {
     const {
-      user: { _id },
+      myUser: { _id },
     } = req;
     const UsersCollection = Users();
     const buffer = await sharp(req.file.buffer)
@@ -188,7 +193,7 @@ exports.postUsersImages = async (req, res) => {
 exports.deleteUsersImages = async (req, res) => {
   try {
     const {
-      user: { _id },
+      myUser: { _id },
     } = req;
     const UsersCollection = Users();
     const imageId = ObjectID(req.params.imageId);

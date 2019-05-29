@@ -1,6 +1,13 @@
 import { reject, compose, append, equals, pick, find } from 'ramda';
 import { enqueueSnackbar, success, error } from './app';
-import { postUsers, postUsersLogin, patchUser, postUsersForgot } from '../api';
+import {
+  postUsers,
+  postUsersLogin,
+  patchUser,
+  postUsersForgot,
+  postUsersImages,
+  deleteUsersImages,
+} from '../api';
 import { getIds } from '../utils';
 import { socket } from '../index';
 
@@ -15,6 +22,10 @@ export const LIKE_USER = 'LIKE_USER';
 export const LIKED_USER = 'LIKED_USER';
 export const BLOCK_USER = 'BLOCK_USER';
 export const BLOCKED_USER = 'BLOCKED_USER';
+export const UPLOAD_IMAGE = 'UPLOAD_IMAGE';
+export const UPLOADED_IMAGE = 'UPLOADED_IMAGE';
+export const DELETE_IMAGE = 'DELETE_IMAGE';
+export const DELETED_IMAGE = 'DELETED_IMAGE';
 export const GOT_FRIENDED = 'GOT_FRIENDED';
 export const GOT_UNDFRIENDED = 'GOT_UNDFRIENDED';
 
@@ -126,6 +137,26 @@ export const blockUser = (account, userBlockedId) => async dispatch => {
     const isUnfriended = find(friendId => userBlockedId === friendId)(friendsIds);
     if (isUnfriended)
       socket.emit('userUnfriended', { user: pick(['_id', 'username'])(myUser), userBlockedId });
+  } catch {
+    dispatch(enqueueSnackbar(error));
+  }
+};
+
+export const uploadImage = (token, image) => async dispatch => {
+  try {
+    dispatch({ type: UPLOAD_IMAGE });
+    const { data: myUser } = await postUsersImages(token, image);
+    dispatch({ type: UPLOADED_IMAGE, myUser });
+  } catch {
+    dispatch(enqueueSnackbar(error));
+  }
+};
+
+export const removeImage = (token, imageId) => async dispatch => {
+  try {
+    dispatch({ type: DELETE_IMAGE });
+    const { data: myUser } = await deleteUsersImages(token, imageId);
+    dispatch({ type: DELETED_IMAGE, myUser });
   } catch {
     dispatch(enqueueSnackbar(error));
   }
