@@ -1,6 +1,6 @@
 import { reduce } from 'ramda';
 import { enqueueSnackbar, error } from './app';
-import { getUsers, getUser, postUsersImages, deleteUsersImages } from '../api';
+import { getUsers, getUser } from '../api';
 import { socket } from '../index';
 
 export const LOAD_USERS = 'LOAD_USERS';
@@ -8,10 +8,6 @@ export const LOADED_USERS = 'LOADED_USERS';
 export const LOAD_LOAD = 'LOAD_LOAD';
 export const LOADED_USER = 'LOADED_USER';
 export const HANDLE_FILTER = 'HANDLE_FILTER';
-export const UPLOAD_IMAGE = 'UPLOAD_IMAGE';
-export const UPLOADED_IMAGE = 'UPLOADED_IMAGE';
-export const DELETE_IMAGE = 'DELETE_IMAGE';
-export const DELETED_IMAGE = 'DELETED_IMAGE';
 
 export const handleFilter = filter => ({ type: HANDLE_FILTER, filter });
 
@@ -53,26 +49,6 @@ export const loadUser = (myUser, id) => async dispatch => {
       user: { _id, username },
       userVisitedId: id,
     });
-  } catch {
-    dispatch(enqueueSnackbar(error));
-  }
-};
-
-export const uploadImage = (token, image) => async dispatch => {
-  try {
-    dispatch({ type: UPLOAD_IMAGE });
-    const { data } = await postUsersImages(token, image);
-    dispatch({ type: UPLOADED_IMAGE, data });
-  } catch {
-    dispatch(enqueueSnackbar(error));
-  }
-};
-
-export const removeImage = (token, imageId) => async dispatch => {
-  try {
-    dispatch({ type: DELETE_IMAGE });
-    const { data } = await deleteUsersImages(token, imageId);
-    dispatch({ type: DELETED_IMAGE, data });
   } catch {
     dispatch(enqueueSnackbar(error));
   }

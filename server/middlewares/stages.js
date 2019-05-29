@@ -61,7 +61,7 @@ exports.matchBirthRange = (req, res, next) => {
 exports.maxDistance = (req, res, next) => {
   const {
     query: { maxDistance },
-    user: {
+    myUser: {
       address: { coordinates },
     },
   } = req;
@@ -79,7 +79,7 @@ exports.maxDistance = (req, res, next) => {
 };
 
 exports.mismatchMyUser = (req, res, next) => {
-  req.mismatchMyUser = { $match: { _id: { $ne: ObjectID(req.user._id) } } };
+  req.mismatchMyUser = { $match: { _id: { $ne: ObjectID(req.myUser._id) } } };
   next();
 };
 
@@ -108,6 +108,6 @@ exports.lookupUsersBlocked = (req, res, next) => {
 };
 
 exports.mismatchUsersBlocked = (req, res, next) => {
-  req.mismatchUsersBlocked = { $match: { _id: { $nin: req.user.usersBlocked } } };
+  req.mismatchUsersBlocked = { $match: { _id: { $nin: req.myUser.usersBlocked } } };
   next();
 };

@@ -30,6 +30,7 @@ const MyUser = ({ classes, myUser, updateUser, uploadImage, removeImage, likeUse
     'address',
     'interests',
     'biography',
+    'token',
   ])(myUser);
   return (
     <Grid container spacing={3} justify="center" direction="row" className={classes.p3}>
