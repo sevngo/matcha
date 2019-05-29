@@ -9,14 +9,14 @@ import { AppBar, Toolbar, Typography, withStyles, MenuItem, Menu } from '@materi
 import Drawer from '../Drawer';
 import IconButton from '../../components/IconButton';
 import { logout } from '../../actions';
-import { getAuth } from '../../selectors';
+import { getMyUser } from '../../selectors';
 import styles from './styles';
 import messages from './messages';
 
-const Header = ({ classes, auth, logout, location: { pathname } }) => {
+const Header = ({ classes, myUser, logout, location: { pathname } }) => {
   const [isDrawerOpen, toggleDrawer] = useState(false);
   const [anchorEl, handleMenu] = useState();
-  const { token, _id } = auth;
+  const { token, _id } = myUser;
   return (
     <Fragment>
       <AppBar position="static" className={classes.appBar}>
@@ -60,7 +60,7 @@ const Header = ({ classes, auth, logout, location: { pathname } }) => {
   );
 };
 
-const mapStateToProps = createStructuredSelector({ auth: getAuth });
+const mapStateToProps = createStructuredSelector({ myUser: getMyUser });
 
 export default compose(
   withRouter,

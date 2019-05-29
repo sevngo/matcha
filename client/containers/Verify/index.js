@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { compose } from 'ramda';
 import { connect } from 'react-redux';
 import withoutAuth from '../../hoc/withoutAuth';
-import { updateUser } from '../../actions/auth';
+import { updateUser } from '../../actions/myUser';
 
 const Reset = ({
   match: {

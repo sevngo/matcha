@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { compose, length, isEmpty, path, map } from 'ramda';
+import { compose, length, isEmpty, path, map, pick } from 'ramda';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { FormattedMessage } from 'react-intl';
@@ -8,18 +8,29 @@ import UserForm from '../../components/UserForm';
 import Carousel from '../../components/Carousel';
 import Popover from '../../components/Popover';
 import { updateUser, uploadImage, removeImage, likeUser } from '../../actions';
-import { getAuth } from '../../selectors';
+import { getMyUser } from '../../selectors';
 import styles from './styles';
 import messages from './messages';
 
-const MyUser = ({ classes, auth, updateUser, uploadImage, removeImage, likeUser }) => {
-  const { _id, token, images, usersBlocked } = auth;
+const MyUser = ({ classes, myUser, updateUser, uploadImage, removeImage, likeUser }) => {
+  const { _id, token, images, usersBlocked } = myUser;
   const [activeStep, handleStep] = useState(0);
   const [anchorEl, handlePopover] = useState();
   const inputEl = useRef();
   const addImage = image => {
     if (image) uploadImage(token, image);
   };
+  const userForm = pick([
+    'username',
+    'birthDate',
+    'firstName',
+    'lastName',
+    'email',
+    'gender',
+    'address',
+    'interests',
+    'biography',
+  ])(myUser);
   return (
     <Grid container spacing={3} justify="center" direction="row" className={classes.p3}>
       <Grid item className={classes.width}>
@@ -96,7 +107,7 @@ const MyUser = ({ classes, auth, updateUser, uploadImage, removeImage, likeUser 
                 <Typography>{user.username}</Typography>
                 <Button
                   variant="outlined"
-                  onClick={() => likeUser(auth, user._id)}
+                  onClick={() => likeUser(myUser, user._id)}
                   className={classes.like}
                 >
                   <FormattedMessage {...messages.likeUser} />
@@ -112,7 +123,7 @@ const MyUser = ({ classes, auth, updateUser, uploadImage, removeImage, likeUser 
             initialValues={{
               interests: [],
               biography: '',
-              ...auth,
+              ...userForm,
               newPassword: '',
             }}
             newPassword
@@ -125,7 +136,7 @@ const MyUser = ({ classes, auth, updateUser, uploadImage, removeImage, likeUser 
 };
 
 const mapStateToProps = createStructuredSelector({
-  auth: getAuth,
+  myUser: getMyUser,
 });
 
 export default compose(

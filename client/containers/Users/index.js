@@ -5,11 +5,11 @@ import { createStructuredSelector } from 'reselect';
 import { withStyles } from '@material-ui/core';
 import Cards from '../../components/Cards';
 import withAuth from '../../hoc/withAuth';
-import { getUsers, getAuth, getFilter } from '../../selectors';
+import { getUsers, getMyUser, getFilter } from '../../selectors';
 import { loadUsers } from '../../actions';
 import styles from './styles';
 
-const Users = ({ classes, users, loadUsers, auth: { token }, filter }) => {
+const Users = ({ classes, users, loadUsers, myUser: { token }, filter }) => {
   useEffect(() => {
     loadUsers(token, filter);
   }, [filter]);
@@ -21,7 +21,7 @@ const Users = ({ classes, users, loadUsers, auth: { token }, filter }) => {
 };
 
 const mapStateToProps = createStructuredSelector({
-  auth: getAuth,
+  myUser: getMyUser,
   users: getUsers,
   filter: getFilter,
 });

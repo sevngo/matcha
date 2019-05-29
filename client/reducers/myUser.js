@@ -14,19 +14,19 @@ import { reject } from 'ramda';
 export default (state = {}, action) => {
   switch (action.type) {
     case LOGGED:
-      return action.data;
+      return action.myUser;
     case LOGOUT:
       return {};
     case UPDATED_USER:
-      return { ...state, ...action.data };
+      return { ...state, ...action.myUser };
     case UPLOADED_IMAGE:
-      return { ...state, ...action.data };
+      return { ...state, ...action.myUser };
     case DELETED_IMAGE:
-      return { ...state, ...action.data };
+      return { ...state, ...action.myUser };
     case BLOCKED_USER:
-      return { ...state, ...action.data };
+      return { ...state, ...action.myUser };
     case LIKED_USER:
-      return { ...state, ...action.data };
+      return { ...state, ...action.myUser };
     case GOT_FRIENDED:
       return { ...state, friends: [...state.friends, { ...action.user }] };
     case GOT_UNDFRIENDED:

@@ -3,12 +3,12 @@ import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { isEmpty } from 'ramda';
-import { getAuth } from '../selectors';
+import { getMyUser } from '../selectors';
 
 const withoutAuth = Component => {
   const EnhancedComponent = props =>
-    isEmpty(props.auth) ? <Component {...props} /> : <Redirect to="/" />;
-  const mapStateToProps = createStructuredSelector({ auth: getAuth });
+    isEmpty(props.myUser) ? <Component {...props} /> : <Redirect to="/" />;
+  const mapStateToProps = createStructuredSelector({ myUser: getMyUser });
   return connect(mapStateToProps)(EnhancedComponent);
 };
 
