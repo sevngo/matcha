@@ -8,15 +8,18 @@ import {
   LIKED_USER,
   GOT_FRIENDED,
   GOT_UNDFRIENDED,
+  ADD_NOTIFICATION,
 } from '../actions';
 import { reject } from 'ramda';
 
-export default (state = {}, action) => {
+const initialState = { notifications: [] };
+
+export default (state = initialState, action) => {
   switch (action.type) {
     case LOGGED:
-      return action.myUser;
+      return { ...state, ...action.myUser };
     case LOGOUT:
-      return {};
+      return initialState;
     case UPDATED_USER:
       return { ...state, ...action.myUser };
     case UPLOADED_IMAGE:
@@ -31,6 +34,8 @@ export default (state = {}, action) => {
       return { ...state, friends: [...state.friends, { ...action.user }] };
     case GOT_UNDFRIENDED:
       return { ...state, friends: reject(friend => friend._id === action._id)(state.friends) };
+    case ADD_NOTIFICATION:
+      return { ...state, notifications: [action.notification, ...state.notifications] };
     default:
       return state;
   }

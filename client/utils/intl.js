@@ -1,5 +1,5 @@
 import { split, keys, includes } from 'ramda';
-import frMessages from './translations/fr.json';
+import frMessages from '../translations/fr.json';
 
 const translations = {
   fr: frMessages,

@@ -1,6 +1,5 @@
 import { random } from 'faker';
 
-export const LOADING = 'LOADING';
 export const ENQUEUE_SNACKBAR = 'ENQUEUE_SNACKBAR';
 export const REMOVE_SNACKBAR = 'REMOVE_SNACKBAR';
 
