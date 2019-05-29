@@ -36,9 +36,9 @@ export const register = user => async dispatch => {
 export const login = user => async dispatch => {
   try {
     dispatch({ type: LOGIN });
-    const { data } = await postUsersLogin(user);
-    dispatch({ type: LOGGED, data });
-    socket.emit('logged', pick(['_id', 'username', 'friends'])(data));
+    const { data: myUser } = await postUsersLogin(user);
+    dispatch({ type: LOGGED, myUser });
+    socket.emit('logged', pick(['_id', 'username', 'friends'])(myUser));
   } catch {
     dispatch(enqueueSnackbar(error));
   }
@@ -60,8 +60,8 @@ export const updateUser = account => async dispatch => {
       'interests',
       'biography',
     ])(account);
-    const { data } = await patchUser(account.token, user);
-    dispatch({ type: UPDATED_USER, data });
+    const { data: myUser } = await patchUser(account.token, user);
+    dispatch({ type: UPDATED_USER, myUser });
   } catch {
     dispatch(enqueueSnackbar(error));
   }
@@ -89,16 +89,16 @@ export const likeUser = (account, userLikedId) => async dispatch => {
       getIds,
     )(account.usersBlocked);
     const user = { usersLiked, usersBlocked };
-    const { data } = await patchUser(account.token, user);
-    dispatch({ type: LIKED_USER, data });
+    const { data: myUser } = await patchUser(account.token, user);
+    dispatch({ type: LIKED_USER, myUser });
     socket.emit('userLiked', {
-      user: pick(['_id', 'username'])(data),
+      user: pick(['_id', 'username'])(myUser),
       userLikedId,
     });
-    const friendsIds = getIds(data.friends);
+    const friendsIds = getIds(myUser.friends);
     const isFriended = find(friendId => userLikedId === friendId)(friendsIds);
     if (isFriended)
-      socket.emit('userFriended', { user: pick(['_id', 'username'])(data), userLikedId });
+      socket.emit('userFriended', { user: pick(['_id', 'username'])(myUser), userLikedId });
   } catch {
     dispatch(enqueueSnackbar(error));
   }
@@ -116,16 +116,16 @@ export const blockUser = (account, userBlockedId) => async dispatch => {
       getIds,
     )(account.usersBlocked);
     const user = { usersLiked, usersBlocked };
-    const { data } = await patchUser(account.token, user);
-    dispatch({ type: BLOCKED_USER, data });
+    const { data: myUser } = await patchUser(account.token, user);
+    dispatch({ type: BLOCKED_USER, myUser });
     socket.emit('userBlocked', {
-      user: pick(['_id', 'username'])(data),
+      user: pick(['_id', 'username'])(myUser),
       userBlockedId,
     });
     const friendsIds = getIds(account.friends);
     const isUnfriended = find(friendId => userBlockedId === friendId)(friendsIds);
     if (isUnfriended)
-      socket.emit('userUnfriended', { user: pick(['_id', 'username'])(data), userBlockedId });
+      socket.emit('userUnfriended', { user: pick(['_id', 'username'])(myUser), userBlockedId });
   } catch {
     dispatch(enqueueSnackbar(error));
   }

@@ -4,7 +4,7 @@ import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import reducer from './reducers';
 
 const initialState = {
-  // auth: {
+  // myUser: {
   //   _id: '5ca7a8e6485d2a0e845260f4',
   //   username: 'asdasd',
   //   email: 'asdasd@asdasd.fr',

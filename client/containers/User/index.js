@@ -9,7 +9,7 @@ import UserForm from '../../components/UserForm';
 import Carousel from '../../components/Carousel';
 import withAuth from '../../hoc/withAuth';
 import { loadUser, likeUser, blockUser } from '../../actions';
-import { getUser, getAuth } from '../../selectors';
+import { getUser, getMyUser } from '../../selectors';
 import styles from './styles';
 import messages from './messages';
 
@@ -20,18 +20,18 @@ const User = ({
   match: {
     params: { id },
   },
-  auth,
+  myUser,
   likeUser,
   blockUser,
 }) => {
-  if (id === auth._id) return <MyUser />;
+  if (id === myUser._id) return <MyUser />;
   const [activeStep, handleStep] = useState(0);
   useEffect(() => {
-    loadUser(auth, id);
+    loadUser(myUser, id);
   }, []);
-  const isLiked = Boolean(find(userLiked => userLiked._id === user._id)(auth.usersLiked));
-  const isBlocked = Boolean(find(userBlocked => userBlocked._id === user._id)(auth.usersBlocked));
-  const isFriend = find(friend => friend._id === user._id)(auth.friends);
+  const isLiked = Boolean(find(userLiked => userLiked._id === user._id)(myUser.usersLiked));
+  const isBlocked = Boolean(find(userBlocked => userBlocked._id === user._id)(myUser.usersBlocked));
+  const isFriend = find(friend => friend._id === user._id)(myUser.friends);
   return (
     <Grid container justify="center" spacing={2} className={classes.p3}>
       {isFriend && (
@@ -47,7 +47,7 @@ const User = ({
           variant="contained"
           size="large"
           className={classes.like}
-          onClick={() => likeUser(auth, user._id)}
+          onClick={() => likeUser(myUser, user._id)}
           disabled={isLiked}
         >
           <FormattedMessage {...messages.likeUser} />
@@ -57,7 +57,7 @@ const User = ({
         <Button
           size="large"
           variant="contained"
-          onClick={() => blockUser(auth, user._id)}
+          onClick={() => blockUser(myUser, user._id)}
           className={classes.block}
           disabled={isBlocked}
         >
@@ -85,7 +85,7 @@ const User = ({
 
 const mapStateToProps = createStructuredSelector({
   user: getUser,
-  auth: getAuth,
+  myUser: getMyUser,
 });
 
 export default compose(

@@ -1,9 +1,9 @@
 import { prop } from 'ramda';
 import { createSelector } from 'reselect';
 
-export const getAuth = prop('auth');
+export const getMyUser = prop('myUser');
 
 export const getToken = createSelector(
-  getAuth,
+  getMyUser,
   prop('token'),
 );

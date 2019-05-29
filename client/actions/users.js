@@ -43,8 +43,8 @@ export const loadUsers = (token, filter) => async dispatch => {
   }
 };
 
-export const loadUser = (auth, id) => async dispatch => {
-  const { token, _id, username } = auth;
+export const loadUser = (myUser, id) => async dispatch => {
+  const { token, _id, username } = myUser;
   try {
     dispatch({ type: LOAD_LOAD });
     const { data } = await getUser(token, id);

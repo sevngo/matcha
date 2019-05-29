@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { withStyles, Paper, Grid } from '@material-ui/core';
 import UserForm from '../../components/UserForm';
 import withoutAuth from '../../hoc/withoutAuth';
-import { updateUser } from '../../actions/auth';
+import { updateUser } from '../../actions/myUser';
 import styles from './styles';
 
 const Reset = ({
