@@ -28,6 +28,7 @@ export const DELETE_IMAGE = 'DELETE_IMAGE';
 export const DELETED_IMAGE = 'DELETED_IMAGE';
 export const GOT_FRIENDED = 'GOT_FRIENDED';
 export const GOT_UNDFRIENDED = 'GOT_UNDFRIENDED';
+export const ADD_NOTIFICATION = 'ADD_NOTIFICATION';
 
 export const logout = () => dispatch => {
   dispatch({ type: LOGOUT });
