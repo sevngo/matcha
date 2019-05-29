@@ -15,6 +15,8 @@ export const LIKE_USER = 'LIKE_USER';
 export const LIKED_USER = 'LIKED_USER';
 export const BLOCK_USER = 'BLOCK_USER';
 export const BLOCKED_USER = 'BLOCKED_USER';
+export const GOT_FRIENDED = 'GOT_FRIENDED';
+export const GOT_UNDFRIENDED = 'GOT_UNDFRIENDED';
 
 export const logout = () => dispatch => {
   dispatch({ type: LOGOUT });
