@@ -13,14 +13,16 @@ import messages from './messages';
 
 const Notifications = ({ myUser: { notifications }, removeNotification, classes }) => {
   const [anchorEl, handlePopover] = useState();
+  const hasNotifications = isEmpty(notifications);
+  const notificationsLength = length(notifications);
   return (
     <Fragment>
-      <IconButton onClick={e => handlePopover(e.currentTarget)}>
-        <Badge badgeContent={4}>
+      <IconButton onClick={e => handlePopover(e.currentTarget)} color="inherit">
+        <Badge badgeContent={notificationsLength} color="error">
           <Icon>notifications_icon</Icon>
         </Badge>
       </IconButton>
-      {!isEmpty(notifications) && (
+      {!hasNotifications && (
         <Popover open={Boolean(anchorEl)} anchorEl={anchorEl} onClose={() => handlePopover()}>
           <Grid container direction="column" spacing={2}>
             {notifications.map((notification, index) => (
@@ -40,7 +42,7 @@ const Notifications = ({ myUser: { notifications }, removeNotification, classes 
                     delete
                   </Icon>
                 </Grid>
-                {length(notifications) - 1 !== index && <Divider />}
+                {notificationsLength - 1 !== index && <Divider />}
               </Fragment>
             ))}
           </Grid>
