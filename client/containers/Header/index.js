@@ -27,8 +27,8 @@ const Header = ({ classes, myUser, logout, location: { pathname } }) => {
               menu
             </IconButton>
           ) : (
-            <IconButton className={classes.icon} component={Link} to="/">
-              accessibility_new
+            <IconButton className={classes.icon} component={Link} to={homeRoute}>
+              home
             </IconButton>
           )}
           <Typography variant="h6" color="secondary" className={classes.title}>
