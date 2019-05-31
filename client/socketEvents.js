@@ -1,3 +1,4 @@
+import { path } from 'ramda';
 import store from './store';
 import { GOT_FRIENDED, GOT_UNDFRIENDED, ADD_NOTIFICATION } from './actions';
 
@@ -6,15 +7,26 @@ const socketEvents = socket => {
     console.log('friendLogged', notification);
     store.dispatch({ type: ADD_NOTIFICATION, notification });
   });
-  socket.on('gotLiked', user => console.log('gotLiked', user));
-  socket.on('gotBlocked', user => console.log('gotBlocked', user));
-  socket.on('gotFriended', user => {
-    store.dispatch({ type: GOT_FRIENDED, user });
+  socket.on('gotLiked', notification => {
+    console.log('gotLiked', notification);
+    store.dispatch({ type: ADD_NOTIFICATION, notification });
   });
-  socket.on('gotUnfriended', user => {
-    store.dispatch({ type: GOT_UNDFRIENDED, _id: user._id });
+  socket.on('gotBlocked', notification => {
+    console.log('gotBlocked', notification);
+    store.dispatch({ type: ADD_NOTIFICATION, notification });
   });
-  socket.on('gotVisited', user => console.log('gotVisited', user));
+  socket.on('gotFriended', notification => {
+    store.dispatch({ type: GOT_FRIENDED, user: notification.user });
+    store.dispatch({ type: ADD_NOTIFICATION, notification });
+  });
+  socket.on('gotUnfriended', notification => {
+    store.dispatch({ type: GOT_UNDFRIENDED, _id: path(['user', '_id'])(notification) });
+    store.dispatch({ type: ADD_NOTIFICATION, notification });
+  });
+  socket.on('gotVisited', notification => {
+    console.log('gotVisited', notification);
+    store.dispatch({ type: ADD_NOTIFICATION, notification });
+  });
 };
 
 export default socketEvents;

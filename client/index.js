@@ -10,9 +10,8 @@ import { MuiThemeProvider, CssBaseline } from '@material-ui/core';
 import { SnackbarProvider } from 'notistack';
 import io from 'socket.io-client';
 import socketEvents from './socketEvents';
-import { locale, messages } from './utils/intl';
+import { locale, messages, theme } from './utils';
 import store from './store';
-import theme from './theme';
 import App from './components/App';
 
 export const socket = io('http://localhost:8080');

@@ -7,7 +7,7 @@ export default (state = {}, action) => {
     case LOADED_USER:
       return { ...state, user: action.data };
     case HANDLE_FILTER:
-      return { ...state, filter: action.filter };
+      return { ...state, filter: { ...state.filter, ...action.filter } };
     default:
       return state;
   }

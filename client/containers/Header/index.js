@@ -10,6 +10,7 @@ import Drawer from '../Drawer';
 import IconButton from '../../components/IconButton';
 import { logout } from '../../actions';
 import { getMyUser } from '../../selectors';
+import { homeRoute, userRoute } from '../../utils';
 import styles from './styles';
 import messages from './messages';
 
@@ -21,7 +22,7 @@ const Header = ({ classes, myUser, logout, location: { pathname } }) => {
     <Fragment>
       <AppBar position="static" className={classes.appBar}>
         <Toolbar>
-          {pathname === '/' && token ? (
+          {pathname === homeRoute && token ? (
             <IconButton onClick={() => toggleDrawer(true)} className={classes.icon}>
               menu
             </IconButton>
@@ -39,7 +40,7 @@ const Header = ({ classes, myUser, logout, location: { pathname } }) => {
               <IconButton>notifications_icon</IconButton>
               <IconButton onClick={e => handleMenu(e.currentTarget)}>account_circle</IconButton>
               <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={() => handleMenu()}>
-                <MenuItem onClick={() => handleMenu()} component={Link} to={`/user/${_id}`}>
+                <MenuItem onClick={() => handleMenu()} component={Link} to={userRoute(_id)}>
                   <FormattedMessage {...messages.myAccount} />
                 </MenuItem>
                 <MenuItem
