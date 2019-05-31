@@ -13,7 +13,7 @@ import {
 import { path } from 'ramda';
 import emptyImage from '../../images/emptyImage.png';
 import Interests from '../Interests';
-import { getAge } from '../../utils';
+import { getAge, userRoute } from '../../utils';
 import styles from './styles';
 import messages from './messages';
 
@@ -23,7 +23,7 @@ const Card = ({ user, classes }) => {
   const image = imageId ? `/api/users/${user._id}/images/${imageId}` : emptyImage;
   return (
     <MCard className={classes.card} elevation={24}>
-      <CardActionArea component={Link} to={`/user/${user._id}`}>
+      <CardActionArea component={Link} to={userRoute(user._id)}>
         <CardMedia className={classes.media} image={image} title={user.username} />
         <CardContent>
           <Grid container justify="space-between" alignItems="center">

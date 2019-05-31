@@ -56,7 +56,7 @@
   },
   "scripts": {
     "start": "parcel build client/index.html && node server",
-    "dev": "env-cmd .env.development concurrently --kill-others \"node client/devServer\" \"nodemon server\"",
+    "dev": "env-cmd .env.development concurrently --kill-others \"node client/utils/devServer\" \"nodemon server\"",
     "test": "env-cmd .env.test jest"
   },
   "browserslist": [

@@ -8,16 +8,17 @@ import Snackbars from '../../containers/Snackbars';
 import Loading from '../../containers/Loading';
 import Reset from '../../containers/Reset';
 import Verify from '../../containers/Verify';
+import { homeRoute, userRoute, resetRoute, verifyRoute } from '../../utils';
 import styles from './styles';
 
 const App = ({ classes }) => (
   <div className={classes.root}>
     <Header />
     <Switch>
-      <Route path="/" exact component={Users} />
-      <Route path="/user/:id" exact render={({ match }) => <User match={match} />} />
-      <Route path="/reset/:token" exact render={({ match }) => <Reset match={match} />} />
-      <Route path="/verify/:token" exact render={({ match }) => <Verify match={match} />} />
+      <Route path={homeRoute} exact component={Users} />
+      <Route path={userRoute(':id')} exact component={User} />
+      <Route path={resetRoute(':token')} exact component={Reset} />
+      <Route path={verifyRoute(':token')} exact component={Verify} />
       <Redirect to="/" />
     </Switch>
     <Snackbars />

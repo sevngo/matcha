@@ -1,5 +1,5 @@
 const { append, reject, includes, path, find } = require('ramda');
-const { getIds, addCreatedAt } = require('../utils/functions');
+const { getIds, createNotification } = require('../utils/functions');
 
 let usersConnected = [];
 
@@ -17,7 +17,7 @@ exports.emitToFriendsConnected = (io, user, eventName) => {
   const usersConnectedIds = getIds(usersConnected);
   usersConnectedIds.forEach((userConnectedId, index) => {
     if (includes(userConnectedId)(friendsIds)) {
-      const user = addCreatedAt({ _id, username });
+      const user = createNotification({ _id, username });
       const socketId = path([index, 'socketId'])(usersConnected);
       io.to(socketId).emit(eventName, user);
     }
@@ -28,5 +28,6 @@ exports.emitToUserConnected = (io, data, receiverId, eventName) => {
   const userLikedConnected = find(userConnected => userConnected._id === receiverId)(
     usersConnected,
   );
-  if (userLikedConnected) io.to(userLikedConnected.socketId).emit(eventName, addCreatedAt(data));
+  if (userLikedConnected)
+    io.to(userLikedConnected.socketId).emit(eventName, createNotification(data));
 };
