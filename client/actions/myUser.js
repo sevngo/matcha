@@ -29,6 +29,7 @@ export const DELETED_IMAGE = 'DELETED_IMAGE';
 export const GOT_FRIENDED = 'GOT_FRIENDED';
 export const GOT_UNDFRIENDED = 'GOT_UNDFRIENDED';
 export const ADD_NOTIFICATION = 'ADD_NOTIFICATION';
+export const REMOVE_NOTIFICATION = 'REMOVE_NOTIFICATION';
 
 export const logout = () => dispatch => {
   dispatch({ type: LOGOUT });
@@ -162,3 +163,5 @@ export const removeImage = (token, imageId) => async dispatch => {
     dispatch(enqueueSnackbar(error));
   }
 };
+
+export const removeNotification = _id => ({ type: REMOVE_NOTIFICATION, _id });
