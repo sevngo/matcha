@@ -5,19 +5,20 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'ramda';
 import { FormattedMessage } from 'react-intl';
-import { AppBar, Toolbar, Typography, withStyles, MenuItem, Menu } from '@material-ui/core';
+import { AppBar, Toolbar, Typography, withStyles } from '@material-ui/core';
 import Drawer from '../Drawer';
+import Account from '../Account';
+import Notifications from '../Notifications';
 import IconButton from '../../components/IconButton';
-import { logout } from '../../actions';
+import { logout, removeNotification } from '../../actions';
 import { getMyUser } from '../../selectors';
-import { homeRoute, userRoute } from '../../utils';
+import { homeRoute } from '../../utils';
 import styles from './styles';
 import messages from './messages';
 
-const Header = ({ classes, myUser, logout, location: { pathname } }) => {
+const Header = ({ classes, myUser, location: { pathname } }) => {
   const [isDrawerOpen, toggleDrawer] = useState(false);
-  const [anchorEl, handleMenu] = useState();
-  const { token, _id } = myUser;
+  const { token } = myUser;
   return (
     <Fragment>
       <AppBar position="static" className={classes.appBar}>
@@ -37,21 +38,8 @@ const Header = ({ classes, myUser, logout, location: { pathname } }) => {
           {token && (
             <Fragment>
               <IconButton>email_icon</IconButton>
-              <IconButton>notifications_icon</IconButton>
-              <IconButton onClick={e => handleMenu(e.currentTarget)}>account_circle</IconButton>
-              <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={() => handleMenu()}>
-                <MenuItem onClick={() => handleMenu()} component={Link} to={userRoute(_id)}>
-                  <FormattedMessage {...messages.myAccount} />
-                </MenuItem>
-                <MenuItem
-                  onClick={() => {
-                    handleMenu();
-                    logout();
-                  }}
-                >
-                  <FormattedMessage {...messages.logout} />
-                </MenuItem>
-              </Menu>
+              <Notifications />
+              <Account />
             </Fragment>
           )}
         </Toolbar>
@@ -67,7 +55,7 @@ export default compose(
   withRouter,
   connect(
     mapStateToProps,
-    { logout },
+    { logout, removeNotification },
   ),
   withStyles(styles),
 )(Header);
