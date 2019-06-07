@@ -32,7 +32,7 @@ const Header = ({ classes, myUser, location: { pathname } }) => {
               home
             </IconButton>
           )}
-          <Typography variant="h6" color="secondary" className={classes.title}>
+          <Typography variant="h6" color="inherit" className={classes.title}>
             <FormattedMessage {...messages.title} />
           </Typography>
           {token && (

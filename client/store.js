@@ -5,7 +5,7 @@ import reducer from './reducers';
 
 const initialState = {
   myUser: {
-    token: 'abc',
+    // token: 'abc',
     notifications: [
       {
         user: {
