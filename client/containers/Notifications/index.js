@@ -17,7 +17,7 @@ const Notifications = ({ myUser: { notifications }, removeNotification, classes 
   const notificationsLength = length(notifications);
   return (
     <Fragment>
-      <IconButton onClick={e => handlePopover(e.currentTarget)} color="inherit">
+      <IconButton color="inherit" onClick={e => handlePopover(e.currentTarget)}>
         <Badge badgeContent={notificationsLength} color="error">
           <Icon>notifications_icon</Icon>
         </Badge>

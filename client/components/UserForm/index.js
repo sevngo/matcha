@@ -68,7 +68,7 @@ const Component = ({
           type={showPassword ? 'text' : 'password'}
           startAdornment="vpn_key"
           endAdornment={
-            <IconButton color="inherit" onClick={() => toggleShowPassword(!showPassword)}>
+            <IconButton onClick={() => toggleShowPassword(!showPassword)}>
               {showPassword ? 'visibility' : 'visibility_off'}
             </IconButton>
           }
@@ -83,7 +83,7 @@ const Component = ({
           type={showPassword ? 'text' : 'password'}
           startAdornment="vpn_key"
           endAdornment={
-            <IconButton color="inherit" onClick={() => toggleShowPassword(!showPassword)}>
+            <IconButton onClick={() => toggleShowPassword(!showPassword)}>
               {showPassword ? 'visibility' : 'visibility_off'}
             </IconButton>
           }
@@ -159,9 +159,7 @@ const Component = ({
           endAdornment={
             hasAddress &&
             !disabled && (
-              <IconButton color="inherit" onClick={() => setFieldValue('address', { name: '' })}>
-                clear
-              </IconButton>
+              <IconButton onClick={() => setFieldValue('address', { name: '' })}>clear</IconButton>
             )
           }
         />
