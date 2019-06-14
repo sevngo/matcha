@@ -1,4 +1,6 @@
-export default theme => ({
+import { makeStyles } from '@material-ui/core/styles';
+
+export default makeStyles(theme => ({
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
   },
@@ -9,4 +11,4 @@ export default theme => ({
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(4),
   },
-});
+}));

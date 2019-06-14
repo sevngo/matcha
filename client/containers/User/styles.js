@@ -1,8 +1,9 @@
+import { makeStyles } from '@material-ui/core/styles';
 import red from '@material-ui/core/colors/red';
 import blue from '@material-ui/core/colors/blue';
 import green from '@material-ui/core/colors/green';
 
-export default theme => ({
+export default makeStyles(theme => ({
   p3: {
     padding: theme.spacing(3),
   },
@@ -33,4 +34,4 @@ export default theme => ({
     },
     width: '100%',
   },
-});
+}));

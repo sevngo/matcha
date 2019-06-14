@@ -1,4 +1,6 @@
-export default theme => ({
+import { makeStyles } from '@material-ui/core/styles';
+
+export default makeStyles(theme => ({
   p3: {
     padding: theme.spacing(3),
   },
@@ -6,4 +8,4 @@ export default theme => ({
     padding: theme.spacing(3),
     maxWidth: 500,
   },
-});
+}));

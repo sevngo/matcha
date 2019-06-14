@@ -3,19 +3,18 @@ import { compose, find } from 'ramda';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { FormattedMessage } from 'react-intl';
-import { withStyles, Paper, Grid, Button } from '@material-ui/core';
+import { Paper, Grid, Button } from '@material-ui/core';
 import MyUser from '../MyUser';
 import UserForm from '../../components/UserForm';
 import Carousel from '../../components/Carousel';
 import withAuth from '../../hoc/withAuth';
 import { loadUser, likeUser, blockUser } from '../../actions';
 import { getUser, getMyUser } from '../../selectors';
-import styles from './styles';
+import useStyles from './styles';
 import messages from './messages';
 
 const User = ({
   user,
-  classes,
   loadUser,
   match: {
     params: { id },
@@ -24,6 +23,7 @@ const User = ({
   likeUser,
   blockUser,
 }) => {
+  const classes = useStyles();
   if (id === myUser._id) return <MyUser />;
   const [activeStep, handleStep] = useState(0);
   useEffect(() => {
@@ -89,7 +89,6 @@ const mapStateToProps = createStructuredSelector({
 });
 
 export default compose(
-  withStyles(styles),
   connect(
     mapStateToProps,
     { loadUser, likeUser, blockUser },

@@ -1,4 +1,6 @@
-export default theme => ({
+import { makeStyles } from '@material-ui/core/styles';
+
+export default makeStyles(theme => ({
   card: {
     width: 300,
   },
@@ -11,4 +13,4 @@ export default theme => ({
   mt1: {
     marginTop: theme.spacing(1),
   },
-});
+}));

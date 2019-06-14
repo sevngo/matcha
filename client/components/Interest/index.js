@@ -1,6 +1,6 @@
 import React from 'react';
-import { withStyles, Chip } from '@material-ui/core';
-import styles from './styles';
+import { Chip } from '@material-ui/core';
+import useStyles from './styles';
 
 const color = {
   PHP: '#3f51b5',
@@ -28,8 +28,11 @@ const color = {
   Crow: '#cddc39',
 };
 
-const Interest = ({ interest, classes }) => (
-  <Chip label={interest} style={{ backgroundColor: color[interest] }} className={classes.chip} />
-);
+const Interest = ({ interest }) => {
+  const classes = useStyles();
+  return (
+    <Chip label={interest} style={{ backgroundColor: color[interest] }} className={classes.chip} />
+  );
+};
 
-export default withStyles(styles)(Interest);
+export default Interest;

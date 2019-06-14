@@ -4,10 +4,10 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import Loader from '../../components/Loader';
 import { getIsLoading } from '../../selectors';
-import { withStyles } from '@material-ui/core';
-import styles from './styles';
+import useStyles from './styles';
 
-const Loading = ({ classes, isLoading }) => {
+const Loading = ({ isLoading }) => {
+  const classes = useStyles();
   if (!isLoading) return false;
   return (
     <Fragment>
@@ -23,7 +23,4 @@ const mapStateToProps = createStructuredSelector({
   isLoading: getIsLoading,
 });
 
-export default compose(
-  withStyles(styles),
-  connect(mapStateToProps),
-)(Loading);
+export default compose(connect(mapStateToProps))(Loading);

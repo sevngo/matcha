@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'ramda';
 import { FormattedMessage } from 'react-intl';
-import { AppBar, Toolbar, Typography, withStyles } from '@material-ui/core';
+import { AppBar, Toolbar, Typography } from '@material-ui/core';
 import Drawer from '../Drawer';
 import Account from '../Account';
 import Notifications from '../Notifications';
@@ -13,10 +13,11 @@ import IconButton from '../../components/IconButton';
 import { logout, removeNotification } from '../../actions';
 import { getMyUser } from '../../selectors';
 import { homeRoute } from '../../utils';
-import styles from './styles';
+import useStyles from './styles';
 import messages from './messages';
 
-const Header = ({ classes, myUser, location: { pathname } }) => {
+const Header = ({ myUser, location: { pathname } }) => {
+  const classes = useStyles();
   const [isDrawerOpen, toggleDrawer] = useState(false);
   const { token } = myUser;
   return (
@@ -57,5 +58,4 @@ export default compose(
     mapStateToProps,
     { logout, removeNotification },
   ),
-  withStyles(styles),
 )(Header);
