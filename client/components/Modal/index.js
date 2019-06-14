@@ -1,11 +1,14 @@
 import React from 'react';
-import { Dialog, withStyles } from '@material-ui/core';
-import styles from './styles';
+import { Dialog } from '@material-ui/core';
+import useStyles from './styles';
 
-const Modal = ({ classes, children, ...rest }) => (
-  <Dialog {...rest}>
-    <div className={classes.p3}>{children}</div>
-  </Dialog>
-);
+const Modal = ({ children, ...rest }) => {
+  const classes = useStyles();
+  return (
+    <Dialog {...rest}>
+      <div className={classes.p3}>{children}</div>
+    </Dialog>
+  );
+};
 
-export default withStyles(styles)(Modal);
+export default Modal;

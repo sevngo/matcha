@@ -2,14 +2,14 @@ import React, { useEffect } from 'react';
 import { compose } from 'ramda';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { withStyles } from '@material-ui/core';
 import Cards from '../../components/Cards';
 import withAuth from '../../hoc/withAuth';
 import { getUsers, getMyUser, getFilter } from '../../selectors';
 import { loadUsers } from '../../actions';
-import styles from './styles';
+import useStyles from './styles';
 
-const Users = ({ classes, users, loadUsers, myUser: { token }, filter }) => {
+const Users = ({ users, loadUsers, myUser: { token }, filter }) => {
+  const classes = useStyles();
   useEffect(() => {
     loadUsers(token, filter);
   }, [filter]);
@@ -28,7 +28,6 @@ const mapStateToProps = createStructuredSelector({
 
 export default compose(
   withAuth,
-  withStyles(styles),
   connect(
     mapStateToProps,
     { loadUsers },

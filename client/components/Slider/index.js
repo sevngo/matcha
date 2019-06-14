@@ -1,18 +1,11 @@
 import React, { Fragment } from 'react';
-import { FormLabel, withStyles } from '@material-ui/core';
+import { FormLabel, withTheme } from '@material-ui/core';
 import RcSlider from 'rc-slider';
 import 'rc-slider/assets/index.css';
-import styles from './styles';
+import useStyles from './styles';
 
-const Slider = ({
-  field: { name, value },
-  label,
-  unitLabel,
-  theme,
-  classes,
-  setFieldValue,
-  ...rest
-}) => {
+const Slider = ({ field: { name, value }, label, unitLabel, theme, setFieldValue, ...rest }) => {
+  const classes = useStyles();
   const { main } = theme.palette.primary;
   return (
     <Fragment>
@@ -33,4 +26,4 @@ const Slider = ({
   );
 };
 
-export default withStyles(styles, { withTheme: true })(Slider);
+export default withTheme(Slider);

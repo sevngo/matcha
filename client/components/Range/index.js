@@ -1,19 +1,12 @@
 import React, { Fragment } from 'react';
-import { FormLabel, withStyles } from '@material-ui/core';
+import { FormLabel, withTheme } from '@material-ui/core';
 import { repeat } from 'ramda';
 import { Range as RcRange } from 'rc-slider';
 import 'rc-slider/assets/index.css';
-import styles from './styles';
+import useStyles from './styles';
 
-const Range = ({
-  field: { name, value },
-  label,
-  unitLabel,
-  theme,
-  classes,
-  setFieldValue,
-  ...rest
-}) => {
+const Range = ({ field: { name, value }, label, unitLabel, theme, setFieldValue, ...rest }) => {
+  const classes = useStyles();
   const { main } = theme.palette.primary;
   return (
     <Fragment>
@@ -40,4 +33,4 @@ const Range = ({
   );
 };
 
-export default withStyles(styles, { withTheme: true })(Range);
+export default withTheme(Range);

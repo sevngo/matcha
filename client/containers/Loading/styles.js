@@ -1,4 +1,6 @@
-export default theme => ({
+import { makeStyles } from '@material-ui/core/styles';
+
+export default makeStyles(theme => ({
   root: {
     position: 'fixed',
     height: '100%',
@@ -15,4 +17,4 @@ export default theme => ({
     transform: 'translate(-50%, -50%)',
     zIndex: theme.zIndex.tooltip + 1,
   },
-});
+}));

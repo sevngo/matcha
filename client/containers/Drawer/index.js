@@ -1,14 +1,15 @@
 import React from 'react';
 import { compose } from 'ramda';
-import { withStyles, Drawer as MDrawer } from '@material-ui/core';
+import { Drawer as MDrawer } from '@material-ui/core';
 import UserForm from '../../components/UserForm';
 import { createStructuredSelector } from 'reselect';
 import { getFilter } from '../../selectors';
 import { connect } from 'react-redux';
 import { handleFilter } from '../../actions';
-import styles from './styles';
+import useStyles from './styles';
 
-const Drawer = ({ classes, filter, handleFilter, isDrawerOpen, toggleDrawer }) => {
+const Drawer = ({ filter, handleFilter, isDrawerOpen, toggleDrawer }) => {
+  const classes = useStyles();
   return (
     <MDrawer
       open={isDrawerOpen}
@@ -31,5 +32,4 @@ export default compose(
     mapStateToProps,
     { handleFilter },
   ),
-  withStyles(styles),
 )(Drawer);

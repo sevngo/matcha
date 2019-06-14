@@ -3,7 +3,6 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import {
-  withStyles,
   Grid,
   AppBar,
   Tabs,
@@ -17,10 +16,11 @@ import {
 import UserForm from '../../components/UserForm';
 import Modal from '../../components/Modal';
 import { register, login, forgotPassword } from '../../actions';
-import styles from './styles';
+import useStyles from './styles';
 import messages from './messages';
 
-const Auth = ({ classes, login, register, forgotPassword }) => {
+const Auth = ({ login, register, forgotPassword }) => {
+  const classes = useStyles();
   const [tab, handleTab] = useState(0);
   const [isModalOpen, toggleModal] = useState(false);
   const initialValues = {
@@ -83,7 +83,6 @@ const Auth = ({ classes, login, register, forgotPassword }) => {
 };
 
 export default compose(
-  withStyles(styles),
   connect(
     null,
     { register, login, forgotPassword },

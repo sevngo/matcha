@@ -2,14 +2,7 @@ import React, { useState } from 'react';
 import { withFormik, Field } from 'formik';
 import { FormattedMessage } from 'react-intl';
 import { has, compose, map, isNil, path } from 'ramda';
-import {
-  Grid,
-  withStyles,
-  Button,
-  FormControlLabel,
-  Radio as MRadio,
-  MenuItem,
-} from '@material-ui/core';
+import { Grid, Button, FormControlLabel, Radio as MRadio, MenuItem } from '@material-ui/core';
 import IconButton from '../IconButton';
 import Input from '../Input';
 import Radio from '../Radio';
@@ -30,14 +23,13 @@ import {
   isTrimmed,
 } from '../../utils';
 import { genderOptions, sortByOptions, interestsOptions } from './constants';
-import styles from './styles';
+import useStyles from './styles';
 import messages from './messages';
 import { compact } from '../../utils';
 
 const Component = ({
   handleSubmit,
   initialValues,
-  classes,
   isValid,
   disabled,
   resetForm,
@@ -45,6 +37,7 @@ const Component = ({
   setFieldValue,
   values,
 }) => {
+  const classes = useStyles();
   const [showPassword, toggleShowPassword] = useState(false);
   const hasAddress = !isNil(path(['address', 'coordinates'])(values));
   return (
@@ -267,5 +260,4 @@ export default compose(
   }),
   withAutocomplete('address'),
   withGeolocation('address'),
-  withStyles(styles),
 )(Component);

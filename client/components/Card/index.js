@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import {
-  withStyles,
   Card as MCard,
   CardActionArea,
   CardContent,
@@ -14,13 +13,14 @@ import { path } from 'ramda';
 import emptyImage from '../../images/emptyImage.png';
 import Interests from '../Interests';
 import { getAge, userRoute } from '../../utils';
-import styles from './styles';
+import useStyles from './styles';
 import messages from './messages';
 
-const Card = ({ user, classes }) => {
+const Card = ({ user }) => {
   const { images } = user;
   const imageId = path([0, '_id'])(images);
   const image = imageId ? `/api/users/${user._id}/images/${imageId}` : emptyImage;
+  const classes = useStyles();
   return (
     <MCard className={classes.card} elevation={24}>
       <CardActionArea component={Link} to={userRoute(user._id)}>
@@ -47,4 +47,4 @@ const Card = ({ user, classes }) => {
   );
 };
 
-export default withStyles(styles)(Card);
+export default Card;

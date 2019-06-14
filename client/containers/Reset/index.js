@@ -1,19 +1,19 @@
 import React from 'react';
 import { compose } from 'ramda';
 import { connect } from 'react-redux';
-import { withStyles, Paper, Grid } from '@material-ui/core';
+import { Paper, Grid } from '@material-ui/core';
 import UserForm from '../../components/UserForm';
 import withoutAuth from '../../hoc/withoutAuth';
 import { updateUser } from '../../actions/myUser';
-import styles from './styles';
+import useStyles from './styles';
 
 const Reset = ({
-  classes,
   match: {
     params: { token },
   },
   updateUser,
 }) => {
+  const classes = useStyles();
   return (
     <Grid container justify="center" className={classes.p3}>
       <Paper elevation={24} className={classes.paper}>
@@ -24,7 +24,6 @@ const Reset = ({
 };
 
 export default compose(
-  withStyles(styles),
   connect(
     null,
     { updateUser },

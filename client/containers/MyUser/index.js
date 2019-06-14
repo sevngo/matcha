@@ -3,16 +3,17 @@ import { compose, length, isEmpty, path, map, pick } from 'ramda';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { FormattedMessage } from 'react-intl';
-import { withStyles, Paper, Grid, Button, Typography, Icon, Divider } from '@material-ui/core';
+import { Paper, Grid, Button, Typography, Icon, Divider } from '@material-ui/core';
 import UserForm from '../../components/UserForm';
 import Carousel from '../../components/Carousel';
 import Popover from '../../components/Popover';
 import { updateUser, uploadImage, removeImage, likeUser } from '../../actions';
 import { getMyUser } from '../../selectors';
-import styles from './styles';
+import useStyles from './styles';
 import messages from './messages';
 
-const MyUser = ({ classes, myUser, updateUser, uploadImage, removeImage, likeUser }) => {
+const MyUser = ({ myUser, updateUser, uploadImage, removeImage, likeUser }) => {
+  const classes = useStyles();
   const { _id, token, images, usersBlocked } = myUser;
   const [activeStep, handleStep] = useState(0);
   const [anchorEl, handlePopover] = useState();
@@ -141,7 +142,6 @@ const mapStateToProps = createStructuredSelector({
 });
 
 export default compose(
-  withStyles(styles),
   connect(
     mapStateToProps,
     { updateUser, uploadImage, removeImage, likeUser },
