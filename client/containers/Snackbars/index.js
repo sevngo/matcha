@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { compose } from 'ramda';
-import { createStructuredSelector } from 'reselect';
 import { withSnackbar } from 'notistack';
 import { forEach, includes } from 'ramda';
 import { removeSnackbar } from '../../actions';
 import { getSnackbars } from '../../selectors';
 
-const Snackbars = ({ snackbars, enqueueSnackbar, removeSnackbar }) => {
+const Snackbars = ({ enqueueSnackbar, removeSnackbar }) => {
   const [displayed, handleDsiplayed] = useState([]);
+  const snackbars = useSelector(getSnackbars);
   useEffect(() => {
     forEach(snackbar => {
       if (includes(snackbar.key)(displayed)) return;
@@ -20,13 +20,9 @@ const Snackbars = ({ snackbars, enqueueSnackbar, removeSnackbar }) => {
   return false;
 };
 
-const mapStateToProps = createStructuredSelector({
-  snackbars: getSnackbars,
-});
-
 export default compose(
   connect(
-    mapStateToProps,
+    null,
     { removeSnackbar },
   ),
   withSnackbar,

@@ -1,8 +1,7 @@
 import React, { useState, Fragment } from 'react';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
+import { connect, useSelector } from 'react-redux';
 import { compose } from 'ramda';
 import { FormattedMessage } from 'react-intl';
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
@@ -11,15 +10,15 @@ import Account from '../Account';
 import Notifications from '../Notifications';
 import IconButton from '../../components/IconButton';
 import { logout, removeNotification } from '../../actions';
-import { getMyUser } from '../../selectors';
+import { getToken } from '../../selectors';
 import { homeRoute } from '../../utils';
 import useStyles from './styles';
 import messages from './messages';
 
-const Header = ({ myUser, location: { pathname } }) => {
+const Header = ({ location: { pathname } }) => {
   const classes = useStyles();
+  const token = useSelector(getToken);
   const [isDrawerOpen, toggleDrawer] = useState(false);
-  const { token } = myUser;
   return (
     <Fragment>
       <AppBar position="static" className={classes.appBar}>
@@ -50,12 +49,10 @@ const Header = ({ myUser, location: { pathname } }) => {
   );
 };
 
-const mapStateToProps = createStructuredSelector({ myUser: getMyUser });
-
 export default compose(
   withRouter,
   connect(
-    mapStateToProps,
+    null,
     { logout, removeNotification },
   ),
 )(Header);

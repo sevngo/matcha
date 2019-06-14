@@ -1,13 +1,12 @@
 import React, { Fragment } from 'react';
-import { compose } from 'ramda';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
+import { useSelector } from 'react-redux';
 import Loader from '../../components/Loader';
 import { getIsLoading } from '../../selectors';
 import useStyles from './styles';
 
-const Loading = ({ isLoading }) => {
+const Loading = () => {
   const classes = useStyles();
+  const isLoading = useSelector(getIsLoading);
   if (!isLoading) return false;
   return (
     <Fragment>
@@ -19,8 +18,4 @@ const Loading = ({ isLoading }) => {
   );
 };
 
-const mapStateToProps = createStructuredSelector({
-  isLoading: getIsLoading,
-});
-
-export default compose(connect(mapStateToProps))(Loading);
+export default Loading;

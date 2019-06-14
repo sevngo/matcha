@@ -1,18 +1,18 @@
 import React, { useState, Fragment } from 'react';
 import { withRouter } from 'react-router';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
+import { connect, useSelector } from 'react-redux';
 import { compose, path, length, isEmpty } from 'ramda';
 import { FormattedMessage } from 'react-intl';
 import { Typography, Grid, Icon, Divider, Badge, IconButton } from '@material-ui/core';
 import Popover from '../../components/Popover';
 import { removeNotification } from '../../actions';
-import { getMyUser } from '../../selectors';
+import { getNotifications } from '../../selectors';
 import useStyles from './styles';
 import messages from './messages';
 
-const Notifications = ({ myUser: { notifications }, removeNotification }) => {
+const Notifications = ({ removeNotification }) => {
   const classes = useStyles();
+  const notifications = useSelector(getNotifications);
   const [anchorEl, handlePopover] = useState();
   const hasNotifications = isEmpty(notifications);
   const notificationsLength = length(notifications);
@@ -53,12 +53,10 @@ const Notifications = ({ myUser: { notifications }, removeNotification }) => {
   );
 };
 
-const mapStateToProps = createStructuredSelector({ myUser: getMyUser });
-
 export default compose(
   withRouter,
   connect(
-    mapStateToProps,
+    null,
     { removeNotification },
   ),
 )(Notifications);

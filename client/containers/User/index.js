@@ -23,12 +23,12 @@ const User = ({
   likeUser,
   blockUser,
 }) => {
-  const classes = useStyles();
   if (id === myUser._id) return <MyUser />;
   const [activeStep, handleStep] = useState(0);
   useEffect(() => {
     loadUser(myUser, id);
   }, []);
+  const classes = useStyles();
   const isLiked = Boolean(find(userLiked => userLiked._id === user._id)(myUser.usersLiked));
   const isBlocked = Boolean(find(userBlocked => userBlocked._id === user._id)(myUser.usersBlocked));
   const isFriend = find(friend => friend._id === user._id)(myUser.friends);
