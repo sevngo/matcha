@@ -1,6 +1,5 @@
 import React, { useState, Fragment } from 'react';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import {
   Grid,
@@ -19,7 +18,8 @@ import { register, login, forgotPassword } from '../../actions';
 import useStyles from './styles';
 import messages from './messages';
 
-const Auth = ({ login, register, forgotPassword }) => {
+const Auth = () => {
+  const dispatch = useDispatch();
   const classes = useStyles();
   const [tab, handleTab] = useState(0);
   const [isModalOpen, toggleModal] = useState(false);
@@ -40,7 +40,7 @@ const Auth = ({ login, register, forgotPassword }) => {
           <div className={classes.p3}>
             {tab === 0 ? (
               <Fragment>
-                <UserForm initialValues={initialValues} submit={login} />
+                <UserForm initialValues={initialValues} submit={login} dispatch={dispatch} />
                 <Button
                   onClick={() => toggleModal(true)}
                   variant="outlined"
@@ -56,7 +56,11 @@ const Auth = ({ login, register, forgotPassword }) => {
                     <DialogContentText>
                       <FormattedMessage {...messages.enterEmail} />
                     </DialogContentText>
-                    <UserForm initialValues={{ email: '' }} submit={forgotPassword} />
+                    <UserForm
+                      initialValues={{ email: '' }}
+                      submit={forgotPassword}
+                      dispatch={dispatch}
+                    />
                   </DialogContent>
                 </Modal>
               </Fragment>
@@ -72,6 +76,7 @@ const Auth = ({ login, register, forgotPassword }) => {
                   address: { name: '' },
                 }}
                 submit={register}
+                dispatch={dispatch}
                 withGeolocation
               />
             )}
@@ -82,9 +87,4 @@ const Auth = ({ login, register, forgotPassword }) => {
   );
 };
 
-export default compose(
-  connect(
-    null,
-    { register, login, forgotPassword },
-  ),
-)(Auth);
+export default Auth;

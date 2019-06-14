@@ -254,7 +254,7 @@ const Component = ({
 export default compose(
   withFormik({
     mapPropsToValues: ({ initialValues }) => initialValues,
-    handleSubmit: (values, { props: { submit } }) => submit(compact(values)),
+    handleSubmit: (values, { props: { submit, dispatch } }) => dispatch(submit(compact(values))),
     displayName: 'UserForm',
     enableReinitialize: true,
   }),

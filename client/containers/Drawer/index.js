@@ -1,15 +1,16 @@
 import React from 'react';
-import { compose } from 'ramda';
+import { useDispatch } from 'react-redux';
 import { Drawer as MDrawer } from '@material-ui/core';
 import UserForm from '../../components/UserForm';
 import { getFilter } from '../../selectors';
-import { connect, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { handleFilter } from '../../actions';
 import useStyles from './styles';
 
-const Drawer = ({ handleFilter, isDrawerOpen, toggleDrawer }) => {
+const Drawer = ({ isDrawerOpen, toggleDrawer }) => {
   const classes = useStyles();
   const filter = useSelector(getFilter);
+  const dispatch = useDispatch();
   return (
     <MDrawer
       open={isDrawerOpen}
@@ -17,15 +18,10 @@ const Drawer = ({ handleFilter, isDrawerOpen, toggleDrawer }) => {
       onKeyDown={() => toggleDrawer(false)}
     >
       <div className={classes.root}>
-        <UserForm initialValues={filter} submit={handleFilter} />
+        <UserForm initialValues={filter} submit={handleFilter} dispatch={dispatch} />
       </div>
     </MDrawer>
   );
 };
 
-export default compose(
-  connect(
-    null,
-    { handleFilter },
-  ),
-)(Drawer);
+export default Drawer;

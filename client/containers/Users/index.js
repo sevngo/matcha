@@ -1,19 +1,20 @@
 import React, { useEffect } from 'react';
 import { compose } from 'ramda';
-import { connect, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Cards from '../../components/Cards';
 import withAuth from '../../hoc/withAuth';
 import { getUsers, getToken, getFilter } from '../../selectors';
 import { loadUsers } from '../../actions';
 import useStyles from './styles';
 
-const Users = ({ loadUsers }) => {
+const Users = () => {
   const token = useSelector(getToken);
   const users = useSelector(getUsers);
   const filter = useSelector(getFilter);
   const classes = useStyles();
+  const dispatch = useDispatch();
   useEffect(() => {
-    loadUsers(token, filter);
+    dispatch(loadUsers(token, filter));
   }, [filter]);
   return (
     <div className={classes.root}>
@@ -22,10 +23,4 @@ const Users = ({ loadUsers }) => {
   );
 };
 
-export default compose(
-  withAuth,
-  connect(
-    null,
-    { loadUsers },
-  ),
-)(Users);
+export default compose(withAuth)(Users);

@@ -1,8 +1,7 @@
 import React, { useState, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-import { compose } from 'ramda';
-import { connect, useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { MenuItem, Menu } from '@material-ui/core';
 import IconButton from '../../components/IconButton';
 import { logout } from '../../actions';
@@ -11,9 +10,10 @@ import { getMyUserId } from '../../selectors';
 
 import messages from './messages.js';
 
-const Account = ({ logout }) => {
+const Account = () => {
   const [anchorEl, handleMenu] = useState();
   const _id = useSelector(getMyUserId);
+  const dispatch = useDispatch();
   return (
     <Fragment>
       <IconButton onClick={e => handleMenu(e.currentTarget)}>account_circle</IconButton>
@@ -24,7 +24,7 @@ const Account = ({ logout }) => {
         <MenuItem
           onClick={() => {
             handleMenu();
-            logout();
+            dispatch(logout());
           }}
         >
           <FormattedMessage {...messages.logout} />
@@ -34,9 +34,4 @@ const Account = ({ logout }) => {
   );
 };
 
-export default compose(
-  connect(
-    null,
-    { logout },
-  ),
-)(Account);
+export default Account;
