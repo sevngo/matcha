@@ -1,7 +1,7 @@
 import React, { useState, Fragment } from 'react';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
-import { connect, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { compose } from 'ramda';
 import { FormattedMessage } from 'react-intl';
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
@@ -9,7 +9,6 @@ import Drawer from '../Drawer';
 import Account from '../Account';
 import Notifications from '../Notifications';
 import IconButton from '../../components/IconButton';
-import { logout, removeNotification } from '../../actions';
 import { getToken } from '../../selectors';
 import { homeRoute } from '../../utils';
 import useStyles from './styles';
@@ -49,10 +48,4 @@ const Header = ({ location: { pathname } }) => {
   );
 };
 
-export default compose(
-  withRouter,
-  connect(
-    null,
-    { logout, removeNotification },
-  ),
-)(Header);
+export default compose(withRouter)(Header);
