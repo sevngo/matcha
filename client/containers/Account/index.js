@@ -2,18 +2,18 @@ import React, { useState, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { compose } from 'ramda';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { MenuItem, Menu } from '@material-ui/core';
-import { createStructuredSelector } from 'reselect';
 import IconButton from '../../components/IconButton';
 import { logout } from '../../actions';
 import { userRoute } from '../../utils';
-import { getMyUser } from '../../selectors';
+import { getMyUserId } from '../../selectors';
 
 import messages from './messages.js';
 
-const Account = ({ logout, myUser: { _id } }) => {
+const Account = ({ logout }) => {
   const [anchorEl, handleMenu] = useState();
+  const _id = useSelector(getMyUserId);
   return (
     <Fragment>
       <IconButton onClick={e => handleMenu(e.currentTarget)}>account_circle</IconButton>
@@ -34,11 +34,9 @@ const Account = ({ logout, myUser: { _id } }) => {
   );
 };
 
-const mapStateToProps = createStructuredSelector({ myUser: getMyUser });
-
 export default compose(
   connect(
-    mapStateToProps,
+    null,
     { logout },
   ),
 )(Account);

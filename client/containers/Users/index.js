@@ -1,14 +1,16 @@
 import React, { useEffect } from 'react';
 import { compose } from 'ramda';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
+import { connect, useSelector } from 'react-redux';
 import Cards from '../../components/Cards';
 import withAuth from '../../hoc/withAuth';
-import { getUsers, getMyUser, getFilter } from '../../selectors';
+import { getUsers, getToken, getFilter } from '../../selectors';
 import { loadUsers } from '../../actions';
 import useStyles from './styles';
 
-const Users = ({ users, loadUsers, myUser: { token }, filter }) => {
+const Users = ({ loadUsers }) => {
+  const token = useSelector(getToken);
+  const users = useSelector(getUsers);
+  const filter = useSelector(getFilter);
   const classes = useStyles();
   useEffect(() => {
     loadUsers(token, filter);
@@ -20,16 +22,10 @@ const Users = ({ users, loadUsers, myUser: { token }, filter }) => {
   );
 };
 
-const mapStateToProps = createStructuredSelector({
-  myUser: getMyUser,
-  users: getUsers,
-  filter: getFilter,
-});
-
 export default compose(
   withAuth,
   connect(
-    mapStateToProps,
+    null,
     { loadUsers },
   ),
 )(Users);
