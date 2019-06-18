@@ -1,19 +1,19 @@
 import React, { useState, Fragment } from 'react';
+import { useSelector } from 'react-redux';
 import { withRouter } from 'react-router';
-import { useSelector, useDispatch } from 'react-redux';
 import { compose, path, length, isEmpty } from 'ramda';
 import { FormattedMessage } from 'react-intl';
 import { Typography, Grid, Icon, Divider, Badge, IconButton } from '@material-ui/core';
 import Popover from '../../components/Popover';
-import { removeNotification } from '../../actions';
 import { getNotifications } from '../../selectors';
+import { useMyDispatch } from '../../hooks';
 import useStyles from './styles';
 import messages from './messages';
 
 const Notifications = () => {
   const classes = useStyles();
   const notifications = useSelector(getNotifications);
-  const dispatch = useDispatch();
+  const { removeNotification } = useMyDispatch();
   const [anchorEl, handlePopover] = useState();
   const hasNotifications = isEmpty(notifications);
   const notificationsLength = length(notifications);
@@ -37,7 +37,7 @@ const Notifications = () => {
                     />
                   </Typography>
                   <Icon
-                    onClick={() => dispatch(removeNotification(notification._id))}
+                    onClick={() => removeNotification(notification._id)}
                     color="inherit"
                     className={classes.ml1}
                   >

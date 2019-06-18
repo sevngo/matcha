@@ -1,5 +1,5 @@
-import React, { Fragment } from 'react';
 import { useSelector } from 'react-redux';
+import React, { Fragment } from 'react';
 import Loader from '../../components/Loader';
 import { getIsLoading } from '../../selectors';
 import useStyles from './styles';

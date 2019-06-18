@@ -1,21 +1,21 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { compose } from 'ramda';
 import { withSnackbar } from 'notistack';
 import { forEach, includes } from 'ramda';
-import { removeSnackbar } from '../../actions';
 import { getSnackbars } from '../../selectors';
+import { useMyDispatch } from '../../hooks';
 
-const Snackbars = ({ enqueueSnackbar }) => {
+const Snackbars = () => {
   const [displayed, handleDsiplayed] = useState([]);
   const snackbars = useSelector(getSnackbars);
-  const dispatch = useDispatch();
+  const { removeSnackbar, enqueueSnackbar } = useMyDispatch();
   useEffect(() => {
     forEach(snackbar => {
       if (includes(snackbar.key)(displayed)) return;
       enqueueSnackbar(snackbar.message, snackbar.options);
       handleDsiplayed([...displayed, snackbar.key]);
-      dispatch(removeSnackbar(snackbar.key));
+      removeSnackbar(snackbar.key);
     })(snackbars);
   });
   return false;

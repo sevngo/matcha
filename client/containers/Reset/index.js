@@ -1,10 +1,9 @@
 import React from 'react';
 import { compose } from 'ramda';
-import { useDispatch } from 'react-redux';
 import { Paper, Grid } from '@material-ui/core';
 import UserForm from '../../components/UserForm';
 import withoutAuth from '../../hoc/withoutAuth';
-import { updateUser } from '../../actions/myUser';
+import { useMyDispatch } from '../../hooks';
 import useStyles from './styles';
 
 const Reset = ({
@@ -12,16 +11,12 @@ const Reset = ({
     params: { token },
   },
 }) => {
-  const dispatch = useDispatch();
+  const { updateUser } = useMyDispatch();
   const classes = useStyles();
   return (
     <Grid container justify="center" className={classes.p3}>
       <Paper elevation={24} className={classes.paper}>
-        <UserForm
-          initialValues={{ token, newPassword: '' }}
-          submit={updateUser}
-          dispatch={dispatch}
-        />
+        <UserForm initialValues={{ token, newPassword: '' }} submit={updateUser} />
       </Paper>
     </Grid>
   );
