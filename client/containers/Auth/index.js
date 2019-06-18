@@ -1,5 +1,4 @@
 import React, { useState, Fragment } from 'react';
-import { useDispatch } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import {
   Grid,
@@ -14,12 +13,12 @@ import {
 } from '@material-ui/core';
 import UserForm from '../../components/UserForm';
 import Modal from '../../components/Modal';
-import { register, login, forgotPassword } from '../../actions';
+import { useMyDispatch } from '../../hooks';
 import useStyles from './styles';
 import messages from './messages';
 
 const Auth = () => {
-  const dispatch = useDispatch();
+  const { login, register, forgotPassword } = useMyDispatch();
   const classes = useStyles();
   const [tab, handleTab] = useState(0);
   const [isModalOpen, toggleModal] = useState(false);
@@ -40,7 +39,7 @@ const Auth = () => {
           <div className={classes.p3}>
             {tab === 0 ? (
               <Fragment>
-                <UserForm initialValues={initialValues} submit={login} dispatch={dispatch} />
+                <UserForm initialValues={initialValues} submit={login} />
                 <Button
                   onClick={() => toggleModal(true)}
                   variant="outlined"
@@ -56,11 +55,7 @@ const Auth = () => {
                     <DialogContentText>
                       <FormattedMessage {...messages.enterEmail} />
                     </DialogContentText>
-                    <UserForm
-                      initialValues={{ email: '' }}
-                      submit={forgotPassword}
-                      dispatch={dispatch}
-                    />
+                    <UserForm initialValues={{ email: '' }} submit={forgotPassword} />
                   </DialogContent>
                 </Modal>
               </Fragment>
@@ -76,7 +71,6 @@ const Auth = () => {
                   address: { name: '' },
                 }}
                 submit={register}
-                dispatch={dispatch}
                 withGeolocation
               />
             )}

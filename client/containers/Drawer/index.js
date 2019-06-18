@@ -1,16 +1,15 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Drawer as MDrawer } from '@material-ui/core';
 import UserForm from '../../components/UserForm';
 import { getFilter } from '../../selectors';
-import { useSelector } from 'react-redux';
-import { handleFilter } from '../../actions';
+import { useMyDispatch } from '../../hooks';
 import useStyles from './styles';
 
 const Drawer = ({ isDrawerOpen, toggleDrawer }) => {
   const classes = useStyles();
   const filter = useSelector(getFilter);
-  const dispatch = useDispatch();
+  const { handleFilter } = useMyDispatch();
   return (
     <MDrawer
       open={isDrawerOpen}
@@ -18,7 +17,7 @@ const Drawer = ({ isDrawerOpen, toggleDrawer }) => {
       onKeyDown={() => toggleDrawer(false)}
     >
       <div className={classes.root}>
-        <UserForm initialValues={filter} submit={handleFilter} dispatch={dispatch} />
+        <UserForm initialValues={filter} submit={handleFilter} />
       </div>
     </MDrawer>
   );

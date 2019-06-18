@@ -1,17 +1,16 @@
 import { useEffect } from 'react';
 import { compose } from 'ramda';
-import { useDispatch } from 'react-redux';
 import withoutAuth from '../../hoc/withoutAuth';
-import { updateUser } from '../../actions/myUser';
+import { useMyDispatch } from '../../hooks';
 
 const Reset = ({
   match: {
     params: { token },
   },
 }) => {
-  const dispatch = useDispatch();
+  const { updateUser } = useMyDispatch();
   useEffect(() => {
-    dispatch(updateUser({ token, emailVerified: true }));
+    updateUser({ token, emailVerified: true });
   }, []);
   return false;
 };

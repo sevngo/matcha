@@ -1,19 +1,18 @@
 import React, { useState, Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { useSelector, useDispatch } from 'react-redux';
 import { MenuItem, Menu } from '@material-ui/core';
 import IconButton from '../../components/IconButton';
-import { logout } from '../../actions';
-import { userRoute } from '../../utils';
 import { getMyUserId } from '../../selectors';
-
+import { userRoute } from '../../utils';
+import { useMyDispatch } from '../../hooks';
 import messages from './messages.js';
 
 const Account = () => {
   const [anchorEl, handleMenu] = useState();
   const _id = useSelector(getMyUserId);
-  const dispatch = useDispatch();
+  const { logout } = useMyDispatch();
   return (
     <Fragment>
       <IconButton onClick={e => handleMenu(e.currentTarget)}>account_circle</IconButton>
@@ -24,7 +23,7 @@ const Account = () => {
         <MenuItem
           onClick={() => {
             handleMenu();
-            dispatch(logout());
+            logout();
           }}
         >
           <FormattedMessage {...messages.logout} />
