@@ -2,9 +2,8 @@
 const request = require('supertest');
 const faker = require('faker');
 const { omit } = require('ramda');
-const app = require('../index');
-const { connectDb, disconnectDb } = require('../database');
-const { Users } = require('../database');
+const app = require('../../index');
+const { connectDb, disconnectDb, Users } = require('../../database');
 const {
   newUser,
   initialPassword,
@@ -82,7 +81,7 @@ describe('/api/users', () => {
     const { body: user } = await request(app)
       .post(`/api/users/images`)
       .set('Authorization', `Bearer ${userOneToken}`)
-      .attach('image', 'server/tests/fixtures/profile-pic.jpg')
+      .attach('image', 'server/users/tests/fixtures/profile-pic.jpg')
       .expect(200);
     expect(user).toMatchObject(myUser);
     const userData = await Users().findOne({ _id: userOne._id });
