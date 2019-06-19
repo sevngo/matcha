@@ -10,13 +10,14 @@ const { getAppUrl, getIds } = require('../utils/functions');
 
 exports.postUsers = async (req, res) => {
   try {
+    const { protocol, hostname } = req;
     const UsersCollection = Users();
     const {
       ops: [user],
     } = await UsersCollection.insertOne({ usersBlocked: [], usersLiked: [], ...req.body });
     const { _id, email, firstName, lastName } = user;
     const token = await jwt.sign({ _id }, JWT_SECRET);
-    const url = `${getAppUrl(req)}/verify/${token}`;
+    const url = `${getAppUrl(protocol, hostname, req.get('host'))}/verify/${token}`;
     await sendEmailConfirmation(email, firstName, lastName, url);
     res.status(201).send();
   } catch (e) {
@@ -149,12 +150,13 @@ exports.postUsersLogin = async (req, res) => {
 
 exports.postUsersForgot = async (req, res) => {
   try {
+    const { protocol, hostname } = req;
     const UsersCollection = Users();
     const user = await UsersCollection.findOne({ email: req.body.email });
     if (!user) throw new Error();
     const { _id, email, firstName, lastName } = user;
     const token = await jwt.sign({ _id }, JWT_SECRET);
-    const url = `${getAppUrl(req)}/reset/${token}`;
+    const url = `${getAppUrl(protocol, hostname, req.get('host'))}/reset/${token}`;
     await sendResetPassword(email, firstName, lastName, url);
     res.status(200).send();
   } catch (e) {
