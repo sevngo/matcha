@@ -13,12 +13,12 @@ import {
 } from '@material-ui/core';
 import UserForm from '../../components/UserForm';
 import Modal from '../../components/Modal';
-import { useMyDispatch } from '../../hooks';
+import { useConnect } from './hooks';
 import useStyles from './styles';
 import messages from './messages';
 
 const Auth = () => {
-  const { login, register, forgotPassword } = useMyDispatch();
+  const { login, register, forgotPassword } = useConnect();
   const classes = useStyles();
   const [tab, handleTab] = useState(0);
   const [isModalOpen, toggleModal] = useState(false);

@@ -3,7 +3,7 @@ import { compose } from 'ramda';
 import { Paper, Grid } from '@material-ui/core';
 import UserForm from '../../components/UserForm';
 import withoutAuth from '../../hoc/withoutAuth';
-import { useMyDispatch } from '../../hooks';
+import { useConnect } from './hooks';
 import useStyles from './styles';
 
 const Reset = ({
@@ -11,7 +11,7 @@ const Reset = ({
     params: { token },
   },
 }) => {
-  const { updateUser } = useMyDispatch();
+  const { updateUser } = useConnect();
   const classes = useStyles();
   return (
     <Grid container justify="center" className={classes.p3}>

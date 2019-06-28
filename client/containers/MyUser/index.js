@@ -1,23 +1,20 @@
 import React, { useRef, useState } from 'react';
 import { length, isEmpty, path, map, pick } from 'ramda';
-import { useSelector } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { Paper, Grid, Button, Typography, Icon, Divider } from '@material-ui/core';
 import UserForm from '../../components/UserForm';
 import Carousel from '../../components/Carousel';
 import Popover from '../../components/Popover';
-import { useMyDispatch } from '../../hooks';
-import { getMyUser } from '../../selectors';
+import { useConnect } from './hooks';
 import useStyles from './styles';
 import messages from './messages';
 
 const MyUser = () => {
   const classes = useStyles();
-  const myUser = useSelector(getMyUser);
-  const { _id, token, images, usersBlocked } = myUser;
+  const { myUser, updateUser, uploadImage, removeImage, likeUser } = useConnect();
   const [activeStep, handleStep] = useState(0);
   const [anchorEl, handlePopover] = useState();
-  const { updateUser, uploadImage, removeImage, likeUser } = useMyDispatch();
+  const { _id, token, images, usersBlocked } = myUser;
   const inputEl = useRef();
   const addImage = image => {
     if (image) uploadImage(token, image);
