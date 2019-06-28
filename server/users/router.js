@@ -2,11 +2,11 @@ const { Router } = require('express');
 const conversions = require('../middlewares/conversions');
 const auth = require('../middlewares/auth');
 const stages = require('../middlewares/stages');
-const usersControllers = require('./usersControllers');
+const controllers = require('./controllers');
 
 const router = new Router();
 
-router.post('/', conversions.newDateBirth, conversions.hashPassword, usersControllers.postUsers);
+router.post('/', conversions.newDateBirth, conversions.hashPassword, controllers.postUsers);
 
 router.get(
   '/',
@@ -20,7 +20,7 @@ router.get(
   stages.limit,
   stages.skip,
   stages.sort,
-  usersControllers.getUsers,
+  controllers.getUsers,
 );
 
 router.get(
@@ -28,7 +28,7 @@ router.get(
   auth.authenticate,
   auth.isValidObjectId,
   conversions.newObjectId,
-  usersControllers.getUser,
+  controllers.getUser,
 );
 
 router.patch(
@@ -41,7 +41,7 @@ router.patch(
   conversions.newUsersBlockedId,
   stages.lookupUsersLiked,
   stages.lookupUsersBlocked,
-  usersControllers.patchUsers,
+  controllers.patchUsers,
 );
 
 router.post(
@@ -51,16 +51,16 @@ router.post(
   auth.emailVerified,
   stages.lookupUsersLiked,
   stages.lookupUsersBlocked,
-  usersControllers.postUsersLogin,
+  controllers.postUsersLogin,
 );
 
-router.post('/forgot', conversions.trimBody, usersControllers.postUsersForgot);
+router.post('/forgot', conversions.trimBody, controllers.postUsersForgot);
 
 router.post(
   '/images',
   auth.authenticate,
   conversions.uploadImage.single('image'),
-  usersControllers.postUsersImages,
+  controllers.postUsersImages,
   // eslint-disable-next-line no-unused-vars
   (error, req, res, next) => {
     res.status(400).send();
@@ -68,13 +68,13 @@ router.post(
   },
 );
 
-router.delete('/images/:imageId', auth.authenticate, usersControllers.deleteUsersImages);
+router.delete('/images/:imageId', auth.authenticate, controllers.deleteUsersImages);
 
 router.get(
   '/:id/images/:imageId',
   auth.isValidObjectId,
   conversions.newObjectId,
-  usersControllers.getUsersImages,
+  controllers.getUsersImages,
 );
 
 module.exports = router;
