@@ -1,5 +1,5 @@
 const { MongoClient } = require('mongodb');
-const { usersModel } = require('./users/usersModel');
+const { usersModel } = require('./users/model');
 const { MONGODB_URL, DATABASE_NAME } = require('./utils/constants');
 const { USERS } = require('./utils/constants');
 
