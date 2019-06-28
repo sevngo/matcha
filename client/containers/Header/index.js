@@ -1,7 +1,6 @@
 import React, { useState, Fragment } from 'react';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { compose } from 'ramda';
 import { FormattedMessage } from 'react-intl';
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
@@ -9,14 +8,14 @@ import Drawer from '../Drawer';
 import Account from '../Account';
 import Notifications from '../Notifications';
 import IconButton from '../../components/IconButton';
-import { getToken } from '../../selectors';
 import { homeRoute } from '../../utils';
+import { useConnect } from './hooks';
 import useStyles from './styles';
 import messages from './messages';
 
 const Header = ({ location: { pathname } }) => {
   const classes = useStyles();
-  const token = useSelector(getToken);
+  const { token } = useConnect();
   const [isDrawerOpen, toggleDrawer] = useState(false);
   return (
     <Fragment>

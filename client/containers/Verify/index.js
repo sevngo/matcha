@@ -1,14 +1,14 @@
 import { useEffect } from 'react';
 import { compose } from 'ramda';
 import withoutAuth from '../../hoc/withoutAuth';
-import { useMyDispatch } from '../../hooks';
+import { useConnect } from '../../hooks';
 
 const Reset = ({
   match: {
     params: { token },
   },
 }) => {
-  const { updateUser } = useMyDispatch();
+  const { updateUser } = useConnect();
   useEffect(() => {
     updateUser({ token, emailVerified: true });
   }, []);

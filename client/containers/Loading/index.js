@@ -1,12 +1,11 @@
-import { useSelector } from 'react-redux';
 import React, { Fragment } from 'react';
 import Loader from '../../components/Loader';
-import { getIsLoading } from '../../selectors';
+import { useConnect } from './hooks';
 import useStyles from './styles';
 
 const Loading = () => {
   const classes = useStyles();
-  const isLoading = useSelector(getIsLoading);
+  const { isLoading } = useConnect();
   if (!isLoading) return false;
   return (
     <Fragment>

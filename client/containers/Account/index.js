@@ -1,18 +1,15 @@
 import React, { useState, Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { MenuItem, Menu } from '@material-ui/core';
 import IconButton from '../../components/IconButton';
-import { getMyUserId } from '../../selectors';
+import { useConnect } from './hooks';
 import { userRoute } from '../../utils';
-import { useMyDispatch } from '../../hooks';
 import messages from './messages.js';
 
 const Account = () => {
   const [anchorEl, handleMenu] = useState();
-  const _id = useSelector(getMyUserId);
-  const { logout } = useMyDispatch();
+  const { _id, logout } = useConnect();
   return (
     <Fragment>
       <IconButton onClick={e => handleMenu(e.currentTarget)}>account_circle</IconButton>
