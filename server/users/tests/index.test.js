@@ -2,7 +2,7 @@
 const request = require('supertest');
 const faker = require('faker');
 const { omit } = require('ramda');
-const app = require('../../index');
+const app = require('../../app');
 const { connectDb, disconnectDb, Users } = require('../../database');
 const {
   newUser,
