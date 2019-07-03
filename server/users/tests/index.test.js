@@ -23,68 +23,106 @@ beforeEach(async () => {
 afterAll(disconnectDb);
 
 describe('/api/users', () => {
-  test('POST /api/users', async () => {
-    await request(app)
-      .post('/api/users')
-      .send(newUser)
-      .expect(201);
+  describe('POST /api/users', () => {
+    test('should create a new user', async () => {
+      await request(app)
+        .post('/api/users')
+        .send(newUser)
+        .expect(201);
+    });
+    test('should not create a new user', async () => {
+      await request(app)
+        .post('/api/users')
+        .send({})
+        .expect(400);
+    });
   });
 
-  test('POST /api/users/login', async () => {
-    const myUser = omit(['birthDate', 'password', '_id'])(userOne);
-    const { body: user } = await request(app)
-      .post('/api/users/login')
-      .send({ username: userOne.username, password: initialPassword })
-      .expect(200);
-    expect(user).toMatchObject(myUser);
+  describe('POST /api/users/login', () => {
+    test('should login user', async () => {
+      const myUser = omit(['birthDate', 'password', '_id'])(userOne);
+      const { body: user } = await request(app)
+        .post('/api/users/login')
+        .send({ username: userOne.username, password: initialPassword })
+        .expect(200);
+      expect(user).toMatchObject(myUser);
+    });
+    test('should not login user', async () => {
+      await request(app)
+        .post('/api/users/login')
+        .send({ username: userOne.username, password: 'invalidPassword' })
+        .expect(400);
+    });
   });
 
-  test('GET /api/users', async () => {
-    const userRegistered = omit(['birthDate', 'password', '_id', 'email'])(userTwo);
-    const { body: users } = await request(app)
-      .get('/api/users')
-      .set('Authorization', `Bearer ${userOneToken}`)
-      .expect(200);
-    expect(users).toHaveLength(1);
-    expect(users).toMatchObject([userRegistered]);
+  describe('GET /api/users', () => {
+    test('should get all users', async () => {
+      const userRegistered = omit(['birthDate', 'password', '_id', 'email'])(userTwo);
+      const { body: users } = await request(app)
+        .get('/api/users')
+        .set('Authorization', `Bearer ${userOneToken}`)
+        .expect(200);
+      expect(users).toHaveLength(1);
+      expect(users).toMatchObject([userRegistered]);
+    });
   });
 
-  test('GET /api/users/:id', async () => {
-    const userRegistered = omit(['birthDate', 'password', '_id', 'email'])(userOne);
-    const { body: user } = await request(app)
-      .get(`/api/users/${initialId}`)
-      .set('Authorization', `Bearer ${userOneToken}`)
-      .expect(200);
-    expect(user).toMatchObject(userRegistered);
+  describe('GET /api/users/:id', () => {
+    test('should get specific user', async () => {
+      const userRegistered = omit(['birthDate', 'password', '_id', 'email'])(userOne);
+      const { body: user } = await request(app)
+        .get(`/api/users/${initialId}`)
+        .set('Authorization', `Bearer ${userOneToken}`)
+        .expect(200);
+      expect(user).toMatchObject(userRegistered);
+    });
+    test('should not found user', async () => {
+      await request(app)
+        .get(`/api/users/1asd5467qwe4`)
+        .set('Authorization', `Bearer ${userOneToken}`)
+        .expect(404);
+    });
   });
 
-  test('PATCH /api/users', async () => {
-    const myUser = omit(['birthDate', 'password', '_id'])(userOne);
-    const newValue = { username: faker.internet.userName() };
-    const { body: user } = await request(app)
-      .patch(`/api/users`)
-      .send(newValue)
-      .set('Authorization', `Bearer ${userOneToken}`)
-      .expect(200);
-    expect(user).toMatchObject({ ...myUser, ...newValue });
+  describe('PATCH /api/users', () => {
+    test('should update user', async () => {
+      const myUser = omit(['birthDate', 'password', '_id'])(userOne);
+      const newValue = { username: faker.internet.userName() };
+      const { body: user } = await request(app)
+        .patch(`/api/users`)
+        .send(newValue)
+        .set('Authorization', `Bearer ${userOneToken}`)
+        .expect(200);
+      expect(user).toMatchObject({ ...myUser, ...newValue });
+    });
   });
 
-  test('POST /api/users/forgot', async () => {
-    await request(app)
-      .post(`/api/users/forgot`)
-      .send({ email: userOne.email })
-      .expect(200);
+  describe('POST /api/users/forgot', () => {
+    test('should send email', async () => {
+      await request(app)
+        .post(`/api/users/forgot`)
+        .send({ email: userOne.email })
+        .expect(200);
+    });
+    test('should not send email', async () => {
+      await request(app)
+        .post(`/api/users/forgot`)
+        .send({ email: 'invalid@email.com' })
+        .expect(400);
+    });
   });
 
-  test('POST /api/users/images', async () => {
-    const myUser = omit(['birthDate', 'password', '_id'])(userOne);
-    const { body: user } = await request(app)
-      .post(`/api/users/images`)
-      .set('Authorization', `Bearer ${userOneToken}`)
-      .attach('image', 'server/users/tests/fixtures/profile-pic.jpg')
-      .expect(200);
-    expect(user).toMatchObject(myUser);
-    const userData = await Users().findOne({ _id: userOne._id });
-    expect(userData.images[0].data.buffer).toEqual(expect.any(Buffer));
+  describe('POST /api/users/images', () => {
+    test('should upload image', async () => {
+      const myUser = omit(['birthDate', 'password', '_id'])(userOne);
+      const { body: user } = await request(app)
+        .post(`/api/users/images`)
+        .set('Authorization', `Bearer ${userOneToken}`)
+        .attach('image', 'server/users/tests/fixtures/profile-pic.jpg')
+        .expect(200);
+      expect(user).toMatchObject(myUser);
+      const userData = await Users().findOne({ _id: userOne._id });
+      expect(userData.images[0].data.buffer).toEqual(expect.any(Buffer));
+    });
   });
 });

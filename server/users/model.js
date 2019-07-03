@@ -6,7 +6,7 @@ exports.usersModel = async db => {
   await db.collection(USERS).createIndex({ username: 1 }, { unique: true, sparse: true });
   await db.collection(USERS).createIndex({ email: 1 }, { unique: true, sparse: true });
   await db.collection(USERS).createIndex({ address: '2dsphere' });
-  await db.command({
+  return db.command({
     collMod: USERS,
     validator: {
       $jsonSchema: {
