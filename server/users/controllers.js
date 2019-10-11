@@ -8,7 +8,7 @@ const { sendEmailConfirmation, sendResetPassword } = require('../emails/account'
 const { JWT_SECRET } = require('../utils/constants');
 const { getAppUrl, getIds } = require('../utils/functions');
 
-exports.postUsers = async (req, res) => {
+exports.postUsers = async (req, res, next) => {
   try {
     const { protocol, hostname } = req;
     const UsersCollection = Users();
@@ -21,12 +21,11 @@ exports.postUsers = async (req, res) => {
     await sendEmailConfirmation(email, firstName, lastName, url);
     res.status(201).send();
   } catch (e) {
-    res.status(400).send();
-    console.log(e); // eslint-disable-line no-console
+    next(e);
   }
 };
 
-exports.getUsers = async (req, res) => {
+exports.getUsers = async (req, res, next) => {
   try {
     const {
       maxDistance,
@@ -57,12 +56,11 @@ exports.getUsers = async (req, res) => {
     ).toArray();
     res.status(200).send(users);
   } catch (e) {
-    res.status(500).send();
-    console.log(e); // eslint-disable-line no-console
+    next(e);
   }
 };
 
-exports.getUser = async (req, res) => {
+exports.getUser = async (req, res, next) => {
   try {
     const UsersCollection = Users();
     const projection = project({ password: 0, 'images.data': 0, email: 0 });
@@ -72,12 +70,11 @@ exports.getUser = async (req, res) => {
     if (!data) return res.status(404).send();
     res.send(data);
   } catch (e) {
-    res.status(500).send();
-    console.log(e); // eslint-disable-line no-console
+    next(e);
   }
 };
 
-exports.patchUsers = async (req, res) => {
+exports.patchUsers = async (req, res, next) => {
   try {
     const {
       myUser: { _id },
@@ -109,12 +106,11 @@ exports.patchUsers = async (req, res) => {
     ]).toArray();
     res.send({ ...data, friends });
   } catch (e) {
-    res.status(400).send();
-    console.log(e); // eslint-disable-line no-console
+    next(e);
   }
 };
 
-exports.postUsersLogin = async (req, res) => {
+exports.postUsersLogin = async (req, res, next) => {
   try {
     const {
       myUser: { _id, usersLiked },
@@ -143,12 +139,11 @@ exports.postUsersLogin = async (req, res) => {
     ]).toArray();
     res.send({ ...data, friends, token });
   } catch (e) {
-    res.status(400).send();
-    console.log(e); // eslint-disable-line no-console
+    next(e);
   }
 };
 
-exports.postUsersForgot = async (req, res) => {
+exports.postUsersForgot = async (req, res, next) => {
   try {
     const { protocol, hostname } = req;
     const UsersCollection = Users();
@@ -160,12 +155,11 @@ exports.postUsersForgot = async (req, res) => {
     await sendResetPassword(email, firstName, lastName, url);
     res.status(200).send();
   } catch (e) {
-    res.status(400).send();
-    console.log(e); // eslint-disable-line no-console
+    next(e);
   }
 };
 
-exports.postUsersImages = async (req, res) => {
+exports.postUsersImages = async (req, res, next) => {
   try {
     const {
       myUser: { _id },
@@ -187,12 +181,11 @@ exports.postUsersImages = async (req, res) => {
     ).toArray();
     res.send(data);
   } catch (e) {
-    res.status(400).send();
-    console.log(e); // eslint-disable-line no-console
+    next(e);
   }
 };
 
-exports.deleteUsersImages = async (req, res) => {
+exports.deleteUsersImages = async (req, res, next) => {
   try {
     const {
       myUser: { _id },
@@ -210,12 +203,11 @@ exports.deleteUsersImages = async (req, res) => {
     ).toArray();
     res.send(data);
   } catch (e) {
-    res.status(500).send();
-    console.log(e); // eslint-disable-line no-console
+    next(e);
   }
 };
 
-exports.getUsersImages = async (req, res) => {
+exports.getUsersImages = async (req, res, next) => {
   try {
     const UsersCollection = Users();
     const imageId = ObjectID(req.params.imageId);
@@ -225,7 +217,6 @@ exports.getUsersImages = async (req, res) => {
     res.type('png');
     res.send(data.buffer);
   } catch (e) {
-    res.status(500).send();
-    console.log(e); // eslint-disable-line no-console
+    next(e);
   }
 };
