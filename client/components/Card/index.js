@@ -12,7 +12,7 @@ import {
 import { path } from 'ramda';
 import emptyImage from '../../images/emptyImage.png';
 import Interests from '../Interests';
-import { getAge, userRoute } from '../../utils';
+import { getAge, userPath } from '../../utils';
 import useStyles from './styles';
 import messages from './messages';
 
@@ -23,7 +23,7 @@ const Card = ({ user }) => {
   const classes = useStyles();
   return (
     <MCard className={classes.card} elevation={24}>
-      <CardActionArea component={Link} to={userRoute(user._id)}>
+      <CardActionArea component={Link} to={userPath(user._id)}>
         <CardMedia className={classes.media} image={image} title={user.username} />
         <CardContent>
           <Grid container justify="space-between" alignItems="center">

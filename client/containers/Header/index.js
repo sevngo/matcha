@@ -8,7 +8,7 @@ import Drawer from '../Drawer';
 import Account from '../Account';
 import Notifications from '../Notifications';
 import IconButton from '../../components/IconButton';
-import { homeRoute } from '../../utils';
+import { homePath } from '../../utils';
 import { useConnect } from './hooks';
 import useStyles from './styles';
 import messages from './messages';
@@ -21,12 +21,12 @@ const Header = ({ location: { pathname } }) => {
     <Fragment>
       <AppBar position="static" className={classes.appBar}>
         <Toolbar>
-          {pathname === homeRoute && token ? (
+          {pathname === homePath && token ? (
             <IconButton onClick={() => toggleDrawer(true)} className={classes.icon}>
               menu
             </IconButton>
           ) : (
-            <IconButton className={classes.icon} component={Link} to={homeRoute}>
+            <IconButton className={classes.icon} component={Link} to={homePath}>
               home
             </IconButton>
           )}
