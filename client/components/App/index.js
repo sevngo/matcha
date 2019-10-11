@@ -1,14 +1,11 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
+import { map } from 'ramda';
 import Header from '../../containers/Header';
-import Users from '../../containers/Users';
-import User from '../../containers/User';
 import Snackbars from '../../containers/Snackbars';
 import Loading from '../../containers/Loading';
-import Reset from '../../containers/Reset';
-import Verify from '../../containers/Verify';
-import { homeRoute, userRoute, resetRoute, verifyRoute } from '../../utils';
 import useStyles from './styles';
+import { homePath, routes } from '../../utils';
 
 const App = () => {
   const classes = useStyles();
@@ -16,11 +13,10 @@ const App = () => {
     <div className={classes.root}>
       <Header />
       <Switch>
-        <Route path={homeRoute} exact component={Users} />
-        <Route path={userRoute(':id')} exact component={User} />
-        <Route path={resetRoute(':token')} exact component={Reset} />
-        <Route path={verifyRoute(':token')} exact component={Verify} />
-        <Redirect to="/" />
+        {map(route => (
+          <Route key={route} path={route.path} exact={route.exact} component={route.component} />
+        ))(routes)}
+        <Redirect to={homePath} />
       </Switch>
       <Snackbars />
       <Loading />

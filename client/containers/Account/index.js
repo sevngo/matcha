@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { MenuItem, Menu } from '@material-ui/core';
 import IconButton from '../../components/IconButton';
 import { useConnect } from './hooks';
-import { userRoute } from '../../utils';
+import { userPath } from '../../utils';
 import messages from './messages.js';
 
 const Account = () => {
@@ -14,7 +14,7 @@ const Account = () => {
     <Fragment>
       <IconButton onClick={e => handleMenu(e.currentTarget)}>account_circle</IconButton>
       <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={() => handleMenu()}>
-        <MenuItem onClick={() => handleMenu()} component={Link} to={userRoute(_id)}>
+        <MenuItem onClick={() => handleMenu()} component={Link} to={userPath(_id)}>
           <FormattedMessage {...messages.myAccount} />
         </MenuItem>
         <MenuItem
