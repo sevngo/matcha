@@ -3,12 +3,8 @@ import { useSelector } from 'react-redux';
 import Auth from '../containers/Auth';
 import { getToken } from '../selectors';
 
-const withAuth = Component => {
-  const EnhancedComponent = props => {
-    const token = useSelector(getToken);
-    return token ? <Component {...props} /> : <Auth />;
-  };
-  return EnhancedComponent;
+const withAuth = Component => props => {
+  const token = useSelector(getToken);
+  return token ? <Component {...props} /> : <Auth />;
 };
-
 export default withAuth;
