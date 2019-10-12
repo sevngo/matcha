@@ -1,6 +1,5 @@
 import React, { useState, Fragment } from 'react';
-import { withRouter } from 'react-router';
-import { compose, path, length, isEmpty } from 'ramda';
+import { path, length, isEmpty } from 'ramda';
 import { FormattedMessage } from 'react-intl';
 import { Typography, Grid, Icon, Divider, Badge, IconButton } from '@material-ui/core';
 import Popover from '../../components/Popover';
@@ -51,4 +50,4 @@ const Notifications = () => {
   );
 };
 
-export default compose(withRouter)(Notifications);
+export default Notifications;
