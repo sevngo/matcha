@@ -7,7 +7,10 @@ let db;
 let client;
 
 exports.connectDb = async () => {
-  client = await MongoClient.connect(MONGODB_URL, { useNewUrlParser: true });
+  client = await MongoClient.connect(MONGODB_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
   db = client.db(DATABASE_NAME);
   console.log('Database connected'); // eslint-disable-line no-console
   return usersModel(db);
