@@ -1,5 +1,4 @@
 import { reject, compose, append, equals, pick, find } from 'ramda';
-import { enqueueSnackbar, success, error } from './app';
 import {
   postUsers,
   postUsersLogin,
@@ -40,9 +39,9 @@ export const register = user => async dispatch => {
   try {
     dispatch({ type: REGISTER });
     await postUsers(user);
-    dispatch(enqueueSnackbar(success('Email sent !')));
+    // dispatch(enqueueSnackbar(success('Email sent !')));
   } catch {
-    dispatch(enqueueSnackbar(error));
+    // dispatch(enqueueSnackbar(error));
   }
 };
 
@@ -53,7 +52,7 @@ export const login = user => async dispatch => {
     dispatch({ type: LOGGED, myUser });
     socket.emit('logged', pick(['_id', 'username', 'friends'])(myUser));
   } catch {
-    dispatch(enqueueSnackbar(error));
+    // dispatch(enqueueSnackbar(error));
   }
 };
 
@@ -76,7 +75,7 @@ export const updateUser = account => async dispatch => {
     const { data: myUser } = await patchUser(account.token, user);
     dispatch({ type: UPDATED_USER, myUser });
   } catch {
-    dispatch(enqueueSnackbar(error));
+    // dispatch(enqueueSnackbar(error));
   }
 };
 
@@ -84,9 +83,9 @@ export const forgotPassword = user => async dispatch => {
   try {
     dispatch({ type: FORGOT_PASSWORD });
     await postUsersForgot(user);
-    dispatch(enqueueSnackbar(success('Email sent !')));
+    // dispatch(enqueueSnackbar(success('Email sent !')));
   } catch {
-    dispatch(enqueueSnackbar(error));
+    // dispatch(enqueueSnackbar(error));
   }
 };
 
@@ -113,7 +112,7 @@ export const likeUser = (account, userLikedId) => async dispatch => {
     if (isFriended)
       socket.emit('userFriended', { user: pick(['_id', 'username'])(myUser), userLikedId });
   } catch {
-    dispatch(enqueueSnackbar(error));
+    // dispatch(enqueueSnackbar(error));
   }
 };
 
@@ -140,7 +139,7 @@ export const blockUser = (account, userBlockedId) => async dispatch => {
     if (isUnfriended)
       socket.emit('userUnfriended', { user: pick(['_id', 'username'])(myUser), userBlockedId });
   } catch {
-    dispatch(enqueueSnackbar(error));
+    // dispatch(enqueueSnackbar(error));
   }
 };
 
@@ -150,7 +149,7 @@ export const uploadImage = (token, image) => async dispatch => {
     const { data: myUser } = await postUsersImages(token, image);
     dispatch({ type: UPLOADED_IMAGE, myUser });
   } catch {
-    dispatch(enqueueSnackbar(error));
+    // dispatch(enqueueSnackbar(error));
   }
 };
 
@@ -160,7 +159,7 @@ export const removeImage = (token, imageId) => async dispatch => {
     const { data: myUser } = await deleteUsersImages(token, imageId);
     dispatch({ type: DELETED_IMAGE, myUser });
   } catch {
-    dispatch(enqueueSnackbar(error));
+    // dispatch(enqueueSnackbar(error));
   }
 };
 

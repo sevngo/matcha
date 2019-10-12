@@ -2,7 +2,6 @@ import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { map } from 'ramda';
 import Header from '../../containers/Header';
-import Snackbars from '../../containers/Snackbars';
 import Loading from '../../containers/Loading';
 import useStyles from './styles';
 import { homePath, routes } from '../../utils';
@@ -18,7 +17,6 @@ const App = () => {
         ))(routes)}
         <Redirect to={homePath} />
       </Switch>
-      <Snackbars />
       <Loading />
     </div>
   );
