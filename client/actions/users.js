@@ -1,5 +1,7 @@
 import { reduce } from 'ramda';
+import { openSnackbar } from './';
 import { getUsers, getUser } from '../api';
+import { ERROR } from '../containers/Snackbar/constants';
 import { socket } from '../index';
 
 export const LOAD_USERS = 'LOAD_USERS';
@@ -34,7 +36,7 @@ export const loadUsers = (token, filter) => async dispatch => {
     const { data } = await getUsers(token, query);
     dispatch({ type: LOADED_USERS, data });
   } catch {
-    // dispatch(enqueueSnackbar(error));
+    dispatch(openSnackbar({ variant: ERROR }));
   }
 };
 
@@ -49,6 +51,6 @@ export const loadUser = (myUser, id) => async dispatch => {
       userVisitedId: id,
     });
   } catch {
-    // dispatch(enqueueSnackbar(error));
+    dispatch(openSnackbar({ variant: ERROR }));
   }
 };

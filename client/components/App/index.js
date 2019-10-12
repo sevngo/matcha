@@ -5,6 +5,7 @@ import Header from '../../containers/Header';
 import Loading from '../../containers/Loading';
 import useStyles from './styles';
 import { homePath, routes } from '../../utils';
+import Snackbar from '../../containers/Snackbar';
 
 const App = () => {
   const classes = useStyles();
@@ -18,6 +19,7 @@ const App = () => {
         <Redirect to={homePath} />
       </Switch>
       <Loading />
+      <Snackbar />
     </div>
   );
 };
