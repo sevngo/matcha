@@ -19,7 +19,8 @@ module.exports = {
   },
   plugins: ['react'],
   rules: {
-    'react/jsx-uses-react': 2,
-    'react/jsx-uses-vars': 2,
+    'react/jsx-uses-react': 'error',
+    'react/jsx-uses-vars': 'error',
+    'require-atomic-updates': 'off',
   },
 };
