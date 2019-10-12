@@ -1,7 +1,4 @@
-import { filter } from 'ramda';
 import {
-  ENQUEUE_SNACKBAR,
-  REMOVE_SNACKBAR,
   LOGIN,
   LOGGED,
   UPDATE_USER,
@@ -23,41 +20,25 @@ import {
 
 export default (state = {}, action) => {
   switch (action.type) {
-    case ENQUEUE_SNACKBAR:
-      return {
-        ...state,
-        isLoading: false,
-        snackbars: [
-          ...state.snackbars,
-          {
-            ...action.snackbar,
-          },
-        ],
-      };
-    case REMOVE_SNACKBAR:
-      return {
-        ...state,
-        snackbars: filter(snackbar => snackbar.key !== action.key)(state.snackbars),
-      };
-    case LOGIN:
-    case UPDATE_USER:
-    case LOAD_USERS:
-    case LOAD_LOAD:
-    case UPLOAD_IMAGE:
-    case DELETE_IMAGE:
-    case LIKE_USER:
-    case BLOCK_USER:
-    case FORGOT_PASSWORD:
-      return { ...state, isLoading: true };
-    case LOGGED:
-    case UPDATED_USER:
-    case LOADED_USERS:
-    case LOADED_USER:
-    case UPLOADED_IMAGE:
-    case DELETED_IMAGE:
-    case LIKED_USER:
-    case BLOCKED_USER:
-      return { ...state, isLoading: false };
+    // case LOGIN:
+    // case UPDATE_USER:
+    // case LOAD_USERS:
+    // case LOAD_LOAD:
+    // case UPLOAD_IMAGE:
+    // case DELETE_IMAGE:
+    // case LIKE_USER:
+    // case BLOCK_USER:
+    // case FORGOT_PASSWORD:
+    //   return { ...state, isLoading: true };
+    // case LOGGED:
+    // case UPDATED_USER:
+    // case LOADED_USERS:
+    // case LOADED_USER:
+    // case UPLOADED_IMAGE:
+    // case DELETED_IMAGE:
+    // case LIKED_USER:
+    // case BLOCKED_USER:
+    //   return { ...state, isLoading: false };
     default:
       return state;
   }
