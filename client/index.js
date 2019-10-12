@@ -3,9 +3,9 @@ import { Provider } from 'react-redux';
 import { render } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { IntlProvider } from 'react-intl';
-import { addLocaleData } from 'react-intl';
-import localeEn from 'react-intl/locale-data/en';
-import localeFr from 'react-intl/locale-data/fr';
+import '@formatjs/intl-pluralrules/polyfill';
+import '@formatjs/intl-pluralrules/dist/locale-data/en';
+import '@formatjs/intl-pluralrules/dist/locale-data/fr';
 import { MuiThemeProvider, CssBaseline } from '@material-ui/core';
 import { SnackbarProvider } from 'notistack';
 import io from 'socket.io-client';
@@ -16,8 +16,6 @@ import App from './components/App';
 
 export const socket = io('http://localhost:8080');
 socketEvents(socket);
-
-addLocaleData([...localeEn, ...localeFr]);
 
 const ROOT = (
   <Provider store={store}>
