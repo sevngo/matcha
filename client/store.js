@@ -27,7 +27,7 @@ const initialState = {
       },
     ],
   },
-  app: { snackbars: [] },
+  app: {},
   users: {
     data: [],
     filter: {
@@ -39,6 +39,7 @@ const initialState = {
     },
     user: {},
   },
+  snackbar: {},
 };
 
 export default createStore(reducer, initialState, composeWithDevTools(applyMiddleware(thunk)));
