@@ -1,7 +1,6 @@
 import React, { useState, Fragment } from 'react';
-import { withRouter } from 'react-router';
+import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { compose } from 'ramda';
 import { FormattedMessage } from 'react-intl';
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
 import Drawer from '../Drawer';
@@ -13,8 +12,9 @@ import { useConnect } from './hooks';
 import useStyles from './styles';
 import messages from './messages';
 
-const Header = ({ location: { pathname } }) => {
+const Header = () => {
   const classes = useStyles();
+  const { pathname } = useLocation();
   const { token } = useConnect();
   const [isDrawerOpen, toggleDrawer] = useState(false);
   return (
@@ -47,4 +47,4 @@ const Header = ({ location: { pathname } }) => {
   );
 };
 
-export default compose(withRouter)(Header);
+export default Header;
