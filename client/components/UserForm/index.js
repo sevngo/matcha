@@ -22,7 +22,7 @@ import {
   isOld,
   isTrimmed,
 } from '../../utils';
-import { genderOptions, sortByOptions, interestsOptions } from './constants';
+import { GENDER_OPTIONS, SORT_BY_OPTIONS, INTERESTS_OPTIONS } from './constants';
 import useStyles from './styles';
 import messages from './messages';
 import { compact } from '../../utils';
@@ -137,7 +137,7 @@ const Component = ({
                 label={<FormattedMessage {...messages[gender.id]} />}
                 disabled={disabled}
               />
-            ))(genderOptions)}
+            ))(GENDER_OPTIONS)}
           </Field>
         </div>
       )}
@@ -197,7 +197,7 @@ const Component = ({
             <MenuItem key={option} value={option}>
               {option}
             </MenuItem>
-          ))(interestsOptions)}
+          ))(INTERESTS_OPTIONS)}
         </Field>
       )}
       {has('biography', initialValues) && (
@@ -217,7 +217,7 @@ const Component = ({
             <MenuItem key={option.id} value={option.value}>
               <FormattedMessage {...messages[option.id]} />
             </MenuItem>
-          ))(sortByOptions)}
+          ))(SORT_BY_OPTIONS)}
         </Field>
       )}
       <Grid container justify="center">

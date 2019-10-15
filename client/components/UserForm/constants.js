@@ -1,6 +1,6 @@
-export const genderOptions = [{ id: 'male', value: 'male' }, { id: 'female', value: 'female' }];
+export const GENDER_OPTIONS = [{ id: 'male', value: 'male' }, { id: 'female', value: 'female' }];
 
-export const sortByOptions = [
+export const SORT_BY_OPTIONS = [
   { id: 'ageIncreasing', value: 'birthDate:desc' },
   { id: 'ageDescending', value: 'birthDate:asc' },
   { id: 'popularityDescending', value: 'popularity:desc' },
@@ -9,7 +9,7 @@ export const sortByOptions = [
   { id: 'distanceDescending', value: 'distance:desc' },
 ];
 
-export const interestsOptions = [
+export const INTERESTS_OPTIONS = [
   'PHP',
   'Javascript',
   'Python',
