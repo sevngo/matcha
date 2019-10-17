@@ -16,11 +16,9 @@ const withGeolocation = fieldName => Component => props => {
               location: { lat, lng },
             },
           } = await axios.post(
-            `https://www.googleapis.com/geolocation/v1/geolocate?key=${
-              process.env.GOOGLEMAPS_API_KEY
-            }`,
+            `https://www.googleapis.com/geolocation/v1/geolocate?key=${process.env.GOOGLEMAPS_API_KEY}`,
           );
-          setField(lng, lat);
+          if (lat && lng) setField(lng, lat);
         },
       );
       const setField = (lng, lat) => {

@@ -61,11 +61,6 @@ router.post(
   auth.authenticate,
   conversions.uploadImage.single('image'),
   controllers.postUsersImages,
-  // eslint-disable-next-line no-unused-vars
-  (error, req, res, next) => {
-    res.status(400).send();
-    console.log(error); // eslint-disable-line no-console
-  },
 );
 
 router.delete('/images/:imageId', auth.authenticate, controllers.deleteUsersImages);
