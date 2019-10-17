@@ -4,8 +4,9 @@ import { map } from 'ramda';
 import Header from '../../containers/Header';
 import Loading from '../../containers/Loading';
 import useStyles from './styles';
-import { homePath, routes } from '../../utils';
+import { usersPath, routes } from '../../utils';
 import Snackbar from '../../containers/Snackbar';
+import PrivateRoute from '../PrivateRoute';
 
 const App = () => {
   const classes = useStyles();
@@ -13,10 +14,12 @@ const App = () => {
     <div className={classes.root}>
       <Header />
       <Switch>
-        {map(route => (
-          <Route key={route} path={route.path} exact={route.exact} component={route.component} />
-        ))(routes)}
-        <Redirect to={homePath} />
+        {map(({ path, exact, component, isPrivate }) => {
+          const props = { key: path, path, exact, component };
+          if (isPrivate) return <PrivateRoute {...props} />;
+          return <Route {...props} />;
+        })(routes)}
+        <Redirect to={usersPath} />
       </Switch>
       <Loading />
       <Snackbar />

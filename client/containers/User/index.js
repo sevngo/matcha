@@ -1,8 +1,6 @@
 import React from 'react';
-import { compose } from 'ramda';
 import MyUser from '../MyUser';
 import OtherUser from '../OtherUser';
-import withAuth from '../../hoc/withAuth';
 import { useConnect } from './hooks';
 
 const User = ({
@@ -15,4 +13,4 @@ const User = ({
   return <OtherUser id={id} />;
 };
 
-export default compose(withAuth)(User);
+export default User;

@@ -1,8 +1,6 @@
 import React from 'react';
-import { compose } from 'ramda';
 import { Paper, Grid } from '@material-ui/core';
 import UserForm from '../../components/UserForm';
-import withoutAuth from '../../hoc/withoutAuth';
 import { useConnect } from './hooks';
 import useStyles from './styles';
 
@@ -22,4 +20,4 @@ const Reset = ({
   );
 };
 
-export default compose(withoutAuth)(Reset);
+export default Reset;
