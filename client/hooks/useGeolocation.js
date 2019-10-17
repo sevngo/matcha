@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { isNil } from 'ramda';
 import axios from 'axios';
 
-const withGeolocation = fieldName => Component => props => {
-  const { setFieldValue, values, withGeolocation } = props;
+const useGeolocation = (fieldName, onChange, values, isGeoActivated) => {
   useEffect(() => {
-    if (values[fieldName] && withGeolocation) {
+    if (values[fieldName] && isGeoActivated) {
       navigator.geolocation.getCurrentPosition(
         ({ coords: { longitude: lng, latitude: lat } }) => {
           setField(lng, lat);
@@ -30,12 +29,11 @@ const withGeolocation = fieldName => Component => props => {
             type: 'Point',
             coordinates: [lng, lat],
           };
-          setFieldValue(fieldName, address);
+          onChange(address);
         });
       };
     }
   }, [isNil(values[fieldName])]);
-  return <Component {...props} />;
 };
 
-export default withGeolocation;
+export default useGeolocation;

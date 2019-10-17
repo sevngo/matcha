@@ -71,7 +71,7 @@ const Auth = () => {
                   address: { name: '' },
                 }}
                 submit={register}
-                withGeolocation
+                isGeoActivated
               />
             )}
           </div>
