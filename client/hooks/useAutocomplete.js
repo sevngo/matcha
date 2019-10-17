@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { isNil, path } from 'ramda';
 
-const withGooglePlaces = fieldName => Component => props => {
-  const { setFieldValue, values } = props;
+const useAutocomplete = (fieldName, onChange, values) => {
   let autocomplete;
   const handlePlace = () => {
     const newAddress = autocomplete.getPlace();
@@ -14,7 +13,7 @@ const withGooglePlaces = fieldName => Component => props => {
       type: 'Point',
       coordinates: [location.lng(), location.lat()],
     };
-    setFieldValue(fieldName, address);
+    onChange(address);
   };
   useEffect(() => {
     if (values[fieldName]) {
@@ -25,7 +24,6 @@ const withGooglePlaces = fieldName => Component => props => {
       autocomplete.addListener('place_changed', handlePlace);
     }
   }, [isNil(values[fieldName])]);
-  return <Component {...props} />;
 };
 
-export default withGooglePlaces;
+export default useAutocomplete;

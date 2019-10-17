@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { compose, find } from 'ramda';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
+import { find } from 'ramda';
 import { FormattedMessage } from 'react-intl';
 import { Paper, Grid, Button } from '@material-ui/core';
 import UserForm from '../../components/UserForm';
 import Carousel from '../../components/Carousel';
-import withAuth from '../../hoc/withAuth';
-import { getUser, getMyUser } from '../../selectors';
 import useStyles from './styles';
 import { useConnect } from './hooks';
 import messages from './messages';
@@ -73,12 +69,4 @@ const User = ({ id }) => {
   );
 };
 
-const mapStateToProps = createStructuredSelector({
-  user: getUser,
-  myUser: getMyUser,
-});
-
-export default compose(
-  connect(mapStateToProps),
-  withAuth,
-)(User);
+export default User;

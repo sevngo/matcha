@@ -10,8 +10,8 @@ import Select from '../Select';
 import Interests from '../Interests';
 import Range from '../Range';
 import Slider from '../Slider';
-import withAutocomplete from '../../hoc/withAutocomplete';
-import withGeolocation from '../../hoc/withGeolocation';
+import useGeolocation from '../../hooks/useGeolocation';
+import useAutocomplete from '../../hooks/useAutocomplete';
 import {
   composeValidators,
   isRequired,
@@ -36,10 +36,14 @@ const Component = ({
   dirty,
   setFieldValue,
   values,
+  isGeoActivated,
 }) => {
   const classes = useStyles();
   const [showPassword, toggleShowPassword] = useState(false);
   const hasAddress = !isNil(path(['address', 'coordinates'])(values));
+  const handleAddress = address => setFieldValue('address', address);
+  useGeolocation('address', handleAddress, values, isGeoActivated);
+  useAutocomplete('address', handleAddress, values);
   return (
     <form onSubmit={handleSubmit}>
       {has('username', initialValues) && (
@@ -258,6 +262,4 @@ export default compose(
     displayName: 'UserForm',
     enableReinitialize: true,
   }),
-  withAutocomplete('address'),
-  withGeolocation('address'),
 )(Component);
