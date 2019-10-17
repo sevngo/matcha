@@ -7,7 +7,6 @@ import '@formatjs/intl-pluralrules/polyfill';
 import '@formatjs/intl-pluralrules/dist/locale-data/en';
 import '@formatjs/intl-pluralrules/dist/locale-data/fr';
 import { MuiThemeProvider, CssBaseline } from '@material-ui/core';
-import { SnackbarProvider } from 'notistack';
 import io from 'socket.io-client';
 import socketEvents from './socketEvents';
 import { locale, messages, theme } from './utils';
@@ -21,12 +20,10 @@ const ROOT = (
   <Provider store={store}>
     <IntlProvider locale={locale} messages={messages}>
       <BrowserRouter>
-        <SnackbarProvider maxSnack={10}>
-          <MuiThemeProvider theme={theme}>
-            <CssBaseline />
-            <App />
-          </MuiThemeProvider>
-        </SnackbarProvider>
+        <MuiThemeProvider theme={theme}>
+          <CssBaseline />
+          <App />
+        </MuiThemeProvider>
       </BrowserRouter>
     </IntlProvider>
   </Provider>
