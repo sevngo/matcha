@@ -13,7 +13,10 @@ import { locale, messages, theme } from './utils';
 import store from './store';
 import App from './components/App';
 
-export const socket = io('http://localhost:8080');
+// process.env to be used
+export const socket = io(
+  `${window.location.protocol}//${window.location.hostname}:${process.env.PORT}`,
+);
 socketEvents(socket);
 
 const ROOT = (
