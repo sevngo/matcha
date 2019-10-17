@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react';
-import { compose } from 'ramda';
 import Cards from '../../components/Cards';
-import withAuth from '../../hoc/withAuth';
 import { useConnect } from './hooks';
 import useStyles from './styles';
 
@@ -18,4 +16,4 @@ const Users = () => {
   );
 };
 
-export default compose(withAuth)(Users);
+export default Users;

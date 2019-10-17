@@ -1,6 +1,4 @@
 import { useEffect } from 'react';
-import { compose } from 'ramda';
-import withoutAuth from '../../hoc/withoutAuth';
 import { useConnect } from './hooks';
 
 const Reset = ({
@@ -15,4 +13,4 @@ const Reset = ({
   return false;
 };
 
-export default compose(withoutAuth)(Reset);
+export default Reset;
