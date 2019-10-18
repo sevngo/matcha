@@ -1,3 +1,4 @@
+import { find } from 'ramda';
 import Users from '../containers/Users';
 import User from '../containers/User';
 import Reset from '../containers/Reset';
@@ -14,6 +15,7 @@ export const routes = [
     exact: true,
     component: Users,
     isPrivate: true,
+    isDefault: true,
   },
   {
     path: userPath(':id'),
@@ -32,3 +34,5 @@ export const routes = [
     component: Verify,
   },
 ];
+
+export const defaultRoute = find(route => route.isDefault)(routes);
