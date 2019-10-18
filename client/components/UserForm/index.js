@@ -10,8 +10,7 @@ import Select from '../Select';
 import Interests from '../Interests';
 import Range from '../Range';
 import Slider from '../Slider';
-import useGeolocation from '../../hooks/useGeolocation';
-import useAutocomplete from '../../hooks/useAutocomplete';
+import { useGeolocation, useAutocomplete } from '../../hooks/googleMaps';
 import {
   composeValidators,
   isRequired,
@@ -42,8 +41,8 @@ const Component = ({
   const [showPassword, toggleShowPassword] = useState(false);
   const hasAddress = !isNil(path(['address', 'coordinates'])(values));
   const handleAddress = address => setFieldValue('address', address);
-  useGeolocation('address', handleAddress, values, isGeoActivated);
-  useAutocomplete('address', handleAddress, values);
+  useGeolocation(handleAddress, !isNil(values['address']) && isGeoActivated);
+  useAutocomplete('address', handleAddress, !isNil(values['address']));
   return (
     <form onSubmit={handleSubmit}>
       {has('username', initialValues) && (
