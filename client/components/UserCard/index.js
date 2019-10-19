@@ -20,7 +20,6 @@ import messages from './messages';
 const UserCard = ({ user }) => {
   const { images } = user;
   const imageId = path([0, '_id'])(images);
-  getUserImage(user._id, imageId);
   const image = imageId ? getUserImage(user._id, imageId) : emptyImage;
   const classes = useStyles();
   return (
