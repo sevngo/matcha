@@ -1,12 +1,22 @@
 import React from 'react';
-import { Dialog } from '@material-ui/core';
-import useStyles from './styles';
+import { FormattedMessage } from 'react-intl';
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+} from '@material-ui/core';
 
-const Modal = ({ children, ...rest }) => {
-  const classes = useStyles();
+const Modal = ({ title, text, content, actions, ...rest }) => {
   return (
     <Dialog {...rest}>
-      <div className={classes.p3}>{children}</div>
+      <DialogTitle>{title && <FormattedMessage {...title} />}</DialogTitle>
+      <DialogContent>
+        <DialogContentText>{text && <FormattedMessage {...text} />}</DialogContentText>
+        {content}
+      </DialogContent>
+      <DialogActions>{actions}</DialogActions>
     </Dialog>
   );
 };
