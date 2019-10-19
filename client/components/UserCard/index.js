@@ -12,6 +12,7 @@ import {
 import { path } from 'ramda';
 import emptyImage from '../../images/emptyImage.png';
 import Interests from '../Interests';
+import { getUserImage } from '../../api';
 import { getAge, userPath } from '../../utils';
 import useStyles from './styles';
 import messages from './messages';
@@ -19,7 +20,8 @@ import messages from './messages';
 const UserCard = ({ user }) => {
   const { images } = user;
   const imageId = path([0, '_id'])(images);
-  const image = imageId ? `/api/users/${user._id}/images/${imageId}` : emptyImage;
+  getUserImage(user._id, imageId);
+  const image = imageId ? getUserImage(user._id, imageId) : emptyImage;
   const classes = useStyles();
   return (
     <MCard className={classes.card} elevation={24}>
