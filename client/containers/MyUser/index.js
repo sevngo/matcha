@@ -1,10 +1,10 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, Fragment } from 'react';
 import { length, isEmpty, path, map, pick } from 'ramda';
 import { FormattedMessage } from 'react-intl';
 import { Paper, Grid, Button, Typography, Icon, Divider } from '@material-ui/core';
 import UserForm from '../../components/UserForm';
 import Carousel from '../../components/Carousel';
-import Popover from '../../components/Popover';
+import Modal from '../../components/Modal';
 import { useConnect } from './hooks';
 import useStyles from './styles';
 import messages from './messages';
@@ -13,7 +13,7 @@ const MyUser = () => {
   const classes = useStyles();
   const { myUser, updateUser, uploadImage, removeImage, likeUser } = useConnect();
   const [activeStep, handleStep] = useState(0);
-  const [anchorEl, handlePopover] = useState();
+  const [isModalOpen, handleModal] = useState(false);
   const { _id, token, images, usersBlocked } = myUser;
   const inputEl = useRef();
   const addImage = image => {
@@ -45,40 +45,34 @@ const MyUser = () => {
             />
             <Button
               variant="outlined"
-              onClick={event => handlePopover(event.currentTarget)}
+              onClick={() => handleModal(true)}
               disabled={!images || isEmpty(images)}
             >
               <FormattedMessage {...messages.delete} />
               <Icon className={classes.ml1}>delete</Icon>
             </Button>
-            <Popover
-              id="simple-popper"
-              open={Boolean(anchorEl)}
-              anchorEl={anchorEl}
-              onClose={() => handlePopover()}
-            >
-              <Grid container>
-                <Icon>info</Icon>
-                <Typography variant="subtitle1" align="center" className={classes.ml1}>
-                  <FormattedMessage {...messages.sure} />
-                </Typography>
-              </Grid>
-              <Grid container justify="flex-end">
-                <Button size="small" onClick={() => handlePopover()}>
-                  <FormattedMessage {...messages.no} />
-                </Button>
-                <Button
-                  size="small"
-                  onClick={() => {
-                    removeImage(token, path([activeStep, '_id'])(images));
-                    handleStep(0);
-                    handlePopover();
-                  }}
-                >
-                  <FormattedMessage {...messages.yes} />
-                </Button>
-              </Grid>
-            </Popover>
+            <Modal
+              open={isModalOpen}
+              onClose={() => handleModal(false)}
+              title={messages.sure}
+              actions={
+                <Fragment>
+                  <Button size="small" onClick={() => handleModal(false)}>
+                    <FormattedMessage {...messages.no} />
+                  </Button>
+                  <Button
+                    size="small"
+                    onClick={() => {
+                      removeImage(token, path([activeStep, '_id'])(images));
+                      handleStep(0);
+                      handleModal(true);
+                    }}
+                  >
+                    <FormattedMessage {...messages.yes} />
+                  </Button>
+                </Fragment>
+              }
+            />
             <Button
               variant="outlined"
               onClick={() => inputEl.current.click()}

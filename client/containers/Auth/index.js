@@ -1,16 +1,6 @@
 import React, { useState, Fragment } from 'react';
 import { FormattedMessage } from 'react-intl';
-import {
-  Grid,
-  AppBar,
-  Tabs,
-  Tab,
-  Paper,
-  Button,
-  Typography,
-  DialogContent,
-  DialogContentText,
-} from '@material-ui/core';
+import { Grid, AppBar, Tabs, Tab, Paper, Button } from '@material-ui/core';
 import UserForm from '../../components/UserForm';
 import Modal from '../../components/Modal';
 import { useConnect } from './hooks';
@@ -21,7 +11,7 @@ const Auth = () => {
   const { login, register, forgotPassword } = useConnect();
   const classes = useStyles();
   const [tab, handleTab] = useState(0);
-  const [isModalOpen, toggleModal] = useState(false);
+  const [isModalOpen, handleModal] = useState(false);
   const initialValues = {
     username: '',
     password: '',
@@ -41,23 +31,19 @@ const Auth = () => {
               <Fragment>
                 <UserForm initialValues={initialValues} submit={login} />
                 <Button
-                  onClick={() => toggleModal(true)}
+                  onClick={() => handleModal(true)}
                   variant="outlined"
                   className={classes.mt1}
                 >
                   <FormattedMessage {...messages.forgotPassword} />
                 </Button>
-                <Modal open={isModalOpen} onClose={() => toggleModal(false)}>
-                  <Typography gutterBottom align="center" variant="h6">
-                    <FormattedMessage {...messages.forgotPassword} />
-                  </Typography>
-                  <DialogContent>
-                    <DialogContentText>
-                      <FormattedMessage {...messages.enterEmail} />
-                    </DialogContentText>
-                    <UserForm initialValues={{ email: '' }} submit={forgotPassword} />
-                  </DialogContent>
-                </Modal>
+                <Modal
+                  open={isModalOpen}
+                  onClose={() => handleModal(false)}
+                  title={messages.forgotPassword}
+                  text={messages.enterEmail}
+                  content={<UserForm initialValues={{ email: '' }} submit={forgotPassword} />}
+                />
               </Fragment>
             ) : (
               <UserForm
