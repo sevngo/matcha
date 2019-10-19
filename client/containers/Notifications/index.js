@@ -19,30 +19,32 @@ const Notifications = () => {
           <Icon>notifications_icon</Icon>
         </Badge>
       </IconButton>
-      <Modal title={messages.title} open={isModalOpen} onClose={() => handleModal(false)}>
-        <Grid container direction="column" spacing={2}>
-          {notifications.map((notification, index) => (
-            <Fragment key={notification._id}>
-              <Grid container item justify="space-between" alignItems="center">
-                <Typography variant="subtitle1">
-                  <FormattedMessage
-                    {...messages[notification.messageId]}
-                    values={{ username: path(['user', 'username'])(notification) }}
-                  />
-                </Typography>
-                <Icon
-                  onClick={() => removeNotification(notification._id)}
-                  color="inherit"
-                  className={classes.ml1}
-                >
-                  delete
-                </Icon>
-              </Grid>
-              {notificationsLength - 1 !== index && <Divider />}
-            </Fragment>
-          ))}
-        </Grid>
-      </Modal>
+      {notificationsLength && (
+        <Modal title={messages.title} open={isModalOpen} onClose={() => handleModal(false)}>
+          <Grid container direction="column" spacing={2}>
+            {notifications.map((notification, index) => (
+              <Fragment key={notification._id}>
+                <Grid container item justify="space-between" alignItems="center">
+                  <Typography variant="subtitle1">
+                    <FormattedMessage
+                      {...messages[notification.messageId]}
+                      values={{ username: path(['user', 'username'])(notification) }}
+                    />
+                  </Typography>
+                  <Icon
+                    onClick={() => removeNotification(notification._id)}
+                    color="inherit"
+                    className={classes.ml1}
+                  >
+                    delete
+                  </Icon>
+                </Grid>
+                {notificationsLength - 1 !== index && <Divider />}
+              </Fragment>
+            ))}
+          </Grid>
+        </Modal>
+      )}
     </Fragment>
   );
 };
