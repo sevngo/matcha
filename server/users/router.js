@@ -51,19 +51,19 @@ router.post(
   auth.emailVerified,
   stages.lookupUsersLiked,
   stages.lookupUsersBlocked,
-  controllers.postUsersLogin,
+  controllers.postUserLogin,
 );
 
-router.post('/forgot', conversions.trimBody, controllers.postUsersForgot);
+router.post('/forgot', conversions.trimBody, controllers.postUserForgot);
 
 router.post(
   '/images',
   auth.authenticate,
   conversions.uploadImage.single('image'),
-  controllers.postUsersImages,
+  controllers.postUserImage,
 );
 
-router.delete('/images/:imageId', auth.authenticate, controllers.deleteUsersImages);
+router.delete('/images/:imageId', auth.authenticate, controllers.deleteUserImage);
 
 router.get(
   '/:id/images/:imageId',

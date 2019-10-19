@@ -110,7 +110,7 @@ exports.patchUsers = async (req, res, next) => {
   }
 };
 
-exports.postUsersLogin = async (req, res, next) => {
+exports.postUserLogin = async (req, res, next) => {
   try {
     const {
       myUser: { _id, usersLiked },
@@ -143,7 +143,7 @@ exports.postUsersLogin = async (req, res, next) => {
   }
 };
 
-exports.postUsersForgot = async (req, res, next) => {
+exports.postUserForgot = async (req, res, next) => {
   try {
     const { protocol, hostname } = req;
     const UsersCollection = Users();
@@ -159,7 +159,7 @@ exports.postUsersForgot = async (req, res, next) => {
   }
 };
 
-exports.postUsersImages = async (req, res, next) => {
+exports.postUserImage = async (req, res, next) => {
   try {
     const {
       myUser: { _id },
@@ -185,7 +185,7 @@ exports.postUsersImages = async (req, res, next) => {
   }
 };
 
-exports.deleteUsersImages = async (req, res, next) => {
+exports.deleteUserImage = async (req, res, next) => {
   try {
     const {
       myUser: { _id },

@@ -2,11 +2,11 @@ import { reject, compose, append, equals, pick, find } from 'ramda';
 import { openSnackbar } from './';
 import {
   postUsers,
-  postUsersLogin,
+  postUserLogin,
   patchUser,
-  postUsersForgot,
-  postUsersImages,
-  deleteUsersImages,
+  postUserForgot,
+  postUserImage,
+  deleteUserImage,
 } from '../api';
 import { getIds } from '../utils';
 import { socket } from '../index';
@@ -50,7 +50,7 @@ export const register = user => async dispatch => {
 export const login = user => async dispatch => {
   try {
     dispatch({ type: LOGIN });
-    const { data: myUser } = await postUsersLogin(user);
+    const { data: myUser } = await postUserLogin(user);
     dispatch({ type: LOGGED, myUser });
     socket.emit('logged', pick(['_id', 'username', 'friends'])(myUser));
   } catch {
@@ -84,7 +84,7 @@ export const updateUser = account => async dispatch => {
 export const forgotPassword = user => async dispatch => {
   try {
     dispatch({ type: FORGOT_PASSWORD });
-    await postUsersForgot(user);
+    await postUserForgot(user);
     dispatch(openSnackbar({ variant: SUCCESS }));
   } catch {
     dispatch(openSnackbar({ variant: ERROR }));
@@ -148,7 +148,7 @@ export const blockUser = (account, userBlockedId) => async dispatch => {
 export const uploadImage = (token, image) => async dispatch => {
   try {
     dispatch({ type: UPLOAD_IMAGE });
-    const { data: myUser } = await postUsersImages(token, image);
+    const { data: myUser } = await postUserImage(token, image);
     dispatch({ type: UPLOADED_IMAGE, myUser });
   } catch {
     dispatch(openSnackbar({ variant: ERROR }));
@@ -158,7 +158,7 @@ export const uploadImage = (token, image) => async dispatch => {
 export const removeImage = (token, imageId) => async dispatch => {
   try {
     dispatch({ type: DELETE_IMAGE });
-    const { data: myUser } = await deleteUsersImages(token, imageId);
+    const { data: myUser } = await deleteUserImage(token, imageId);
     dispatch({ type: DELETED_IMAGE, myUser });
   } catch {
     dispatch(openSnackbar({ variant: ERROR }));
