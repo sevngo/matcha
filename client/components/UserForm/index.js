@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { withFormik, Field } from 'formik';
 import { FormattedMessage } from 'react-intl';
 import { has, compose, map, isNil, path } from 'ramda';
-import { Grid, Button, FormControlLabel, Radio as MRadio, MenuItem } from '@material-ui/core';
+import { Grid, Button, MenuItem } from '@material-ui/core';
 import IconButton from '../IconButton';
 import Input from '../Input';
 import Radio from '../Radio';
@@ -131,17 +131,9 @@ const Component = ({
             label={<FormattedMessage {...messages.gender} />}
             component={Radio}
             validate={isRequired}
-          >
-            {map(gender => (
-              <FormControlLabel
-                key={gender.id}
-                value={gender.value}
-                control={<MRadio color="primary" />}
-                label={<FormattedMessage {...messages[gender.id]} />}
-                disabled={disabled}
-              />
-            ))(GENDER_OPTIONS)}
-          </Field>
+            options={GENDER_OPTIONS}
+            messages={messages}
+          />
         </div>
       )}
       {has('address', initialValues) && (
