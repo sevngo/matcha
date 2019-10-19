@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import Cards from '../../components/Cards';
+import UserCards from '../../components/UserCards';
 import { useConnect } from './hooks';
 import useStyles from './styles';
 
@@ -11,7 +11,7 @@ const Users = () => {
   }, [filter]);
   return (
     <div className={classes.root}>
-      <Cards users={users} />
+      <UserCards users={users} />
     </div>
   );
 };

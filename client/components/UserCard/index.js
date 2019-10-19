@@ -16,7 +16,7 @@ import { getAge, userPath } from '../../utils';
 import useStyles from './styles';
 import messages from './messages';
 
-const Card = ({ user }) => {
+const UserCard = ({ user }) => {
   const { images } = user;
   const imageId = path([0, '_id'])(images);
   const image = imageId ? `/api/users/${user._id}/images/${imageId}` : emptyImage;
@@ -47,4 +47,4 @@ const Card = ({ user }) => {
   );
 };
 
-export default Card;
+export default UserCard;
