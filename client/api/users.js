@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const postUsers = user => axios.post('/api/users', user);
 
-export const postUsersLogin = user => axios.post('/api/users/login', user);
+export const postUserLogin = user => axios.post('/api/users/login', user);
 
 export const getUsers = (token, query = '') => {
   const headers = { Authorization: `Bearer ${token}` };
@@ -24,7 +24,7 @@ export const patchUser = (token, user) => {
   return axios.patch('/api/users', user, { headers });
 };
 
-export const postUsersImages = (token, image) => {
+export const postUserImage = (token, image) => {
   const headers = {
     Authorization: `Bearer ${token}`,
     'Content-Type': 'multipart/form-data',
@@ -34,7 +34,7 @@ export const postUsersImages = (token, image) => {
   return axios.post('/api/users/images', formData, { headers });
 };
 
-export const deleteUsersImages = (token, imageId) => {
+export const deleteUserImage = (token, imageId) => {
   const headers = {
     Authorization: `Bearer ${token}`,
   };
@@ -43,4 +43,4 @@ export const deleteUsersImages = (token, imageId) => {
 
 export const getUserImage = (userId, imageId) => `/api/users/${userId}/images/${imageId}`;
 
-export const postUsersForgot = user => axios.post('/api/users/forgot', user);
+export const postUserForgot = user => axios.post('/api/users/forgot', user);
