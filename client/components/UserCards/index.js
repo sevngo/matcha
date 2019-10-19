@@ -1,16 +1,16 @@
 import React from 'react';
 import { map } from 'ramda';
 import Grid from '@material-ui/core/Grid';
-import Card from '../Card';
+import UserCard from '../UserCard';
 
-const Cards = ({ users }) => (
+const UserCards = ({ users }) => (
   <Grid container spacing={2} justify="center">
     {map(user => (
       <Grid item key={user._id}>
-        <Card user={user} />
+        <UserCard user={user} />
       </Grid>
     ))(users)}
   </Grid>
 );
 
-export default Cards;
+export default UserCards;
