@@ -34,4 +34,7 @@ export default makeStyles(theme => ({
     },
     width: '100%',
   },
+  img: {
+    width: '100%',
+  },
 }));

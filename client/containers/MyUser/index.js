@@ -5,6 +5,7 @@ import { Paper, Grid, Button, Typography, Icon, Divider } from '@material-ui/cor
 import UserForm from '../../components/UserForm';
 import Carousel from '../../components/Carousel';
 import Modal from '../../components/Modal';
+import { getUserImage } from '../../api';
 import emptyImage from '../../images/emptyImage.png';
 import { useConnect } from './hooks';
 import useStyles from './styles';
@@ -20,8 +21,9 @@ const MyUser = () => {
   const addImage = image => {
     if (image) uploadImage(token, image);
   };
-  const imageId = path([activeStep, '_id'])(images);
-  const image = imageId ? `/api/users/${_id}/images/${images[activeStep]._id}` : emptyImage;
+  const image = !isEmpty(images)
+    ? getUserImage(_id, path([activeStep, '_id'])(images))
+    : emptyImage;
   const maxSteps = length(images);
   const userForm = pick([
     'username',
@@ -38,65 +40,57 @@ const MyUser = () => {
   return (
     <Grid container spacing={3} justify="center" direction="row" className={classes.p3}>
       <Grid item className={classes.width}>
-        <Paper elevation={24}>
-          <Carousel
-            userId={_id}
-            image={image}
-            activeStep={activeStep}
-            maxSteps={maxSteps}
-            handleStep={handleStep}
-          >
-            <div className={classes.header}>
-              <input
-                ref={inputEl}
-                type="file"
-                onChange={event => addImage(event.target.files[0])}
-                accept="image/png, image/jpeg"
-                className={classes.hide}
-              />
-              <Button
-                variant="outlined"
-                onClick={() => handleModal(true)}
-                disabled={!images || isEmpty(images)}
-              >
-                <FormattedMessage {...messages.delete} />
-                <Icon className={classes.ml1}>delete</Icon>
-              </Button>
-              <Modal
-                open={isModalOpen}
-                onClose={() => handleModal(false)}
-                title={messages.sure}
-                actions={
-                  <Fragment>
-                    <Button size="small" onClick={() => handleModal(false)}>
-                      <FormattedMessage {...messages.no} />
-                    </Button>
-                    <Button
-                      size="small"
-                      onClick={() => {
-                        removeImage(token, path([activeStep, '_id'])(images));
-                        handleStep(0);
-                        handleModal(true);
-                      }}
-                    >
-                      <FormattedMessage {...messages.yes} />
-                    </Button>
-                  </Fragment>
-                }
-              />
-              <Button
-                variant="outlined"
-                onClick={() => inputEl.current.click()}
-                disabled={length(images) === 5}
-                className={classes.ml1}
-              >
-                <FormattedMessage {...messages.upload} />
-                <Icon className={classes.ml1}>cloud_upload</Icon>
-              </Button>
-            </div>
-            <img className={classes.img} src={image} alt="image" />
-          </Carousel>
-        </Paper>
+        <Carousel activeStep={activeStep} maxSteps={maxSteps} handleStep={handleStep}>
+          <div className={classes.header}>
+            <input
+              ref={inputEl}
+              type="file"
+              onChange={event => addImage(event.target.files[0])}
+              accept="image/png, image/jpeg"
+              className={classes.hide}
+            />
+            <Button
+              variant="outlined"
+              onClick={() => handleModal(true)}
+              disabled={!images || isEmpty(images)}
+            >
+              <FormattedMessage {...messages.delete} />
+              <Icon className={classes.ml1}>delete</Icon>
+            </Button>
+            <Modal
+              open={isModalOpen}
+              onClose={() => handleModal(false)}
+              title={messages.sure}
+              actions={
+                <Fragment>
+                  <Button size="small" onClick={() => handleModal(false)}>
+                    <FormattedMessage {...messages.no} />
+                  </Button>
+                  <Button
+                    size="small"
+                    onClick={() => {
+                      removeImage(token, path([activeStep, '_id'])(images));
+                      handleStep(0);
+                      handleModal(true);
+                    }}
+                  >
+                    <FormattedMessage {...messages.yes} />
+                  </Button>
+                </Fragment>
+              }
+            />
+            <Button
+              variant="outlined"
+              onClick={() => inputEl.current.click()}
+              disabled={length(images) === 5}
+              className={classes.ml1}
+            >
+              <FormattedMessage {...messages.upload} />
+              <Icon className={classes.ml1}>cloud_upload</Icon>
+            </Button>
+          </div>
+          <img className={classes.img} src={image} alt="image" />
+        </Carousel>
         {usersBlocked[0] && (
           <Paper elevation={24} className={classes.usersBlocked}>
             <Typography variant="h5">

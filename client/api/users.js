@@ -41,4 +41,6 @@ export const deleteUsersImages = (token, imageId) => {
   return axios.delete(`/api/users/images/${imageId}`, { headers });
 };
 
+export const getUserImage = (userId, imageId) => `/api/users/${userId}/images/${imageId}`;
+
 export const postUsersForgot = user => axios.post('/api/users/forgot', user);

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { find } from 'ramda';
+import { find, path, isEmpty, length } from 'ramda';
 import { FormattedMessage } from 'react-intl';
 import { Paper, Grid, Button } from '@material-ui/core';
 import UserForm from '../../components/UserForm';
 import Carousel from '../../components/Carousel';
+import emptyImage from '../../images/emptyImage.png';
+import { getUserImage } from '../../api';
 import useStyles from './styles';
 import { useConnect } from './hooks';
 import messages from './messages';
@@ -18,6 +20,11 @@ const User = ({ id }) => {
   const isLiked = Boolean(find(userLiked => userLiked._id === user._id)(myUser.usersLiked));
   const isBlocked = Boolean(find(userBlocked => userBlocked._id === user._id)(myUser.usersBlocked));
   const isFriend = find(friend => friend._id === user._id)(myUser.friends);
+  const { images = [] } = user;
+  const image = !isEmpty(images)
+    ? getUserImage(user._id, path([activeStep, '_id'])(images))
+    : emptyImage;
+  const maxSteps = length(images);
   return (
     <Grid container justify="center" spacing={2} className={classes.p3}>
       {isFriend && (
@@ -52,12 +59,9 @@ const User = ({ id }) => {
       </Grid>
       <Grid item className={classes.width}>
         <Paper elevation={24}>
-          <Carousel
-            userId={user._id}
-            images={user.images}
-            activeStep={activeStep}
-            handleStep={handleStep}
-          />
+          <Carousel activeStep={activeStep} handleStep={handleStep} maxSteps={maxSteps}>
+            <img className={classes.img} src={image} alt="image" />
+          </Carousel>
         </Paper>
       </Grid>
       <Grid item className={classes.width}>
