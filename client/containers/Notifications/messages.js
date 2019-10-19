@@ -1,6 +1,10 @@
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
+  title: {
+    id: 'containers.notifications.title',
+    defaultMessage: 'Notifications',
+  },
   friendLogged: {
     id: 'containers.notifications.friendLogged',
     defaultMessage: '{username} has logged in',

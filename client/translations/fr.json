@@ -47,6 +47,7 @@
   "containers.notifications.gotLiked": "{username} vous aime",
   "containers.notifications.gotUnfriended": "{username} n'est plus votre ami",
   "containers.notifications.gotVisited": "{username} a visité votre profil",
+  "containers.notifications.title": "Notifications",
   "containers.user.blockUser": "Bloquer",
   "containers.user.friend": "Ami",
   "containers.user.likeUser": "Aimer",

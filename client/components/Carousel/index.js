@@ -1,20 +1,12 @@
 import React from 'react';
-import { length, path } from 'ramda';
 import { FormattedMessage } from 'react-intl';
 import { Button, MobileStepper, Icon, Paper } from '@material-ui/core';
-import emptyImage from '../../images/emptyImage.png';
-import useStyles from './styles';
 import messages from './messages';
 
-const Carousel = ({ children, userId, images, activeStep, handleStep }) => {
-  const classes = useStyles();
-  const maxSteps = length(images);
-  const imageId = path([activeStep, '_id'])(images);
-  const image = imageId ? `/api/users/${userId}/images/${images[activeStep]._id}` : emptyImage;
+const Carousel = ({ children, activeStep, maxSteps, handleStep }) => {
   return (
     <Paper elevation={24}>
-      {children && <div className={classes.header}>{children}</div>}
-      <img className={classes.img} src={image} alt="image" />
+      {children}
       <MobileStepper
         steps={maxSteps}
         position="static"

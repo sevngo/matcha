@@ -8,13 +8,17 @@ import {
   DialogActions,
 } from '@material-ui/core';
 
-const Modal = ({ title, text, content, actions, ...rest }) => {
+const Modal = ({ title, text, children, actions, ...rest }) => {
   return (
     <Dialog {...rest}>
       <DialogTitle>{title && <FormattedMessage {...title} />}</DialogTitle>
       <DialogContent>
-        <DialogContentText>{text && <FormattedMessage {...text} />}</DialogContentText>
-        {content}
+        {text && (
+          <DialogContentText>
+            <FormattedMessage {...text} />
+          </DialogContentText>
+        )}
+        {children}
       </DialogContent>
       <DialogActions>{actions}</DialogActions>
     </Dialog>
