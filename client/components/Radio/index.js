@@ -1,16 +1,34 @@
 import React from 'react';
-import { RadioGroup, FormControl, FormLabel } from '@material-ui/core';
+import { FormattedMessage } from 'react-intl';
+import { map } from 'ramda';
+import {
+  RadioGroup,
+  FormControl,
+  FormLabel,
+  FormControlLabel,
+  Radio as MRadio,
+} from '@material-ui/core';
+import withMetaData from '../../hoc/withMetaData';
 
-const Radio = ({ field, form: { touched, errors }, label, children, ...rest }) => {
+const Radio = ({ field, meta: { isError }, label, options, messages, disabled, ...rest }) => {
   const { name } = field;
   return (
-    <FormControl error={errors[name] && touched[name]}>
+    <FormControl error={isError}>
       <FormLabel>{label}</FormLabel>
       <RadioGroup row {...field} {...rest}>
-        {children}
+        {map(option => (
+          <FormControlLabel
+            name={name}
+            key={option.id}
+            value={option.value}
+            control={<MRadio color="primary" />}
+            label={<FormattedMessage {...messages[option.id]} />}
+            disabled={disabled}
+          />
+        ))(options)}
       </RadioGroup>
     </FormControl>
   );
 };
 
-export default Radio;
+export default withMetaData(Radio);
