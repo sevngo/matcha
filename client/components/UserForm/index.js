@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { withFormik, Field } from 'formik';
 import { FormattedMessage } from 'react-intl';
-import { has, compose, map, isNil, path } from 'ramda';
+import { has, compose, map, isNil, path, __ } from 'ramda';
 import { Grid, Button, MenuItem } from '@material-ui/core';
-import IconButton from '../IconButton';
 import Input from '../Input';
 import Radio from '../Radio';
 import Select from '../Select';
@@ -39,13 +38,14 @@ const Component = ({
 }) => {
   const classes = useStyles();
   const [showPassword, toggleShowPassword] = useState(false);
+  const hasInitialValue = has(__, initialValues);
   const hasAddress = !isNil(path(['address', 'coordinates'])(values));
   const handleAddress = address => setFieldValue('address', address);
-  useGeolocation(handleAddress, !isNil(values['address']) && isGeoActivated);
-  useAutocomplete('address', handleAddress, !isNil(values['address']));
+  useGeolocation(handleAddress, values['address'] && isGeoActivated);
+  useAutocomplete('address', handleAddress, values['address']);
   return (
     <form onSubmit={handleSubmit}>
-      {has('username', initialValues) && (
+      {hasInitialValue('username') && (
         <Field
           name="username"
           label={<FormattedMessage {...messages.username} />}
@@ -55,7 +55,7 @@ const Component = ({
           disabled={disabled}
         />
       )}
-      {has('password', initialValues) && (
+      {hasInitialValue('password') && (
         <Field
           name="password"
           label={<FormattedMessage {...messages.password} />}
@@ -63,14 +63,13 @@ const Component = ({
           validate={composeValidators(isRequired, isShort, isLong(30), isTrimmed)}
           type={showPassword ? 'text' : 'password'}
           startAdornment="vpn_key"
-          endAdornment={
-            <IconButton onClick={() => toggleShowPassword(!showPassword)}>
-              {showPassword ? 'visibility' : 'visibility_off'}
-            </IconButton>
-          }
+          endAdornment={{
+            icon: showPassword ? 'visibility' : 'visibility_off',
+            action: () => toggleShowPassword(!showPassword),
+          }}
         />
       )}
-      {has('newPassword', initialValues) && (
+      {hasInitialValue('newPassword') && (
         <Field
           name="newPassword"
           label={<FormattedMessage {...messages.newPassword} />}
@@ -78,14 +77,13 @@ const Component = ({
           validate={composeValidators(isShort, isLong(30), isTrimmed)}
           type={showPassword ? 'text' : 'password'}
           startAdornment="vpn_key"
-          endAdornment={
-            <IconButton onClick={() => toggleShowPassword(!showPassword)}>
-              {showPassword ? 'visibility' : 'visibility_off'}
-            </IconButton>
-          }
+          endAdornment={{
+            icon: showPassword ? 'visibility' : 'visibility_off',
+            action: () => toggleShowPassword(!showPassword),
+          }}
         />
       )}
-      {has('email', initialValues) && (
+      {hasInitialValue('email') && (
         <Field
           name="email"
           label={<FormattedMessage {...messages.email} />}
@@ -95,7 +93,7 @@ const Component = ({
           disabled={disabled}
         />
       )}
-      {has('firstName', initialValues) && (
+      {hasInitialValue('firstName') && (
         <Field
           name="firstName"
           label={<FormattedMessage {...messages.firstName} />}
@@ -104,7 +102,7 @@ const Component = ({
           disabled={disabled}
         />
       )}
-      {has('lastName', initialValues) && (
+      {hasInitialValue('lastName') && (
         <Field
           name="lastName"
           label={<FormattedMessage {...messages.lastName} />}
@@ -113,7 +111,7 @@ const Component = ({
           disabled={disabled}
         />
       )}
-      {has('birthDate', initialValues) && (
+      {hasInitialValue('birthDate') && (
         <Field
           name="birthDate"
           label={<FormattedMessage {...messages.birthDate} />}
@@ -124,7 +122,7 @@ const Component = ({
           disabled={disabled}
         />
       )}
-      {has('gender', initialValues) && (
+      {hasInitialValue('gender') && (
         <div className={classes.gender}>
           <Field
             name="gender"
@@ -136,7 +134,7 @@ const Component = ({
           />
         </div>
       )}
-      {has('address', initialValues) && (
+      {hasInitialValue('address') && (
         <Field
           name="address.name"
           id="address"
@@ -146,13 +144,14 @@ const Component = ({
           validate={() => isRequired(hasAddress)}
           endAdornment={
             hasAddress &&
-            !disabled && (
-              <IconButton onClick={() => setFieldValue('address', { name: '' })}>clear</IconButton>
-            )
+            !disabled && {
+              icon: 'clear',
+              action: () => setFieldValue('address', { name: '' }),
+            }
           }
         />
       )}
-      {has('ageRange', initialValues) && (
+      {hasInitialValue('ageRange') && (
         <div className={classes.p1}>
           <Field
             name="ageRange"
@@ -164,7 +163,7 @@ const Component = ({
           />
         </div>
       )}
-      {has('maxDistance', initialValues) && (
+      {hasInitialValue('maxDistance') && (
         <div className={classes.p1}>
           <Field
             name="maxDistance"
@@ -178,7 +177,7 @@ const Component = ({
           />
         </div>
       )}
-      {has('interests', initialValues) && (
+      {hasInitialValue('interests') && (
         <Field
           name="interests"
           label={<FormattedMessage {...messages.interests} />}
@@ -195,7 +194,7 @@ const Component = ({
           ))(INTERESTS_OPTIONS)}
         </Field>
       )}
-      {has('biography', initialValues) && (
+      {hasInitialValue('biography') && (
         <Field
           name="biography"
           label={<FormattedMessage {...messages.biography} />}
@@ -206,7 +205,7 @@ const Component = ({
           disabled={disabled}
         />
       )}
-      {has('sortBy', initialValues) && (
+      {hasInitialValue('sortBy') && (
         <Field name="sortBy" label={<FormattedMessage {...messages.sortBy} />} component={Select}>
           {map(option => (
             <MenuItem key={option.id} value={option.value}>
