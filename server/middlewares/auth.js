@@ -22,7 +22,6 @@ exports.generateAuthToken = async (req, res, next) => {
     next();
   } catch (e) {
     res.status(400).send();
-    console.log(e); // eslint-disable-line no-console
   }
 };
 
@@ -36,7 +35,6 @@ exports.authenticate = async (req, res, next) => {
     next();
   } catch (e) {
     res.status(401).send();
-    console.log(e); // eslint-disable-line no-console
   }
 };
 
