@@ -1,4 +1,4 @@
-import { reject, append, equals, pick, find } from 'ramda';
+import { reject, compose, append, equals, pick, find } from 'ramda';
 import { openSnackbar } from './';
 import {
   postUser,
@@ -94,9 +94,15 @@ export const forgotPassword = user => async dispatch => {
 export const likeUser = (account, userLikedId) => async dispatch => {
   try {
     dispatch({ type: LIKE_USER });
-    const usersLikedIds = append(userLikedId)(account.usersLikedIds);
-    const usersBlockedIds = reject(equals(userLikedId))(account.usersBlockedIds);
-    const user = { usersLikedIds, usersBlockedIds };
+    const usersLiked = compose(
+      append(userLikedId),
+      getIds,
+    )(account.usersLiked);
+    const usersBlocked = compose(
+      reject(equals(userLikedId)),
+      getIds,
+    )(account.usersBlocked);
+    const user = { usersLiked, usersBlocked };
     const { data: myUser } = await patchUser(account.token, user);
     dispatch({ type: LIKED_USER, myUser });
     socket.emit('userLiked', {
@@ -115,9 +121,15 @@ export const likeUser = (account, userLikedId) => async dispatch => {
 export const blockUser = (account, userBlockedId) => async dispatch => {
   try {
     dispatch({ type: BLOCK_USER });
-    const usersLikedIds = reject(equals(userBlockedId))(account.usersLikedIds);
-    const usersBlockedIds = append(userBlockedId)(account.usersBlockedIds);
-    const user = { usersLikedIds, usersBlockedIds };
+    const usersLiked = compose(
+      reject(equals(userBlockedId)),
+      getIds,
+    )(account.usersLiked);
+    const usersBlocked = compose(
+      append(userBlockedId),
+      getIds,
+    )(account.usersBlocked);
+    const user = { usersLiked, usersBlocked };
     const { data: myUser } = await patchUser(account.token, user);
     dispatch({ type: BLOCKED_USER, myUser });
     socket.emit('userBlocked', {

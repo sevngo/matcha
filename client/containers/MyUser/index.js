@@ -16,7 +16,7 @@ const MyUser = () => {
   const { myUser, updateUser, uploadImage, removeImage, likeUser } = useConnect();
   const [activeStep, handleStep] = useState(0);
   const [isModalOpen, handleModal] = useState(false);
-  const { _id, token, images = [], usersBlocked } = myUser;
+  const { _id, token, images, usersBlocked } = myUser;
   const inputEl = useRef();
   const addImage = image => {
     if (image) uploadImage(token, image);
