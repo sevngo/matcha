@@ -1,4 +1,4 @@
-import { reduce, filter, isEmpty } from 'ramda';
+import { reduce, filter, isEmpty, path, split } from 'ramda';
 
 export const getAge = dateString => {
   const today = new Date();
@@ -12,3 +12,11 @@ export const getAge = dateString => {
 export const getIds = reduce((acc, object) => [...acc, object._id], []);
 
 export const compact = filter(value => value && !isEmpty(value));
+
+export const getFieldError = (name, errors, touched) => {
+  const names = split('.')(name);
+  const pathName = path(names);
+  const error = pathName(errors);
+  const isError = error && pathName(touched);
+  return { isError, error };
+};

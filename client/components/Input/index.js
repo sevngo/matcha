@@ -1,14 +1,14 @@
 import React from 'react';
-import { compose } from 'ramda';
 import { FormattedMessage } from 'react-intl';
 import { TextField, Icon } from '@material-ui/core';
 import IconButton from '../IconButton';
-import withMetaData from '../../hoc/withMetaData';
+import { getFieldError } from '../../utils';
 import useStyles from './styles';
 import messages from './messages';
 
-const Input = ({ field, meta: { error, isError }, startAdornment, endAdornment, ...rest }) => {
+const Input = ({ field, form: { errors, touched }, startAdornment, endAdornment, ...rest }) => {
   const classes = useStyles();
+  const { isError, error } = getFieldError(field.name, errors, touched);
   return (
     <TextField
       margin="dense"
@@ -28,4 +28,4 @@ const Input = ({ field, meta: { error, isError }, startAdornment, endAdornment, 
   );
 };
 
-export default compose(withMetaData)(Input);
+export default Input;

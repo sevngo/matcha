@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { withFormik, Field } from 'formik';
 import { FormattedMessage } from 'react-intl';
-import { has, compose, map, isNil, path, __ } from 'ramda';
+import { has, compose, map, isNil, __ } from 'ramda';
 import { Grid, Button, MenuItem } from '@material-ui/core';
 import Input from '../Input';
 import Radio from '../Radio';
@@ -39,10 +39,12 @@ const Component = ({
   const classes = useStyles();
   const [showPassword, toggleShowPassword] = useState(false);
   const hasInitialValue = has(__, initialValues);
-  const hasAddress = !isNil(path(['address', 'coordinates'])(values));
+
+  const address = values['address'];
+  const isValidAddress = !isNil(address.coordinates);
   const handleAddress = address => setFieldValue('address', address);
-  useGeolocation(handleAddress, values['address'] && isGeoActivated);
-  useAutocomplete('address', handleAddress, values['address']);
+  useGeolocation(handleAddress, address && isGeoActivated);
+  useAutocomplete('address', handleAddress, address);
   return (
     <form onSubmit={handleSubmit}>
       {hasInitialValue('username') && (
@@ -140,10 +142,10 @@ const Component = ({
           id="address"
           label={<FormattedMessage {...messages.address} />}
           component={Input}
-          disabled={disabled || hasAddress}
-          validate={() => isRequired(hasAddress)}
+          disabled={disabled || isValidAddress}
+          validate={() => isRequired(isValidAddress)}
           endAdornment={
-            hasAddress &&
+            isValidAddress &&
             !disabled && {
               icon: 'clear',
               action: () => setFieldValue('address', { name: '' }),
