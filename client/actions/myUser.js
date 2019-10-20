@@ -1,7 +1,7 @@
 import { reject, compose, append, equals, pick, find } from 'ramda';
 import { openSnackbar } from './';
 import {
-  postUsers,
+  postUser,
   postUserLogin,
   patchUser,
   postUserForgot,
@@ -40,7 +40,7 @@ export const logout = () => dispatch => {
 export const register = user => async dispatch => {
   try {
     dispatch({ type: REGISTER });
-    await postUsers(user);
+    await postUser(user);
     dispatch(openSnackbar({ variant: SUCCESS }));
   } catch {
     dispatch(openSnackbar({ variant: ERROR }));

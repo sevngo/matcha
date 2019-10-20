@@ -6,7 +6,7 @@ const controllers = require('./controllers');
 
 const router = new Router();
 
-router.post('/', conversions.newDateBirth, conversions.hashPassword, controllers.postUsers);
+router.post('/', conversions.newDateBirth, conversions.hashPassword, controllers.postUser);
 
 router.get(
   '/',
@@ -41,7 +41,7 @@ router.patch(
   conversions.newUsersBlockedId,
   stages.lookupUsersLiked,
   stages.lookupUsersBlocked,
-  controllers.patchUsers,
+  controllers.patchUser,
 );
 
 router.post(
@@ -69,7 +69,7 @@ router.get(
   '/:id/images/:imageId',
   auth.isValidObjectId,
   conversions.newObjectId,
-  controllers.getUsersImages,
+  controllers.getUserImage,
 );
 
 module.exports = router;
