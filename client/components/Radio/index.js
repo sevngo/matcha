@@ -8,10 +8,19 @@ import {
   FormControlLabel,
   Radio as MRadio,
 } from '@material-ui/core';
-import withMetaData from '../../hoc/withMetaData';
+import { getFieldError } from '../../utils';
 
-const Radio = ({ field, meta: { isError }, label, options, messages, disabled, ...rest }) => {
+const Radio = ({
+  field,
+  form: { errors, touched },
+  label,
+  options,
+  messages,
+  disabled,
+  ...rest
+}) => {
   const { name } = field;
+  const { isError } = getFieldError(field.name, errors, touched);
   return (
     <FormControl error={isError}>
       <FormLabel>{label}</FormLabel>
@@ -31,4 +40,4 @@ const Radio = ({ field, meta: { isError }, label, options, messages, disabled, .
   );
 };
 
-export default withMetaData(Radio);
+export default Radio;
