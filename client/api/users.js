@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const postUsers = user => axios.post('/api/users', user);
+export const postUser = user => axios.post('/api/users', user);
 
 export const postUserLogin = user => axios.post('/api/users/login', user);
 

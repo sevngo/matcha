@@ -2,6 +2,7 @@ const { ObjectID } = require('mongodb');
 const { omit, reduce, trim, keys, is, map } = require('ramda');
 const bcrypt = require('bcryptjs');
 const multer = require('multer');
+const { asyncHandler } = require('./utils');
 
 exports.newObjectId = (req, res, next) => {
   req._id = ObjectID(req.params.id);
@@ -15,14 +16,14 @@ exports.newDateBirth = (req, res, next) => {
   next();
 };
 
-exports.hashPassword = async (req, res, next) => {
+exports.hashPassword = asyncHandler(async (req, res, next) => {
   const { password } = req.body;
   if (!password) return next();
   req.body.password = await bcrypt.hash(password, 8);
   next();
-};
+});
 
-exports.hashNewPassword = async (req, res, next) => {
+exports.hashNewPassword = asyncHandler(async (req, res, next) => {
   const { body } = req;
   const { newPassword } = body;
   if (!newPassword) {
@@ -32,7 +33,7 @@ exports.hashNewPassword = async (req, res, next) => {
   const password = await bcrypt.hash(newPassword, 8);
   req.body = { ...omit(['newPassword'])(body), password };
   next();
-};
+});
 
 exports.uploadImage = multer({
   limits: {
