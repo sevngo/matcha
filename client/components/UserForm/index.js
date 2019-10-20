@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { withFormik, Field } from 'formik';
 import { FormattedMessage } from 'react-intl';
-import { has, compose, map, isNil, __ } from 'ramda';
+import { has, compose, map, isNil, __, path } from 'ramda';
 import { Grid, Button, MenuItem } from '@material-ui/core';
 import Input from '../Input';
 import Radio from '../Radio';
@@ -41,7 +41,7 @@ const Component = ({
   const hasInitialValue = has(__, initialValues);
 
   const address = values['address'];
-  const isValidAddress = !isNil(address.coordinates);
+  const isValidAddress = !isNil(path(['address', 'coordinates'])(values));
   const handleAddress = address => setFieldValue('address', address);
   useGeolocation(handleAddress, address && isGeoActivated);
   useAutocomplete('address', handleAddress, address);
