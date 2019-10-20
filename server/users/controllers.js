@@ -6,7 +6,7 @@ const { usersPipeline, matchById, project } = require('../utils/functions');
 const { Users } = require('../database');
 const { sendEmailConfirmation, sendResetPassword } = require('../emails/account');
 const { JWT_SECRET } = require('../utils/constants');
-const { getAppUrl, getIds } = require('../utils/functions');
+const { getAppUrl } = require('../utils/functions');
 const { asyncHandler } = require('../middlewares/utils');
 
 exports.postUser = asyncHandler(async (req, res) => {
@@ -14,7 +14,7 @@ exports.postUser = asyncHandler(async (req, res) => {
   const UsersCollection = Users();
   const {
     ops: [user],
-  } = await UsersCollection.insertOne({ usersBlocked: [], usersLiked: [], ...req.body });
+  } = await UsersCollection.insertOne({ usersLikedIds: [], usersBlockedIds: [], ...req.body });
   const { _id, email, firstName, lastName } = user;
   const token = await jwt.sign({ _id }, JWT_SECRET);
   const url = `${getAppUrl(protocol, hostname, req.get('host'))}/verify/${token}`;
@@ -86,10 +86,10 @@ exports.patchUser = asyncHandler(async (req, res) => {
   const [data] = await UsersCollection.aggregate(
     usersPipeline(matchById(_id), lookupUsersLiked, lookupUsersBlocked, projection),
   ).toArray();
-  const usersLikedIds = getIds(data.usersLiked);
+  const { usersLikedIds = [] } = data;
   const friends = await UsersCollection.aggregate([
     { $match: { _id: { $in: usersLikedIds } } },
-    { $match: { usersLiked: ObjectID(data._id) } },
+    { $match: { usersLikedIds: ObjectID(data._id) } },
     projection,
   ]).toArray();
   res.send({ ...data, friends });
@@ -97,7 +97,7 @@ exports.patchUser = asyncHandler(async (req, res) => {
 
 exports.postUserLogin = asyncHandler(async (req, res) => {
   const {
-    myUser: { _id, usersLiked },
+    myUser: { _id, usersLikedIds = [] },
     token,
     lookupUsersLiked,
     lookupUsersBlocked,
@@ -117,8 +117,8 @@ exports.postUserLogin = asyncHandler(async (req, res) => {
     usersPipeline(matchById(_id), lookupUsersLiked, lookupUsersBlocked, projection),
   ).toArray();
   const friends = await UsersCollection.aggregate([
-    { $match: { _id: { $in: usersLiked } } },
-    { $match: { usersLiked: ObjectID(data._id) } },
+    { $match: { _id: { $in: usersLikedIds } } },
+    { $match: { usersLikedIds: ObjectID(data._id) } },
     projection,
   ]).toArray();
   res.send({ ...data, friends, token });

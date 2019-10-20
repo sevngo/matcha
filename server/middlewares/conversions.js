@@ -58,16 +58,16 @@ exports.trimBody = (req, res, next) => {
 
 exports.newUsersLikedId = (req, res, next) => {
   const {
-    body: { usersLiked },
+    body: { usersLikedIds },
   } = req;
-  if (usersLiked) req.body.usersLiked = map(id => ObjectID(id))(usersLiked);
+  if (usersLikedIds) req.body.usersLikedIds = map(id => ObjectID(id))(usersLikedIds);
   next();
 };
 
 exports.newUsersBlockedId = (req, res, next) => {
   const {
-    body: { usersBlocked },
+    body: { usersBlockedIds },
   } = req;
-  if (usersBlocked) req.body.usersBlocked = map(id => ObjectID(id))(usersBlocked);
+  if (usersBlockedIds) req.body.usersBlockedIds = map(id => ObjectID(id))(usersBlockedIds);
   next();
 };
