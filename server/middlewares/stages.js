@@ -87,7 +87,7 @@ exports.lookupUsersLiked = (req, res, next) => {
   req.lookupUsersLiked = {
     $lookup: {
       from: 'users',
-      localField: 'usersLikedIds',
+      localField: 'usersLiked',
       foreignField: '_id',
       as: 'usersLiked',
     },
@@ -99,7 +99,7 @@ exports.lookupUsersBlocked = (req, res, next) => {
   req.lookupUsersBlocked = {
     $lookup: {
       from: 'users',
-      localField: 'usersBlockedIds',
+      localField: 'usersBlocked',
       foreignField: '_id',
       as: 'usersBlocked',
     },
@@ -108,9 +108,6 @@ exports.lookupUsersBlocked = (req, res, next) => {
 };
 
 exports.mismatchUsersBlocked = (req, res, next) => {
-  const {
-    myUser: { usersBlockedIds = [] },
-  } = req;
-  req.mismatchUsersBlocked = { $match: { _id: { $nin: usersBlockedIds } } };
+  req.mismatchUsersBlocked = { $match: { _id: { $nin: req.myUser.usersBlocked } } };
   next();
 };
