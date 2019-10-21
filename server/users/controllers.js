@@ -2,12 +2,12 @@ const { ObjectID } = require('mongodb');
 const { find, propEq } = require('ramda');
 const jwt = require('jsonwebtoken');
 const sharp = require('sharp');
-const { usersPipeline, matchById, project } = require('../utils/functions');
+const { matchById, project } = require('../utils/functions');
+const { usersPipeline } = require('./utils');
 const { Users } = require('../database');
 const { sendEmailConfirmation, sendResetPassword } = require('../emails/account');
 const { JWT_SECRET } = require('../utils/constants');
-const { getAppUrl, getIds } = require('../utils/functions');
-const { asyncHandler } = require('../middlewares/utils');
+const { getAppUrl, getIds, asyncHandler } = require('../utils/functions');
 
 exports.postUser = asyncHandler(async (req, res) => {
   const { protocol, hostname } = req;

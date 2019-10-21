@@ -4,7 +4,7 @@ const { ObjectID } = require('mongodb');
 const bcrypt = require('bcryptjs');
 const { Users } = require('../database');
 const { JWT_SECRET } = require('../utils/constants');
-const { asyncHandler } = require('./utils');
+const { asyncHandler } = require('../utils/functions');
 
 exports.generateAuthToken = asyncHandler(async (req, res, next) => {
   const { username, password } = req.body;

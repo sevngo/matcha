@@ -1,4 +1,4 @@
-const { pick, split, is } = require('ramda');
+const { split, is } = require('ramda');
 const { ObjectID } = require('mongodb');
 const { defaultToNull } = require('../utils/functions');
 
@@ -7,7 +7,7 @@ exports.limit = (req, res, next) => {
     query: { limit },
   } = req;
   const intLimit = defaultToNull(parseInt(limit));
-  req.limit = intLimit && { $limit: intLimit };
+  if (intLimit) req.limit = { $limit: intLimit };
   next();
 };
 
@@ -16,7 +16,7 @@ exports.skip = (req, res, next) => {
     query: { skip },
   } = req;
   const intSkip = defaultToNull(parseInt(skip));
-  req.skip = intSkip && { $skip: intSkip };
+  if (intSkip) req.skip = { $skip: intSkip };
   next();
 };
 
@@ -32,17 +32,22 @@ exports.sort = (req, res, next) => {
 };
 
 exports.matchInterests = (req, res, next) => {
-  const { query } = req;
-  const { interests } = query;
-  req.matchInterests = {
-    $match: is(Array)(interests) ? { interests: { $all: interests } } : pick(['interests'])(query),
-  };
+  const {
+    query: { interests },
+  } = req;
+  if (interests) {
+    req.matchInterests = {
+      $match: is(Array)(interests) ? { interests: { $all: interests } } : { interests },
+    };
+  }
   next();
 };
 
 exports.matchGender = (req, res, next) => {
-  const { query } = req;
-  req.matchGender = query.gender && { $match: pick(['gender'])(query) };
+  const {
+    query: { gender },
+  } = req;
+  if (gender) req.matchGender = gender && { $match: { gender } };
   next();
 };
 
@@ -62,19 +67,22 @@ exports.maxDistance = (req, res, next) => {
   const {
     query: { maxDistance },
     myUser: {
-      address: { coordinates },
+      address: {
+        coordinates: [lng, lat],
+      },
     },
   } = req;
-  const [lng, lat] = coordinates;
-  req.maxDistance = {
-    $geoNear: {
-      near: { type: 'Point', coordinates: [parseFloat(lng), parseFloat(lat)] },
-      distanceField: 'distance',
-      distanceMultiplier: 0.001,
-      maxDistance: parseInt(maxDistance),
-      spherical: true,
-    },
-  };
+  if (maxDistance) {
+    req.maxDistance = {
+      $geoNear: {
+        near: { type: 'Point', coordinates: [parseFloat(lng), parseFloat(lat)] },
+        distanceField: 'distance',
+        distanceMultiplier: 0.001,
+        maxDistance: parseInt(maxDistance),
+        spherical: true,
+      },
+    };
+  }
   next();
 };
 
