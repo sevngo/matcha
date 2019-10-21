@@ -2,7 +2,7 @@ const { ObjectID } = require('mongodb');
 const { omit, reduce, trim, keys, is, map } = require('ramda');
 const bcrypt = require('bcryptjs');
 const multer = require('multer');
-const { asyncHandler } = require('./utils');
+const { asyncHandler } = require('../utils/functions');
 
 exports.newObjectId = (req, res, next) => {
   req._id = ObjectID(req.params.id);

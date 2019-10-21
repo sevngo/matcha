@@ -5,7 +5,7 @@ import {
   UPDATED_USER,
   LOAD_USERS,
   LOADED_USERS,
-  LOAD_LOAD,
+  LOAD_USER,
   LOADED_USER,
   UPLOAD_IMAGE,
   UPLOADED_IMAGE,
@@ -24,7 +24,7 @@ export default (state = {}, action) => {
     case LOGIN:
     case UPDATE_USER:
     case LOAD_USERS:
-    case LOAD_LOAD:
+    case LOAD_USER:
     case UPLOAD_IMAGE:
     case DELETE_IMAGE:
     case LIKE_USER:
