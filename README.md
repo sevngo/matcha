@@ -2,7 +2,9 @@
 
 [Subject](https://github.com/sevngo/Matcha/blob/master/subject.pdf)
 
-React.js Redux Node.js MongoDB web application
+React Redux Node.js MongoDB web application
+
+node v12.13.0
 
 ## .env.development
 
