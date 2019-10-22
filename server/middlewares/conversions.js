@@ -2,7 +2,7 @@ const { ObjectID } = require('mongodb');
 const { omit, reduce, trim, keys, is, map } = require('ramda');
 const bcrypt = require('bcryptjs');
 const multer = require('multer');
-const { asyncHandler } = require('../utils/functions');
+const { asyncHandler, ErrorResponse } = require('../utils/functions');
 
 exports.newObjectId = (req, res, next) => {
   req._id = ObjectID(req.params.id);
@@ -41,7 +41,7 @@ exports.uploadImage = multer({
   },
   fileFilter(req, file, cb) {
     if (!file.originalname.match(/\.(png|jpg|jpeg)$/))
-      return cb(new Error('Please upload an image'));
+      return cb(new ErrorResponse(400, 'Please upload an image'));
     cb(undefined, true);
   },
 });
