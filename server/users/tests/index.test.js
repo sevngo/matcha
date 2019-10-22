@@ -108,7 +108,7 @@ describe('/api/users', () => {
       await request(app)
         .post(`/api/users/forgot`)
         .send({ email: 'invalid@email.com' })
-        .expect(500);
+        .expect(400);
     });
   });
 
