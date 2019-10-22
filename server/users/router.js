@@ -1,27 +1,13 @@
 const { Router } = require('express');
 const conversions = require('../middlewares/conversions');
 const auth = require('../middlewares/auth');
-const stages = require('../middlewares/stages');
 const controllers = require('./controllers');
 
 const router = new Router();
 
 router.post('/', conversions.newDateBirth, conversions.hashPassword, controllers.postUser);
 
-router.get(
-  '/',
-  auth.authenticate,
-  stages.maxDistance,
-  stages.matchGender,
-  stages.matchInterests,
-  stages.matchBirthRange,
-  stages.mismatchUsersBlocked,
-  stages.mismatchMyUser,
-  stages.limit,
-  stages.skip,
-  stages.sort,
-  controllers.getUsers,
-);
+router.get('/', auth.authenticate, controllers.getUsers);
 
 router.get(
   '/:id',
@@ -39,8 +25,6 @@ router.patch(
   conversions.hashNewPassword,
   conversions.newUsersLikedId,
   conversions.newUsersBlockedId,
-  stages.lookupUsersLiked,
-  stages.lookupUsersBlocked,
   controllers.patchUser,
 );
 
@@ -49,8 +33,6 @@ router.post(
   conversions.trimBody,
   auth.generateAuthToken,
   auth.emailVerified,
-  stages.lookupUsersLiked,
-  stages.lookupUsersBlocked,
   controllers.postUserLogin,
 );
 
