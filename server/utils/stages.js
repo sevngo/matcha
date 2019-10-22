@@ -11,7 +11,7 @@ exports.match = (key, value) => {
 };
 
 exports.matchRange = (key, min, max) => {
-  if (min && max) {
+  if (is(Number)(min) && is(Number)(max)) {
     return { $match: { [key]: { $gt: min, $lt: max } } };
   }
 };

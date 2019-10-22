@@ -34,7 +34,7 @@ exports.postUser = asyncHandler(async (req, res) => {
 
 exports.getUsers = asyncHandler(async (req, res) => {
   const {
-    query: { gender, interests, birthRange, limit, skip, sortBy, maxDistance },
+    query: { gender, interests, birthRange = '', limit, skip, sortBy, maxDistance },
     myUser: {
       _id,
       usersBlocked,
