@@ -146,7 +146,7 @@ exports.postUserForgot = asyncHandler(async (req, res, next) => {
   const { protocol, hostname } = req;
   const UsersCollection = Users();
   const user = await UsersCollection.findOne({ email: req.body.email });
-  if (!user) next(new ErrorResponse(400, 'Bad request'));
+  if (!user) next(new ErrorResponse(400, 'Email not found'));
   const { _id, email, firstName, lastName } = user;
   const token = await jwt.sign({ _id }, JWT_SECRET);
   const url = `${getAppUrl(protocol, hostname, req.get('host'))}/reset/${token}`;

@@ -4,17 +4,22 @@ const jwt = require('jsonwebtoken');
 const { ObjectID } = require('mongodb');
 const { JWT_SECRET } = require('../../../utils/constants');
 
+const genders = ['female', 'male'];
+const today = new Date();
+const birthDateMin = new Date(today.getFullYear() - 50, today.getMonth(), today.getDate());
+const birthDateMax = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+
 const initialPassword = faker.internet.password();
 const initialId = faker.random.alphaNumeric(12);
 const userOneToken = jwt.sign({ _id: initialId }, JWT_SECRET);
 
 const userOne = {
   username: faker.internet.userName(),
-  birthDate: faker.date.past(),
+  birthDate: faker.date.between(birthDateMin, birthDateMax),
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
   email: faker.internet.email(),
-  gender: 'male',
+  gender: faker.random.arrayElement(genders),
   address: {
     type: 'Point',
     name: faker.address.streetAddress(),
@@ -33,13 +38,13 @@ const userTwo = {
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
   email: faker.internet.email(),
-  gender: 'male',
+  gender: faker.random.arrayElement(genders),
   address: {
     type: 'Point',
     name: faker.address.streetAddress(),
     coordinates: [parseFloat(faker.address.longitude()), parseFloat(faker.address.latitude())],
   },
-  password: bcrypt.hashSync(initialPassword, 8),
+  password: bcrypt.hashSync(faker.internet.password(), 8),
   _id: ObjectID(),
   usersLiked: [],
   usersBlocked: [],
@@ -52,7 +57,7 @@ const newUser = {
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
   email: faker.internet.email(),
-  gender: 'male',
+  gender: faker.random.arrayElement(genders),
   address: {
     type: 'Point',
     name: faker.address.streetAddress(),
