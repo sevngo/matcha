@@ -17,7 +17,7 @@ const {
 const { Users } = require('../database');
 const { sendEmailConfirmation, sendResetPassword } = require('../emails/account');
 const { JWT_SECRET } = require('../utils/constants');
-const { getAppUrl, getIds, asyncHandler, compact } = require('../utils/functions');
+const { getAppUrl, getIds, asyncHandler, compact, ErrorResponse } = require('../utils/functions');
 
 exports.postUser = asyncHandler(async (req, res) => {
   const { protocol, hostname } = req;
@@ -142,11 +142,11 @@ exports.postUserLogin = asyncHandler(async (req, res) => {
   res.send({ ...data, friends, token });
 });
 
-exports.postUserForgot = asyncHandler(async (req, res) => {
+exports.postUserForgot = asyncHandler(async (req, res, next) => {
   const { protocol, hostname } = req;
   const UsersCollection = Users();
   const user = await UsersCollection.findOne({ email: req.body.email });
-  if (!user) throw new Error();
+  if (!user) next(new ErrorResponse(400, 'Bad request'));
   const { _id, email, firstName, lastName } = user;
   const token = await jwt.sign({ _id }, JWT_SECRET);
   const url = `${getAppUrl(protocol, hostname, req.get('host'))}/reset/${token}`;

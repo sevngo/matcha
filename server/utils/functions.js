@@ -4,6 +4,13 @@ const { NODE_ENV, DEVSERVER_PORT } = require('./constants');
 
 exports.asyncHandler = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next);
 
+exports.ErrorResponse = class ErrorResponse extends Error {
+  constructor(statusCode, message) {
+    super(message);
+    this.statusCode = statusCode;
+  }
+};
+
 exports.defaultToNull = defaultTo(null);
 
 exports.getAppUrl = (protocol, hostname, host) => {
