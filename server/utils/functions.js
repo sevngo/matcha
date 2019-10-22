@@ -19,7 +19,3 @@ exports.compact = filter(value => value && !isEmpty(value));
 exports.getIds = reduce((acc, object) => [...acc, object._id], []);
 
 exports.createNotification = user => ({ user, createdAt: new Date(), _id: ObjectID() });
-
-exports.matchById = _id => ({ $match: { _id } });
-
-exports.project = fields => ({ $project: fields });

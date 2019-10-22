@@ -1,13 +1,23 @@
 const { ObjectID } = require('mongodb');
-const { find, propEq } = require('ramda');
+const { find, propEq, split } = require('ramda');
 const jwt = require('jsonwebtoken');
 const sharp = require('sharp');
-const { matchById, project } = require('../utils/functions');
-const { usersPipeline } = require('./utils');
+const {
+  project,
+  match,
+  matchRange,
+  getLimit,
+  getSkip,
+  getSort,
+  mismatch,
+  geoNear,
+  addFieldBirthDate,
+  lookup,
+} = require('../utils/stages');
 const { Users } = require('../database');
 const { sendEmailConfirmation, sendResetPassword } = require('../emails/account');
 const { JWT_SECRET } = require('../utils/constants');
-const { getAppUrl, getIds, asyncHandler } = require('../utils/functions');
+const { getAppUrl, getIds, asyncHandler, compact } = require('../utils/functions');
 
 exports.postUser = asyncHandler(async (req, res) => {
   const { protocol, hostname } = req;
@@ -24,31 +34,31 @@ exports.postUser = asyncHandler(async (req, res) => {
 
 exports.getUsers = asyncHandler(async (req, res) => {
   const {
-    maxDistance,
-    matchGender,
-    matchInterests,
-    limit,
-    skip,
-    sort,
-    matchBirthRange,
-    mismatchMyUser,
-    mismatchUsersBlocked,
+    query: { gender, interests, birthRange, limit, skip, sortBy, maxDistance },
+    myUser: {
+      _id,
+      usersBlocked,
+      address: {
+        coordinates: [lng, lat],
+      },
+    },
   } = req;
   const UsersCollection = Users();
+  const [birthMin, birthMax] = split(':')(birthRange);
   const projection = project({ password: 0, 'images.data': 0, email: 0 });
   const users = await UsersCollection.aggregate(
-    usersPipeline(
-      maxDistance,
-      matchGender,
-      matchInterests,
-      matchBirthRange,
-      mismatchUsersBlocked,
-      mismatchMyUser,
-      limit,
-      skip,
-      sort,
+    compact([
+      geoNear(lng, lat, maxDistance),
+      match('gender', gender),
+      match('interests', interests),
+      matchRange('birthDate', new Date(birthMin), new Date(birthMax)),
+      mismatch('_id', usersBlocked),
+      mismatch('_id', _id),
+      getLimit(limit),
+      getSkip(skip),
+      getSort(sortBy),
       projection,
-    ),
+    ]),
   ).toArray();
   res.status(200).send(users);
 });
@@ -57,7 +67,7 @@ exports.getUser = asyncHandler(async (req, res) => {
   const UsersCollection = Users();
   const projection = project({ password: 0, 'images.data': 0, email: 0 });
   const [data] = await UsersCollection.aggregate(
-    usersPipeline(matchById(req._id), projection),
+    compact([match('_id', req._id), addFieldBirthDate, projection]),
   ).toArray();
   if (!data) return res.status(404).send();
   res.send(data);
@@ -67,8 +77,6 @@ exports.patchUser = asyncHandler(async (req, res) => {
   const {
     myUser: { _id },
     body,
-    lookupUsersLiked,
-    lookupUsersBlocked,
   } = req;
   const UsersCollection = Users();
   const { value: user } = await UsersCollection.findOneAndUpdate({ _id }, { $set: body });
@@ -84,7 +92,13 @@ exports.patchUser = asyncHandler(async (req, res) => {
     'usersLiked.images.data': 0,
   });
   const [data] = await UsersCollection.aggregate(
-    usersPipeline(matchById(_id), lookupUsersLiked, lookupUsersBlocked, projection),
+    compact([
+      match('_id', _id),
+      lookup('users', 'usersLiked', '_id', 'usersLiked'),
+      lookup('users', 'usersBlocked', '_id', 'usersBlocked'),
+      addFieldBirthDate,
+      projection,
+    ]),
   ).toArray();
   const usersLikedIds = getIds(data.usersLiked);
   const friends = await UsersCollection.aggregate([
@@ -99,8 +113,6 @@ exports.postUserLogin = asyncHandler(async (req, res) => {
   const {
     myUser: { _id, usersLiked },
     token,
-    lookupUsersLiked,
-    lookupUsersBlocked,
   } = req;
   const UsersCollection = Users();
   const projection = project({
@@ -114,7 +126,13 @@ exports.postUserLogin = asyncHandler(async (req, res) => {
     'usersLiked.images.data': 0,
   });
   const [data] = await UsersCollection.aggregate(
-    usersPipeline(matchById(_id), lookupUsersLiked, lookupUsersBlocked, projection),
+    compact([
+      match('_id', _id),
+      lookup('users', 'usersLiked', '_id', 'usersLiked'),
+      lookup('users', 'usersBlocked', '_id', 'usersBlocked'),
+      addFieldBirthDate,
+      projection,
+    ]),
   ).toArray();
   const friends = await UsersCollection.aggregate([
     { $match: { _id: { $in: usersLiked } } },
@@ -153,7 +171,7 @@ exports.postUserImage = asyncHandler(async (req, res) => {
   if (!user) return res.status(404).send();
   const projection = project({ password: 0, 'images.data': 0 });
   const [data] = await UsersCollection.aggregate(
-    usersPipeline(matchById(_id), projection),
+    compact([match('_id', _id), addFieldBirthDate, projection]),
   ).toArray();
   res.send(data);
 });
@@ -171,7 +189,7 @@ exports.deleteUserImage = asyncHandler(async (req, res) => {
   if (!user) return res.status(404).send();
   const projection = project({ password: 0, 'images.data': 0 });
   const [data] = await UsersCollection.aggregate(
-    usersPipeline(matchById(_id), projection),
+    compact([match('_id', _id), addFieldBirthDate, projection]),
   ).toArray();
   res.send(data);
 });

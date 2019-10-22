@@ -31,7 +31,7 @@ export const loadUsers = (token, filter) => async dispatch => {
     const birthMax = `${todayYear - ageRange[0]}${todayMonthDay}`;
     const birthQuery = `&birthRange=${birthMin}:${birthMax}`;
 
-    const query = `?${genderQuery}${birthQuery}&${sortQuery}&${interestsQuery}&${maxDistanceQuery}`;
+    const query = `?${genderQuery}${birthQuery}${sortQuery}${interestsQuery}${maxDistanceQuery}`;
     dispatch({ type: LOAD_USERS });
     const { data } = await getUsers(token, query);
     dispatch({ type: LOADED_USERS, data });
