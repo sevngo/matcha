@@ -64,8 +64,5 @@
     "test": "env-cmd -f .env.test jest",
     "coverage": "env-cmd -f .env.test jest --coverage",
     "seed": "env-cmd -f .env.development node server/utils/seeder"
-  },
-  "browserslist": [
-    "last 1 Chrome version"
-  ]
+  }
 }
