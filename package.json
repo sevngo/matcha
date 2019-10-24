@@ -58,7 +58,7 @@
   },
   "scripts": {
     "start": "parcel build client/index.html && node server",
-    "dev": "concurrently --kill-others \"npm run client\" \"npm run server\"",
+    "dev": "env-cmd -f .env.development concurrently --kill-others \"node client/utils/devServer\" \"nodemon server\"",
     "client": "env-cmd -f .env.development node client/utils/devServer",
     "server": "env-cmd -f .env.development nodemon server",
     "test": "env-cmd -f .env.test jest",
