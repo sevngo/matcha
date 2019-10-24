@@ -102,8 +102,8 @@ exports.patchUser = asyncHandler(async (req, res) => {
   ).toArray();
   const usersLikedIds = getIds(data.usersLiked);
   const friends = await UsersCollection.aggregate([
-    { $match: { _id: { $in: usersLikedIds } } },
-    { $match: { usersLiked: ObjectID(data._id) } },
+    match('_id', usersLikedIds),
+    match('usersLiked', data._id),
     projection,
   ]).toArray();
   res.send({ ...data, friends });
@@ -135,8 +135,8 @@ exports.postUserLogin = asyncHandler(async (req, res) => {
     ]),
   ).toArray();
   const friends = await UsersCollection.aggregate([
-    { $match: { _id: { $in: usersLiked } } },
-    { $match: { usersLiked: ObjectID(data._id) } },
+    match('_id', usersLiked),
+    match('usersLiked', data._id),
     projection,
   ]).toArray();
   res.send({ ...data, friends, token });
