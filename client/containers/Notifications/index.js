@@ -11,7 +11,7 @@ const Notifications = () => {
   const classes = useStyles();
   const { removeNotification, notifications = [] } = useConnect();
   const [isModalOpen, handleModal] = useState(false);
-  const notificationsLength = length(notifications) || 0;
+  const notificationsLength = length(notifications);
   return (
     <Fragment>
       <IconButton color="inherit" onClick={() => handleModal(true)}>
@@ -19,7 +19,7 @@ const Notifications = () => {
           <Icon>notifications_icon</Icon>
         </Badge>
       </IconButton>
-      {notificationsLength && (
+      {notificationsLength !== 0 && (
         <Modal title={messages.title} open={isModalOpen} onClose={() => handleModal(false)}>
           <Grid container direction="column" spacing={2}>
             {notifications.map((notification, index) => (

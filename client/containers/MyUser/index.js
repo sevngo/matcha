@@ -38,8 +38,8 @@ const MyUser = () => {
     'token',
   ])(myUser);
   return (
-    <Grid container spacing={3} justify="center" direction="row" className={classes.p3}>
-      <Grid item className={classes.width}>
+    <Grid container justify="center" direction="row" className={classes.p3}>
+      <Grid item className={classes.mw500}>
         <Carousel activeStep={activeStep} maxSteps={maxSteps} handleStep={handleStep}>
           <div className={classes.header}>
             <input
@@ -118,7 +118,7 @@ const MyUser = () => {
           </Paper>
         )}
       </Grid>
-      <Grid item className={classes.width}>
+      <Grid item className={classes.mw500}>
         <Paper elevation={24} className={classes.p3}>
           <UserForm
             initialValues={{

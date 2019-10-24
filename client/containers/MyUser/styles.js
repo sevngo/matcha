@@ -8,6 +8,9 @@ export default makeStyles(theme => ({
   ml1: {
     marginLeft: theme.spacing(1),
   },
+  ml3: {
+    marginLeft: theme.spacing(3),
+  },
   mt1: {
     marginTop: theme.spacing(1),
   },
@@ -15,7 +18,10 @@ export default makeStyles(theme => ({
     padding: theme.spacing(3),
     marginTop: theme.spacing(3),
   },
-  width: {
+  w100: {
+    width: '100%',
+  },
+  mw500: {
     maxWidth: 500,
   },
   hide: {

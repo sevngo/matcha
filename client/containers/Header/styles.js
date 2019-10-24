@@ -8,7 +8,6 @@ export default makeStyles(theme => ({
     flexGrow: 1,
   },
   icon: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(4),
+    marginRight: theme.spacing(1),
   },
 }));
