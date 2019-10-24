@@ -37,4 +37,7 @@ export default makeStyles(theme => ({
   img: {
     width: '100%',
   },
+  mw500: {
+    maxWidth: 500,
+  },
 }));

@@ -26,36 +26,38 @@ const User = ({ id }) => {
     : emptyImage;
   const maxSteps = length(images);
   return (
-    <Grid container justify="center" spacing={2} className={classes.p3}>
-      {isFriend && (
-        <Grid item xs={12} className={classes.width}>
-          <Button color="primary" variant="contained" size="large" className={classes.friend}>
-            <FormattedMessage {...messages.friend} />
+    <Grid container alignItems="center" direction="column" className={classes.p3}>
+      <Grid container className={classes.mw500}>
+        {isFriend && (
+          <Grid item xs={12}>
+            <Button color="primary" variant="contained" size="large" className={classes.friend}>
+              <FormattedMessage {...messages.friend} />
+            </Button>
+          </Grid>
+        )}
+        <Grid item xs={12}>
+          <Button
+            color="primary"
+            variant="contained"
+            size="large"
+            className={classes.like}
+            onClick={() => likeUser(myUser, user._id)}
+            disabled={isLiked}
+          >
+            <FormattedMessage {...messages.likeUser} />
           </Button>
         </Grid>
-      )}
-      <Grid item xs={12} className={classes.width}>
-        <Button
-          color="primary"
-          variant="contained"
-          size="large"
-          className={classes.like}
-          onClick={() => likeUser(myUser, user._id)}
-          disabled={isLiked}
-        >
-          <FormattedMessage {...messages.likeUser} />
-        </Button>
-      </Grid>
-      <Grid item xs={12} className={classes.width}>
-        <Button
-          size="large"
-          variant="contained"
-          onClick={() => blockUser(myUser, user._id)}
-          className={classes.block}
-          disabled={isBlocked}
-        >
-          <FormattedMessage {...messages.blockUser} />
-        </Button>
+        <Grid item xs={12}>
+          <Button
+            size="large"
+            variant="contained"
+            onClick={() => blockUser(myUser, user._id)}
+            className={classes.block}
+            disabled={isBlocked}
+          >
+            <FormattedMessage {...messages.blockUser} />
+          </Button>
+        </Grid>
       </Grid>
       <Grid item className={classes.width}>
         <Paper elevation={24}>
