@@ -1,6 +1,5 @@
 const { ObjectID } = require('mongodb');
 const { find, propEq, split } = require('ramda');
-const jwt = require('jsonwebtoken');
 const sharp = require('sharp');
 const {
   match,
@@ -18,8 +17,13 @@ const {
 const { otherUserProjection, myUserProjection, imageProjection } = require('./projections');
 const { Users } = require('../database');
 const { sendEmailConfirmation, sendResetPassword } = require('../emails/account');
-const { JWT_SECRET } = require('../utils/constants');
-const { getAppUrl, asyncHandler, compact, ErrorResponse } = require('../utils/functions');
+const {
+  getAppUrl,
+  asyncHandler,
+  compact,
+  ErrorResponse,
+  createToken,
+} = require('../utils/functions');
 
 exports.postUser = asyncHandler(async (req, res) => {
   const { protocol, hostname } = req;
@@ -28,7 +32,7 @@ exports.postUser = asyncHandler(async (req, res) => {
     ops: [user],
   } = await UsersCollection.insertOne({ usersBlocked: [], usersLiked: [], ...req.body });
   const { _id, email, firstName, lastName } = user;
-  const token = await jwt.sign({ _id }, JWT_SECRET);
+  const token = createToken({ _id });
   const url = `${getAppUrl(protocol, hostname, req.get('host'))}/verify/${token}`;
   await sendEmailConfirmation(email, firstName, lastName, url);
   res.status(201).send();
@@ -128,7 +132,7 @@ exports.postUserForgot = asyncHandler(async (req, res, next) => {
   const user = await UsersCollection.findOne({ email: req.body.email });
   if (!user) next(new ErrorResponse(400, 'Email not found'));
   const { _id, email, firstName, lastName } = user;
-  const token = await jwt.sign({ _id }, JWT_SECRET);
+  const token = createToken({ _id });
   const url = `${getAppUrl(protocol, hostname, req.get('host'))}/reset/${token}`;
   await sendResetPassword(email, firstName, lastName, url);
   res.status(200).send();
