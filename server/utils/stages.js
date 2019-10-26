@@ -10,6 +10,13 @@ exports.match = (key, value) => {
     };
 };
 
+exports.matchIn = (key, value) => {
+  if (value)
+    return {
+      $match: { [key]: { $in: value } },
+    };
+};
+
 exports.matchRange = (key, min, max) => {
   if (is(Number)(min) && is(Number)(max)) {
     return { $match: { [key]: { $gt: min, $lt: max } } };

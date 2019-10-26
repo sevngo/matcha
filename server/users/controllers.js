@@ -3,8 +3,8 @@ const { find, propEq, split } = require('ramda');
 const jwt = require('jsonwebtoken');
 const sharp = require('sharp');
 const {
-  project,
   match,
+  matchIn,
   matchRange,
   getLimit,
   getSkip,
@@ -14,6 +14,12 @@ const {
   addFieldBirthDate,
   lookup,
 } = require('../utils/stages');
+const {
+  otherUserProjection,
+  myUserProjection,
+  friendsProjection,
+  imageProjection,
+} = require('./projections');
 const { Users } = require('../database');
 const { sendEmailConfirmation, sendResetPassword } = require('../emails/account');
 const { JWT_SECRET } = require('../utils/constants');
@@ -45,7 +51,6 @@ exports.getUsers = asyncHandler(async (req, res) => {
   } = req;
   const UsersCollection = Users();
   const [birthMin, birthMax] = split(':')(birthRange);
-  const projection = project({ password: 0, 'images.data': 0, email: 0 });
   const users = await UsersCollection.aggregate(
     compact([
       geoNear(lng, lat, maxDistance),
@@ -57,7 +62,7 @@ exports.getUsers = asyncHandler(async (req, res) => {
       getLimit(limit),
       getSkip(skip),
       getSort(sortBy),
-      projection,
+      otherUserProjection,
     ]),
   ).toArray();
   res.status(200).send(users);
@@ -65,9 +70,8 @@ exports.getUsers = asyncHandler(async (req, res) => {
 
 exports.getUser = asyncHandler(async (req, res) => {
   const UsersCollection = Users();
-  const projection = project({ password: 0, 'images.data': 0, email: 0 });
   const [data] = await UsersCollection.aggregate(
-    compact([match('_id', req._id), addFieldBirthDate, projection]),
+    compact([match('_id', req._id), addFieldBirthDate, otherUserProjection]),
   ).toArray();
   if (!data) return res.status(404).send();
   res.send(data);
@@ -81,31 +85,19 @@ exports.patchUser = asyncHandler(async (req, res) => {
   const UsersCollection = Users();
   const { value: user } = await UsersCollection.findOneAndUpdate({ _id }, { $set: body });
   if (!user) return res.status(404).send();
-  const projection = project({
-    password: 0,
-    'images.data': 0,
-    'usersBlocked.password': 0,
-    'usersBlocked.email': 0,
-    'usersBlocked.images.data': 0,
-    'usersLiked.password': 0,
-    'usersLiked.email': 0,
-    'usersLiked.images.data': 0,
-  });
   const [data] = await UsersCollection.aggregate(
     compact([
       match('_id', _id),
       lookup('users', 'usersLiked', '_id', 'usersLiked'),
       lookup('users', 'usersBlocked', '_id', 'usersBlocked'),
       addFieldBirthDate,
-      projection,
+      myUserProjection,
     ]),
   ).toArray();
   const usersLikedIds = getIds(data.usersLiked);
-  const friends = await UsersCollection.aggregate([
-    match('_id', usersLikedIds),
-    match('usersLiked', data._id),
-    projection,
-  ]).toArray();
+  const friends = await UsersCollection.aggregate(
+    compact([matchIn('_id', usersLikedIds), match('usersLiked', data._id), friendsProjection]),
+  ).toArray();
   res.send({ ...data, friends });
 });
 
@@ -115,30 +107,18 @@ exports.postUserLogin = asyncHandler(async (req, res) => {
     token,
   } = req;
   const UsersCollection = Users();
-  const projection = project({
-    password: 0,
-    'images.data': 0,
-    'usersBlocked.password': 0,
-    'usersBlocked.email': 0,
-    'usersBlocked.images.data': 0,
-    'usersLiked.password': 0,
-    'usersLiked.email': 0,
-    'usersLiked.images.data': 0,
-  });
   const [data] = await UsersCollection.aggregate(
     compact([
       match('_id', _id),
       lookup('users', 'usersLiked', '_id', 'usersLiked'),
       lookup('users', 'usersBlocked', '_id', 'usersBlocked'),
       addFieldBirthDate,
-      projection,
+      myUserProjection,
     ]),
   ).toArray();
-  const friends = await UsersCollection.aggregate([
-    match('_id', usersLiked),
-    match('usersLiked', data._id),
-    projection,
-  ]).toArray();
+  const friends = await UsersCollection.aggregate(
+    compact([matchIn('_id', usersLiked), match('usersLiked', data._id), friendsProjection]),
+  ).toArray();
   res.send({ ...data, friends, token });
 });
 
@@ -169,9 +149,8 @@ exports.postUserImage = asyncHandler(async (req, res) => {
     { $push: { images: { _id: imageId, data: buffer } } },
   );
   if (!user) return res.status(404).send();
-  const projection = project({ password: 0, 'images.data': 0 });
   const [data] = await UsersCollection.aggregate(
-    compact([match('_id', _id), addFieldBirthDate, projection]),
+    compact([match('_id', _id), addFieldBirthDate, imageProjection]),
   ).toArray();
   res.send(data);
 });
@@ -187,9 +166,8 @@ exports.deleteUserImage = asyncHandler(async (req, res) => {
     { $pull: { images: { _id: imageId } } },
   );
   if (!user) return res.status(404).send();
-  const projection = project({ password: 0, 'images.data': 0 });
   const [data] = await UsersCollection.aggregate(
-    compact([match('_id', _id), addFieldBirthDate, projection]),
+    compact([match('_id', _id), addFieldBirthDate, imageProjection]),
   ).toArray();
   res.send(data);
 });
