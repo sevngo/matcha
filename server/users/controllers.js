@@ -69,16 +69,16 @@ exports.getUsers = asyncHandler(async (req, res) => {
   res.status(200).send(users);
 });
 
-exports.getUser = asyncHandler(async (req, res) => {
+exports.getUser = asyncHandler(async (req, res, next) => {
   const UsersCollection = Users();
   const [data] = await UsersCollection.aggregate(
     compact([match('_id', req._id), addFieldBirthDate, otherUserProjection]),
   ).toArray();
-  if (!data) return res.status(404).send();
+  if (!data) next(new ErrorResponse(404, 'User not found'));
   res.send(data);
 });
 
-exports.patchUser = asyncHandler(async (req, res) => {
+exports.patchUser = asyncHandler(async (req, res, next) => {
   const {
     myUser: { _id },
     body,
@@ -89,7 +89,7 @@ exports.patchUser = asyncHandler(async (req, res) => {
     { $set: body },
     { returnOriginal: false },
   );
-  if (!user) return res.status(404).send();
+  if (!user) next(new ErrorResponse(404, 'User not found'));
   const [data] = await UsersCollection.aggregate(
     compact([
       match('_id', _id),
@@ -138,7 +138,7 @@ exports.postUserForgot = asyncHandler(async (req, res, next) => {
   res.status(200).send();
 });
 
-exports.postUserImage = asyncHandler(async (req, res) => {
+exports.postUserImage = asyncHandler(async (req, res, next) => {
   const {
     myUser: { _id },
   } = req;
@@ -152,14 +152,14 @@ exports.postUserImage = asyncHandler(async (req, res) => {
     { _id },
     { $push: { images: { _id: imageId, data: buffer } } },
   );
-  if (!user) return res.status(404).send();
+  if (!user) next(new ErrorResponse(404, 'User not found'));
   const [data] = await UsersCollection.aggregate(
     compact([match('_id', _id), addFieldBirthDate, imageProjection]),
   ).toArray();
   res.send(data);
 });
 
-exports.deleteUserImage = asyncHandler(async (req, res) => {
+exports.deleteUserImage = asyncHandler(async (req, res, next) => {
   const {
     myUser: { _id },
   } = req;
@@ -169,18 +169,18 @@ exports.deleteUserImage = asyncHandler(async (req, res) => {
     { _id },
     { $pull: { images: { _id: imageId } } },
   );
-  if (!user) return res.status(404).send();
+  if (!user) next(new ErrorResponse(404, 'User not found'));
   const [data] = await UsersCollection.aggregate(
     compact([match('_id', _id), addFieldBirthDate, imageProjection]),
   ).toArray();
   res.send(data);
 });
 
-exports.getUserImage = asyncHandler(async (req, res) => {
+exports.getUserImage = asyncHandler(async (req, res, next) => {
   const UsersCollection = Users();
   const imageId = ObjectID(req.params.imageId);
   const user = await UsersCollection.findOne({ _id: req._id, 'images._id': imageId });
-  if (!user) return res.status(404).send();
+  if (!user) next(new ErrorResponse(404, 'User not found'));
   const { data } = find(image => propEq('_id', imageId)(image))(user.images);
   res.type('png');
   res.send(data.buffer);
