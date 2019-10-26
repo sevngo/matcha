@@ -1,8 +1,6 @@
 const { split, is } = require('ramda');
 const { defaultToNull } = require('./functions');
 
-exports.matchById = _id => ({ $match: { _id } });
-
 exports.match = (key, value) => {
   if (value)
     return {
@@ -62,6 +60,14 @@ exports.geoNear = (lng, lat, maxDistance) => {
 
 exports.lookup = (from, localField, foreignField, as) => ({
   $lookup: { from, localField, foreignField, as },
+});
+
+exports.lookupPipeline = (from, pipeline, as) => ({
+  $lookup: {
+    from,
+    pipeline,
+    as,
+  },
 });
 
 exports.addFieldBirthDate = {

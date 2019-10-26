@@ -27,10 +27,7 @@ exports.myUserProjection = project({
   'usersBlocked._id': 1,
   'usersBlocked.username': 1,
   'usersLiked._id': 1,
-});
-
-exports.friendsProjection = project({
-  _id: 1,
+  'friends._id': 1,
 });
 
 exports.imageProjection = project({ 'images._id': 1 });

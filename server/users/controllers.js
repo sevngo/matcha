@@ -13,17 +13,13 @@ const {
   geoNear,
   addFieldBirthDate,
   lookup,
+  lookupPipeline,
 } = require('../utils/stages');
-const {
-  otherUserProjection,
-  myUserProjection,
-  friendsProjection,
-  imageProjection,
-} = require('./projections');
+const { otherUserProjection, myUserProjection, imageProjection } = require('./projections');
 const { Users } = require('../database');
 const { sendEmailConfirmation, sendResetPassword } = require('../emails/account');
 const { JWT_SECRET } = require('../utils/constants');
-const { getAppUrl, getIds, asyncHandler, compact, ErrorResponse } = require('../utils/functions');
+const { getAppUrl, asyncHandler, compact, ErrorResponse } = require('../utils/functions');
 
 exports.postUser = asyncHandler(async (req, res) => {
   const { protocol, hostname } = req;
@@ -62,6 +58,7 @@ exports.getUsers = asyncHandler(async (req, res) => {
       getLimit(limit),
       getSkip(skip),
       getSort(sortBy),
+      addFieldBirthDate,
       otherUserProjection,
     ]),
   ).toArray();
@@ -83,22 +80,27 @@ exports.patchUser = asyncHandler(async (req, res) => {
     body,
   } = req;
   const UsersCollection = Users();
-  const { value: user } = await UsersCollection.findOneAndUpdate({ _id }, { $set: body });
+  const { value: user } = await UsersCollection.findOneAndUpdate(
+    { _id },
+    { $set: body },
+    { returnOriginal: false },
+  );
   if (!user) return res.status(404).send();
   const [data] = await UsersCollection.aggregate(
     compact([
       match('_id', _id),
       lookup('users', 'usersLiked', '_id', 'usersLiked'),
       lookup('users', 'usersBlocked', '_id', 'usersBlocked'),
+      lookupPipeline(
+        'users',
+        [matchIn('_id', user.usersLiked), match('usersLiked', _id)],
+        'friends',
+      ),
       addFieldBirthDate,
       myUserProjection,
     ]),
   ).toArray();
-  const usersLikedIds = getIds(data.usersLiked);
-  const friends = await UsersCollection.aggregate(
-    compact([matchIn('_id', usersLikedIds), match('usersLiked', data._id), friendsProjection]),
-  ).toArray();
-  res.send({ ...data, friends });
+  res.send(data);
 });
 
 exports.postUserLogin = asyncHandler(async (req, res) => {
@@ -112,14 +114,12 @@ exports.postUserLogin = asyncHandler(async (req, res) => {
       match('_id', _id),
       lookup('users', 'usersLiked', '_id', 'usersLiked'),
       lookup('users', 'usersBlocked', '_id', 'usersBlocked'),
+      lookupPipeline('users', [matchIn('_id', usersLiked), match('usersLiked', _id)], 'friends'),
       addFieldBirthDate,
       myUserProjection,
     ]),
   ).toArray();
-  const friends = await UsersCollection.aggregate(
-    compact([matchIn('_id', usersLiked), match('usersLiked', data._id), friendsProjection]),
-  ).toArray();
-  res.send({ ...data, friends, token });
+  res.send({ ...data, token });
 });
 
 exports.postUserForgot = asyncHandler(async (req, res, next) => {
