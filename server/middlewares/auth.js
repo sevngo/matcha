@@ -1,10 +1,8 @@
 const { replace } = require('ramda');
-const jwt = require('jsonwebtoken');
 const { ObjectID } = require('mongodb');
 const bcrypt = require('bcryptjs');
 const { Users } = require('../database');
-const { JWT_SECRET } = require('../utils/constants');
-const { asyncHandler, ErrorResponse } = require('../utils/functions');
+const { asyncHandler, ErrorResponse, createToken, verifyToken } = require('../utils/functions');
 
 exports.generateAuthToken = asyncHandler(async (req, res, next) => {
   const { username, password } = req.body;
@@ -14,7 +12,7 @@ exports.generateAuthToken = asyncHandler(async (req, res, next) => {
   const isMatch = await bcrypt.compare(password, myUser.password);
   if (!isMatch) return next(new ErrorResponse(400, 'Identification failed'));
 
-  const token = await jwt.sign({ _id: myUser._id }, JWT_SECRET);
+  const token = createToken({ _id: myUser._id });
 
   req.myUser = myUser;
   req.token = token;
@@ -23,7 +21,7 @@ exports.generateAuthToken = asyncHandler(async (req, res, next) => {
 
 exports.authenticate = asyncHandler(async (req, res, next) => {
   const token = replace('Bearer ', '')(req.header('Authorization'));
-  const { _id } = jwt.verify(token, JWT_SECRET);
+  const { _id } = verifyToken(token);
   const myUser = await Users().findOne({ _id: ObjectID(_id) });
   if (!myUser) return next(new ErrorResponse(401, 'Unauthorized'));
   req.myUser = myUser;

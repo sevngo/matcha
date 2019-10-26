@@ -1,8 +1,7 @@
 const faker = require('faker');
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
 const { ObjectID } = require('mongodb');
-const { JWT_SECRET } = require('../../../utils/constants');
+const { createToken } = require('../../../utils/constants');
 
 const genders = ['female', 'male'];
 const today = new Date();
@@ -11,7 +10,7 @@ const birthDateMax = new Date(today.getFullYear() - 18, today.getMonth(), today.
 
 const initialPassword = faker.internet.password();
 const initialId = faker.random.alphaNumeric(12);
-const userOneToken = jwt.sign({ _id: initialId }, JWT_SECRET);
+const userOneToken = createToken({ _id: initialId });
 
 const userOne = {
   username: faker.internet.userName(),
