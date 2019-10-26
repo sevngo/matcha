@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { find, path, isEmpty, length } from 'ramda';
 import { FormattedMessage } from 'react-intl';
-import { Paper, Grid, Button } from '@material-ui/core';
+import { Grid, Button } from '@material-ui/core';
+import Paper from '../../components/Paper';
 import UserForm from '../../components/UserForm';
 import Carousel from '../../components/Carousel';
 import emptyImage from '../../images/emptyImage.png';
@@ -26,7 +27,7 @@ const User = ({ id }) => {
     : emptyImage;
   const maxSteps = length(images);
   return (
-    <Grid container alignItems="center" direction="column" className={classes.p3}>
+    <Grid container alignItems="center" className={classes.p3}>
       <Grid container className={classes.mw500}>
         {isFriend && (
           <Grid item xs={12}>
@@ -59,15 +60,15 @@ const User = ({ id }) => {
           </Button>
         </Grid>
       </Grid>
-      <Grid item className={classes.width}>
-        <Paper elevation={24}>
+      <Grid item className={classes.mw500}>
+        <Paper>
           <Carousel activeStep={activeStep} handleStep={handleStep} maxSteps={maxSteps}>
             <img className={classes.img} src={image} alt="image" />
           </Carousel>
         </Paper>
       </Grid>
-      <Grid item className={classes.width}>
-        <Paper elevation={24} className={classes.p3}>
+      <Grid item className={classes.mw500}>
+        <Paper className={classes.p3}>
           <UserForm initialValues={user} disabled />
         </Paper>
       </Grid>

@@ -23,7 +23,6 @@ import {
 import { GENDER_OPTIONS, SORT_BY_OPTIONS, INTERESTS_OPTIONS } from './constants';
 import useStyles from './styles';
 import messages from './messages';
-import { compact } from '../../utils';
 
 const Component = ({
   handleSubmit,
@@ -250,7 +249,7 @@ const Component = ({
 export default compose(
   withFormik({
     mapPropsToValues: ({ initialValues }) => initialValues,
-    handleSubmit: (values, { props: { submit } }) => submit(compact(values)),
+    handleSubmit: (values, { props: { submit } }) => submit(values),
     displayName: 'UserForm',
     enableReinitialize: true,
   }),

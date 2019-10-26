@@ -14,7 +14,7 @@ export const handleFilter = filter => ({ type: HANDLE_FILTER, filter });
 
 export const loadUsers = (token, filter) => async dispatch => {
   try {
-    const { gender, interests, ageRange, sortBy, maxDistance } = filter;
+    const { gender, interests, ageRange, sortBy, maxDistance, limit, skip } = filter;
 
     const genderQuery = `gender=${gender}`;
 
@@ -31,7 +31,10 @@ export const loadUsers = (token, filter) => async dispatch => {
     const birthMax = `${todayYear - ageRange[0]}${todayMonthDay}`;
     const birthQuery = `&birthRange=${birthMin}:${birthMax}`;
 
-    const query = `?${genderQuery}${birthQuery}${sortQuery}${interestsQuery}${maxDistanceQuery}`;
+    const limitQuery = `&limit=${limit}`;
+    const skipQuery = `&skip=${skip}`;
+
+    const query = `?${genderQuery}${birthQuery}${sortQuery}${interestsQuery}${maxDistanceQuery}${limitQuery}${skipQuery}`;
     dispatch({ type: LOAD_USERS });
     const { data } = await getUsers(token, query);
     dispatch({ type: LOADED_USERS, data });

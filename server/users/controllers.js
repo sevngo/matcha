@@ -5,14 +5,13 @@ const {
   match,
   matchIn,
   matchRange,
-  getLimit,
-  getSkip,
-  getSort,
+  sort,
   mismatch,
   geoNear,
   addFieldBirthDate,
   lookup,
   lookupPipeline,
+  addPagination,
 } = require('../utils/stages');
 const { otherUserProjection, myUserProjection, imageProjection } = require('./projections');
 const { Users } = require('../database');
@@ -51,7 +50,7 @@ exports.getUsers = asyncHandler(async (req, res) => {
   } = req;
   const UsersCollection = Users();
   const [birthMin, birthMax] = split(':')(birthRange);
-  const users = await UsersCollection.aggregate(
+  const [data] = await UsersCollection.aggregate(
     compact([
       geoNear(lng, lat, maxDistance),
       match('gender', gender),
@@ -59,14 +58,13 @@ exports.getUsers = asyncHandler(async (req, res) => {
       matchRange('birthDate', new Date(birthMin), new Date(birthMax)),
       mismatch('_id', usersBlocked),
       mismatch('_id', _id),
-      getLimit(limit),
-      getSkip(skip),
-      getSort(sortBy),
+      sort(sortBy),
       addFieldBirthDate,
       otherUserProjection,
+      ...addPagination(limit, skip),
     ]),
   ).toArray();
-  res.status(200).send(users);
+  res.status(200).send(data);
 });
 
 exports.getUser = asyncHandler(async (req, res, next) => {
