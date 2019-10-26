@@ -1,7 +1,8 @@
 import React, { useRef, useState, Fragment } from 'react';
 import { length, isEmpty, path, map, pick } from 'ramda';
 import { FormattedMessage } from 'react-intl';
-import { Paper, Grid, Button, Typography, Icon, Divider } from '@material-ui/core';
+import { Grid, Button, Typography, Icon, Divider } from '@material-ui/core';
+import Paper from '../../components/Paper';
 import UserForm from '../../components/UserForm';
 import Carousel from '../../components/Carousel';
 import Modal from '../../components/Modal';
@@ -38,8 +39,8 @@ const MyUser = () => {
     'token',
   ])(myUser);
   return (
-    <Grid container justify="center" direction="row" className={classes.p3}>
-      <Grid item className={classes.mw500}>
+    <Grid container spacing={1} className={classes.p3}>
+      <Grid item xs={12} className={classes.mw500}>
         <Carousel activeStep={activeStep} maxSteps={maxSteps} handleStep={handleStep}>
           <div className={classes.header}>
             <input
@@ -91,8 +92,24 @@ const MyUser = () => {
           </div>
           <img className={classes.img} src={image} alt="image" />
         </Carousel>
+      </Grid>
+      <Grid item xs={12} className={classes.mw500}>
+        <Paper className={classes.p3}>
+          <UserForm
+            initialValues={{
+              interests: [],
+              biography: '',
+              ...userForm,
+              newPassword: '',
+            }}
+            newPassword
+            submit={updateUser}
+          />
+        </Paper>
+      </Grid>
+      <Grid item xs={12} className={classes.mw500}>
         {usersBlocked[0] && (
-          <Paper elevation={24} className={classes.usersBlocked}>
+          <Paper className={classes.p3}>
             <Typography variant="h5">
               <FormattedMessage {...messages.usersBlocked} />
             </Typography>
@@ -117,20 +134,6 @@ const MyUser = () => {
             ))(usersBlocked)}
           </Paper>
         )}
-      </Grid>
-      <Grid item className={classes.mw500}>
-        <Paper elevation={24} className={classes.p3}>
-          <UserForm
-            initialValues={{
-              interests: [],
-              biography: '',
-              ...userForm,
-              newPassword: '',
-            }}
-            newPassword
-            submit={updateUser}
-          />
-        </Paper>
       </Grid>
     </Grid>
   );

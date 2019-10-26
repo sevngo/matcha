@@ -17,3 +17,8 @@ export const getUser = createSelector(
   root,
   prop('user'),
 );
+
+export const getUsersTotal = createSelector(
+  root,
+  prop('total'),
+);

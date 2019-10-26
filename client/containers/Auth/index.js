@@ -1,6 +1,7 @@
 import React, { useState, Fragment } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Grid, AppBar, Tabs, Tab, Paper, Button } from '@material-ui/core';
+import { Grid, AppBar, Tabs, Tab, Button } from '@material-ui/core';
+import Paper from '../../components/Paper';
 import UserForm from '../../components/UserForm';
 import Modal from '../../components/Modal';
 import { useConnect } from './hooks';
@@ -19,7 +20,7 @@ const Auth = () => {
   return (
     <Grid container justify="center" className={classes.p3}>
       <Grid item className={classes.item}>
-        <Paper elevation={24}>
+        <Paper>
           <AppBar position="static">
             <Tabs variant="fullWidth" value={tab} onChange={(e, tab) => handleTab(tab)}>
               <Tab label={<FormattedMessage {...messages.login} />} />

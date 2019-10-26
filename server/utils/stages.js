@@ -1,5 +1,5 @@
 const { split, is } = require('ramda');
-const { defaultToNull } = require('./functions');
+const { defaultToNull, compact } = require('./functions');
 
 exports.match = (key, value) => {
   if (value)
@@ -27,17 +27,7 @@ exports.mismatch = (key, value) => {
 
 exports.project = fields => ({ $project: fields });
 
-exports.getLimit = limit => {
-  const intLimit = defaultToNull(parseInt(limit));
-  if (intLimit) return { $limit: intLimit };
-};
-
-exports.getSkip = skip => {
-  const intSkip = defaultToNull(parseInt(skip));
-  if (intSkip) return { $skip: intSkip };
-};
-
-exports.getSort = sortBy => {
+exports.sort = sortBy => {
   if (sortBy) {
     const [key, value] = split(':')(sortBy);
     return { $sort: { [key]: value === 'desc' ? -1 : 1 } };
@@ -69,6 +59,26 @@ exports.lookupPipeline = (from, pipeline, as) => ({
     as,
   },
 });
+
+exports.addPagination = (limit, skip) => {
+  const getLimit = limit => {
+    const intLimit = defaultToNull(parseInt(limit));
+    if (intLimit) return { $limit: intLimit };
+  };
+  const getSkip = skip => {
+    const intSkip = defaultToNull(parseInt(skip));
+    if (intSkip) return { $skip: intSkip };
+  };
+  return [
+    {
+      $facet: {
+        total: [{ $count: 'total' }],
+        data: compact([getSkip(skip), getLimit(limit)]),
+      },
+    },
+    { $addFields: { total: { $arrayElemAt: ['$total.total', 0] } } },
+  ];
+};
 
 exports.addFieldBirthDate = {
   $addFields: {

@@ -7,9 +7,6 @@ export default makeStyles(theme => ({
   p3: {
     padding: theme.spacing(3),
   },
-  width: {
-    maxWidth: 500,
-  },
   block: {
     color: theme.palette.getContrastText(red[700]),
     backgroundColor: red[700],

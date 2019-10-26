@@ -23,7 +23,7 @@ const UserCard = ({ user }) => {
   const image = imageId ? getUserImage(user._id, imageId) : emptyImage;
   const classes = useStyles();
   return (
-    <MCard className={classes.card} elevation={24}>
+    <MCard className={classes.card} elevation={1}>
       <CardActionArea component={Link} to={userPath(user._id)}>
         <CardMedia className={classes.media} image={image} title={user.username} />
         <CardContent>

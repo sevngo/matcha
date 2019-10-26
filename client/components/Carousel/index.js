@@ -1,11 +1,12 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Button, MobileStepper, Icon, Paper } from '@material-ui/core';
+import { Button, MobileStepper, Icon } from '@material-ui/core';
+import Paper from '../Paper';
 import messages from './messages';
 
 const Carousel = ({ children, activeStep, maxSteps, handleStep }) => {
   return (
-    <Paper elevation={24}>
+    <Paper>
       {children}
       <MobileStepper
         steps={maxSteps}

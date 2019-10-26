@@ -101,4 +101,8 @@ export default defineMessages({
     id: 'components.userForm.username',
     defaultMessage: 'Username',
   },
+  limit: {
+    id: 'components.userForm.limit',
+    defaultMessage: 'Users per page',
+  },
 });

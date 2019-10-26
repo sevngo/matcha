@@ -14,10 +14,6 @@ export default makeStyles(theme => ({
   mt1: {
     marginTop: theme.spacing(1),
   },
-  usersBlocked: {
-    padding: theme.spacing(3),
-    marginTop: theme.spacing(3),
-  },
   w100: {
     width: '100%',
   },

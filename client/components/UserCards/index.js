@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import UserCard from '../UserCard';
 
 const UserCards = ({ users }) => (
-  <Grid container spacing={2} justify="center">
+  <Grid container spacing={2}>
     {map(user => (
       <Grid item key={user._id}>
         <UserCard user={user} />
