@@ -71,7 +71,7 @@ const MyUser = () => {
                     onClick={() => {
                       removeImage(token, path([activeStep, '_id'])(images));
                       handleStep(0);
-                      handleModal(true);
+                      handleModal(false);
                     }}
                   >
                     <FormattedMessage {...messages.yes} />
