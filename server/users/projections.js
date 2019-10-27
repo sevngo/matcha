@@ -21,6 +21,7 @@ exports.myUserProjection = project({
   lastName: 1,
   gender: 1,
   address: 1,
+  email: 1,
   'images._id': 1,
   interests: 1,
   biography: 1,

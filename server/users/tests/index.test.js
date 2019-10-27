@@ -1,7 +1,7 @@
 /* eslint-env node, jest */
 const request = require('supertest');
 const faker = require('faker');
-const { omit } = require('ramda');
+const { has } = require('ramda');
 const app = require('../../app');
 const { connectDb, disconnectDb, Users } = require('../../database');
 const {
@@ -37,15 +37,13 @@ describe('/api/users', () => {
         .expect(500);
     });
   });
-
   describe('POST /api/users/login', () => {
     test('should login user', async () => {
-      const myUser = omit(['birthDate', 'password', '_id'])(userOne);
       const { body: user } = await request(app)
         .post('/api/users/login')
         .send({ username: userOne.username, password: initialPassword })
         .expect(200);
-      expect(user).toMatchObject(myUser);
+      expect(user.username).toEqual(userOne.username);
     });
     test('should not login user', async () => {
       await request(app)
@@ -54,27 +52,22 @@ describe('/api/users', () => {
         .expect(400);
     });
   });
-
   describe('GET /api/users', () => {
     test('should get all users', async () => {
-      const userRegistered = omit(['birthDate', 'password', '_id', 'email'])(userTwo);
       const { body: users } = await request(app)
         .get('/api/users')
         .set('Authorization', `Bearer ${userOneToken}`)
         .expect(200);
-      expect(users).toHaveLength(1);
-      expect(users).toMatchObject([userRegistered]);
+      expect(users.data).toHaveLength(1);
     });
   });
-
   describe('GET /api/users/:id', () => {
     test('should get specific user', async () => {
-      const userRegistered = omit(['birthDate', 'password', '_id', 'email'])(userOne);
       const { body: user } = await request(app)
         .get(`/api/users/${initialId}`)
         .set('Authorization', `Bearer ${userOneToken}`)
         .expect(200);
-      expect(user).toMatchObject(userRegistered);
+      expect(user.username).toEqual(userOne.username);
     });
     test('should not found user', async () => {
       await request(app)
@@ -83,20 +76,17 @@ describe('/api/users', () => {
         .expect(404);
     });
   });
-
   describe('PATCH /api/users', () => {
     test('should update user', async () => {
-      const myUser = omit(['birthDate', 'password', '_id'])(userOne);
       const newValue = { username: faker.internet.userName() };
       const { body: user } = await request(app)
         .patch(`/api/users`)
         .send(newValue)
         .set('Authorization', `Bearer ${userOneToken}`)
         .expect(200);
-      expect(user).toMatchObject({ ...myUser, ...newValue });
+      expect(user).toMatchObject(newValue);
     });
   });
-
   describe('POST /api/users/forgot', () => {
     test('should send email', async () => {
       await request(app)
@@ -111,16 +101,14 @@ describe('/api/users', () => {
         .expect(400);
     });
   });
-
   describe('POST /api/users/images', () => {
     test('should upload image', async () => {
-      const myUser = omit(['birthDate', 'password', '_id'])(userOne);
       const { body: user } = await request(app)
         .post(`/api/users/images`)
         .set('Authorization', `Bearer ${userOneToken}`)
         .attach('image', 'server/users/tests/fixtures/profile-pic.jpg')
         .expect(200);
-      expect(user).toMatchObject(myUser);
+      expect(has('images')(user)).toBeTruthy();
       const userData = await Users().findOne({ _id: userOne._id });
       expect(userData.images[0].data.buffer).toEqual(expect.any(Buffer));
     });
