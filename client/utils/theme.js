@@ -31,5 +31,12 @@ export const theme = createMuiTheme({
         },
       },
     },
+    MuiIconButton: {
+      root: {
+        '&$disabled': {
+          color: '',
+        },
+      },
+    },
   },
 });
