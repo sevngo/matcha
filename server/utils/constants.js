@@ -21,11 +21,3 @@ exports.PRODUCTION = 'production';
 exports.TEST = 'test';
 
 exports.USERS = 'users';
-
-exports.STRING = { bsonType: 'string' };
-exports.OBJECTID = { bsonType: 'objectId' };
-exports.DATE = { bsonType: 'date' };
-exports.BOOL = { bsonType: 'bool' };
-exports.ARRAY = { bsonType: 'array' };
-exports.OBJECT = { bsonType: 'object' };
-exports.BINDATA = { bsonType: 'binData' };

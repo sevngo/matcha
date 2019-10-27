@@ -1,4 +1,3 @@
-const { STRING, OBJECTID, DATE, BOOL, ARRAY, OBJECT, BINDATA } = require('../utils/constants');
 const { USERS } = require('../utils/constants');
 
 exports.usersModel = async db => {
@@ -25,28 +24,52 @@ exports.usersModel = async db => {
         ],
         additionalProperties: false,
         properties: {
-          _id: OBJECTID,
-          username: STRING,
-          birthDate: DATE,
-          firstName: STRING,
-          lastName: STRING,
-          email: STRING,
-          emailVerified: BOOL,
-          password: STRING,
+          _id: { bsonType: 'objectId' },
+          username: { bsonType: 'string', minLength: 3, maxLength: 30 },
+          birthDate: { bsonType: 'date' },
+          firstName: { bsonType: 'string', minLength: 3, maxLength: 30 },
+          lastName: { bsonType: 'string', minLength: 3, maxLength: 30 },
+          email: { bsonType: 'string' },
+          emailVerified: { bsonType: 'bool' },
+          password: { bsonType: 'string' },
           gender: {
+            bsonType: 'string',
             enum: ['male', 'female'],
           },
-          interests: ARRAY,
-          biography: STRING,
-          images: ARRAY,
-          'images._id': OBJECTID,
-          'images.data': BINDATA,
-          address: OBJECT,
-          'address.name': STRING,
-          'address.type': STRING,
-          'address.coordinates': ARRAY,
-          usersLiked: ARRAY,
-          usersBlocked: ARRAY,
+          interests: {
+            bsonType: 'array',
+            items: {
+              bsonType: 'string',
+              uniqueItems: true,
+              maxItems: 5,
+            },
+          },
+          biography: { bsonType: 'string', maxLength: 300 },
+          images: {
+            bsonType: 'array',
+            items: {
+              bsonType: 'object',
+              properties: {
+                _id: { bsonType: 'objectId' },
+                data: { bsonType: 'binData' },
+              },
+            },
+          },
+          address: {
+            bsonType: 'object',
+            properties: {
+              name: { bsonType: 'string' },
+              type: { bsonType: 'string' },
+              coordinates: {
+                bsonType: 'array',
+                items: {
+                  bsonType: 'double',
+                },
+              },
+            },
+          },
+          usersLiked: { bsonType: 'array', items: { bsonType: 'objectId', uniqueItems: true } },
+          usersBlocked: { bsonType: 'array', items: { bsonType: 'objectId', uniqueItems: true } },
         },
       },
     },
