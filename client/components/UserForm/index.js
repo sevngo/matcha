@@ -235,7 +235,7 @@ const Component = ({
             color="primary"
             size="large"
             disabled={!dirty}
-            onClick={() => resetForm(initialValues)}
+            onClick={() => resetForm({ values: initialValues })}
             fullWidth
           >
             <FormattedMessage {...messages.cancel} />
