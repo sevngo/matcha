@@ -11,7 +11,7 @@ const {
   addFieldBirthDate,
   lookup,
   lookupPipeline,
-  addPagination,
+  pagination,
 } = require('../utils/stages');
 const { otherUserProjection, myUserProjection, imageProjection } = require('./projections');
 const { Users } = require('../database');
@@ -61,7 +61,7 @@ exports.getUsers = asyncHandler(async (req, res) => {
       sort(sortBy),
       addFieldBirthDate,
       otherUserProjection,
-      ...addPagination(limit, skip),
+      ...pagination(limit, skip),
     ]),
   ).toArray();
   res.status(200).send(data);

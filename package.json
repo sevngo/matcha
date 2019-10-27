@@ -37,6 +37,7 @@
     "express": "^4.17.1",
     "faker": "^4.1.0",
     "formik": "^1.5.8",
+    "helmet": "^3.21.2",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.3.3",
     "morgan": "^1.9.1",

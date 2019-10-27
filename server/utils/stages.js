@@ -60,7 +60,7 @@ exports.lookupPipeline = (from, pipeline, as) => ({
   },
 });
 
-exports.addPagination = (limit, skip) => {
+exports.pagination = (limit, skip) => {
   const getLimit = limit => {
     const intLimit = defaultToNull(parseInt(limit));
     if (intLimit) return { $limit: intLimit };
