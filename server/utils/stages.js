@@ -1,4 +1,4 @@
-const { split, is } = require('ramda');
+const { split, is, isEmpty } = require('ramda');
 const { defaultToNull, compact } = require('./functions');
 
 exports.match = (key, value) => {
@@ -69,11 +69,12 @@ exports.pagination = (limit, skip) => {
     const intSkip = defaultToNull(parseInt(skip));
     if (intSkip) return { $skip: intSkip };
   };
+  const paginate = compact([getSkip(skip), getLimit(limit)]);
   return [
     {
       $facet: {
         total: [{ $count: 'total' }],
-        data: compact([getSkip(skip), getLimit(limit)]),
+        data: !isEmpty(paginate) ? paginate : [{ $match: {} }],
       },
     },
     { $addFields: { total: { $arrayElemAt: ['$total.total', 0] } } },

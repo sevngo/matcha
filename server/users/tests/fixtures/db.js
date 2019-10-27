@@ -1,7 +1,7 @@
 const faker = require('faker');
 const bcrypt = require('bcryptjs');
 const { ObjectID } = require('mongodb');
-const { createToken } = require('../../../utils/constants');
+const { createToken } = require('../../../utils/functions');
 
 const genders = ['female', 'male'];
 const today = new Date();
