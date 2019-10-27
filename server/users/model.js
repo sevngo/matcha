@@ -57,6 +57,7 @@ exports.usersModel = async db => {
           },
           address: {
             bsonType: 'object',
+            required: ['name', 'type', 'coordinates'],
             properties: {
               name: { bsonType: 'string' },
               type: { bsonType: 'string' },
