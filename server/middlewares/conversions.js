@@ -1,5 +1,5 @@
 const { ObjectID } = require('mongodb');
-const { omit, reduce, trim, keys, is, map } = require('ramda');
+const { omit, map } = require('ramda');
 const bcrypt = require('bcryptjs');
 const multer = require('multer');
 const { asyncHandler, ErrorResponse } = require('../utils/functions');
@@ -45,16 +45,6 @@ exports.uploadImage = multer({
     cb(undefined, true);
   },
 });
-
-exports.trimBody = (req, res, next) => {
-  const { body } = req;
-  const BodyTrimmed = reduce(
-    (acc, key) => ({ ...acc, [key]: is(String, body[key]) ? trim(body[key]) : body[key] }),
-    {},
-  )(keys(body));
-  req.body = BodyTrimmed;
-  next();
-};
 
 exports.newUsersLikedId = (req, res, next) => {
   const {
