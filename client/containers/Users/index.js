@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import TablePagination from '@material-ui/core/TablePagination';
-import { Hidden } from '@material-ui/core';
+import { Hidden, Box, TablePagination } from '@material-ui/core';
 import Paper from '../../components/Paper';
 import UserCards from '../../components/UserCards';
 import { useConnect } from './hooks';
@@ -23,8 +22,8 @@ const Users = () => {
     setPage(0);
   };
   return (
-    <div className={classes.root}>
-      <Paper className={classes.mb3}>
+    <Box p={3}>
+      <Paper className={classes.mb2}>
         <Hidden xsDown>
           <TablePagination
             component="div"
@@ -38,7 +37,7 @@ const Users = () => {
         </Hidden>
       </Paper>
       <UserCards users={users} />
-    </div>
+    </Box>
   );
 };
 
