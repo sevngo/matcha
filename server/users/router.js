@@ -20,7 +20,6 @@ router.get(
 router.patch(
   '/',
   auth.authenticate,
-  conversions.trimBody,
   conversions.newDateBirth,
   conversions.hashNewPassword,
   conversions.newUsersLikedId,
@@ -28,15 +27,9 @@ router.patch(
   controllers.patchUser,
 );
 
-router.post(
-  '/login',
-  conversions.trimBody,
-  auth.generateAuthToken,
-  auth.emailVerified,
-  controllers.postUserLogin,
-);
+router.post('/login', auth.generateAuthToken, auth.emailVerified, controllers.postUserLogin);
 
-router.post('/forgot', conversions.trimBody, controllers.postUserForgot);
+router.post('/forgot', controllers.postUserForgot);
 
 router.post(
   '/images',
