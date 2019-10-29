@@ -1,29 +1,29 @@
+import { Slider as MSlider, FormLabel } from '@material-ui/core';
+import { is } from 'ramda';
 import React, { Fragment } from 'react';
-import { FormLabel, withTheme } from '@material-ui/core';
-import RcSlider from 'rc-slider';
-import 'rc-slider/assets/index.css';
 import useStyles from './styles';
 
-const Slider = ({ field: { name, value }, label, unitLabel, theme, setFieldValue, ...rest }) => {
+const Slider = ({ field, label, unitLabel, setFieldValue, ...rest }) => {
   const classes = useStyles();
-  const { main } = theme.palette.primary;
+  const { value, name } = field;
   return (
     <Fragment>
-      <FormLabel className={classes.gender}>
-        {label} <span className={classes.values}>{value}</span> {unitLabel}
+      <FormLabel>
+        {label}{' '}
+        <span className={classes.values}>
+          {is(Array)(value) ? `${value[0]} - ${value[1]}` : value}
+        </span>{' '}
+        {unitLabel}
       </FormLabel>
-      <div className={classes.m1}>
-        <RcSlider
-          defaultValue={value}
-          value={value}
-          trackStyle={{ backgroundColor: 'darkgray' }}
-          handleStyle={{ backgroundColor: main, borderColor: main }}
-          onChange={value => setFieldValue(name, value)}
-          {...rest}
-        />
-      </div>
+      <MSlider
+        className={classes.m1}
+        defaultValue={value}
+        value={value}
+        onChange={(e, value) => setFieldValue(name, value)}
+        {...rest}
+      />
     </Fragment>
   );
 };
 
-export default withTheme(Slider);
+export default Slider;
