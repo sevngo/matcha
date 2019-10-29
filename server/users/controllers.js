@@ -50,12 +50,14 @@ exports.getUsers = asyncHandler(async (req, res) => {
   } = req;
   const UsersCollection = Users();
   const [birthMin, birthMax] = split(':')(birthRange);
+  const birthMinDate = birthMin && new Date(birthMin);
+  const birthMaxDate = birthMax && new Date(birthMax);
   const [data] = await UsersCollection.aggregate(
     compact([
       geoNear(lng, lat, maxDistance),
       match('gender', gender),
       match('interests', interests),
-      matchRange('birthDate', new Date(birthMin), new Date(birthMax)),
+      matchRange('birthDate', birthMinDate, birthMaxDate),
       mismatch('_id', usersBlocked),
       mismatch('_id', _id),
       sort(sortBy),
