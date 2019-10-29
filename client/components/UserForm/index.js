@@ -7,7 +7,6 @@ import Input from '../Input';
 import Radio from '../Radio';
 import Select from '../Select';
 import Interests from '../Interests';
-import Range from '../Range';
 import Slider from '../Slider';
 import { useGeolocation, useAutocomplete } from '../../hooks/googleMaps';
 import {
@@ -157,7 +156,7 @@ const Component = ({
           <Field
             name="ageRange"
             label={<FormattedMessage {...messages.ageRange} />}
-            component={Range}
+            component={Slider}
             min={18}
             max={50}
             setFieldValue={setFieldValue}
