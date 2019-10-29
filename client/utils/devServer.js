@@ -7,6 +7,6 @@ const PORT = process.env.DEVSERVER_PORT;
 const bundler = new Bundler(path.join(__dirname, '..', 'index.html'));
 
 app.use('/api', proxy({ target: `http://localhost:${process.env.PORT}`, changeOrigin: true }));
-app.use(bundler.middleware(), { autoInstall: false });
+app.use(bundler.middleware());
 
 app.listen(PORT, () => console.log(`Development server listening on port ${PORT}`)); // eslint-disable-line no-console
