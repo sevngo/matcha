@@ -123,7 +123,7 @@ exports.postUserLogin = asyncHandler(async (req, res) => {
       myUserProjection,
     ]),
   ).toArray();
-  res.send({ ...data, token });
+  res.send({ data, token });
 });
 
 exports.postUserForgot = asyncHandler(async (req, res, next) => {
