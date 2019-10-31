@@ -37,7 +37,6 @@ const Component = ({
   const classes = useStyles();
   const [showPassword, toggleShowPassword] = useState(false);
   const hasInitialValue = has(__, initialValues);
-
   const address = values['address'];
   const isValidAddress = !isNil(path(['address', 'coordinates'])(values));
   const handleAddress = address => setFieldValue('address', address);
@@ -251,5 +250,6 @@ export default compose(
     handleSubmit: (values, { props: { submit } }) => submit(values),
     displayName: 'UserForm',
     enableReinitialize: true,
+    isInitialValid: false,
   }),
 )(Component);
