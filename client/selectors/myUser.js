@@ -1,15 +1,10 @@
 import { prop } from 'ramda';
 import { createSelector } from 'reselect';
 
-const root = prop('myUser');
-
-export const getMyUser = createSelector(
-  root,
-  prop('data'),
-);
+export const getMyUser = prop('myUser');
 
 export const getToken = createSelector(
-  root,
+  getMyUser,
   prop('token'),
 );
 
