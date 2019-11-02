@@ -18,19 +18,19 @@ const initialState = { notifications: [] };
 export default (state = initialState, action) => {
   switch (action.type) {
     case LOGGED:
-      return { ...state, ...action.myUser };
+      return { ...state, ...action.data };
     case LOGOUT:
       return initialState;
     case UPDATED_USER:
-      return { ...state, ...action.myUser };
+      return { ...state, ...action.data };
     case UPLOADED_IMAGE:
-      return { ...state, ...action.myUser };
+      return { ...state, ...action.data };
     case DELETED_IMAGE:
-      return { ...state, ...action.myUser };
+      return { ...state, ...action.data };
     case BLOCKED_USER:
-      return { ...state, ...action.myUser };
+      return { ...state, ...action.data };
     case LIKED_USER:
-      return { ...state, ...action.myUser };
+      return { ...state, ...action.data };
     case GOT_FRIENDED:
       return { ...state, friends: [...state.friends, { ...action.user }] };
     case GOT_UNDFRIENDED:

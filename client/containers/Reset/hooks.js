@@ -4,6 +4,6 @@ import { updateUser } from '../../actions';
 export const useConnect = () => {
   const dispatch = useDispatch();
   return {
-    updateUser: user => dispatch(updateUser(user)),
+    updateUser: (token, user) => dispatch(updateUser(token, user)),
   };
 };
