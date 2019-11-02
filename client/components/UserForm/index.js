@@ -47,6 +47,7 @@ const Component = ({
       {hasInitialValue('username') && (
         <Field
           name="username"
+          autoComplete="username"
           label={<FormattedMessage {...messages.username} />}
           component={Input}
           validate={composeValidators(isRequired, isShort, isLong(30), isTrimmed)}
@@ -57,6 +58,7 @@ const Component = ({
       {hasInitialValue('password') && (
         <Field
           name="password"
+          autoComplete="password"
           label={<FormattedMessage {...messages.password} />}
           component={Input}
           validate={composeValidators(isRequired, isShort, isLong(30), isTrimmed)}
@@ -71,6 +73,7 @@ const Component = ({
       {hasInitialValue('newPassword') && (
         <Field
           name="newPassword"
+          autoComplete="password"
           label={<FormattedMessage {...messages.newPassword} />}
           component={Input}
           validate={composeValidators(isShort, isLong(30), isTrimmed)}
@@ -250,6 +253,6 @@ export default compose(
     handleSubmit: (values, { props: { submit } }) => submit(values),
     displayName: 'UserForm',
     enableReinitialize: true,
-    isInitialValid: false,
+    mapPropsToErrors: () => ({ isInitialInvalid: true }),
   }),
 )(Component);
