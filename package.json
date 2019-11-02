@@ -14,7 +14,6 @@
     "@babel/preset-react": "^7.6.3",
     "babel-eslint": "^10.0.3",
     "concurrently": "^5.0.0",
-    "env-cmd": "^10.0.1",
     "eslint": "^6.6.0",
     "eslint-plugin-react": "^7.16.0",
     "http-proxy-middleware": "^0.20.0",
@@ -34,6 +33,7 @@
     "@sendgrid/mail": "^6.4.0",
     "axios": "^0.19.0",
     "bcryptjs": "^2.4.3",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "faker": "^4.1.0",
     "formik": "^2.0.3",
@@ -57,12 +57,10 @@
     "socket.io-client": "^2.3.0"
   },
   "scripts": {
-    "start": "parcel build client/index.html && node server",
-    "dev": "env-cmd -f .env.development concurrently --kill-others \"node client/utils/devServer\" \"nodemon server\"",
-    "client": "env-cmd -f .env.development node client/utils/devServer",
-    "server": "env-cmd -f .env.development nodemon server",
-    "test": "env-cmd -f .env.test jest",
-    "coverage": "env-cmd -f .env.test jest --coverage",
-    "seed": "env-cmd -f .env.development node server/utils/seeder"
+    "start": "NODE_ENV=production parcel build client/index.html && node server",
+    "client": "NODE_ENV=development node client/utils/devServer",
+    "server": "NODE_ENV=development nodemon server",
+    "test": "NODE_ENV=test jest",
+    "seeder": "NODE_ENV=development node server/utils/seeder"
   }
 }

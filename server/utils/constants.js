@@ -1,3 +1,8 @@
+const path = require('path');
+require('dotenv').config({
+  path: path.join(__dirname, '..', '..', `.env.${process.env.NODE_ENV}`),
+});
+
 const {
   JWT_SECRET,
   DEVSERVER_PORT,
