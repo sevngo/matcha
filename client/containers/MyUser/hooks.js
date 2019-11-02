@@ -6,7 +6,7 @@ export const useConnect = () => {
   const dispatch = useDispatch();
   return {
     myUser: useSelector(getMyUser),
-    updateUser: user => dispatch(updateUser(user)),
+    updateUser: (token, user) => dispatch(updateUser(token, user)),
     uploadImage: (account, userLikedId) => dispatch(uploadImage(account, userLikedId)),
     removeImage: (token, imageId) => dispatch(removeImage(token, imageId)),
     likeUser: (account, userLikedId) => dispatch(likeUser(account, userLikedId)),

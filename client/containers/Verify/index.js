@@ -8,7 +8,7 @@ const Reset = ({
 }) => {
   const { updateUser } = useConnect();
   useEffect(() => {
-    updateUser({ token, emailVerified: true });
+    updateUser(token, { emailVerified: true });
   }, []);
   return false;
 };

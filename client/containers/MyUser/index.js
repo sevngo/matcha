@@ -7,6 +7,7 @@ import UserForm from '../../components/UserForm';
 import Carousel from '../../components/Carousel';
 import Modal from '../../components/Modal';
 import { getUserImage } from '../../api';
+import { compact } from '../../utils';
 import emptyImage from '../../images/emptyImage.png';
 import { useConnect } from './hooks';
 import useStyles from './styles';
@@ -36,7 +37,6 @@ const MyUser = () => {
     'address',
     'interests',
     'biography',
-    'token',
   ])(myUser);
   return (
     <Box p={3}>
@@ -104,7 +104,7 @@ const MyUser = () => {
                 newPassword: '',
               }}
               newPassword
-              submit={updateUser}
+              submit={user => updateUser(token, compact(user))}
             />
           </Paper>
         </Grid>

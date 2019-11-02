@@ -15,7 +15,7 @@ const Reset = ({
   return (
     <Grid container justify="center" className={classes.p3}>
       <Paper className={classes.paper}>
-        <UserForm initialValues={{ token, newPassword: '' }} submit={updateUser} />
+        <UserForm initialValues={{ newPassword: '' }} submit={user => updateUser(token, user)} />
       </Paper>
     </Grid>
   );
