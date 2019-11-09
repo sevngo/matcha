@@ -41,7 +41,7 @@ exports.usersModel = async db => {
             items: {
               bsonType: 'string',
               uniqueItems: true,
-              maxItems: 5,
+              maxItems: 3,
             },
           },
           biography: { bsonType: 'string', maxLength: 300 },

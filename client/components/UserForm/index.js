@@ -13,8 +13,8 @@ import {
   composeValidators,
   isRequired,
   isEmail,
-  isShort,
-  isLong,
+  minLength,
+  maxLength,
   isYoung,
   isOld,
   isTrimmed,
@@ -50,7 +50,7 @@ const Component = ({
           autoComplete="username"
           label={<FormattedMessage {...messages.username} />}
           component={Input}
-          validate={composeValidators(isRequired, isShort, isLong(30), isTrimmed)}
+          validate={composeValidators(isRequired, minLength, maxLength(30), isTrimmed)}
           startAdornment="account_circle"
           disabled={disabled}
         />
@@ -61,7 +61,7 @@ const Component = ({
           autoComplete="password"
           label={<FormattedMessage {...messages.password} />}
           component={Input}
-          validate={composeValidators(isRequired, isShort, isLong(30), isTrimmed)}
+          validate={composeValidators(isRequired, minLength, maxLength(30), isTrimmed)}
           type={showPassword ? 'text' : 'password'}
           startAdornment="vpn_key"
           endAdornment={{
@@ -76,7 +76,7 @@ const Component = ({
           autoComplete="password"
           label={<FormattedMessage {...messages.newPassword} />}
           component={Input}
-          validate={composeValidators(isShort, isLong(30), isTrimmed)}
+          validate={composeValidators(minLength, maxLength(30), isTrimmed)}
           type={showPassword ? 'text' : 'password'}
           startAdornment="vpn_key"
           endAdornment={{
@@ -90,7 +90,7 @@ const Component = ({
           name="email"
           label={<FormattedMessage {...messages.email} />}
           component={Input}
-          validate={composeValidators(isRequired, isEmail, isLong(30), isTrimmed)}
+          validate={composeValidators(isRequired, isEmail, maxLength(30), isTrimmed)}
           startAdornment="alternate_email"
           disabled={disabled}
         />
@@ -100,7 +100,7 @@ const Component = ({
           name="firstName"
           label={<FormattedMessage {...messages.firstName} />}
           component={Input}
-          validate={composeValidators(isRequired, isLong(30), isTrimmed)}
+          validate={composeValidators(isRequired, maxLength(30), isTrimmed)}
           disabled={disabled}
         />
       )}
@@ -109,7 +109,7 @@ const Component = ({
           name="lastName"
           label={<FormattedMessage {...messages.lastName} />}
           component={Input}
-          validate={composeValidators(isRequired, isLong(30), isTrimmed)}
+          validate={composeValidators(isRequired, maxLength(30), isTrimmed)}
           disabled={disabled}
         />
       )}
@@ -185,7 +185,7 @@ const Component = ({
           label={<FormattedMessage {...messages.interests} />}
           component={Select}
           multiple
-          validate={isLong(4)}
+          validate={maxLength(3)}
           disabled={disabled}
           renderValue={selected => <Interests interests={selected} />}
         >
@@ -201,7 +201,7 @@ const Component = ({
           name="biography"
           label={<FormattedMessage {...messages.biography} />}
           component={Input}
-          validate={composeValidators(isLong(300), isTrimmed)}
+          validate={composeValidators(maxLength(300), isTrimmed)}
           multiline
           rows="3"
           disabled={disabled}
