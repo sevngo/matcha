@@ -25,11 +25,11 @@ exports.usersModel = async db => {
         additionalProperties: false,
         properties: {
           _id: { bsonType: 'objectId' },
-          username: { bsonType: 'string', minLength: 3, maxLength: 30 },
+          username: { bsonType: 'string', minLength: 3, maxLength: 20 },
           birthDate: { bsonType: 'date' },
-          firstName: { bsonType: 'string', minLength: 3, maxLength: 30 },
-          lastName: { bsonType: 'string', minLength: 3, maxLength: 30 },
-          email: { bsonType: 'string' },
+          firstName: { bsonType: 'string', minLength: 3, maxLength: 20 },
+          lastName: { bsonType: 'string', minLength: 3, maxLength: 20 },
+          email: { bsonType: 'string', minLength: 3, maxLength: 20 },
           emailVerified: { bsonType: 'bool' },
           password: { bsonType: 'string' },
           gender: {
@@ -41,10 +41,10 @@ exports.usersModel = async db => {
             items: {
               bsonType: 'string',
               uniqueItems: true,
-              maxItems: 5,
+              maxItems: 3,
             },
           },
-          biography: { bsonType: 'string', maxLength: 300 },
+          biography: { bsonType: 'string', maxLength: 200 },
           images: {
             bsonType: 'array',
             items: {
