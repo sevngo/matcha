@@ -54,8 +54,6 @@ const store = createStore(
   composeWithDevTools(applyMiddleware(thunk)),
 );
 
-store.subscribe(() => {
-  saveState({ myUser: store.getState().myUser });
-});
+store.subscribe(() => saveState({ myUser: store.getState().myUser }));
 
 export default store;

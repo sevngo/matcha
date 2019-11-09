@@ -6,7 +6,7 @@ const { PORT } = require('./utils/constants');
 const socketEvents = require('./websocket');
 
 const server = http.createServer(app);
-const io = socketIo(server);
+const io = socketIo(server, { pingTimeout: 60000 });
 socketEvents(io);
 
 (async () => {
