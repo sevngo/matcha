@@ -8,7 +8,7 @@ export const isRequired = value => !value && 'required';
 export const isEmail = value =>
   !/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) && 'invalid';
 
-export const isShort = value => value && length(value) < 4 && 'tooShort';
+export const isShort = value => value && length(value) <= 3 && 'tooShort';
 
 export const isLong = max => value => length(value) >= max && 'tooLong';
 
