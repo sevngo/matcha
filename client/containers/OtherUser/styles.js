@@ -10,8 +10,8 @@ export default makeStyles(theme => ({
   img: {
     width: '100%',
   },
-  mw500: {
-    maxWidth: 500,
+  mw30: {
+    maxWidth: '30em',
   },
   header: {
     backgroundColor: theme.palette.background.default,

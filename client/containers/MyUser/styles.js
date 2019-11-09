@@ -17,8 +17,8 @@ export default makeStyles(theme => ({
   w100: {
     width: '100%',
   },
-  mw500: {
-    maxWidth: 500,
+  mw30: {
+    maxWidth: '30em',
   },
   hide: {
     display: 'none',

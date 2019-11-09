@@ -6,6 +6,6 @@ export default makeStyles(theme => ({
   },
   paper: {
     padding: theme.spacing(3),
-    maxWidth: 500,
+    maxWidth: '30em',
   },
 }));

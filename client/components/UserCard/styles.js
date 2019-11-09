@@ -2,10 +2,10 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles(theme => ({
   card: {
-    width: 300,
+    width: '20em',
   },
   media: {
-    height: 250,
+    height: '15em',
   },
   root: {
     padding: theme.spacing(3),

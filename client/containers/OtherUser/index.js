@@ -28,7 +28,7 @@ const User = ({ id }) => {
   return (
     <Box p={3}>
       <Grid container spacing={2}>
-        <Grid item className={classes.mw500}>
+        <Grid item className={classes.mw30}>
           <Paper>
             <Carousel activeStep={activeStep} handleStep={handleStep} maxSteps={maxSteps}>
               <div className={classes.header}>
@@ -56,7 +56,7 @@ const User = ({ id }) => {
             </Carousel>
           </Paper>
         </Grid>
-        <Grid item className={classes.mw500}>
+        <Grid item className={classes.mw30}>
           <Paper className={classes.p3}>
             <UserForm initialValues={user} disabled />
           </Paper>

@@ -41,7 +41,7 @@ const MyUser = () => {
   return (
     <Box p={3}>
       <Grid container spacing={2}>
-        <Grid item xs={12} className={classes.mw500}>
+        <Grid item xs={12} className={classes.mw30}>
           <Carousel activeStep={activeStep} maxSteps={maxSteps} handleStep={handleStep}>
             <div className={classes.header}>
               <input
@@ -94,7 +94,7 @@ const MyUser = () => {
             <img className={classes.img} src={image} alt="image" />
           </Carousel>
         </Grid>
-        <Grid item xs={12} className={classes.mw500}>
+        <Grid item xs={12} className={classes.mw30}>
           <Paper className={classes.p3}>
             <UserForm
               initialValues={{
@@ -108,7 +108,7 @@ const MyUser = () => {
             />
           </Paper>
         </Grid>
-        <Grid item xs={12} className={classes.mw500}>
+        <Grid item xs={12} className={classes.mw30}>
           {usersBlocked[0] && (
             <Paper className={classes.p3}>
               <Typography variant="h5">
