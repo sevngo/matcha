@@ -2,6 +2,7 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import reducer from './reducers';
+import { loadState, saveState } from './utils';
 
 const initialState = {
   myUser: {
@@ -45,4 +46,16 @@ const initialState = {
   snackbar: {},
 };
 
-export default createStore(reducer, initialState, composeWithDevTools(applyMiddleware(thunk)));
+const persistedState = loadState();
+
+const store = createStore(
+  reducer,
+  { ...initialState, ...persistedState },
+  composeWithDevTools(applyMiddleware(thunk)),
+);
+
+store.subscribe(() => {
+  saveState({ myUser: store.getState().myUser });
+});
+
+export default store;
