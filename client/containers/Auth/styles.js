@@ -8,6 +8,6 @@ export default makeStyles(theme => ({
     marginTop: theme.spacing(1),
   },
   item: {
-    maxWidth: 500,
+    maxWidth: '30em',
   },
 }));

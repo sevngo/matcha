@@ -10,7 +10,7 @@ export const isEmail = value =>
 
 export const isShort = value => value && length(value) < 4 && 'tooShort';
 
-export const isLong = max => value => length(value) > max && 'tooLong';
+export const isLong = max => value => length(value) >= max && 'tooLong';
 
 export const isOld = value => {
   const today = new Date();
