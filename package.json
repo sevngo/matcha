@@ -61,6 +61,6 @@
     "client": "NODE_ENV=development node client/utils/devServer",
     "server": "NODE_ENV=development nodemon server",
     "test": "NODE_ENV=test jest",
-    "seeder": "NODE_ENV=development node server/utils/seeder"
+    "seedDb": "NODE_ENV=development node server/utils/seedDb"
   }
 }
