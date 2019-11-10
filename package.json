@@ -63,5 +63,20 @@
     "server": "NODE_ENV=development nodemon server",
     "test": "NODE_ENV=test jest",
     "seedDb": "NODE_ENV=development node server/utils/seedDb"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ]
+  },
+  "browserslist": "last 1 Chrome version",
+  "lint-staged": {
+      "*.js": ["prettier --write", "git add", "eslint"]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
