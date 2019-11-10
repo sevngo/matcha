@@ -13,7 +13,6 @@ router.get(
   sanatize.toInt('maxDistance'),
   sanatize.toInt('skip'),
   sanatize.toInt('limit'),
-  sanatize.toFloat('address.coordinates'),
   sanatize.birthRange,
   auth.authenticate,
   controllers.getUsers,

@@ -26,11 +26,6 @@ exports.toInt = field =>
     .optional()
     .toInt();
 
-exports.toFloat = field =>
-  check(field)
-    .optional()
-    .toFloat();
-
 exports.hash = field =>
   body(field)
     .optional()
