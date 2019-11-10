@@ -6,15 +6,15 @@ const { asyncHandler, ErrorResponse, createToken, verifyToken } = require('../ut
 
 exports.generateAuthToken = asyncHandler(async (req, res, next) => {
   const { username, password } = req.body;
-  const myUser = await Users().findOne({ username });
-  if (!myUser) next(new ErrorResponse(400, 'Identification failed'));
+  const auth = await Users().findOne({ username });
+  if (!auth) next(new ErrorResponse(400, 'Identification failed'));
 
-  const isMatch = await bcrypt.compare(password, myUser.password);
+  const isMatch = await bcrypt.compare(password, auth.password);
   if (!isMatch) next(new ErrorResponse(400, 'Identification failed'));
 
-  const token = createToken({ _id: myUser._id });
+  const token = createToken({ _id: auth._id });
 
-  req.myUser = myUser;
+  req.auth = auth;
   req.token = token;
   next();
 });
@@ -22,13 +22,13 @@ exports.generateAuthToken = asyncHandler(async (req, res, next) => {
 exports.authenticate = asyncHandler(async (req, res, next) => {
   const token = replace('Bearer ', '')(req.header('Authorization'));
   const { _id } = verifyToken(token);
-  const myUser = await Users().findOne({ _id: ObjectID(_id) });
-  if (!myUser) next(new ErrorResponse(401, 'Unauthorized'));
-  req.myUser = myUser;
+  const auth = await Users().findOne({ _id: ObjectID(_id) });
+  if (!auth) next(new ErrorResponse(401, 'Unauthorized'));
+  req.auth = auth;
   next();
 });
 
 exports.emailVerified = (req, res, next) => {
-  if (!req.myUser.emailVerified) next(new ErrorResponse(400, 'Unverified email'));
+  if (!req.auth.emailVerified) next(new ErrorResponse(400, 'Unverified email'));
   next();
 };

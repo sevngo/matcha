@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { updateUser, uploadImage, removeImage, likeUser } from '../../actions';
-import { getMyUser } from '../../selectors';
+import { getAuth } from '../../selectors';
 
 export const useConnect = () => {
   const dispatch = useDispatch();
   return {
-    myUser: useSelector(getMyUser),
+    auth: useSelector(getAuth),
     updateUser: (token, user) => dispatch(updateUser(token, user)),
     uploadImage: (account, userLikedId) => dispatch(uploadImage(account, userLikedId)),
     removeImage: (token, imageId) => dispatch(removeImage(token, imageId)),

@@ -15,10 +15,10 @@ import messages from './messages';
 
 const MyUser = () => {
   const classes = useStyles();
-  const { myUser, updateUser, uploadImage, removeImage, likeUser } = useConnect();
+  const { auth, updateUser, uploadImage, removeImage, likeUser } = useConnect();
   const [activeStep, handleStep] = useState(0);
   const [isModalOpen, handleModal] = useState(false);
-  const { _id, token, images = [], usersBlocked } = myUser;
+  const { _id, token, images = [], usersBlocked } = auth;
   const inputEl = useRef();
   const addImage = image => {
     if (image) uploadImage(token, image);
@@ -37,7 +37,7 @@ const MyUser = () => {
     'address',
     'interests',
     'biography',
-  ])(myUser);
+  ])(auth);
   return (
     <Box p={3}>
       <Grid container spacing={2}>
@@ -126,7 +126,7 @@ const MyUser = () => {
                   <Typography>{user.username}</Typography>
                   <Button
                     variant="outlined"
-                    onClick={() => likeUser(myUser, user._id)}
+                    onClick={() => likeUser(auth, user._id)}
                     className={classes.like}
                   >
                     <FormattedMessage {...messages.likeUser} />

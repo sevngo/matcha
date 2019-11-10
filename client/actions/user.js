@@ -6,8 +6,8 @@ import { socket } from '../index';
 export const LOAD_USER = 'LOAD_USER';
 export const LOADED_USER = 'LOADED_USER';
 
-export const loadUser = (myUser, id) => async dispatch => {
-  const { token, _id, username } = myUser;
+export const loadUser = (auth, id) => async dispatch => {
+  const { token, _id, username } = auth;
   try {
     dispatch({ type: LOAD_USER });
     const { data } = await getUser(token, id);

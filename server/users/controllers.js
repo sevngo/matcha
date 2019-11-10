@@ -13,7 +13,7 @@ const {
   lookupPipeline,
   pagination,
 } = require('../utils/stages');
-const { otherUserProjection, myUserProjection, imageProjection } = require('./projections');
+const { userProjection, authProjection, imageProjection } = require('./projections');
 const { Users } = require('../database');
 const { sendEmailConfirmation, sendResetPassword } = require('../emails/account');
 const {
@@ -40,7 +40,7 @@ exports.postUser = asyncHandler(async (req, res) => {
 exports.getUsers = asyncHandler(async (req, res) => {
   const {
     query: { gender, interests, birthRange, limit, skip, sortBy, maxDistance },
-    myUser: {
+    auth: {
       _id,
       usersBlocked,
       address: { coordinates },
@@ -57,7 +57,7 @@ exports.getUsers = asyncHandler(async (req, res) => {
       mismatch('_id', _id),
       sort(sortBy),
       addFieldBirthDate,
-      otherUserProjection,
+      userProjection,
       ...pagination(limit, skip),
     ]),
   ).toArray();
@@ -67,7 +67,7 @@ exports.getUsers = asyncHandler(async (req, res) => {
 exports.getUser = asyncHandler(async (req, res, next) => {
   const UsersCollection = Users();
   const [data] = await UsersCollection.aggregate(
-    compact([match('_id', req.params.id), addFieldBirthDate, otherUserProjection]),
+    compact([match('_id', req.params.id), addFieldBirthDate, userProjection]),
   ).toArray();
   if (!data) next(new ErrorResponse(404, 'User not found'));
   res.send(data);
@@ -75,7 +75,7 @@ exports.getUser = asyncHandler(async (req, res, next) => {
 
 exports.patchUser = asyncHandler(async (req, res, next) => {
   const {
-    myUser: { _id },
+    auth: { _id },
     body,
   } = req;
   const UsersCollection = Users();
@@ -96,7 +96,7 @@ exports.patchUser = asyncHandler(async (req, res, next) => {
         'friends',
       ),
       addFieldBirthDate,
-      myUserProjection,
+      authProjection,
     ]),
   ).toArray();
   res.send(data);
@@ -104,7 +104,7 @@ exports.patchUser = asyncHandler(async (req, res, next) => {
 
 exports.postUserLogin = asyncHandler(async (req, res) => {
   const {
-    myUser: { _id, usersLiked },
+    auth: { _id, usersLiked },
     token,
   } = req;
   const UsersCollection = Users();
@@ -115,7 +115,7 @@ exports.postUserLogin = asyncHandler(async (req, res) => {
       lookup('users', 'usersBlocked', '_id', 'usersBlocked'),
       lookupPipeline('users', [matchIn('_id', usersLiked), match('usersLiked', _id)], 'friends'),
       addFieldBirthDate,
-      myUserProjection,
+      authProjection,
     ]),
   ).toArray();
   res.send({ ...data, token });
@@ -135,7 +135,7 @@ exports.postUserForgot = asyncHandler(async (req, res, next) => {
 
 exports.postUserImage = asyncHandler(async (req, res, next) => {
   const {
-    myUser: { _id },
+    auth: { _id },
   } = req;
   const UsersCollection = Users();
   const buffer = await sharp(req.file.buffer)
@@ -156,7 +156,7 @@ exports.postUserImage = asyncHandler(async (req, res, next) => {
 
 exports.deleteUserImage = asyncHandler(async (req, res, next) => {
   const {
-    myUser: { _id },
+    auth: { _id },
     params: { imageId },
   } = req;
   const UsersCollection = Users();

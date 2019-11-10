@@ -8,8 +8,8 @@ const User = ({
     params: { id },
   },
 }) => {
-  const { myUser } = useConnect();
-  if (id === myUser._id) return <MyUser />;
+  const { auth } = useConnect();
+  if (id === auth._id) return <MyUser />;
   return <OtherUser id={id} />;
 };
 

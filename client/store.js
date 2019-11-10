@@ -5,7 +5,7 @@ import reducer from './reducers';
 import { loadState, saveState } from './utils';
 
 const initialState = {
-  myUser: {
+  auth: {
     // token: 'abc',
     notifications: [
       {
@@ -54,6 +54,6 @@ const store = createStore(
   composeWithDevTools(applyMiddleware(thunk)),
 );
 
-store.subscribe(() => saveState({ myUser: store.getState().myUser }));
+store.subscribe(() => saveState({ auth: store.getState().auth }));
 
 export default store;
