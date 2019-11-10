@@ -3,22 +3,8 @@ import { createSelector } from 'reselect';
 
 const root = prop('users');
 
-export const getFilter = createSelector(
-  root,
-  prop('filter'),
-);
+export const getFilter = createSelector(root, prop('filter'));
 
-export const getUsers = createSelector(
-  root,
-  prop('data'),
-);
+export const getUsers = createSelector(root, prop('data'));
 
-export const getUser = createSelector(
-  root,
-  prop('user'),
-);
-
-export const getUsersTotal = createSelector(
-  root,
-  prop('total'),
-);
+export const getUsersTotal = createSelector(root, prop('total'));

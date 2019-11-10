@@ -41,8 +41,8 @@ const initialState = {
       limit: 10,
       skip: 0,
     },
-    user: {},
   },
+  user: {},
   snackbar: {},
 };
 
