@@ -8,7 +8,16 @@ const router = new Router();
 
 router.post('/', sanatize.newDate('birthDate'), sanatize.hash('password'), controllers.postUser);
 
-router.get('/', auth.authenticate, controllers.getUsers);
+router.get(
+  '/',
+  sanatize.toInt('maxDistance'),
+  sanatize.toInt('skip'),
+  sanatize.toInt('limit'),
+  sanatize.toFloat('address.coordinates'),
+  sanatize.birthRange,
+  auth.authenticate,
+  controllers.getUsers,
+);
 
 router.get(
   '/:id',
