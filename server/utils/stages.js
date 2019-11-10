@@ -1,5 +1,5 @@
 const { split, is, isEmpty } = require('ramda');
-const { defaultToNull, compact } = require('./functions');
+const { compact } = require('./functions');
 
 exports.match = (key, value) => {
   if (value)
@@ -34,14 +34,14 @@ exports.sort = sortBy => {
   }
 };
 
-exports.geoNear = (lng, lat, maxDistance) => {
-  if (maxDistance && lng && lat) {
+exports.geoNear = (coordinates, maxDistance) => {
+  if (maxDistance && !isEmpty(coordinates)) {
     return {
       $geoNear: {
-        near: { type: 'Point', coordinates: [parseFloat(lng), parseFloat(lat)] },
+        near: { type: 'Point', coordinates },
         distanceField: 'distance',
         distanceMultiplier: 0.001,
-        maxDistance: parseInt(maxDistance),
+        maxDistance,
         spherical: true,
       },
     };
@@ -62,12 +62,10 @@ exports.lookupPipeline = (from, pipeline, as) => ({
 
 exports.pagination = (limit, skip) => {
   const getLimit = limit => {
-    const intLimit = defaultToNull(parseInt(limit));
-    if (intLimit) return { $limit: intLimit };
+    if (limit) return { $limit: limit };
   };
   const getSkip = skip => {
-    const intSkip = defaultToNull(parseInt(skip));
-    if (intSkip) return { $skip: intSkip };
+    if (skip) return { $skip: skip };
   };
   const paginate = compact([getSkip(skip), getLimit(limit)]);
   return [

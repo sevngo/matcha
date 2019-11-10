@@ -1,5 +1,5 @@
 const { ObjectID } = require('mongodb');
-const { find, propEq, split } = require('ramda');
+const { find, propEq } = require('ramda');
 const sharp = require('sharp');
 const {
   match,
@@ -39,25 +39,20 @@ exports.postUser = asyncHandler(async (req, res) => {
 
 exports.getUsers = asyncHandler(async (req, res) => {
   const {
-    query: { gender, interests, birthRange = '', limit, skip, sortBy, maxDistance },
+    query: { gender, interests, birthRange, limit, skip, sortBy, maxDistance },
     myUser: {
       _id,
       usersBlocked,
-      address: {
-        coordinates: [lng, lat],
-      },
+      address: { coordinates },
     },
   } = req;
   const UsersCollection = Users();
-  const [birthMin, birthMax] = split(':')(birthRange);
-  const birthMinDate = birthMin && new Date(birthMin);
-  const birthMaxDate = birthMax && new Date(birthMax);
   const [data] = await UsersCollection.aggregate(
     compact([
-      geoNear(lng, lat, maxDistance),
+      geoNear(coordinates, maxDistance),
       match('gender', gender),
       match('interests', interests),
-      matchRange('birthDate', birthMinDate, birthMaxDate),
+      matchRange('birthDate', ...birthRange),
       mismatch('_id', usersBlocked),
       mismatch('_id', _id),
       sort(sortBy),

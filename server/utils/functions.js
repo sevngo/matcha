@@ -1,4 +1,4 @@
-const { defaultTo, filter, isEmpty, reduce } = require('ramda');
+const { filter, isEmpty, reduce } = require('ramda');
 const jwt = require('jsonwebtoken');
 const { ObjectID } = require('mongodb');
 const { NODE_ENV, DEVSERVER_PORT, JWT_SECRET } = require('./constants');
@@ -11,8 +11,6 @@ exports.ErrorResponse = class ErrorResponse extends Error {
     this.statusCode = statusCode;
   }
 };
-
-exports.defaultToNull = defaultTo(null);
 
 exports.getAppUrl = (protocol, hostname, host) => {
   const fullUrl =
