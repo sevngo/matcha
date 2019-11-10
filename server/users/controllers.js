@@ -72,7 +72,7 @@ exports.getUsers = asyncHandler(async (req, res) => {
 exports.getUser = asyncHandler(async (req, res, next) => {
   const UsersCollection = Users();
   const [data] = await UsersCollection.aggregate(
-    compact([match('_id', req._id), addFieldBirthDate, otherUserProjection]),
+    compact([match('_id', req.params.id), addFieldBirthDate, otherUserProjection]),
   ).toArray();
   if (!data) next(new ErrorResponse(404, 'User not found'));
   res.send(data);
@@ -162,9 +162,9 @@ exports.postUserImage = asyncHandler(async (req, res, next) => {
 exports.deleteUserImage = asyncHandler(async (req, res, next) => {
   const {
     myUser: { _id },
+    params: { imageId },
   } = req;
   const UsersCollection = Users();
-  const imageId = ObjectID(req.params.imageId);
   const { value: user } = await UsersCollection.findOneAndUpdate(
     { _id },
     { $pull: { images: { _id: imageId } } },
@@ -178,8 +178,8 @@ exports.deleteUserImage = asyncHandler(async (req, res, next) => {
 
 exports.getUserImage = asyncHandler(async (req, res, next) => {
   const UsersCollection = Users();
-  const imageId = ObjectID(req.params.imageId);
-  const user = await UsersCollection.findOne({ _id: req._id, 'images._id': imageId });
+  const { id, imageId } = req.params;
+  const user = await UsersCollection.findOne({ _id: id, 'images._id': imageId });
   if (!user) next(new ErrorResponse(404, 'User not found'));
   const { data } = find(image => propEq('_id', imageId)(image))(user.images);
   res.type('png');

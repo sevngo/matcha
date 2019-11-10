@@ -1,29 +1,31 @@
 const { Router } = require('express');
-const conversions = require('../middlewares/conversions');
 const auth = require('../middlewares/auth');
+const sanatize = require('../middlewares/sanatize');
+const validate = require('../middlewares/validate');
 const controllers = require('./controllers');
 
 const router = new Router();
 
-router.post('/', conversions.newDateBirth, conversions.hashPassword, controllers.postUser);
+router.post('/', sanatize.newDate('birthDate'), sanatize.hash('password'), controllers.postUser);
 
 router.get('/', auth.authenticate, controllers.getUsers);
 
 router.get(
   '/:id',
+  validate.isValidObjectId('id'),
+  sanatize.objectId('id'),
   auth.authenticate,
-  auth.isValidObjectId,
-  conversions.newObjectId,
   controllers.getUser,
 );
 
 router.patch(
   '/',
   auth.authenticate,
-  conversions.newDateBirth,
-  conversions.hashNewPassword,
-  conversions.newUsersLikedId,
-  conversions.newUsersBlockedId,
+  sanatize.newDate('birthDate'),
+  sanatize.hash('password'),
+  sanatize.objectIds('usersLiked'),
+  sanatize.objectIds('usersBlocked'),
+  sanatize.newPassword,
   controllers.patchUser,
 );
 
@@ -34,16 +36,23 @@ router.post('/forgot', controllers.postUserForgot);
 router.post(
   '/images',
   auth.authenticate,
-  conversions.uploadImage.single('image'),
+  sanatize.uploadImage.single('image'),
   controllers.postUserImage,
 );
 
-router.delete('/images/:imageId', auth.authenticate, controllers.deleteUserImage);
+router.delete(
+  '/images/:imageId',
+  validate.isValidObjectId('imageId'),
+  sanatize.objectId('imageId'),
+  controllers.deleteUserImage,
+);
 
 router.get(
   '/:id/images/:imageId',
-  auth.isValidObjectId,
-  conversions.newObjectId,
+  validate.isValidObjectId('id'),
+  validate.isValidObjectId('imageId'),
+  sanatize.objectId('id'),
+  sanatize.objectId('imageId'),
   controllers.getUserImage,
 );
 
