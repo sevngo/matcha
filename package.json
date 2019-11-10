@@ -27,7 +27,7 @@
     "supertest": "^4.0.2"
   },
   "dependencies": {
-    "@formatjs/intl-pluralrules": "^1.3.1",
+    "@formatjs/intl-pluralrules": "^1.3.2",
     "@material-ui/core": "^4.6.0",
     "@material-ui/icons": "^4.5.1",
     "@sendgrid/mail": "^6.4.0",
@@ -46,7 +46,7 @@
     "ramda": "^0.26.1",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
-    "react-intl": "^3.4.0",
+    "react-intl": "^3.5.0",
     "react-redux": "^7.1.3",
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
@@ -72,7 +72,11 @@
   },
   "browserslist": "last 1 Chrome version",
   "lint-staged": {
-      "*.js": ["prettier --write", "git add", "eslint"]
+    "*.js": [
+      "prettier --write",
+      "git add",
+      "eslint"
+    ]
   },
   "husky": {
     "hooks": {
