@@ -15,7 +15,7 @@ const {
 } = require('../utils/stages');
 const { userProjection, authProjection, imageProjection } = require('./projections');
 const { Users } = require('../database');
-const { sendEmailConfirmation, sendResetPassword } = require('../emails/account');
+const { sendEmail } = require('../emails');
 const {
   getAppUrl,
   asyncHandler,
@@ -33,7 +33,11 @@ exports.postUser = asyncHandler(async (req, res) => {
   const { _id, email, firstName, lastName } = user;
   const token = createToken({ _id });
   const url = `${getAppUrl(protocol, hostname, req.get('host'))}/verify/${token}`;
-  await sendEmailConfirmation(email, firstName, lastName, url);
+  await sendEmail(
+    email,
+    'Email confirmation',
+    `Welcome to Matcha, ${firstName} ${lastName}. Click on this link to confirm your email : ${url}`,
+  );
   res.status(201).send();
 });
 
@@ -129,7 +133,11 @@ exports.postUserForgot = asyncHandler(async (req, res, next) => {
   const { _id, email, firstName, lastName } = user;
   const token = createToken({ _id });
   const url = `${getAppUrl(protocol, hostname, req.get('host'))}/reset/${token}`;
-  await sendResetPassword(email, firstName, lastName, url);
+  await sendEmail(
+    email,
+    'Password reset',
+    `Hello ${firstName} ${lastName}. Click on this link to reset your password : ${url}`,
+  );
   res.status(200).send();
 });
 
