@@ -1,5 +1,5 @@
 import { reject, compose, append, equals, pick, find } from 'ramda';
-import { openSnackbar } from './';
+import { openSnackbar } from '.';
 import {
   postUser,
   postUserLogin,
@@ -37,20 +37,20 @@ export const logout = () => dispatch => {
   socket.emit('logout');
 };
 
-export const register = myUser => async dispatch => {
+export const register = user => async dispatch => {
   try {
     dispatch({ type: REGISTER });
-    await postUser(myUser);
+    await postUser(user);
     dispatch(openSnackbar({ variant: SUCCESS }));
   } catch {
     dispatch(openSnackbar({ variant: ERROR }));
   }
 };
 
-export const login = myUser => async dispatch => {
+export const login = user => async dispatch => {
   try {
     dispatch({ type: LOGIN });
-    const { data } = await postUserLogin(myUser);
+    const { data } = await postUserLogin(user);
     dispatch({ type: LOGGED, data });
     socket.emit('logged', pick(['_id', 'username', 'friends'])(data));
   } catch {
@@ -58,39 +58,33 @@ export const login = myUser => async dispatch => {
   }
 };
 
-export const updateUser = (token, myUser) => async dispatch => {
+export const updateUser = (token, auth) => async dispatch => {
   try {
     dispatch({ type: UPDATE_USER });
-    const { data } = await patchUser(token, myUser);
+    const { data } = await patchUser(token, auth);
     dispatch({ type: UPDATED_USER, data });
   } catch {
     dispatch(openSnackbar({ variant: ERROR }));
   }
 };
 
-export const forgotPassword = myUser => async dispatch => {
+export const forgotPassword = auth => async dispatch => {
   try {
     dispatch({ type: FORGOT_PASSWORD });
-    await postUserForgot(myUser);
+    await postUserForgot(auth);
     dispatch(openSnackbar({ variant: SUCCESS }));
   } catch {
     dispatch(openSnackbar({ variant: ERROR }));
   }
 };
 
-export const likeUser = (myUser, userLikedId) => async dispatch => {
+export const likeUser = (auth, userLikedId) => async dispatch => {
   try {
     dispatch({ type: LIKE_USER });
-    const usersLiked = compose(
-      append(userLikedId),
-      getIds,
-    )(myUser.usersLiked);
-    const usersBlocked = compose(
-      reject(equals(userLikedId)),
-      getIds,
-    )(myUser.usersBlocked);
+    const usersLiked = compose(append(userLikedId), getIds)(auth.usersLiked);
+    const usersBlocked = compose(reject(equals(userLikedId)), getIds)(auth.usersBlocked);
     const user = { usersLiked, usersBlocked };
-    const { data } = await patchUser(myUser.token, user);
+    const { data } = await patchUser(auth.token, user);
     dispatch({ type: LIKED_USER, data });
     socket.emit('userLiked', {
       user: pick(['_id', 'username'])(data),
@@ -105,25 +99,19 @@ export const likeUser = (myUser, userLikedId) => async dispatch => {
   }
 };
 
-export const blockUser = (myUser, userBlockedId) => async dispatch => {
+export const blockUser = (auth, userBlockedId) => async dispatch => {
   try {
     dispatch({ type: BLOCK_USER });
-    const usersLiked = compose(
-      reject(equals(userBlockedId)),
-      getIds,
-    )(myUser.usersLiked);
-    const usersBlocked = compose(
-      append(userBlockedId),
-      getIds,
-    )(myUser.usersBlocked);
+    const usersLiked = compose(reject(equals(userBlockedId)), getIds)(auth.usersLiked);
+    const usersBlocked = compose(append(userBlockedId), getIds)(auth.usersBlocked);
     const user = { usersLiked, usersBlocked };
-    const { data } = await patchUser(myUser.token, user);
+    const { data } = await patchUser(auth.token, user);
     dispatch({ type: BLOCKED_USER, data });
     socket.emit('userBlocked', {
       user: pick(['_id', 'username'])(data),
       userBlockedId,
     });
-    const friendsIds = getIds(myUser.friends);
+    const friendsIds = getIds(auth.friends);
     const isUnfriended = find(friendId => userBlockedId === friendId)(friendsIds);
     if (isUnfriended)
       socket.emit('userUnfriended', { user: pick(['_id', 'username'])(data), userBlockedId });

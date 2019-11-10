@@ -1,4 +1,4 @@
-export * from './myUser';
+export * from './auth';
 export * from './users';
 export * from './app';
 export * from './snackbar';

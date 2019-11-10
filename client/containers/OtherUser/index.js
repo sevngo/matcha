@@ -11,15 +11,15 @@ import useStyles from './styles';
 import { useConnect } from './hooks';
 
 const User = ({ id }) => {
-  const { user, myUser, loadUser, likeUser, blockUser } = useConnect();
+  const { user, auth, loadUser, likeUser, blockUser } = useConnect();
   const [activeStep, handleStep] = useState(0);
   useEffect(() => {
-    loadUser(myUser, id);
+    loadUser(auth, id);
   }, []);
   const classes = useStyles();
-  const isLiked = Boolean(find(userLiked => userLiked._id === user._id)(myUser.usersLiked));
-  const isBlocked = Boolean(find(userBlocked => userBlocked._id === user._id)(myUser.usersBlocked));
-  const isFriend = find(friend => friend._id === user._id)(myUser.friends);
+  const isLiked = Boolean(find(userLiked => userLiked._id === user._id)(auth.usersLiked));
+  const isBlocked = Boolean(find(userBlocked => userBlocked._id === user._id)(auth.usersBlocked));
+  const isFriend = find(friend => friend._id === user._id)(auth.friends);
   const { images = [] } = user;
   const image = !isEmpty(images)
     ? getUserImage(user._id, path([activeStep, '_id'])(images))
@@ -34,14 +34,14 @@ const User = ({ id }) => {
               <div className={classes.header}>
                 <IconButton
                   className={isLiked ? classes.red : ''}
-                  onClick={() => likeUser(myUser, user._id)}
+                  onClick={() => likeUser(auth, user._id)}
                   disabled={isLiked}
                 >
                   favorite
                 </IconButton>
                 <IconButton
                   className={isBlocked ? classes.red : ''}
-                  onClick={() => blockUser(myUser, user._id)}
+                  onClick={() => blockUser(auth, user._id)}
                   disabled={isBlocked}
                 >
                   block

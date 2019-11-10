@@ -1,6 +1,6 @@
 const { project } = require('../utils/stages');
 
-exports.otherUserProjection = project({
+exports.userProjection = project({
   _id: 1,
   username: 1,
   firstName: 1,
@@ -14,7 +14,7 @@ exports.otherUserProjection = project({
   distance: 1,
 });
 
-exports.myUserProjection = project({
+exports.authProjection = project({
   _id: 1,
   username: 1,
   firstName: 1,

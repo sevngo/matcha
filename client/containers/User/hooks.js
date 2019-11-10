@@ -1,8 +1,8 @@
 import { useSelector } from 'react-redux';
-import { getMyUser } from '../../selectors';
+import { getAuth } from '../../selectors';
 
 export const useConnect = () => {
   return {
-    myUser: useSelector(getMyUser),
+    auth: useSelector(getAuth),
   };
 };
