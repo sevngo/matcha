@@ -28,11 +28,6 @@ exports.authenticate = asyncHandler(async (req, res, next) => {
   next();
 });
 
-exports.isValidObjectId = (req, res, next) => {
-  if (!ObjectID.isValid(req.params.id)) next(new ErrorResponse(400, 'Bad request'));
-  next();
-};
-
 exports.emailVerified = (req, res, next) => {
   if (!req.myUser.emailVerified) next(new ErrorResponse(400, 'Unverified email'));
   next();
