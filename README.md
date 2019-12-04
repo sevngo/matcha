@@ -18,3 +18,10 @@ DATABASE_NAME=matcha
 SENDGRID_API_KEY=
 JWT_SECRET=
 ```
+
+```
+npm i
+npm run seedDb
+npm run start:client
+npm run start:server
+```
