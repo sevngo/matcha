@@ -8,7 +8,7 @@ import Radio from '../Radio';
 import Select from '../Select';
 import Interests from '../Interests';
 import Slider from '../Slider';
-import { useGeolocation, useAutocomplete } from '../../hooks/googleMaps';
+import { useGeolocation, useAutocomplete } from '../../hooks';
 import {
   composeValidators,
   isRequired,

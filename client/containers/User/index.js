@@ -1,14 +1,14 @@
 import React from 'react';
 import MyUser from '../MyUser';
 import OtherUser from '../OtherUser';
-import { useConnect } from './hooks';
+import { useAuth } from '../../hooks';
 
 const User = ({
   match: {
     params: { id },
   },
 }) => {
-  const { auth } = useConnect();
+  const { auth } = useAuth();
   if (id === auth._id) return <MyUser />;
   return <OtherUser id={id} />;
 };

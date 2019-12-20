@@ -3,13 +3,13 @@ import { path, length } from 'ramda';
 import { FormattedMessage } from 'react-intl';
 import { Typography, Grid, Icon, Divider, Badge, IconButton } from '@material-ui/core';
 import Modal from '../../components/Modal';
-import { useConnect } from './hooks';
+import { useNotifications } from '../../hooks';
 import useStyles from './styles';
 import messages from './messages';
 
 const Notifications = () => {
   const classes = useStyles();
-  const { removeNotification, notifications = [] } = useConnect();
+  const { removeNotification, notifications = [] } = useNotifications();
   const [isModalOpen, handleModal] = useState(false);
   const notificationsLength = length(notifications);
   return (

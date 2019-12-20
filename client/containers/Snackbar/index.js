@@ -6,10 +6,10 @@ import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
 import { variantIcon } from './constants';
 import useStyles from './styles';
-import { useConnect } from './hooks';
+import { useSnackbar } from '../../hooks';
 
 const MySnackbar = () => {
-  const { snackbar, closeSnackbar } = useConnect();
+  const { snackbar, closeSnackbar } = useSnackbar();
   const classes = useStyles();
   const isSnackbarOpen = !isEmpty(snackbar);
   if (!isSnackbarOpen) return false;

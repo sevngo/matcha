@@ -4,12 +4,12 @@ import { Grid, AppBar, Tabs, Tab, Button } from '@material-ui/core';
 import Paper from '../../components/Paper';
 import UserForm from '../../components/UserForm';
 import Modal from '../../components/Modal';
-import { useConnect } from './hooks';
+import { useAuth } from '../../hooks';
 import useStyles from './styles';
 import messages from './messages';
 
 const Auth = () => {
-  const { login, register, forgotPassword } = useConnect();
+  const { login, register, forgotPassword } = useAuth();
   const classes = useStyles();
   const [tab, handleTab] = useState(0);
   const [isModalOpen, handleModal] = useState(false);

@@ -3,18 +3,18 @@ import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { MenuItem, Menu } from '@material-ui/core';
 import IconButton from '../../components/IconButton';
-import { useConnect } from './hooks';
+import { useAuth } from '../../hooks';
 import { userPath } from '../../utils';
 import messages from './messages.js';
 
 const Account = () => {
   const [anchorEl, handleMenu] = useState();
-  const { _id, logout } = useConnect();
+  const { auth, logout } = useAuth();
   return (
     <Fragment>
       <IconButton onClick={e => handleMenu(e.currentTarget)}>account_circle</IconButton>
       <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={() => handleMenu()}>
-        <MenuItem onClick={() => handleMenu()} component={Link} to={userPath(_id)}>
+        <MenuItem onClick={() => handleMenu()} component={Link} to={userPath(auth._id)}>
           <FormattedMessage {...messages.myAccount} />
         </MenuItem>
         <MenuItem

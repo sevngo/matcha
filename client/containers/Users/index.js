@@ -2,14 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { Hidden, Box, TablePagination } from '@material-ui/core';
 import Paper from '../../components/Paper';
 import UserCards from '../../components/UserCards';
-import { useConnect } from './hooks';
+import { useUsers, useAuth, useFilter } from '../../hooks';
 import useStyles from './styles';
 
 const Users = () => {
-  const { token, users, filter, loadUsers, total, handleFilter } = useConnect();
+  const { auth } = useAuth();
+  const { users, loadUsers, total } = useUsers();
+  const { filter, handleFilter } = useFilter();
   const classes = useStyles();
   useEffect(() => {
-    loadUsers(token, filter);
+    loadUsers(auth.token, filter);
   }, [filter]);
   const { limit } = filter;
   const [page, setPage] = useState(0);

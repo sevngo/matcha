@@ -1,8 +1,8 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { getSnackbar } from '../../selectors';
-import { closeSnackbar } from '../../actions';
+import { getSnackbar } from '../selectors';
+import { closeSnackbar } from '../actions';
 
-export const useConnect = () => {
+export const useSnackbar = () => {
   const dispatch = useDispatch();
   return {
     snackbar: useSelector(getSnackbar),
