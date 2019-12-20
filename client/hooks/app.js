@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
-import { getIsLoading } from '../../selectors';
+import { getIsLoading } from '../selectors';
 
-export const useConnect = () => {
+export const useApp = () => {
   return {
     isLoading: useSelector(getIsLoading),
   };

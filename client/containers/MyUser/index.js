@@ -9,13 +9,13 @@ import Modal from '../../components/Modal';
 import { getUserImage } from '../../api';
 import { compact } from '../../utils';
 import emptyImage from '../../images/emptyImage.png';
-import { useConnect } from './hooks';
+import { useAuth } from '../../hooks';
 import useStyles from './styles';
 import messages from './messages';
 
 const MyUser = () => {
   const classes = useStyles();
-  const { auth, updateUser, uploadImage, removeImage, likeUser } = useConnect();
+  const { auth, updateUser, uploadImage, removeImage, likeUser } = useAuth();
   const [activeStep, handleStep] = useState(0);
   const [isModalOpen, handleModal] = useState(false);
   const { _id, token, images = [], usersBlocked } = auth;

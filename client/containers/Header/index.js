@@ -8,15 +8,16 @@ import Account from '../Account';
 import Notifications from '../Notifications';
 import IconButton from '../../components/IconButton';
 import { usersPath } from '../../utils';
-import { useConnect } from './hooks';
+import { useAuth } from '../../hooks';
 import useStyles from './styles';
 import messages from './messages';
 
 const Header = () => {
   const classes = useStyles();
   const { pathname } = useLocation();
-  const { token } = useConnect();
+  const { auth } = useAuth();
   const [isDrawerOpen, toggleDrawer] = useState(false);
+  const { token } = auth;
   return (
     <Fragment>
       <AppBar position="static" className={classes.appBar}>

@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
 import Loader from '../../components/Loader';
-import { useConnect } from './hooks';
+import { useApp } from '../../hooks';
 import useStyles from './styles';
 
 const Loading = () => {
   const classes = useStyles();
-  const { isLoading } = useConnect();
+  const { isLoading } = useApp();
   if (!isLoading) return false;
   return (
     <Fragment>

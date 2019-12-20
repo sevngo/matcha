@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
-import { useConnect } from './hooks';
+import { useAuth } from '../../hooks';
 
 const Reset = ({
   match: {
     params: { token },
   },
 }) => {
-  const { updateUser } = useConnect();
+  const { updateUser } = useAuth();
   useEffect(() => {
     updateUser(token, { emailVerified: true });
   }, []);

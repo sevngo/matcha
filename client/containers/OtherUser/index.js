@@ -8,10 +8,11 @@ import IconButton from '../../components/IconButton';
 import emptyImage from '../../images/emptyImage.png';
 import { getUserImage } from '../../api';
 import useStyles from './styles';
-import { useConnect } from './hooks';
+import { useUser, useAuth } from '../../hooks';
 
 const User = ({ id }) => {
-  const { user, auth, loadUser, likeUser, blockUser } = useConnect();
+  const { user, loadUser } = useUser();
+  const { auth, likeUser, blockUser } = useAuth();
   const [activeStep, handleStep] = useState(0);
   useEffect(() => {
     loadUser(auth, id);
