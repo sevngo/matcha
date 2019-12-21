@@ -1,6 +1,7 @@
 /* eslint-env node, jest */
 const request = require('supertest');
 const faker = require('faker');
+const path = require('path');
 const { has } = require('ramda');
 const app = require('../../app');
 const { connectDb, disconnectDb, Users } = require('../../database');
@@ -106,7 +107,7 @@ describe('/api/users', () => {
       const { body: user } = await request(app)
         .post(`/api/users/images`)
         .set('Authorization', `Bearer ${userOneToken}`)
-        .attach('image', 'server/users/tests/fixtures/profile-pic.jpg')
+        .attach('image', path.resolve(__dirname, 'fixtures', 'profile-pic.jpg'))
         .expect(200);
       expect(has('images')(user)).toBeTruthy();
       const userData = await Users().findOne({ _id: userOne._id });
