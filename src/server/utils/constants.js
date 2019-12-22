@@ -1,6 +1,6 @@
 const path = require('path');
 require('dotenv').config({
-  path: path.join(__dirname, '..', '..', `.env.${process.env.NODE_ENV}`),
+  path: path.resolve(__dirname, '..', '..', '..', `.env.${process.env.NODE_ENV}`),
 });
 
 const {
