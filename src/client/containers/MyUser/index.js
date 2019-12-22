@@ -103,7 +103,6 @@ const MyUser = () => {
                 ...userForm,
                 newPassword: '',
               }}
-              newPassword
               submit={user => updateUser(token, compact(user))}
             />
           </Paper>

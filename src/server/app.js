@@ -20,7 +20,7 @@ app.use(errorHandler);
 
 if (NODE_ENV === PRODUCTION) {
   app.use(express.static('dist'));
-  app.get('*', (req, res) => res.sendFile(path.join(__dirname, '..', 'dist', 'index.html')));
+  app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, '..', 'dist', 'index.html')));
 }
 
 module.exports = app;

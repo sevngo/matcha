@@ -51,11 +51,12 @@
     "socket.io-client": "^2.3.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "server": "NODE_ENV=development nodemon --watch src/server src/server",
+    "start": "NODE_ENV=production node src/server",
+    "srv": "NODE_ENV=development nodemon --watch src/server src/server",
+    "client": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "seedDb": "NODE_ENV=development node server/utils/seedDb",
+    "seedDb": "node server/utils/seedDb",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
