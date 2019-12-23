@@ -16,23 +16,16 @@ const {
 const { userProjection, authProjection, imageProjection } = require('./projections');
 const { Users } = require('../database');
 const { sendEmail } = require('../emails');
-const {
-  getAppUrl,
-  asyncHandler,
-  compact,
-  ErrorResponse,
-  createToken,
-} = require('../utils/functions');
+const { asyncHandler, compact, ErrorResponse, createToken } = require('../utils/functions');
 
 exports.postUser = asyncHandler(async (req, res) => {
-  const { protocol, hostname } = req;
   const UsersCollection = Users();
   const {
     ops: [user],
   } = await UsersCollection.insertOne({ usersBlocked: [], usersLiked: [], ...req.body });
   const { _id, email, firstName, lastName } = user;
   const token = createToken({ _id });
-  const url = `${getAppUrl(protocol, hostname, req.get('host'))}/verify/${token}`;
+  const url = `${req.headers.referer}verify/${token}`;
   await sendEmail(
     email,
     'Email confirmation',
@@ -126,13 +119,12 @@ exports.postUserLogin = asyncHandler(async (req, res) => {
 });
 
 exports.postUserForgot = asyncHandler(async (req, res, next) => {
-  const { protocol, hostname } = req;
   const UsersCollection = Users();
   const user = await UsersCollection.findOne({ email: req.body.email });
   if (!user) next(new ErrorResponse(400, 'Email not found'));
   const { _id, email, firstName, lastName } = user;
   const token = createToken({ _id });
-  const url = `${getAppUrl(protocol, hostname, req.get('host'))}/reset/${token}`;
+  const url = `${req.headers.referer}reset/${token}`;
   await sendEmail(
     email,
     'Password reset',

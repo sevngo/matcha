@@ -59,16 +59,7 @@
     "seedDb": "node server/utils/seedDb",
     "eject": "react-scripts eject"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
   "proxy": "http://localhost:8080",
-  "babel": {
-    "presets": [
-      "@babel/preset-env",
-      "@babel/preset-react"
-    ]
-  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -81,6 +72,9 @@
       "last 1 safari version"
     ]
   },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
@@ -92,5 +86,10 @@
       "git add",
       "eslint"
     ]
+  },
+  "prettier": {
+    "singleQuote": true,
+    "printWidth": 100,
+    "trailingComma": "all"
   }
 }

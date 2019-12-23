@@ -2,7 +2,7 @@ const { ObjectID } = require('mongodb');
 const faker = require('faker');
 const { times } = require('ramda');
 const bcrypt = require('bcryptjs');
-const { connectDb, Users } = require('../database');
+const { connectDb, Users } = require('../src/server/database');
 
 const insertData = async () => {
   const genders = ['female', 'male'];
