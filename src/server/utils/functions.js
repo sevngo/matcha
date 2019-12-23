@@ -1,7 +1,7 @@
 const { filter, isEmpty, reduce } = require('ramda');
 const jwt = require('jsonwebtoken');
 const { ObjectID } = require('mongodb');
-const { NODE_ENV, SERVER_PORT, JWT_SECRET } = require('./constants');
+const { JWT_SECRET } = require('./constants');
 
 exports.asyncHandler = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next);
 
@@ -10,12 +10,6 @@ exports.ErrorResponse = class ErrorResponse extends Error {
     super(message);
     this.statusCode = statusCode;
   }
-};
-
-exports.getAppUrl = (protocol, hostname, host) => {
-  const fullUrl =
-    NODE_ENV === 'development' ? `http://localhost:${SERVER_PORT}` : `${protocol}://${host}`;
-  return fullUrl;
 };
 
 exports.compact = filter(value => value && !isEmpty(value));

@@ -1,3 +1,5 @@
+// This file is not in client folder to match create-react-app webpack src/index entry point
+
 import React from 'react';
 import { Provider } from 'react-redux';
 import { render } from 'react-dom';

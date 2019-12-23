@@ -1,5 +1,7 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import { useAuth } from '../../hooks';
+import { usersPath } from '../../utils';
 
 const Reset = ({
   match: {
@@ -10,7 +12,7 @@ const Reset = ({
   useEffect(() => {
     updateUser(token, { emailVerified: true });
   }, [token, updateUser]);
-  return false;
+  return <Redirect to={usersPath} />;
 };
 
 export default Reset;
