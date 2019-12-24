@@ -16,7 +16,7 @@ import store from './client/store';
 import App from './client/components/App';
 
 // process.env to be used
-export const socket = io(`${window.location.protocol}//${window.location.hostname}:8080`);
+export const socket = io(`http://localhost:${process.env.REACT_APP_PROXY_PORT}`);
 socketEvents(socket);
 
 const ROOT = (
