@@ -41,7 +41,7 @@ const Component = ({
   const isValidAddress = !isNil(path(['address', 'coordinates'])(values));
   const handleAddress = useCallback(address => setFieldValue('address', address), [setFieldValue]);
   useGeolocation(handleAddress, address && isGeoActivated);
-  useAutocomplete('address', handleAddress, address);
+  useAutocomplete('address', handleAddress, !isNil(address));
   return (
     <form onSubmit={handleSubmit}>
       {hasInitialValue('username') && (
