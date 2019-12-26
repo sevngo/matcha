@@ -19,7 +19,7 @@ export const useAutocomplete = (inputId, onChange, isActive) => {
   useEffect(() => {
     if (isActive) {
       const element = document.getElementById(inputId);
-      autocomplete = new google.maps.places.Autocomplete(element);
+      autocomplete = new google.maps.places.Autocomplete(element); // eslint-disable-line react-hooks/exhaustive-deps
       autocomplete.setTypes(['address']);
       autocomplete.setFields(['formatted_address', 'geometry']);
       autocomplete.addListener('place_changed', handlePlace);
