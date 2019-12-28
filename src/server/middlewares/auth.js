@@ -20,7 +20,9 @@ exports.generateAuthToken = asyncHandler(async (req, res, next) => {
 });
 
 exports.authenticate = asyncHandler(async (req, res, next) => {
-  const token = replace('Bearer ', '')(req.header('Authorization'));
+  const authHeader = req.header('Authorization');
+  if (!authHeader) next(new ErrorResponse(401, 'Unauthorized'));
+  const token = replace('Bearer ', '')(authHeader);
   const { _id } = verifyToken(token);
   const auth = await Users().findOne({ _id: ObjectID(_id) });
   if (!auth) next(new ErrorResponse(401, 'Unauthorized'));
