@@ -14,15 +14,15 @@ const {
   pagination,
 } = require('../utils/stages');
 const { userProjection, authProjection, imageProjection } = require('./projections');
-const { Users } = require('../database');
+const { getUsers } = require('../database');
 const { sendEmail } = require('../emails');
 const { asyncHandler, compact, ErrorResponse, createToken } = require('../utils/functions');
 
 exports.postUser = asyncHandler(async (req, res) => {
-  const UsersCollection = Users();
+  const Users = getUsers();
   const {
     ops: [user],
-  } = await UsersCollection.insertOne({ usersBlocked: [], usersLiked: [], ...req.body });
+  } = await Users.insertOne({ usersBlocked: [], usersLiked: [], ...req.body });
   const { _id, email, firstName, lastName } = user;
   const token = createToken({ _id });
   const url = `${req.headers.referer}verify/${token}`;
@@ -43,8 +43,8 @@ exports.getUsers = asyncHandler(async (req, res) => {
       address: { coordinates },
     },
   } = req;
-  const UsersCollection = Users();
-  const [data] = await UsersCollection.aggregate(
+  const Users = getUsers();
+  const [data] = await Users.aggregate(
     compact([
       geoNear(coordinates, maxDistance),
       match('gender', gender),
@@ -62,8 +62,8 @@ exports.getUsers = asyncHandler(async (req, res) => {
 });
 
 exports.getUser = asyncHandler(async (req, res, next) => {
-  const UsersCollection = Users();
-  const [data] = await UsersCollection.aggregate(
+  const Users = getUsers();
+  const [data] = await Users.aggregate(
     compact([match('_id', req.params.id), addFieldBirthDate, userProjection]),
   ).toArray();
   if (!data) next(new ErrorResponse(404, 'User not found'));
@@ -75,14 +75,14 @@ exports.patchUser = asyncHandler(async (req, res, next) => {
     auth: { _id },
     body,
   } = req;
-  const UsersCollection = Users();
-  const { value: user } = await UsersCollection.findOneAndUpdate(
+  const Users = getUsers();
+  const { value: user } = await Users.findOneAndUpdate(
     { _id },
     { $set: body },
     { returnOriginal: false },
   );
   if (!user) next(new ErrorResponse(404, 'User not found'));
-  const [data] = await UsersCollection.aggregate(
+  const [data] = await Users.aggregate(
     compact([
       match('_id', _id),
       lookup('users', 'usersLiked', '_id', 'usersLiked'),
@@ -104,8 +104,8 @@ exports.postUserLogin = asyncHandler(async (req, res) => {
     auth: { _id, usersLiked },
     token,
   } = req;
-  const UsersCollection = Users();
-  const [data] = await UsersCollection.aggregate(
+  const Users = getUsers();
+  const [data] = await Users.aggregate(
     compact([
       match('_id', _id),
       lookup('users', 'usersLiked', '_id', 'usersLiked'),
@@ -119,8 +119,8 @@ exports.postUserLogin = asyncHandler(async (req, res) => {
 });
 
 exports.postUserForgot = asyncHandler(async (req, res, next) => {
-  const UsersCollection = Users();
-  const user = await UsersCollection.findOne({ email: req.body.email });
+  const Users = getUsers();
+  const user = await Users.findOne({ email: req.body.email });
   if (!user) next(new ErrorResponse(400, 'Email not found'));
   const { _id, email, firstName, lastName } = user;
   const token = createToken({ _id });
@@ -137,18 +137,18 @@ exports.postUserImage = asyncHandler(async (req, res, next) => {
   const {
     auth: { _id },
   } = req;
-  const UsersCollection = Users();
+  const Users = getUsers();
   const buffer = await sharp(req.file.buffer)
     .resize({ width: 500, fit: 'outside' })
     .png()
     .toBuffer();
   const imageId = ObjectID();
-  const { value: user } = await UsersCollection.findOneAndUpdate(
+  const { value: user } = await Users.findOneAndUpdate(
     { _id },
     { $push: { images: { _id: imageId, data: buffer } } },
   );
   if (!user) next(new ErrorResponse(404, 'User not found'));
-  const [data] = await UsersCollection.aggregate(
+  const [data] = await Users.aggregate(
     compact([match('_id', _id), addFieldBirthDate, imageProjection]),
   ).toArray();
   res.send(data);
@@ -159,22 +159,22 @@ exports.deleteUserImage = asyncHandler(async (req, res, next) => {
     auth: { _id },
     params: { imageId },
   } = req;
-  const UsersCollection = Users();
-  const { value: user } = await UsersCollection.findOneAndUpdate(
+  const Users = getUsers();
+  const { value: user } = await Users.findOneAndUpdate(
     { _id },
     { $pull: { images: { _id: imageId } } },
   );
   if (!user) next(new ErrorResponse(404, 'User not found'));
-  const [data] = await UsersCollection.aggregate(
+  const [data] = await Users.aggregate(
     compact([match('_id', _id), addFieldBirthDate, imageProjection]),
   ).toArray();
   res.send(data);
 });
 
 exports.getUserImage = asyncHandler(async (req, res, next) => {
-  const UsersCollection = Users();
+  const Users = getUsers();
   const { id, imageId } = req.params;
-  const user = await UsersCollection.findOne({ _id: id, 'images._id': imageId });
+  const user = await Users.findOne({ _id: id, 'images._id': imageId });
   if (!user) next(new ErrorResponse(404, 'User not found'));
   const { data } = find(image => propEq('_id', imageId)(image))(user.images);
   res.type('png');

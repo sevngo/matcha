@@ -18,4 +18,4 @@ exports.connectDb = async () => {
 
 exports.disconnectDb = () => client.close();
 
-exports.Users = () => db.collection(USERS);
+exports.getUsers = () => db.collection(USERS);

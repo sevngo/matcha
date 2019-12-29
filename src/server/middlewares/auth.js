@@ -1,12 +1,12 @@
 const { replace } = require('ramda');
 const { ObjectID } = require('mongodb');
 const bcrypt = require('bcryptjs');
-const { Users } = require('../database');
+const { getUsers } = require('../database');
 const { asyncHandler, ErrorResponse, createToken, verifyToken } = require('../utils/functions');
 
 exports.generateAuthToken = asyncHandler(async (req, res, next) => {
   const { username, password } = req.body;
-  const auth = await Users().findOne({ username });
+  const auth = await getUsers().findOne({ username });
   if (!auth) next(new ErrorResponse(400, 'Identification failed'));
 
   const isMatch = await bcrypt.compare(password, auth.password);
@@ -24,7 +24,7 @@ exports.authenticate = asyncHandler(async (req, res, next) => {
   if (!authHeader) next(new ErrorResponse(401, 'Unauthorized'));
   const token = replace('Bearer ', '')(authHeader);
   const { _id } = verifyToken(token);
-  const auth = await Users().findOne({ _id: ObjectID(_id) });
+  const auth = await getUsers().findOne({ _id: ObjectID(_id) });
   if (!auth) next(new ErrorResponse(401, 'Unauthorized'));
   req.auth = auth;
   next();

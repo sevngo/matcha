@@ -4,7 +4,7 @@ const faker = require('faker');
 const path = require('path');
 const { has } = require('ramda');
 const app = require('../../app');
-const { connectDb, disconnectDb, Users } = require('../../database');
+const { connectDb, disconnectDb, getUsers } = require('../../database');
 const {
   newUser,
   initialPassword,
@@ -17,8 +17,9 @@ const {
 beforeAll(connectDb);
 
 beforeEach(async () => {
-  await Users().deleteMany();
-  await Users().insertMany([userOne, userTwo]);
+  const Users = getUsers();
+  await Users.deleteMany();
+  await Users.insertMany([userOne, userTwo]);
 });
 
 afterAll(disconnectDb);
@@ -110,7 +111,7 @@ describe('/api/users', () => {
         .attach('image', path.resolve(__dirname, 'fixtures', 'profile-pic.jpg'))
         .expect(200);
       expect(has('images')(user)).toBeTruthy();
-      const userData = await Users().findOne({ _id: userOne._id });
+      const userData = await getUsers().findOne({ _id: userOne._id });
       expect(userData.images[0].data.buffer).toEqual(expect.any(Buffer));
     });
   });
