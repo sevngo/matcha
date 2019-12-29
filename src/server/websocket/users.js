@@ -1,33 +1,43 @@
-const { append, reject, includes, path, find } = require('ramda');
-const { getIds, createNotification } = require('../utils/functions');
+const { ObjectID } = require('mongodb');
+const { map } = require('ramda');
+const { getIds, createNotification, getSocketIds } = require('../utils/functions');
+const { matchIn, matchField, match } = require('../utils/stages');
+const { getUsers } = require('../database');
 
-let usersConnected = [];
-
-exports.addUser = (socketId, _id) => {
-  usersConnected = append({ socketId, _id })(usersConnected);
+exports.addUserSocketId = async (_id, socketId) => {
+  const Users = getUsers();
+  await Users.findOneAndUpdate({ _id: ObjectID(_id) }, { $set: { socketId } });
 };
 
-exports.removeUserBySocketId = socketId => () => {
-  usersConnected = reject(object => socketId === object.socketId)(usersConnected);
+exports.removeUserSocketId = async socketId => {
+  const Users = getUsers();
+  await Users.findOneAndUpdate({ socketId }, { $unset: { socketId: '' } });
 };
 
-exports.emitToFriendsConnected = (io, user, eventName) => {
+exports.emitToFriendsConnected = async (io, user, eventName) => {
   const { friends, _id, username } = user;
-  const friendsIds = getIds(friends);
-  const usersConnectedIds = getIds(usersConnected);
-  usersConnectedIds.forEach((userConnectedId, index) => {
-    if (includes(userConnectedId)(friendsIds)) {
-      const user = createNotification({ _id, username });
-      const socketId = path([index, 'socketId'])(usersConnected);
-      io.to(socketId).emit(eventName, user);
-    }
+  const Users = getUsers();
+  const friendsIds = map(id => ObjectID(id))(getIds(friends));
+  const friendsConnected = await Users.aggregate([
+    matchIn('_id', friendsIds),
+    matchField('socketId'),
+  ]).toArray();
+  const friendsSocketIds = getSocketIds(friendsConnected);
+  friendsSocketIds.forEach(friendSocketId => {
+    const notification = createNotification({ _id, username });
+    io.to(friendSocketId).emit(eventName, notification);
   });
 };
 
-exports.emitToUserConnected = (io, data, receiverId, eventName) => {
-  const userLikedConnected = find(userConnected => userConnected._id === receiverId)(
-    usersConnected,
-  );
-  if (userLikedConnected)
-    io.to(userLikedConnected.socketId).emit(eventName, createNotification(data));
+exports.emitToUserConnected = async (io, data, receiverId, eventName) => {
+  const _id = ObjectID(receiverId);
+  const Users = getUsers();
+  const [userConnected] = await Users.aggregate([
+    match('_id', _id),
+    matchField('socketId'),
+  ]).toArray();
+  if (userConnected) {
+    const notification = createNotification(data);
+    io.to(userConnected.socketId).emit(eventName, notification);
+  }
 };

@@ -71,6 +71,7 @@ exports.usersModel = async db => {
           },
           usersLiked: { bsonType: 'array', items: { bsonType: 'objectId', uniqueItems: true } },
           usersBlocked: { bsonType: 'array', items: { bsonType: 'objectId', uniqueItems: true } },
+          socketId: { bsonType: 'string' },
         },
       },
     },

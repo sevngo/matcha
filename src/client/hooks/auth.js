@@ -10,6 +10,7 @@ import {
   removeImage,
   likeUser,
   removeNotification,
+  blockUser,
 } from '../actions';
 import { getAuth, getNotifications } from '../selectors';
 
@@ -28,6 +29,9 @@ export const useAuth = () => {
     ),
     removeImage: useCallback((token, imageId) => dispatch(removeImage(token, imageId)), [dispatch]),
     likeUser: useCallback((account, userLikedId) => dispatch(likeUser(account, userLikedId)), [
+      dispatch,
+    ]),
+    blockUser: useCallback((auth, userBlockedId) => dispatch(blockUser(auth, userBlockedId)), [
       dispatch,
     ]),
   };

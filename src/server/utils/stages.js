@@ -15,6 +15,10 @@ exports.matchIn = (key, value) => {
     };
 };
 
+exports.matchField = key => ({
+  $match: { [key]: { $exists: true } },
+});
+
 exports.matchRange = (key, min, max) => {
   if (min && max) {
     return { $match: { [key]: { $gt: min, $lt: max } } };
