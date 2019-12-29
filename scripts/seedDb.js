@@ -2,7 +2,7 @@ const { ObjectID } = require('mongodb');
 const faker = require('faker');
 const { times } = require('ramda');
 const bcrypt = require('bcryptjs');
-const { connectDb, Users } = require('../src/server/database');
+const { connectDb, getUsers } = require('../src/server/database');
 
 const insertData = async () => {
   const genders = ['female', 'male'];
@@ -29,7 +29,7 @@ const insertData = async () => {
     emailVerified: true,
   });
   const newUsers = times(makeRandomUser, 20);
-  await Users().insertMany(newUsers);
+  await getUsers().insertMany(newUsers);
   console.log('Data inserted in the database');
 };
 
