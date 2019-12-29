@@ -13,10 +13,11 @@ import { useUser, useAuth } from '../../hooks';
 const User = ({ id }) => {
   const { user, loadUser } = useUser();
   const { auth, likeUser, blockUser } = useAuth();
+  const { token, _id, username } = auth;
   const [activeStep, handleStep] = useState(0);
   useEffect(() => {
-    loadUser(auth, id);
-  }, [auth, id, loadUser]);
+    loadUser({ token, _id, username }, id);
+  }, [token, _id, username, id, loadUser]);
   const classes = useStyles();
   const isLiked = Boolean(find(userLiked => userLiked._id === user._id)(auth.usersLiked));
   const isBlocked = Boolean(find(userBlocked => userBlocked._id === user._id)(auth.usersBlocked));
