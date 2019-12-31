@@ -3,6 +3,8 @@ import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import reducer from './reducers';
 import { loadState, saveState } from './utils';
+import { getAuth } from './selectors';
+import { socket } from '../index';
 
 const initialState = {
   auth: {
@@ -54,6 +56,10 @@ const store = createStore(
   composeWithDevTools(applyMiddleware(thunk)),
 );
 
-store.subscribe(() => saveState({ auth: store.getState().auth }));
+store.subscribe(() => {
+  const state = store.getState();
+  const auth = getAuth(state);
+  saveState({ auth });
+});
 
 export default store;

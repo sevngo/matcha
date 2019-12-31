@@ -1,8 +1,14 @@
-import { path } from 'ramda';
+import { path, pick } from 'ramda';
 import store from './store';
 import { GOT_FRIENDED, GOT_UNDFRIENDED, ADD_NOTIFICATION } from './actions';
+import { getAuth } from './selectors';
 
 const socketEvents = socket => {
+  socket.on('connect', () => {
+    const state = store.getState();
+    const auth = getAuth(state);
+    if (auth._id) socket.emit('reLogged', pick(['_id', 'username', 'friends'])(auth));
+  });
   socket.on('friendLogged', notification => {
     store.dispatch({
       type: ADD_NOTIFICATION,
