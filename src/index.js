@@ -3,7 +3,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { render } from 'react-dom';
-import { pick, path } from 'ramda';
 import { BrowserRouter } from 'react-router-dom';
 import { IntlProvider } from 'react-intl';
 import '@formatjs/intl-pluralrules/polyfill';

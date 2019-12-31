@@ -4,7 +4,6 @@ import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import reducer from './reducers';
 import { loadState, saveState } from './utils';
 import { getAuth } from './selectors';
-import { socket } from '../index';
 
 const initialState = {
   auth: {
