@@ -7,12 +7,12 @@ const {
 
 const socketEvents = io => {
   io.on('connect', socket => {
-    socket.on('logged', async user => {
-      await addUserSocketId(user._id, socket.id);
-      await emitToFriendsConnected(io, user, 'friendLogged');
+    socket.on('logged', async ({ friends, _id, username }) => {
+      await addUserSocketId(_id, socket.id);
+      await emitToFriendsConnected(io, { _id, username }, friends, 'friendLogged');
     });
 
-    socket.on('reLogged', user => addUserSocketId(user._id, socket.id));
+    socket.on('reLogged', _id => addUserSocketId(_id, socket.id));
 
     socket.on('userLiked', ({ user, userLikedId }) =>
       emitToUserConnected(io, user, userLikedId, 'gotLiked'),
