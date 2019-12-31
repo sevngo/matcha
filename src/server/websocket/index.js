@@ -6,11 +6,13 @@ const {
 } = require('./users');
 
 const socketEvents = io => {
-  io.on('connection', socket => {
+  io.on('connect', socket => {
     socket.on('logged', async user => {
       await addUserSocketId(user._id, socket.id);
       await emitToFriendsConnected(io, user, 'friendLogged');
     });
+
+    socket.on('reLogged', user => addUserSocketId(user._id, socket.id));
 
     socket.on('userLiked', ({ user, userLikedId }) =>
       emitToUserConnected(io, user, userLikedId, 'gotLiked'),
@@ -33,6 +35,7 @@ const socketEvents = io => {
     );
 
     socket.on('logout', () => removeUserSocketId(socket.id));
+
     socket.on('disconnect', () => removeUserSocketId(socket.id));
   });
 };
