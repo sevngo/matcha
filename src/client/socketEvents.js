@@ -1,4 +1,4 @@
-import { path, pick } from 'ramda';
+import { path, isEmpty } from 'ramda';
 import store from './store';
 import { GOT_FRIENDED, GOT_UNDFRIENDED, ADD_NOTIFICATION } from './actions';
 import { getAuth } from './selectors';
@@ -7,7 +7,7 @@ const socketEvents = socket => {
   socket.on('connect', () => {
     const state = store.getState();
     const auth = getAuth(state);
-    if (auth._id) socket.emit('reLogged', pick(['_id', 'username', 'friends'])(auth));
+    if (!isEmpty(auth)) socket.emit('reLogged', auth._id);
   });
   socket.on('friendLogged', notification => {
     store.dispatch({

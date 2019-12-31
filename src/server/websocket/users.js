@@ -14,8 +14,7 @@ exports.removeUserSocketId = async socketId => {
   await Users.findOneAndUpdate({ socketId }, { $unset: { socketId: '' } });
 };
 
-exports.emitToFriendsConnected = async (io, user, eventName) => {
-  const { friends, _id, username } = user;
+exports.emitToFriendsConnected = async (io, data, friends, eventName) => {
   const Users = getUsers();
   const friendsIds = map(id => ObjectID(id))(getIds(friends));
   const friendsConnected = await Users.aggregate([
@@ -24,7 +23,7 @@ exports.emitToFriendsConnected = async (io, user, eventName) => {
   ]).toArray();
   const friendsSocketIds = getSocketIds(friendsConnected);
   friendsSocketIds.forEach(friendSocketId => {
-    const notification = createNotification({ _id, username });
+    const notification = createNotification(data);
     io.to(friendSocketId).emit(eventName, notification);
   });
 };
