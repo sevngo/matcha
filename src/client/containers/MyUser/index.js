@@ -62,7 +62,7 @@ const MyUser = () => {
               <Modal
                 open={isModalOpen}
                 onClose={() => handleModal(false)}
-                title={messages.sure}
+                title={<FormattedMessage {...messages.sure} />}
                 actions={
                   <Fragment>
                     <Button size="small" onClick={() => handleModal(false)}>

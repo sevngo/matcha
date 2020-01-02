@@ -9,15 +9,10 @@ import '@formatjs/intl-pluralrules/polyfill';
 import '@formatjs/intl-pluralrules/dist/locale-data/en';
 import '@formatjs/intl-pluralrules/dist/locale-data/fr';
 import { MuiThemeProvider, CssBaseline } from '@material-ui/core';
-import io from 'socket.io-client';
-import socketEvents from './client/socketEvents';
+import './client/socketEvents';
 import { locale, messages, theme } from './client/utils';
 import store from './client/store';
 import App from './client/components/App';
-
-// process.env to be used
-export const socket = io(`http://localhost:${process.env.REACT_APP_PROXY_PORT}`);
-socketEvents(socket);
 
 const ROOT = (
   <Provider store={store}>

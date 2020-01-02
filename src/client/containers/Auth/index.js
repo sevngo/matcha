@@ -41,8 +41,8 @@ const Auth = () => {
                 <Modal
                   open={isModalOpen}
                   onClose={() => handleModal(false)}
-                  title={messages.forgotPassword}
-                  text={messages.enterEmail}
+                  title={<FormattedMessage {...messages.forgotPassword} />}
+                  text={<FormattedMessage {...messages.enterEmail} />}
                 >
                   <UserForm initialValues={{ email: '' }} submit={forgotPassword} />
                 </Modal>
