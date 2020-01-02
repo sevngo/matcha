@@ -10,6 +10,7 @@
   "author": "Steven Ngo",
   "license": "ISC",
   "devDependencies": {
+    "@testing-library/react": "^9.4.0",
     "concurrently": "^5.0.2",
     "http-proxy-middleware": "^0.20.0",
     "husky": "^3.1.0",

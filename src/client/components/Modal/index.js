@@ -1,5 +1,4 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
 import {
   Dialog,
   DialogTitle,
@@ -11,13 +10,9 @@ import {
 const Modal = ({ title, text, children, actions, ...rest }) => {
   return (
     <Dialog {...rest}>
-      <DialogTitle>{title && <FormattedMessage {...title} />}</DialogTitle>
+      {title && <DialogTitle>{title}</DialogTitle>}
       <DialogContent>
-        {text && (
-          <DialogContentText>
-            <FormattedMessage {...text} />
-          </DialogContentText>
-        )}
+        {text && <DialogContentText>{text}</DialogContentText>}
         {children}
       </DialogContent>
       <DialogActions>{actions}</DialogActions>

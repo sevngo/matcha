@@ -1,7 +1,7 @@
 import { openSnackbar } from '.';
 import { getUser } from '../api';
 import { ERROR } from '../containers/Snackbar/constants';
-import { socket } from '../../index';
+import socket from '../socketEvents';
 
 export const LOAD_USER = 'LOAD_USER';
 export const LOADED_USER = 'LOADED_USER';

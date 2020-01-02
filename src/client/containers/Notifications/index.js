@@ -20,7 +20,11 @@ const Notifications = () => {
         </Badge>
       </IconButton>
       {notificationsLength !== 0 && (
-        <Modal title={messages.title} open={isModalOpen} onClose={() => handleModal(false)}>
+        <Modal
+          title={<FormattedMessage {...messages.title} />}
+          open={isModalOpen}
+          onClose={() => handleModal(false)}
+        >
           <Grid container direction="column" spacing={2}>
             {notifications.map((notification, index) => (
               <Fragment key={notification._id}>

@@ -9,7 +9,7 @@ import {
   deleteUserImage,
 } from '../api';
 import { getIds } from '../utils';
-import { socket } from '../../index';
+import socket from '../socketEvents';
 import { SUCCESS, ERROR } from '../containers/Snackbar/constants';
 
 export const REGISTER = 'REGISTER';
