@@ -6,7 +6,7 @@ require('dotenv').config({
 const {
   JWT_SECRET = 'mySecret',
   NODE_ENV,
-  MONGODB_URL,
+  MONGODB_URI,
   DATABASE_NAME,
   REACT_APP_PROXY_PORT,
   PORT = REACT_APP_PROXY_PORT,
@@ -25,7 +25,7 @@ module.exports = {
   TEST,
   JWT_SECRET,
   NODE_ENV,
-  MONGODB_URL,
+  MONGODB_URI,
   DATABASE_NAME,
   PORT,
   SENDGRID_API_KEY,
