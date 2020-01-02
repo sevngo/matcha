@@ -8,12 +8,10 @@ cache:
     - node_modules
 
 env:
+  - REQ_FILE = "./.env.test"
   - MONGODB_VERSION=mongodb-linux-x86_64-4.0.14
-  - MONGODB_URI=matcha-test
-  - DATABASE_NAME=matcha-test
 
 install:
-  - echo $MONGODB_VERSION
   - wget https://fastdl.mongodb.org/linux/${MONGODB_VERSION}.tgz
   - tar xzf ${MONGODB_VERSION}.tgz
   - ${MONGODB_VERSION}/bin/mongod --version
