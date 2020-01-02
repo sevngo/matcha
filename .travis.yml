@@ -8,8 +8,7 @@ cache:
     - node_modules
 
 env:
-  - REQ_FILE = "./.env.test"
-  - MONGODB_VERSION=mongodb-linux-x86_64-4.0.14
+  - REQ_FILE = "./.env.test" MONGODB_VERSION=mongodb-linux-x86_64-4.0.14
 
 install:
   - wget https://fastdl.mongodb.org/linux/${MONGODB_VERSION}.tgz
