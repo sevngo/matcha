@@ -1,13 +1,13 @@
 const { MongoClient } = require('mongodb');
 const { usersModel } = require('./users/model');
-const { MONGODB_URL, DATABASE_NAME } = require('./utils/constants');
+const { MONGODB_URI, DATABASE_NAME } = require('./utils/constants');
 const { USERS } = require('./utils/constants');
 
 let db;
 let client;
 
 exports.connectDb = async () => {
-  client = await MongoClient.connect(MONGODB_URL, {
+  client = await MongoClient.connect(MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
