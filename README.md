@@ -19,7 +19,6 @@ JWT_SECRET=
 
 ```
 mongod
-npm run srv
+npm run dev
 npm run seedDb
-npm run client
 ```

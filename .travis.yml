@@ -1,14 +1,23 @@
 language: node_js
 
 node_js:
-  - 12.13.0
+  - 12.14.0
+
+cache:
+  directories:
+    - node_modules
+
+env:
+  global:
+    - MONGODB_VERSION=mongodb-linux-x86_64-4.2.2
 
 install:
-  - wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-4.0.10.tgz
-  - tar xzf mongodb-linux-x86_64-4.0.10.tgz
-  - ${PWD}/mongodb-linux-x86_64-4.0.10/bin/mongod --version
+  - echo $HOME
+  - wget https://fastdl.mongodb.org/linux/${MONGODB_VERSION}.tgz
+  - tar xzf ${MONGODB_VERSION}.tgz
+  - ${MONGODB_VERSION}/bin/mongod --version
   - npm install
 
 before_script:
-  - mkdir ${PWD}/mongodb-linux-x86_64-4.0.10/data
-  - ${PWD}/mongodb-linux-x86_64-4.0.10/bin/mongod --dbpath ${PWD}/mongodb-linux-x86_64-4.0.10/data --logpath ${PWD}/mongodb-linux-x86_64-4.0.10/mongodb.log --fork
+  - mkdir ${MONGODB_VERSION}/data
+  - ${MONGODB_VERSION}/bin/mongod --dbpath ${MONGODB_VERSION}/data --logpath ${MONGODB_VERSION}/mongodb.log --fork
