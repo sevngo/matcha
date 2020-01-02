@@ -57,7 +57,7 @@
     "client": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "seedDb": "node server/utils/seedDb",
+    "seedDb": "node scripts/seedDb",
     "eject": "react-scripts eject"
   },
   "browserslist": {
