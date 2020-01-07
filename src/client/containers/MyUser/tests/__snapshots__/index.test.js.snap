@@ -1,0 +1,309 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MyUser should match snapshot 1`] = `
+<div>
+  <div
+    class="MuiBox-root MuiBox-root-12"
+  >
+    <div
+      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2"
+    >
+      <div
+        class="MuiGrid-root makeStyles-mw30-6 MuiGrid-item MuiGrid-grid-xs-12"
+      >
+        <div
+          class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+        >
+          <div
+            class="makeStyles-header-9"
+          >
+            <input
+              accept="image/png, image/jpeg"
+              class="makeStyles-hide-7"
+              type="file"
+            />
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined Mui-disabled Mui-disabled"
+              disabled=""
+              tabindex="-1"
+              type="button"
+            >
+              <span
+                class="MuiButton-label"
+              >
+                Delete
+                <span
+                  aria-hidden="true"
+                  class="material-icons MuiIcon-root makeStyles-ml1-2"
+                >
+                  delete
+                </span>
+              </span>
+            </button>
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined makeStyles-ml1-2"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="MuiButton-label"
+              >
+                Upload
+                <span
+                  aria-hidden="true"
+                  class="material-icons MuiIcon-root makeStyles-ml1-2"
+                >
+                  cloud_upload
+                </span>
+              </span>
+              <span
+                class="MuiTouchRipple-root"
+              />
+            </button>
+          </div>
+          <img
+            alt="profile"
+            class="makeStyles-img-10"
+            src="emptyImage.png"
+          />
+          <div
+            class="MuiPaper-root MuiMobileStepper-root MuiMobileStepper-positionStatic MuiPaper-elevation0"
+          >
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSizeSmall MuiButton-sizeSmall Mui-disabled Mui-disabled"
+              disabled=""
+              tabindex="-1"
+              type="button"
+            >
+              <span
+                class="MuiButton-label"
+              >
+                <span
+                  aria-hidden="true"
+                  class="material-icons MuiIcon-root"
+                >
+                  keyboard_arrow_left
+                </span>
+                Back
+              </span>
+            </button>
+            <div
+              class="MuiMobileStepper-dots"
+            />
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSizeSmall MuiButton-sizeSmall Mui-disabled Mui-disabled"
+              disabled=""
+              tabindex="-1"
+              type="button"
+            >
+              <span
+                class="MuiButton-label"
+              >
+                Next
+                <span
+                  aria-hidden="true"
+                  class="material-icons MuiIcon-root"
+                >
+                  keyboard_arrow_right
+                </span>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        class="MuiGrid-root makeStyles-mw30-6 MuiGrid-item MuiGrid-grid-xs-12"
+      >
+        <div
+          class="MuiPaper-root makeStyles-p3-1 MuiPaper-elevation1 MuiPaper-rounded"
+        >
+          <form>
+            <div
+              class="MuiFormControl-root MuiTextField-root MuiFormControl-marginDense MuiFormControl-fullWidth"
+            >
+              <label
+                class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-marginDense MuiInputLabel-outlined"
+                data-shrink="true"
+              >
+                New password
+              </label>
+              <div
+                class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedStart MuiOutlinedInput-adornedStart MuiInputBase-adornedEnd MuiOutlinedInput-adornedEnd MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+              >
+                <span
+                  aria-hidden="true"
+                  class="material-icons MuiIcon-root makeStyles-icon-214"
+                >
+                  vpn_key
+                </span>
+                <input
+                  aria-invalid="false"
+                  autocomplete="password"
+                  class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedStart MuiOutlinedInput-inputAdornedStart MuiInputBase-inputAdornedEnd MuiOutlinedInput-inputAdornedEnd MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+                  name="newPassword"
+                  type="password"
+                  value=""
+                />
+                <button
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit"
+                  tabindex="0"
+                  type="button"
+                >
+                  <span
+                    class="MuiIconButton-label"
+                  >
+                    <span
+                      aria-hidden="true"
+                      class="material-icons MuiIcon-root"
+                    >
+                      visibility_off
+                    </span>
+                  </span>
+                  <span
+                    class="MuiTouchRipple-root"
+                  />
+                </button>
+                <fieldset
+                  aria-hidden="true"
+                  class="PrivateNotchedOutline-root-284 MuiOutlinedInput-notchedOutline"
+                  style="padding-left: 8px;"
+                >
+                  <legend
+                    class="PrivateNotchedOutline-legend-285"
+                    style="width: 0px;"
+                  >
+                    <span>
+                      ​
+                    </span>
+                  </legend>
+                </fieldset>
+              </div>
+            </div>
+            <div
+              class="MuiFormControl-root MuiFormControl-marginDense MuiFormControl-fullWidth"
+            >
+              <label
+                class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense MuiInputLabel-outlined"
+                data-shrink="false"
+              >
+                Interests
+              </label>
+              <div
+                class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+              >
+                <div
+                  aria-haspopup="listbox"
+                  aria-labelledby=" mui-component-select-interests"
+                  class="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+                  id="mui-component-select-interests"
+                  role="button"
+                  tabindex="0"
+                >
+                  <span>
+                    ​
+                  </span>
+                </div>
+                <input
+                  name="interests"
+                  type="hidden"
+                  value=""
+                />
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root MuiSelect-icon MuiSelect-iconOutlined"
+                  focusable="false"
+                  role="presentation"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M7 10l5 5 5-5z"
+                  />
+                </svg>
+                <fieldset
+                  aria-hidden="true"
+                  class="PrivateNotchedOutline-root-284 MuiOutlinedInput-notchedOutline"
+                  style="padding-left: 36.375px;"
+                >
+                  <legend
+                    class="PrivateNotchedOutline-legend-285"
+                    style="width: 0.01px;"
+                  >
+                    <span>
+                      ​
+                    </span>
+                  </legend>
+                </fieldset>
+              </div>
+            </div>
+            <div
+              class="MuiFormControl-root MuiTextField-root MuiFormControl-marginDense MuiFormControl-fullWidth"
+            >
+              <label
+                class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense MuiInputLabel-outlined"
+                data-shrink="false"
+              >
+                Biography
+              </label>
+              <div
+                class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-multiline MuiOutlinedInput-multiline MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+              >
+                <textarea
+                  aria-invalid="false"
+                  class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline MuiOutlinedInput-inputMultiline MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+                  name="biography"
+                  rows="3"
+                />
+                <fieldset
+                  aria-hidden="true"
+                  class="PrivateNotchedOutline-root-284 MuiOutlinedInput-notchedOutline"
+                  style="padding-left: 8px;"
+                >
+                  <legend
+                    class="PrivateNotchedOutline-legend-285"
+                    style="width: 0.01px;"
+                  >
+                    <span>
+                      ​
+                    </span>
+                  </legend>
+                </fieldset>
+              </div>
+            </div>
+            <div
+              class="MuiGrid-root MuiGrid-container MuiGrid-justify-xs-center"
+            >
+              <button
+                class="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-mt1-208 MuiButton-containedPrimary MuiButton-containedSizeLarge MuiButton-sizeLarge Mui-disabled MuiButton-fullWidth Mui-disabled"
+                disabled=""
+                tabindex="-1"
+                type="submit"
+              >
+                <span
+                  class="MuiButton-label"
+                >
+                  Submit
+                </span>
+              </button>
+              <button
+                class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-outlinedSizeLarge MuiButton-sizeLarge Mui-disabled MuiButton-fullWidth Mui-disabled"
+                disabled=""
+                tabindex="-1"
+                type="button"
+              >
+                <span
+                  class="MuiButton-label"
+                >
+                  Cancel
+                </span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div
+        class="MuiGrid-root makeStyles-mw30-6 MuiGrid-item MuiGrid-grid-xs-12"
+      />
+    </div>
+  </div>
+</div>
+`;

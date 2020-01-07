@@ -1,0 +1,105 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Reset should match snapshot 1`] = `
+<div>
+  <div
+    class="MuiGrid-root makeStyles-p3-1 MuiGrid-container MuiGrid-justify-xs-center"
+  >
+    <div
+      class="MuiPaper-root makeStyles-paper-2 MuiPaper-elevation1 MuiPaper-rounded"
+    >
+      <form>
+        <div
+          class="MuiFormControl-root MuiTextField-root MuiFormControl-marginDense MuiFormControl-fullWidth"
+        >
+          <label
+            class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-marginDense MuiInputLabel-outlined"
+            data-shrink="true"
+          >
+            New password
+          </label>
+          <div
+            class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedStart MuiOutlinedInput-adornedStart MuiInputBase-adornedEnd MuiOutlinedInput-adornedEnd MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+          >
+            <span
+              aria-hidden="true"
+              class="material-icons MuiIcon-root makeStyles-icon-140"
+            >
+              vpn_key
+            </span>
+            <input
+              aria-invalid="false"
+              autocomplete="password"
+              class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedStart MuiOutlinedInput-inputAdornedStart MuiInputBase-inputAdornedEnd MuiOutlinedInput-inputAdornedEnd MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+              name="newPassword"
+              type="password"
+              value=""
+            />
+            <button
+              class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="MuiIconButton-label"
+              >
+                <span
+                  aria-hidden="true"
+                  class="material-icons MuiIcon-root"
+                >
+                  visibility_off
+                </span>
+              </span>
+              <span
+                class="MuiTouchRipple-root"
+              />
+            </button>
+            <fieldset
+              aria-hidden="true"
+              class="PrivateNotchedOutline-root-222 MuiOutlinedInput-notchedOutline"
+              style="padding-left: 8px;"
+            >
+              <legend
+                class="PrivateNotchedOutline-legend-223"
+                style="width: 0px;"
+              >
+                <span>
+                  ​
+                </span>
+              </legend>
+            </fieldset>
+          </div>
+        </div>
+        <div
+          class="MuiGrid-root MuiGrid-container MuiGrid-justify-xs-center"
+        >
+          <button
+            class="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-mt1-134 MuiButton-containedPrimary MuiButton-containedSizeLarge MuiButton-sizeLarge Mui-disabled MuiButton-fullWidth Mui-disabled"
+            disabled=""
+            tabindex="-1"
+            type="submit"
+          >
+            <span
+              class="MuiButton-label"
+            >
+              Submit
+            </span>
+          </button>
+          <button
+            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-outlinedSizeLarge MuiButton-sizeLarge Mui-disabled MuiButton-fullWidth Mui-disabled"
+            disabled=""
+            tabindex="-1"
+            type="button"
+          >
+            <span
+              class="MuiButton-label"
+            >
+              Cancel
+            </span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+`;
