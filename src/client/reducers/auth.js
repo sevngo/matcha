@@ -13,14 +13,12 @@ import {
 } from '../actions';
 import { reject } from 'ramda';
 
-const initialState = { notifications: [] };
-
-export default (state = initialState, action) => {
+export default (state = {}, action) => {
   switch (action.type) {
     case LOGGED:
       return { ...state, ...action.data };
     case LOGOUT:
-      return initialState;
+      return {};
     case UPDATED_USER:
       return { ...state, ...action.data };
     case UPLOADED_IMAGE:
