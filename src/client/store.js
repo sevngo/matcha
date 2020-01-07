@@ -6,11 +6,7 @@ import { loadState, saveState } from './utils';
 import { getAuth } from './selectors';
 
 const initialState = {
-  auth: {},
-  app: {},
   users: {
-    data: [],
-    total: 0,
     filter: {
       gender: 'male',
       interests: [],
@@ -21,8 +17,6 @@ const initialState = {
       skip: 0,
     },
   },
-  user: {},
-  snackbar: {},
 };
 
 const persistedState = loadState();
