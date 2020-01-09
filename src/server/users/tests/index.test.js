@@ -14,6 +14,11 @@ const {
   userOneToken,
 } = require('./fixtures/db');
 
+jest.mock('@sendgrid/mail', () => ({
+  setApiKey: () => {},
+  send: () => {},
+}));
+
 beforeAll(connectDb);
 
 beforeEach(async () => {
