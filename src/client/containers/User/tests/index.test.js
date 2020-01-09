@@ -3,12 +3,6 @@ import { render } from '@testing-library/react';
 import TestProvider from '../../../components/TestProvider';
 import Component from '../index';
 
-jest.mock('../../../selectors/auth', () => ({
-  getAuth: () => ({
-    usersBlocked: [],
-  }),
-}));
-
 describe('User', () => {
   it('should match snapshot', () => {
     const props = { match: { params: {} } };

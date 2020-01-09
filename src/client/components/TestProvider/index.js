@@ -4,9 +4,15 @@ import { BrowserRouter } from 'react-router-dom';
 import { MuiThemeProvider } from '@material-ui/core';
 import { IntlProvider } from 'react-intl';
 import { theme } from '../../utils/theme';
-import store from '../../store';
+import reducer from '../../reducers';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import initialState from './initialState';
 
-const TestProvider = ({ children = <div /> }) => {
+jest.mock('../../store');
+
+const TestProvider = ({ children }) => {
+  const store = createStore(reducer, initialState, applyMiddleware(thunk));
   return (
     <Provider store={store}>
       <IntlProvider locale="en" messages={{}}>

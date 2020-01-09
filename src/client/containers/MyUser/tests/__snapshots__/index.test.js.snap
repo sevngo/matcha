@@ -302,7 +302,41 @@ exports[`MyUser should match snapshot 1`] = `
       </div>
       <div
         class="MuiGrid-root makeStyles-mw30-6 MuiGrid-item MuiGrid-grid-xs-12"
-      />
+      >
+        <div
+          class="MuiPaper-root makeStyles-p3-1 MuiPaper-elevation1 MuiPaper-rounded"
+        >
+          <h5
+            class="MuiTypography-root MuiTypography-h5"
+          >
+            Users blocked :
+          </h5>
+          <hr
+            class="MuiDivider-root makeStyles-mt1-4"
+          />
+          <div
+            class="MuiGrid-root makeStyles-mt1-4 MuiGrid-container MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
+          >
+            <p
+              class="MuiTypography-root MuiTypography-body1"
+            />
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined makeStyles-like-8"
+              tabindex="0"
+              type="button"
+            >
+              <span
+                class="MuiButton-label"
+              >
+                Like
+              </span>
+              <span
+                class="MuiTouchRipple-root"
+              />
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
