@@ -10,7 +10,6 @@ cache:
 env:
   - REQ_FILE = "./.env.test"
     MONGODB_VERSION=mongodb-linux-x86_64-4.0.14
-    COVERALLS_REPO_TOKEN=Hi7OMUZ3M60a5Z99LzDlbhp4mk5soKHcP
 
 install:
   - wget https://fastdl.mongodb.org/linux/${MONGODB_VERSION}.tgz
