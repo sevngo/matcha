@@ -3,7 +3,6 @@ const PORT = process.env.PORT || 3000;
 const http = require('http').createServer();
 const serverIo = require('socket.io')(http);
 const socketEvents = require('..');
-const { connectDb, disconnectDb } = require('../../database');
 
 const ioOptions = {
   transports: ['websocket'],
@@ -13,29 +12,27 @@ const ioOptions = {
 
 let sender;
 
-beforeAll(connectDb);
+jest.mock('../../database', () => ({
+  getUsers: () => ({ findOneAndUpdate: () => ({}) }),
+}));
 
-afterAll(disconnectDb);
-
-beforeEach(done => {
+beforeAll(() => {
   http.listen(PORT);
-  const { address, port } = http.address();
-  serverIo.on('connect', socketEvents);
-
-  sender = clientIo(`http://[${address}]:${port}`, ioOptions);
-  sender.on('connect', () => {
-    done();
-  });
 });
 
-afterEach(() => {
+afterAll(() => {
   sender.disconnect();
   http.close();
 });
 
 describe('Websocket', () => {
-  it('example', done => {
-    // sender.emit('userLiked', {});
-    done();
+  it('should connect client to server socket io', done => {
+    const { address, port } = http.address();
+    serverIo.on('connect', socketEvents);
+
+    sender = clientIo(`http://[${address}]:${port}`, ioOptions);
+    sender.on('connect', () => {
+      done();
+    });
   });
 });

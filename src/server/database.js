@@ -1,7 +1,6 @@
 const { MongoClient } = require('mongodb');
 const { usersModel } = require('./users/model');
-const { MONGODB_URI, DATABASE_NAME } = require('./utils/constants');
-const { USERS } = require('./utils/constants');
+const { MONGODB_URI, DATABASE_NAME, NODE_ENV, USERS, TEST } = require('./utils/constants');
 
 let db;
 let client;
@@ -12,7 +11,7 @@ exports.connectDb = async () => {
     useUnifiedTopology: true,
   });
   db = client.db(DATABASE_NAME);
-  console.log('Database connected'); // eslint-disable-line no-console
+  if (NODE_ENV !== TEST) console.log('Database connected'); // eslint-disable-line no-console
   return usersModel(db);
 };
 
