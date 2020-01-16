@@ -27,10 +27,10 @@ afterAll(() => {
 
 describe('Websocket', () => {
   it('should connect client to server socket io', done => {
-    const { address, port } = http.address();
+    const { port } = http.address();
     serverIo.on('connect', socketEvents);
 
-    sender = clientIo(`http://[${address}]:${port}`, ioOptions);
+    sender = clientIo(`http://localhost:${port}`, ioOptions);
     sender.on('connect', () => {
       done();
     });
