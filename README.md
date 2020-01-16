@@ -1,4 +1,4 @@
-# Matcha &middot; [![Build Status](https://travis-ci.com/sevngo/matcha.svg?branch=master)](https://travis-ci.com/sevngo/matcha) [![Coverage Status](https://coveralls.io/repos/github/sevngo/matcha/badge.svg?branch=Add_coveralls)](https://coveralls.io/github/sevngo/matcha?branch=Add_coveralls)
+# Matcha &middot; [![Build Status](https://travis-ci.com/sevngo/matcha.svg?branch=master)](https://travis-ci.com/sevngo/matcha) [![Coverage Status](https://coveralls.io/repos/github/sevngo/matcha/badge.svg?branch=master)](https://coveralls.io/github/sevngo/matcha?branch=master)
 
 [Subject](https://github.com/sevngo/Matcha/blob/master/subject.pdf)
 
