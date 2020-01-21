@@ -7,4 +7,4 @@ export const getFilter = createSelector(root, propOr({}, 'filter'));
 
 export const getUsers = createSelector(root, propOr([], 'data'));
 
-export const getUsersTotal = createSelector(root, prop('total'));
+export const getUsersTotal = createSelector(root, propOr(0, 'total'));
