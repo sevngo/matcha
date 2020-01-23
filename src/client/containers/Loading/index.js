@@ -11,7 +11,7 @@ const Loading = () => {
     <Fragment>
       <div className={classes.root} />
       <div className={classes.loader}>
-        <Loader size={100} />
+        <Loader data-testid="loader" size={100} />
       </div>
     </Fragment>
   );
