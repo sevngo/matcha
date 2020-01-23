@@ -1,5 +1,4 @@
 const clientIo = require('socket.io-client');
-const PORT = process.env.PORT || 3000;
 const http = require('http').createServer();
 const serverIo = require('socket.io')(http);
 const socketEvents = require('..');
@@ -17,7 +16,7 @@ jest.mock('../../database', () => ({
 }));
 
 beforeAll(() => {
-  http.listen(PORT);
+  http.listen(0);
 });
 
 afterAll(() => {

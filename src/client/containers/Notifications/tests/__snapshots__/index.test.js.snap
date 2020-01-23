@@ -20,9 +20,9 @@ exports[`Notifications should match snapshot 1`] = `
           notifications_icon
         </span>
         <span
-          class="MuiBadge-badge MuiBadge-anchorOriginTopRightRectangle MuiBadge-colorError MuiBadge-invisible"
+          class="MuiBadge-badge MuiBadge-anchorOriginTopRightRectangle MuiBadge-colorError"
         >
-          0
+          2
         </span>
       </span>
     </span>

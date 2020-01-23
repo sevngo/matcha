@@ -8,12 +8,10 @@ exports[`Header should match snapshot 1`] = `
     <div
       class="MuiToolbar-root MuiToolbar-regular MuiToolbar-gutters"
     >
-      <a
-        aria-disabled="false"
+      <button
         class="MuiButtonBase-root MuiIconButton-root makeStyles-icon-3 MuiIconButton-colorInherit"
-        href="/"
-        role="button"
         tabindex="0"
+        type="button"
       >
         <span
           class="MuiIconButton-label"
@@ -22,18 +20,84 @@ exports[`Header should match snapshot 1`] = `
             aria-hidden="true"
             class="material-icons MuiIcon-root"
           >
-            home
+            menu
           </span>
         </span>
         <span
           class="MuiTouchRipple-root"
         />
-      </a>
+      </button>
       <h6
         class="MuiTypography-root makeStyles-title-2 MuiTypography-h6 MuiTypography-colorInherit"
       >
         Matcha
       </h6>
+      <button
+        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiIconButton-label"
+        >
+          <span
+            aria-hidden="true"
+            class="material-icons MuiIcon-root"
+          >
+            email_icon
+          </span>
+        </span>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+      <button
+        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiIconButton-label"
+        >
+          <span
+            class="MuiBadge-root"
+          >
+            <span
+              aria-hidden="true"
+              class="material-icons MuiIcon-root"
+            >
+              notifications_icon
+            </span>
+            <span
+              class="MuiBadge-badge MuiBadge-anchorOriginTopRightRectangle MuiBadge-colorError MuiBadge-invisible"
+            >
+              0
+            </span>
+          </span>
+        </span>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+      <button
+        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiIconButton-label"
+        >
+          <span
+            aria-hidden="true"
+            class="material-icons MuiIcon-root"
+          >
+            account_circle
+          </span>
+        </span>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
     </div>
   </header>
 </div>

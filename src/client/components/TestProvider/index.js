@@ -7,11 +7,11 @@ import { theme } from '../../utils/theme';
 import reducer from '../../reducers';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import initialState from './initialState';
+import defaultInitialState from './initialState';
 
 jest.mock('../../store');
 
-const TestProvider = ({ children }) => {
+const TestProvider = ({ children, initialState = defaultInitialState }) => {
   const store = createStore(reducer, initialState, applyMiddleware(thunk));
   return (
     <Provider store={store}>

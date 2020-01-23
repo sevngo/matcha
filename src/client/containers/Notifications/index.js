@@ -9,7 +9,7 @@ import messages from './messages';
 
 const Notifications = () => {
   const classes = useStyles();
-  const { removeNotification, notifications = [] } = useNotifications();
+  const { removeNotification, notifications } = useNotifications();
   const [isModalOpen, handleModal] = useState(false);
   const notificationsLength = length(notifications);
   return (
