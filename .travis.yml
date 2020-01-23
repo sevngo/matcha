@@ -8,7 +8,8 @@ cache:
     - node_modules
 
 env:
-  - REQ_FILE = "./.env.test"
+  - MONGODB_URI=mongodb://127.0.0.1:27017
+    DATABASE_NAME=matcha-test
     MONGODB_VERSION=mongodb-linux-x86_64-4.0.14
 
 install:
@@ -18,8 +19,8 @@ install:
   - npm install
 
 script:
-  - npm test
-  - npm test -- --coverage --coverageReporters=text-lcov | coveralls
+  - npm test -- --coverage
+  - cat coverage/lcov.info | coveralls
 
 before_script:
   - mkdir ${MONGODB_VERSION}/data
