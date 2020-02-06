@@ -1,4 +1,3 @@
-import { reduce } from 'ramda';
 import { openSnackbar } from '.';
 import { getUsers } from '../api';
 import { ERROR } from '../containers/Snackbar/constants';
@@ -11,11 +10,9 @@ export const handleFilter = filter => ({ type: HANDLE_FILTER, filter });
 
 export const loadUsers = (token, filter) => async dispatch => {
   try {
-    const { gender, interests, ageRange, sortBy, maxDistance, limit, skip } = filter;
+    const { gender, ageRange, sortBy, maxDistance, limit, skip } = filter;
 
     const genderQuery = `gender=${gender}`;
-
-    const interestsQuery = reduce((acc, interest) => `${acc}&interests=${interest}`, '')(interests);
 
     const sortQuery = `&sortBy=${sortBy}`;
 
@@ -31,7 +28,7 @@ export const loadUsers = (token, filter) => async dispatch => {
     const limitQuery = `&limit=${limit}`;
     const skipQuery = `&skip=${skip}`;
 
-    const query = `?${genderQuery}${birthQuery}${sortQuery}${interestsQuery}${maxDistanceQuery}${limitQuery}${skipQuery}`;
+    const query = `?${genderQuery}${birthQuery}${sortQuery}${maxDistanceQuery}${limitQuery}${skipQuery}`;
     dispatch({ type: LOAD_USERS });
     const { data } = await getUsers(token, query);
     dispatch({ type: LOADED_USERS, data });

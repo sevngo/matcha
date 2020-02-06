@@ -9,7 +9,6 @@ const initialState = {
   users: {
     filter: {
       gender: 'male',
-      interests: [],
       maxDistance: 20000,
       ageRange: [18, 50],
       sortBy: 'distance:asc',

@@ -36,7 +36,7 @@ exports.postUser = asyncHandler(async (req, res) => {
 
 exports.getUsers = asyncHandler(async (req, res) => {
   const {
-    query: { gender, interests, birthRange, limit, skip, sortBy, maxDistance },
+    query: { gender, birthRange, limit, skip, sortBy, maxDistance },
     auth: {
       _id,
       usersBlocked,
@@ -48,7 +48,6 @@ exports.getUsers = asyncHandler(async (req, res) => {
     compact([
       geoNear(coordinates, maxDistance),
       match('gender', gender),
-      match('interests', interests),
       matchRange('birthDate', ...birthRange),
       mismatch('_id', usersBlocked),
       mismatch('_id', _id),

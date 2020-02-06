@@ -7,7 +7,6 @@ exports.userProjection = project({
   birthDate: 1,
   'address.name': 1,
   'images._id': 1,
-  interests: 1,
   distance: 1,
 });
 
@@ -19,7 +18,6 @@ exports.authProjection = project({
   email: 1,
   birthDate: 1,
   'images._id': 1,
-  interests: 1,
   'usersBlocked._id': 1,
   'usersBlocked.username': 1,
   'usersLiked._id': 1,
