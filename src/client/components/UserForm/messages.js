@@ -41,10 +41,6 @@ export default defineMessages({
     id: 'components.userForm.gender',
     defaultMessage: 'Gender',
   },
-  interests: {
-    id: 'components.userForm.interests',
-    defaultMessage: 'Interests',
-  },
   male: {
     id: 'components.userForm.male',
     defaultMessage: 'Male',

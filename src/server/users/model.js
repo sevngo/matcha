@@ -20,7 +20,7 @@ exports.usersModel = async db => {
           'usersLiked',
           'usersBlocked',
         ],
-        additionalProperties: false,
+        // additionalProperties: false,
         properties: {
           _id: { bsonType: 'objectId' },
           username: { bsonType: 'string', minLength: 3, maxLength: 30 },
@@ -31,14 +31,6 @@ exports.usersModel = async db => {
           gender: {
             bsonType: 'string',
             enum: ['male', 'female'],
-          },
-          interests: {
-            bsonType: 'array',
-            items: {
-              bsonType: 'string',
-              uniqueItems: true,
-              maxItems: 3,
-            },
           },
           images: {
             bsonType: 'array',

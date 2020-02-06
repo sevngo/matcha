@@ -7,7 +7,6 @@ import useStyles from './styles';
 import Input from '../Input';
 import Radio from '../Radio';
 import Select from '../Select';
-import Interests from '../Interests';
 import Slider from '../Slider';
 import { useGeolocation, useAutocomplete } from '../../hooks';
 import {
@@ -20,7 +19,7 @@ import {
   isOld,
   isTrimmed,
 } from '../../utils';
-import { GENDER_OPTIONS, SORT_BY_OPTIONS, INTERESTS_OPTIONS } from './constants';
+import { GENDER_OPTIONS, SORT_BY_OPTIONS } from './constants';
 import messages from './messages';
 
 const Component = ({
@@ -160,23 +159,6 @@ const Component = ({
             setFieldValue={setFieldValue}
           />
         </Box>
-      )}
-      {hasInitialValue('interests') && (
-        <Field
-          name="interests"
-          label={<FormattedMessage {...messages.interests} />}
-          component={Select}
-          multiple
-          validate={maxLength(3)}
-          disabled={disabled}
-          renderValue={selected => <Interests interests={selected} />}
-        >
-          {map(option => (
-            <MenuItem key={option} value={option}>
-              {option}
-            </MenuItem>
-          ))(INTERESTS_OPTIONS)}
-        </Field>
       )}
       {hasInitialValue('sortBy') && (
         <Field name="sortBy" label={<FormattedMessage {...messages.sortBy} />} component={Select}>

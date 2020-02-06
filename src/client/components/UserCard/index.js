@@ -11,7 +11,6 @@ import {
 } from '@material-ui/core';
 import { path } from 'ramda';
 import emptyImage from '../../images/emptyImage.png';
-import Interests from '../Interests';
 import { getUserImage } from '../../api';
 import { getAge, userPath } from '../../utils';
 import useStyles from './styles';
@@ -38,7 +37,6 @@ const UserCard = ({ user }) => {
               />
             </Typography>
           </Grid>
-          <Interests interests={user.interests} />
         </CardContent>
       </CardActionArea>
     </MCard>
