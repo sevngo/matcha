@@ -2,7 +2,8 @@ import React, { useState, useCallback } from 'react';
 import { withFormik, Field } from 'formik';
 import { FormattedMessage } from 'react-intl';
 import { has, compose, map, isNil, __, path } from 'ramda';
-import { Grid, Button, MenuItem } from '@material-ui/core';
+import { Button, MenuItem, Box } from '@material-ui/core';
+import useStyles from './styles';
 import Input from '../Input';
 import Radio from '../Radio';
 import Select from '../Select';
@@ -20,7 +21,6 @@ import {
   isTrimmed,
 } from '../../utils';
 import { GENDER_OPTIONS, SORT_BY_OPTIONS, INTERESTS_OPTIONS } from './constants';
-import useStyles from './styles';
 import messages from './messages';
 
 const Component = ({
@@ -125,7 +125,7 @@ const Component = ({
         />
       )}
       {hasInitialValue('gender') && (
-        <div className={classes.gender}>
+        <Box mt={1} mb={1}>
           <Field
             name="gender"
             label={<FormattedMessage {...messages.gender} />}
@@ -134,7 +134,7 @@ const Component = ({
             options={GENDER_OPTIONS}
             messages={messages}
           />
-        </div>
+        </Box>
       )}
       {hasInitialValue('address') && (
         <Field
@@ -154,7 +154,7 @@ const Component = ({
         />
       )}
       {hasInitialValue('ageRange') && (
-        <div className={classes.p1}>
+        <Box p={1}>
           <Field
             name="ageRange"
             label={<FormattedMessage {...messages.ageRange} />}
@@ -163,10 +163,10 @@ const Component = ({
             max={50}
             setFieldValue={setFieldValue}
           />
-        </div>
+        </Box>
       )}
       {hasInitialValue('maxDistance') && (
-        <div className={classes.p1}>
+        <Box p={1}>
           <Field
             name="maxDistance"
             label={<FormattedMessage {...messages.maxDistance} />}
@@ -177,7 +177,7 @@ const Component = ({
             step={50}
             setFieldValue={setFieldValue}
           />
-        </div>
+        </Box>
       )}
       {hasInitialValue('interests') && (
         <Field
@@ -216,33 +216,31 @@ const Component = ({
           ))(SORT_BY_OPTIONS)}
         </Field>
       )}
-      <Grid container justify="center">
-        {!disabled && (
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            size="large"
-            disabled={!isValid}
-            className={classes.mt1}
-            fullWidth
-          >
-            <FormattedMessage {...messages.submit} />
-          </Button>
-        )}
-        {!disabled && (
-          <Button
-            variant="outlined"
-            color="primary"
-            size="large"
-            disabled={!dirty}
-            onClick={() => resetForm({ values: initialValues })}
-            fullWidth
-          >
-            <FormattedMessage {...messages.cancel} />
-          </Button>
-        )}
-      </Grid>
+      {!disabled && (
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          size="large"
+          disabled={!isValid}
+          fullWidth
+          className={classes.mt1}
+        >
+          <FormattedMessage {...messages.submit} />
+        </Button>
+      )}
+      {!disabled && (
+        <Button
+          variant="outlined"
+          color="primary"
+          size="large"
+          disabled={!dirty}
+          onClick={() => resetForm({ values: initialValues })}
+          fullWidth
+        >
+          <FormattedMessage {...messages.cancel} />
+        </Button>
+      )}
     </form>
   );
 };

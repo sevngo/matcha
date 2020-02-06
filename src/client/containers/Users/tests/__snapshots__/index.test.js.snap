@@ -3,14 +3,13 @@
 exports[`Users should match snapshot 1`] = `
 <div>
   <div
-    class="MuiBox-root MuiBox-root-3"
-  >
-    <div
-      class="MuiPaper-root makeStyles-mb2-1 MuiPaper-elevation1 MuiPaper-rounded"
-    />
-    <div
-      class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2"
-    />
-  </div>
+    class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+  />
+  <div
+    class="MuiBox-root MuiBox-root-30"
+  />
+  <div
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2"
+  />
 </div>
 `;

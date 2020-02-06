@@ -7,9 +7,6 @@ export default makeStyles(theme => ({
   media: {
     height: '15em',
   },
-  root: {
-    padding: theme.spacing(3),
-  },
   mt1: {
     marginTop: theme.spacing(1),
   },

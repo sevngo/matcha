@@ -2,7 +2,7 @@ const { ObjectID } = require('mongodb');
 const faker = require('faker');
 const { times } = require('ramda');
 const bcrypt = require('bcryptjs');
-const { connectDb, getUsers } = require('../src/server/database');
+const { connectDb, getUsers, disconnectDb } = require('../src/server/database');
 
 const insertData = async () => {
   const genders = ['female', 'male'];
@@ -37,7 +37,7 @@ const insertData = async () => {
   try {
     await connectDb();
     await insertData();
-
+    await disconnectDb();
     process.exit();
   } catch (err) {
     console.log(err); // eslint-disable-line no-console

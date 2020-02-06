@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Fragment } from 'react';
 import { Hidden, Box, TablePagination } from '@material-ui/core';
 import Paper from '../../components/Paper';
 import UserCards from '../../components/UserCards';
 import { useUsers, useAuth, useFilter } from '../../hooks';
-import useStyles from './styles';
 
 const Users = () => {
   const { auth } = useAuth();
   const { users, loadUsers, total } = useUsers();
   const { filter, handleFilter } = useFilter();
-  const classes = useStyles();
   const { token } = auth;
   useEffect(() => {
     loadUsers(token, filter);
@@ -25,8 +23,8 @@ const Users = () => {
     setPage(0);
   };
   return (
-    <Box p={3}>
-      <Paper className={classes.mb2}>
+    <Fragment>
+      <Paper>
         <Hidden xsDown>
           <TablePagination
             component="div"
@@ -39,8 +37,9 @@ const Users = () => {
           />
         </Hidden>
       </Paper>
+      <Box mb={2} />
       <UserCards users={users} />
-    </Box>
+    </Fragment>
   );
 };
 

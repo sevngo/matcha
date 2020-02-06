@@ -33,7 +33,7 @@ const User = ({ id }) => {
         <Grid item className={classes.mw30}>
           <Paper>
             <Carousel activeStep={activeStep} handleStep={handleStep} maxSteps={maxSteps}>
-              <div className={classes.header}>
+              <Box p={1} bgcolor="background.default">
                 <IconButton
                   className={isLiked ? classes.red : ''}
                   onClick={() => likeUser(auth, user._id)}
@@ -53,7 +53,7 @@ const User = ({ id }) => {
                     done_all
                   </IconButton>
                 )}
-              </div>
+              </Box>
               <img className={classes.img} src={image} alt="profile" />
             </Carousel>
           </Paper>

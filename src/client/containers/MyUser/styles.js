@@ -27,10 +27,6 @@ export default makeStyles(theme => ({
     color: blue[700],
     marginLeft: theme.spacing(1),
   },
-  header: {
-    padding: theme.spacing(1),
-    backgroundColor: theme.palette.background.default,
-  },
   img: {
     width: '100%',
   },
