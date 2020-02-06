@@ -11,7 +11,7 @@ const Drawer = ({ isDrawerOpen, toggleDrawer }) => {
       onClose={() => toggleDrawer(false)}
       onKeyDown={() => toggleDrawer(false)}
     >
-      <Box p={3} width={400}>
+      <Box p={3} width={300}>
         <UserForm initialValues={filter} submit={handleFilter} />
       </Box>
     </MDrawer>
