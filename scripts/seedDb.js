@@ -13,8 +13,6 @@ const insertData = async () => {
   const makeRandomUser = () => ({
     username: faker.internet.userName(),
     birthDate: faker.date.between(birthDateMin, birthDateMax),
-    firstName: faker.name.firstName(),
-    lastName: faker.name.lastName(),
     email: faker.internet.email(),
     gender: faker.random.arrayElement(genders),
     address: {

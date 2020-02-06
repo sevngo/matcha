@@ -27,17 +27,7 @@ const MyUser = () => {
     ? getUserImage(_id, path([activeStep, '_id'])(images))
     : emptyImage;
   const maxSteps = length(images);
-  const userForm = pick([
-    'username',
-    'birthDate',
-    'firstName',
-    'lastName',
-    'email',
-    'gender',
-    'address',
-    'interests',
-    'biography',
-  ])(auth);
+  const userForm = pick(['username', 'birthDate', 'email', 'gender', 'address', 'interests'])(auth);
   return (
     <Box p={3}>
       <Grid container spacing={2}>
@@ -99,7 +89,6 @@ const MyUser = () => {
             <UserForm
               initialValues={{
                 interests: [],
-                biography: '',
                 ...userForm,
                 newPassword: '',
               }}

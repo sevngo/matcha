@@ -17,10 +17,6 @@ export default defineMessages({
     id: 'components.userForm.ageRange',
     defaultMessage: 'Age range :',
   },
-  biography: {
-    id: 'components.userForm.biography',
-    defaultMessage: 'Biography',
-  },
   birthDate: {
     id: 'components.userForm.birthDate',
     defaultMessage: 'Birth date',
@@ -41,10 +37,6 @@ export default defineMessages({
     id: 'components.userForm.female',
     defaultMessage: 'Female',
   },
-  firstName: {
-    id: 'components.userForm.firstName',
-    defaultMessage: 'First name',
-  },
   gender: {
     id: 'components.userForm.gender',
     defaultMessage: 'Gender',
@@ -52,10 +44,6 @@ export default defineMessages({
   interests: {
     id: 'components.userForm.interests',
     defaultMessage: 'Interests',
-  },
-  lastName: {
-    id: 'components.userForm.lastName',
-    defaultMessage: 'Last name',
   },
   male: {
     id: 'components.userForm.male',
@@ -68,14 +56,6 @@ export default defineMessages({
   newPassword: {
     id: 'components.userForm.newPassword',
     defaultMessage: 'New password',
-  },
-  popularityDescending: {
-    id: 'components.userForm.popularityDescending',
-    defaultMessage: 'Popularity (descending)',
-  },
-  popularityIncreasing: {
-    id: 'components.userForm.popularityIncreasing',
-    defaultMessage: 'Popularity (increasing)',
   },
   password: {
     id: 'components.userForm.password',

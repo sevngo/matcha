@@ -23,13 +23,13 @@ exports.postUser = asyncHandler(async (req, res) => {
   const {
     ops: [user],
   } = await Users.insertOne({ usersBlocked: [], usersLiked: [], ...req.body });
-  const { _id, email, firstName, lastName } = user;
+  const { _id, email, username } = user;
   const token = createToken({ _id });
   const url = `${req.headers.referer}verify/${token}`;
   await sendEmail(
     email,
     'Email confirmation',
-    `Welcome to Matcha, ${firstName} ${lastName}. Click on this link to confirm your email : ${url}`,
+    `Welcome to Matcha, ${username}. Click on this link to confirm your email : ${url}`,
   );
   res.status(201).send();
 });
@@ -122,13 +122,13 @@ exports.postUserForgot = asyncHandler(async (req, res, next) => {
   const Users = getUsers();
   const user = await Users.findOne({ email: req.body.email });
   if (!user) next(new ErrorResponse(400, 'Email not found'));
-  const { _id, email, firstName, lastName } = user;
+  const { _id, email, username } = user;
   const token = createToken({ _id });
   const url = `${req.headers.referer}reset/${token}`;
   await sendEmail(
     email,
     'Password reset',
-    `Hello ${firstName} ${lastName}. Click on this link to reset your password : ${url}`,
+    `Hello ${username}. Click on this link to reset your password : ${url}`,
   );
   res.status(200).send();
 });

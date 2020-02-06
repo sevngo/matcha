@@ -6,8 +6,6 @@ export const GENDER_OPTIONS = [
 export const SORT_BY_OPTIONS = [
   { id: 'ageIncreasing', value: 'birthDate:desc' },
   { id: 'ageDescending', value: 'birthDate:asc' },
-  { id: 'popularityDescending', value: 'popularity:desc' },
-  { id: 'popularityIncreasing', value: 'popularity:asc' },
   { id: 'distanceIncreasing', value: 'distance:asc' },
   { id: 'distanceDescending', value: 'distance:desc' },
 ];

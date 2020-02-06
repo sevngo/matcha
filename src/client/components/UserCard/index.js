@@ -39,9 +39,6 @@ const UserCard = ({ user }) => {
             </Typography>
           </Grid>
           <Interests interests={user.interests} />
-          <Typography noWrap className={classes.mt1}>
-            {user.biography}
-          </Typography>
         </CardContent>
       </CardActionArea>
     </MCard>
