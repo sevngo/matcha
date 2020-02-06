@@ -233,38 +233,6 @@ exports[`MyUser should match snapshot 1`] = `
                 </fieldset>
               </div>
             </div>
-            <div
-              class="MuiFormControl-root MuiTextField-root MuiFormControl-marginDense MuiFormControl-fullWidth"
-            >
-              <label
-                class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense MuiInputLabel-outlined"
-                data-shrink="false"
-              >
-                Biography
-              </label>
-              <div
-                class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-multiline MuiOutlinedInput-multiline MuiInputBase-marginDense MuiOutlinedInput-marginDense"
-              >
-                <textarea
-                  aria-invalid="false"
-                  class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline MuiOutlinedInput-inputMultiline MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
-                  name="biography"
-                  rows="3"
-                />
-                <fieldset
-                  aria-hidden="true"
-                  class="PrivateNotchedOutline-root-282 MuiOutlinedInput-notchedOutline"
-                >
-                  <legend
-                    class="PrivateNotchedOutline-legendLabelled-284"
-                  >
-                    <span>
-                      Biography
-                    </span>
-                  </legend>
-                </fieldset>
-              </div>
-            </div>
             <button
               class="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-mt1-208 MuiButton-containedPrimary MuiButton-containedSizeLarge MuiButton-sizeLarge Mui-disabled MuiButton-fullWidth Mui-disabled"
               disabled=""

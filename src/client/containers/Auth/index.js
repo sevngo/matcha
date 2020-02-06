@@ -48,8 +48,6 @@ const Auth = () => {
               initialValues={{
                 ...initialValues,
                 email: '',
-                firstName: '',
-                lastName: '',
                 gender: '',
                 birthDate: '',
                 address: { name: '' },

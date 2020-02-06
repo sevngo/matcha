@@ -10,7 +10,7 @@ export default {
       interests: [],
       maxDistance: 20000,
       ageRange: [18, 50],
-      sortBy: 'popularity:desc',
+      sortBy: 'distance:asc',
       limit: 10,
       skip: 0,
     },

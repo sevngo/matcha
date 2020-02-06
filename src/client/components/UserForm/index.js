@@ -95,24 +95,6 @@ const Component = ({
           disabled={disabled}
         />
       )}
-      {hasInitialValue('firstName') && (
-        <Field
-          name="firstName"
-          label={<FormattedMessage {...messages.firstName} />}
-          component={Input}
-          validate={composeValidators(isRequired, maxLength(30), isTrimmed)}
-          disabled={disabled}
-        />
-      )}
-      {hasInitialValue('lastName') && (
-        <Field
-          name="lastName"
-          label={<FormattedMessage {...messages.lastName} />}
-          component={Input}
-          validate={composeValidators(isRequired, maxLength(30), isTrimmed)}
-          disabled={disabled}
-        />
-      )}
       {hasInitialValue('birthDate') && (
         <Field
           name="birthDate"
@@ -195,17 +177,6 @@ const Component = ({
             </MenuItem>
           ))(INTERESTS_OPTIONS)}
         </Field>
-      )}
-      {hasInitialValue('biography') && (
-        <Field
-          name="biography"
-          label={<FormattedMessage {...messages.biography} />}
-          component={Input}
-          validate={composeValidators(maxLength(300), isTrimmed)}
-          multiline
-          rows="3"
-          disabled={disabled}
-        />
       )}
       {hasInitialValue('sortBy') && (
         <Field name="sortBy" label={<FormattedMessage {...messages.sortBy} />} component={Select}>

@@ -15,8 +15,6 @@ const userOneToken = createToken({ _id: initialId });
 const userOne = {
   username: faker.internet.userName(),
   birthDate: faker.date.between(birthDateMin, birthDateMax),
-  firstName: faker.name.firstName(),
-  lastName: faker.name.lastName(),
   email: faker.internet.email(),
   gender: faker.random.arrayElement(genders),
   address: {
@@ -34,8 +32,6 @@ const userOne = {
 const userTwo = {
   username: faker.internet.userName(),
   birthDate: faker.date.past(),
-  firstName: faker.name.firstName(),
-  lastName: faker.name.lastName(),
   email: faker.internet.email(),
   gender: faker.random.arrayElement(genders),
   address: {
@@ -53,8 +49,6 @@ const userTwo = {
 const newUser = {
   username: faker.internet.userName(),
   birthDate: faker.date.past(),
-  firstName: faker.name.firstName(),
-  lastName: faker.name.lastName(),
   email: faker.internet.email(),
   gender: faker.random.arrayElement(genders),
   address: {
