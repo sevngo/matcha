@@ -1,7 +1,7 @@
-import { Slider as MSlider, FormLabel } from '@material-ui/core';
+import { Slider as MSlider, FormLabel, Box } from '@material-ui/core';
 import { is } from 'ramda';
-import React, { Fragment } from 'react';
 import useStyles from './styles';
+import React, { Fragment } from 'react';
 
 const Slider = ({ field, label, unitLabel, setFieldValue, ...rest }) => {
   const classes = useStyles();
@@ -10,11 +10,12 @@ const Slider = ({ field, label, unitLabel, setFieldValue, ...rest }) => {
     <Fragment>
       <FormLabel>
         {label}{' '}
-        <span className={classes.values}>
+        <Box color="black" display="inline">
           {is(Array)(value) ? `${value[0]} - ${value[1]}` : value}
-        </span>{' '}
+        </Box>{' '}
         {unitLabel}
       </FormLabel>
+      <Box mt={1} />
       <MSlider
         className={classes.m1}
         defaultValue={value}

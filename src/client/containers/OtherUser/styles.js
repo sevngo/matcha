@@ -13,7 +13,4 @@ export default makeStyles(theme => ({
   mw30: {
     maxWidth: '30em',
   },
-  header: {
-    backgroundColor: theme.palette.background.default,
-  },
 }));

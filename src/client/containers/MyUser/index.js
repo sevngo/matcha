@@ -43,7 +43,7 @@ const MyUser = () => {
       <Grid container spacing={2}>
         <Grid item xs={12} className={classes.mw30}>
           <Carousel activeStep={activeStep} maxSteps={maxSteps} handleStep={handleStep}>
-            <div className={classes.header}>
+            <Box p={1} bgcolor="background.default">
               <input
                 ref={inputEl}
                 type="file"
@@ -90,7 +90,7 @@ const MyUser = () => {
                 <FormattedMessage {...messages.upload} />
                 <Icon className={classes.ml1}>cloud_upload</Icon>
               </Button>
-            </div>
+            </Box>
             <img className={classes.img} src={image} alt="profile" />
           </Carousel>
         </Grid>

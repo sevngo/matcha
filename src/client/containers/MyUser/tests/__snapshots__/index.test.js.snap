@@ -3,7 +3,7 @@
 exports[`MyUser should match snapshot 1`] = `
 <div>
   <div
-    class="MuiBox-root MuiBox-root-12"
+    class="MuiBox-root MuiBox-root-11"
   >
     <div
       class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2"
@@ -15,7 +15,7 @@ exports[`MyUser should match snapshot 1`] = `
           class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
         >
           <div
-            class="makeStyles-header-9"
+            class="MuiBox-root MuiBox-root-143"
           >
             <input
               accept="image/png, image/jpeg"
@@ -63,7 +63,7 @@ exports[`MyUser should match snapshot 1`] = `
           </div>
           <img
             alt="profile"
-            class="makeStyles-img-10"
+            class="makeStyles-img-9"
             src="emptyImage.png"
           />
           <div
@@ -165,15 +165,13 @@ exports[`MyUser should match snapshot 1`] = `
                 </button>
                 <fieldset
                   aria-hidden="true"
-                  class="PrivateNotchedOutline-root-284 MuiOutlinedInput-notchedOutline"
-                  style="padding-left: 8px;"
+                  class="PrivateNotchedOutline-root-282 MuiOutlinedInput-notchedOutline"
                 >
                   <legend
-                    class="PrivateNotchedOutline-legend-285"
-                    style="width: 0px;"
+                    class="PrivateNotchedOutline-legendLabelled-284 PrivateNotchedOutline-legendNotched-285"
                   >
                     <span>
-                      ​
+                      New password
                     </span>
                   </legend>
                 </fieldset>
@@ -221,11 +219,11 @@ exports[`MyUser should match snapshot 1`] = `
                 </svg>
                 <fieldset
                   aria-hidden="true"
-                  class="PrivateNotchedOutline-root-284 MuiOutlinedInput-notchedOutline"
-                  style="padding-left: 36.375px;"
+                  class="PrivateNotchedOutline-root-282 MuiOutlinedInput-notchedOutline"
+                  style="padding-left: 8px;"
                 >
                   <legend
-                    class="PrivateNotchedOutline-legend-285"
+                    class="PrivateNotchedOutline-legend-283"
                     style="width: 0.01px;"
                   >
                     <span>
@@ -255,48 +253,42 @@ exports[`MyUser should match snapshot 1`] = `
                 />
                 <fieldset
                   aria-hidden="true"
-                  class="PrivateNotchedOutline-root-284 MuiOutlinedInput-notchedOutline"
-                  style="padding-left: 8px;"
+                  class="PrivateNotchedOutline-root-282 MuiOutlinedInput-notchedOutline"
                 >
                   <legend
-                    class="PrivateNotchedOutline-legend-285"
-                    style="width: 0.01px;"
+                    class="PrivateNotchedOutline-legendLabelled-284"
                   >
                     <span>
-                      ​
+                      Biography
                     </span>
                   </legend>
                 </fieldset>
               </div>
             </div>
-            <div
-              class="MuiGrid-root MuiGrid-container MuiGrid-justify-xs-center"
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-mt1-208 MuiButton-containedPrimary MuiButton-containedSizeLarge MuiButton-sizeLarge Mui-disabled MuiButton-fullWidth Mui-disabled"
+              disabled=""
+              tabindex="-1"
+              type="submit"
             >
-              <button
-                class="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-mt1-208 MuiButton-containedPrimary MuiButton-containedSizeLarge MuiButton-sizeLarge Mui-disabled MuiButton-fullWidth Mui-disabled"
-                disabled=""
-                tabindex="-1"
-                type="submit"
+              <span
+                class="MuiButton-label"
               >
-                <span
-                  class="MuiButton-label"
-                >
-                  Submit
-                </span>
-              </button>
-              <button
-                class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-outlinedSizeLarge MuiButton-sizeLarge Mui-disabled MuiButton-fullWidth Mui-disabled"
-                disabled=""
-                tabindex="-1"
-                type="button"
+                Submit
+              </span>
+            </button>
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-outlinedSizeLarge MuiButton-sizeLarge Mui-disabled MuiButton-fullWidth Mui-disabled"
+              disabled=""
+              tabindex="-1"
+              type="button"
+            >
+              <span
+                class="MuiButton-label"
               >
-                <span
-                  class="MuiButton-label"
-                >
-                  Cancel
-                </span>
-              </button>
-            </div>
+                Cancel
+              </span>
+            </button>
           </form>
         </div>
       </div>

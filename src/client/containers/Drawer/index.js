@@ -1,11 +1,9 @@
 import React from 'react';
-import { Drawer as MDrawer } from '@material-ui/core';
+import { Drawer as MDrawer, Box } from '@material-ui/core';
 import UserForm from '../../components/UserForm';
 import { useFilter } from '../../hooks';
-import useStyles from './styles';
 
 const Drawer = ({ isDrawerOpen, toggleDrawer }) => {
-  const classes = useStyles();
   const { handleFilter, filter } = useFilter();
   return (
     <MDrawer
@@ -13,9 +11,9 @@ const Drawer = ({ isDrawerOpen, toggleDrawer }) => {
       onClose={() => toggleDrawer(false)}
       onKeyDown={() => toggleDrawer(false)}
     >
-      <div className={classes.root}>
+      <Box p={3} width={400}>
         <UserForm initialValues={filter} submit={handleFilter} />
-      </div>
+      </Box>
     </MDrawer>
   );
 };

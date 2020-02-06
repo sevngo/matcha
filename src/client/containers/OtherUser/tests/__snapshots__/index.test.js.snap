@@ -3,7 +3,7 @@
 exports[`OtherUser should match snapshot 1`] = `
 <div>
   <div
-    class="MuiBox-root MuiBox-root-7"
+    class="MuiBox-root MuiBox-root-6"
   >
     <div
       class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2"
@@ -18,7 +18,7 @@ exports[`OtherUser should match snapshot 1`] = `
             class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
           >
             <div
-              class="makeStyles-header-5"
+              class="MuiBox-root MuiBox-root-138"
             >
               <button
                 class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit"
@@ -116,11 +116,7 @@ exports[`OtherUser should match snapshot 1`] = `
         <div
           class="MuiPaper-root makeStyles-p3-1 MuiPaper-elevation1 MuiPaper-rounded"
         >
-          <form>
-            <div
-              class="MuiGrid-root MuiGrid-container MuiGrid-justify-xs-center"
-            />
-          </form>
+          <form />
         </div>
       </div>
     </div>

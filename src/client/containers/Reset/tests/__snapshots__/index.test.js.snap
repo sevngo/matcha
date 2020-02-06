@@ -56,48 +56,42 @@ exports[`Reset should match snapshot 1`] = `
             </button>
             <fieldset
               aria-hidden="true"
-              class="PrivateNotchedOutline-root-222 MuiOutlinedInput-notchedOutline"
-              style="padding-left: 8px;"
+              class="PrivateNotchedOutline-root-220 MuiOutlinedInput-notchedOutline"
             >
               <legend
-                class="PrivateNotchedOutline-legend-223"
-                style="width: 0px;"
+                class="PrivateNotchedOutline-legendLabelled-222 PrivateNotchedOutline-legendNotched-223"
               >
                 <span>
-                  ​
+                  New password
                 </span>
               </legend>
             </fieldset>
           </div>
         </div>
-        <div
-          class="MuiGrid-root MuiGrid-container MuiGrid-justify-xs-center"
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-mt1-134 MuiButton-containedPrimary MuiButton-containedSizeLarge MuiButton-sizeLarge Mui-disabled MuiButton-fullWidth Mui-disabled"
+          disabled=""
+          tabindex="-1"
+          type="submit"
         >
-          <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-mt1-134 MuiButton-containedPrimary MuiButton-containedSizeLarge MuiButton-sizeLarge Mui-disabled MuiButton-fullWidth Mui-disabled"
-            disabled=""
-            tabindex="-1"
-            type="submit"
+          <span
+            class="MuiButton-label"
           >
-            <span
-              class="MuiButton-label"
-            >
-              Submit
-            </span>
-          </button>
-          <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-outlinedSizeLarge MuiButton-sizeLarge Mui-disabled MuiButton-fullWidth Mui-disabled"
-            disabled=""
-            tabindex="-1"
-            type="button"
+            Submit
+          </span>
+        </button>
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-outlinedSizeLarge MuiButton-sizeLarge Mui-disabled MuiButton-fullWidth Mui-disabled"
+          disabled=""
+          tabindex="-1"
+          type="button"
+        >
+          <span
+            class="MuiButton-label"
           >
-            <span
-              class="MuiButton-label"
-            >
-              Cancel
-            </span>
-          </button>
-        </div>
+            Cancel
+          </span>
+        </button>
       </form>
     </div>
   </div>
