@@ -1,22 +1,11 @@
 const { ObjectID } = require('mongodb');
-const { find, propEq } = require('ramda');
+const { find, propEq, split } = require('ramda');
 const sharp = require('sharp');
-const {
-  match,
-  matchIn,
-  matchRange,
-  sort,
-  mismatch,
-  geoNear,
-  addFieldBirthDate,
-  lookup,
-  lookupPipeline,
-  pagination,
-} = require('../utils/stages');
+const { match, matchIn, addFieldBirthDate } = require('../utils/stages');
 const { userProjection, authProjection, imageProjection } = require('./projections');
 const { getUsers } = require('../database');
 const { sendEmail } = require('../emails');
-const { asyncHandler, compact, ErrorResponse, createToken } = require('../utils/functions');
+const { asyncHandler, ErrorResponse, createToken } = require('../utils/functions');
 
 exports.postUser = asyncHandler(async (req, res) => {
   const Users = getUsers();
@@ -44,27 +33,38 @@ exports.getUsers = asyncHandler(async (req, res) => {
     },
   } = req;
   const Users = getUsers();
-  const [data] = await Users.aggregate(
-    compact([
-      geoNear(coordinates, maxDistance),
-      match('gender', gender),
-      matchRange('birthDate', ...birthRange),
-      mismatch('_id', usersBlocked),
-      mismatch('_id', _id),
-      sort(sortBy),
-      addFieldBirthDate,
-      userProjection,
-      ...pagination(limit, skip),
-    ]),
-  ).toArray();
-  res.status(200).send(data);
+  let cursor = Users.aggregate();
+  if (coordinates && maxDistance)
+    cursor.geoNear({
+      near: { type: 'Point', coordinates },
+      distanceField: 'distance',
+      distanceMultiplier: 0.001,
+      maxDistance,
+      spherical: true,
+    });
+  if (gender) cursor.match({ gender });
+  if (usersBlocked) cursor.match({ _id: { $nin: usersBlocked } });
+  if (_id) cursor.match({ _id: { $ne: _id } });
+  if (birthRange) cursor.match({ birthDate: { $gt: birthRange[0], $lt: birthRange[1] } });
+  if (sortBy) {
+    const [sortKey, sortValue] = split(':')(sortBy);
+    cursor.sort({ [sortKey]: sortValue === 'desc' ? -1 : 1 });
+  }
+  cursor.project(userProjection);
+  const totalUsers = await cursor.toArray();
+  const total = totalUsers.length;
+  if (skip) cursor.skip(skip);
+  if (limit) cursor.limit(limit);
+  const data = await cursor.toArray();
+  res.status(200).send({ data, total });
 });
 
 exports.getUser = asyncHandler(async (req, res, next) => {
   const Users = getUsers();
-  const [data] = await Users.aggregate(
-    compact([match('_id', req.params.id), addFieldBirthDate, userProjection]),
-  ).toArray();
+  const [data] = await Users.aggregate([addFieldBirthDate])
+    .match({ _id: req.params.id })
+    .project(userProjection)
+    .toArray();
   if (!data) next(new ErrorResponse(404, 'User not found'));
   res.send(data);
 });
@@ -81,20 +81,17 @@ exports.patchUser = asyncHandler(async (req, res, next) => {
     { returnOriginal: false },
   );
   if (!user) next(new ErrorResponse(404, 'User not found'));
-  const [data] = await Users.aggregate(
-    compact([
-      match('_id', _id),
-      lookup('users', 'usersLiked', '_id', 'usersLiked'),
-      lookup('users', 'usersBlocked', '_id', 'usersBlocked'),
-      lookupPipeline(
-        'users',
-        [matchIn('_id', user.usersLiked), match('usersLiked', _id)],
-        'friends',
-      ),
-      addFieldBirthDate,
-      authProjection,
-    ]),
-  ).toArray();
+  const [data] = await Users.aggregate([addFieldBirthDate])
+    .match({ _id })
+    .lookup({ from: 'users', localField: 'usersLiked', foreignField: '_id', as: 'usersLiked' })
+    .lookup({ from: 'users', localField: 'usersBlocked', foreignField: '_id', as: 'usersBlocked' })
+    .lookup({
+      from: 'users',
+      pipeline: [matchIn('_id', user.usersLiked), match('usersLiked', _id)],
+      as: 'friends',
+    })
+    .project(authProjection)
+    .toArray();
   res.send(data);
 });
 
@@ -104,16 +101,17 @@ exports.postUserLogin = asyncHandler(async (req, res) => {
     token,
   } = req;
   const Users = getUsers();
-  const [data] = await Users.aggregate(
-    compact([
-      match('_id', _id),
-      lookup('users', 'usersLiked', '_id', 'usersLiked'),
-      lookup('users', 'usersBlocked', '_id', 'usersBlocked'),
-      lookupPipeline('users', [matchIn('_id', usersLiked), match('usersLiked', _id)], 'friends'),
-      addFieldBirthDate,
-      authProjection,
-    ]),
-  ).toArray();
+  const [data] = await Users.aggregate([addFieldBirthDate])
+    .match({ _id })
+    .lookup({ from: 'users', localField: 'usersLiked', foreignField: '_id', as: 'usersLiked' })
+    .lookup({ from: 'users', localField: 'usersBlocked', foreignField: '_id', as: 'usersBlocked' })
+    .lookup({
+      from: 'users',
+      pipeline: [matchIn('_id', usersLiked), match('usersLiked', _id)],
+      as: 'friends',
+    })
+    .project(authProjection)
+    .toArray();
   res.send({ ...data, token });
 });
 
@@ -147,9 +145,10 @@ exports.postUserImage = asyncHandler(async (req, res, next) => {
     { $push: { images: { _id: imageId, data: buffer } } },
   );
   if (!user) next(new ErrorResponse(404, 'User not found'));
-  const [data] = await Users.aggregate(
-    compact([match('_id', _id), addFieldBirthDate, imageProjection]),
-  ).toArray();
+  const [data] = await Users.aggregate([addFieldBirthDate])
+    .match({ _id })
+    .project(imageProjection)
+    .toArray();
   res.send(data);
 });
 
@@ -164,9 +163,10 @@ exports.deleteUserImage = asyncHandler(async (req, res, next) => {
     { $pull: { images: { _id: imageId } } },
   );
   if (!user) next(new ErrorResponse(404, 'User not found'));
-  const [data] = await Users.aggregate(
-    compact([match('_id', _id), addFieldBirthDate, imageProjection]),
-  ).toArray();
+  const [data] = await Users.aggregate([addFieldBirthDate])
+    .match({ _id })
+    .project(imageProjection)
+    .toArray();
   res.send(data);
 });
 
