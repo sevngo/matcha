@@ -1,4 +1,4 @@
-const { filter, isEmpty, reduce } = require('ramda');
+const { reduce } = require('ramda');
 const jwt = require('jsonwebtoken');
 const { ObjectID } = require('mongodb');
 const { JWT_SECRET } = require('./constants');
@@ -11,8 +11,6 @@ exports.ErrorResponse = class ErrorResponse extends Error {
     this.statusCode = statusCode;
   }
 };
-
-exports.compact = filter(value => value && !isEmpty(value));
 
 exports.getIds = reduce((acc, object) => [...acc, object._id], []);
 

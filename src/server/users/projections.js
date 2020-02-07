@@ -1,6 +1,4 @@
-const { project } = require('../utils/stages');
-
-exports.userProjection = project({
+exports.userProjection = {
   _id: 1,
   username: 1,
   gender: 1,
@@ -8,9 +6,9 @@ exports.userProjection = project({
   'address.name': 1,
   'images._id': 1,
   distance: 1,
-});
+};
 
-exports.authProjection = project({
+exports.authProjection = {
   _id: 1,
   username: 1,
   gender: 1,
@@ -22,6 +20,6 @@ exports.authProjection = project({
   'usersBlocked.username': 1,
   'usersLiked._id': 1,
   'friends._id': 1,
-});
+};
 
-exports.imageProjection = project({ 'images._id': 1 });
+exports.imageProjection = { 'images._id': 1 };

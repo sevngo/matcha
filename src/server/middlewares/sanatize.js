@@ -54,11 +54,13 @@ exports.newPassword = asyncHandler(async (req, res, next) => {
 
 exports.birthRange = (req, res, next) => {
   const {
-    query: { birthRange = '' },
+    query: { birthRange },
   } = req;
-  const [birthMin, birthMax] = split(':')(birthRange);
-  const birthMinDate = birthMin && new Date(birthMin);
-  const birthMaxDate = birthMax && new Date(birthMax);
-  req.query.birthRange = [birthMinDate, birthMaxDate];
+  if (birthRange) {
+    const [birthMin, birthMax] = split(':')(birthRange);
+    const birthMinDate = birthMin && new Date(birthMin);
+    const birthMaxDate = birthMax && new Date(birthMax);
+    req.query.birthRange = [birthMinDate, birthMaxDate];
+  }
   next();
 };
