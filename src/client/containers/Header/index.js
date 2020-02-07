@@ -1,6 +1,5 @@
 import React, { useState, Fragment } from 'react';
-import { useLocation } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
 import Drawer from '../Drawer';
@@ -14,7 +13,7 @@ import messages from './messages';
 
 const Header = () => {
   const classes = useStyles();
-  const { pathname } = useLocation();
+  const { isExact: isUsersPath } = useRouteMatch(usersPath);
   const { auth } = useAuth();
   const [isDrawerOpen, toggleDrawer] = useState(false);
   const { token } = auth;
@@ -22,7 +21,7 @@ const Header = () => {
     <Fragment>
       <AppBar position="static" className={classes.appBar}>
         <Toolbar>
-          {pathname === usersPath && token ? (
+          {isUsersPath && token ? (
             <IconButton onClick={() => toggleDrawer(true)} className={classes.icon}>
               menu
             </IconButton>
