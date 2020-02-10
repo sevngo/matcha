@@ -1,11 +1,20 @@
 import React, { useRef, useState, Fragment } from 'react';
 import { length, isEmpty, path, map, pick } from 'ramda';
 import { FormattedMessage } from 'react-intl';
-import { Grid, Button, Typography, Icon, Divider, Box } from '@material-ui/core';
+import {
+  Grid,
+  Button,
+  Typography,
+  Icon,
+  Divider,
+  Box,
+  Dialog,
+  DialogTitle,
+  DialogActions,
+} from '@material-ui/core';
 import Paper from '../../components/Paper';
 import UserForm from '../../components/UserForm';
 import Carousel from '../../components/Carousel';
-import Modal from '../../components/Modal';
 import { getUserImage } from '../../api';
 import { compact } from '../../utils';
 import emptyImage from '../../images/emptyImage.png';
@@ -20,7 +29,7 @@ const MyUser = () => {
   const { images, uploadImage, removeImage } = useImages();
   const { likeUser, usersBlocked } = useRelations();
   const [activeStep, handleStep] = useState(0);
-  const [isModalOpen, handleModal] = useState(false);
+  const [isDialogOpen, handleDialog] = useState(false);
   const { _id } = auth;
   const inputEl = useRef();
   const addImage = image => {
@@ -46,19 +55,19 @@ const MyUser = () => {
               />
               <Button
                 variant="outlined"
-                onClick={() => handleModal(true)}
+                onClick={() => handleDialog(true)}
                 disabled={!images || isEmpty(images)}
               >
                 <FormattedMessage {...messages.delete} />
                 <Icon className={classes.ml1}>delete</Icon>
               </Button>
-              <Modal
-                open={isModalOpen}
-                onClose={() => handleModal(false)}
-                title={<FormattedMessage {...messages.sure} />}
-                actions={
+              <Dialog open={isDialogOpen} onClose={() => handleDialog(false)}>
+                <DialogTitle>
+                  <FormattedMessage {...messages.sure} />
+                </DialogTitle>
+                <DialogActions>
                   <Fragment>
-                    <Button size="small" onClick={() => handleModal(false)}>
+                    <Button size="small" onClick={() => handleDialog(false)}>
                       <FormattedMessage {...messages.no} />
                     </Button>
                     <Button
@@ -66,14 +75,14 @@ const MyUser = () => {
                       onClick={() => {
                         removeImage(path([activeStep, '_id'])(images));
                         handleStep(0);
-                        handleModal(false);
+                        handleDialog(false);
                       }}
                     >
                       <FormattedMessage {...messages.yes} />
                     </Button>
                   </Fragment>
-                }
-              />
+                </DialogActions>
+              </Dialog>
               <Button
                 variant="outlined"
                 onClick={() => inputEl.current.click()}
