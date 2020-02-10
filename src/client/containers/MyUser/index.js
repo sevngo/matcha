@@ -10,10 +10,10 @@ import {
   Dialog,
   DialogTitle,
   DialogActions,
+  Paper,
 } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CloudUpload from '@material-ui/icons/CloudUpload';
-import Paper from '../../components/Paper';
 import UserForm from '../../components/UserForm';
 import Carousel from '../../components/Carousel';
 import { getUserImage } from '../../api';
@@ -98,7 +98,7 @@ const MyUser = () => {
           </Carousel>
         </Grid>
         <Grid item xs={12} className={classes.mw30}>
-          <Paper className={classes.p3}>
+          <Paper elevation={1} className={classes.p3}>
             <UserForm
               initialValues={{
                 ...userForm,
@@ -110,7 +110,7 @@ const MyUser = () => {
         </Grid>
         <Grid item xs={12} className={classes.mw30}>
           {usersBlocked[0] && (
-            <Paper className={classes.p3}>
+            <Paper elevation={1} className={classes.p3}>
               <Typography variant="h5">
                 <FormattedMessage {...messages.usersBlocked} />
               </Typography>
