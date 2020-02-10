@@ -5,13 +5,14 @@ import {
   Grid,
   Button,
   Typography,
-  Icon,
   Divider,
   Box,
   Dialog,
   DialogTitle,
   DialogActions,
 } from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
+import CloudUpload from '@material-ui/icons/CloudUpload';
 import Paper from '../../components/Paper';
 import UserForm from '../../components/UserForm';
 import Carousel from '../../components/Carousel';
@@ -59,7 +60,7 @@ const MyUser = () => {
                 disabled={!images || isEmpty(images)}
               >
                 <FormattedMessage {...messages.delete} />
-                <Icon className={classes.ml1}>delete</Icon>
+                <DeleteIcon className={classes.ml1} />
               </Button>
               <Dialog open={isDialogOpen} onClose={() => handleDialog(false)}>
                 <DialogTitle>
@@ -90,7 +91,7 @@ const MyUser = () => {
                 className={classes.ml1}
               >
                 <FormattedMessage {...messages.upload} />
-                <Icon className={classes.ml1}>cloud_upload</Icon>
+                <CloudUpload className={classes.ml1} />
               </Button>
             </Box>
             <img className={classes.img} src={image} alt="profile" />
