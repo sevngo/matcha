@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { render } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { IntlProvider } from 'react-intl';
-import { MuiThemeProvider, CssBaseline } from '@material-ui/core';
+import { CssBaseline, ThemeProvider } from '@material-ui/core';
 import './socketEvents';
 import { locale, messages, theme } from './utils';
 import store from './store';
@@ -15,10 +15,10 @@ const ROOT = (
   <Provider store={store}>
     <IntlProvider locale={locale} messages={messages}>
       <BrowserRouter>
-        <MuiThemeProvider theme={theme}>
+        <ThemeProvider theme={theme}>
           <CssBaseline />
           <App />
-        </MuiThemeProvider>
+        </ThemeProvider>
       </BrowserRouter>
     </IntlProvider>
   </Provider>

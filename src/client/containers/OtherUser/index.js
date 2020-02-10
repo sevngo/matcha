@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { find, path, isEmpty, length } from 'ramda';
-import { Grid, Box, IconButton } from '@material-ui/core';
+import { Grid, Box, IconButton, Paper } from '@material-ui/core';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import DoneAllIcon from '@material-ui/icons/DoneAll';
 import BlockIcon from '@material-ui/icons/Block';
-import Paper from '../../components/Paper';
 import UserForm from '../../components/UserForm';
 import Carousel from '../../components/Carousel';
 import emptyImage from '../../images/emptyImage.png';
@@ -32,7 +31,7 @@ const User = ({ id }) => {
     <Box p={3}>
       <Grid container spacing={2}>
         <Grid item className={classes.mw30}>
-          <Paper>
+          <Paper elevation={1}>
             <Carousel activeStep={activeStep} handleStep={handleStep} maxSteps={maxSteps}>
               <Box p={1} bgcolor="background.default">
                 <IconButton
@@ -60,7 +59,7 @@ const User = ({ id }) => {
           </Paper>
         </Grid>
         <Grid item className={classes.mw30}>
-          <Paper className={classes.p3}>
+          <Paper elevation={1} className={classes.p3}>
             <UserForm initialValues={user} disabled />
           </Paper>
         </Grid>

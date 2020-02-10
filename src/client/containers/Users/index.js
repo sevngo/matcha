@@ -1,6 +1,5 @@
 import React, { useEffect, useState, Fragment } from 'react';
-import { Hidden, Box, TablePagination } from '@material-ui/core';
-import Paper from '../../components/Paper';
+import { Hidden, Box, TablePagination, Paper } from '@material-ui/core';
 import UserCards from '../../components/UserCards';
 import { useUsers, useFilter } from '../../hooks';
 
@@ -22,7 +21,7 @@ const Users = () => {
   };
   return (
     <Fragment>
-      <Paper>
+      <Paper elevation={1}>
         <Hidden xsDown>
           <TablePagination
             component="div"

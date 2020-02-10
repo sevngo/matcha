@@ -56,14 +56,14 @@ exports[`Auth should match snapshot 1`] = `
               </button>
             </div>
             <span
-              class="PrivateTabIndicator-root-65 PrivateTabIndicator-colorSecondary-67 MuiTabs-indicator"
+              class="PrivateTabIndicator-root-67 PrivateTabIndicator-colorSecondary-69 MuiTabs-indicator"
               style="left: 0px; width: 0px;"
             />
           </div>
         </div>
       </header>
       <div
-        class="MuiBox-root MuiBox-root-69"
+        class="MuiBox-root MuiBox-root-71"
       >
         <form>
           <div
@@ -79,7 +79,7 @@ exports[`Auth should match snapshot 1`] = `
               class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedStart MuiOutlinedInput-adornedStart MuiInputBase-marginDense MuiOutlinedInput-marginDense"
             >
               <div
-                class="MuiBox-root MuiBox-root-135 makeStyles-icon-76"
+                class="MuiBox-root MuiBox-root-137 makeStyles-icon-78"
               >
                 <svg
                   aria-hidden="true"
@@ -103,10 +103,10 @@ exports[`Auth should match snapshot 1`] = `
               />
               <fieldset
                 aria-hidden="true"
-                class="PrivateNotchedOutline-root-145 MuiOutlinedInput-notchedOutline"
+                class="PrivateNotchedOutline-root-147 MuiOutlinedInput-notchedOutline"
               >
                 <legend
-                  class="PrivateNotchedOutline-legendLabelled-147 PrivateNotchedOutline-legendNotched-148"
+                  class="PrivateNotchedOutline-legendLabelled-149 PrivateNotchedOutline-legendNotched-150"
                 >
                   <span>
                     Username
@@ -128,7 +128,7 @@ exports[`Auth should match snapshot 1`] = `
               class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedStart MuiOutlinedInput-adornedStart MuiInputBase-adornedEnd MuiOutlinedInput-adornedEnd MuiInputBase-marginDense MuiOutlinedInput-marginDense"
             >
               <div
-                class="MuiBox-root MuiBox-root-149 makeStyles-icon-76"
+                class="MuiBox-root MuiBox-root-151 makeStyles-icon-78"
               >
                 <svg
                   aria-hidden="true"
@@ -176,10 +176,10 @@ exports[`Auth should match snapshot 1`] = `
               </button>
               <fieldset
                 aria-hidden="true"
-                class="PrivateNotchedOutline-root-145 MuiOutlinedInput-notchedOutline"
+                class="PrivateNotchedOutline-root-147 MuiOutlinedInput-notchedOutline"
               >
                 <legend
-                  class="PrivateNotchedOutline-legendLabelled-147 PrivateNotchedOutline-legendNotched-148"
+                  class="PrivateNotchedOutline-legendLabelled-149 PrivateNotchedOutline-legendNotched-150"
                 >
                   <span>
                     Password
@@ -189,7 +189,7 @@ exports[`Auth should match snapshot 1`] = `
             </div>
           </div>
           <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-mt1-70 MuiButton-containedPrimary MuiButton-containedSizeLarge MuiButton-sizeLarge Mui-disabled MuiButton-fullWidth Mui-disabled"
+            class="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-mt1-72 MuiButton-containedPrimary MuiButton-containedSizeLarge MuiButton-sizeLarge Mui-disabled MuiButton-fullWidth Mui-disabled"
             disabled=""
             tabindex="-1"
             type="submit"

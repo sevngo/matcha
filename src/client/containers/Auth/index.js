@@ -10,8 +10,8 @@ import {
   DialogTitle,
   DialogContent,
   DialogContentText,
+  Paper,
 } from '@material-ui/core';
-import Paper from '../../components/Paper';
 import UserForm from '../../components/UserForm';
 import { useAuth } from '../../hooks';
 import useStyles from './styles';
@@ -29,7 +29,7 @@ const Auth = () => {
   };
   return (
     <Box mx="auto" maxWidth={500}>
-      <Paper>
+      <Paper elevation={1}>
         <AppBar position="static">
           <Tabs variant="fullWidth" value={tab} onChange={(e, tab) => handleTab(tab)}>
             <Tab label={<FormattedMessage {...messages.login} />} />

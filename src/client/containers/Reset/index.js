@@ -1,7 +1,6 @@
 import React from 'react';
-import { Grid } from '@material-ui/core';
+import { Grid, Paper } from '@material-ui/core';
 import { useParams } from 'react-router';
-import Paper from '../../components/Paper';
 import UserForm from '../../components/UserForm';
 import { useAuth } from '../../hooks';
 import useStyles from './styles';
@@ -12,7 +11,7 @@ const Reset = () => {
   const classes = useStyles();
   return (
     <Grid container justify="center" className={classes.p3}>
-      <Paper className={classes.paper}>
+      <Paper elevation={1} className={classes.paper}>
         <UserForm initialValues={{ newPassword: '' }} submit={user => updateUser(token, user)} />
       </Paper>
     </Grid>
