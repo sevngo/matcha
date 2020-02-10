@@ -18,7 +18,7 @@ const MyUser = () => {
   const { auth, updateUser, uploadImage, removeImage, likeUser } = useAuth();
   const [activeStep, handleStep] = useState(0);
   const [isModalOpen, handleModal] = useState(false);
-  const { _id, token, images = [], usersBlocked } = auth;
+  const { _id, token, images = [], usersBlocked = [] } = auth;
   const inputEl = useRef();
   const addImage = image => {
     if (image) uploadImage(token, image);

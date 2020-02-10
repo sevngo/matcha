@@ -13,15 +13,15 @@ import { useUser, useAuth } from '../../hooks';
 const User = ({ id }) => {
   const { user, loadUser } = useUser();
   const { auth, likeUser, blockUser } = useAuth();
-  const { token, _id, username } = auth;
+  const { token, _id, username, usersLiked = [], usersBlocked = [], friends = [] } = auth;
   const [activeStep, handleStep] = useState(0);
   useEffect(() => {
     loadUser({ token, _id, username }, id);
   }, [token, _id, username, id, loadUser]);
   const classes = useStyles();
-  const isLiked = Boolean(find(userLiked => userLiked._id === user._id)(auth.usersLiked));
-  const isBlocked = Boolean(find(userBlocked => userBlocked._id === user._id)(auth.usersBlocked));
-  const isFriend = find(friend => friend._id === user._id)(auth.friends);
+  const isLiked = Boolean(find(userLiked => userLiked._id === user._id)(usersLiked));
+  const isBlocked = Boolean(find(userBlocked => userBlocked._id === user._id)(usersBlocked));
+  const isFriend = find(friend => friend._id === user._id)(friends);
   const { images = [] } = user;
   const image = !isEmpty(images)
     ? getUserImage(user._id, path([activeStep, '_id'])(images))
