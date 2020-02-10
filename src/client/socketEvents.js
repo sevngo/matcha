@@ -49,11 +49,4 @@ socket.on('gotUnfriended', notification => {
   });
 });
 
-socket.on('gotVisited', notification => {
-  store.dispatch({
-    type: ADD_NOTIFICATION,
-    notification: { ...notification, messageId: 'gotVisited' },
-  });
-});
-
 export default socket;

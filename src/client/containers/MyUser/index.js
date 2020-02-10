@@ -9,19 +9,22 @@ import Modal from '../../components/Modal';
 import { getUserImage } from '../../api';
 import { compact } from '../../utils';
 import emptyImage from '../../images/emptyImage.png';
-import { useAuth } from '../../hooks';
+import { useAuth, useRelations, useImages, useToken } from '../../hooks';
 import useStyles from './styles';
 import messages from './messages';
 
 const MyUser = () => {
   const classes = useStyles();
-  const { auth, updateUser, uploadImage, removeImage, likeUser } = useAuth();
+  const { auth, updateUser } = useAuth();
+  const token = useToken();
+  const { images, uploadImage, removeImage } = useImages();
+  const { likeUser, usersBlocked } = useRelations();
   const [activeStep, handleStep] = useState(0);
   const [isModalOpen, handleModal] = useState(false);
-  const { _id, token, images = [], usersBlocked = [] } = auth;
+  const { _id } = auth;
   const inputEl = useRef();
   const addImage = image => {
-    if (image) uploadImage(token, image);
+    if (image) uploadImage(image);
   };
   const image = !isEmpty(images)
     ? getUserImage(_id, path([activeStep, '_id'])(images))
@@ -61,7 +64,7 @@ const MyUser = () => {
                     <Button
                       size="small"
                       onClick={() => {
-                        removeImage(token, path([activeStep, '_id'])(images));
+                        removeImage(path([activeStep, '_id'])(images));
                         handleStep(0);
                         handleModal(false);
                       }}
@@ -113,7 +116,7 @@ const MyUser = () => {
                   <Typography>{user.username}</Typography>
                   <Button
                     variant="outlined"
-                    onClick={() => likeUser(auth, user._id)}
+                    onClick={() => likeUser(user._id)}
                     className={classes.like}
                   >
                     <FormattedMessage {...messages.likeUser} />

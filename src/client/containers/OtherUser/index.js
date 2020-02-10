@@ -8,16 +8,15 @@ import IconButton from '../../components/IconButton';
 import emptyImage from '../../images/emptyImage.png';
 import { getUserImage } from '../../api';
 import useStyles from './styles';
-import { useUser, useAuth } from '../../hooks';
+import { useUser, useRelations } from '../../hooks';
 
 const User = ({ id }) => {
   const { user, loadUser } = useUser();
-  const { auth, likeUser, blockUser } = useAuth();
-  const { token, _id, username, usersLiked = [], usersBlocked = [], friends = [] } = auth;
+  const { likeUser, blockUser, usersLiked, usersBlocked, friends } = useRelations();
   const [activeStep, handleStep] = useState(0);
   useEffect(() => {
-    loadUser({ token, _id, username }, id);
-  }, [token, _id, username, id, loadUser]);
+    loadUser(id);
+  }, [id, loadUser]);
   const classes = useStyles();
   const isLiked = Boolean(find(userLiked => userLiked._id === user._id)(usersLiked));
   const isBlocked = Boolean(find(userBlocked => userBlocked._id === user._id)(usersBlocked));
@@ -36,14 +35,14 @@ const User = ({ id }) => {
               <Box p={1} bgcolor="background.default">
                 <IconButton
                   className={isLiked ? classes.red : ''}
-                  onClick={() => likeUser(auth, user._id)}
+                  onClick={() => likeUser(user._id)}
                   disabled={isLiked}
                 >
                   favorite
                 </IconButton>
                 <IconButton
                   className={isBlocked ? classes.red : ''}
-                  onClick={() => blockUser(auth, user._id)}
+                  onClick={() => blockUser(user._id)}
                   disabled={isBlocked}
                 >
                   block

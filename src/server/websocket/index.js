@@ -29,10 +29,6 @@ const socketEvents = socket => {
     emitToUserConnected(socket, user, userBlockedId, 'gotUnfriended'),
   );
 
-  socket.on('userVisited', ({ user, userVisitedId }) =>
-    emitToUserConnected(socket, user, userVisitedId, 'gotVisited'),
-  );
-
   socket.on('logout', () => removeUserSocketId(socket.id));
 
   socket.on('disconnect', () => removeUserSocketId(socket.id));
