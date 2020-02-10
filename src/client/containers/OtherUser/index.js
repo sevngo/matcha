@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { find, path, isEmpty, length } from 'ramda';
-import { Grid, Box } from '@material-ui/core';
+import { Grid, Box, IconButton } from '@material-ui/core';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import DoneAllIcon from '@material-ui/icons/DoneAll';
+import BlockIcon from '@material-ui/icons/Block';
 import Paper from '../../components/Paper';
 import UserForm from '../../components/UserForm';
 import Carousel from '../../components/Carousel';
-import IconButton from '../../components/IconButton';
 import emptyImage from '../../images/emptyImage.png';
 import { getUserImage } from '../../api';
 import useStyles from './styles';
@@ -38,18 +40,18 @@ const User = ({ id }) => {
                   onClick={() => likeUser(user._id)}
                   disabled={isLiked}
                 >
-                  favorite
+                  <FavoriteIcon />
                 </IconButton>
                 <IconButton
                   className={isBlocked ? classes.red : ''}
                   onClick={() => blockUser(user._id)}
                   disabled={isBlocked}
                 >
-                  block
+                  <BlockIcon />
                 </IconButton>
                 {isFriend && (
                   <IconButton color="primary" disabled>
-                    done_all
+                    <DoneAllIcon />
                   </IconButton>
                 )}
               </Box>

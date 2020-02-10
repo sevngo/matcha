@@ -3,6 +3,14 @@ import { withFormik, Field } from 'formik';
 import { FormattedMessage } from 'react-intl';
 import { has, compose, map, isNil, __, path } from 'ramda';
 import { Button, MenuItem, Box } from '@material-ui/core';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
+import ClearIcon from '@material-ui/icons/Clear';
+import VpnKeyIcon from '@material-ui/icons/VpnKey';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import AlternateEmailIcon from '@material-ui/icons/AlternateEmail';
+import DateRangeIcon from '@material-ui/icons/DateRange';
+
 import useStyles from './styles';
 import Input from '../Input';
 import Radio from '../Radio';
@@ -50,7 +58,7 @@ const Component = ({
           label={<FormattedMessage {...messages.username} />}
           component={Input}
           validate={composeValidators(isRequired, minLength, maxLength(30), isTrimmed)}
-          startAdornment="account_circle"
+          startAdornment={<AccountCircleIcon />}
           disabled={disabled}
         />
       )}
@@ -62,9 +70,9 @@ const Component = ({
           component={Input}
           validate={composeValidators(isRequired, minLength, maxLength(30), isTrimmed)}
           type={showPassword ? 'text' : 'password'}
-          startAdornment="vpn_key"
+          startAdornment={<VpnKeyIcon />}
           endAdornment={{
-            icon: showPassword ? 'visibility' : 'visibility_off',
+            icon: showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />,
             action: () => toggleShowPassword(!showPassword),
           }}
         />
@@ -77,9 +85,9 @@ const Component = ({
           component={Input}
           validate={composeValidators(minLength, maxLength(30), isTrimmed)}
           type={showPassword ? 'text' : 'password'}
-          startAdornment="vpn_key"
+          startAdornment={<VpnKeyIcon />}
           endAdornment={{
-            icon: showPassword ? 'visibility' : 'visibility_off',
+            icon: showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />,
             action: () => toggleShowPassword(!showPassword),
           }}
         />
@@ -90,7 +98,7 @@ const Component = ({
           label={<FormattedMessage {...messages.email} />}
           component={Input}
           validate={composeValidators(isRequired, isEmail, maxLength(30), isTrimmed)}
-          startAdornment="alternate_email"
+          startAdornment={<AlternateEmailIcon />}
           disabled={disabled}
         />
       )}
@@ -101,7 +109,7 @@ const Component = ({
           component={Input}
           validate={composeValidators(isRequired, isYoung, isOld)}
           type="date"
-          startAdornment="date_range"
+          startAdornment={<DateRangeIcon />}
           disabled={disabled}
         />
       )}
@@ -128,7 +136,7 @@ const Component = ({
           endAdornment={
             isValidAddress &&
             !disabled && {
-              icon: 'clear',
+              icon: <ClearIcon />,
               action: () => setFieldValue('address', { name: '' }),
             }
           }
