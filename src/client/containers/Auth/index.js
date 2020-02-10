@@ -1,9 +1,18 @@
 import React, { useState, Fragment } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { AppBar, Tabs, Tab, Button, Box } from '@material-ui/core';
+import {
+  AppBar,
+  Tabs,
+  Tab,
+  Button,
+  Box,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+} from '@material-ui/core';
 import Paper from '../../components/Paper';
 import UserForm from '../../components/UserForm';
-import Modal from '../../components/Modal';
 import { useAuth } from '../../hooks';
 import useStyles from './styles';
 
@@ -13,7 +22,7 @@ const Auth = () => {
   const { login, register, forgotPassword } = useAuth();
   const classes = useStyles();
   const [tab, handleTab] = useState(0);
-  const [isModalOpen, handleModal] = useState(false);
+  const [isDialogOpen, handleDialog] = useState(false);
   const initialValues = {
     username: '',
     password: '',
@@ -31,17 +40,20 @@ const Auth = () => {
           {tab === 0 ? (
             <Fragment>
               <UserForm initialValues={initialValues} submit={login} />
-              <Button onClick={() => handleModal(true)} variant="outlined" className={classes.mt1}>
+              <Button onClick={() => handleDialog(true)} variant="outlined" className={classes.mt1}>
                 <FormattedMessage {...messages.forgotPassword} />
               </Button>
-              <Modal
-                open={isModalOpen}
-                onClose={() => handleModal(false)}
-                title={<FormattedMessage {...messages.forgotPassword} />}
-                text={<FormattedMessage {...messages.enterEmail} />}
-              >
-                <UserForm initialValues={{ email: '' }} submit={forgotPassword} />
-              </Modal>
+              <Dialog open={isDialogOpen} onClose={() => handleDialog(false)}>
+                <DialogTitle>
+                  <FormattedMessage {...messages.forgotPassword} />
+                </DialogTitle>
+                <DialogContent>
+                  <DialogContentText>
+                    <FormattedMessage {...messages.enterEmail} />
+                  </DialogContentText>
+                  <UserForm initialValues={{ email: '' }} submit={forgotPassword} />
+                </DialogContent>
+              </Dialog>
             </Fragment>
           ) : (
             <UserForm
