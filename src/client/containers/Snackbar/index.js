@@ -1,9 +1,9 @@
 import React from 'react';
 import { isEmpty } from 'ramda';
-import { Typography } from '@material-ui/core';
-import IconButton from '../../components/IconButton';
+import { Typography, IconButton } from '@material-ui/core';
 import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
+import CloseIcon from '@material-ui/icons/Close';
 import { variantIcon } from './constants';
 import useStyles from './styles';
 import { useSnackbar } from '../../hooks';
@@ -36,7 +36,7 @@ const MySnackbar = () => {
         }
         action={[
           <IconButton key="close" color="inherit" onClick={closeSnackbar}>
-            close_icon
+            <CloseIcon />
           </IconButton>,
         ]}
       />

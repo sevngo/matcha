@@ -12,6 +12,8 @@ import {
   DialogTitle,
   DialogContent,
 } from '@material-ui/core';
+import NotificationsIcon from '@material-ui/icons/Notifications';
+
 import { useNotifications } from '../../hooks';
 import useStyles from './styles';
 import messages from './messages';
@@ -25,7 +27,7 @@ const Notifications = () => {
     <Fragment>
       <IconButton color="inherit" onClick={() => handleDialog(true)}>
         <Badge badgeContent={notificationsLength} color="error">
-          <Icon>notifications_icon</Icon>
+          <NotificationsIcon />
         </Badge>
       </IconButton>
       {notificationsLength !== 0 && (

@@ -1,7 +1,6 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { TextField, Icon } from '@material-ui/core';
-import IconButton from '../IconButton';
+import { TextField, IconButton, Box } from '@material-ui/core';
 import { getFieldError } from '../../utils';
 import useStyles from './styles';
 import messages from './messages';
@@ -17,7 +16,7 @@ const Input = ({ field, form: { errors, touched }, startAdornment, endAdornment,
       helperText={isError && <FormattedMessage {...messages[error]} />}
       fullWidth
       InputProps={{
-        startAdornment: startAdornment && <Icon className={classes.icon}>{startAdornment}</Icon>,
+        startAdornment: startAdornment && <Box className={classes.icon}>{startAdornment}</Box>,
         endAdornment: endAdornment && (
           <IconButton onClick={endAdornment.action}>{endAdornment.icon}</IconButton>
         ),
