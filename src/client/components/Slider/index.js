@@ -18,7 +18,6 @@ const Slider = ({ field, label, unitLabel, setFieldValue, ...rest }) => {
       <Box mt={1} />
       <MSlider
         className={classes.m1}
-        defaultValue={value}
         value={value}
         onChange={(e, value) => setFieldValue(name, value)}
         {...rest}
