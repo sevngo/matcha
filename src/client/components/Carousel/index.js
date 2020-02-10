@@ -1,6 +1,8 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Button, MobileStepper, Icon } from '@material-ui/core';
+import { Button, MobileStepper } from '@material-ui/core';
+import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
+import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import Paper from '../Paper';
 import messages from './messages';
 
@@ -19,7 +21,7 @@ const Carousel = ({ children, activeStep, maxSteps, handleStep }) => {
             disabled={activeStep === maxSteps - 1 || !maxSteps}
           >
             <FormattedMessage {...messages.next} />
-            <Icon>keyboard_arrow_right</Icon>
+            <KeyboardArrowRightIcon />
           </Button>
         }
         backButton={
@@ -28,7 +30,7 @@ const Carousel = ({ children, activeStep, maxSteps, handleStep }) => {
             onClick={() => handleStep(activeStep - 1)}
             disabled={activeStep === 0 || !maxSteps}
           >
-            <Icon>keyboard_arrow_left</Icon>
+            <KeyboardArrowLeftIcon />
             <FormattedMessage {...messages.back} />
           </Button>
         }
