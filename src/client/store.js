@@ -5,7 +5,7 @@ import reducer from './reducers';
 import { loadState, saveState } from './utils';
 import { getAuth } from './selectors';
 
-const initialState = {
+export const initialState = {
   users: {
     filter: {
       gender: 'male',
