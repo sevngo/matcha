@@ -25,8 +25,4 @@ export default defineMessages({
     id: 'containers.notifications.gotUnfriended',
     defaultMessage: '{username} is not your friend anymore',
   },
-  gotVisited: {
-    id: 'containers.notifications.gotVisited',
-    defaultMessage: '{username} has visited your profile',
-  },
 });

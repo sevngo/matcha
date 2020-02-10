@@ -7,6 +7,6 @@ export const useUser = () => {
   const dispatch = useDispatch();
   return {
     user: useSelector(getUser),
-    loadUser: useCallback((auth, id) => dispatch(loadUser(auth, id)), [dispatch]),
+    loadUser: useCallback(id => dispatch(loadUser(id)), [dispatch]),
   };
 };

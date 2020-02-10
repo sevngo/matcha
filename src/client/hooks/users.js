@@ -8,7 +8,7 @@ export const useUsers = () => {
   return {
     users: useSelector(getUsers),
     total: useSelector(getUsersTotal),
-    loadUsers: useCallback((token, filter) => dispatch(loadUsers(token, filter)), [dispatch]),
+    loadUsers: useCallback(filter => dispatch(loadUsers(filter)), [dispatch]),
   };
 };
 

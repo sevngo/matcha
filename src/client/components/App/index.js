@@ -1,20 +1,22 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { map } from 'ramda';
-import { Box } from '@material-ui/core';
+import { Box, LinearProgress } from '@material-ui/core';
 import Header from '../../containers/Header';
-import Loading from '../../containers/Loading';
 import useStyles from './styles';
 import { routes, defaultRoute } from '../../utils';
 import Snackbar from '../../containers/Snackbar';
+import { useApp } from '../../hooks';
 import PrivateRoute from '../PrivateRoute';
 
 const App = () => {
   const classes = useStyles();
+  const { isLoading } = useApp();
   return (
     <Box className={classes.root}>
       <Header />
-      <Box p={3}>
+      {isLoading && <LinearProgress />}
+      <Box p={3} visibility={isLoading ? 'hidden' : 'visible'}>
         <Switch>
           {map(route => {
             const { isPrivate, path } = route;
@@ -24,7 +26,6 @@ const App = () => {
           <Redirect to={defaultRoute.path} />
         </Switch>
       </Box>
-      <Loading />
       <Snackbar />
     </Box>
   );

@@ -125,6 +125,46 @@ exports[`User should match snapshot 1`] = `
                 class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-marginDense MuiInputLabel-outlined"
                 data-shrink="true"
               >
+                Username
+              </label>
+              <div
+                class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedStart MuiOutlinedInput-adornedStart MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+              >
+                <span
+                  aria-hidden="true"
+                  class="material-icons MuiIcon-root makeStyles-icon-214"
+                >
+                  account_circle
+                </span>
+                <input
+                  aria-invalid="false"
+                  autocomplete="username"
+                  class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedStart MuiOutlinedInput-inputAdornedStart MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+                  name="username"
+                  type="text"
+                  value=""
+                />
+                <fieldset
+                  aria-hidden="true"
+                  class="PrivateNotchedOutline-root-273 MuiOutlinedInput-notchedOutline"
+                >
+                  <legend
+                    class="PrivateNotchedOutline-legendLabelled-275 PrivateNotchedOutline-legendNotched-276"
+                  >
+                    <span>
+                      Username
+                    </span>
+                  </legend>
+                </fieldset>
+              </div>
+            </div>
+            <div
+              class="MuiFormControl-root MuiTextField-root MuiFormControl-marginDense MuiFormControl-fullWidth"
+            >
+              <label
+                class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-marginDense MuiInputLabel-outlined"
+                data-shrink="true"
+              >
                 New password
               </label>
               <div
@@ -165,13 +205,251 @@ exports[`User should match snapshot 1`] = `
                 </button>
                 <fieldset
                   aria-hidden="true"
-                  class="PrivateNotchedOutline-root-282 MuiOutlinedInput-notchedOutline"
+                  class="PrivateNotchedOutline-root-273 MuiOutlinedInput-notchedOutline"
                 >
                   <legend
-                    class="PrivateNotchedOutline-legendLabelled-284 PrivateNotchedOutline-legendNotched-285"
+                    class="PrivateNotchedOutline-legendLabelled-275 PrivateNotchedOutline-legendNotched-276"
                   >
                     <span>
                       New password
+                    </span>
+                  </legend>
+                </fieldset>
+              </div>
+            </div>
+            <div
+              class="MuiFormControl-root MuiTextField-root MuiFormControl-marginDense MuiFormControl-fullWidth"
+            >
+              <label
+                class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-marginDense MuiInputLabel-outlined"
+                data-shrink="true"
+              >
+                Email
+              </label>
+              <div
+                class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedStart MuiOutlinedInput-adornedStart MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+              >
+                <span
+                  aria-hidden="true"
+                  class="material-icons MuiIcon-root makeStyles-icon-214"
+                >
+                  alternate_email
+                </span>
+                <input
+                  aria-invalid="false"
+                  class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedStart MuiOutlinedInput-inputAdornedStart MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+                  name="email"
+                  type="text"
+                  value=""
+                />
+                <fieldset
+                  aria-hidden="true"
+                  class="PrivateNotchedOutline-root-273 MuiOutlinedInput-notchedOutline"
+                >
+                  <legend
+                    class="PrivateNotchedOutline-legendLabelled-275 PrivateNotchedOutline-legendNotched-276"
+                  >
+                    <span>
+                      Email
+                    </span>
+                  </legend>
+                </fieldset>
+              </div>
+            </div>
+            <div
+              class="MuiFormControl-root MuiTextField-root MuiFormControl-marginDense MuiFormControl-fullWidth"
+            >
+              <label
+                class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-marginDense MuiInputLabel-outlined"
+                data-shrink="true"
+              >
+                Birth date
+              </label>
+              <div
+                class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedStart MuiOutlinedInput-adornedStart MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+              >
+                <span
+                  aria-hidden="true"
+                  class="material-icons MuiIcon-root makeStyles-icon-214"
+                >
+                  date_range
+                </span>
+                <input
+                  aria-invalid="false"
+                  class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedStart MuiOutlinedInput-inputAdornedStart MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+                  name="birthDate"
+                  type="date"
+                  value=""
+                />
+                <fieldset
+                  aria-hidden="true"
+                  class="PrivateNotchedOutline-root-273 MuiOutlinedInput-notchedOutline"
+                >
+                  <legend
+                    class="PrivateNotchedOutline-legendLabelled-275 PrivateNotchedOutline-legendNotched-276"
+                  >
+                    <span>
+                      Birth date
+                    </span>
+                  </legend>
+                </fieldset>
+              </div>
+            </div>
+            <div
+              class="MuiBox-root MuiBox-root-286"
+            >
+              <div
+                class="MuiFormControl-root"
+              >
+                <label
+                  class="MuiFormLabel-root"
+                >
+                  Gender
+                </label>
+                <div
+                  class="MuiFormGroup-root MuiFormGroup-row"
+                  role="radiogroup"
+                >
+                  <label
+                    class="MuiFormControlLabel-root"
+                  >
+                    <span
+                      aria-disabled="false"
+                      class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-300 MuiRadio-root MuiRadio-colorPrimary MuiIconButton-colorPrimary"
+                    >
+                      <span
+                        class="MuiIconButton-label"
+                      >
+                        <input
+                          class="PrivateSwitchBase-input-303"
+                          name="gender"
+                          type="radio"
+                          value="male"
+                        />
+                        <div
+                          class="PrivateRadioButtonIcon-root-304"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            class="MuiSvgIcon-root"
+                            focusable="false"
+                            role="presentation"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"
+                            />
+                          </svg>
+                          <svg
+                            aria-hidden="true"
+                            class="MuiSvgIcon-root PrivateRadioButtonIcon-layer-305"
+                            focusable="false"
+                            role="presentation"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              d="M8.465 8.465C9.37 7.56 10.62 7 12 7C14.76 7 17 9.24 17 12C17 13.38 16.44 14.63 15.535 15.535C14.63 16.44 13.38 17 12 17C9.24 17 7 14.76 7 12C7 10.62 7.56 9.37 8.465 8.465Z"
+                            />
+                          </svg>
+                        </div>
+                      </span>
+                      <span
+                        class="MuiTouchRipple-root"
+                      />
+                    </span>
+                    <span
+                      class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
+                    >
+                      Male
+                    </span>
+                  </label>
+                  <label
+                    class="MuiFormControlLabel-root"
+                  >
+                    <span
+                      aria-disabled="false"
+                      class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-300 MuiRadio-root MuiRadio-colorPrimary MuiIconButton-colorPrimary"
+                    >
+                      <span
+                        class="MuiIconButton-label"
+                      >
+                        <input
+                          class="PrivateSwitchBase-input-303"
+                          name="gender"
+                          type="radio"
+                          value="female"
+                        />
+                        <div
+                          class="PrivateRadioButtonIcon-root-304"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            class="MuiSvgIcon-root"
+                            focusable="false"
+                            role="presentation"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"
+                            />
+                          </svg>
+                          <svg
+                            aria-hidden="true"
+                            class="MuiSvgIcon-root PrivateRadioButtonIcon-layer-305"
+                            focusable="false"
+                            role="presentation"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              d="M8.465 8.465C9.37 7.56 10.62 7 12 7C14.76 7 17 9.24 17 12C17 13.38 16.44 14.63 15.535 15.535C14.63 16.44 13.38 17 12 17C9.24 17 7 14.76 7 12C7 10.62 7.56 9.37 8.465 8.465Z"
+                            />
+                          </svg>
+                        </div>
+                      </span>
+                      <span
+                        class="MuiTouchRipple-root"
+                      />
+                    </span>
+                    <span
+                      class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
+                    >
+                      Female
+                    </span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div
+              class="MuiFormControl-root MuiTextField-root MuiFormControl-marginDense MuiFormControl-fullWidth"
+            >
+              <label
+                class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense MuiInputLabel-outlined"
+                data-shrink="false"
+                for="address"
+                id="address-label"
+              >
+                Address
+              </label>
+              <div
+                class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+              >
+                <input
+                  aria-invalid="false"
+                  class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+                  id="address"
+                  name="address.name"
+                  type="text"
+                  value=""
+                />
+                <fieldset
+                  aria-hidden="true"
+                  class="PrivateNotchedOutline-root-273 MuiOutlinedInput-notchedOutline"
+                >
+                  <legend
+                    class="PrivateNotchedOutline-legendLabelled-275"
+                  >
+                    <span>
+                      Address
                     </span>
                   </legend>
                 </fieldset>
