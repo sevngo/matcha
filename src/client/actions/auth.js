@@ -53,7 +53,7 @@ export const login = user => async dispatch => {
     dispatch({ type: LOGIN });
     const { data } = await postUserLogin(user);
     dispatch({ type: LOGGED, data });
-    socket.emit('logged', pick(['_id', 'username', 'friends'])(data));
+    if (data.friends) socket.emit('logged', pick(['_id', 'username', 'friends'])(data));
   } catch {
     dispatch(openSnackbar({ variant: ERROR }));
   }
