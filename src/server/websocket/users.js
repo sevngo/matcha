@@ -41,7 +41,7 @@ exports.emitToUserConnected = async (io, data, receiverId, eventName) => {
     const Users = getUsers();
     const [userConnected] = await Users.aggregate()
       .match({ _id })
-      .matchField({ sockerId: { $exists: true } })
+      .match({ sockerId: { $exists: true } })
       .toArray();
     if (userConnected) {
       const notification = createNotification(data);
