@@ -24,8 +24,6 @@ const userOne = {
   },
   password: bcrypt.hashSync(initialPassword, 8),
   _id: ObjectID(initialId),
-  usersLiked: [],
-  usersBlocked: [],
   emailVerified: true,
 };
 
@@ -41,8 +39,6 @@ const userTwo = {
   },
   password: bcrypt.hashSync(faker.internet.password(), 8),
   _id: ObjectID(),
-  usersLiked: [],
-  usersBlocked: [],
   emailVerified: true,
 };
 

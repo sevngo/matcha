@@ -11,7 +11,7 @@ exports.postUser = asyncHandler(async (req, res) => {
   const Users = getUsers();
   const {
     ops: [user],
-  } = await Users.insertOne({ usersBlocked: [], usersLiked: [], ...req.body });
+  } = await Users.insertOne(req.body);
   const { _id, email, username } = user;
   const token = createToken({ _id });
   const url = `${req.headers.referer}verify/${token}`;
@@ -81,37 +81,62 @@ exports.patchUser = asyncHandler(async (req, res, next) => {
     { returnOriginal: false },
   );
   if (!user) next(new ErrorResponse(404, 'User not found'));
-  const [data] = await Users.aggregate([addFieldBirthDate])
-    .match({ _id })
-    .lookup({ from: 'users', localField: 'usersLiked', foreignField: '_id', as: 'usersLiked' })
-    .lookup({ from: 'users', localField: 'usersBlocked', foreignField: '_id', as: 'usersBlocked' })
-    .lookup({
+  const { usersLiked, usersBlocked } = user;
+  const cursor = Users.aggregate([addFieldBirthDate]).match({ _id });
+  if (usersLiked)
+    cursor.lookup({
       from: 'users',
-      pipeline: [matchIn('_id', user.usersLiked), match('usersLiked', _id)],
+      localField: 'usersLiked',
+      foreignField: '_id',
+      as: 'usersLiked',
+    });
+  if (usersBlocked)
+    cursor.lookup({
+      from: 'users',
+      localField: 'usersBlocked',
+      foreignField: '_id',
+      as: 'usersBlocked',
+    });
+  if (usersLiked)
+    cursor.lookup({
+      from: 'users',
+      pipeline: [matchIn('_id', usersLiked), match('usersLiked', _id)],
       as: 'friends',
-    })
-    .project(authProjection)
-    .toArray();
+    });
+  cursor.project(authProjection);
+  const [data] = await cursor.toArray();
   res.send(data);
 });
 
 exports.postUserLogin = asyncHandler(async (req, res) => {
   const {
-    auth: { _id, usersLiked },
+    auth: { _id, usersLiked, usersBlocked },
     token,
   } = req;
   const Users = getUsers();
-  const [data] = await Users.aggregate([addFieldBirthDate])
-    .match({ _id })
-    .lookup({ from: 'users', localField: 'usersLiked', foreignField: '_id', as: 'usersLiked' })
-    .lookup({ from: 'users', localField: 'usersBlocked', foreignField: '_id', as: 'usersBlocked' })
-    .lookup({
+  const cursor = Users.aggregate([addFieldBirthDate]).match({ _id });
+  if (usersLiked)
+    cursor.lookup({
+      from: 'users',
+      localField: 'usersLiked',
+      foreignField: '_id',
+      as: 'usersLiked',
+    });
+  if (usersBlocked)
+    cursor.lookup({
+      from: 'users',
+      localField: 'usersBlocked',
+      foreignField: '_id',
+      as: 'usersBlocked',
+    });
+  if (usersLiked)
+    cursor.lookup({
       from: 'users',
       pipeline: [matchIn('_id', usersLiked), match('usersLiked', _id)],
       as: 'friends',
-    })
-    .project(authProjection)
-    .toArray();
+    });
+  cursor.project(authProjection);
+  const [data] = await cursor.toArray();
   res.send({ ...data, token });
 });
 

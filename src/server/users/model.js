@@ -10,16 +10,7 @@ exports.usersModel = async db => {
     validator: {
       $jsonSchema: {
         bsonType: 'object',
-        required: [
-          'username',
-          'birthDate',
-          'email',
-          'password',
-          'gender',
-          'address',
-          'usersLiked',
-          'usersBlocked',
-        ],
+        required: ['username', 'birthDate', 'email', 'password', 'gender', 'address'],
         // additionalProperties: false,
         properties: {
           _id: { bsonType: 'objectId' },
