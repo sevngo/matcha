@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import {
   AppBar,
@@ -38,7 +38,7 @@ const Auth = () => {
         </AppBar>
         <Box p={3}>
           {tab === 0 ? (
-            <Fragment>
+            <Box>
               <UserForm initialValues={initialValues} submit={login} />
               <Button onClick={() => handleDialog(true)} variant="outlined" className={classes.mt1}>
                 <FormattedMessage {...messages.forgotPassword} />
@@ -54,7 +54,7 @@ const Auth = () => {
                   <UserForm initialValues={{ email: '' }} submit={forgotPassword} />
                 </DialogContent>
               </Dialog>
-            </Fragment>
+            </Box>
           ) : (
             <UserForm
               initialValues={{
