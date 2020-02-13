@@ -12,10 +12,19 @@ const Account = () => {
   const { auth, logout } = useAuth();
   return (
     <Fragment>
-      <IconButton color="inherit" onClick={e => handleMenu(e.currentTarget)}>
+      <IconButton
+        data-testid="accountButton"
+        color="inherit"
+        onClick={e => handleMenu(e.currentTarget)}
+      >
         <AccountCircleIcon />
       </IconButton>
-      <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={() => handleMenu()}>
+      <Menu
+        data-testid="accountMenu"
+        anchorEl={anchorEl}
+        open={Boolean(anchorEl)}
+        onClose={() => handleMenu()}
+      >
         <MenuItem onClick={() => handleMenu()} component={Link} to={userPath(auth._id)}>
           <FormattedMessage {...messages.myAccount} />
         </MenuItem>

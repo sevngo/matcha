@@ -10,6 +10,54 @@ exports[`Users should match snapshot 1`] = `
   />
   <div
     class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2"
-  />
+  >
+    <div
+      class="MuiGrid-root MuiGrid-item"
+    >
+      <div
+        class="MuiPaper-root MuiCard-root makeStyles-card-134 MuiPaper-elevation1 MuiPaper-rounded"
+      >
+        <a
+          aria-disabled="false"
+          class="MuiButtonBase-root MuiCardActionArea-root"
+          href="/user/5caf003feaca23291c0cec34"
+          role="button"
+          tabindex="0"
+        >
+          <div
+            class="MuiCardMedia-root makeStyles-media-135"
+            style="background-image: url(/api/users/5caf003feaca23291c0cec34/images/5caf005beaca23291c0cec35);"
+            title="qweqwe"
+          />
+          <div
+            class="MuiCardContent-root"
+          >
+            <div
+              class="MuiGrid-root MuiGrid-container MuiGrid-align-items-xs-center MuiGrid-justify-xs-space-between"
+            >
+              <h6
+                class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom"
+              >
+                qweqwe
+                , 
+                19
+              </h6>
+              <span
+                class="MuiTypography-root MuiTypography-caption"
+              >
+                0.9 Km
+              </span>
+            </div>
+          </div>
+          <span
+            class="MuiCardActionArea-focusHighlight"
+          />
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </a>
+      </div>
+    </div>
+  </div>
 </div>
 `;
