@@ -3,9 +3,8 @@ import { is } from 'ramda';
 import useStyles from './styles';
 import React, { Fragment } from 'react';
 
-const Slider = ({ field, label, unitLabel, setFieldValue, ...rest }) => {
+const Slider = ({ name, value, field, label, unitLabel, setFieldValue, ...rest }) => {
   const classes = useStyles();
-  const { value, name } = field;
   return (
     <Fragment>
       <FormLabel>

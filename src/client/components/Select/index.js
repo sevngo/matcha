@@ -7,18 +7,22 @@ import {
   FormHelperText,
   OutlinedInput,
 } from '@material-ui/core';
-import { getFieldError } from '../../utils';
 import messages from './messages';
 
-const Select = ({ field, form: { errors, touched }, label, children, className, ...rest }) => {
-  const { isError, error } = getFieldError(field.name, errors, touched);
+const Select = ({ field, error, label, children, className, ...rest }) => {
   return (
-    <FormControl margin="dense" className={className} fullWidth error={isError} variant="outlined">
+    <FormControl
+      margin="dense"
+      className={className}
+      fullWidth
+      error={Boolean(error)}
+      variant="outlined"
+    >
       <InputLabel>{label}</InputLabel>
       <MSelect input={<OutlinedInput labelWidth={65} />} {...field} {...rest}>
         {children}
       </MSelect>
-      {isError && (
+      {error && (
         <FormHelperText>
           <FormattedMessage {...messages[error]} />
         </FormHelperText>

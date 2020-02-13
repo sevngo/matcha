@@ -8,26 +8,14 @@ import {
   FormControlLabel,
   Radio as MRadio,
 } from '@material-ui/core';
-import { getFieldError } from '../../utils';
 
-const Radio = ({
-  field,
-  form: { errors, touched },
-  label,
-  options,
-  messages,
-  disabled,
-  ...rest
-}) => {
-  const { name } = field;
-  const { isError } = getFieldError(field.name, errors, touched);
+const Radio = ({ label, options, messages, disabled, error, ...rest }) => {
   return (
-    <FormControl error={isError}>
+    <FormControl error={Boolean(error)}>
       <FormLabel>{label}</FormLabel>
-      <RadioGroup row {...field} {...rest}>
+      <RadioGroup row {...rest}>
         {map(option => (
           <FormControlLabel
-            name={name}
             key={option.id}
             value={option.value}
             control={<MRadio color="primary" />}

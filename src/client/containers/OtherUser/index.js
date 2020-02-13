@@ -27,6 +27,7 @@ const User = ({ id }) => {
     ? getUserImage(user._id, path([activeStep, '_id'])(images))
     : emptyImage;
   const maxSteps = length(images);
+  if (isEmpty(user)) return false;
   return (
     <Box p={3}>
       <Grid container spacing={2}>

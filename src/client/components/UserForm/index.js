@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
-import { withFormik, Field } from 'formik';
 import { FormattedMessage } from 'react-intl';
-import { has, compose, map, isNil, __, path } from 'ramda';
+import { has, map, isNil, __, path } from 'ramda';
+import { useFormik } from 'formik';
 import { Button, MenuItem, Box } from '@material-ui/core';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
@@ -17,33 +17,30 @@ import Radio from '../Radio';
 import Select from '../Select';
 import Slider from '../Slider';
 import { useGeolocation, useAutocomplete } from '../../hooks';
-import {
-  composeValidators,
-  isRequired,
-  isEmail,
-  minLength,
-  maxLength,
-  isYoung,
-  isOld,
-  isTrimmed,
-} from '../../utils';
 import { GENDER_OPTIONS, SORT_BY_OPTIONS } from './constants';
 import messages from './messages';
+import validate from './validate';
 
-const Component = ({
-  handleSubmit,
-  initialValues,
-  isValid,
-  disabled,
-  resetForm,
-  dirty,
-  setFieldValue,
-  values,
-  isGeoActivated,
-}) => {
+const Component = ({ initialValues, disabled, isGeoActivated, submit }) => {
   const classes = useStyles();
-  const [showPassword, toggleShowPassword] = useState(false);
   const hasInitialValue = has(__, initialValues);
+  const {
+    handleSubmit,
+    handleChange,
+    isValid,
+    dirty,
+    errors,
+    touched,
+    setFieldValue,
+    values,
+    resetForm,
+  } = useFormik({
+    initialValues,
+    onSubmit: submit,
+    validate: values => validate(initialValues, values),
+    enableReinitialize: true,
+  });
+  const [showPassword, toggleShowPassword] = useState(false);
   const address = values['address'];
   const isValidAddress = !isNil(path(['address', 'coordinates'])(values));
   const handleAddress = useCallback(address => setFieldValue('address', address), [setFieldValue]);
@@ -52,23 +49,25 @@ const Component = ({
   return (
     <form onSubmit={handleSubmit}>
       {hasInitialValue('username') && (
-        <Field
+        <Input
           name="username"
           autoComplete="username"
+          onChange={handleChange}
           label={<FormattedMessage {...messages.username} />}
-          component={Input}
-          validate={composeValidators(isRequired, minLength, maxLength(30), isTrimmed)}
+          error={touched.username && errors.username}
+          value={values.username}
           startAdornment={<AccountCircleIcon />}
           disabled={disabled}
         />
       )}
       {hasInitialValue('password') && (
-        <Field
+        <Input
           name="password"
           autoComplete="password"
           label={<FormattedMessage {...messages.password} />}
-          component={Input}
-          validate={composeValidators(isRequired, minLength, maxLength(30), isTrimmed)}
+          onChange={handleChange}
+          value={values.password}
+          error={touched.password && errors.password}
           type={showPassword ? 'text' : 'password'}
           startAdornment={<VpnKeyIcon />}
           endAdornment={{
@@ -78,12 +77,13 @@ const Component = ({
         />
       )}
       {hasInitialValue('newPassword') && (
-        <Field
+        <Input
           name="newPassword"
           autoComplete="password"
           label={<FormattedMessage {...messages.newPassword} />}
-          component={Input}
-          validate={composeValidators(minLength, maxLength(30), isTrimmed)}
+          onChange={handleChange}
+          value={values.newPassword}
+          error={touched.newPassword && errors.newPassword}
           type={showPassword ? 'text' : 'password'}
           startAdornment={<VpnKeyIcon />}
           endAdornment={{
@@ -93,21 +93,23 @@ const Component = ({
         />
       )}
       {hasInitialValue('email') && (
-        <Field
+        <Input
           name="email"
           label={<FormattedMessage {...messages.email} />}
-          component={Input}
-          validate={composeValidators(isRequired, isEmail, maxLength(30), isTrimmed)}
+          onChange={handleChange}
+          value={values.email}
+          error={touched.email && errors.email}
           startAdornment={<AlternateEmailIcon />}
           disabled={disabled}
         />
       )}
       {hasInitialValue('birthDate') && (
-        <Field
+        <Input
           name="birthDate"
           label={<FormattedMessage {...messages.birthDate} />}
-          component={Input}
-          validate={composeValidators(isRequired, isYoung, isOld)}
+          onChange={handleChange}
+          value={values.birthDate}
+          error={touched.birthDate && errors.birthDate}
           type="date"
           startAdornment={<DateRangeIcon />}
           disabled={disabled}
@@ -115,24 +117,27 @@ const Component = ({
       )}
       {hasInitialValue('gender') && (
         <Box mt={1} mb={1}>
-          <Field
+          <Radio
             name="gender"
             label={<FormattedMessage {...messages.gender} />}
-            component={Radio}
-            validate={isRequired}
+            onChange={handleChange}
+            value={values.gender}
+            error={touched.gender && errors.gender}
             options={GENDER_OPTIONS}
             messages={messages}
+            disabled={disabled}
           />
         </Box>
       )}
       {hasInitialValue('address') && (
-        <Field
+        <Input
           name="address.name"
           id="address"
           label={<FormattedMessage {...messages.address} />}
-          component={Input}
           disabled={disabled || isValidAddress}
-          validate={() => isRequired(isValidAddress)}
+          onChange={handleChange}
+          value={path(['address', 'name'])(values)}
+          error={touched.address && errors.address}
           endAdornment={
             isValidAddress &&
             !disabled && {
@@ -144,10 +149,10 @@ const Component = ({
       )}
       {hasInitialValue('ageRange') && (
         <Box p={1}>
-          <Field
+          <Slider
             name="ageRange"
             label={<FormattedMessage {...messages.ageRange} />}
-            component={Slider}
+            value={values.ageRange}
             min={18}
             max={50}
             setFieldValue={setFieldValue}
@@ -156,11 +161,11 @@ const Component = ({
       )}
       {hasInitialValue('maxDistance') && (
         <Box p={1}>
-          <Field
+          <Slider
             name="maxDistance"
             label={<FormattedMessage {...messages.maxDistance} />}
             unitLabel={<FormattedMessage {...messages.unitDistance} />}
-            component={Slider}
+            value={values.maxDistance}
             min={50}
             max={20000}
             step={50}
@@ -168,14 +173,21 @@ const Component = ({
           />
         </Box>
       )}
+
       {hasInitialValue('sortBy') && (
-        <Field name="sortBy" label={<FormattedMessage {...messages.sortBy} />} component={Select}>
+        <Select
+          name="sortBy"
+          onChange={handleChange}
+          error={touched.sortBy && errors.sortBy}
+          value={values.sortBy}
+          label={<FormattedMessage {...messages.sortBy} />}
+        >
           {map(option => (
             <MenuItem key={option.id} value={option.value}>
               <FormattedMessage {...messages[option.id]} />
             </MenuItem>
           ))(SORT_BY_OPTIONS)}
-        </Field>
+        </Select>
       )}
       {!disabled && (
         <Button
@@ -183,7 +195,7 @@ const Component = ({
           variant="contained"
           color="primary"
           size="large"
-          disabled={!isValid}
+          disabled={!isValid || !dirty}
           fullWidth
           className={classes.mt1}
         >
@@ -206,12 +218,4 @@ const Component = ({
   );
 };
 
-export default compose(
-  withFormik({
-    mapPropsToValues: ({ initialValues }) => initialValues,
-    handleSubmit: (values, { props: { submit } }) => submit(values),
-    displayName: 'UserForm',
-    enableReinitialize: true,
-    mapPropsToErrors: () => ({ isInitialInvalid: true }),
-  }),
-)(Component);
+export default Component;
