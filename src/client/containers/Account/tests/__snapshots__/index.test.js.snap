@@ -4,6 +4,7 @@ exports[`Account should match snapshot 1`] = `
 <div>
   <button
     class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit"
+    data-testid="accountButton"
     tabindex="0"
     type="button"
   >

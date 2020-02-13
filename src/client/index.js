@@ -9,7 +9,7 @@ import { CssBaseline, ThemeProvider } from '@material-ui/core';
 import './socketEvents';
 import { locale, messages, theme } from './utils';
 import store from './store';
-import App from './components/App';
+import App from './containers/App';
 
 const ROOT = (
   <Provider store={store}>

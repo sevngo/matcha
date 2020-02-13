@@ -2,12 +2,12 @@ import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { map } from 'ramda';
 import { Box, LinearProgress } from '@material-ui/core';
-import Header from '../../containers/Header';
+import Header from '../Header';
 import useStyles from './styles';
 import { routes, defaultRoute } from '../../utils';
-import Snackbar from '../../containers/Snackbar';
+import Snackbar from '../Snackbar';
 import { useApp } from '../../hooks';
-import PrivateRoute from '../PrivateRoute';
+import PrivateRoute from '../../components/PrivateRoute';
 
 const App = () => {
   const classes = useStyles();

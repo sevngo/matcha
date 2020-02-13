@@ -19,7 +19,7 @@ install:
   - npm install
 
 script:
-  - npm test -- --coverage
+  - npm run coverage
   - cat coverage/lcov.info | coveralls
 
 before_script:

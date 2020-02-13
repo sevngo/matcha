@@ -61,6 +61,7 @@
     "client": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "coverage": "react-scripts test --coverage --watchAll=false",
     "seedDb": "node scripts/seedDb",
     "eject": "react-scripts eject"
   },
