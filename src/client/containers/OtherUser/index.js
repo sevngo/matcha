@@ -34,7 +34,7 @@ const User = ({ id }) => {
         <Grid item className={classes.mw30}>
           <Paper elevation={1}>
             <Carousel activeStep={activeStep} handleStep={handleStep} maxSteps={maxSteps}>
-              <Box p={1} bgcolor="background.default">
+              <Box bgcolor="background.default">
                 <IconButton
                   className={isLiked ? classes.red : ''}
                   onClick={() => likeUser(user._id)}

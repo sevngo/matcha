@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { has, map, isNil, __, path } from 'ramda';
 import { useFormik } from 'formik';
-import { Button, MenuItem, Box } from '@material-ui/core';
+import { Button, MenuItem } from '@material-ui/core';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import ClearIcon from '@material-ui/icons/Clear';
@@ -116,18 +116,17 @@ const Component = ({ initialValues, disabled, isGeoActivated, submit }) => {
         />
       )}
       {hasInitialValue('gender') && (
-        <Box mt={1} mb={1}>
-          <Radio
-            name="gender"
-            label={<FormattedMessage {...messages.gender} />}
-            onChange={handleChange}
-            value={values.gender}
-            error={touched.gender && errors.gender}
-            options={GENDER_OPTIONS}
-            messages={messages}
-            disabled={disabled}
-          />
-        </Box>
+        <Radio
+          name="gender"
+          label={<FormattedMessage {...messages.gender} />}
+          onChange={handleChange}
+          value={values.gender}
+          error={touched.gender && errors.gender}
+          options={GENDER_OPTIONS}
+          messages={messages}
+          disabled={disabled}
+          className={classes.p1}
+        />
       )}
       {hasInitialValue('address') && (
         <Input
@@ -148,30 +147,28 @@ const Component = ({ initialValues, disabled, isGeoActivated, submit }) => {
         />
       )}
       {hasInitialValue('ageRange') && (
-        <Box p={1}>
-          <Slider
-            name="ageRange"
-            label={<FormattedMessage {...messages.ageRange} />}
-            value={values.ageRange}
-            min={18}
-            max={50}
-            setFieldValue={setFieldValue}
-          />
-        </Box>
+        <Slider
+          name="ageRange"
+          label={<FormattedMessage {...messages.ageRange} />}
+          value={values.ageRange}
+          min={18}
+          max={50}
+          setFieldValue={setFieldValue}
+          className={classes.p1}
+        />
       )}
       {hasInitialValue('maxDistance') && (
-        <Box p={1}>
-          <Slider
-            name="maxDistance"
-            label={<FormattedMessage {...messages.maxDistance} />}
-            unitLabel={<FormattedMessage {...messages.unitDistance} />}
-            value={values.maxDistance}
-            min={50}
-            max={20000}
-            step={50}
-            setFieldValue={setFieldValue}
-          />
-        </Box>
+        <Slider
+          name="maxDistance"
+          label={<FormattedMessage {...messages.maxDistance} />}
+          unitLabel={<FormattedMessage {...messages.unitDistance} />}
+          value={values.maxDistance}
+          min={50}
+          max={20000}
+          step={50}
+          setFieldValue={setFieldValue}
+          className={classes.p1}
+        />
       )}
 
       {hasInitialValue('sortBy') && (
