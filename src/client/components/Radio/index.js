@@ -9,9 +9,9 @@ import {
   Radio as MRadio,
 } from '@material-ui/core';
 
-const Radio = ({ label, options, messages, disabled, error, ...rest }) => {
+const Radio = ({ label, options, messages, disabled, error, className, ...rest }) => {
   return (
-    <FormControl error={Boolean(error)}>
+    <FormControl error={Boolean(error)} className={className}>
       <FormLabel>{label}</FormLabel>
       <RadioGroup row {...rest}>
         {map(option => (
