@@ -1,4 +1,4 @@
-import { reduce, filter, isEmpty, path, split } from 'ramda';
+import { reduce, filter, isEmpty } from 'ramda';
 
 export const getAge = dateString => {
   const today = new Date();
