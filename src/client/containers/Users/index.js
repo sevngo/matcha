@@ -1,23 +1,27 @@
 import React, { useEffect, useState, Fragment } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Hidden, Box, TablePagination, Paper } from '@material-ui/core';
 import UserCards from '../../components/UserCards';
-import { useUsers, useFilter } from '../../hooks';
+import { handleFilter, loadUsers } from '../../actions';
+import { getUsers, getUsersTotal, getFilter } from '../../selectors';
 
 const Users = () => {
-  const { users, loadUsers, total } = useUsers();
-  const { filter, handleFilter } = useFilter();
+  const dispatch = useDispatch();
+  const users = useSelector(getUsers);
+  const total = useSelector(getUsersTotal);
+  const filter = useSelector(getFilter);
   useEffect(() => {
-    loadUsers(filter);
-  }, [filter, loadUsers]);
+    dispatch(loadUsers(filter));
+  }, [dispatch, filter]);
   const { limit } = filter;
   const [page, setPage] = useState(0);
   const handleChangePage = (event, page) => {
-    handleFilter({ skip: limit * page });
+    dispatch(handleFilter({ skip: limit * page }));
     setPage(page);
   };
   const handleChangeRowsPerPage = event => {
     handleFilter({ limit: event.target.value });
-    setPage(0);
+    dispatch(setPage(0));
   };
   return (
     <Fragment>

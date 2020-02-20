@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { isEmpty } from 'ramda';
 import { Typography, IconButton } from '@material-ui/core';
 import Snackbar from '@material-ui/core/Snackbar';
@@ -6,10 +7,12 @@ import SnackbarContent from '@material-ui/core/SnackbarContent';
 import CloseIcon from '@material-ui/icons/Close';
 import { variantIcon } from './constants';
 import useStyles from './styles';
-import { useSnackbar } from '../../hooks';
+import { closeSnackbar } from '../../actions';
+import { getSnackbar } from '../../selectors';
 
 const MySnackbar = () => {
-  const { snackbar, closeSnackbar } = useSnackbar();
+  const snackbar = useSelector(getSnackbar);
+  const dispatch = useDispatch();
   const classes = useStyles();
   const isSnackbarOpen = !isEmpty(snackbar);
   if (!isSnackbarOpen) return false;
@@ -24,7 +27,7 @@ const MySnackbar = () => {
       }}
       open
       autoHideDuration={2000}
-      onClose={closeSnackbar}
+      onClose={() => dispatch(closeSnackbar())}
     >
       <SnackbarContent
         className={classes[variant]}
@@ -35,7 +38,7 @@ const MySnackbar = () => {
           </Typography>
         }
         action={[
-          <IconButton key="close" color="inherit" onClick={closeSnackbar}>
+          <IconButton key="close" color="inherit" onClick={() => dispatch(closeSnackbar())}>
             <CloseIcon />
           </IconButton>,
         ]}

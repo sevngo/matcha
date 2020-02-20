@@ -1,15 +1,18 @@
 import React, { useState, Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { MenuItem, Menu, IconButton } from '@material-ui/core';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import { useAuth } from '../../hooks';
 import { userPath } from '../../utils';
 import messages from './messages.js';
+import { getAuth } from '../../selectors';
+import { logout } from '../../actions';
 
 const Account = () => {
   const [anchorEl, handleMenu] = useState();
-  const { auth, logout } = useAuth();
+  const dispatch = useDispatch();
+  const auth = useSelector(getAuth);
   return (
     <Fragment>
       <IconButton
@@ -31,7 +34,7 @@ const Account = () => {
         <MenuItem
           onClick={() => {
             handleMenu();
-            logout();
+            dispatch(logout());
           }}
         >
           <FormattedMessage {...messages.logout} />

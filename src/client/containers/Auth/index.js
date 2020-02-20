@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import {
   AppBar,
@@ -13,13 +14,12 @@ import {
   Paper,
 } from '@material-ui/core';
 import UserForm from '../../components/UserForm';
-import { useAuth } from '../../hooks';
 import useStyles from './styles';
-
+import { login, register, forgotPassword } from '../../actions';
 import messages from './messages';
 
 const Auth = () => {
-  const { login, register, forgotPassword } = useAuth();
+  const dispatch = useDispatch();
   const classes = useStyles();
   const [tab, handleTab] = useState(0);
   const [isDialogOpen, handleDialog] = useState(false);
@@ -39,7 +39,7 @@ const Auth = () => {
         <Box p={3}>
           {tab === 0 ? (
             <Box>
-              <UserForm initialValues={initialValues} submit={login} />
+              <UserForm initialValues={initialValues} submit={values => dispatch(login(values))} />
               <Button onClick={() => handleDialog(true)} variant="outlined" className={classes.mt1}>
                 <FormattedMessage {...messages.forgotPassword} />
               </Button>
@@ -51,7 +51,10 @@ const Auth = () => {
                   <DialogContentText>
                     <FormattedMessage {...messages.enterEmail} />
                   </DialogContentText>
-                  <UserForm initialValues={{ email: '' }} submit={forgotPassword} />
+                  <UserForm
+                    initialValues={{ email: '' }}
+                    submit={values => dispatch(forgotPassword(values))}
+                  />
                 </DialogContent>
               </Dialog>
             </Box>
@@ -64,7 +67,7 @@ const Auth = () => {
                 birthDate: '',
                 address: { name: '' },
               }}
-              submit={register}
+              submit={values => dispatch(register(values))}
               isGeoActivated
             />
           )}

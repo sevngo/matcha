@@ -1,6 +1,7 @@
 import React, { useState, Fragment } from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
+import { useSelector } from 'react-redux';
 import { AppBar, Toolbar, Typography, IconButton } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import HomeIcon from '@material-ui/icons/Home';
@@ -8,14 +9,14 @@ import Drawer from '../Drawer';
 import Account from '../Account';
 import Notifications from '../Notifications';
 import { usersPath } from '../../utils';
-import { useToken } from '../../hooks';
 import useStyles from './styles';
 import messages from './messages';
+import { getToken } from '../../selectors';
 
 const Header = () => {
   const classes = useStyles();
   const { isExact: isUsersPath } = useRouteMatch(usersPath);
-  const token = useToken();
+  const token = useSelector(getToken);
   const [isDrawerOpen, toggleDrawer] = useState(false);
   return (
     <Fragment>
