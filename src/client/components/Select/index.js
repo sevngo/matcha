@@ -9,26 +9,24 @@ import {
 } from '@material-ui/core';
 import messages from './messages';
 
-const Select = ({ field, error, label, children, className, ...rest }) => {
-  return (
-    <FormControl
-      margin="dense"
-      className={className}
-      fullWidth
-      error={Boolean(error)}
-      variant="outlined"
-    >
-      <InputLabel>{label}</InputLabel>
-      <MSelect input={<OutlinedInput labelWidth={65} />} {...field} {...rest}>
-        {children}
-      </MSelect>
-      {error && (
-        <FormHelperText>
-          <FormattedMessage {...messages[error]} />
-        </FormHelperText>
-      )}
-    </FormControl>
-  );
-};
+const Select = ({ field, error, label, children, className, ...rest }) => (
+  <FormControl
+    margin="dense"
+    className={className}
+    fullWidth
+    error={Boolean(error)}
+    variant="outlined"
+  >
+    <InputLabel>{label}</InputLabel>
+    <MSelect input={<OutlinedInput labelWidth={65} />} {...field} {...rest}>
+      {children}
+    </MSelect>
+    {error && (
+      <FormHelperText>
+        <FormattedMessage {...messages[error]} />
+      </FormHelperText>
+    )}
+  </FormControl>
+);
 
 export default Select;

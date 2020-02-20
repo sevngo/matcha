@@ -9,23 +9,21 @@ import {
   Radio as MRadio,
 } from '@material-ui/core';
 
-const Radio = ({ label, options, messages, disabled, error, className, ...rest }) => {
-  return (
-    <FormControl error={Boolean(error)} className={className}>
-      <FormLabel>{label}</FormLabel>
-      <RadioGroup row {...rest}>
-        {map(option => (
-          <FormControlLabel
-            key={option.id}
-            value={option.value}
-            control={<MRadio color="primary" />}
-            label={<FormattedMessage {...messages[option.id]} />}
-            disabled={disabled}
-          />
-        ))(options)}
-      </RadioGroup>
-    </FormControl>
-  );
-};
+const Radio = ({ label, options, messages, disabled, error, className, ...rest }) => (
+  <FormControl error={Boolean(error)} className={className}>
+    <FormLabel>{label}</FormLabel>
+    <RadioGroup row {...rest}>
+      {map(option => (
+        <FormControlLabel
+          key={option.id}
+          value={option.value}
+          control={<MRadio color="primary" />}
+          label={<FormattedMessage {...messages[option.id]} />}
+          disabled={disabled}
+        />
+      ))(options)}
+    </RadioGroup>
+  </FormControl>
+);
 
 export default Radio;

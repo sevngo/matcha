@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { find, path, isEmpty, length } from 'ramda';
+import { useSelector, useDispatch } from 'react-redux';
 import { Grid, Box, IconButton, Paper } from '@material-ui/core';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import DoneAllIcon from '@material-ui/icons/DoneAll';
@@ -9,15 +10,19 @@ import Carousel from '../../components/Carousel';
 import emptyImage from '../../images/emptyImage.png';
 import { getUserImage } from '../../api';
 import useStyles from './styles';
-import { useUser, useRelations } from '../../hooks';
+import { loadUser, likeUser, blockUser } from '../../actions';
+import { getUser, getUsersLiked, getUsersBlocked, getFriends } from '../../selectors';
 
 const User = ({ id }) => {
-  const { user, loadUser } = useUser();
-  const { likeUser, blockUser, usersLiked, usersBlocked, friends } = useRelations();
+  const user = useSelector(getUser);
+  const usersLiked = useSelector(getUsersLiked);
+  const usersBlocked = useSelector(getUsersBlocked);
+  const friends = useSelector(getFriends);
+  const dispatch = useDispatch();
   const [activeStep, handleStep] = useState(0);
   useEffect(() => {
-    loadUser(id);
-  }, [id, loadUser]);
+    dispatch(loadUser(id));
+  }, [dispatch, id]);
   const classes = useStyles();
   const isLiked = Boolean(find(userLiked => userLiked._id === user._id)(usersLiked));
   const isBlocked = Boolean(find(userBlocked => userBlocked._id === user._id)(usersBlocked));
@@ -37,14 +42,14 @@ const User = ({ id }) => {
               <Box bgcolor="background.default">
                 <IconButton
                   className={isLiked ? classes.red : ''}
-                  onClick={() => likeUser(user._id)}
+                  onClick={() => dispatch(likeUser(user._id))}
                   disabled={isLiked}
                 >
                   <FavoriteIcon />
                 </IconButton>
                 <IconButton
                   className={isBlocked ? classes.red : ''}
-                  onClick={() => blockUser(user._id)}
+                  onClick={() => dispatch(blockUser(user._id))}
                   disabled={isBlocked}
                 >
                   <BlockIcon />

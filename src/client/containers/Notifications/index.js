@@ -1,4 +1,5 @@
 import React, { useState, Fragment } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { path, length } from 'ramda';
 import { FormattedMessage } from 'react-intl';
 import {
@@ -13,14 +14,15 @@ import {
   DialogContent,
 } from '@material-ui/core';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-
-import { useNotifications } from '../../hooks';
+import { removeNotification } from '../../actions';
+import { getNotifications } from '../../selectors';
 import useStyles from './styles';
 import messages from './messages';
 
 const Notifications = () => {
   const classes = useStyles();
-  const { removeNotification, notifications } = useNotifications();
+  const dispatch = useDispatch();
+  const notifications = useSelector(getNotifications);
   const [isDialogOpen, handleDialog] = useState(false);
   const notificationsLength = length(notifications);
   return (
@@ -47,7 +49,7 @@ const Notifications = () => {
                       />
                     </Typography>
                     <Icon
-                      onClick={() => removeNotification(notification._id)}
+                      onClick={() => dispatch(removeNotification(notification._id))}
                       color="inherit"
                       className={classes.ml1}
                     >

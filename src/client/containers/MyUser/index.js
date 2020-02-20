@@ -1,5 +1,6 @@
 import React, { useRef, useState, Fragment } from 'react';
 import { length, isEmpty, path, map, pick } from 'ramda';
+import { useSelector, useDispatch } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import {
   Grid,
@@ -19,22 +20,24 @@ import Carousel from '../../components/Carousel';
 import { getUserImage } from '../../api';
 import { compact } from '../../utils';
 import emptyImage from '../../images/emptyImage.png';
-import { useAuth, useRelations, useImages, useToken } from '../../hooks';
 import useStyles from './styles';
 import messages from './messages';
+import { getImages, getToken, getAuth, getUsersBlocked } from '../../selectors';
+import { likeUser, uploadImage, removeImage, updateUser } from '../../actions';
 
 const MyUser = () => {
   const classes = useStyles();
-  const { auth, updateUser } = useAuth();
-  const token = useToken();
-  const { images, uploadImage, removeImage } = useImages();
-  const { likeUser, usersBlocked } = useRelations();
+  const dispatch = useDispatch();
+  const auth = useSelector(getAuth);
+  const token = useSelector(getToken);
+  const images = useSelector(getImages);
+  const usersBlocked = useSelector(getUsersBlocked);
   const [activeStep, handleStep] = useState(0);
   const [isDialogOpen, handleDialog] = useState(false);
   const { _id } = auth;
   const inputEl = useRef();
   const addImage = image => {
-    if (image) uploadImage(image);
+    if (image) dispatch(uploadImage(image));
   };
   const image = !isEmpty(images)
     ? getUserImage(_id, path([activeStep, '_id'])(images))
@@ -74,7 +77,7 @@ const MyUser = () => {
                     <Button
                       size="small"
                       onClick={() => {
-                        removeImage(path([activeStep, '_id'])(images));
+                        dispatch(removeImage(path([activeStep, '_id'])(images)));
                         handleStep(0);
                         handleDialog(false);
                       }}
@@ -104,7 +107,7 @@ const MyUser = () => {
                 ...userForm,
                 newPassword: '',
               }}
-              submit={user => updateUser(token, compact(user))}
+              submit={user => dispatch(updateUser(token, compact(user)))}
             />
           </Paper>
         </Grid>
@@ -126,7 +129,7 @@ const MyUser = () => {
                   <Typography>{user.username}</Typography>
                   <Button
                     variant="outlined"
-                    onClick={() => likeUser(user._id)}
+                    onClick={() => dispatch(likeUser(user._id))}
                     className={classes.like}
                   >
                     <FormattedMessage {...messages.likeUser} />
