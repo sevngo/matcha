@@ -20,8 +20,8 @@ const Users = () => {
     setPage(page);
   };
   const handleChangeRowsPerPage = event => {
-    handleFilter({ limit: event.target.value });
-    dispatch(setPage(0));
+    dispatch(handleFilter({ limit: event.target.value }));
+    setPage(0);
   };
   return (
     <Fragment>
