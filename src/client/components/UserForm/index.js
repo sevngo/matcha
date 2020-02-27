@@ -34,6 +34,7 @@ const Component = ({ initialValues, disabled, isGeoActivated, submit }) => {
     setFieldValue,
     values,
     resetForm,
+    handleBlur,
   } = useFormik({
     initialValues,
     onSubmit: submit,
@@ -53,6 +54,7 @@ const Component = ({ initialValues, disabled, isGeoActivated, submit }) => {
           name="username"
           autoComplete="username"
           onChange={handleChange}
+          onBlur={handleBlur}
           label={<FormattedMessage {...messages.username} />}
           error={touched.username && errors.username}
           value={values.username}
@@ -66,6 +68,7 @@ const Component = ({ initialValues, disabled, isGeoActivated, submit }) => {
           autoComplete="password"
           label={<FormattedMessage {...messages.password} />}
           onChange={handleChange}
+          onBlur={handleBlur}
           value={values.password}
           error={touched.password && errors.password}
           type={showPassword ? 'text' : 'password'}
@@ -82,6 +85,7 @@ const Component = ({ initialValues, disabled, isGeoActivated, submit }) => {
           autoComplete="password"
           label={<FormattedMessage {...messages.newPassword} />}
           onChange={handleChange}
+          onBlur={handleBlur}
           value={values.newPassword}
           error={touched.newPassword && errors.newPassword}
           type={showPassword ? 'text' : 'password'}
@@ -97,6 +101,7 @@ const Component = ({ initialValues, disabled, isGeoActivated, submit }) => {
           name="email"
           label={<FormattedMessage {...messages.email} />}
           onChange={handleChange}
+          onBlur={handleBlur}
           value={values.email}
           error={touched.email && errors.email}
           startAdornment={<AlternateEmailIcon />}
@@ -108,6 +113,7 @@ const Component = ({ initialValues, disabled, isGeoActivated, submit }) => {
           name="birthDate"
           label={<FormattedMessage {...messages.birthDate} />}
           onChange={handleChange}
+          onBlur={handleBlur}
           value={values.birthDate}
           error={touched.birthDate && errors.birthDate}
           type="date"
@@ -135,6 +141,7 @@ const Component = ({ initialValues, disabled, isGeoActivated, submit }) => {
           label={<FormattedMessage {...messages.address} />}
           disabled={disabled || isValidAddress}
           onChange={handleChange}
+          onBlur={handleBlur}
           value={path(['address', 'name'])(values)}
           error={touched.address && errors.address}
           endAdornment={

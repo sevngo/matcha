@@ -11,7 +11,7 @@ exports.usersModel = async db => {
       $jsonSchema: {
         bsonType: 'object',
         required: ['username', 'birthDate', 'email', 'password', 'gender', 'address'],
-        // additionalProperties: false,
+        additionalProperties: false,
         properties: {
           _id: { bsonType: 'objectId' },
           username: { bsonType: 'string', minLength: 3, maxLength: 30 },
