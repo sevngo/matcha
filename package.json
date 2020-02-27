@@ -63,7 +63,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "coverage": "react-scripts test --coverage --watchAll=false",
-    "seed": "NODE_ENV=development node scripts/seedDb",
+    "seed:db": "NODE_ENV=development node scripts/seedDb",
     "create:user": "NODE_ENV=development node scripts/createVerifiedUser",
     "eject": "react-scripts eject"
   },

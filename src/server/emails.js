@@ -5,8 +5,7 @@ sgMail.setApiKey(SENDGRID_API_KEY);
 
 exports.sendEmail = (email, subject, text) => {
   const message = {
-    // to: email,
-    to: 'sevngo@gmail.com',
+    to: email,
     from: 'matcha@matcha.com',
     subject,
     text,

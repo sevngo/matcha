@@ -4,12 +4,12 @@
 
 React Redux Node.js MongoDB web application
 
-node v12.13.0
+Install Node v12.14.0
 
 ## .env.development
 
 ```
-REACT_APP_PROXY_PORT=
+SERVER_PORT=8080
 REACT_APP_GOOGLEMAPS_API_KEY=
 MONGODB_URI=
 DATABASE_NAME=
@@ -18,7 +18,8 @@ JWT_SECRET=
 ```
 
 ```
-mongod
+docker run -p 27017:27017 mongo:4.2.3
+npm i
+npm run seed:db
 npm run dev
-npm run seedDb
 ```
