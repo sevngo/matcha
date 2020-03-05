@@ -1,11 +1,18 @@
 const path = require('path');
-require('dotenv').config({
-  path: path.resolve(__dirname, '..', '..', '..', `.env.${process.env.NODE_ENV}`),
-});
+
+const PRODUCTION = 'production';
+const DEVELOPMENT = 'development';
+const TEST = 'test';
+
+const { NODE_ENV } = process.env;
+
+if (NODE_ENV !== PRODUCTION)
+  require('dotenv').config({
+    path: path.resolve(__dirname, '..', '..', '..', `.env.${NODE_ENV}`),
+  });
 
 const {
-  JWT_SECRET = 'mySecret',
-  NODE_ENV,
+  JWT_SECRET = 'defaultSecret',
   MONGODB_URI,
   DATABASE_NAME,
   REACT_APP_PROXY_PORT,
@@ -13,9 +20,7 @@ const {
   SENDGRID_API_KEY,
 } = process.env;
 
-const DEVELOPMENT = 'development';
-const PRODUCTION = 'production';
-const TEST = 'test';
+// default values for testing environment
 
 const USERS = 'users';
 

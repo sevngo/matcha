@@ -1,7 +1,7 @@
 language: node_js
 
 node_js:
-  - 12.14.0
+  - 12.16.1
 
 services:
   - docker
@@ -9,10 +9,6 @@ services:
 cache:
   directories:
     - node_modules
-
-env:
-  - MONGODB_URI=mongodb://127.0.0.1:27017
-    DATABASE_NAME=matcha-test
 
 before_script:
   - docker run -d -p 27017:27017 mongo:4.2.3
