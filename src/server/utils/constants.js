@@ -6,10 +6,9 @@ const TEST = 'test';
 
 const { NODE_ENV } = process.env;
 
-if (NODE_ENV !== PRODUCTION)
-  require('dotenv').config({
-    path: path.resolve(__dirname, '..', '..', '..', `.env.${NODE_ENV}`),
-  });
+require('dotenv').config({
+  path: path.resolve(__dirname, '..', '..', '..', `.env.${NODE_ENV}`),
+});
 
 const {
   JWT_SECRET = 'defaultSecret',
