@@ -4,7 +4,7 @@ import store from './store';
 import { GOT_FRIENDED, GOT_UNDFRIENDED, ADD_NOTIFICATION } from './actions';
 import { getAuth } from './selectors';
 
-const socket = io(`http://localhost:${process.env.REACT_APP_PROXY_PORT}`);
+const socket = io(`http://localhost:${process.env.SERVER_PORT}`); // logic to be changed for production environment
 
 socket.on('connect', () => {
   const state = store.getState();
