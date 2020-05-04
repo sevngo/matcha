@@ -20,14 +20,14 @@
     "husky": "^4.2.5",
     "lint-staged": "^10.2.2",
     "nodemon": "^2.0.3",
-    "prettier": "^1.19.1",
+    "prettier": "^2.0.5",
     "redux-devtools-extension": "^2.13.8",
     "supertest": "^4.0.2"
   },
   "dependencies": {
     "@material-ui/core": "^4.9.13",
     "@material-ui/icons": "^4.9.1",
-    "@sendgrid/mail": "^6.5.5",
+    "@sendgrid/mail": "^7.1.0",
     "axios": "^0.19.2",
     "bcryptjs": "^2.4.3",
     "dotenv": "^8.2.0",
