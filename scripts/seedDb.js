@@ -25,7 +25,6 @@ const insertData = async () => {
     emailVerified: false,
   });
   const newUsers = times(makeRandomUser, 20);
-  console.log(newUsers);
   await getUsers().insertMany(newUsers);
   console.log('Data inserted in the database');
 };

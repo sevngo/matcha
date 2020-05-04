@@ -9,6 +9,7 @@ Install Node v12.14.0
 ## .env.development
 
 ```
+REACT_APP_API_URL=http://localhost:8080
 SERVER_PORT=8080
 REACT_APP_GOOGLEMAPS_API_KEY=
 MONGODB_URI=

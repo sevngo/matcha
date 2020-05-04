@@ -21,7 +21,6 @@ exports[`Snackbar should match snapshot 1`] = `
             aria-hidden="true"
             class="MuiSvgIcon-root makeStyles-iconVariant-6"
             focusable="false"
-            role="presentation"
             viewBox="0 0 24 24"
           >
             <path
@@ -46,7 +45,6 @@ exports[`Snackbar should match snapshot 1`] = `
               aria-hidden="true"
               class="MuiSvgIcon-root"
               focusable="false"
-              role="presentation"
               viewBox="0 0 24 24"
             >
               <path
