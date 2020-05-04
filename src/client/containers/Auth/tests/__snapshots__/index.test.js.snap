@@ -42,7 +42,7 @@ exports[`Auth should match snapshot 1`] = `
                 aria-selected="false"
                 class="MuiButtonBase-root MuiTab-root MuiTab-textColorInherit MuiTab-fullWidth"
                 role="tab"
-                tabindex="0"
+                tabindex="-1"
                 type="button"
               >
                 <span
@@ -88,7 +88,6 @@ exports[`Auth should match snapshot 1`] = `
                     aria-hidden="true"
                     class="MuiSvgIcon-root"
                     focusable="false"
-                    role="presentation"
                     viewBox="0 0 24 24"
                   >
                     <path
@@ -137,7 +136,6 @@ exports[`Auth should match snapshot 1`] = `
                     aria-hidden="true"
                     class="MuiSvgIcon-root"
                     focusable="false"
-                    role="presentation"
                     viewBox="0 0 24 24"
                   >
                     <path
@@ -165,7 +163,6 @@ exports[`Auth should match snapshot 1`] = `
                       aria-hidden="true"
                       class="MuiSvgIcon-root"
                       focusable="false"
-                      role="presentation"
                       viewBox="0 0 24 24"
                     >
                       <path

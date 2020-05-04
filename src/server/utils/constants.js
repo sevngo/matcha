@@ -14,7 +14,6 @@ const {
   JWT_SECRET = 'defaultSecret',
   MONGODB_URI,
   DATABASE_NAME,
-  REACT_APP_PROXY_PORT,
   SERVER_PORT,
   SENDGRID_API_KEY,
 } = process.env;
@@ -33,6 +32,5 @@ module.exports = {
   DATABASE_NAME,
   SERVER_PORT,
   SENDGRID_API_KEY,
-  REACT_APP_PROXY_PORT,
   USERS,
 };
