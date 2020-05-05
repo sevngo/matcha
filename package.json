@@ -1,8 +1,9 @@
 {
   "name": "matcha",
   "version": "1.0.0",
+  "engineStrict": true,
   "engines": {
-    "node": "12.16.1"
+    "node": "13.14.0"
   },
   "description": "React.js Node.js MongoDB application",
   "main": "index.js",
