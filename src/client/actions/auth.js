@@ -33,12 +33,12 @@ export const GOT_UNDFRIENDED = 'GOT_UNDFRIENDED';
 export const ADD_NOTIFICATION = 'ADD_NOTIFICATION';
 export const REMOVE_NOTIFICATION = 'REMOVE_NOTIFICATION';
 
-export const logout = () => dispatch => {
+export const logout = () => (dispatch) => {
   dispatch({ type: LOGOUT });
   socket.emit('logout');
 };
 
-export const register = user => async dispatch => {
+export const register = (user) => async (dispatch) => {
   try {
     dispatch({ type: REGISTER });
     await postUser(user);
@@ -48,18 +48,18 @@ export const register = user => async dispatch => {
   }
 };
 
-export const login = user => async dispatch => {
+export const login = (user) => async (dispatch) => {
   try {
     dispatch({ type: LOGIN });
     const { data } = await postUserLogin(user);
     dispatch({ type: LOGGED, data });
-    if (data.friends) socket.emit('logged', pick(['_id', 'username', 'friends'])(data));
+    socket.emit('logged', pick(['_id', 'username', 'friends'])(data));
   } catch {
     dispatch(openSnackbar({ variant: ERROR }));
   }
 };
 
-export const updateUser = (token, auth) => async dispatch => {
+export const updateUser = (token, auth) => async (dispatch) => {
   try {
     dispatch({ type: UPDATE_USER });
     const { data } = await patchUser(token, auth);
@@ -70,7 +70,7 @@ export const updateUser = (token, auth) => async dispatch => {
   }
 };
 
-export const forgotPassword = auth => async dispatch => {
+export const forgotPassword = (auth) => async (dispatch) => {
   try {
     dispatch({ type: FORGOT_PASSWORD });
     await postUserForgot(auth);
@@ -80,7 +80,7 @@ export const forgotPassword = auth => async dispatch => {
   }
 };
 
-export const likeUser = userLikedId => async (dispatch, getState) => {
+export const likeUser = (userLikedId) => async (dispatch, getState) => {
   try {
     dispatch({ type: LIKE_USER });
     const state = getState();
@@ -96,7 +96,7 @@ export const likeUser = userLikedId => async (dispatch, getState) => {
       userLikedId,
     });
     const friendsIds = getIds(data.friends);
-    const isFriended = find(friendId => userLikedId === friendId)(friendsIds);
+    const isFriended = find((friendId) => userLikedId === friendId)(friendsIds);
     if (isFriended)
       socket.emit('userFriended', { user: pick(['_id', 'username'])(data), userLikedId });
   } catch {
@@ -104,7 +104,7 @@ export const likeUser = userLikedId => async (dispatch, getState) => {
   }
 };
 
-export const blockUser = userBlockedId => async (dispatch, getState) => {
+export const blockUser = (userBlockedId) => async (dispatch, getState) => {
   try {
     dispatch({ type: BLOCK_USER });
     const state = getState();
@@ -122,7 +122,7 @@ export const blockUser = userBlockedId => async (dispatch, getState) => {
       userBlockedId,
     });
     const friendsIds = getIds(friends);
-    const isUnfriended = find(friendId => userBlockedId === friendId)(friendsIds);
+    const isUnfriended = find((friendId) => userBlockedId === friendId)(friendsIds);
     if (isUnfriended)
       socket.emit('userUnfriended', { user: pick(['_id', 'username'])(data), userBlockedId });
   } catch {
@@ -130,7 +130,7 @@ export const blockUser = userBlockedId => async (dispatch, getState) => {
   }
 };
 
-export const uploadImage = image => async (dispatch, getState) => {
+export const uploadImage = (image) => async (dispatch, getState) => {
   try {
     dispatch({ type: UPLOAD_IMAGE });
     const state = getState();
@@ -142,7 +142,7 @@ export const uploadImage = image => async (dispatch, getState) => {
   }
 };
 
-export const removeImage = imageId => async (dispatch, getState) => {
+export const removeImage = (imageId) => async (dispatch, getState) => {
   try {
     dispatch({ type: DELETE_IMAGE });
     const state = getState();
@@ -154,4 +154,4 @@ export const removeImage = imageId => async (dispatch, getState) => {
   }
 };
 
-export const removeNotification = _id => ({ type: REMOVE_NOTIFICATION, _id });
+export const removeNotification = (_id) => ({ type: REMOVE_NOTIFICATION, _id });

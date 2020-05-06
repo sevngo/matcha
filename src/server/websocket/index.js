@@ -5,33 +5,71 @@ const {
   emitToUserConnected,
 } = require('./users');
 
-const socketEvents = socket => {
+const socketEvents = (socket) => {
   socket.on('logged', async ({ friends, _id, username }) => {
-    await addUserSocketId(_id, socket.id);
-    await emitToFriendsConnected(socket, { _id, username }, friends, 'friendLogged');
+    try {
+      await addUserSocketId(_id, socket.id);
+      if (friends) await emitToFriendsConnected(socket, { _id, username }, friends, 'friendLogged');
+    } catch (e) {
+      console.log(e);
+    }
   });
 
-  socket.on('reLogged', _id => addUserSocketId(_id, socket.id));
+  socket.on('reLogged', (_id) => {
+    try {
+      addUserSocketId(_id, socket.id);
+    } catch (e) {
+      console.log(e);
+    }
+  });
 
-  socket.on('userLiked', ({ user, userLikedId }) =>
-    emitToUserConnected(socket, user, userLikedId, 'gotLiked'),
-  );
+  socket.on('userLiked', ({ user, userLikedId }) => {
+    try {
+      emitToUserConnected(socket, user, userLikedId, 'gotLiked');
+    } catch (e) {
+      console.log(e);
+    }
+  });
 
-  socket.on('userFriended', ({ user, userLikedId }) =>
-    emitToUserConnected(socket, user, userLikedId, 'gotFriended'),
-  );
+  socket.on('userFriended', ({ user, userLikedId }) => {
+    try {
+      emitToUserConnected(socket, user, userLikedId, 'gotFriended');
+    } catch (e) {
+      console.log(e);
+    }
+  });
 
-  socket.on('userBlocked', ({ user, userBlockedId }) =>
-    emitToUserConnected(socket, user, userBlockedId, 'gotBlocked'),
-  );
+  socket.on('userBlocked', ({ user, userBlockedId }) => {
+    try {
+      emitToUserConnected(socket, user, userBlockedId, 'gotBlocked');
+    } catch (e) {
+      console.log(e);
+    }
+  });
 
-  socket.on('userUnfriended', ({ user, userBlockedId }) =>
-    emitToUserConnected(socket, user, userBlockedId, 'gotUnfriended'),
-  );
+  socket.on('userUnfriended', ({ user, userBlockedId }) => {
+    try {
+      emitToUserConnected(socket, user, userBlockedId, 'gotUnfriended');
+    } catch (e) {
+      console.log(e);
+    }
+  });
 
-  socket.on('logout', () => removeUserSocketId(socket.id));
+  socket.on('logout', () => {
+    try {
+      removeUserSocketId(socket.id);
+    } catch (e) {
+      console.log(e);
+    }
+  });
 
-  socket.on('disconnect', () => removeUserSocketId(socket.id));
+  socket.on('disconnect', () => {
+    try {
+      removeUserSocketId(socket.id);
+    } catch (e) {
+      console.log(e);
+    }
+  });
 };
 
 module.exports = socketEvents;

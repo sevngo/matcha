@@ -11,6 +11,18 @@ const Users = () => {
   const total = useSelector(getUsersTotal);
   const filter = useSelector(getFilter);
   useEffect(() => {
+    dispatch(
+      handleFilter({
+        gender: 'male',
+        maxDistance: 20000,
+        ageRange: [18, 50],
+        sortBy: 'distance:asc',
+        limit: 10,
+        skip: 0,
+      }),
+    );
+  }, [dispatch]);
+  useEffect(() => {
     dispatch(loadUsers(filter));
   }, [dispatch, filter]);
   const { limit } = filter;
@@ -19,7 +31,7 @@ const Users = () => {
     dispatch(handleFilter({ skip: limit * page }));
     setPage(page);
   };
-  const handleChangeRowsPerPage = event => {
+  const handleChangeRowsPerPage = (event) => {
     dispatch(handleFilter({ limit: event.target.value }));
     setPage(0);
   };

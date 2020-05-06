@@ -2,25 +2,23 @@
 
 [Subject](https://github.com/sevngo/Matcha/blob/master/subject.pdf)
 
-React Redux Node.js MongoDB web application
+React Redux Node.js MongoDB Socket.IO web application
 
-Install Node v12.14.0
+## Development mode
 
-## .env.development
-
-```
-REACT_APP_API_URL=http://localhost:8080
-SERVER_PORT=8080
-REACT_APP_GOOGLEMAPS_API_KEY=
-MONGODB_URI=
-DATABASE_NAME=
-SENDGRID_API_KEY=
-JWT_SECRET=
-```
+Fill .env.development then :
 
 ```
 docker run -p 27017:27017 mongo:4.2.3
 npm i
 npm run seed:db
 npm run dev
+```
+
+## Production mode
+
+Fill .env.production then :
+
+```
+docker-compose up
 ```
