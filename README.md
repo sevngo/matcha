@@ -6,7 +6,19 @@ React Redux Node.js MongoDB Socket.IO web application
 
 ## Development mode
 
-Fill .env.development then :
+Create .env.development
+
+```
+REACT_APP_API_URL=http://localhost:8080
+SERVER_PORT=8080
+REACT_APP_GOOGLEMAPS_API_KEY=
+MONGODB_URI=mongodb://localhost:27017
+DATABASE_NAME=matcha
+SENDGRID_API_KEY=
+JWT_SECRET=mysecret
+```
+
+Then run :
 
 ```
 docker run -p 27017:27017 mongo:4.2.3
@@ -17,7 +29,19 @@ npm run dev
 
 ## Production mode
 
-Fill .env.production then :
+Create .env.production
+
+```
+REACT_APP_API_URL=http://localhost:8080
+SERVER_PORT=8080
+REACT_APP_GOOGLEMAPS_API_KEY=
+MONGODB_URI=mongodb://mongo:27017
+DATABASE_NAME=matcha
+SENDGRID_API_KEY=
+JWT_SECRET=mysecret
+```
+
+Then run :
 
 ```
 docker-compose up
