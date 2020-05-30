@@ -43,12 +43,22 @@ const MyUser = () => {
     ? getUserImage(_id, path([activeStep, '_id'])(images))
     : emptyImage;
   const maxSteps = length(images);
-  const userForm = pick(['username', 'birthDate', 'email', 'gender', 'address'])(auth);
+  const userForm = pick([
+    'username',
+    'birthDate',
+    'email',
+    'gender',
+    'address',
+  ])(auth);
   return (
     <Box p={3}>
       <Grid container spacing={2}>
         <Grid item xs={12} className={classes.mw30}>
-          <Carousel activeStep={activeStep} maxSteps={maxSteps} handleStep={handleStep}>
+          <Carousel
+            activeStep={activeStep}
+            maxSteps={maxSteps}
+            handleStep={handleStep}
+          >
             <Box p={1} bgcolor="background.default">
               <input
                 ref={inputEl}
@@ -77,7 +87,9 @@ const MyUser = () => {
                     <Button
                       size="small"
                       onClick={() => {
-                        dispatch(removeImage(path([activeStep, '_id'])(images)));
+                        dispatch(
+                          removeImage(path([activeStep, '_id'])(images))
+                        );
                         handleStep(0);
                         handleDialog(false);
                       }}

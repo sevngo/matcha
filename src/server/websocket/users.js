@@ -1,6 +1,10 @@
 const { ObjectID } = require('mongodb');
 const { map } = require('ramda');
-const { getIds, createNotification, getSocketIds } = require('../utils/functions');
+const {
+  getIds,
+  createNotification,
+  getSocketIds,
+} = require('../utils/functions');
 const { getUsers } = require('../database');
 
 exports.addUserSocketId = async (_id, socketId) => {

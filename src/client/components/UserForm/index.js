@@ -44,9 +44,10 @@ const Component = ({ initialValues, disabled, isGeoActivated, submit }) => {
   const [showPassword, toggleShowPassword] = useState(false);
   const address = values['address'];
   const isValidAddress = !isNil(path(['address', 'coordinates'])(values));
-  const handleAddress = useCallback((address) => setFieldValue('address', address), [
-    setFieldValue,
-  ]);
+  const handleAddress = useCallback(
+    (address) => setFieldValue('address', address),
+    [setFieldValue]
+  );
   useGeolocation(handleAddress, address && isGeoActivated);
   useAutocomplete('address', handleAddress, !isNil(address));
   return (

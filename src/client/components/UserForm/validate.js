@@ -15,21 +15,38 @@ const validate = (initialValues, values) => {
   const errors = {};
   const usernameError =
     hasInitialValue('username') &&
-    composeValidators(isRequired, minLength, maxLength(30), isTrimmed)(values.username);
+    composeValidators(
+      isRequired,
+      minLength,
+      maxLength(30),
+      isTrimmed
+    )(values.username);
   const passwordError =
     hasInitialValue('password') &&
-    composeValidators(isRequired, minLength, maxLength(30), isTrimmed)(values.password);
+    composeValidators(
+      isRequired,
+      minLength,
+      maxLength(30),
+      isTrimmed
+    )(values.password);
   const newPasswordError =
     hasInitialValue('newPassword') &&
     composeValidators(minLength, maxLength(30), isTrimmed)(values.newPassword);
   const emailError =
     hasInitialValue('email') &&
-    composeValidators(isRequired, isEmail, maxLength(30), isTrimmed)(values.email);
+    composeValidators(
+      isRequired,
+      isEmail,
+      maxLength(30),
+      isTrimmed
+    )(values.email);
   const birthDateError =
-    hasInitialValue('birthDate') && composeValidators(isRequired, isYoung, isOld)(values.birthDate);
+    hasInitialValue('birthDate') &&
+    composeValidators(isRequired, isYoung, isOld)(values.birthDate);
   const genderError = hasInitialValue('gender') && isRequired(values.gender);
   const addressError =
-    hasInitialValue('address') && isRequired(!isNil(path(['address', 'coordinates'])(values)));
+    hasInitialValue('address') &&
+    isRequired(!isNil(path(['address', 'coordinates'])(values)));
   if (usernameError) errors.username = usernameError;
   if (passwordError) errors.password = passwordError;
   if (newPasswordError) errors.newPassword = newPasswordError;

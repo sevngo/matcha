@@ -11,7 +11,12 @@ import {
 import { getIds } from '../utils';
 import socket from '../socketEvents';
 import { SUCCESS, ERROR } from '../containers/Snackbar/constants';
-import { getUsersLiked, getUsersBlocked, getToken, getFriends } from '../selectors';
+import {
+  getUsersLiked,
+  getUsersBlocked,
+  getToken,
+  getFriends,
+} from '../selectors';
 
 export const REGISTER = 'REGISTER';
 export const LOGIN = 'LOGIN';
@@ -87,7 +92,10 @@ export const likeUser = (userLikedId) => async (dispatch, getState) => {
   const authUsersBlocked = getUsersBlocked(state);
   const token = getToken(state);
   const usersLiked = compose(append(userLikedId), getIds)(authUsersLiked);
-  const usersBlocked = compose(reject(equals(userLikedId)), getIds)(authUsersBlocked);
+  const usersBlocked = compose(
+    reject(equals(userLikedId)),
+    getIds
+  )(authUsersBlocked);
   try {
     const { data } = await patchUser(token, { usersLiked, usersBlocked });
     dispatch({ type: LIKED_USER, data });
@@ -98,7 +106,10 @@ export const likeUser = (userLikedId) => async (dispatch, getState) => {
     const friendsIds = getIds(data.friends);
     const isFriended = find((friendId) => userLikedId === friendId)(friendsIds);
     if (isFriended)
-      socket.emit('userFriended', { user: pick(['_id', 'username'])(data), userLikedId });
+      socket.emit('userFriended', {
+        user: pick(['_id', 'username'])(data),
+        userLikedId,
+      });
   } catch {
     dispatch(openSnackbar({ variant: ERROR }));
   }
@@ -111,7 +122,10 @@ export const blockUser = (userBlockedId) => async (dispatch, getState) => {
   const authUsersBlocked = getUsersBlocked(state);
   const friends = getFriends(state);
   const token = getToken(state);
-  const usersLiked = compose(reject(equals(userBlockedId)), getIds)(authUsersLiked);
+  const usersLiked = compose(
+    reject(equals(userBlockedId)),
+    getIds
+  )(authUsersLiked);
   const usersBlocked = compose(append(userBlockedId), getIds)(authUsersBlocked);
   const user = { usersLiked, usersBlocked };
   try {
@@ -122,9 +136,14 @@ export const blockUser = (userBlockedId) => async (dispatch, getState) => {
       userBlockedId,
     });
     const friendsIds = getIds(friends);
-    const isUnfriended = find((friendId) => userBlockedId === friendId)(friendsIds);
+    const isUnfriended = find((friendId) => userBlockedId === friendId)(
+      friendsIds
+    );
     if (isUnfriended)
-      socket.emit('userUnfriended', { user: pick(['_id', 'username'])(data), userBlockedId });
+      socket.emit('userUnfriended', {
+        user: pick(['_id', 'username'])(data),
+        userBlockedId,
+      });
   } catch {
     dispatch(openSnackbar({ variant: ERROR }));
   }

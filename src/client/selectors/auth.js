@@ -14,10 +14,16 @@ export const getToken = createSelector(getAuth, prop('token'));
 
 export const getImages = createSelector(getAuth, propOr([], 'images'));
 
-export const getUsersBlocked = createSelector(getAuth, propOr([], 'usersBlocked'));
+export const getUsersBlocked = createSelector(
+  getAuth,
+  propOr([], 'usersBlocked')
+);
 
 export const getUsersLiked = createSelector(getAuth, propOr([], 'usersLiked'));
 
 export const getFriends = createSelector(getAuth, propOr([], 'friends'));
 
-export const getNotifications = createSelector(getAuth, propOr([], 'notifications'));
+export const getNotifications = createSelector(
+  getAuth,
+  propOr([], 'notifications')
+);

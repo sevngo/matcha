@@ -15,7 +15,10 @@ const Drawer = ({ isDrawerOpen, toggleDrawer }) => {
       onKeyDown={() => toggleDrawer(false)}
     >
       <Box p={3} width={300}>
-        <UserForm initialValues={filter} submit={(values) => dispatch(handleFilter(values))} />
+        <UserForm
+          initialValues={filter}
+          submit={(values) => dispatch(handleFilter(values))}
+        />
       </Box>
     </MDrawer>
   );

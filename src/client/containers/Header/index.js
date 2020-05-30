@@ -23,11 +23,20 @@ const Header = () => {
       <AppBar position="static" className={classes.appBar}>
         <Toolbar>
           {isUsersPath && token ? (
-            <IconButton color="inherit" onClick={() => toggleDrawer(true)} className={classes.icon}>
+            <IconButton
+              color="inherit"
+              onClick={() => toggleDrawer(true)}
+              className={classes.icon}
+            >
               <MenuIcon />
             </IconButton>
           ) : (
-            <IconButton color="inherit" className={classes.icon} component={Link} to={usersPath}>
+            <IconButton
+              color="inherit"
+              className={classes.icon}
+              component={Link}
+              to={usersPath}
+            >
               <HomeIcon />
             </IconButton>
           )}

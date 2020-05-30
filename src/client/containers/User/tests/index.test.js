@@ -9,7 +9,7 @@ describe('User', () => {
     const { container } = render(
       <TestProvider>
         <Component {...props} />
-      </TestProvider>,
+      </TestProvider>
     );
     expect(container).toMatchSnapshot();
   });

@@ -31,7 +31,7 @@ describe('Users', () => {
     const { container } = render(
       <TestProvider initialState={initialState}>
         <Component />
-      </TestProvider>,
+      </TestProvider>
     );
     expect(container).toMatchSnapshot();
   });

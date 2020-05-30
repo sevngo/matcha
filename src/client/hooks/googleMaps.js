@@ -30,17 +30,22 @@ export const useAutocomplete = (inputId, onChange, isActive) => {
 export const useGeolocation = (onChange, isActive) => {
   useEffect(() => {
     if (isActive) {
-      navigator.geolocation.getCurrentPosition(({ coords: { longitude: lng, latitude: lat } }) => {
-        const geocoder = new google.maps.Geocoder();
-        geocoder.geocode({ location: { lat, lng } }, ([{ formatted_address }]) => {
-          const address = {
-            name: formatted_address,
-            type: 'Point',
-            coordinates: [lng, lat],
-          };
-          onChange(address);
-        });
-      });
+      navigator.geolocation.getCurrentPosition(
+        ({ coords: { longitude: lng, latitude: lat } }) => {
+          const geocoder = new google.maps.Geocoder();
+          geocoder.geocode(
+            { location: { lat, lng } },
+            ([{ formatted_address }]) => {
+              const address = {
+                name: formatted_address,
+                type: 'Point',
+                coordinates: [lng, lat],
+              };
+              onChange(address);
+            }
+          );
+        }
+      );
     }
   }, [isActive, onChange]);
 };

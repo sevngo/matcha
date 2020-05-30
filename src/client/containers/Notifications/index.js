@@ -41,15 +41,24 @@ const Notifications = () => {
             <Grid container direction="column" spacing={2}>
               {notifications.map((notification, index) => (
                 <Fragment key={notification._id}>
-                  <Grid container item justify="space-between" alignItems="center">
+                  <Grid
+                    container
+                    item
+                    justify="space-between"
+                    alignItems="center"
+                  >
                     <Typography variant="subtitle1">
                       <FormattedMessage
                         {...messages[notification.messageId]}
-                        values={{ username: path(['user', 'username'])(notification) }}
+                        values={{
+                          username: path(['user', 'username'])(notification),
+                        }}
                       />
                     </Typography>
                     <Icon
-                      onClick={() => dispatch(removeNotification(notification._id))}
+                      onClick={() =>
+                        dispatch(removeNotification(notification._id))
+                      }
                       color="inherit"
                       className={classes.ml1}
                     >

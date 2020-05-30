@@ -2,7 +2,12 @@ const { replace } = require('ramda');
 const { ObjectID } = require('mongodb');
 const bcrypt = require('bcryptjs');
 const { getUsers } = require('../database');
-const { asyncHandler, ErrorResponse, createToken, verifyToken } = require('../utils/functions');
+const {
+  asyncHandler,
+  ErrorResponse,
+  createToken,
+  verifyToken,
+} = require('../utils/functions');
 
 exports.generateAuthToken = asyncHandler(async (req, res, next) => {
   const { username, password } = req.body;
@@ -31,6 +36,7 @@ exports.authenticate = asyncHandler(async (req, res, next) => {
 });
 
 exports.emailVerified = (req, res, next) => {
-  if (!req.auth.emailVerified) return next(new ErrorResponse(400, 'Unverified email'));
+  if (!req.auth.emailVerified)
+    return next(new ErrorResponse(400, 'Unverified email'));
   next();
 };

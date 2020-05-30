@@ -7,6 +7,7 @@ const translations = {
 
 const language = split('-')(navigator.language)[0];
 
-export const locale = (includes(language)(keys(translations)) && language) || 'en';
+export const locale =
+  (includes(language)(keys(translations)) && language) || 'en';
 
 export const messages = translations[language];

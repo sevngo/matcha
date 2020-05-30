@@ -28,7 +28,11 @@ const Account = () => {
         open={Boolean(anchorEl)}
         onClose={() => handleMenu()}
       >
-        <MenuItem onClick={() => handleMenu()} component={Link} to={userPath(auth._id)}>
+        <MenuItem
+          onClick={() => handleMenu()}
+          component={Link}
+          to={userPath(auth._id)}
+        >
           <FormattedMessage {...messages.myAccount} />
         </MenuItem>
         <MenuItem

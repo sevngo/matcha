@@ -5,8 +5,16 @@ const { createToken } = require('../../../utils/functions');
 
 const genders = ['female', 'male'];
 const today = new Date();
-const birthDateMin = new Date(today.getFullYear() - 50, today.getMonth(), today.getDate());
-const birthDateMax = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+const birthDateMin = new Date(
+  today.getFullYear() - 50,
+  today.getMonth(),
+  today.getDate()
+);
+const birthDateMax = new Date(
+  today.getFullYear() - 18,
+  today.getMonth(),
+  today.getDate()
+);
 
 const initialPassword = faker.internet.password();
 const initialId = faker.random.alphaNumeric(12);
@@ -20,7 +28,10 @@ const userOne = {
   address: {
     type: 'Point',
     name: faker.address.streetAddress(),
-    coordinates: [parseFloat(faker.address.longitude()), parseFloat(faker.address.latitude())],
+    coordinates: [
+      parseFloat(faker.address.longitude()),
+      parseFloat(faker.address.latitude()),
+    ],
   },
   password: bcrypt.hashSync(initialPassword, 8),
   _id: ObjectID(initialId),
@@ -35,7 +46,10 @@ const userTwo = {
   address: {
     type: 'Point',
     name: faker.address.streetAddress(),
-    coordinates: [parseFloat(faker.address.longitude()), parseFloat(faker.address.latitude())],
+    coordinates: [
+      parseFloat(faker.address.longitude()),
+      parseFloat(faker.address.latitude()),
+    ],
   },
   password: bcrypt.hashSync(faker.internet.password(), 8),
   _id: ObjectID(),
@@ -50,7 +64,10 @@ const newUser = {
   address: {
     type: 'Point',
     name: faker.address.streetAddress(),
-    coordinates: [parseFloat(faker.address.longitude()), parseFloat(faker.address.latitude())],
+    coordinates: [
+      parseFloat(faker.address.longitude()),
+      parseFloat(faker.address.latitude()),
+    ],
   },
   password: faker.internet.password(),
 };

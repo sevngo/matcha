@@ -90,10 +90,16 @@ describe('/api/users', () => {
   });
   describe('POST /api/users/forgot', () => {
     test('should send email', async () => {
-      await request(app).post(`/api/users/forgot`).send({ email: userOne.email }).expect(200);
+      await request(app)
+        .post(`/api/users/forgot`)
+        .send({ email: userOne.email })
+        .expect(200);
     });
     test('should not send email', async () => {
-      await request(app).post(`/api/users/forgot`).send({ email: 'invalid@email.com' }).expect(400);
+      await request(app)
+        .post(`/api/users/forgot`)
+        .send({ email: 'invalid@email.com' })
+        .expect(400);
     });
   });
   describe('POST /api/users/images', () => {

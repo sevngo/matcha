@@ -8,7 +8,7 @@ const socketEvents = require('./websocket');
   try {
     await connectDb();
     const server = await app.listen(SERVER_PORT, () =>
-      console.log(`Server listening on port ${SERVER_PORT}`),
+      console.log(`Server listening on port ${SERVER_PORT}`)
     ); // eslint-disable-line no-console
     const io = socketIo(server, { pingTimeout: 60000 });
     io.on('connect', socketEvents);

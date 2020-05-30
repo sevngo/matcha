@@ -9,7 +9,13 @@ const socketEvents = (socket) => {
   socket.on('logged', async ({ friends, _id, username }) => {
     try {
       await addUserSocketId(_id, socket.id);
-      if (friends) await emitToFriendsConnected(socket, { _id, username }, friends, 'friendLogged');
+      if (friends)
+        await emitToFriendsConnected(
+          socket,
+          { _id, username },
+          friends,
+          'friendLogged'
+        );
     } catch (e) {
       console.log(e);
     }

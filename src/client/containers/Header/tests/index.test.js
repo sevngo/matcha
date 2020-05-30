@@ -13,7 +13,7 @@ describe('Header', () => {
     const { container } = render(
       <TestProvider initialState={initialState}>
         <Component />
-      </TestProvider>,
+      </TestProvider>
     );
     expect(container).toMatchSnapshot();
   });
@@ -22,7 +22,7 @@ describe('Header', () => {
     const { queryByText } = render(
       <TestProvider>
         <Component />
-      </TestProvider>,
+      </TestProvider>
     );
     expect(queryByText('home')).toBeDefined();
   });

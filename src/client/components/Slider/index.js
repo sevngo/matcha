@@ -3,7 +3,16 @@ import { is } from 'ramda';
 import useStyles from './styles';
 import React from 'react';
 
-const Slider = ({ name, value, field, label, unitLabel, setFieldValue, className, ...rest }) => {
+const Slider = ({
+  name,
+  value,
+  field,
+  label,
+  unitLabel,
+  setFieldValue,
+  className,
+  ...rest
+}) => {
   const classes = useStyles();
   return (
     <Box className={className}>
