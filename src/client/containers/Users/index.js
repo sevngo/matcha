@@ -1,6 +1,7 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Hidden, Box, TablePagination, Paper } from '@material-ui/core';
+import { isEmpty } from 'ramda';
 import UserCards from '../../components/UserCards';
 import { handleFilter, loadUsers } from '../../actions';
 import { getUsers, getUsersTotal, getFilter } from '../../selectors';
@@ -23,7 +24,7 @@ const Users = () => {
     );
   }, [dispatch]);
   useEffect(() => {
-    dispatch(loadUsers(filter));
+    if (!isEmpty(filter)) dispatch(loadUsers(filter));
   }, [dispatch, filter]);
   const { limit } = filter;
   const [page, setPage] = useState(0);
