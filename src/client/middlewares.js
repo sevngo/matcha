@@ -3,7 +3,7 @@ import { path, mergeDeepRight } from 'ramda';
 import { getToken, getAuth } from './selectors';
 import { logout, openSnackbar, displayLoader, hideLoader } from './actions';
 import { ERROR } from './containers/Snackbar/constants';
-import { saveState } from './utils/localStorage';
+import { saveState } from './utils';
 import store from './store';
 
 store.subscribe(() => {

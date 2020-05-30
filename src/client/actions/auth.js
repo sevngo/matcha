@@ -8,7 +8,7 @@ import {
   postUserImage,
   deleteUserImage,
 } from '../api';
-import { getIds } from '../utils/functions';
+import { getIds } from '../utils';
 import socket from '../socketEvents';
 import { SUCCESS } from '../containers/Snackbar/constants';
 import { getUsersLiked, getUsersBlocked, getFriends } from '../selectors';
