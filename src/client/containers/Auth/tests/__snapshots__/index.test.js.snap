@@ -3,7 +3,7 @@
 exports[`Auth should match snapshot 1`] = `
 <div>
   <div
-    class="MuiBox-root MuiBox-root-3"
+    class="MuiBox-root MuiBox-root-2"
   >
     <div
       class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
@@ -56,17 +56,17 @@ exports[`Auth should match snapshot 1`] = `
               </button>
             </div>
             <span
-              class="PrivateTabIndicator-root-67 PrivateTabIndicator-colorSecondary-69 MuiTabs-indicator"
+              class="PrivateTabIndicator-root-3 PrivateTabIndicator-colorSecondary-5 MuiTabs-indicator"
               style="left: 0px; width: 0px;"
             />
           </div>
         </div>
       </header>
       <div
-        class="MuiBox-root MuiBox-root-71"
+        class="MuiBox-root MuiBox-root-7"
       >
         <div
-          class="MuiBox-root MuiBox-root-72"
+          class="MuiBox-root MuiBox-root-8"
         >
           <form>
             <div
@@ -82,7 +82,7 @@ exports[`Auth should match snapshot 1`] = `
                 class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedStart MuiOutlinedInput-adornedStart MuiInputBase-marginDense MuiOutlinedInput-marginDense"
               >
                 <div
-                  class="MuiBox-root MuiBox-root-138 makeStyles-icon-79"
+                  class="MuiBox-root MuiBox-root-16 makeStyles-icon-15"
                 >
                   <svg
                     aria-hidden="true"
@@ -105,10 +105,10 @@ exports[`Auth should match snapshot 1`] = `
                 />
                 <fieldset
                   aria-hidden="true"
-                  class="PrivateNotchedOutline-root-148 MuiOutlinedInput-notchedOutline"
+                  class="PrivateNotchedOutline-root-17 MuiOutlinedInput-notchedOutline"
                 >
                   <legend
-                    class="PrivateNotchedOutline-legendLabelled-150 PrivateNotchedOutline-legendNotched-151"
+                    class="PrivateNotchedOutline-legendLabelled-19 PrivateNotchedOutline-legendNotched-20"
                   >
                     <span>
                       Username
@@ -130,7 +130,7 @@ exports[`Auth should match snapshot 1`] = `
                 class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedStart MuiOutlinedInput-adornedStart MuiInputBase-adornedEnd MuiOutlinedInput-adornedEnd MuiInputBase-marginDense MuiOutlinedInput-marginDense"
               >
                 <div
-                  class="MuiBox-root MuiBox-root-152 makeStyles-icon-79"
+                  class="MuiBox-root MuiBox-root-21 makeStyles-icon-15"
                 >
                   <svg
                     aria-hidden="true"
@@ -176,10 +176,10 @@ exports[`Auth should match snapshot 1`] = `
                 </button>
                 <fieldset
                   aria-hidden="true"
-                  class="PrivateNotchedOutline-root-148 MuiOutlinedInput-notchedOutline"
+                  class="PrivateNotchedOutline-root-17 MuiOutlinedInput-notchedOutline"
                 >
                   <legend
-                    class="PrivateNotchedOutline-legendLabelled-150 PrivateNotchedOutline-legendNotched-151"
+                    class="PrivateNotchedOutline-legendLabelled-19 PrivateNotchedOutline-legendNotched-20"
                   >
                     <span>
                       Password
@@ -189,7 +189,7 @@ exports[`Auth should match snapshot 1`] = `
               </div>
             </div>
             <button
-              class="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-mt1-73 MuiButton-containedPrimary MuiButton-containedSizeLarge MuiButton-sizeLarge Mui-disabled MuiButton-fullWidth Mui-disabled"
+              class="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-mt1-9 MuiButton-containedPrimary MuiButton-containedSizeLarge MuiButton-sizeLarge Mui-disabled MuiButton-fullWidth Mui-disabled"
               disabled=""
               tabindex="-1"
               type="submit"

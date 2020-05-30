@@ -3,17 +3,17 @@
 exports[`App should match snapshot 1`] = `
 <div>
   <div
-    class="MuiBox-root MuiBox-root-3 makeStyles-root-1"
+    class="MuiBox-root MuiBox-root-2 makeStyles-root-1"
   >
     <header
-      class="MuiPaper-root MuiAppBar-root MuiAppBar-positionStatic MuiAppBar-colorPrimary makeStyles-appBar-4 MuiPaper-elevation4"
+      class="MuiPaper-root MuiAppBar-root MuiAppBar-positionStatic MuiAppBar-colorPrimary makeStyles-appBar-3 MuiPaper-elevation4"
     >
       <div
         class="MuiToolbar-root MuiToolbar-regular MuiToolbar-gutters"
       >
         <a
           aria-disabled="false"
-          class="MuiButtonBase-root MuiIconButton-root makeStyles-icon-6 MuiIconButton-colorInherit"
+          class="MuiButtonBase-root MuiIconButton-root makeStyles-icon-5 MuiIconButton-colorInherit"
           href="/"
           role="button"
           tabindex="0"
@@ -37,7 +37,7 @@ exports[`App should match snapshot 1`] = `
           />
         </a>
         <h6
-          class="MuiTypography-root makeStyles-title-5 MuiTypography-h6 MuiTypography-colorInherit"
+          class="MuiTypography-root makeStyles-title-4 MuiTypography-h6 MuiTypography-colorInherit"
         >
           Matcha
         </h6>
@@ -55,10 +55,10 @@ exports[`App should match snapshot 1`] = `
       />
     </div>
     <div
-      class="MuiBox-root MuiBox-root-134"
+      class="MuiBox-root MuiBox-root-6"
     >
       <div
-        class="MuiBox-root MuiBox-root-136"
+        class="MuiBox-root MuiBox-root-8"
       >
         <div
           class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
@@ -111,17 +111,17 @@ exports[`App should match snapshot 1`] = `
                   </button>
                 </div>
                 <span
-                  class="PrivateTabIndicator-root-158 PrivateTabIndicator-colorSecondary-160 MuiTabs-indicator"
+                  class="PrivateTabIndicator-root-9 PrivateTabIndicator-colorSecondary-11 MuiTabs-indicator"
                   style="left: 0px; width: 0px;"
                 />
               </div>
             </div>
           </header>
           <div
-            class="MuiBox-root MuiBox-root-162"
+            class="MuiBox-root MuiBox-root-13"
           >
             <div
-              class="MuiBox-root MuiBox-root-163"
+              class="MuiBox-root MuiBox-root-14"
             >
               <form>
                 <div
@@ -137,7 +137,7 @@ exports[`App should match snapshot 1`] = `
                     class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedStart MuiOutlinedInput-adornedStart MuiInputBase-marginDense MuiOutlinedInput-marginDense"
                   >
                     <div
-                      class="MuiBox-root MuiBox-root-229 makeStyles-icon-170"
+                      class="MuiBox-root MuiBox-root-22 makeStyles-icon-21"
                     >
                       <svg
                         aria-hidden="true"
@@ -160,10 +160,10 @@ exports[`App should match snapshot 1`] = `
                     />
                     <fieldset
                       aria-hidden="true"
-                      class="PrivateNotchedOutline-root-230 MuiOutlinedInput-notchedOutline"
+                      class="PrivateNotchedOutline-root-23 MuiOutlinedInput-notchedOutline"
                     >
                       <legend
-                        class="PrivateNotchedOutline-legendLabelled-232 PrivateNotchedOutline-legendNotched-233"
+                        class="PrivateNotchedOutline-legendLabelled-25 PrivateNotchedOutline-legendNotched-26"
                       >
                         <span>
                           Username
@@ -185,7 +185,7 @@ exports[`App should match snapshot 1`] = `
                     class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedStart MuiOutlinedInput-adornedStart MuiInputBase-adornedEnd MuiOutlinedInput-adornedEnd MuiInputBase-marginDense MuiOutlinedInput-marginDense"
                   >
                     <div
-                      class="MuiBox-root MuiBox-root-234 makeStyles-icon-170"
+                      class="MuiBox-root MuiBox-root-27 makeStyles-icon-21"
                     >
                       <svg
                         aria-hidden="true"
@@ -231,10 +231,10 @@ exports[`App should match snapshot 1`] = `
                     </button>
                     <fieldset
                       aria-hidden="true"
-                      class="PrivateNotchedOutline-root-230 MuiOutlinedInput-notchedOutline"
+                      class="PrivateNotchedOutline-root-23 MuiOutlinedInput-notchedOutline"
                     >
                       <legend
-                        class="PrivateNotchedOutline-legendLabelled-232 PrivateNotchedOutline-legendNotched-233"
+                        class="PrivateNotchedOutline-legendLabelled-25 PrivateNotchedOutline-legendNotched-26"
                       >
                         <span>
                           Password
@@ -244,7 +244,7 @@ exports[`App should match snapshot 1`] = `
                   </div>
                 </div>
                 <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-mt1-164 MuiButton-containedPrimary MuiButton-containedSizeLarge MuiButton-sizeLarge Mui-disabled MuiButton-fullWidth Mui-disabled"
+                  class="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-mt1-15 MuiButton-containedPrimary MuiButton-containedSizeLarge MuiButton-sizeLarge Mui-disabled MuiButton-fullWidth Mui-disabled"
                   disabled=""
                   tabindex="-1"
                   type="submit"
@@ -269,7 +269,7 @@ exports[`App should match snapshot 1`] = `
                 </button>
               </form>
               <button
-                class="MuiButtonBase-root MuiButton-root MuiButton-outlined makeStyles-mt1-135"
+                class="MuiButtonBase-root MuiButton-root MuiButton-outlined makeStyles-mt1-7"
                 tabindex="0"
                 type="button"
               >

@@ -6,7 +6,7 @@ exports[`Users should match snapshot 1`] = `
     class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
   />
   <div
-    class="MuiBox-root MuiBox-root-30"
+    class="MuiBox-root MuiBox-root-1"
   />
   <div
     class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2"
@@ -15,7 +15,7 @@ exports[`Users should match snapshot 1`] = `
       class="MuiGrid-root MuiGrid-item"
     >
       <div
-        class="MuiPaper-root MuiCard-root makeStyles-card-134 MuiPaper-elevation1 MuiPaper-rounded"
+        class="MuiPaper-root MuiCard-root makeStyles-card-2 MuiPaper-elevation1 MuiPaper-rounded"
       >
         <a
           aria-disabled="false"
@@ -25,7 +25,7 @@ exports[`Users should match snapshot 1`] = `
           tabindex="0"
         >
           <div
-            class="MuiCardMedia-root makeStyles-media-135"
+            class="MuiCardMedia-root makeStyles-media-3"
             style="background-image: url(/api/users/5caf003feaca23291c0cec34/images/5caf005beaca23291c0cec35);"
             title="qweqwe"
           />
