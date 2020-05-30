@@ -11,7 +11,7 @@ cache:
     - node_modules
 
 before_script:
-  - docker compose up -d mongo
+  - docker-compose up -d mongo
 
 script:
   - npm run coverage
