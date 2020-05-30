@@ -2,7 +2,7 @@ import { amber, green } from '@material-ui/core/colors';
 import { SUCCESS, ERROR, INFO, WARNING } from './constants';
 import { makeStyles } from '@material-ui/core/styles';
 
-export default makeStyles(theme => ({
+export default makeStyles((theme) => ({
   [SUCCESS]: {
     backgroundColor: green[600],
   },

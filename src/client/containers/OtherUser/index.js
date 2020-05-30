@@ -24,9 +24,9 @@ const User = ({ id }) => {
     dispatch(loadUser(id));
   }, [dispatch, id]);
   const classes = useStyles();
-  const isLiked = Boolean(find(userLiked => userLiked._id === user._id)(usersLiked));
-  const isBlocked = Boolean(find(userBlocked => userBlocked._id === user._id)(usersBlocked));
-  const isFriend = find(friend => friend._id === user._id)(friends);
+  const isLiked = Boolean(find((userLiked) => userLiked._id === user._id)(usersLiked));
+  const isBlocked = Boolean(find((userBlocked) => userBlocked._id === user._id)(usersBlocked));
+  const isFriend = find((friend) => friend._id === user._id)(friends);
   const { images = [] } = user;
   const image = !isEmpty(images)
     ? getUserImage(user._id, path([activeStep, '_id'])(images))

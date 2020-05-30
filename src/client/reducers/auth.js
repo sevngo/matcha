@@ -32,7 +32,7 @@ export default (state = {}, action) => {
     case GOT_FRIENDED:
       return { ...state, friends: [...state.friends, { ...action.user }] };
     case GOT_UNDFRIENDED:
-      return { ...state, friends: reject(friend => friend._id === action._id)(state.friends) };
+      return { ...state, friends: reject((friend) => friend._id === action._id)(state.friends) };
     case ADD_NOTIFICATION:
       return {
         ...state,
@@ -41,7 +41,9 @@ export default (state = {}, action) => {
     case REMOVE_NOTIFICATION:
       return {
         ...state,
-        notifications: reject(notification => notification._id === action._id)(state.notifications),
+        notifications: reject((notification) => notification._id === action._id)(
+          state.notifications,
+        ),
       };
     default:
       return state;

@@ -1,6 +1,6 @@
 const { USERS } = require('../utils/constants');
 
-exports.usersModel = async db => {
+exports.usersModel = async (db) => {
   await db.createCollection(USERS);
   await db.collection(USERS).createIndex({ username: 1 }, { unique: true, sparse: true });
   await db.collection(USERS).createIndex({ email: 1 }, { unique: true, sparse: true });

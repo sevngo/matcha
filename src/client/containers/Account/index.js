@@ -18,7 +18,7 @@ const Account = () => {
       <IconButton
         data-testid="accountButton"
         color="inherit"
-        onClick={e => handleMenu(e.currentTarget)}
+        onClick={(e) => handleMenu(e.currentTarget)}
       >
         <AccountCircleIcon />
       </IconButton>

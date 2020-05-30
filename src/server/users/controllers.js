@@ -200,7 +200,7 @@ exports.getUserImage = asyncHandler(async (req, res, next) => {
   const { id, imageId } = req.params;
   const user = await Users.findOne({ _id: id, 'images._id': imageId });
   if (!user) return next(new ErrorResponse(404, 'User not found'));
-  const { data } = find(image => propEq('_id', imageId)(image))(user.images);
+  const { data } = find((image) => propEq('_id', imageId)(image))(user.images);
   res.type('png');
   res.send(data.buffer);
 });

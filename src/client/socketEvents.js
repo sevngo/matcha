@@ -12,28 +12,28 @@ socket.on('connect', () => {
   if (!isEmpty(auth)) socket.emit('reLogged', auth._id);
 });
 
-socket.on('friendLogged', notification => {
+socket.on('friendLogged', (notification) => {
   store.dispatch({
     type: ADD_NOTIFICATION,
     notification: { ...notification, messageId: 'friendLogged' },
   });
 });
 
-socket.on('gotLiked', notification => {
+socket.on('gotLiked', (notification) => {
   store.dispatch({
     type: ADD_NOTIFICATION,
     notification: { ...notification, messageId: 'gotLiked' },
   });
 });
 
-socket.on('gotBlocked', notification => {
+socket.on('gotBlocked', (notification) => {
   store.dispatch({
     type: ADD_NOTIFICATION,
     notification: { ...notification, messageId: 'gotBlocked' },
   });
 });
 
-socket.on('gotFriended', notification => {
+socket.on('gotFriended', (notification) => {
   store.dispatch({ type: GOT_FRIENDED, user: notification.user });
   store.dispatch({
     type: ADD_NOTIFICATION,
@@ -41,7 +41,7 @@ socket.on('gotFriended', notification => {
   });
 });
 
-socket.on('gotUnfriended', notification => {
+socket.on('gotUnfriended', (notification) => {
   store.dispatch({ type: GOT_UNDFRIENDED, _id: path(['user', '_id'])(notification) });
   store.dispatch({
     type: ADD_NOTIFICATION,

@@ -36,7 +36,7 @@ const MyUser = () => {
   const [isDialogOpen, handleDialog] = useState(false);
   const { _id } = auth;
   const inputEl = useRef();
-  const addImage = image => {
+  const addImage = (image) => {
     if (image) dispatch(uploadImage(image));
   };
   const image = !isEmpty(images)
@@ -53,7 +53,7 @@ const MyUser = () => {
               <input
                 ref={inputEl}
                 type="file"
-                onChange={event => addImage(event.target.files[0])}
+                onChange={(event) => addImage(event.target.files[0])}
                 accept="image/png, image/jpeg"
                 className={classes.hide}
               />
@@ -107,7 +107,7 @@ const MyUser = () => {
                 ...userForm,
                 newPassword: '',
               }}
-              submit={user => dispatch(updateUser(token, compact(user)))}
+              submit={(user) => dispatch(updateUser(token, compact(user)))}
             />
           </Paper>
         </Grid>
@@ -118,7 +118,7 @@ const MyUser = () => {
                 <FormattedMessage {...messages.usersBlocked} />
               </Typography>
               <Divider className={classes.mt1} />
-              {map(user => (
+              {map((user) => (
                 <Grid
                   key={user._id}
                   container

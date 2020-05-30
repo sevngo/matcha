@@ -25,7 +25,7 @@ afterAll(() => {
 });
 
 describe('Websocket', () => {
-  it('should connect client to server socket io', done => {
+  it('should connect client to server socket io', (done) => {
     const { port } = http.address();
     serverIo.on('connect', socketEvents);
 

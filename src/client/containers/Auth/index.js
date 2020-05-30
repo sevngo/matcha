@@ -39,7 +39,10 @@ const Auth = () => {
         <Box p={3}>
           {tab === 0 ? (
             <Box>
-              <UserForm initialValues={initialValues} submit={values => dispatch(login(values))} />
+              <UserForm
+                initialValues={initialValues}
+                submit={(values) => dispatch(login(values))}
+              />
               <Button onClick={() => handleDialog(true)} variant="outlined" className={classes.mt1}>
                 <FormattedMessage {...messages.forgotPassword} />
               </Button>
@@ -53,7 +56,7 @@ const Auth = () => {
                   </DialogContentText>
                   <UserForm
                     initialValues={{ email: '' }}
-                    submit={values => dispatch(forgotPassword(values))}
+                    submit={(values) => dispatch(forgotPassword(values))}
                   />
                 </DialogContent>
               </Dialog>
@@ -67,7 +70,7 @@ const Auth = () => {
                 birthDate: '',
                 address: { name: '' },
               }}
-              submit={values => dispatch(register(values))}
+              submit={(values) => dispatch(register(values))}
               isGeoActivated
             />
           )}
