@@ -8,7 +8,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import { variantIcon } from './constants';
 import useStyles from './styles';
 import { closeSnackbar } from '../../actions';
-import { getSnackbar } from '../../selectors/snackbar';
+import { getSnackbar } from '../../selectors';
 
 const MySnackbar = () => {
   const snackbar = useSelector(getSnackbar);

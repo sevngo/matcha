@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { path, mergeDeepRight } from 'ramda';
-import { getToken, getAuth } from './selectors/auth';
+import { getToken, getAuth } from './selectors';
 import { logout, openSnackbar, displayLoader, hideLoader } from './actions';
 import { ERROR } from './containers/Snackbar/constants';
 import { saveState } from './utils/localStorage';

@@ -11,7 +11,7 @@ import Notifications from '../Notifications';
 import { usersPath } from '../../utils/routes';
 import useStyles from './styles';
 import messages from './messages';
-import { getToken } from '../../selectors/auth';
+import { getToken } from '../../selectors';
 
 const Header = () => {
   const classes = useStyles();
