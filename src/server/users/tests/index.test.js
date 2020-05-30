@@ -32,16 +32,10 @@ afterAll(disconnectDb);
 describe('/api/users', () => {
   describe('POST /api/users', () => {
     test('should create a new user', async () => {
-      await request(app)
-        .post('/api/users')
-        .send(newUser)
-        .expect(201);
+      await request(app).post('/api/users').send(newUser).expect(201);
     });
     test('should not create a new user', async () => {
-      await request(app)
-        .post('/api/users')
-        .send({})
-        .expect(500);
+      await request(app).post('/api/users').send({}).expect(500);
     });
   });
   describe('POST /api/users/login', () => {
@@ -96,16 +90,10 @@ describe('/api/users', () => {
   });
   describe('POST /api/users/forgot', () => {
     test('should send email', async () => {
-      await request(app)
-        .post(`/api/users/forgot`)
-        .send({ email: userOne.email })
-        .expect(200);
+      await request(app).post(`/api/users/forgot`).send({ email: userOne.email }).expect(200);
     });
     test('should not send email', async () => {
-      await request(app)
-        .post(`/api/users/forgot`)
-        .send({ email: 'invalid@email.com' })
-        .expect(400);
+      await request(app).post(`/api/users/forgot`).send({ email: 'invalid@email.com' }).expect(400);
     });
   });
   describe('POST /api/users/images', () => {

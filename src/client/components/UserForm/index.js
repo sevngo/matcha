@@ -38,13 +38,15 @@ const Component = ({ initialValues, disabled, isGeoActivated, submit }) => {
   } = useFormik({
     initialValues,
     onSubmit: submit,
-    validate: values => validate(initialValues, values),
+    validate: (values) => validate(initialValues, values),
     enableReinitialize: true,
   });
   const [showPassword, toggleShowPassword] = useState(false);
   const address = values['address'];
   const isValidAddress = !isNil(path(['address', 'coordinates'])(values));
-  const handleAddress = useCallback(address => setFieldValue('address', address), [setFieldValue]);
+  const handleAddress = useCallback((address) => setFieldValue('address', address), [
+    setFieldValue,
+  ]);
   useGeolocation(handleAddress, address && isGeoActivated);
   useAutocomplete('address', handleAddress, !isNil(address));
   return (
@@ -186,7 +188,7 @@ const Component = ({ initialValues, disabled, isGeoActivated, submit }) => {
           value={values.sortBy}
           label={<FormattedMessage {...messages.sortBy} />}
         >
-          {map(option => (
+          {map((option) => (
             <MenuItem key={option.id} value={option.value}>
               <FormattedMessage {...messages[option.id]} />
             </MenuItem>

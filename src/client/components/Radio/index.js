@@ -13,7 +13,7 @@ const Radio = ({ label, options, messages, disabled, error, className, ...rest }
   <FormControl error={Boolean(error)} className={className}>
     <FormLabel>{label}</FormLabel>
     <RadioGroup row {...rest}>
-      {map(option => (
+      {map((option) => (
         <FormControlLabel
           key={option.id}
           value={option.value}

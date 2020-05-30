@@ -19,7 +19,7 @@ const App = () => {
       {isLoading && <LinearProgress />}
       <Box p={3} visibility={isLoading ? 'hidden' : 'visible'}>
         <Switch>
-          {map(route => {
+          {map((route) => {
             const { isPrivate, path } = route;
             if (isPrivate) return <PrivateRoute key={path} {...route} />;
             return <Route key={path} {...route} />;

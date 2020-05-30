@@ -5,9 +5,9 @@ import Reset from '../containers/Reset';
 import Verify from '../containers/Verify';
 
 export const usersPath = '/';
-export const userPath = id => `/user/${id}`;
-export const resetPath = token => `/reset/${token}`;
-export const verifyPath = token => `/verify/${token}`;
+export const userPath = (id) => `/user/${id}`;
+export const resetPath = (token) => `/reset/${token}`;
+export const verifyPath = (token) => `/verify/${token}`;
 
 export const routes = [
   {
@@ -35,4 +35,4 @@ export const routes = [
   },
 ];
 
-export const defaultRoute = find(route => route.isDefault)(routes);
+export const defaultRoute = find((route) => route.isDefault)(routes);

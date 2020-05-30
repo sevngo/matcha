@@ -5,7 +5,7 @@ import UserCard from '../UserCard';
 
 const UserCards = ({ users }) => (
   <Grid container spacing={2}>
-    {map(user => (
+    {map((user) => (
       <Grid item key={user._id}>
         <UserCard user={user} />
       </Grid>

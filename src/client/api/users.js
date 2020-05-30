@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-export const postUser = user => axios.post('/api/users', user);
+export const postUser = (user) => axios.post('/api/users', user);
 
-export const postUserLogin = user => axios.post('/api/users/login', user);
+export const postUserLogin = (user) => axios.post('/api/users/login', user);
 
 export const getUsers = (token, query = '') => {
   const headers = { Authorization: `Bearer ${token}` };
@@ -43,4 +43,4 @@ export const deleteUserImage = (token, imageId) => {
 
 export const getUserImage = (userId, imageId) => `/api/users/${userId}/images/${imageId}`;
 
-export const postUserForgot = user => axios.post('/api/users/forgot', user);
+export const postUserForgot = (user) => axios.post('/api/users/forgot', user);
