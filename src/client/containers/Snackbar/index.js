@@ -16,8 +16,7 @@ const MySnackbar = () => {
   const classes = useStyles();
   const isSnackbarOpen = !isEmpty(snackbar);
   if (!isSnackbarOpen) return false;
-  const variant = snackbar.variant;
-  const message = '';
+  const { variant, message } = snackbar;
   const Icon = variantIcon[variant];
   return (
     <Snackbar
@@ -26,7 +25,7 @@ const MySnackbar = () => {
         horizontal: 'left',
       }}
       open
-      autoHideDuration={2000}
+      autoHideDuration={5000}
       onClose={() => dispatch(closeSnackbar())}
     >
       <SnackbarContent

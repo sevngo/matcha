@@ -23,6 +23,7 @@ exports.createNotification = (user) => ({
   _id: ObjectID(),
 });
 
-exports.createToken = (value) => jwt.sign(value, JWT_SECRET);
+exports.createToken = (value) =>
+  jwt.sign(value, JWT_SECRET, { expiresIn: '1d' });
 
 exports.verifyToken = (token) => jwt.verify(token, JWT_SECRET);
