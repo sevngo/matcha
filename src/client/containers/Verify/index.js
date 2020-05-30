@@ -9,7 +9,7 @@ const Reset = () => {
   const { token } = useParams();
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(updateUser(token, { emailVerified: true }));
+    dispatch(updateUser({ emailVerified: true }, token));
   }, [token, dispatch]);
   return <Redirect to={usersPath} />;
 };

@@ -15,7 +15,7 @@ const Reset = () => {
       <Paper elevation={1} className={classes.paper}>
         <UserForm
           initialValues={{ newPassword: '' }}
-          submit={(user) => dispatch(updateUser(token, user))}
+          submit={(user) => dispatch(updateUser(user, token))}
         />
       </Paper>
     </Grid>

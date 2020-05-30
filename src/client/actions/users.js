@@ -1,5 +1,4 @@
 import { getUsers } from '../api';
-import { getToken } from '../selectors';
 
 export const LOAD_USERS = 'LOAD_USERS';
 export const LOADED_USERS = 'LOADED_USERS';
@@ -7,10 +6,8 @@ export const HANDLE_FILTER = 'HANDLE_FILTER';
 
 export const handleFilter = (filter) => ({ type: HANDLE_FILTER, filter });
 
-export const loadUsers = (filter) => async (dispatch, getState) => {
+export const loadUsers = (filter) => async (dispatch) => {
   dispatch({ type: LOAD_USERS });
-  const state = getState();
-  const token = getToken(state);
   const { gender, ageRange, sortBy, maxDistance, limit, skip } = filter;
 
   const genderQuery = `gender=${gender}`;
@@ -31,7 +28,7 @@ export const loadUsers = (filter) => async (dispatch, getState) => {
 
   const query = `?${genderQuery}&${birthQuery}&${sortQuery}&${maxDistanceQuery}&${limitQuery}&${skipQuery}`;
   try {
-    const { data } = await getUsers(token, query);
+    const { data } = await getUsers(query);
     dispatch({ type: LOADED_USERS, data });
   } catch {}
 };

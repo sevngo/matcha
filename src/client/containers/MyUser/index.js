@@ -22,14 +22,13 @@ import { compact } from '../../utils';
 import emptyImage from '../../images/emptyImage.png';
 import useStyles from './styles';
 import messages from './messages';
-import { getImages, getToken, getAuth, getUsersBlocked } from '../../selectors';
+import { getImages, getAuth, getUsersBlocked } from '../../selectors';
 import { likeUser, uploadImage, removeImage, updateUser } from '../../actions';
 
 const MyUser = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const auth = useSelector(getAuth);
-  const token = useSelector(getToken);
   const images = useSelector(getImages);
   const usersBlocked = useSelector(getUsersBlocked);
   const [activeStep, handleStep] = useState(0);
@@ -119,7 +118,7 @@ const MyUser = () => {
                 ...userForm,
                 newPassword: '',
               }}
-              submit={(user) => dispatch(updateUser(token, compact(user)))}
+              submit={(user) => dispatch(updateUser(compact(user)))}
             />
           </Paper>
         </Grid>
