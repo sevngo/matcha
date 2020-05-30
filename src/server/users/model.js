@@ -25,7 +25,7 @@ exports.usersModel = async (db) => {
         additionalProperties: false,
         properties: {
           _id: { bsonType: 'objectId' },
-          username: { bsonType: 'string', minLength: 3, maxLength: 30 },
+          username: { bsonType: 'string', minLength: 3, maxLength: 40 },
           birthDate: { bsonType: 'date' },
           email: { bsonType: 'string' },
           emailVerified: { bsonType: 'bool' },

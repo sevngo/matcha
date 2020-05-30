@@ -18,7 +18,7 @@ const validate = (initialValues, values) => {
     composeValidators(
       isRequired,
       minLength,
-      maxLength(30),
+      maxLength(40),
       isTrimmed
     )(values.username);
   const passwordError =
@@ -26,18 +26,18 @@ const validate = (initialValues, values) => {
     composeValidators(
       isRequired,
       minLength,
-      maxLength(30),
+      maxLength(40),
       isTrimmed
     )(values.password);
   const newPasswordError =
     hasInitialValue('newPassword') &&
-    composeValidators(minLength, maxLength(30), isTrimmed)(values.newPassword);
+    composeValidators(minLength, maxLength(40), isTrimmed)(values.newPassword);
   const emailError =
     hasInitialValue('email') &&
     composeValidators(
       isRequired,
       isEmail,
-      maxLength(30),
+      maxLength(40),
       isTrimmed
     )(values.email);
   const birthDateError =
