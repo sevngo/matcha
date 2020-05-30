@@ -6,7 +6,7 @@ import { MenuItem, Menu, IconButton } from '@material-ui/core';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { userPath } from '../../utils/routes';
 import messages from './messages.js';
-import { getAuth } from '../../selectors';
+import { getAuth } from '../../selectors/auth';
 import { logout } from '../../actions';
 
 const Account = () => {

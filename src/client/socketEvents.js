@@ -2,7 +2,7 @@ import { path, isEmpty } from 'ramda';
 import io from 'socket.io-client';
 import store from './store';
 import { GOT_FRIENDED, GOT_UNDFRIENDED, ADD_NOTIFICATION } from './actions';
-import { getAuth } from './selectors';
+import { getAuth } from './selectors/auth';
 
 const socket = io(process.env.REACT_APP_API_URL); // logic to be changed for production environment
 

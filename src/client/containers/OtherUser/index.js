@@ -12,11 +12,11 @@ import { getUserImage } from '../../api';
 import useStyles from './styles';
 import { loadUser, likeUser, blockUser } from '../../actions';
 import {
-  getUser,
   getUsersLiked,
   getUsersBlocked,
   getFriends,
-} from '../../selectors';
+} from '../../selectors/auth';
+import { getUser } from '../../selectors/user';
 
 const User = ({ id }) => {
   const user = useSelector(getUser);
