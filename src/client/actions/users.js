@@ -1,7 +1,5 @@
-import { openSnackbar } from '.';
 import { getUsers } from '../api';
 import { getToken } from '../selectors';
-import { ERROR } from '../containers/Snackbar/constants';
 
 export const LOAD_USERS = 'LOAD_USERS';
 export const LOADED_USERS = 'LOADED_USERS';
@@ -35,7 +33,5 @@ export const loadUsers = (filter) => async (dispatch, getState) => {
   try {
     const { data } = await getUsers(token, query);
     dispatch({ type: LOADED_USERS, data });
-  } catch (e) {
-    dispatch(openSnackbar({ variant: ERROR }));
-  }
+  } catch {}
 };

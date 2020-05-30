@@ -8,11 +8,11 @@ import useStyles from './styles';
 import { routes, defaultRoute } from '../../utils';
 import Snackbar from '../Snackbar';
 import PrivateRoute from '../../components/PrivateRoute';
-import { getIsLoading } from '../../selectors';
+import { getLoading } from '../../selectors';
 
 const App = () => {
   const classes = useStyles();
-  const isLoading = useSelector(getIsLoading);
+  const isLoading = useSelector(getLoading);
   return (
     <Box className={classes.root}>
       <Header />

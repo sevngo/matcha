@@ -6,9 +6,7 @@ import Component from '../index';
 describe('App', () => {
   it('should match snapshot', () => {
     const initialState = {
-      app: {
-        isLoading: true,
-      },
+      loading: true,
     };
     const { container } = render(
       <TestProvider initialState={initialState}>

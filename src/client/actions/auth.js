@@ -10,7 +10,7 @@ import {
 } from '../api';
 import { getIds } from '../utils';
 import socket from '../socketEvents';
-import { SUCCESS, ERROR } from '../containers/Snackbar/constants';
+import { SUCCESS } from '../containers/Snackbar/constants';
 import {
   getUsersLiked,
   getUsersBlocked,
@@ -48,9 +48,7 @@ export const register = (user) => async (dispatch) => {
   try {
     await postUser(user);
     dispatch(openSnackbar({ variant: SUCCESS }));
-  } catch {
-    dispatch(openSnackbar({ variant: ERROR }));
-  }
+  } catch {}
 };
 
 export const login = (user) => async (dispatch) => {
@@ -59,9 +57,7 @@ export const login = (user) => async (dispatch) => {
     const { data } = await postUserLogin(user);
     dispatch({ type: LOGGED, data });
     socket.emit('logged', pick(['_id', 'username', 'friends'])(data));
-  } catch {
-    dispatch(openSnackbar({ variant: ERROR }));
-  }
+  } catch {}
 };
 
 export const updateUser = (token, auth) => async (dispatch) => {
@@ -70,9 +66,7 @@ export const updateUser = (token, auth) => async (dispatch) => {
     const { data } = await patchUser(token, auth);
     dispatch({ type: UPDATED_USER, data });
     dispatch(openSnackbar({ variant: SUCCESS }));
-  } catch {
-    dispatch(openSnackbar({ variant: ERROR }));
-  }
+  } catch {}
 };
 
 export const forgotPassword = (auth) => async (dispatch) => {
@@ -80,9 +74,7 @@ export const forgotPassword = (auth) => async (dispatch) => {
   try {
     await postUserForgot(auth);
     dispatch(openSnackbar({ variant: SUCCESS }));
-  } catch {
-    dispatch(openSnackbar({ variant: ERROR }));
-  }
+  } catch {}
 };
 
 export const likeUser = (userLikedId) => async (dispatch, getState) => {
@@ -110,9 +102,7 @@ export const likeUser = (userLikedId) => async (dispatch, getState) => {
         user: pick(['_id', 'username'])(data),
         userLikedId,
       });
-  } catch {
-    dispatch(openSnackbar({ variant: ERROR }));
-  }
+  } catch {}
 };
 
 export const blockUser = (userBlockedId) => async (dispatch, getState) => {
@@ -144,9 +134,7 @@ export const blockUser = (userBlockedId) => async (dispatch, getState) => {
         user: pick(['_id', 'username'])(data),
         userBlockedId,
       });
-  } catch {
-    dispatch(openSnackbar({ variant: ERROR }));
-  }
+  } catch {}
 };
 
 export const uploadImage = (image) => async (dispatch, getState) => {
@@ -156,9 +144,7 @@ export const uploadImage = (image) => async (dispatch, getState) => {
   try {
     const { data } = await postUserImage(token, image);
     dispatch({ type: UPLOADED_IMAGE, data });
-  } catch {
-    dispatch(openSnackbar({ variant: ERROR }));
-  }
+  } catch {}
 };
 
 export const removeImage = (imageId) => async (dispatch, getState) => {
@@ -168,9 +154,7 @@ export const removeImage = (imageId) => async (dispatch, getState) => {
   try {
     const { data } = await deleteUserImage(token, imageId);
     dispatch({ type: DELETED_IMAGE, data });
-  } catch {
-    dispatch(openSnackbar({ variant: ERROR }));
-  }
+  } catch {}
 };
 
 export const removeNotification = (_id) => ({ type: REMOVE_NOTIFICATION, _id });
