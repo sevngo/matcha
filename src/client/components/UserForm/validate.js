@@ -8,7 +8,7 @@ import {
   isYoung,
   isOld,
   isTrimmed,
-} from '../../utils';
+} from '../../utils/validates';
 
 const validate = (initialValues, values) => {
   const hasInitialValue = has(__, initialValues);

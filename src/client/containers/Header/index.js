@@ -8,7 +8,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import Drawer from '../Drawer';
 import Account from '../Account';
 import Notifications from '../Notifications';
-import { usersPath } from '../../utils';
+import { usersPath } from '../../utils/routes';
 import useStyles from './styles';
 import messages from './messages';
 import { getToken } from '../../selectors';
