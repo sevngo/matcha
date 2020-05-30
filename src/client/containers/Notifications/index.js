@@ -15,7 +15,7 @@ import {
 } from '@material-ui/core';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { removeNotification } from '../../actions';
-import { getNotifications } from '../../selectors/auth';
+import { getNotifications } from '../../selectors';
 import useStyles from './styles';
 import messages from './messages';
 

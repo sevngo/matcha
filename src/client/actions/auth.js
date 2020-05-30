@@ -11,7 +11,7 @@ import {
 import { getIds } from '../utils/functions';
 import socket from '../socketEvents';
 import { SUCCESS } from '../containers/Snackbar/constants';
-import { getUsersLiked, getUsersBlocked, getFriends } from '../selectors/auth';
+import { getUsersLiked, getUsersBlocked, getFriends } from '../selectors';
 
 export const REGISTER = 'REGISTER';
 export const LOGIN = 'LOGIN';

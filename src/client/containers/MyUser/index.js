@@ -22,7 +22,7 @@ import { compact } from '../../utils/functions';
 import emptyImage from '../../images/emptyImage.png';
 import useStyles from './styles';
 import messages from './messages';
-import { getImages, getAuth, getUsersBlocked } from '../../selectors/auth';
+import { getImages, getAuth, getUsersBlocked } from '../../selectors';
 import { likeUser, uploadImage, removeImage, updateUser } from '../../actions';
 
 const MyUser = () => {

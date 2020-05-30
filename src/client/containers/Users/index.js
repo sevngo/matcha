@@ -4,7 +4,7 @@ import { Hidden, Box, TablePagination, Paper } from '@material-ui/core';
 import { isEmpty } from 'ramda';
 import UserCards from '../../components/UserCards';
 import { handleFilter, loadUsers } from '../../actions';
-import { getUsers, getUsersTotal, getFilter } from '../../selectors/users';
+import { getUsers, getUsersTotal, getFilter } from '../../selectors';
 
 const Users = () => {
   const dispatch = useDispatch();
