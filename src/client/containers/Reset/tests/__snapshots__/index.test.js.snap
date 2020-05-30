@@ -22,7 +22,7 @@ exports[`Reset should match snapshot 1`] = `
             class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedStart MuiOutlinedInput-adornedStart MuiInputBase-adornedEnd MuiOutlinedInput-adornedEnd MuiInputBase-marginDense MuiOutlinedInput-marginDense"
           >
             <div
-              class="MuiBox-root MuiBox-root-200 makeStyles-icon-140"
+              class="MuiBox-root MuiBox-root-10 makeStyles-icon-9"
             >
               <svg
                 aria-hidden="true"
@@ -68,10 +68,10 @@ exports[`Reset should match snapshot 1`] = `
             </button>
             <fieldset
               aria-hidden="true"
-              class="PrivateNotchedOutline-root-222 MuiOutlinedInput-notchedOutline"
+              class="PrivateNotchedOutline-root-11 MuiOutlinedInput-notchedOutline"
             >
               <legend
-                class="PrivateNotchedOutline-legendLabelled-224 PrivateNotchedOutline-legendNotched-225"
+                class="PrivateNotchedOutline-legendLabelled-13 PrivateNotchedOutline-legendNotched-14"
               >
                 <span>
                   New password
@@ -81,7 +81,7 @@ exports[`Reset should match snapshot 1`] = `
           </div>
         </div>
         <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-mt1-134 MuiButton-containedPrimary MuiButton-containedSizeLarge MuiButton-sizeLarge Mui-disabled MuiButton-fullWidth Mui-disabled"
+          class="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-mt1-3 MuiButton-containedPrimary MuiButton-containedSizeLarge MuiButton-sizeLarge Mui-disabled MuiButton-fullWidth Mui-disabled"
           disabled=""
           tabindex="-1"
           type="submit"

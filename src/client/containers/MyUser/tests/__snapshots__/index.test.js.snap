@@ -3,7 +3,7 @@
 exports[`MyUser should match snapshot 1`] = `
 <div>
   <div
-    class="MuiBox-root MuiBox-root-11"
+    class="MuiBox-root MuiBox-root-10"
   >
     <div
       class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2"
@@ -15,7 +15,7 @@ exports[`MyUser should match snapshot 1`] = `
           class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
         >
           <div
-            class="MuiBox-root MuiBox-root-143"
+            class="MuiBox-root MuiBox-root-11"
           >
             <input
               accept="image/png, image/jpeg"
@@ -147,7 +147,7 @@ exports[`MyUser should match snapshot 1`] = `
                 class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedStart MuiOutlinedInput-adornedStart MuiInputBase-adornedEnd MuiOutlinedInput-adornedEnd MuiInputBase-marginDense MuiOutlinedInput-marginDense"
               >
                 <div
-                  class="MuiBox-root MuiBox-root-273 makeStyles-icon-214"
+                  class="MuiBox-root MuiBox-root-19 makeStyles-icon-18"
                 >
                   <svg
                     aria-hidden="true"
@@ -193,10 +193,10 @@ exports[`MyUser should match snapshot 1`] = `
                 </button>
                 <fieldset
                   aria-hidden="true"
-                  class="PrivateNotchedOutline-root-283 MuiOutlinedInput-notchedOutline"
+                  class="PrivateNotchedOutline-root-20 MuiOutlinedInput-notchedOutline"
                 >
                   <legend
-                    class="PrivateNotchedOutline-legendLabelled-285 PrivateNotchedOutline-legendNotched-286"
+                    class="PrivateNotchedOutline-legendLabelled-22 PrivateNotchedOutline-legendNotched-23"
                   >
                     <span>
                       New password
@@ -206,7 +206,7 @@ exports[`MyUser should match snapshot 1`] = `
               </div>
             </div>
             <button
-              class="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-mt1-208 MuiButton-containedPrimary MuiButton-containedSizeLarge MuiButton-sizeLarge Mui-disabled MuiButton-fullWidth Mui-disabled"
+              class="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-mt1-12 MuiButton-containedPrimary MuiButton-containedSizeLarge MuiButton-sizeLarge Mui-disabled MuiButton-fullWidth Mui-disabled"
               disabled=""
               tabindex="-1"
               type="submit"
