@@ -21,7 +21,7 @@ JWT_SECRET=mysecret
 Then run :
 
 ```
-docker run -p 27017:27017 -v mongo-db:/data/db -v mongo-configdb:/data/configdb mongo:4.2.3
+docker compose up -d mongo
 npm i
 npm run seed:db
 npm run dev
