@@ -3,12 +3,12 @@ version: '3.8'
 services:
   webapp-production:
     build: .
-    ports: [8080:8080]
+    ports: ['8080:8080']
     depends_on: [mongo]
   mongo:
     image: mongo:4.2.3
-    volumes: [mongo-db:/data/db, mongo-configdb:/data/configdb]
-    ports: [27017:27017]
+    volumes: ['mongo-db:/data/db', 'mongo-configdb:/data/configdb']
+    ports: ['27017:27017']
 
 volumes:
   mongo-db:
