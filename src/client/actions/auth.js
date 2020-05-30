@@ -39,8 +39,8 @@ export const logout = () => (dispatch) => {
 };
 
 export const register = (user) => async (dispatch) => {
+  dispatch({ type: REGISTER });
   try {
-    dispatch({ type: REGISTER });
     await postUser(user);
     dispatch(openSnackbar({ variant: SUCCESS }));
   } catch {
@@ -49,8 +49,8 @@ export const register = (user) => async (dispatch) => {
 };
 
 export const login = (user) => async (dispatch) => {
+  dispatch({ type: LOGIN });
   try {
-    dispatch({ type: LOGIN });
     const { data } = await postUserLogin(user);
     dispatch({ type: LOGGED, data });
     socket.emit('logged', pick(['_id', 'username', 'friends'])(data));
@@ -60,8 +60,8 @@ export const login = (user) => async (dispatch) => {
 };
 
 export const updateUser = (token, auth) => async (dispatch) => {
+  dispatch({ type: UPDATE_USER });
   try {
-    dispatch({ type: UPDATE_USER });
     const { data } = await patchUser(token, auth);
     dispatch({ type: UPDATED_USER, data });
     dispatch(openSnackbar({ variant: SUCCESS }));
@@ -71,8 +71,8 @@ export const updateUser = (token, auth) => async (dispatch) => {
 };
 
 export const forgotPassword = (auth) => async (dispatch) => {
+  dispatch({ type: FORGOT_PASSWORD });
   try {
-    dispatch({ type: FORGOT_PASSWORD });
     await postUserForgot(auth);
     dispatch(openSnackbar({ variant: SUCCESS }));
   } catch {
@@ -81,14 +81,14 @@ export const forgotPassword = (auth) => async (dispatch) => {
 };
 
 export const likeUser = (userLikedId) => async (dispatch, getState) => {
+  dispatch({ type: LIKE_USER });
+  const state = getState();
+  const authUsersLiked = getUsersLiked(state);
+  const authUsersBlocked = getUsersBlocked(state);
+  const token = getToken(state);
+  const usersLiked = compose(append(userLikedId), getIds)(authUsersLiked);
+  const usersBlocked = compose(reject(equals(userLikedId)), getIds)(authUsersBlocked);
   try {
-    dispatch({ type: LIKE_USER });
-    const state = getState();
-    const authUsersLiked = getUsersLiked(state);
-    const authUsersBlocked = getUsersBlocked(state);
-    const token = getToken(state);
-    const usersLiked = compose(append(userLikedId), getIds)(authUsersLiked);
-    const usersBlocked = compose(reject(equals(userLikedId)), getIds)(authUsersBlocked);
     const { data } = await patchUser(token, { usersLiked, usersBlocked });
     dispatch({ type: LIKED_USER, data });
     socket.emit('userLiked', {
@@ -105,16 +105,16 @@ export const likeUser = (userLikedId) => async (dispatch, getState) => {
 };
 
 export const blockUser = (userBlockedId) => async (dispatch, getState) => {
+  dispatch({ type: BLOCK_USER });
+  const state = getState();
+  const authUsersLiked = getUsersLiked(state);
+  const authUsersBlocked = getUsersBlocked(state);
+  const friends = getFriends(state);
+  const token = getToken(state);
+  const usersLiked = compose(reject(equals(userBlockedId)), getIds)(authUsersLiked);
+  const usersBlocked = compose(append(userBlockedId), getIds)(authUsersBlocked);
+  const user = { usersLiked, usersBlocked };
   try {
-    dispatch({ type: BLOCK_USER });
-    const state = getState();
-    const authUsersLiked = getUsersLiked(state);
-    const authUsersBlocked = getUsersBlocked(state);
-    const friends = getFriends(state);
-    const token = getToken(state);
-    const usersLiked = compose(reject(equals(userBlockedId)), getIds)(authUsersLiked);
-    const usersBlocked = compose(append(userBlockedId), getIds)(authUsersBlocked);
-    const user = { usersLiked, usersBlocked };
     const { data } = await patchUser(token, user);
     dispatch({ type: BLOCKED_USER, data });
     socket.emit('userBlocked', {
@@ -131,10 +131,10 @@ export const blockUser = (userBlockedId) => async (dispatch, getState) => {
 };
 
 export const uploadImage = (image) => async (dispatch, getState) => {
+  dispatch({ type: UPLOAD_IMAGE });
+  const state = getState();
+  const token = getToken(state);
   try {
-    dispatch({ type: UPLOAD_IMAGE });
-    const state = getState();
-    const token = getToken(state);
     const { data } = await postUserImage(token, image);
     dispatch({ type: UPLOADED_IMAGE, data });
   } catch {
@@ -143,10 +143,10 @@ export const uploadImage = (image) => async (dispatch, getState) => {
 };
 
 export const removeImage = (imageId) => async (dispatch, getState) => {
+  dispatch({ type: DELETE_IMAGE });
+  const state = getState();
+  const token = getToken(state);
   try {
-    dispatch({ type: DELETE_IMAGE });
-    const state = getState();
-    const token = getToken(state);
     const { data } = await deleteUserImage(token, imageId);
     dispatch({ type: DELETED_IMAGE, data });
   } catch {
