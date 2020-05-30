@@ -42,7 +42,10 @@ socket.on('gotFriended', (notification) => {
 });
 
 socket.on('gotUnfriended', (notification) => {
-  store.dispatch({ type: GOT_UNDFRIENDED, _id: path(['user', '_id'])(notification) });
+  store.dispatch({
+    type: GOT_UNDFRIENDED,
+    _id: path(['user', '_id'])(notification),
+  });
   store.dispatch({
     type: ADD_NOTIFICATION,
     notification: { ...notification, messageId: 'gotUnfriended' },

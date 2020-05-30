@@ -2,15 +2,26 @@ const { USERS } = require('../utils/constants');
 
 exports.usersModel = async (db) => {
   await db.createCollection(USERS);
-  await db.collection(USERS).createIndex({ username: 1 }, { unique: true, sparse: true });
-  await db.collection(USERS).createIndex({ email: 1 }, { unique: true, sparse: true });
+  await db
+    .collection(USERS)
+    .createIndex({ username: 1 }, { unique: true, sparse: true });
+  await db
+    .collection(USERS)
+    .createIndex({ email: 1 }, { unique: true, sparse: true });
   await db.collection(USERS).createIndex({ address: '2dsphere' });
   return db.command({
     collMod: USERS,
     validator: {
       $jsonSchema: {
         bsonType: 'object',
-        required: ['username', 'birthDate', 'email', 'password', 'gender', 'address'],
+        required: [
+          'username',
+          'birthDate',
+          'email',
+          'password',
+          'gender',
+          'address',
+        ],
         additionalProperties: false,
         properties: {
           _id: { bsonType: 'objectId' },
@@ -47,8 +58,14 @@ exports.usersModel = async (db) => {
               },
             },
           },
-          usersLiked: { bsonType: 'array', items: { bsonType: 'objectId', uniqueItems: true } },
-          usersBlocked: { bsonType: 'array', items: { bsonType: 'objectId', uniqueItems: true } },
+          usersLiked: {
+            bsonType: 'array',
+            items: { bsonType: 'objectId', uniqueItems: true },
+          },
+          usersBlocked: {
+            bsonType: 'array',
+            items: { bsonType: 'objectId', uniqueItems: true },
+          },
           socketId: { bsonType: 'string' },
         },
       },

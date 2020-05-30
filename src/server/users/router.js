@@ -6,7 +6,12 @@ const controllers = require('./controllers');
 
 const router = new Router();
 
-router.post('/', sanatize.newDate('birthDate'), sanatize.hash('password'), controllers.postUser);
+router.post(
+  '/',
+  sanatize.newDate('birthDate'),
+  sanatize.hash('password'),
+  controllers.postUser
+);
 
 router.get(
   '/',
@@ -15,7 +20,7 @@ router.get(
   sanatize.toInt('limit'),
   sanatize.birthRange,
   auth.authenticate,
-  controllers.getUsers,
+  controllers.getUsers
 );
 
 router.get(
@@ -23,7 +28,7 @@ router.get(
   validate.isValidObjectId('id'),
   sanatize.objectId('id'),
   auth.authenticate,
-  controllers.getUser,
+  controllers.getUser
 );
 
 router.patch(
@@ -34,10 +39,15 @@ router.patch(
   sanatize.objectIds('usersLiked'),
   sanatize.objectIds('usersBlocked'),
   sanatize.newPassword,
-  controllers.patchUser,
+  controllers.patchUser
 );
 
-router.post('/login', auth.generateAuthToken, auth.emailVerified, controllers.postUserLogin);
+router.post(
+  '/login',
+  auth.generateAuthToken,
+  auth.emailVerified,
+  controllers.postUserLogin
+);
 
 router.post('/forgot', controllers.postUserForgot);
 
@@ -45,14 +55,14 @@ router.post(
   '/images',
   auth.authenticate,
   sanatize.uploadImage.single('image'),
-  controllers.postUserImage,
+  controllers.postUserImage
 );
 
 router.delete(
   '/images/:imageId',
   validate.isValidObjectId('imageId'),
   sanatize.objectId('imageId'),
-  controllers.deleteUserImage,
+  controllers.deleteUserImage
 );
 
 router.get(
@@ -61,7 +71,7 @@ router.get(
   validate.isValidObjectId('imageId'),
   sanatize.objectId('id'),
   sanatize.objectId('imageId'),
-  controllers.getUserImage,
+  controllers.getUserImage
 );
 
 module.exports = router;

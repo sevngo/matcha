@@ -31,7 +31,11 @@ const Auth = () => {
     <Box mx="auto" maxWidth={500}>
       <Paper elevation={1}>
         <AppBar position="static">
-          <Tabs variant="fullWidth" value={tab} onChange={(e, tab) => handleTab(tab)}>
+          <Tabs
+            variant="fullWidth"
+            value={tab}
+            onChange={(e, tab) => handleTab(tab)}
+          >
             <Tab label={<FormattedMessage {...messages.login} />} />
             <Tab label={<FormattedMessage {...messages.register} />} />
           </Tabs>
@@ -43,7 +47,11 @@ const Auth = () => {
                 initialValues={initialValues}
                 submit={(values) => dispatch(login(values))}
               />
-              <Button onClick={() => handleDialog(true)} variant="outlined" className={classes.mt1}>
+              <Button
+                onClick={() => handleDialog(true)}
+                variant="outlined"
+                className={classes.mt1}
+              >
                 <FormattedMessage {...messages.forgotPassword} />
               </Button>
               <Dialog open={isDialogOpen} onClose={() => handleDialog(false)}>

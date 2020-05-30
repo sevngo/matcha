@@ -2,10 +2,18 @@ const { ObjectID } = require('mongodb');
 const { find, propEq, split } = require('ramda');
 const sharp = require('sharp');
 const { match, matchIn, addFieldBirthDate } = require('../utils/stages');
-const { userProjection, authProjection, imageProjection } = require('./projections');
+const {
+  userProjection,
+  authProjection,
+  imageProjection,
+} = require('./projections');
 const { getUsers } = require('../database');
 const { sendEmail } = require('../emails');
-const { asyncHandler, ErrorResponse, createToken } = require('../utils/functions');
+const {
+  asyncHandler,
+  ErrorResponse,
+  createToken,
+} = require('../utils/functions');
 
 exports.postUser = asyncHandler(async (req, res) => {
   const Users = getUsers();
@@ -18,7 +26,7 @@ exports.postUser = asyncHandler(async (req, res) => {
   await sendEmail(
     email,
     'Email confirmation',
-    `Welcome to Matcha, ${username}. Click on this link to confirm your email : ${url}`,
+    `Welcome to Matcha, ${username}. Click on this link to confirm your email : ${url}`
   );
   res.status(201).send();
 });
@@ -45,7 +53,8 @@ exports.getUsers = asyncHandler(async (req, res) => {
   if (gender) cursor.match({ gender });
   if (usersBlocked) cursor.match({ _id: { $nin: usersBlocked } });
   if (_id) cursor.match({ _id: { $ne: _id } });
-  if (birthRange) cursor.match({ birthDate: { $gt: birthRange[0], $lt: birthRange[1] } });
+  if (birthRange)
+    cursor.match({ birthDate: { $gt: birthRange[0], $lt: birthRange[1] } });
   if (sortBy) {
     const [sortKey, sortValue] = split(':')(sortBy);
     cursor.sort({ [sortKey]: sortValue === 'desc' ? -1 : 1 });
@@ -78,7 +87,7 @@ exports.patchUser = asyncHandler(async (req, res, next) => {
   const { value: user } = await Users.findOneAndUpdate(
     { _id },
     { $set: body },
-    { returnOriginal: false },
+    { returnOriginal: false }
   );
   if (!user) return next(new ErrorResponse(404, 'User not found'));
   const { usersLiked, usersBlocked } = user;
@@ -150,7 +159,7 @@ exports.postUserForgot = asyncHandler(async (req, res, next) => {
   await sendEmail(
     email,
     'Password reset',
-    `Hello ${username}. Click on this link to reset your password : ${url}`,
+    `Hello ${username}. Click on this link to reset your password : ${url}`
   );
   res.status(200).send();
 });
@@ -167,7 +176,7 @@ exports.postUserImage = asyncHandler(async (req, res, next) => {
   const imageId = ObjectID();
   const { value: user } = await Users.findOneAndUpdate(
     { _id },
-    { $push: { images: { _id: imageId, data: buffer } } },
+    { $push: { images: { _id: imageId, data: buffer } } }
   );
   if (!user) return next(new ErrorResponse(404, 'User not found'));
   const [data] = await Users.aggregate([addFieldBirthDate])
@@ -185,7 +194,7 @@ exports.deleteUserImage = asyncHandler(async (req, res, next) => {
   const Users = getUsers();
   const { value: user } = await Users.findOneAndUpdate(
     { _id },
-    { $pull: { images: { _id: imageId } } },
+    { $pull: { images: { _id: imageId } } }
   );
   if (!user) return next(new ErrorResponse(404, 'User not found'));
   const [data] = await Users.aggregate([addFieldBirthDate])

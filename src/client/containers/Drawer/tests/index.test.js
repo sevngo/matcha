@@ -20,7 +20,7 @@ describe('Drawer', () => {
     const { container } = render(
       <TestProvider initialState={initialState}>
         <Component isDrawerOpen />
-      </TestProvider>,
+      </TestProvider>
     );
     expect(container).toMatchSnapshot();
   });

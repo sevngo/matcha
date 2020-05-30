@@ -14,9 +14,13 @@ const Input = ({ startAdornment, endAdornment, error, ...rest }) => {
       helperText={error && <FormattedMessage {...messages[error]} />}
       fullWidth
       InputProps={{
-        startAdornment: startAdornment && <Box className={classes.icon}>{startAdornment}</Box>,
+        startAdornment: startAdornment && (
+          <Box className={classes.icon}>{startAdornment}</Box>
+        ),
         endAdornment: endAdornment && (
-          <IconButton onClick={endAdornment.action}>{endAdornment.icon}</IconButton>
+          <IconButton onClick={endAdornment.action}>
+            {endAdornment.icon}
+          </IconButton>
         ),
       }}
       {...rest}

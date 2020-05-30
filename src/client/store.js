@@ -10,7 +10,11 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const persistedState = loadState();
 
-const store = createStore(reducer, persistedState, composeEnhancers(applyMiddleware(thunk)));
+const store = createStore(
+  reducer,
+  persistedState,
+  composeEnhancers(applyMiddleware(thunk))
+);
 
 store.subscribe(() => {
   const state = store.getState();

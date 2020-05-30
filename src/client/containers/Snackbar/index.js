@@ -38,7 +38,11 @@ const MySnackbar = () => {
           </Typography>
         }
         action={[
-          <IconButton key="close" color="inherit" onClick={() => dispatch(closeSnackbar())}>
+          <IconButton
+            key="close"
+            color="inherit"
+            onClick={() => dispatch(closeSnackbar())}
+          >
             <CloseIcon />
           </IconButton>,
         ]}

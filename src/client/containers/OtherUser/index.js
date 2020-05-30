@@ -11,7 +11,12 @@ import emptyImage from '../../images/emptyImage.png';
 import { getUserImage } from '../../api';
 import useStyles from './styles';
 import { loadUser, likeUser, blockUser } from '../../actions';
-import { getUser, getUsersLiked, getUsersBlocked, getFriends } from '../../selectors';
+import {
+  getUser,
+  getUsersLiked,
+  getUsersBlocked,
+  getFriends,
+} from '../../selectors';
 
 const User = ({ id }) => {
   const user = useSelector(getUser);
@@ -24,8 +29,12 @@ const User = ({ id }) => {
     dispatch(loadUser(id));
   }, [dispatch, id]);
   const classes = useStyles();
-  const isLiked = Boolean(find((userLiked) => userLiked._id === user._id)(usersLiked));
-  const isBlocked = Boolean(find((userBlocked) => userBlocked._id === user._id)(usersBlocked));
+  const isLiked = Boolean(
+    find((userLiked) => userLiked._id === user._id)(usersLiked)
+  );
+  const isBlocked = Boolean(
+    find((userBlocked) => userBlocked._id === user._id)(usersBlocked)
+  );
   const isFriend = find((friend) => friend._id === user._id)(friends);
   const { images = [] } = user;
   const image = !isEmpty(images)
@@ -38,7 +47,11 @@ const User = ({ id }) => {
       <Grid container spacing={2}>
         <Grid item className={classes.mw30}>
           <Paper elevation={1}>
-            <Carousel activeStep={activeStep} handleStep={handleStep} maxSteps={maxSteps}>
+            <Carousel
+              activeStep={activeStep}
+              handleStep={handleStep}
+              maxSteps={maxSteps}
+            >
               <Box bgcolor="background.default">
                 <IconButton
                   className={isLiked ? classes.red : ''}

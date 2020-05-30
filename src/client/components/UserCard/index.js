@@ -24,7 +24,11 @@ const UserCard = ({ user }) => {
   return (
     <MCard className={classes.card} elevation={1}>
       <CardActionArea component={Link} to={userPath(user._id)}>
-        <CardMedia className={classes.media} image={image} title={user.username} />
+        <CardMedia
+          className={classes.media}
+          image={image}
+          title={user.username}
+        />
         <CardContent>
           <Grid container justify="space-between" alignItems="center">
             <Typography variant="h6" gutterBottom>

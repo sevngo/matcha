@@ -20,7 +20,7 @@ const Users = () => {
         sortBy: 'distance:asc',
         limit: 10,
         skip: 0,
-      }),
+      })
     );
   }, [dispatch]);
   useEffect(() => {
