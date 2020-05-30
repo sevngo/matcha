@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { getToken } from '../../selectors';
+import { getToken } from '../../selectors/auth';
 import Auth from '../../containers/Auth';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
