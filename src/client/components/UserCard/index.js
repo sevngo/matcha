@@ -12,7 +12,8 @@ import {
 import { path } from 'ramda';
 import emptyImage from '../../images/emptyImage.png';
 import { getUserImage } from '../../api';
-import { getAge, userPath } from '../../utils';
+import { getAge } from '../../utils/functions';
+import { userPath } from '../../utils/routes';
 import useStyles from './styles';
 import messages from './messages';
 

@@ -5,7 +5,7 @@ import { map } from 'ramda';
 import { Box, LinearProgress } from '@material-ui/core';
 import Header from '../Header';
 import useStyles from './styles';
-import { routes, defaultRoute } from '../../utils';
+import { routes, defaultRoute } from '../../utils/routes';
 import Snackbar from '../Snackbar';
 import PrivateRoute from '../../components/PrivateRoute';
 import { getLoading } from '../../selectors';

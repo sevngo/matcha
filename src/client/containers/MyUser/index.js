@@ -18,7 +18,7 @@ import CloudUpload from '@material-ui/icons/CloudUpload';
 import UserForm from '../../components/UserForm';
 import Carousel from '../../components/Carousel';
 import { getUserImage } from '../../api';
-import { compact } from '../../utils';
+import { compact } from '../../utils/functions';
 import emptyImage from '../../images/emptyImage.png';
 import useStyles from './styles';
 import messages from './messages';
