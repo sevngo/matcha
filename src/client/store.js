@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import reducer from './reducers';
-import { loadState } from './utils/localStorage';
+import { loadState } from './utils';
 
 export const initialState = {};
 

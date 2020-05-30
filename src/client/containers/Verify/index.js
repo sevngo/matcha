@@ -3,7 +3,7 @@ import { useParams } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { updateUser } from '../../actions';
-import { usersPath } from '../../utils/routes';
+import { usersPath } from '../../utils';
 
 const Reset = () => {
   const { token } = useParams();
