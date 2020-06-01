@@ -31,7 +31,7 @@ exports.uploadImage = multer({
   },
   fileFilter(req, file, cb) {
     if (!file.originalname.match(/\.(png|jpg|jpeg)$/))
-      return cb(new ErrorResponse(400, 'Please upload an image'));
+      return cb(new ErrorResponse(400, 'invalid image format'));
     cb(undefined, true);
   },
 });
