@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import {
-  Card as MCard,
+  Card,
   CardActionArea,
   CardContent,
   CardMedia,
@@ -22,7 +22,7 @@ const UserCard = ({ user }) => {
   const image = imageId ? getUserImage(user._id, imageId) : emptyImage;
   const classes = useStyles();
   return (
-    <MCard className={classes.card} elevation={1}>
+    <Card className={classes.card} elevation={1}>
       <CardActionArea component={Link} to={userPath(user._id)}>
         <CardMedia
           className={classes.media}
@@ -43,7 +43,7 @@ const UserCard = ({ user }) => {
           </Grid>
         </CardContent>
       </CardActionArea>
-    </MCard>
+    </Card>
   );
 };
 
