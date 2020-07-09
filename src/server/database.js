@@ -7,6 +7,7 @@ const {
   USERS,
   TEST,
 } = require('./utils/constants');
+const pino = require('./utils/logger');
 
 let db;
 let client;
@@ -17,7 +18,7 @@ exports.connectDb = async () => {
     useUnifiedTopology: true,
   });
   db = client.db(DATABASE_NAME);
-  if (NODE_ENV !== TEST) console.log('Database connected'); // eslint-disable-line no-console
+  if (NODE_ENV !== TEST) pino.logger.info('Database connected'); // eslint-disable-line no-console
   return usersModel(db);
 };
 
