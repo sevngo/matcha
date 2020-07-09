@@ -20,8 +20,6 @@ const {
 
 // default values for testing environment
 
-const USERS = 'users';
-
 module.exports = {
   DEVELOPMENT,
   PRODUCTION,
@@ -32,5 +30,4 @@ module.exports = {
   DATABASE_NAME,
   SERVER_PORT,
   SENDGRID_API_KEY,
-  USERS,
 };

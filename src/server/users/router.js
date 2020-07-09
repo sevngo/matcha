@@ -25,7 +25,7 @@ router.get(
 
 router.get(
   '/:id',
-  validate.isValidObjectId('id'),
+  // validate.isValidObjectId('id'),
   sanatize.objectId('id'),
   auth.authenticate,
   controllers.getUser

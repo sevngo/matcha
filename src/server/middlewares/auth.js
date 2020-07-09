@@ -28,7 +28,12 @@ exports.authenticate = asyncHandler(async (req, res, next) => {
   const authHeader = req.header('Authorization');
   if (!authHeader) next(new ErrorResponse(401, 'unauthorized'));
   const token = replace('Bearer ', '')(authHeader);
-  const data = verifyToken(token);
+  let data;
+  try {
+    data = verifyToken(token);
+  } catch (err) {
+    return next(new ErrorResponse(401, 'unauthorized'));
+  }
   const { _id } = data;
   const auth = await getUsers().findOne({ _id: ObjectID(_id) });
   if (!auth) return next(new ErrorResponse(401, 'unauthorized'));

@@ -1,7 +1,7 @@
 const { reduce } = require('ramda');
 const jwt = require('jsonwebtoken');
 const { ObjectID } = require('mongodb');
-const { JWT_SECRET } = require('./constants');
+const { JWT_SECRET } = require('./env');
 
 exports.asyncHandler = (fn) => (req, res, next) =>
   Promise.resolve(fn(req, res, next)).catch(next);
