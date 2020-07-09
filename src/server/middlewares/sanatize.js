@@ -3,7 +3,11 @@ const bcrypt = require('bcryptjs');
 const { map, omit, split } = require('ramda');
 const { body, check } = require('express-validator');
 const multer = require('multer');
-const { asyncHandler, ErrorResponse } = require('../utils/functions');
+const {
+  asyncHandler,
+  ErrorResponse,
+  INVALID_IMAGE_FORMAT,
+} = require('../utils/error');
 
 exports.objectId = (field) =>
   check(field)
@@ -31,7 +35,7 @@ exports.uploadImage = multer({
   },
   fileFilter(req, file, cb) {
     if (!file.originalname.match(/\.(png|jpg|jpeg)$/))
-      return cb(new ErrorResponse(400, 'invalid image format'));
+      return cb(new ErrorResponse(400, INVALID_IMAGE_FORMAT));
     cb(undefined, true);
   },
 });
