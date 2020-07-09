@@ -6,13 +6,6 @@ const { JWT_SECRET } = require('./env');
 exports.asyncHandler = (fn) => (req, res, next) =>
   Promise.resolve(fn(req, res, next)).catch(next);
 
-exports.ErrorResponse = class ErrorResponse extends Error {
-  constructor(statusCode, message) {
-    super(message);
-    this.statusCode = statusCode;
-  }
-};
-
 exports.getIds = reduce((acc, object) => [...acc, object._id], []);
 
 exports.getSocketIds = reduce((acc, object) => [...acc, object.socketId], []);
