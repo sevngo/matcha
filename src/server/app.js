@@ -4,7 +4,7 @@ const helmet = require('helmet');
 const pino = require('./utils/logger');
 const usersRouter = require('./users/router');
 const { errorHandler } = require('./middlewares/error');
-const { NODE_ENV, TEST, PRODUCTION } = require('./utils/constants');
+const { NODE_ENV, TEST, PRODUCTION } = require('./utils/env');
 
 const app = express();
 

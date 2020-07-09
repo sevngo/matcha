@@ -1,4 +1,6 @@
-const { USERS } = require('../utils/constants');
+const USERS = 'users';
+
+exports.USERS = USERS;
 
 exports.usersModel = async (db) => {
   await db.createCollection(USERS);
