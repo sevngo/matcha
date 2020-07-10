@@ -1,49 +1,47 @@
 const { Router } = require('express');
+const { body } = require('express-validator');
+const bcrypt = require('bcryptjs');
 const auth = require('../middlewares/auth');
-const sanatize = require('../middlewares/sanatize');
-const validate = require('../middlewares/validate');
+const { uploadImage } = require('../middlewares/validation');
 const controllers = require('./controllers');
+const validation = require('./validation');
 
 const router = new Router();
 
 router.post(
   '/',
-  sanatize.newDate('birthDate'),
-  sanatize.hash('password'),
+  validation.bodyValidation,
+  body('password').customSanitizer((value) => bcrypt.hashSync(value, 8)),
   controllers.postUser
 );
 
 router.get(
   '/',
-  sanatize.toInt('maxDistance'),
-  sanatize.toInt('skip'),
-  sanatize.toInt('limit'),
-  sanatize.birthRange,
+  validation.queryValidation,
   auth.authenticate,
   controllers.getUsers
 );
 
 router.get(
   '/:id',
-  // validate.isValidObjectId('id'),
-  sanatize.objectId('id'),
+  validation.paramValidation,
   auth.authenticate,
   controllers.getUser
 );
 
 router.patch(
   '/',
+  validation.bodyValidation,
   auth.authenticate,
-  sanatize.newDate('birthDate'),
-  sanatize.hash('password'),
-  sanatize.objectIds('usersLiked'),
-  sanatize.objectIds('usersBlocked'),
-  sanatize.newPassword,
+  body('newPassword')
+    .optional()
+    .customSanitizer((value) => bcrypt.hashSync(value, 8)),
   controllers.patchUser
 );
 
 router.post(
   '/login',
+  validation.bodyValidation,
   auth.generateAuthToken,
   auth.emailVerified,
   controllers.postUserLogin
@@ -54,23 +52,19 @@ router.post('/forgot', controllers.postUserForgot);
 router.post(
   '/images',
   auth.authenticate,
-  sanatize.uploadImage.single('image'),
+  uploadImage.single('image'),
   controllers.postUserImage
 );
 
 router.delete(
   '/images/:imageId',
-  validate.isValidObjectId('imageId'),
-  sanatize.objectId('imageId'),
+  validation.paramValidation,
   controllers.deleteUserImage
 );
 
 router.get(
   '/:id/images/:imageId',
-  validate.isValidObjectId('id'),
-  validate.isValidObjectId('imageId'),
-  sanatize.objectId('id'),
-  sanatize.objectId('imageId'),
+  validation.paramValidation,
   controllers.getUserImage
 );
 

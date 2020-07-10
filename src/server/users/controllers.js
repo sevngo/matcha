@@ -1,5 +1,5 @@
 const { ObjectID } = require('mongodb');
-const { find, propEq, split } = require('ramda');
+const { find, propEq, split, omit } = require('ramda');
 const sharp = require('sharp');
 const { match, matchIn, addFieldBirthDate } = require('../utils/stages');
 const {
@@ -85,6 +85,8 @@ exports.patchUser = asyncHandler(async (req, res, next) => {
     auth: { _id },
     body,
   } = req;
+  const { newPassword: password } = body;
+  if (password) req.body = { ...omit(['newPassword'])(body), password };
   const Users = getUsers();
   const { value: user } = await Users.findOneAndUpdate(
     { _id },
@@ -211,7 +213,7 @@ exports.getUserImage = asyncHandler(async (req, res, next) => {
   const { id, imageId } = req.params;
   const user = await Users.findOne({ _id: id, 'images._id': imageId });
   if (!user) return next(new ErrorResponse(404, USER_NOT_FOUND));
-  const { data } = find((image) => propEq('_id', imageId)(image))(user.images);
+  const { data } = find(propEq('_id', imageId))(user.images);
   res.type('png');
   res.send(data.buffer);
 });
