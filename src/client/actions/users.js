@@ -1,4 +1,5 @@
 import { getUsers } from '../api';
+import { getFilter } from '../selectors';
 
 export const LOAD_USERS = 'LOAD_USERS';
 export const LOADED_USERS = 'LOADED_USERS';
@@ -6,8 +7,10 @@ export const HANDLE_FILTER = 'HANDLE_FILTER';
 
 export const handleFilter = (filter) => ({ type: HANDLE_FILTER, filter });
 
-export const loadUsers = (filter) => async (dispatch) => {
+export const loadUsers = () => async (dispatch, getState) => {
   dispatch({ type: LOAD_USERS });
+  const state = getState();
+  const filter = getFilter(state);
   const { gender, ageRange, sortBy, maxDistance, limit, skip } = filter;
 
   const genderQuery = `gender=${gender}`;
