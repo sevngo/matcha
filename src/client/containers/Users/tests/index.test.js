@@ -7,6 +7,14 @@ describe('Users', () => {
   it('should match snapshot', () => {
     const initialState = {
       users: {
+        filter: {
+          gender: 'male',
+          maxDistance: 20000,
+          ageRange: [18, 50],
+          sortBy: 'distance:asc',
+          limit: 10,
+          skip: 0,
+        },
         data: [
           {
             _id: '5caf003feaca23291c0cec34',
