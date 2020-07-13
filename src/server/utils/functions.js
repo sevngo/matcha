@@ -3,9 +3,6 @@ const jwt = require('jsonwebtoken');
 const { ObjectID } = require('mongodb');
 const { JWT_SECRET } = require('./env');
 
-exports.asyncHandler = (fn) => (req, res, next) =>
-  Promise.resolve(fn(req, res, next)).catch(next);
-
 exports.getIds = reduce((acc, object) => [...acc, object._id], []);
 
 exports.getSocketIds = reduce((acc, object) => [...acc, object.socketId], []);
