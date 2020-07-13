@@ -11,7 +11,10 @@ const router = new Router();
 router.post(
   '/',
   validation.bodyValidation,
-  body('password').customSanitizer((value) => bcrypt.hashSync(value, 8)),
+  body('password')
+    .exists()
+    .bail()
+    .customSanitizer((value) => bcrypt.hashSync(value, 8)),
   controllers.postUser
 );
 

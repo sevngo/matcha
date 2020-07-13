@@ -3,8 +3,8 @@ const { ObjectID } = require('mongodb');
 const bcrypt = require('bcryptjs');
 const { getUsers } = require('../database');
 const { createToken, verifyToken } = require('../utils/functions');
+const { asyncHandler } = require('../middlewares/error');
 const {
-  asyncHandler,
   ErrorResponse,
   IDENTIFICATION_FAILED,
   UNAUTHORIZED,

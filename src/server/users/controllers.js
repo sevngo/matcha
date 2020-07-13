@@ -9,9 +9,9 @@ const {
 } = require('./projections');
 const { getUsers } = require('../database');
 const { sendEmail } = require('../emails');
+const { asyncHandler } = require('../middlewares/error');
 const { createToken } = require('../utils/functions');
 const {
-  asyncHandler,
   ErrorResponse,
   USER_NOT_FOUND,
   EMAIL_NOT_FOUND,

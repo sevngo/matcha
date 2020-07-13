@@ -1,9 +1,9 @@
 const { body, param, query } = require('express-validator');
-const { map, is, all, split } = require('ramda');
+const { map, is, all, split, isEmpty } = require('ramda');
 const { ObjectID } = require('mongodb');
 const { validate } = require('../middlewares/validation');
 
-exports.bodyValidation = validate([
+exports.bodyValidation = validate('body', [
   body('username').optional().isString().trim().isLength({ min: 3, max: 40 }),
   body('birthDate').optional().isString().trim().toDate(),
   body('email')
@@ -31,36 +31,40 @@ exports.bodyValidation = validate([
     .optional()
     .isArray()
     .custom(all(ObjectID.isValid))
-    .if(all(ObjectID.isValid))
+    .bail()
     .customSanitizer(map(ObjectID)),
   body('usersBlocked')
     .optional()
     .isArray()
     .custom(all(ObjectID.isValid))
-    .if(all(ObjectID.isValid))
+    .bail()
     .customSanitizer(map(ObjectID)),
   body('socketId').optional().isString().trim(),
 ]);
 
-exports.paramValidation = validate([
+exports.paramValidation = validate('param', [
   param('id')
     .optional()
     .custom(ObjectID.isValid)
-    .if(ObjectID.isValid)
+    .bail()
     .customSanitizer(ObjectID),
   param('imageId')
     .optional()
     .custom(ObjectID.isValid)
-    .if(ObjectID.isValid)
+    .bail()
     .customSanitizer(ObjectID),
 ]);
 
-exports.queryValidation = validate([
+exports.queryValidation = validate('query', [
   query('maxDistance').optional().isString().toInt(),
   query('skip').optional().isString().toInt(),
   query('limit').optional().isString().toInt(),
+
   query('birthRange')
     .optional()
     .customSanitizer(split(':'))
+    .custom((value) => value.length === 2)
+    .custom(all((value) => !isEmpty(value)))
+    .bail()
     .customSanitizer(map((value) => new Date(value))),
 ]);
