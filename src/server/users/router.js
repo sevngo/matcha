@@ -36,7 +36,7 @@ router.patch(
   '/',
   validation.bodyValidation,
   auth.authenticate,
-  body('newPassword')
+  body('password')
     .optional()
     .customSanitizer((value) => bcrypt.hashSync(value, 8)),
   controllers.patchUser

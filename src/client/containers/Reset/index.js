@@ -14,8 +14,9 @@ const Reset = () => {
     <Grid container justify="center" className={classes.p3}>
       <Paper elevation={1} className={classes.paper}>
         <UserForm
-          initialValues={{ newPassword: '' }}
+          initialValues={{ password: '' }}
           submit={(user) => dispatch(updateUser(user, token))}
+          newPasswordLabel
         />
       </Paper>
     </Grid>

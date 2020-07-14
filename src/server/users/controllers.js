@@ -1,5 +1,5 @@
 const { ObjectID } = require('mongodb');
-const { find, propEq, split, omit } = require('ramda');
+const { find, propEq, split } = require('ramda');
 const sharp = require('sharp');
 const { match, matchIn, addFieldBirthDate } = require('../utils/stages');
 const {
@@ -85,8 +85,6 @@ exports.patchUser = asyncHandler(async (req, res, next) => {
     auth: { _id },
     body,
   } = req;
-  const { newPassword: password } = body;
-  if (password) req.body = { ...omit(['newPassword'])(body), password };
   const Users = getUsers();
   const { value: user } = await Users.findOneAndUpdate(
     { _id },

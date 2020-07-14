@@ -39,7 +39,7 @@ exports[`Reset should match snapshot 1`] = `
               aria-invalid="false"
               autocomplete="password"
               class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedStart MuiOutlinedInput-inputAdornedStart MuiInputBase-inputAdornedEnd MuiOutlinedInput-inputAdornedEnd MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
-              name="newPassword"
+              name="password"
               type="password"
               value=""
             />

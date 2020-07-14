@@ -10,7 +10,7 @@ import {
   isTrimmed,
 } from '../../utils';
 
-const validate = (initialValues, values) => {
+const validate = (initialValues, values, newPasswordLabel) => {
   const hasInitialValue = has(__, initialValues);
   const errors = {};
   const usernameError =
@@ -24,14 +24,11 @@ const validate = (initialValues, values) => {
   const passwordError =
     hasInitialValue('password') &&
     composeValidators(
-      isRequired,
+      newPasswordLabel ? () => false : isRequired,
       minLength,
       maxLength(40),
       isTrimmed
     )(values.password);
-  const newPasswordError =
-    hasInitialValue('newPassword') &&
-    composeValidators(minLength, maxLength(40), isTrimmed)(values.newPassword);
   const emailError =
     hasInitialValue('email') &&
     composeValidators(
@@ -49,7 +46,6 @@ const validate = (initialValues, values) => {
     isRequired(!isNil(path(['address', 'coordinates'])(values)));
   if (usernameError) errors.username = usernameError;
   if (passwordError) errors.password = passwordError;
-  if (newPasswordError) errors.newPassword = newPasswordError;
   if (emailError) errors.email = emailError;
   if (birthDateError) errors.birthDate = birthDateError;
   if (genderError) errors.gender = genderError;
