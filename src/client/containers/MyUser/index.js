@@ -116,9 +116,10 @@ const MyUser = () => {
             <UserForm
               initialValues={{
                 ...userForm,
-                newPassword: '',
+                password: '',
               }}
               submit={(user) => dispatch(updateUser(compact(user)))}
+              newPasswordLabel
             />
           </Paper>
         </Grid>

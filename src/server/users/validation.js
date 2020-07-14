@@ -14,11 +14,6 @@ exports.bodyValidation = validate('body', [
     .isLength({ min: 3, max: 40 }),
   body('emailVerified').optional().isBoolean(),
   body('password').optional().isString().trim().isLength({ min: 3, max: 40 }),
-  body('newPassword')
-    .optional()
-    .isString()
-    .trim()
-    .isLength({ min: 3, max: 40 }),
   body('gender').optional().isString().trim(),
   body('address.name').optional().isString().trim(),
   body('address.type').optional().isString().trim(),
@@ -59,7 +54,6 @@ exports.queryValidation = validate('query', [
   query('maxDistance').optional().isString().toInt(),
   query('skip').optional().isString().toInt(),
   query('limit').optional().isString().toInt(),
-
   query('birthRange')
     .optional()
     .customSanitizer(split(':'))

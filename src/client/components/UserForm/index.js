@@ -21,7 +21,13 @@ import { GENDER_OPTIONS, SORT_BY_OPTIONS } from './constants';
 import messages from './messages';
 import validate from './validate';
 
-const Component = ({ initialValues, disabled, isGeoActivated, submit }) => {
+const Component = ({
+  initialValues,
+  disabled,
+  isGeoActivated,
+  submit,
+  newPasswordLabel,
+}) => {
   const classes = useStyles();
   const hasInitialValue = has(__, initialValues);
   const {
@@ -38,7 +44,7 @@ const Component = ({ initialValues, disabled, isGeoActivated, submit }) => {
   } = useFormik({
     initialValues,
     onSubmit: submit,
-    validate: (values) => validate(initialValues, values),
+    validate: (values) => validate(initialValues, values, newPasswordLabel),
     enableReinitialize: true,
   });
   const [showPassword, toggleShowPassword] = useState(false);
@@ -50,6 +56,9 @@ const Component = ({ initialValues, disabled, isGeoActivated, submit }) => {
   );
   useGeolocation(handleAddress, address && isGeoActivated);
   useAutocomplete('address', handleAddress, !isNil(address));
+  const passwordMessage = newPasswordLabel
+    ? messages.newPassword
+    : messages.password;
   return (
     <form onSubmit={handleSubmit}>
       {hasInitialValue('username') && (
@@ -69,28 +78,11 @@ const Component = ({ initialValues, disabled, isGeoActivated, submit }) => {
         <Input
           name="password"
           autoComplete="password"
-          label={<FormattedMessage {...messages.password} />}
+          label={<FormattedMessage {...passwordMessage} />}
           onChange={handleChange}
           onBlur={handleBlur}
           value={values.password}
           error={touched.password && errors.password}
-          type={showPassword ? 'text' : 'password'}
-          startAdornment={<VpnKeyIcon />}
-          endAdornment={{
-            icon: showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />,
-            action: () => toggleShowPassword(!showPassword),
-          }}
-        />
-      )}
-      {hasInitialValue('newPassword') && (
-        <Input
-          name="newPassword"
-          autoComplete="password"
-          label={<FormattedMessage {...messages.newPassword} />}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          value={values.newPassword}
-          error={touched.newPassword && errors.newPassword}
           type={showPassword ? 'text' : 'password'}
           startAdornment={<VpnKeyIcon />}
           endAdornment={{
