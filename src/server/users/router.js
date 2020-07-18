@@ -1,71 +1,72 @@
 const { Router } = require('express');
 const auth = require('../middlewares/auth');
-const { uploadImage } = require('../middlewares/validation');
 const controllers = require('./controllers');
-const validation = require('./validation');
+const sanatize = require('../middlewares/sanatize');
 
 const router = new Router();
 
 router.post(
   '/',
-  validation.bodyValidation,
-  validation.bodySanatization,
+  sanatize.hash('password'),
+  sanatize.toDate('birthDate'),
+  sanatize.objectIds('usersLiked'),
+  sanatize.objectIds('usersBlocked'),
   controllers.postUser
 );
 
 router.get(
   '/',
-  validation.queryValidation,
+  sanatize.toInt('maxDistance'),
+  sanatize.toInt('skip'),
+  sanatize.toInt('limit'),
+  sanatize.dateRange('birthDate'),
   auth.authenticate,
   controllers.getUsers
 );
 
 router.get(
   '/:id',
-  validation.paramValidation,
+  sanatize.objectId('id'),
   auth.authenticate,
   controllers.getUser
 );
 
 router.patch(
   '/',
-  validation.bodyValidation,
   auth.authenticate,
-  validation.bodySanatization,
+  sanatize.hash('password'),
+  sanatize.toDate('birthDate'),
+  sanatize.objectIds('usersLiked'),
+  sanatize.objectIds('usersBlocked'),
   controllers.patchUser
 );
 
 router.post(
   '/login',
-  validation.bodyValidation,
   auth.generateAuthToken,
   auth.emailVerified,
   controllers.postUserLogin
 );
 
-router.post(
-  '/forgot',
-  validation.bodyValidation,
-  validation.bodySanatization,
-  controllers.postUserForgot
-);
+router.post('/forgot', controllers.postUserForgot);
 
 router.post(
   '/images',
   auth.authenticate,
-  uploadImage.single('image'),
+  sanatize.image.single('image'),
   controllers.postUserImage
 );
 
 router.delete(
   '/images/:imageId',
-  validation.paramValidation,
+  sanatize.objectId('imageId'),
   controllers.deleteUserImage
 );
 
 router.get(
   '/:id/images/:imageId',
-  validation.paramValidation,
+  sanatize.objectId('id'),
+  sanatize.objectId('imageId'),
   controllers.getUserImage
 );
 
