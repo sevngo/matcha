@@ -1,6 +1,4 @@
 const { Router } = require('express');
-const { body } = require('express-validator');
-const bcrypt = require('bcryptjs');
 const auth = require('../middlewares/auth');
 const { uploadImage } = require('../middlewares/validation');
 const controllers = require('./controllers');
@@ -11,10 +9,7 @@ const router = new Router();
 router.post(
   '/',
   validation.bodyValidation,
-  body('password')
-    .exists()
-    .bail()
-    .customSanitizer((value) => bcrypt.hashSync(value, 8)),
+  validation.bodySanatization,
   controllers.postUser
 );
 
@@ -36,9 +31,7 @@ router.patch(
   '/',
   validation.bodyValidation,
   auth.authenticate,
-  body('password')
-    .optional()
-    .customSanitizer((value) => bcrypt.hashSync(value, 8)),
+  validation.bodySanatization,
   controllers.patchUser
 );
 
@@ -50,7 +43,12 @@ router.post(
   controllers.postUserLogin
 );
 
-router.post('/forgot', controllers.postUserForgot);
+router.post(
+  '/forgot',
+  validation.bodyValidation,
+  validation.bodySanatization,
+  controllers.postUserForgot
+);
 
 router.post(
   '/images',

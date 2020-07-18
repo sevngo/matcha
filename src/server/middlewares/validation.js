@@ -14,6 +14,11 @@ exports.validate = (loca, validations) => async (req, res, next) => {
   res.status(422).send({ errorMessage, location, param });
 };
 
+exports.sanatize = (sanatizations) => async (req, res, next) => {
+  await Promise.all(sanatizations.map((sanatization) => sanatization.run(req)));
+  next();
+};
+
 exports.uploadImage = multer({
   limits: {
     fileSize: 1000000,

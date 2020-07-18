@@ -1,40 +1,40 @@
 const { body, param, query } = require('express-validator');
 const { map, is, all, split, isEmpty } = require('ramda');
+const bcrypt = require('bcryptjs');
 const { ObjectID } = require('mongodb');
-const { validate } = require('../middlewares/validation');
+const { validate, sanatize } = require('../middlewares/validation');
 
 exports.bodyValidation = validate('body', [
-  body('username').optional().isString().trim().isLength({ min: 3, max: 40 }),
-  body('birthDate').optional().isString().trim().toDate(),
-  body('email')
-    .optional()
-    .isString()
-    .trim()
-    .normalizeEmail()
-    .isLength({ min: 3, max: 40 }),
+  body('username').optional().isString().isLength({ min: 3, max: 40 }),
+  body('birthDate').optional().isString(),
+  body('email').optional().isString().isEmail().isLength({ min: 3, max: 40 }),
   body('emailVerified').optional().isBoolean(),
-  body('password').optional().isString().trim().isLength({ min: 3, max: 40 }),
-  body('gender').optional().isString().trim(),
-  body('address.name').optional().isString().trim(),
-  body('address.type').optional().isString().trim(),
+  body('password').optional().isString().isLength({ min: 3, max: 40 }),
+  body('gender').optional().isString(),
+  body('address.name').optional().isString(),
+  body('address.type').optional().isString(),
   body('address.coordinates')
     .optional()
     .isArray()
     .custom((value) => value.length === 2)
     .custom(all(is(Number))),
-  body('usersLiked')
+  body('usersLiked').optional().isArray().custom(all(ObjectID.isValid)),
+  body('usersBlocked').optional().isArray().custom(all(ObjectID.isValid)),
+  body('socketId').optional().isString(),
+]);
+
+exports.bodySanatization = sanatize([
+  body('username').optional().trim(),
+  body('birthDate').optional().trim().toDate(),
+  body('email').optional().trim(),
+  body('password')
     .optional()
-    .isArray()
-    .custom(all(ObjectID.isValid))
-    .bail()
-    .customSanitizer(map(ObjectID)),
-  body('usersBlocked')
-    .optional()
-    .isArray()
-    .custom(all(ObjectID.isValid))
-    .bail()
-    .customSanitizer(map(ObjectID)),
-  body('socketId').optional().isString().trim(),
+    .customSanitizer((value) => bcrypt.hashSync(value, 8)),
+  body('address.name').optional().trim(),
+  body('address.type').optional().trim(),
+  body('usersLiked').optional().customSanitizer(map(ObjectID)),
+  body('usersBlocked').optional().customSanitizer(map(ObjectID)),
+  body('socketId').optional().trim(),
 ]);
 
 exports.paramValidation = validate('param', [
