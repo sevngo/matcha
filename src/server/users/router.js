@@ -19,7 +19,7 @@ router.get(
   sanatize.toInt('maxDistance'),
   sanatize.toInt('skip'),
   sanatize.toInt('limit'),
-  sanatize.dateRange('birthDate'),
+  sanatize.dateRange('birthRange'),
   auth.authenticate,
   controllers.getUsers
 );

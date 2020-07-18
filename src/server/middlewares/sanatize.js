@@ -22,7 +22,7 @@ exports.objectIds = (field) =>
 exports.objectId = (field) =>
   check(field).custom(ObjectID.isValid).bail().customSanitizer(ObjectID);
 
-exports.toInt = (field) => check(field).isString().toInt();
+exports.toInt = (field) => check(field).optional().toInt();
 
 exports.dateRange = (field) =>
   check(field)

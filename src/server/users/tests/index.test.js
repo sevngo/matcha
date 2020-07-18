@@ -7,8 +7,8 @@ const app = require('../../app');
 const { connectDb, disconnectDb, getUsers } = require('../../database');
 const {
   newUser,
-  initialPassword,
-  initialId,
+  userOnePassword,
+  userOneId,
   userOne,
   userTwo,
   userOneToken,
@@ -42,7 +42,7 @@ describe('/api/users', () => {
     test('should login user', async () => {
       const { body: user } = await request(app)
         .post('/api/users/login')
-        .send({ username: userOne.username, password: initialPassword })
+        .send({ username: userOne.username, password: userOnePassword })
         .expect(200);
       expect(user.username).toEqual(userOne.username);
     });
@@ -61,11 +61,21 @@ describe('/api/users', () => {
         .expect(200);
       expect(users.data).toHaveLength(1);
     });
+    test('should get all users with a full query', async () => {
+      const { body: users } = await request(app)
+        .get(
+          '/api/users?gender=male&birthRange=1969-7-18:2002-7-18&sortBy=distance:asc&limit=10&skip=0&maxDistance=20000000'
+        )
+        .set('Authorization', `Bearer ${userOneToken}`)
+        .expect(200);
+      expect(users.data).toHaveLength(1);
+    });
   });
+
   describe('GET /api/users/:id', () => {
     test('should get specific user', async () => {
       const { body: user } = await request(app)
-        .get(`/api/users/${initialId}`)
+        .get(`/api/users/${userOneId}`)
         .set('Authorization', `Bearer ${userOneToken}`)
         .expect(200);
       expect(user.username).toEqual(userOne.username);

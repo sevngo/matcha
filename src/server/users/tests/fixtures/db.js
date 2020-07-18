@@ -16,9 +16,9 @@ const birthDateMax = new Date(
   today.getDate()
 );
 
-const initialPassword = faker.internet.password();
-const initialId = faker.random.alphaNumeric(12);
-const userOneToken = createToken({ _id: initialId });
+const userOnePassword = faker.internet.password();
+const userOneId = faker.random.alphaNumeric(12);
+const userOneToken = createToken({ _id: userOneId });
 
 const userOne = {
   username: faker.internet.userName(),
@@ -33,16 +33,16 @@ const userOne = {
       parseFloat(faker.address.latitude()),
     ],
   },
-  password: bcrypt.hashSync(initialPassword, 8),
-  _id: ObjectID(initialId),
+  password: bcrypt.hashSync(userOnePassword, 8),
+  _id: ObjectID(userOneId),
   emailVerified: true,
 };
 
 const userTwo = {
   username: faker.internet.userName(),
-  birthDate: faker.date.past(),
+  birthDate: faker.date.between(birthDateMin, birthDateMax),
   email: faker.internet.email(),
-  gender: faker.random.arrayElement(genders),
+  gender: 'male',
   address: {
     type: 'Point',
     name: faker.address.streetAddress(),
@@ -51,9 +51,8 @@ const userTwo = {
       parseFloat(faker.address.latitude()),
     ],
   },
-  password: bcrypt.hashSync(faker.internet.password(), 8),
+  password: faker.internet.password(),
   _id: ObjectID(),
-  emailVerified: true,
 };
 
 const newUser = {
@@ -75,8 +74,8 @@ const newUser = {
 module.exports = {
   userOne,
   userTwo,
-  initialPassword,
+  userOnePassword,
   newUser,
-  initialId,
+  userOneId,
   userOneToken,
 };
