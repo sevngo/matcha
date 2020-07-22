@@ -1,17 +1,9 @@
-version: '3.4'
+version: '3.3'
 
 services:
   webapp-production:
-    build:
-      context: .
-      target: prod
+    build: .
     ports: ['8080:8080']
-    depends_on: [mongo]
-  webapp-test:
-    build:
-      context: .
-      target: test
-    volumes: ['./src:/app/src']
     depends_on: [mongo]
   mongo:
     image: mongo:4.2.3
