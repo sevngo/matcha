@@ -3,7 +3,5 @@ build
 coverage
 .env.development
 .env.production
-.cache
-
 .vscode
 .DS_Store
