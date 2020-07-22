@@ -1,0 +1,10 @@
+node_modules
+build
+coverage
+scripts
+.git
+
+README.md
+.vscode
+.DS_Store
+.gitignore
