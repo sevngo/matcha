@@ -1,7 +1,8 @@
 node_modules
 build
 coverage
+.vscode
+
 .env.development
 .env.production
-.vscode
 .DS_Store
