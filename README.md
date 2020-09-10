@@ -21,7 +21,7 @@ JWT_SECRET=mysecret
 Then run :
 
 ```
-docker-compose run -d mongo
+docker-compose up -d mongo
 npm i
 npm run seed:db
 npm run dev
