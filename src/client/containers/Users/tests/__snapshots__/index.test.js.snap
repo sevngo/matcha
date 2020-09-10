@@ -3,10 +3,138 @@
 exports[`Users should match snapshot 1`] = `
 <div>
   <div
-    class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
-  />
+    class="MuiPaper-root makeStyles-paper-3 MuiPaper-elevation1 MuiPaper-rounded"
+  >
+    <button
+      class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit"
+      tabindex="0"
+      type="button"
+    >
+      <span
+        class="MuiIconButton-label"
+      >
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"
+          />
+        </svg>
+      </span>
+      <span
+        class="MuiTouchRipple-root"
+      />
+    </button>
+    <div
+      class="MuiTablePagination-root makeStyles-pagination-2"
+    >
+      <div
+        class="MuiToolbar-root MuiToolbar-regular MuiTablePagination-toolbar MuiToolbar-gutters"
+      >
+        <div
+          class="MuiTablePagination-spacer"
+        />
+        <p
+          class="MuiTypography-root MuiTablePagination-caption MuiTypography-body2 MuiTypography-colorInherit"
+          id="mui-33768"
+        >
+          Rows per page:
+        </p>
+        <div
+          class="MuiInputBase-root MuiTablePagination-input makeStyles-displayNone-1 MuiTablePagination-selectRoot"
+        >
+          <div
+            aria-haspopup="listbox"
+            aria-labelledby="mui-33768 mui-91061"
+            class="MuiSelect-root MuiSelect-select MuiTablePagination-select MuiSelect-selectMenu MuiInputBase-input"
+            id="mui-91061"
+            role="button"
+            tabindex="0"
+          >
+            10
+          </div>
+          <input
+            aria-hidden="true"
+            class="MuiSelect-nativeInput"
+            tabindex="-1"
+            value="10"
+          />
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSelect-icon MuiTablePagination-selectIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M7 10l5 5 5-5z"
+            />
+          </svg>
+        </div>
+        <p
+          class="MuiTypography-root MuiTablePagination-caption MuiTypography-body2 MuiTypography-colorInherit"
+        >
+          1-10 of 13
+        </p>
+        <div
+          class="MuiTablePagination-actions"
+        >
+          <button
+            aria-label="Previous page"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit Mui-disabled Mui-disabled"
+            disabled=""
+            tabindex="-1"
+            title="Previous page"
+            type="button"
+          >
+            <span
+              class="MuiIconButton-label"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M15.41 16.09l-4.58-4.59 4.58-4.59L14 5.5l-6 6 6 6z"
+                />
+              </svg>
+            </span>
+          </button>
+          <button
+            aria-label="Next page"
+            class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit"
+            tabindex="0"
+            title="Next page"
+            type="button"
+          >
+            <span
+              class="MuiIconButton-label"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"
+                />
+              </svg>
+            </span>
+            <span
+              class="MuiTouchRipple-root"
+            />
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
   <div
-    class="MuiBox-root MuiBox-root-1"
+    class="MuiBox-root MuiBox-root-4"
   />
   <div
     class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2"
@@ -15,7 +143,7 @@ exports[`Users should match snapshot 1`] = `
       class="MuiGrid-root MuiGrid-item"
     >
       <div
-        class="MuiPaper-root MuiCard-root makeStyles-card-2 MuiPaper-elevation1 MuiPaper-rounded"
+        class="MuiPaper-root MuiCard-root makeStyles-card-5 MuiPaper-elevation1 MuiPaper-rounded"
       >
         <a
           aria-disabled="false"
@@ -25,7 +153,7 @@ exports[`Users should match snapshot 1`] = `
           tabindex="0"
         >
           <div
-            class="MuiCardMedia-root makeStyles-media-3"
+            class="MuiCardMedia-root makeStyles-media-6"
             style="background-image: url(/api/users/5caf003feaca23291c0cec34/images/5caf005beaca23291c0cec35);"
             title="qweqwe"
           />
@@ -40,7 +168,7 @@ exports[`Users should match snapshot 1`] = `
               >
                 qweqwe
                 , 
-                19
+                20
               </h6>
               <span
                 class="MuiTypography-root MuiTypography-caption"

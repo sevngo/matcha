@@ -15,14 +15,22 @@ const App = () => {
   const isLoading = useSelector(getLoading);
   return (
     <Box
-      className={classes.root}
-      style={{ pointerEvents: isLoading ? 'none' : 'auto' }}
+      className={`${classes.root} ${
+        isLoading ? classes.pointerEventsNone : classes.pointerEventsAuto
+      }`}
     >
       <Header />
       <LinearProgress
-        style={{ visibility: isLoading ? 'visible' : 'hidden' }}
+        className={
+          isLoading ? classes.visibilityVisible : classes.visibilityHidden
+        }
       />
-      <Box p={3}>
+      <Box
+        p={3}
+        className={
+          isLoading ? classes.visibilityHidden : classes.visibilityVisible
+        }
+      >
         <Switch>
           {map((route) => {
             const { isPrivate, path } = route;

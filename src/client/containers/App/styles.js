@@ -6,6 +6,8 @@ export default makeStyles({
       'url(//www.gstatic.com/pantheon/images/marketplace/cameo_banner-1x.png)',
     minHeight: '100vh',
   },
-  disableEvents: { pointerEvents: 'none' },
-  hide: { visibility: 'hidden' },
+  pointerEventsNone: { pointerEvents: 'none' },
+  pointerEventsAuto: { pointerEvents: 'auto' },
+  visibilityHidden: { visibility: 'hidden' },
+  visibilityVisible: { visibility: 'visible' },
 });
