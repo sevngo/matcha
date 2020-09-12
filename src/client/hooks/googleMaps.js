@@ -1,6 +1,8 @@
 /*global google*/
 import { useEffect } from 'react';
 import { path } from 'ramda';
+import { useDispatch } from 'react-redux';
+import { displayLoader, hideLoader } from '../actions/loading';
 
 export const useAutocomplete = (inputId, onChange, isActive) => {
   let autocomplete;
@@ -28,24 +30,30 @@ export const useAutocomplete = (inputId, onChange, isActive) => {
 };
 
 export const useGeolocation = (onChange, isActive) => {
+  const dispatch = useDispatch();
   useEffect(() => {
     if (isActive) {
+      dispatch(displayLoader());
       navigator.geolocation.getCurrentPosition(
         ({ coords: { longitude: lng, latitude: lat } }) => {
           const geocoder = new google.maps.Geocoder();
           geocoder.geocode(
             { location: { lat, lng } },
-            ([{ formatted_address }]) => {
-              const address = {
-                name: formatted_address,
-                type: 'Point',
-                coordinates: [lng, lat],
-              };
-              onChange(address);
+            ([{ formatted_address }], status) => {
+              if (status === 'OK') {
+                const address = {
+                  name: formatted_address,
+                  type: 'Point',
+                  coordinates: [lng, lat],
+                };
+                onChange(address);
+              }
+              dispatch(hideLoader());
             }
           );
-        }
+        },
+        () => dispatch(hideLoader())
       );
     }
-  }, [isActive, onChange]);
+  }, [isActive, onChange, dispatch]);
 };
