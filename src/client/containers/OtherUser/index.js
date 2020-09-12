@@ -26,8 +26,8 @@ const User = ({ id }) => {
   const dispatch = useDispatch();
   const [activeStep, handleStep] = useState(0);
   useEffect(() => {
-    dispatch(loadUser(id));
-  }, [dispatch, id]);
+    if (id !== user._id) dispatch(loadUser(id));
+  }, [dispatch, id, user._id]);
   const classes = useStyles();
   const isLiked = Boolean(
     find((userLiked) => userLiked._id === user._id)(usersLiked)
@@ -41,7 +41,7 @@ const User = ({ id }) => {
     ? getUserImage(user._id, path([activeStep, '_id'])(images))
     : emptyImage;
   const maxSteps = length(images);
-  if (isEmpty(user)) return false;
+  if (isEmpty(user) || user._id !== id) return false;
   return (
     <Box p={3}>
       <Grid container spacing={2}>

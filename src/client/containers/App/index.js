@@ -25,12 +25,7 @@ const App = () => {
           isLoading ? classes.visibilityVisible : classes.visibilityHidden
         }
       />
-      <Box
-        p={3}
-        className={
-          isLoading ? classes.visibilityHidden : classes.visibilityVisible
-        }
-      >
+      <Box p={3}>
         <Switch>
           {map((route) => {
             const { isPrivate, path } = route;
