@@ -55,7 +55,7 @@ exports[`App should match snapshot 1`] = `
       />
     </div>
     <div
-      class="MuiBox-root MuiBox-root-10 makeStyles-visibilityHidden-4"
+      class="MuiBox-root MuiBox-root-10"
     >
       <div
         class="MuiBox-root MuiBox-root-12"

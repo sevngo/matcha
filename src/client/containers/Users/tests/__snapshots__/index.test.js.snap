@@ -39,7 +39,7 @@ exports[`Users should match snapshot 1`] = `
         />
         <p
           class="MuiTypography-root MuiTablePagination-caption MuiTypography-body2 MuiTypography-colorInherit"
-          id="mui-33768"
+          id="mui-73201"
         >
           Rows per page:
         </p>
@@ -48,9 +48,9 @@ exports[`Users should match snapshot 1`] = `
         >
           <div
             aria-haspopup="listbox"
-            aria-labelledby="mui-33768 mui-91061"
+            aria-labelledby="mui-73201 mui-41963"
             class="MuiSelect-root MuiSelect-select MuiTablePagination-select MuiSelect-selectMenu MuiInputBase-input"
-            id="mui-91061"
+            id="mui-41963"
             role="button"
             tabindex="0"
           >
