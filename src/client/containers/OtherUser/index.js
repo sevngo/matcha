@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { find, path, isEmpty, length } from 'ramda';
 import { useSelector, useDispatch } from 'react-redux';
-import { Grid, Box, IconButton, Paper } from '@material-ui/core';
+import { Grid, Box, IconButton, Paper, Grow } from '@material-ui/core';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import DoneAllIcon from '@material-ui/icons/DoneAll';
 import BlockIcon from '@material-ui/icons/Block';
@@ -43,9 +43,9 @@ const User = ({ id }) => {
   const maxSteps = length(images);
   if (isEmpty(user) || user._id !== id) return false;
   return (
-    <Box p={3}>
-      <Grid container spacing={2}>
-        <Grid item className={classes.mw30}>
+    <Grid container justify="center" spacing={2}>
+      <Grow in={true} timeout={200}>
+        <Grid item xs className={classes.mw30}>
           <Paper elevation={1}>
             <Carousel
               activeStep={activeStep}
@@ -77,13 +77,15 @@ const User = ({ id }) => {
             </Carousel>
           </Paper>
         </Grid>
-        <Grid item className={classes.mw30}>
+      </Grow>
+      <Grow in={true} timeout={400}>
+        <Grid item xs className={classes.mw30}>
           <Paper elevation={1} className={classes.p3}>
             <UserForm initialValues={user} disabled />
           </Paper>
         </Grid>
-      </Grid>
-    </Box>
+      </Grow>
+    </Grid>
   );
 };
 

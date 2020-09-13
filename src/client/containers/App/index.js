@@ -24,6 +24,7 @@ const App = () => {
         className={
           isLoading ? classes.visibilityVisible : classes.visibilityHidden
         }
+        thickness={8}
       />
       <Box p={3}>
         <Switch>

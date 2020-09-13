@@ -46,6 +46,7 @@ exports[`App should match snapshot 1`] = `
     <div
       class="MuiLinearProgress-root MuiLinearProgress-colorPrimary makeStyles-visibilityVisible-5 MuiLinearProgress-indeterminate"
       role="progressbar"
+      thickness="8"
     >
       <div
         class="MuiLinearProgress-bar MuiLinearProgress-barColorPrimary MuiLinearProgress-bar1Indeterminate"

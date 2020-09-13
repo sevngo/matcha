@@ -12,6 +12,7 @@ import {
   DialogTitle,
   DialogActions,
   Paper,
+  Grow,
 } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CloudUpload from '@material-ui/icons/CloudUpload';
@@ -50,9 +51,9 @@ const MyUser = () => {
     'address',
   ])(auth);
   return (
-    <Box p={3}>
-      <Grid container spacing={2}>
-        <Grid item xs={12} className={classes.mw30}>
+    <Grid container justify="center" spacing={2}>
+      <Grow in={true} timeout={200}>
+        <Grid item xs className={classes.mw30}>
           <Carousel
             activeStep={activeStep}
             maxSteps={maxSteps}
@@ -111,7 +112,9 @@ const MyUser = () => {
             <img className={classes.img} src={image} alt="profile" />
           </Carousel>
         </Grid>
-        <Grid item xs={12} className={classes.mw30}>
+      </Grow>
+      <Grow in={true} timeout={400}>
+        <Grid item xs className={classes.mw30}>
           <Paper elevation={1} className={classes.p3}>
             <UserForm
               initialValues={{
@@ -123,8 +126,10 @@ const MyUser = () => {
             />
           </Paper>
         </Grid>
-        <Grid item xs={12} className={classes.mw30}>
-          {usersBlocked[0] && (
+      </Grow>
+      {usersBlocked[0] && (
+        <Grow in={true} timeout={600}>
+          <Grid item xs className={classes.mw30}>
             <Paper elevation={1} className={classes.p3}>
               <Typography variant="h5">
                 <FormattedMessage {...messages.usersBlocked} />
@@ -149,10 +154,10 @@ const MyUser = () => {
                 </Grid>
               ))(usersBlocked)}
             </Paper>
-          )}
-        </Grid>
-      </Grid>
-    </Box>
+          </Grid>
+        </Grow>
+      )}
+    </Grid>
   );
 };
 
