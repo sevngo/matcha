@@ -21,6 +21,7 @@ const UserCard = ({ user }) => {
   const imageId = path([0, '_id'])(images);
   const image = imageId ? getUserImage(user._id, imageId) : emptyImage;
   const classes = useStyles();
+  const distance = parseInt(user.distance) || 1;
   return (
     <Card className={classes.card} elevation={1}>
       <CardActionArea component={Link} to={userPath(user._id)}>
@@ -37,7 +38,7 @@ const UserCard = ({ user }) => {
             <Typography variant="caption">
               <FormattedMessage
                 {...messages.unitDistance}
-                values={{ distance: parseFloat(user.distance).toFixed(1) }}
+                values={{ distance }}
               />
             </Typography>
           </Grid>
