@@ -8,7 +8,6 @@ const Input = ({ startAdornment, endAdornment, error, ...rest }) => {
   const classes = useStyles();
   return (
     <TextField
-      margin="dense"
       variant="outlined"
       error={Boolean(error)}
       helperText={error && <FormattedMessage {...messages[error]} />}
@@ -18,7 +17,7 @@ const Input = ({ startAdornment, endAdornment, error, ...rest }) => {
           <Box className={classes.icon}>{startAdornment}</Box>
         ),
         endAdornment: endAdornment && (
-          <IconButton onClick={endAdornment.action}>
+          <IconButton edge="end" onClick={endAdornment.action}>
             {endAdornment.icon}
           </IconButton>
         ),

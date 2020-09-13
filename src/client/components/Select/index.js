@@ -11,7 +11,6 @@ import messages from './messages';
 
 const Select = ({ field, error, label, children, className, ...rest }) => (
   <FormControl
-    margin="dense"
     className={className}
     fullWidth
     error={Boolean(error)}
