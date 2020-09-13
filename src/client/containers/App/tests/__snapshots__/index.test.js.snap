@@ -58,232 +58,196 @@ exports[`App should match snapshot 1`] = `
       class="MuiBox-root MuiBox-root-10"
     >
       <div
-        class="MuiBox-root MuiBox-root-12"
+        class="MuiPaper-root makeStyles-paper-13 MuiPaper-elevation1 MuiPaper-rounded"
       >
         <div
-          class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+          class="MuiAvatar-root MuiAvatar-circle makeStyles-avatar-12 MuiAvatar-colorDefault"
         >
-          <header
-            class="MuiPaper-root MuiAppBar-root MuiAppBar-positionStatic MuiAppBar-colorPrimary MuiPaper-elevation4"
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6zm9 14H6V10h12v10zm-6-3c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"
+            />
+          </svg>
+        </div>
+        <h6
+          class="MuiTypography-root MuiTypography-h6"
+        >
+          Login
+        </h6>
+        <div
+          class="MuiBox-root MuiBox-root-15"
+        />
+        <form
+          style="width: 100%;"
+        >
+          <div
+            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-direction-xs-column"
           >
             <div
-              class="MuiTabs-root"
+              class="MuiGrid-root MuiGrid-item"
             >
               <div
-                class="MuiTabs-scroller MuiTabs-fixed"
-                style="overflow: hidden;"
+                class="MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth"
               >
-                <div
-                  class="MuiTabs-flexContainer"
-                  role="tablist"
+                <label
+                  class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined"
+                  data-shrink="true"
                 >
+                  Username
+                </label>
+                <div
+                  class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedStart MuiOutlinedInput-adornedStart"
+                >
+                  <div
+                    class="MuiBox-root MuiBox-root-17 makeStyles-icon-16"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="MuiSvgIcon-root"
+                      focusable="false"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"
+                      />
+                    </svg>
+                  </div>
+                  <input
+                    aria-invalid="false"
+                    autocomplete="username"
+                    class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedStart MuiOutlinedInput-inputAdornedStart"
+                    name="username"
+                    type="text"
+                    value=""
+                  />
+                  <fieldset
+                    aria-hidden="true"
+                    class="PrivateNotchedOutline-root-18 MuiOutlinedInput-notchedOutline"
+                  >
+                    <legend
+                      class="PrivateNotchedOutline-legendLabelled-20 PrivateNotchedOutline-legendNotched-21"
+                    >
+                      <span>
+                        Username
+                      </span>
+                    </legend>
+                  </fieldset>
+                </div>
+              </div>
+            </div>
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <div
+                class="MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth"
+              >
+                <label
+                  class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined"
+                  data-shrink="true"
+                >
+                  Password
+                </label>
+                <div
+                  class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedStart MuiOutlinedInput-adornedStart MuiInputBase-adornedEnd MuiOutlinedInput-adornedEnd"
+                >
+                  <div
+                    class="MuiBox-root MuiBox-root-22 makeStyles-icon-16"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="MuiSvgIcon-root"
+                      focusable="false"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"
+                      />
+                    </svg>
+                  </div>
+                  <input
+                    aria-invalid="false"
+                    autocomplete="password"
+                    class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedStart MuiOutlinedInput-inputAdornedStart MuiInputBase-inputAdornedEnd MuiOutlinedInput-inputAdornedEnd"
+                    name="password"
+                    type="password"
+                    value=""
+                  />
                   <button
-                    aria-selected="true"
-                    class="MuiButtonBase-root MuiTab-root MuiTab-textColorInherit Mui-selected MuiTab-fullWidth"
-                    role="tab"
+                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd"
                     tabindex="0"
                     type="button"
                   >
                     <span
-                      class="MuiTab-wrapper"
+                      class="MuiIconButton-label"
                     >
-                      Login
+                      <svg
+                        aria-hidden="true"
+                        class="MuiSvgIcon-root"
+                        focusable="false"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          d="M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2zm4.31-.78l3.15 3.15.02-.16c0-1.66-1.34-3-3-3l-.17.01z"
+                        />
+                      </svg>
                     </span>
                     <span
                       class="MuiTouchRipple-root"
                     />
                   </button>
-                  <button
-                    aria-selected="false"
-                    class="MuiButtonBase-root MuiTab-root MuiTab-textColorInherit MuiTab-fullWidth"
-                    role="tab"
-                    tabindex="-1"
-                    type="button"
+                  <fieldset
+                    aria-hidden="true"
+                    class="PrivateNotchedOutline-root-18 MuiOutlinedInput-notchedOutline"
                   >
-                    <span
-                      class="MuiTab-wrapper"
+                    <legend
+                      class="PrivateNotchedOutline-legendLabelled-20 PrivateNotchedOutline-legendNotched-21"
                     >
-                      Register
-                    </span>
-                    <span
-                      class="MuiTouchRipple-root"
-                    />
-                  </button>
+                      <span>
+                        Password
+                      </span>
+                    </legend>
+                  </fieldset>
                 </div>
-                <span
-                  class="PrivateTabIndicator-root-13 PrivateTabIndicator-colorSecondary-15 MuiTabs-indicator"
-                  style="left: 0px; width: 0px;"
-                />
               </div>
             </div>
-          </header>
-          <div
-            class="MuiBox-root MuiBox-root-17"
-          >
             <div
-              class="MuiBox-root MuiBox-root-18"
+              class="MuiGrid-root MuiGrid-item"
             >
-              <form>
-                <div
-                  class="MuiFormControl-root MuiTextField-root MuiFormControl-marginDense MuiFormControl-fullWidth"
-                >
-                  <label
-                    class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-marginDense MuiInputLabel-outlined"
-                    data-shrink="true"
-                  >
-                    Username
-                  </label>
-                  <div
-                    class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedStart MuiOutlinedInput-adornedStart MuiInputBase-marginDense MuiOutlinedInput-marginDense"
-                  >
-                    <div
-                      class="MuiBox-root MuiBox-root-26 makeStyles-icon-25"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        class="MuiSvgIcon-root"
-                        focusable="false"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"
-                        />
-                      </svg>
-                    </div>
-                    <input
-                      aria-invalid="false"
-                      autocomplete="username"
-                      class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedStart MuiOutlinedInput-inputAdornedStart MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
-                      name="username"
-                      type="text"
-                      value=""
-                    />
-                    <fieldset
-                      aria-hidden="true"
-                      class="PrivateNotchedOutline-root-27 MuiOutlinedInput-notchedOutline"
-                    >
-                      <legend
-                        class="PrivateNotchedOutline-legendLabelled-29 PrivateNotchedOutline-legendNotched-30"
-                      >
-                        <span>
-                          Username
-                        </span>
-                      </legend>
-                    </fieldset>
-                  </div>
-                </div>
-                <div
-                  class="MuiFormControl-root MuiTextField-root MuiFormControl-marginDense MuiFormControl-fullWidth"
-                >
-                  <label
-                    class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-marginDense MuiInputLabel-outlined"
-                    data-shrink="true"
-                  >
-                    Password
-                  </label>
-                  <div
-                    class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedStart MuiOutlinedInput-adornedStart MuiInputBase-adornedEnd MuiOutlinedInput-adornedEnd MuiInputBase-marginDense MuiOutlinedInput-marginDense"
-                  >
-                    <div
-                      class="MuiBox-root MuiBox-root-31 makeStyles-icon-25"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        class="MuiSvgIcon-root"
-                        focusable="false"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"
-                        />
-                      </svg>
-                    </div>
-                    <input
-                      aria-invalid="false"
-                      autocomplete="password"
-                      class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedStart MuiOutlinedInput-inputAdornedStart MuiInputBase-inputAdornedEnd MuiOutlinedInput-inputAdornedEnd MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
-                      name="password"
-                      type="password"
-                      value=""
-                    />
-                    <button
-                      class="MuiButtonBase-root MuiIconButton-root"
-                      tabindex="0"
-                      type="button"
-                    >
-                      <span
-                        class="MuiIconButton-label"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          class="MuiSvgIcon-root"
-                          focusable="false"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            d="M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2zm4.31-.78l3.15 3.15.02-.16c0-1.66-1.34-3-3-3l-.17.01z"
-                          />
-                        </svg>
-                      </span>
-                      <span
-                        class="MuiTouchRipple-root"
-                      />
-                    </button>
-                    <fieldset
-                      aria-hidden="true"
-                      class="PrivateNotchedOutline-root-27 MuiOutlinedInput-notchedOutline"
-                    >
-                      <legend
-                        class="PrivateNotchedOutline-legendLabelled-29 PrivateNotchedOutline-legendNotched-30"
-                      >
-                        <span>
-                          Password
-                        </span>
-                      </legend>
-                    </fieldset>
-                  </div>
-                </div>
-                <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-mt1-19 MuiButton-containedPrimary MuiButton-containedSizeLarge MuiButton-sizeLarge Mui-disabled MuiButton-fullWidth Mui-disabled"
-                  disabled=""
-                  tabindex="-1"
-                  type="submit"
-                >
-                  <span
-                    class="MuiButton-label"
-                  >
-                    Submit
-                  </span>
-                </button>
-                <button
-                  class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-outlinedSizeLarge MuiButton-sizeLarge Mui-disabled MuiButton-fullWidth Mui-disabled"
-                  disabled=""
-                  tabindex="-1"
-                  type="button"
-                >
-                  <span
-                    class="MuiButton-label"
-                  >
-                    Cancel
-                  </span>
-                </button>
-              </form>
               <button
-                class="MuiButtonBase-root MuiButton-root MuiButton-outlined makeStyles-mt1-11"
-                tabindex="0"
-                type="button"
+                class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-containedSizeLarge MuiButton-sizeLarge Mui-disabled MuiButton-fullWidth Mui-disabled"
+                disabled=""
+                tabindex="-1"
+                type="submit"
               >
                 <span
                   class="MuiButton-label"
                 >
-                  Forgot your password ?
+                  Submit
                 </span>
-                <span
-                  class="MuiTouchRipple-root"
-                />
               </button>
             </div>
           </div>
+        </form>
+        <div
+          class="MuiGrid-root makeStyles-mt2-11 MuiGrid-container MuiGrid-justify-xs-space-between"
+        >
+          <a
+            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-body1 MuiTypography-colorPrimary"
+            href="#"
+          >
+            Forgot your password ?
+          </a>
+          <a
+            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-body1 MuiTypography-colorPrimary"
+            href="#"
+          >
+            Register
+          </a>
         </div>
       </div>
     </div>
