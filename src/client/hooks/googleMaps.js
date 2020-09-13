@@ -29,31 +29,30 @@ export const useAutocomplete = (inputId, onChange, isActive) => {
   }, [isActive]);
 };
 
-export const useGeolocation = (onChange, isActive) => {
+export const useGeolocation = (onChange) => {
   const dispatch = useDispatch();
-  useEffect(() => {
-    if (isActive) {
-      dispatch(displayLoader());
-      navigator.geolocation.getCurrentPosition(
-        ({ coords: { longitude: lng, latitude: lat } }) => {
-          const geocoder = new google.maps.Geocoder();
-          geocoder.geocode(
-            { location: { lat, lng } },
-            ([{ formatted_address }], status) => {
-              if (status === 'OK') {
-                const address = {
-                  name: formatted_address,
-                  type: 'Point',
-                  coordinates: [lng, lat],
-                };
-                onChange(address);
-              }
-              dispatch(hideLoader());
+  const getGeolocation = () => {
+    dispatch(displayLoader());
+    navigator.geolocation.getCurrentPosition(
+      ({ coords: { longitude: lng, latitude: lat } }) => {
+        const geocoder = new google.maps.Geocoder();
+        geocoder.geocode(
+          { location: { lat, lng } },
+          ([{ formatted_address }], status) => {
+            if (status === 'OK') {
+              const address = {
+                name: formatted_address,
+                type: 'Point',
+                coordinates: [lng, lat],
+              };
+              onChange(address);
             }
-          );
-        },
-        () => dispatch(hideLoader())
-      );
-    }
-  }, [isActive, onChange, dispatch]);
+            dispatch(hideLoader());
+          }
+        );
+      },
+      () => dispatch(hideLoader())
+    );
+  };
+  return getGeolocation;
 };

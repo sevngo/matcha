@@ -10,6 +10,7 @@ import VpnKeyIcon from '@material-ui/icons/VpnKey';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import AlternateEmailIcon from '@material-ui/icons/AlternateEmail';
 import DateRangeIcon from '@material-ui/icons/DateRange';
+import MyLocationIcon from '@material-ui/icons/MyLocation';
 
 import Input from '../Input';
 import Radio from '../Radio';
@@ -20,13 +21,7 @@ import { GENDER_OPTIONS, SORT_BY_OPTIONS } from './constants';
 import messages from './messages';
 import validate from './validate';
 
-const Component = ({
-  initialValues,
-  disabled,
-  isGeoActivated,
-  submit,
-  newPasswordLabel,
-}) => {
+const Component = ({ initialValues, disabled, submit, newPasswordLabel }) => {
   const hasInitialValue = has(__, initialValues);
   const {
     handleSubmit,
@@ -51,7 +46,7 @@ const Component = ({
     (address) => setFieldValue('address', address),
     [setFieldValue]
   );
-  useGeolocation(handleAddress, address && isGeoActivated);
+  const getGeolocation = useGeolocation(handleAddress);
   useAutocomplete('address', handleAddress, !isNil(address));
   const passwordMessage = newPasswordLabel
     ? messages.newPassword
@@ -148,11 +143,15 @@ const Component = ({
               value={path(['address', 'name'])(values)}
               error={touched.address && errors.address}
               endAdornment={
-                isValidAddress &&
-                !disabled && {
-                  icon: <ClearIcon />,
-                  action: () => setFieldValue('address', { name: '' }),
-                }
+                (isValidAddress &&
+                  !disabled && {
+                    icon: <ClearIcon />,
+                    action: () => setFieldValue('address', { name: '' }),
+                  }) ||
+                (!disabled && {
+                  icon: <MyLocationIcon />,
+                  action: getGeolocation,
+                })
               }
             />
           </Grid>
@@ -212,16 +211,6 @@ const Component = ({
             >
               <FormattedMessage {...messages.submit} />
             </Button>
-            {/* <Button
-          variant="outlined"
-          color="primary"
-          size="large"
-          disabled={!dirty}
-          onClick={() => resetForm({ values: initialValues })}
-          fullWidth
-        >
-          <FormattedMessage {...messages.cancel} />
-        </Button> */}
           </Grid>
         )}
       </Grid>

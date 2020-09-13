@@ -42,17 +42,25 @@ const Auth = () => {
       </Typography>
       <Box mt={3} />
       {tab === 0 ? (
-        <Fragment>
+        <Fragment key="login">
           <UserForm
             initialValues={initialValues}
             submit={(values) => dispatch(login(values))}
           />
           <Grid container className={classes.mt2} justify="space-between">
-            <Link href="#" variant="body1" onClick={() => handleDialog(true)}>
+            <Link
+              variant="body2"
+              className={classes.cursorPointer}
+              onClick={() => handleDialog(true)}
+            >
               <FormattedMessage {...messages.forgotPassword} />
             </Link>
-            <Link href="#" variant="body1" onClick={() => handleTab(1)}>
-              <FormattedMessage {...messages.register} />
+            <Link
+              variant="body2"
+              className={classes.cursorPointer}
+              onClick={() => handleTab(1)}
+            >
+              <FormattedMessage {...messages.redirectToLogin} />
             </Link>
           </Grid>
           <Dialog open={isDialogOpen} onClose={() => handleDialog(false)}>
@@ -73,7 +81,7 @@ const Auth = () => {
           </Dialog>
         </Fragment>
       ) : (
-        <Fragment>
+        <Fragment key="register">
           <UserForm
             initialValues={{
               ...initialValues,
@@ -83,11 +91,14 @@ const Auth = () => {
               address: { name: '' },
             }}
             submit={(values) => dispatch(register(values))}
-            isGeoActivated
           />
           <Grid container className={classes.mt2} justify="flex-end">
-            <Link href="#" variant="body1" onClick={() => handleTab(0)}>
-              <FormattedMessage {...messages.login} />
+            <Link
+              variant="body2"
+              className={classes.cursorPointer}
+              onClick={() => handleTab(0)}
+            >
+              <FormattedMessage {...messages.redirectToRegister} />
             </Link>
           </Grid>
         </Fragment>

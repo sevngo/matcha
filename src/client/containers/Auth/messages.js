@@ -8,7 +8,7 @@ export default defineMessages({
   },
   forgotPassword: {
     id: 'containers.auth.forgotPassword',
-    defaultMessage: 'Forgot your password ?',
+    defaultMessage: 'Forgot password ?',
   },
   login: {
     id: 'containers.auth.login',
@@ -17,5 +17,13 @@ export default defineMessages({
   register: {
     id: 'containers.auth.register',
     defaultMessage: 'Register',
+  },
+  redirectToLogin: {
+    id: 'containers.auth.redirectToLogin',
+    defaultMessage: 'Create an account ?',
+  },
+  redirectToRegister: {
+    id: 'containers.auth.redirectToRegister',
+    defaultMessage: 'I already have an account ?',
   },
 });

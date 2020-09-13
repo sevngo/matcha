@@ -24,6 +24,8 @@
   "containers.auth.enterEmail": "Please enter the e-mail address connected to your Matcha account and click on submit.",
   "containers.auth.forgotPassword": "Mot de passe oublié ?",
   "containers.auth.login": "Se connecter",
+  "containers.auth.redirectToLogin": "J'ai déjà un compte ?",
+  "containers.auth.redirectToRegister": "Créer un compte ?",
   "containers.auth.register": "Créer un compte",
   "containers.account.logout": "Se Déconnecter",
   "containers.account.myAccount": "Mon Compte",

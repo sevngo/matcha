@@ -19,4 +19,7 @@ export default makeStyles((theme) => ({
   dialogTitle: {
     textAlign: 'center',
   },
+  cursorPointer: {
+    cursor: 'pointer',
+  },
 }));
