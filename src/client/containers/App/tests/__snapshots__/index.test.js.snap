@@ -80,7 +80,7 @@ exports[`App should match snapshot 1`] = `
           Login
         </h6>
         <div
-          class="MuiBox-root MuiBox-root-15"
+          class="MuiBox-root MuiBox-root-16"
         />
         <form
           style="width: 100%;"
@@ -104,7 +104,7 @@ exports[`App should match snapshot 1`] = `
                   class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedStart MuiOutlinedInput-adornedStart"
                 >
                   <div
-                    class="MuiBox-root MuiBox-root-17 makeStyles-icon-16"
+                    class="MuiBox-root MuiBox-root-18 makeStyles-icon-17"
                   >
                     <svg
                       aria-hidden="true"
@@ -127,10 +127,10 @@ exports[`App should match snapshot 1`] = `
                   />
                   <fieldset
                     aria-hidden="true"
-                    class="PrivateNotchedOutline-root-18 MuiOutlinedInput-notchedOutline"
+                    class="PrivateNotchedOutline-root-19 MuiOutlinedInput-notchedOutline"
                   >
                     <legend
-                      class="PrivateNotchedOutline-legendLabelled-20 PrivateNotchedOutline-legendNotched-21"
+                      class="PrivateNotchedOutline-legendLabelled-21 PrivateNotchedOutline-legendNotched-22"
                     >
                       <span>
                         Username
@@ -156,7 +156,7 @@ exports[`App should match snapshot 1`] = `
                   class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedStart MuiOutlinedInput-adornedStart MuiInputBase-adornedEnd MuiOutlinedInput-adornedEnd"
                 >
                   <div
-                    class="MuiBox-root MuiBox-root-22 makeStyles-icon-16"
+                    class="MuiBox-root MuiBox-root-23 makeStyles-icon-17"
                   >
                     <svg
                       aria-hidden="true"
@@ -202,10 +202,10 @@ exports[`App should match snapshot 1`] = `
                   </button>
                   <fieldset
                     aria-hidden="true"
-                    class="PrivateNotchedOutline-root-18 MuiOutlinedInput-notchedOutline"
+                    class="PrivateNotchedOutline-root-19 MuiOutlinedInput-notchedOutline"
                   >
                     <legend
-                      class="PrivateNotchedOutline-legendLabelled-20 PrivateNotchedOutline-legendNotched-21"
+                      class="PrivateNotchedOutline-legendLabelled-21 PrivateNotchedOutline-legendNotched-22"
                     >
                       <span>
                         Password
@@ -237,16 +237,14 @@ exports[`App should match snapshot 1`] = `
           class="MuiGrid-root makeStyles-mt2-11 MuiGrid-container MuiGrid-justify-xs-space-between"
         >
           <a
-            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-body1 MuiTypography-colorPrimary"
-            href="#"
+            class="MuiTypography-root MuiLink-root MuiLink-underlineHover makeStyles-cursorPointer-15 MuiTypography-body2 MuiTypography-colorPrimary"
           >
-            Forgot your password ?
+            Forgot password ?
           </a>
           <a
-            class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-body1 MuiTypography-colorPrimary"
-            href="#"
+            class="MuiTypography-root MuiLink-root MuiLink-underlineHover makeStyles-cursorPointer-15 MuiTypography-body2 MuiTypography-colorPrimary"
           >
-            Register
+            Create an account ?
           </a>
         </div>
       </div>

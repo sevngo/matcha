@@ -25,7 +25,7 @@ exports[`Auth should match snapshot 1`] = `
       Login
     </h6>
     <div
-      class="MuiBox-root MuiBox-root-5"
+      class="MuiBox-root MuiBox-root-6"
     />
     <form
       style="width: 100%;"
@@ -49,7 +49,7 @@ exports[`Auth should match snapshot 1`] = `
               class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedStart MuiOutlinedInput-adornedStart"
             >
               <div
-                class="MuiBox-root MuiBox-root-7 makeStyles-icon-6"
+                class="MuiBox-root MuiBox-root-8 makeStyles-icon-7"
               >
                 <svg
                   aria-hidden="true"
@@ -72,10 +72,10 @@ exports[`Auth should match snapshot 1`] = `
               />
               <fieldset
                 aria-hidden="true"
-                class="PrivateNotchedOutline-root-8 MuiOutlinedInput-notchedOutline"
+                class="PrivateNotchedOutline-root-9 MuiOutlinedInput-notchedOutline"
               >
                 <legend
-                  class="PrivateNotchedOutline-legendLabelled-10 PrivateNotchedOutline-legendNotched-11"
+                  class="PrivateNotchedOutline-legendLabelled-11 PrivateNotchedOutline-legendNotched-12"
                 >
                   <span>
                     Username
@@ -101,7 +101,7 @@ exports[`Auth should match snapshot 1`] = `
               class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedStart MuiOutlinedInput-adornedStart MuiInputBase-adornedEnd MuiOutlinedInput-adornedEnd"
             >
               <div
-                class="MuiBox-root MuiBox-root-12 makeStyles-icon-6"
+                class="MuiBox-root MuiBox-root-13 makeStyles-icon-7"
               >
                 <svg
                   aria-hidden="true"
@@ -147,10 +147,10 @@ exports[`Auth should match snapshot 1`] = `
               </button>
               <fieldset
                 aria-hidden="true"
-                class="PrivateNotchedOutline-root-8 MuiOutlinedInput-notchedOutline"
+                class="PrivateNotchedOutline-root-9 MuiOutlinedInput-notchedOutline"
               >
                 <legend
-                  class="PrivateNotchedOutline-legendLabelled-10 PrivateNotchedOutline-legendNotched-11"
+                  class="PrivateNotchedOutline-legendLabelled-11 PrivateNotchedOutline-legendNotched-12"
                 >
                   <span>
                     Password
@@ -182,16 +182,14 @@ exports[`Auth should match snapshot 1`] = `
       class="MuiGrid-root makeStyles-mt2-1 MuiGrid-container MuiGrid-justify-xs-space-between"
     >
       <a
-        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-body1 MuiTypography-colorPrimary"
-        href="#"
+        class="MuiTypography-root MuiLink-root MuiLink-underlineHover makeStyles-cursorPointer-5 MuiTypography-body2 MuiTypography-colorPrimary"
       >
-        Forgot your password ?
+        Forgot password ?
       </a>
       <a
-        class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-body1 MuiTypography-colorPrimary"
-        href="#"
+        class="MuiTypography-root MuiLink-root MuiLink-underlineHover makeStyles-cursorPointer-5 MuiTypography-body2 MuiTypography-colorPrimary"
       >
-        Register
+        Create an account ?
       </a>
     </div>
   </div>
