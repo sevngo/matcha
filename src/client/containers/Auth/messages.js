@@ -4,7 +4,7 @@ export default defineMessages({
   enterEmail: {
     id: 'containers.auth.enterEmail',
     defaultMessage:
-      'Please enter the e-mail address connected to your Matcha account and click on submit.',
+      'Please enter your e-mail address and we will send you a password reset link.',
   },
   forgotPassword: {
     id: 'containers.auth.forgotPassword',
