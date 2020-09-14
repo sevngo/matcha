@@ -5,7 +5,6 @@ import { BrowserRouter } from 'react-router-dom';
 import { IntlProvider } from 'react-intl';
 import { CssBaseline, ThemeProvider } from '@material-ui/core';
 import store from './store';
-import './middlewares';
 import './socketEvents';
 import { locale, messages, theme } from './utils';
 import App from './containers/App';

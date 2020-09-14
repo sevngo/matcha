@@ -59,10 +59,10 @@ exports[`App should match snapshot 1`] = `
       class="MuiBox-root MuiBox-root-10"
     >
       <div
-        class="MuiPaper-root makeStyles-paper-13 MuiPaper-elevation1 MuiPaper-rounded"
+        class="MuiPaper-root makeStyles-paper-20 MuiPaper-elevation1 MuiPaper-rounded"
       >
         <div
-          class="MuiAvatar-root MuiAvatar-circle makeStyles-avatar-12 MuiAvatar-colorDefault"
+          class="MuiAvatar-root MuiAvatar-circle makeStyles-avatar-19 MuiAvatar-colorDefault"
         >
           <svg
             aria-hidden="true"
@@ -81,7 +81,7 @@ exports[`App should match snapshot 1`] = `
           Login
         </h6>
         <div
-          class="MuiBox-root MuiBox-root-16"
+          class="MuiBox-root MuiBox-root-23"
         />
         <form
           style="width: 100%;"
@@ -105,7 +105,7 @@ exports[`App should match snapshot 1`] = `
                   class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedStart MuiOutlinedInput-adornedStart"
                 >
                   <div
-                    class="MuiBox-root MuiBox-root-18 makeStyles-icon-17"
+                    class="MuiBox-root MuiBox-root-25 makeStyles-icon-24"
                   >
                     <svg
                       aria-hidden="true"
@@ -128,10 +128,10 @@ exports[`App should match snapshot 1`] = `
                   />
                   <fieldset
                     aria-hidden="true"
-                    class="PrivateNotchedOutline-root-19 MuiOutlinedInput-notchedOutline"
+                    class="PrivateNotchedOutline-root-26 MuiOutlinedInput-notchedOutline"
                   >
                     <legend
-                      class="PrivateNotchedOutline-legendLabelled-21 PrivateNotchedOutline-legendNotched-22"
+                      class="PrivateNotchedOutline-legendLabelled-28 PrivateNotchedOutline-legendNotched-29"
                     >
                       <span>
                         Username
@@ -157,7 +157,7 @@ exports[`App should match snapshot 1`] = `
                   class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedStart MuiOutlinedInput-adornedStart MuiInputBase-adornedEnd MuiOutlinedInput-adornedEnd"
                 >
                   <div
-                    class="MuiBox-root MuiBox-root-23 makeStyles-icon-17"
+                    class="MuiBox-root MuiBox-root-30 makeStyles-icon-24"
                   >
                     <svg
                       aria-hidden="true"
@@ -203,10 +203,10 @@ exports[`App should match snapshot 1`] = `
                   </button>
                   <fieldset
                     aria-hidden="true"
-                    class="PrivateNotchedOutline-root-19 MuiOutlinedInput-notchedOutline"
+                    class="PrivateNotchedOutline-root-26 MuiOutlinedInput-notchedOutline"
                   >
                     <legend
-                      class="PrivateNotchedOutline-legendLabelled-21 PrivateNotchedOutline-legendNotched-22"
+                      class="PrivateNotchedOutline-legendLabelled-28 PrivateNotchedOutline-legendNotched-29"
                     >
                       <span>
                         Password
@@ -235,15 +235,15 @@ exports[`App should match snapshot 1`] = `
           </div>
         </form>
         <div
-          class="MuiGrid-root makeStyles-mt2-11 MuiGrid-container MuiGrid-justify-xs-space-between"
+          class="MuiGrid-root makeStyles-mt2-18 MuiGrid-container MuiGrid-justify-xs-space-between"
         >
           <a
-            class="MuiTypography-root MuiLink-root MuiLink-underlineHover makeStyles-cursorPointer-15 MuiTypography-body2 MuiTypography-colorPrimary"
+            class="MuiTypography-root MuiLink-root MuiLink-underlineHover makeStyles-cursorPointer-22 MuiTypography-body2 MuiTypography-colorPrimary"
           >
             Forgot password ?
           </a>
           <a
-            class="MuiTypography-root MuiLink-root MuiLink-underlineHover makeStyles-cursorPointer-15 MuiTypography-body2 MuiTypography-colorPrimary"
+            class="MuiTypography-root MuiLink-root MuiLink-underlineHover makeStyles-cursorPointer-22 MuiTypography-body2 MuiTypography-colorPrimary"
           >
             Create an account ?
           </a>
