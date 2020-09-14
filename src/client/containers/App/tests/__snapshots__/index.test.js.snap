@@ -60,6 +60,7 @@ exports[`App should match snapshot 1`] = `
     >
       <div
         class="MuiPaper-root makeStyles-paper-20 MuiPaper-elevation1 MuiPaper-rounded"
+        style="opacity: 1; transform: scale(1, 1); transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,transform 133ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"
       >
         <div
           class="MuiAvatar-root MuiAvatar-circle makeStyles-avatar-19 MuiAvatar-colorDefault"
@@ -243,7 +244,8 @@ exports[`App should match snapshot 1`] = `
             Forgot password ?
           </a>
           <a
-            class="MuiTypography-root MuiLink-root MuiLink-underlineHover makeStyles-cursorPointer-22 MuiTypography-body2 MuiTypography-colorPrimary"
+            class="MuiTypography-root MuiTypography-body2"
+            href="/register"
           >
             Create an account ?
           </a>
