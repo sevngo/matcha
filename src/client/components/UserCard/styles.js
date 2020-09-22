@@ -10,4 +10,7 @@ export default makeStyles((theme) => ({
   mt1: {
     marginTop: theme.spacing(1),
   },
+  subtitle: {
+    fontWeight: 500,
+  },
 }));

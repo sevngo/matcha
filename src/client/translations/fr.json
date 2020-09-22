@@ -30,11 +30,11 @@
   "containers.notifications.gotUnfriended": "{username} n'est plus votre ami",
   "containers.notifications.title": "Notifications",
   "components.select.tooLong": "Trop long",
-  "components.user.unitDistance": "{distance} Km",
+  "components.user.unitDistance": "{distance} km",
   "components.userForm.address": "Adresse",
   "components.userForm.ageDescending": "Age (décroissant)",
   "components.userForm.ageIncreasing": "Age (croissant)",
-  "components.userForm.ageRange": "Age range :",
+  "components.userForm.ageRange": "Tranche d'âge :",
   "components.userForm.birthDate": "Date de naissance",
   "components.userForm.distanceDescending": "Distance (décroissant)",
   "components.userForm.distanceIncreasing": "Distance (croissant)",
@@ -42,7 +42,7 @@
   "components.userForm.female": "Femme",
   "components.userForm.gender": "Genre",
   "components.userForm.male": "Homme",
-  "components.userForm.maxDistance": "Max distance :",
+  "components.userForm.maxDistance": "Distance max :",
   "components.userForm.newPassword": "Nouveau mot de passe",
   "components.userForm.password": "Mot de passe",
   "components.userForm.cancel": "Annuler",
@@ -50,5 +50,5 @@
   "components.userForm.submit": "Confirmer",
   "components.userForm.unitDistance": "Km",
   "components.userForm.username": "Pseudo",
-  "containers.users.filter": "Filter"
+  "containers.users.filter": "Filtrer"
 }

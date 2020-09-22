@@ -25,23 +25,22 @@ const UserCard = ({ user }) => {
   return (
     <Card className={classes.card} elevation={1}>
       <CardActionArea component={Link} to={userPath(user._id)}>
-        <CardMedia
-          className={classes.media}
-          image={image}
-          title={user.username}
-        />
+        <CardMedia className={classes.media} image={image} />
         <CardContent>
-          <Grid container justify="space-between" alignItems="center">
-            <Typography variant="h6" gutterBottom>
-              {user.username}, {getAge(user.birthDate)}
+          <Grid container>
+            <Typography variant="subtitle1" className={classes.subtitle}>
+              {user.username}
             </Typography>
-            <Typography variant="caption">
-              <FormattedMessage
-                {...messages.unitDistance}
-                values={{ distance }}
-              />
+            <Typography variant="subtitle1">
+              , {getAge(user.birthDate)}
             </Typography>
           </Grid>
+          <Typography variant="caption" color="textSecondary">
+            <FormattedMessage
+              {...messages.unitDistance}
+              values={{ distance }}
+            />
+          </Typography>
         </CardContent>
       </CardActionArea>
     </Card>
