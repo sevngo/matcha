@@ -53,6 +53,7 @@ const userTwo = {
   },
   password: faker.internet.password(),
   _id: ObjectID(),
+  emailVerified: true,
 };
 
 const newUser = {

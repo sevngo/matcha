@@ -7,8 +7,16 @@ const { connectDb, getUsers, disconnectDb } = require('../src/server/database');
 const insertData = async () => {
   const genders = ['female', 'male'];
   const today = new Date();
-  const birthDateMin = new Date(today.getFullYear() - 50, today.getMonth(), today.getDate());
-  const birthDateMax = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+  const birthDateMin = new Date(
+    today.getFullYear() - 50,
+    today.getMonth(),
+    today.getDate()
+  );
+  const birthDateMax = new Date(
+    today.getFullYear() - 18,
+    today.getMonth(),
+    today.getDate()
+  );
 
   const makeRandomUser = () => ({
     username: faker.internet.userName(),
@@ -18,11 +26,14 @@ const insertData = async () => {
     address: {
       type: 'Point',
       name: faker.address.streetAddress(),
-      coordinates: [parseFloat(faker.address.longitude()), parseFloat(faker.address.latitude())],
+      coordinates: [
+        parseFloat(faker.address.longitude()),
+        parseFloat(faker.address.latitude()),
+      ],
     },
     password: bcrypt.hashSync(faker.internet.password(), 8),
     _id: ObjectID(),
-    emailVerified: false,
+    emailVerified: true,
   });
   const newUsers = times(makeRandomUser, 20);
   await getUsers().insertMany(newUsers);

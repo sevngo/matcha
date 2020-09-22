@@ -1,12 +1,20 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Box, TablePagination, Paper, IconButton } from '@material-ui/core';
-import FilterListIcon from '@material-ui/icons/FilterList';
+import {
+  Box,
+  TablePagination,
+  Paper,
+  IconButton,
+  Typography,
+} from '@material-ui/core';
+import SortIcon from '@material-ui/icons/Sort';
 import UserCards from '../../components/UserCards';
 import Drawer from '../Drawer';
 import { handleFilter, loadUsers } from '../../actions';
 import { getUsers, getUsersTotal, getFilter } from '../../selectors';
 import useStyles from './styles';
+import messages from './messages';
+import { FormattedMessage } from 'react-intl';
 
 const Users = () => {
   const classes = useStyles();
@@ -35,7 +43,10 @@ const Users = () => {
     <Fragment>
       <Paper elevation={1} className={classes.paper}>
         <IconButton color="inherit" onClick={() => toggleDrawer(true)}>
-          <FilterListIcon />
+          <SortIcon />
+          <Typography className={classes.filter}>
+            <FormattedMessage {...messages.filter} />
+          </Typography>
         </IconButton>
         <TablePagination
           component="div"

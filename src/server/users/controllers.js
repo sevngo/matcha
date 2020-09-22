@@ -52,6 +52,7 @@ exports.getUsers = asyncHandler(async (req, res) => {
       maxDistance,
       spherical: true,
     });
+  cursor.match({ emailVerified: { $eq: true } });
   if (gender) cursor.match({ gender });
   if (usersBlocked) cursor.match({ _id: { $nin: usersBlocked } });
   if (_id) cursor.match({ _id: { $ne: _id } });

@@ -17,4 +17,7 @@ export default makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
   },
+  filter: {
+    marginLeft: theme.spacing(1.5),
+  },
 }));

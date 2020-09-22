@@ -1,4 +1,4 @@
-import { find } from 'ramda';
+import { find, prop } from 'ramda';
 import Users from '../containers/Users';
 import User from '../containers/User';
 import Reset from '../containers/Reset';
@@ -49,4 +49,4 @@ export const routes = [
   },
 ];
 
-export const defaultRoute = find((route) => route.isDefault)(routes);
+export const defaultRoute = find(prop('isDefault'))(routes);
