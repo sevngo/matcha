@@ -15,13 +15,9 @@ export const patchUser = (user, config) => {
 export const postUserImage = (image) => {
   let formData = new FormData();
   formData.append('image', image);
-  return axios.post('/api/users/images', formData);
+  return axios.post('/api/users/image', formData);
 };
 
-export const deleteUserImage = (imageId) =>
-  axios.delete(`/api/users/images/${imageId}`);
-
-export const getUserImage = (userId, imageId) =>
-  `/api/users/${userId}/images/${imageId}`;
+export const getUserImage = (userId) => `/api/users/${userId}/image`;
 
 export const postUserForgot = (user) => axios.post('/api/users/forgot', user);

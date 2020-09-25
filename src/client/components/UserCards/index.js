@@ -8,7 +8,7 @@ const UserCards = ({ users }) => (
     {users.map((user, index) => (
       <Grow key={user._id} in={true} timeout={index * 200}>
         <Grid item>
-          <UserCard user={user} />
+          <UserCard user={user} hasDistance />
         </Grid>
       </Grow>
     ))}

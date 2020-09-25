@@ -112,16 +112,16 @@ describe('/api/users', () => {
         .expect(400);
     });
   });
-  describe('POST /api/users/images', () => {
+  describe('POST /api/users/image', () => {
     test('should upload image', async () => {
       const { body: user } = await request(app)
-        .post(`/api/users/images`)
+        .post(`/api/users/image`)
         .set('Authorization', `Bearer ${userOneToken}`)
         .attach('image', path.resolve(__dirname, 'fixtures', 'profile-pic.jpg'))
         .expect(200);
-      expect(has('images')(user)).toBeTruthy();
+      expect(has('image')(user)).toBeTruthy();
       const userData = await getUsers().findOne({ _id: userOne._id });
-      expect(userData.images[0].data.buffer).toEqual(expect.any(Buffer));
+      expect(userData.image.buffer).toEqual(expect.any(Buffer));
     });
   });
 });

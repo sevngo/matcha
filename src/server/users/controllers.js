@@ -1,5 +1,4 @@
-const { ObjectID } = require('mongodb');
-const { find, propEq, split } = require('ramda');
+const { split, path } = require('ramda');
 const sharp = require('sharp');
 const { match, matchIn, addFieldBirthDate } = require('../utils/stages');
 const {
@@ -176,28 +175,9 @@ exports.postUserImage = asyncHandler(async (req, res, next) => {
     .resize({ width: 500, fit: 'outside' })
     .png()
     .toBuffer();
-  const imageId = ObjectID();
   const { value: user } = await Users.findOneAndUpdate(
     { _id },
-    { $push: { images: { _id: imageId, data: buffer } } }
-  );
-  if (!user) return next(new ErrorResponse(404, USER_NOT_FOUND));
-  const [data] = await Users.aggregate([addFieldBirthDate])
-    .match({ _id })
-    .project(imageProjection)
-    .toArray();
-  res.send(data);
-});
-
-exports.deleteUserImage = asyncHandler(async (req, res, next) => {
-  const {
-    auth: { _id },
-    params: { imageId },
-  } = req;
-  const Users = getUsers();
-  const { value: user } = await Users.findOneAndUpdate(
-    { _id },
-    { $pull: { images: { _id: imageId } } }
+    { $set: { image: buffer } }
   );
   if (!user) return next(new ErrorResponse(404, USER_NOT_FOUND));
   const [data] = await Users.aggregate([addFieldBirthDate])
@@ -209,10 +189,10 @@ exports.deleteUserImage = asyncHandler(async (req, res, next) => {
 
 exports.getUserImage = asyncHandler(async (req, res, next) => {
   const Users = getUsers();
-  const { id, imageId } = req.params;
-  const user = await Users.findOne({ _id: id, 'images._id': imageId });
+  const { id } = req.params;
+  const user = await Users.findOne({ _id: id });
   if (!user) return next(new ErrorResponse(404, USER_NOT_FOUND));
-  const { data } = find(propEq('_id', imageId))(user.images);
+  const buffer = path(['image', 'buffer'])(user);
   res.type('png');
-  res.send(data.buffer);
+  res.send(buffer);
 });

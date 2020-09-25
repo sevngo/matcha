@@ -35,15 +35,8 @@ exports.usersModel = async (db) => {
             bsonType: 'string',
             enum: ['male', 'female'],
           },
-          images: {
-            bsonType: 'array',
-            items: {
-              bsonType: 'object',
-              properties: {
-                _id: { bsonType: 'objectId' },
-                data: { bsonType: 'binData' },
-              },
-            },
+          image: {
+            bsonType: 'binData',
           },
           address: {
             bsonType: 'object',

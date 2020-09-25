@@ -6,7 +6,6 @@ import {
   patchUser,
   postUserForgot,
   postUserImage,
-  deleteUserImage,
 } from '../api';
 import { getIds } from '../utils';
 import socket from '../socketEvents';
@@ -26,8 +25,6 @@ export const BLOCK_USER = 'BLOCK_USER';
 export const BLOCKED_USER = 'BLOCKED_USER';
 export const UPLOAD_IMAGE = 'UPLOAD_IMAGE';
 export const UPLOADED_IMAGE = 'UPLOADED_IMAGE';
-export const DELETE_IMAGE = 'DELETE_IMAGE';
-export const DELETED_IMAGE = 'DELETED_IMAGE';
 export const GOT_FRIENDED = 'GOT_FRIENDED';
 export const GOT_UNDFRIENDED = 'GOT_UNDFRIENDED';
 export const ADD_NOTIFICATION = 'ADD_NOTIFICATION';
@@ -140,14 +137,6 @@ export const uploadImage = (image) => async (dispatch) => {
   try {
     const { data } = await postUserImage(image);
     dispatch({ type: UPLOADED_IMAGE, data });
-  } catch {}
-};
-
-export const removeImage = (imageId) => async (dispatch) => {
-  dispatch({ type: DELETE_IMAGE });
-  try {
-    const { data } = await deleteUserImage(imageId);
-    dispatch({ type: DELETED_IMAGE, data });
   } catch {}
 };
 

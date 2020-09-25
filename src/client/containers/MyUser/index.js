@@ -1,5 +1,5 @@
-import React, { useRef, useState, Fragment } from 'react';
-import { length, isEmpty, path, map, pick } from 'ramda';
+import React, { Fragment, useRef } from 'react';
+import { map, pick } from 'ramda';
 import { useSelector, useDispatch } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import {
@@ -7,42 +7,28 @@ import {
   Button,
   Typography,
   Divider,
-  Box,
-  Dialog,
-  DialogTitle,
-  DialogActions,
   Paper,
   Grow,
+  IconButton,
 } from '@material-ui/core';
-import DeleteIcon from '@material-ui/icons/Delete';
 import CloudUpload from '@material-ui/icons/CloudUpload';
 import UserForm from '../../components/UserForm';
-import Carousel from '../../components/Carousel';
-import { getUserImage } from '../../api';
 import { compact } from '../../utils';
-import emptyImage from '../../images/emptyImage.png';
 import useStyles from './styles';
 import messages from './messages';
-import { getImages, getAuth, getUsersBlocked } from '../../selectors';
-import { likeUser, uploadImage, removeImage, updateUser } from '../../actions';
+import { getAuth, getUsersBlocked } from '../../selectors';
+import { likeUser, uploadImage, updateUser } from '../../actions';
+import UserCard from '../../components/UserCard';
 
 const MyUser = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const auth = useSelector(getAuth);
-  const images = useSelector(getImages);
   const usersBlocked = useSelector(getUsersBlocked);
-  const [activeStep, handleStep] = useState(0);
-  const [isDialogOpen, handleDialog] = useState(false);
-  const { _id } = auth;
   const inputEl = useRef();
   const addImage = (image) => {
     if (image) dispatch(uploadImage(image));
   };
-  const image = !isEmpty(images)
-    ? getUserImage(_id, path([activeStep, '_id'])(images))
-    : emptyImage;
-  const maxSteps = length(images);
   const userForm = pick([
     'username',
     'birthDate',
@@ -53,64 +39,24 @@ const MyUser = () => {
   return (
     <Grid container justify="center" spacing={2}>
       <Grow in={true} timeout={200}>
-        <Grid item xs className={classes.mw30}>
-          <Carousel
-            activeStep={activeStep}
-            maxSteps={maxSteps}
-            handleStep={handleStep}
-          >
-            <Box p={1} bgcolor="background.default">
-              <input
-                ref={inputEl}
-                type="file"
-                onChange={(event) => addImage(event.target.files[0])}
-                accept="image/png, image/jpeg"
-                className={classes.hide}
-              />
-              <Button
-                variant="outlined"
-                onClick={() => handleDialog(true)}
-                disabled={!images || isEmpty(images)}
-              >
-                <FormattedMessage {...messages.delete} />
-                <DeleteIcon className={classes.ml1} />
-              </Button>
-              <Dialog open={isDialogOpen} onClose={() => handleDialog(false)}>
-                <DialogTitle>
-                  <FormattedMessage {...messages.sure} />
-                </DialogTitle>
-                <DialogActions>
-                  <Fragment>
-                    <Button size="small" onClick={() => handleDialog(false)}>
-                      <FormattedMessage {...messages.no} />
-                    </Button>
-                    <Button
-                      size="small"
-                      onClick={() => {
-                        dispatch(
-                          removeImage(path([activeStep, '_id'])(images))
-                        );
-                        handleStep(0);
-                        handleDialog(false);
-                      }}
-                    >
-                      <FormattedMessage {...messages.yes} />
-                    </Button>
-                  </Fragment>
-                </DialogActions>
-              </Dialog>
-              <Button
-                variant="outlined"
-                onClick={() => inputEl.current.click()}
-                disabled={length(images) === 5}
-                className={classes.ml1}
-              >
-                <FormattedMessage {...messages.upload} />
-                <CloudUpload className={classes.ml1} />
-              </Button>
-            </Box>
-            <img className={classes.img} src={image} alt="profile" />
-          </Carousel>
+        <Grid item>
+          <UserCard
+            user={auth}
+            actions={
+              <Fragment>
+                <input
+                  ref={inputEl}
+                  type="file"
+                  onChange={(event) => addImage(event.target.files[0])}
+                  accept="image/png, image/jpeg"
+                  className={classes.hide}
+                />
+                <IconButton onClick={() => inputEl.current.click()}>
+                  <CloudUpload color="primary" />
+                </IconButton>
+              </Fragment>
+            }
+          />
         </Grid>
       </Grow>
       <Grow in={true} timeout={400}>
@@ -131,7 +77,7 @@ const MyUser = () => {
         <Grow in={true} timeout={600}>
           <Grid item xs className={classes.mw30}>
             <Paper elevation={1} className={classes.p3}>
-              <Typography variant="h5">
+              <Typography variant="subtitle1" className={classes.subtitle}>
                 <FormattedMessage {...messages.usersBlocked} />
               </Typography>
               <Divider className={classes.mt1} />

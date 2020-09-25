@@ -51,23 +51,12 @@ router.post(
 router.post('/forgot', controllers.postUserForgot);
 
 router.post(
-  '/images',
+  '/image',
   auth.authenticate,
   sanatize.image.single('image'),
   controllers.postUserImage
 );
 
-router.delete(
-  '/images/:imageId',
-  sanatize.objectId('imageId'),
-  controllers.deleteUserImage
-);
-
-router.get(
-  '/:id/images/:imageId',
-  sanatize.objectId('id'),
-  sanatize.objectId('imageId'),
-  controllers.getUserImage
-);
+router.get('/:id/image', sanatize.objectId('id'), controllers.getUserImage);
 
 module.exports = router;

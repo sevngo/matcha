@@ -30,4 +30,7 @@ export default makeStyles((theme) => ({
   img: {
     width: '100%',
   },
+  subtitle: {
+    fontWeight: 500,
+  },
 }));

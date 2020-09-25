@@ -1,16 +1,15 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles((theme) => ({
-  card: {
-    width: '20em',
+  root: {
+    maxWidth: 345,
+    width: '100%',
+    minWidth: 300,
   },
   media: {
-    height: '15em',
+    height: 200,
   },
-  mt1: {
-    marginTop: theme.spacing(1),
-  },
-  subtitle: {
-    fontWeight: 500,
+  age: {
+    fontWeight: 300,
   },
 }));

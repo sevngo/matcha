@@ -3,7 +3,6 @@ import {
   LOGOUT,
   UPDATED_USER,
   UPLOADED_IMAGE,
-  DELETED_IMAGE,
   BLOCKED_USER,
   LIKED_USER,
   GOT_FRIENDED,
@@ -22,8 +21,6 @@ export default (state = {}, action) => {
     case UPDATED_USER:
       return { ...state, ...action.data };
     case UPLOADED_IMAGE:
-      return { ...state, ...action.data };
-    case DELETED_IMAGE:
       return { ...state, ...action.data };
     case BLOCKED_USER:
       return { ...state, ...action.data };

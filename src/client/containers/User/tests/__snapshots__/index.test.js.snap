@@ -6,14 +6,49 @@ exports[`User should match snapshot 1`] = `
     class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-justify-xs-center"
   >
     <div
-      class="MuiGrid-root makeStyles-mw30-6 MuiGrid-item MuiGrid-grid-xs-true"
+      class="MuiGrid-root MuiGrid-item"
       style="opacity: 1; transform: scale(1, 1); transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,transform 133ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"
     >
       <div
-        class="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+        class="MuiPaper-root MuiCard-root makeStyles-root-11 MuiPaper-elevation1 MuiPaper-rounded"
       >
+        <a
+          aria-disabled="false"
+          class="MuiButtonBase-root MuiCardActionArea-root"
+          href="/user/undefined"
+          role="button"
+          tabindex="0"
+        >
+          <div
+            class="MuiCardMedia-root makeStyles-media-12"
+            style="background-image: url(emptyImage.png);"
+          />
+          <div
+            class="MuiCardContent-root"
+          >
+            <div
+              class="MuiGrid-root MuiGrid-container"
+            >
+              <h5
+                class="MuiTypography-root MuiTypography-h5"
+              />
+              <h5
+                class="MuiTypography-root makeStyles-age-13 MuiTypography-h5"
+              >
+                , 
+                NaN
+              </h5>
+            </div>
+          </div>
+          <span
+            class="MuiCardActionArea-focusHighlight"
+          />
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </a>
         <div
-          class="MuiBox-root MuiBox-root-10"
+          class="MuiCardActions-root"
         >
           <input
             accept="image/png, image/jpeg"
@@ -21,39 +56,16 @@ exports[`User should match snapshot 1`] = `
             type="file"
           />
           <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-outlined Mui-disabled Mui-disabled"
-            disabled=""
-            tabindex="-1"
-            type="button"
-          >
-            <span
-              class="MuiButton-label"
-            >
-              Delete
-              <svg
-                aria-hidden="true"
-                class="MuiSvgIcon-root makeStyles-ml1-2"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"
-                />
-              </svg>
-            </span>
-          </button>
-          <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-outlined makeStyles-ml1-2"
+            class="MuiButtonBase-root MuiIconButton-root"
             tabindex="0"
             type="button"
           >
             <span
-              class="MuiButton-label"
+              class="MuiIconButton-label"
             >
-              Upload
               <svg
                 aria-hidden="true"
-                class="MuiSvgIcon-root makeStyles-ml1-2"
+                class="MuiSvgIcon-root MuiSvgIcon-colorPrimary"
                 focusable="false"
                 viewBox="0 0 24 24"
               >
@@ -65,62 +77,6 @@ exports[`User should match snapshot 1`] = `
             <span
               class="MuiTouchRipple-root"
             />
-          </button>
-        </div>
-        <img
-          alt="profile"
-          class="makeStyles-img-9"
-          src="emptyImage.png"
-        />
-        <div
-          class="MuiPaper-root MuiMobileStepper-root MuiMobileStepper-positionStatic MuiPaper-elevation0"
-        >
-          <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSizeSmall MuiButton-sizeSmall Mui-disabled Mui-disabled"
-            disabled=""
-            tabindex="-1"
-            type="button"
-          >
-            <span
-              class="MuiButton-label"
-            >
-              <svg
-                aria-hidden="true"
-                class="MuiSvgIcon-root"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"
-                />
-              </svg>
-              Back
-            </span>
-          </button>
-          <div
-            class="MuiMobileStepper-dots"
-          />
-          <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSizeSmall MuiButton-sizeSmall Mui-disabled Mui-disabled"
-            disabled=""
-            tabindex="-1"
-            type="button"
-          >
-            <span
-              class="MuiButton-label"
-            >
-              Next
-              <svg
-                aria-hidden="true"
-                class="MuiSvgIcon-root"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"
-                />
-              </svg>
-            </span>
           </button>
         </div>
       </div>
@@ -154,7 +110,7 @@ exports[`User should match snapshot 1`] = `
                   class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedStart MuiOutlinedInput-adornedStart MuiInputBase-adornedEnd MuiOutlinedInput-adornedEnd"
                 >
                   <div
-                    class="MuiBox-root MuiBox-root-12 makeStyles-icon-11"
+                    class="MuiBox-root MuiBox-root-15 makeStyles-icon-14"
                   >
                     <svg
                       aria-hidden="true"
@@ -200,10 +156,10 @@ exports[`User should match snapshot 1`] = `
                   </button>
                   <fieldset
                     aria-hidden="true"
-                    class="PrivateNotchedOutline-root-13 MuiOutlinedInput-notchedOutline"
+                    class="PrivateNotchedOutline-root-16 MuiOutlinedInput-notchedOutline"
                   >
                     <legend
-                      class="PrivateNotchedOutline-legendLabelled-15 PrivateNotchedOutline-legendNotched-16"
+                      class="PrivateNotchedOutline-legendLabelled-18 PrivateNotchedOutline-legendNotched-19"
                     >
                       <span>
                         New password
