@@ -27,7 +27,7 @@ exports.postUser = asyncHandler(async (req, res) => {
   await sendEmail(
     email,
     'Email confirmation',
-    `Welcome to Webapp, ${username}. Click on this link to confirm your email : ${url}`
+    `Welcome to Matcha, ${username}. Click on this link to confirm your email : ${url}`
   );
   res.status(201).send();
 });
