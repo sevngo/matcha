@@ -7,10 +7,4 @@ export default makeStyles((theme) => ({
   red: {
     color: 'red',
   },
-  img: {
-    width: '100%',
-  },
-  mw30: {
-    maxWidth: '30em',
-  },
 }));

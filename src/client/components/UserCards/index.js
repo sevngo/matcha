@@ -4,10 +4,10 @@ import UserCard from '../UserCard';
 import Grow from '@material-ui/core/Grow';
 
 const UserCards = ({ users }) => (
-  <Grid container justify="center" spacing={2}>
+  <Grid container spacing={2}>
     {users.map((user, index) => (
       <Grow key={user._id} in={true} timeout={index * 200}>
-        <Grid item>
+        <Grid item xs={12} sm={6} md={4}>
           <UserCard user={user} hasDistance />
         </Grid>
       </Grow>

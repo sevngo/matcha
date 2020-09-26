@@ -37,7 +37,7 @@ const User = ({ id }) => {
   return (
     <Grid container justify="center" spacing={2}>
       <Grow in={true} timeout={200}>
-        <Grid item>
+        <Grid item xs={12} sm={6} md={7}>
           <UserCard
             user={user}
             actions={
@@ -68,7 +68,7 @@ const User = ({ id }) => {
         </Grid>
       </Grow>
       <Grow in={true} timeout={400}>
-        <Grid item xs className={classes.mw30}>
+        <Grid item xs={12} sm={6} md={5}>
           <Paper elevation={1} className={classes.p3}>
             <UserForm initialValues={user} disabled />
           </Paper>

@@ -3,14 +3,14 @@
 exports[`User should match snapshot 1`] = `
 <div>
   <div
-    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 MuiGrid-justify-xs-center"
+    class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2"
   >
     <div
-      class="MuiGrid-root MuiGrid-item"
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-7"
       style="opacity: 1; transform: scale(1, 1); transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,transform 133ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"
     >
       <div
-        class="MuiPaper-root MuiCard-root makeStyles-root-11 MuiPaper-elevation1 MuiPaper-rounded"
+        class="MuiPaper-root MuiCard-root MuiPaper-elevation1 MuiPaper-rounded"
       >
         <a
           aria-disabled="false"
@@ -20,7 +20,7 @@ exports[`User should match snapshot 1`] = `
           tabindex="0"
         >
           <div
-            class="MuiCardMedia-root makeStyles-media-12"
+            class="MuiCardMedia-root makeStyles-media-6"
             style="background-image: url(emptyImage.png);"
           />
           <div
@@ -33,7 +33,7 @@ exports[`User should match snapshot 1`] = `
                 class="MuiTypography-root MuiTypography-h5"
               />
               <h5
-                class="MuiTypography-root makeStyles-age-13 MuiTypography-h5"
+                class="MuiTypography-root makeStyles-age-7 MuiTypography-h5"
               >
                 , 
                 NaN
@@ -52,7 +52,7 @@ exports[`User should match snapshot 1`] = `
         >
           <input
             accept="image/png, image/jpeg"
-            class="makeStyles-hide-7"
+            class="makeStyles-hide-4"
             type="file"
           />
           <button
@@ -80,9 +80,12 @@ exports[`User should match snapshot 1`] = `
           </button>
         </div>
       </div>
+      <div
+        class="MuiBox-root MuiBox-root-8"
+      />
     </div>
     <div
-      class="MuiGrid-root makeStyles-mw30-6 MuiGrid-item MuiGrid-grid-xs-true"
+      class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-6 MuiGrid-grid-md-5"
       style="opacity: 1; transform: scale(1, 1); transition: opacity 400ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,transform 266ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"
     >
       <div
@@ -110,7 +113,7 @@ exports[`User should match snapshot 1`] = `
                   class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedStart MuiOutlinedInput-adornedStart MuiInputBase-adornedEnd MuiOutlinedInput-adornedEnd"
                 >
                   <div
-                    class="MuiBox-root MuiBox-root-15 makeStyles-icon-14"
+                    class="MuiBox-root MuiBox-root-10 makeStyles-icon-9"
                   >
                     <svg
                       aria-hidden="true"
@@ -156,10 +159,10 @@ exports[`User should match snapshot 1`] = `
                   </button>
                   <fieldset
                     aria-hidden="true"
-                    class="PrivateNotchedOutline-root-16 MuiOutlinedInput-notchedOutline"
+                    class="PrivateNotchedOutline-root-11 MuiOutlinedInput-notchedOutline"
                   >
                     <legend
-                      class="PrivateNotchedOutline-legendLabelled-18 PrivateNotchedOutline-legendNotched-19"
+                      class="PrivateNotchedOutline-legendLabelled-13 PrivateNotchedOutline-legendNotched-14"
                     >
                       <span>
                         New password
