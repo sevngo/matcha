@@ -1,10 +1,11 @@
 import React, { Fragment, useEffect } from 'react';
 import { find, isEmpty } from 'ramda';
 import { useSelector, useDispatch } from 'react-redux';
-import { Grid, IconButton, Paper, Grow } from '@material-ui/core';
+import { Grid, IconButton, Paper, Grow, Tooltip } from '@material-ui/core';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import DoneAllIcon from '@material-ui/icons/DoneAll';
 import BlockIcon from '@material-ui/icons/Block';
+import { FormattedMessage } from 'react-intl';
 import UserForm from '../../components/UserForm';
 import useStyles from './styles';
 import { loadUser, likeUser, blockUser } from '../../actions';
@@ -15,6 +16,7 @@ import {
   getFriends,
 } from '../../selectors';
 import UserCard from '../../components/UserCard';
+import messages from './messages';
 
 const User = ({ id }) => {
   const user = useSelector(getUser);
@@ -42,20 +44,36 @@ const User = ({ id }) => {
             user={user}
             actions={
               <Fragment>
-                <IconButton
-                  className={isLiked ? classes.red : ''}
-                  onClick={() => dispatch(likeUser(user._id))}
-                  disabled={isLiked}
+                <Tooltip
+                  title={
+                    !isLiked ? <FormattedMessage {...messages.likeUser} /> : ''
+                  }
                 >
-                  <FavoriteIcon />
-                </IconButton>
-                <IconButton
-                  className={isBlocked ? classes.red : ''}
-                  onClick={() => dispatch(blockUser(user._id))}
-                  disabled={isBlocked}
+                  <IconButton
+                    className={isLiked ? classes.red : ''}
+                    onClick={() => dispatch(likeUser(user._id))}
+                    disabled={isLiked}
+                  >
+                    <FavoriteIcon />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip
+                  title={
+                    !isBlocked ? (
+                      <FormattedMessage {...messages.blockUser} />
+                    ) : (
+                      ''
+                    )
+                  }
                 >
-                  <BlockIcon />
-                </IconButton>
+                  <IconButton
+                    className={isBlocked ? classes.red : ''}
+                    onClick={() => dispatch(blockUser(user._id))}
+                    disabled={isBlocked}
+                  >
+                    <BlockIcon />
+                  </IconButton>
+                </Tooltip>
                 {isFriend && (
                   <IconButton color="primary" disabled>
                     <DoneAllIcon />
@@ -63,7 +81,6 @@ const User = ({ id }) => {
                 )}
               </Fragment>
             }
-            hasBiodescription
           />
         </Grid>
       </Grow>

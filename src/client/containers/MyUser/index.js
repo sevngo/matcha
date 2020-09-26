@@ -11,6 +11,7 @@ import {
   Grow,
   IconButton,
   Box,
+  Tooltip,
 } from '@material-ui/core';
 import CloudUpload from '@material-ui/icons/CloudUpload';
 import UserForm from '../../components/UserForm';
@@ -52,9 +53,11 @@ const MyUser = () => {
                   accept="image/png, image/jpeg"
                   className={classes.hide}
                 />
-                <IconButton onClick={() => inputEl.current.click()}>
-                  <CloudUpload color="primary" />
-                </IconButton>
+                <Tooltip title={<FormattedMessage {...messages.uploadImage} />}>
+                  <IconButton onClick={() => inputEl.current.click()}>
+                    <CloudUpload color="primary" />
+                  </IconButton>
+                </Tooltip>
               </Fragment>
             }
           />

@@ -9,4 +9,8 @@ export default defineMessages({
     id: 'containers.myUser.usersBlocked',
     defaultMessage: 'Users blocked :',
   },
+  uploadImage: {
+    id: 'containers.myUser.uploadImage',
+    defaultMessage: 'Upload an image',
+  },
 });
