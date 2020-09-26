@@ -4,12 +4,12 @@ exports.asyncHandler = (fn) => (req, res, next) =>
   Promise.resolve(fn(req, res, next)).catch(next);
 
 exports.errorHandler = (err, req, res, next) => {
-  const statusCode = err.statusCode || 500;
-  let errorMessage;
-  if (statusCode >= 500) {
+  let { statusCode, message } = err;
+  if (!statusCode) {
     req.log.error(err.stack);
-    errorMessage = INTERNAL_SERVER_ERROR;
-  } else errorMessage = err.message;
-  res.status(statusCode).send({ errorMessage });
+    message = INTERNAL_SERVER_ERROR;
+    statusCode = 500;
+  }
+  res.status(statusCode).send({ message });
   next();
 };

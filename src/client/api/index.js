@@ -28,10 +28,9 @@ axios.interceptors.response.use(
   (error) => {
     store.dispatch(hideLoader());
     const status = path(['response', 'status'])(error);
-    const errorMessage = path(['response', 'data', 'errorMessage'])(error);
+    const message = path(['response', 'data', 'message'])(error);
     if (status === 401) store.dispatch(logout());
-    else
-      store.dispatch(openSnackbar({ variant: ERROR, message: errorMessage }));
+    else store.dispatch(openSnackbar({ variant: ERROR, message }));
     return Promise.reject(error);
   }
 );
