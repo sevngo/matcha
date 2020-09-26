@@ -20,7 +20,6 @@
   "containers.myUser.uploadImage": "Uploader une image",
   "containers.myUser.usersBlocked": "Utilisateurs bloqués",
   "containers.notifications.friendLogged": "{username} vient de se connecter",
-  "containers.notifications.gotBlocked": "{username} vous a bloqué",
   "containers.notifications.gotFriended": "{username} est votre nouvel ami",
   "containers.notifications.gotLiked": "{username} vous aime",
   "containers.notifications.gotUnfriended": "{username} n'est plus votre ami",

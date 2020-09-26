@@ -13,10 +13,6 @@ export default defineMessages({
     id: 'containers.notifications.gotLiked',
     defaultMessage: '{username} has liked you',
   },
-  gotBlocked: {
-    id: 'containers.notifications.gotBlocked',
-    defaultMessage: '{username} has blocked you',
-  },
   gotFriended: {
     id: 'containers.notifications.gotFriended',
     defaultMessage: '{username} is your new friend',

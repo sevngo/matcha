@@ -26,13 +26,6 @@ socket.on('gotLiked', (notification) => {
   });
 });
 
-socket.on('gotBlocked', (notification) => {
-  store.dispatch({
-    type: ADD_NOTIFICATION,
-    notification: { ...notification, messageId: 'gotBlocked' },
-  });
-});
-
 socket.on('gotFriended', (notification) => {
   store.dispatch({ type: GOT_FRIENDED, user: notification.user });
   store.dispatch({

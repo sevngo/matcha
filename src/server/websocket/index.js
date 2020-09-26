@@ -45,15 +45,6 @@ const socketEvents = (socket) => {
       pino.logger.error(err.stack);
     }
   });
-
-  socket.on('userBlocked', ({ user, userBlockedId }) => {
-    try {
-      emitToUserConnected(socket, user, userBlockedId, 'gotBlocked');
-    } catch (err) {
-      pino.logger.error(err.stack);
-    }
-  });
-
   socket.on('userUnfriended', ({ user, userBlockedId }) => {
     try {
       emitToUserConnected(socket, user, userBlockedId, 'gotUnfriended');
