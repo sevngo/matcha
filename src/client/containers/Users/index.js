@@ -8,13 +8,14 @@ import {
   Typography,
 } from '@material-ui/core';
 import SortIcon from '@material-ui/icons/Sort';
+import { FormattedMessage } from 'react-intl';
 import UserCards from '../../components/UserCards';
+import ScrollToTop from '../../components/ScrollToTop';
 import Drawer from '../Drawer';
 import { handleFilter, loadUsers } from '../../actions';
 import { getUsers, getUsersTotal, getFilter } from '../../selectors';
 import useStyles from './styles';
 import messages from './messages';
-import { FormattedMessage } from 'react-intl';
 
 const Users = () => {
   const classes = useStyles();
@@ -63,6 +64,7 @@ const Users = () => {
       <Box mb={2} />
       <UserCards users={users} />
       <Drawer isDrawerOpen={isDrawerOpen} toggleDrawer={toggleDrawer} />
+      <ScrollToTop />
     </Fragment>
   );
 };

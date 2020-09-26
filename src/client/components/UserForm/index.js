@@ -16,7 +16,7 @@ import Input from '../Input';
 import Radio from '../Radio';
 import Select from '../Select';
 import Slider from '../Slider';
-import { useGeolocation, useAutocomplete } from '../../hooks';
+import { useGeolocation, useAutocomplete } from '../../hooks/googleMaps';
 import { GENDER_OPTIONS, SORT_BY_OPTIONS } from './constants';
 import messages from './messages';
 import validate from './validate';
