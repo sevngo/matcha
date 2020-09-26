@@ -6,7 +6,7 @@ sgMail.setApiKey(SENDGRID_API_KEY);
 exports.sendEmail = (email, subject, text) => {
   const message = {
     to: email,
-    from: 'matcha@matcha.com',
+    from: 'webapp@webapp.com',
     subject,
     text,
   };

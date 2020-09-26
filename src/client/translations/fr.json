@@ -1,7 +1,7 @@
 {
   "containers.account.logout": "Se Déconnecter",
   "containers.account.myAccount": "Mon Compte",
-  "containers.auth.enterEmail": "Please enter the e-mail address connected to your Matcha account and click on submit.",
+  "containers.auth.enterEmail": "Please enter the e-mail address and click on submit.",
   "containers.auth.forgotPassword": "Mot de passe oublié ?",
   "containers.auth.login": "Se connecter",
   "containers.auth.redirectToLogin": "J'ai déjà un compte ?",
@@ -15,7 +15,7 @@
   "components.input.tooLong": "Trop long",
   "components.input.tooOld": "Trop vieux",
   "components.input.tooYoung": "Trop jeune",
-  "containers.header.title": "Matcha",
+  "containers.header.title": "Webapp",
   "containers.myUser.likeUser": "Aimer",
   "containers.myUser.uploadImage": "Uploader une image",
   "containers.myUser.usersBlocked": "Utilisateurs bloqués",
