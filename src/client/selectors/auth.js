@@ -1,4 +1,4 @@
-import { prop, propOr } from 'ramda';
+import { length, prop, propOr } from 'ramda';
 import { createSelector } from 'reselect';
 
 export const getAuth = prop('auth');
@@ -22,4 +22,9 @@ export const getAuthFriends = createSelector(getAuth, propOr([], 'friends'));
 export const getAuthNotifications = createSelector(
   getAuth,
   propOr([], 'notifications')
+);
+
+export const getAuthNotificationsLength = createSelector(
+  getAuthNotifications,
+  length
 );

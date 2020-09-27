@@ -1,6 +1,5 @@
 import React, { useState, Fragment } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { path, length } from 'ramda';
+import { path } from 'ramda';
 import { FormattedMessage } from 'react-intl';
 import {
   Typography,
@@ -14,17 +13,18 @@ import {
   DialogContent,
 } from '@material-ui/core';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import { removeNotification } from '../../actions';
-import { getAuthNotifications } from '../../selectors';
 import useStyles from './styles';
 import messages from './messages';
+import { useConnect } from './hooks';
 
 const Notifications = () => {
+  const {
+    notifications,
+    notificationsLength,
+    removeNotification,
+  } = useConnect();
   const classes = useStyles();
-  const dispatch = useDispatch();
-  const notifications = useSelector(getAuthNotifications);
   const [isDialogOpen, handleDialog] = useState(false);
-  const notificationsLength = length(notifications);
   return (
     <Fragment>
       <IconButton color="inherit" onClick={() => handleDialog(true)}>
@@ -56,9 +56,7 @@ const Notifications = () => {
                       />
                     </Typography>
                     <Icon
-                      onClick={() =>
-                        dispatch(removeNotification(notification._id))
-                      }
+                      onClick={() => removeNotification(notification._id)}
                       color="inherit"
                       className={classes.ml1}
                     >

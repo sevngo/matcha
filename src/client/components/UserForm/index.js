@@ -21,7 +21,7 @@ import { GENDER_OPTIONS, SORT_BY_OPTIONS } from './constants';
 import messages from './messages';
 import validate from './validate';
 
-const Component = ({ initialValues, disabled, submit, newPasswordLabel }) => {
+const UserForm = ({ initialValues, disabled, submit, newPasswordLabel }) => {
   const hasInitialValue = has(__, initialValues);
   const {
     handleSubmit,
@@ -218,4 +218,4 @@ const Component = ({ initialValues, disabled, submit, newPasswordLabel }) => {
   );
 };
 
-export default React.memo(Component);
+export default React.memo(UserForm);

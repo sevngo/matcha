@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import {
   Box,
@@ -17,21 +16,16 @@ import {
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import UserForm from '../../components/UserForm';
 import useStyles from './styles';
-import { login, forgotPassword } from '../../actions';
 import messages from './messages';
 import { Link, Redirect } from 'react-router-dom';
 import { registerPath, usersPath } from '../../utils';
-import { getAuthToken } from '../../selectors';
+import { useConnect } from './hooks';
+import { initialValuesEmail, initialValues } from './constants';
 
 const Login = () => {
-  const dispatch = useDispatch();
+  const { token, login, forgotPassword } = useConnect();
   const classes = useStyles();
   const [isDialogOpen, handleDialog] = useState(false);
-  const token = useSelector(getAuthToken);
-  const initialValues = {
-    username: '',
-    password: '',
-  };
   if (token) return <Redirect to={usersPath} />;
   return (
     <Grow in={true} timeout={200}>
@@ -43,10 +37,7 @@ const Login = () => {
           <FormattedMessage {...messages.login} />
         </Typography>
         <Box mt={3} />
-        <UserForm
-          initialValues={initialValues}
-          submit={(values) => dispatch(login(values))}
-        />
+        <UserForm initialValues={initialValues} submit={login} />
         <Grid container className={classes.mt2} justify="space-between">
           <MuiLink
             variant="body2"
@@ -69,8 +60,8 @@ const Login = () => {
             </DialogContentText>
             <Box p={3}>
               <UserForm
-                initialValues={{ email: '' }}
-                submit={(values) => dispatch(forgotPassword(values))}
+                initialValues={initialValuesEmail}
+                submit={forgotPassword}
               />
             </Box>
           </DialogContent>
