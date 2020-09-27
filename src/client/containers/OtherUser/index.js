@@ -14,6 +14,7 @@ import { useConnect } from './hooks';
 const User = ({ id }) => {
   const {
     user,
+    userId,
     usersLiked,
     usersBlocked,
     friends,
@@ -22,17 +23,17 @@ const User = ({ id }) => {
     loadUser,
   } = useConnect();
   useEffect(() => {
-    if (id !== user._id) loadUser(id);
-  }, [id, user._id, loadUser]);
+    if (id !== userId) loadUser(id);
+  }, [id, userId, loadUser]);
   const classes = useStyles();
   const isLiked = Boolean(
-    find((userLiked) => userLiked._id === user._id)(usersLiked)
+    find((userLiked) => userLiked._id === userId)(usersLiked)
   );
   const isBlocked = Boolean(
-    find((userBlocked) => userBlocked._id === user._id)(usersBlocked)
+    find((userBlocked) => userBlocked._id === userId)(usersBlocked)
   );
-  const isFriend = find((friend) => friend._id === user._id)(friends);
-  if (isEmpty(user) || user._id !== id) return false;
+  const isFriend = find((friend) => friend._id === userId)(friends);
+  if (isEmpty(user) || userId !== id) return false;
   return (
     <Grid container justify="center" spacing={2}>
       <Grow in={true} timeout={200}>
