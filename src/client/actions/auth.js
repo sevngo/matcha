@@ -10,7 +10,11 @@ import {
 import { getIds } from '../utils';
 import socket from '../socketEvents';
 import { SUCCESS } from '../containers/Snackbar/constants';
-import { getUsersLiked, getUsersBlocked, getFriends } from '../selectors';
+import {
+  getAuthUsersLiked,
+  getAuthUsersBlocked,
+  getAuthFriends,
+} from '../selectors';
 
 export const REGISTER = 'REGISTER';
 export const LOGIN = 'LOGIN';
@@ -77,8 +81,8 @@ export const forgotPassword = (auth) => async (dispatch) => {
 export const likeUser = (userLikedId) => async (dispatch, getState) => {
   dispatch({ type: LIKE_USER });
   const state = getState();
-  const authUsersLiked = getUsersLiked(state);
-  const authUsersBlocked = getUsersBlocked(state);
+  const authUsersLiked = getAuthUsersLiked(state);
+  const authUsersBlocked = getAuthUsersBlocked(state);
   const usersLiked = compose(append(userLikedId), getIds)(authUsersLiked);
   const usersBlocked = compose(
     reject(equals(userLikedId)),
@@ -104,9 +108,9 @@ export const likeUser = (userLikedId) => async (dispatch, getState) => {
 export const blockUser = (userBlockedId) => async (dispatch, getState) => {
   dispatch({ type: BLOCK_USER });
   const state = getState();
-  const authUsersLiked = getUsersLiked(state);
-  const authUsersBlocked = getUsersBlocked(state);
-  const friends = getFriends(state);
+  const authUsersLiked = getAuthUsersLiked(state);
+  const authUsersBlocked = getAuthUsersBlocked(state);
+  const friends = getAuthFriends(state);
   const usersLiked = compose(
     reject(equals(userBlockedId)),
     getIds

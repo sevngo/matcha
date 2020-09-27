@@ -18,7 +18,7 @@ import UserForm from '../../components/UserForm';
 import { compact } from '../../utils';
 import useStyles from './styles';
 import messages from './messages';
-import { getAuth, getUsersBlocked } from '../../selectors';
+import { getAuth, getAuthUsersBlocked } from '../../selectors';
 import { likeUser, uploadImage, updateUser } from '../../actions';
 import UserCard from '../../components/UserCard';
 
@@ -26,7 +26,7 @@ const MyUser = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const auth = useSelector(getAuth);
-  const usersBlocked = useSelector(getUsersBlocked);
+  const usersBlocked = useSelector(getAuthUsersBlocked);
   const inputEl = useRef();
   const addImage = (image) => {
     if (image) dispatch(uploadImage(image));

@@ -21,13 +21,13 @@ import { login, forgotPassword } from '../../actions';
 import messages from './messages';
 import { Link, Redirect } from 'react-router-dom';
 import { registerPath, usersPath } from '../../utils';
-import { getToken } from '../../selectors';
+import { getAuthToken } from '../../selectors';
 
 const Login = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const [isDialogOpen, handleDialog] = useState(false);
-  const token = useSelector(getToken);
+  const token = useSelector(getAuthToken);
   const initialValues = {
     username: '',
     password: '',

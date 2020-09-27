@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from 'react';
-import { find, isEmpty } from 'ramda';
+import { isEmpty } from 'ramda';
 import { Grid, IconButton, Paper, Grow, Tooltip } from '@material-ui/core';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import DoneAllIcon from '@material-ui/icons/DoneAll';
@@ -15,9 +15,9 @@ const User = ({ id }) => {
   const {
     user,
     userId,
-    usersLiked,
-    usersBlocked,
-    friends,
+    isUserLiked,
+    isUserBlocked,
+    isUserFriended,
     likeUser,
     blockUser,
     loadUser,
@@ -26,13 +26,6 @@ const User = ({ id }) => {
     if (id !== userId) loadUser(id);
   }, [id, userId, loadUser]);
   const classes = useStyles();
-  const isLiked = Boolean(
-    find((userLiked) => userLiked._id === userId)(usersLiked)
-  );
-  const isBlocked = Boolean(
-    find((userBlocked) => userBlocked._id === userId)(usersBlocked)
-  );
-  const isFriend = find((friend) => friend._id === userId)(friends);
   if (isEmpty(user) || userId !== id) return false;
   return (
     <Grid container justify="center" spacing={2}>
@@ -44,20 +37,24 @@ const User = ({ id }) => {
               <Fragment>
                 <Tooltip
                   title={
-                    !isLiked ? <FormattedMessage {...messages.likeUser} /> : ''
+                    !isUserLiked ? (
+                      <FormattedMessage {...messages.likeUser} />
+                    ) : (
+                      ''
+                    )
                   }
                 >
                   <IconButton
-                    className={isLiked ? classes.red : ''}
+                    className={isUserLiked ? classes.red : ''}
                     onClick={likeUser}
-                    disabled={isLiked}
+                    disabled={isUserLiked}
                   >
                     <FavoriteIcon />
                   </IconButton>
                 </Tooltip>
                 <Tooltip
                   title={
-                    !isBlocked ? (
+                    !isUserBlocked ? (
                       <FormattedMessage {...messages.blockUser} />
                     ) : (
                       ''
@@ -65,14 +62,14 @@ const User = ({ id }) => {
                   }
                 >
                   <IconButton
-                    className={isBlocked ? classes.red : ''}
+                    className={isUserBlocked ? classes.red : ''}
                     onClick={blockUser}
-                    disabled={isBlocked}
+                    disabled={isUserBlocked}
                   >
                     <BlockIcon />
                   </IconButton>
                 </Tooltip>
-                {isFriend && (
+                {isUserFriended && (
                   <IconButton color="primary" disabled>
                     <DoneAllIcon />
                   </IconButton>

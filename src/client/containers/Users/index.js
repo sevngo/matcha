@@ -13,16 +13,16 @@ import UserCards from '../../components/UserCards';
 import ScrollToTop from '../../components/ScrollToTop';
 import Drawer from '../Drawer';
 import { handleFilter, loadUsers } from '../../actions';
-import { getUsers, getUsersTotal, getFilter } from '../../selectors';
+import { getUsersData, getUsersTotal, getUsersFilter } from '../../selectors';
 import useStyles from './styles';
 import messages from './messages';
 
 const Users = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const users = useSelector(getUsers);
+  const users = useSelector(getUsersData);
   const total = useSelector(getUsersTotal);
-  const filter = useSelector(getFilter);
+  const filter = useSelector(getUsersFilter);
   useEffect(() => {
     return () => dispatch(handleFilter({ skip: 0 }));
   }, [dispatch]);

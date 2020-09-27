@@ -1,10 +1,10 @@
 import { prop, propOr } from 'ramda';
 import { createSelector } from 'reselect';
 
-const root = prop('users');
+const getUsers = prop('users');
 
-export const getFilter = createSelector(root, propOr({}, 'filter'));
+export const getUsersFilter = createSelector(getUsers, propOr({}, 'filter'));
 
-export const getUsers = createSelector(root, propOr([], 'data'));
+export const getUsersData = createSelector(getUsers, propOr([], 'data'));
 
-export const getUsersTotal = createSelector(root, propOr(0, 'total'));
+export const getUsersTotal = createSelector(getUsers, propOr(0, 'total'));

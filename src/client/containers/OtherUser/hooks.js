@@ -2,9 +2,9 @@ import { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   getUser,
-  getUsersLiked,
-  getUsersBlocked,
-  getFriends,
+  getIsUserFriended,
+  getIsUserLiked,
+  getIsUserBlocked,
 } from '../../selectors';
 import { likeUser, blockUser, loadUser } from '../../actions';
 
@@ -15,9 +15,9 @@ export const useConnect = () => {
   return {
     user,
     userId,
-    usersLiked: useSelector(getUsersLiked),
-    usersBlocked: useSelector(getUsersBlocked),
-    friends: useSelector(getFriends),
+    isUserFriended: useSelector(getIsUserFriended),
+    isUserLiked: useSelector(getIsUserLiked),
+    isUserBlocked: useSelector(getIsUserBlocked),
     likeUser: useCallback(() => dispatch(likeUser(userId)), [dispatch, userId]),
     blockUser: useCallback(() => dispatch(blockUser(userId)), [
       dispatch,

@@ -2,12 +2,12 @@ import React from 'react';
 import { Drawer as MDrawer, Box } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
 import UserForm from '../../components/UserForm';
-import { getFilter } from '../../selectors';
+import { getUsersFilter } from '../../selectors';
 import { handleFilter } from '../../actions';
 
 const Drawer = ({ isDrawerOpen, toggleDrawer }) => {
   const dispatch = useDispatch();
-  const filter = useSelector(getFilter);
+  const filter = useSelector(getUsersFilter);
   return (
     <MDrawer
       open={isDrawerOpen}

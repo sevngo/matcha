@@ -5,18 +5,21 @@ export const getAuth = prop('auth');
 
 export const getAuthId = createSelector(getAuth, prop('_id'));
 
-export const getToken = createSelector(getAuth, prop('token'));
+export const getAuthToken = createSelector(getAuth, prop('token'));
 
-export const getUsersBlocked = createSelector(
+export const getAuthUsersBlocked = createSelector(
   getAuth,
   propOr([], 'usersBlocked')
 );
 
-export const getUsersLiked = createSelector(getAuth, propOr([], 'usersLiked'));
+export const getAuthUsersLiked = createSelector(
+  getAuth,
+  propOr([], 'usersLiked')
+);
 
-export const getFriends = createSelector(getAuth, propOr([], 'friends'));
+export const getAuthFriends = createSelector(getAuth, propOr([], 'friends'));
 
-export const getNotifications = createSelector(
+export const getAuthNotifications = createSelector(
   getAuth,
   propOr([], 'notifications')
 );

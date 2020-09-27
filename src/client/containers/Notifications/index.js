@@ -15,14 +15,14 @@ import {
 } from '@material-ui/core';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { removeNotification } from '../../actions';
-import { getNotifications } from '../../selectors';
+import { getAuthNotifications } from '../../selectors';
 import useStyles from './styles';
 import messages from './messages';
 
 const Notifications = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const notifications = useSelector(getNotifications);
+  const notifications = useSelector(getAuthNotifications);
   const [isDialogOpen, handleDialog] = useState(false);
   const notificationsLength = length(notifications);
   return (

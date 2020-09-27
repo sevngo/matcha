@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { path, mergeDeepRight } from 'ramda';
-import { getToken } from '../selectors';
+import { getAuthToken } from '../selectors';
 import { logout, openSnackbar, displayLoader, hideLoader } from '../actions';
 import { ERROR } from '../containers/Snackbar/constants';
 import store from '../store';
@@ -9,7 +9,7 @@ axios.interceptors.request.use(
   (config) => {
     store.dispatch(displayLoader());
     const state = store.getState();
-    const token = getToken(state);
+    const token = getAuthToken(state);
     if (!token) return config;
     const auth = { headers: { Authorization: `Bearer ${token}` } };
     const newConfig = mergeDeepRight(config, auth);

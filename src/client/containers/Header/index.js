@@ -9,11 +9,11 @@ import Notifications from '../Notifications';
 import { usersPath } from '../../utils';
 import useStyles from './styles';
 import messages from './messages';
-import { getToken } from '../../selectors';
+import { getAuthToken } from '../../selectors';
 
 const Header = (props) => {
   const classes = useStyles();
-  const token = useSelector(getToken);
+  const token = useSelector(getAuthToken);
   return (
     <Fragment>
       <AppBar position="static" className={classes.appBar}>
