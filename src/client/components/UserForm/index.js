@@ -218,4 +218,4 @@ const Component = ({ initialValues, disabled, submit, newPasswordLabel }) => {
   );
 };
 
-export default Component;
+export default React.memo(Component);

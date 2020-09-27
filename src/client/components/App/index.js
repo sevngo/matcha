@@ -1,31 +1,20 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { map } from 'ramda';
-import { Box, LinearProgress } from '@material-ui/core';
-import Header from '../Header';
+import { Box } from '@material-ui/core';
+import Header from '../../containers/Header';
 import useStyles from './styles';
 import { routes, defaultRoute } from '../../utils';
-import Snackbar from '../Snackbar';
-import PrivateRoute from '../../components/PrivateRoute';
-import { getLoading } from '../../selectors';
+import Snackbar from '../../containers/Snackbar';
+import PrivateRoute from '../PrivateRoute';
+import Loader from '../../containers/Loader';
 
 const App = () => {
   const classes = useStyles();
-  const isLoading = useSelector(getLoading);
   return (
-    <Box
-      className={`${classes.root} ${
-        isLoading ? classes.pointerEventsNone : classes.pointerEventsAuto
-      }`}
-    >
+    <Box className={classes.root}>
       <Header />
-      <LinearProgress
-        className={
-          isLoading ? classes.visibilityVisible : classes.visibilityHidden
-        }
-        thickness={8}
-      />
+      <Loader />
       <Box p={3}>
         <Switch>
           {map((route) => {

@@ -6,13 +6,13 @@ import { MenuItem, Menu, IconButton } from '@material-ui/core';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { userPath } from '../../utils';
 import messages from './messages.js';
-import { getAuth } from '../../selectors';
+import { getAuthId } from '../../selectors';
 import { logout } from '../../actions';
 
 const Account = () => {
   const [anchorEl, handleMenu] = useState();
   const dispatch = useDispatch();
-  const auth = useSelector(getAuth);
+  const authId = useSelector(getAuthId);
   return (
     <Fragment>
       <IconButton
@@ -31,7 +31,7 @@ const Account = () => {
         <MenuItem
           onClick={() => handleMenu()}
           component={Link}
-          to={userPath(auth._id)}
+          to={userPath(authId)}
         >
           <FormattedMessage {...messages.myAccount} />
         </MenuItem>

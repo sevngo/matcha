@@ -3,7 +3,7 @@ import { createSelector } from 'reselect';
 
 export const getAuth = prop('auth');
 
-export const getId = createSelector(getAuth, prop('_id'));
+export const getAuthId = createSelector(getAuth, prop('_id'));
 
 export const getToken = createSelector(getAuth, prop('token'));
 

@@ -15,4 +15,4 @@ const UserCards = ({ users }) => (
   </Grid>
 );
 
-export default UserCards;
+export default React.memo(UserCards);

@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PointerEvents should match snapshot 1`] = `
+<div>
+  <div
+    class="MuiBox-root MuiBox-root-6 makeStyles-root-1 makeStyles-pointerEventsNone-2"
+  />
+</div>
+`;

@@ -1,10 +1,9 @@
-import React, { useState, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { useSelector } from 'react-redux';
 import { AppBar, Toolbar, Typography, IconButton } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
-import Drawer from '../Drawer';
 import Account from '../Account';
 import Notifications from '../Notifications';
 import { usersPath } from '../../utils';
@@ -12,10 +11,9 @@ import useStyles from './styles';
 import messages from './messages';
 import { getToken } from '../../selectors';
 
-const Header = () => {
+const Header = (props) => {
   const classes = useStyles();
   const token = useSelector(getToken);
-  const [isDrawerOpen, toggleDrawer] = useState(false);
   return (
     <Fragment>
       <AppBar position="static" className={classes.appBar}>
@@ -39,7 +37,6 @@ const Header = () => {
           )}
         </Toolbar>
       </AppBar>
-      <Drawer isDrawerOpen={isDrawerOpen} toggleDrawer={toggleDrawer} />
     </Fragment>
   );
 };

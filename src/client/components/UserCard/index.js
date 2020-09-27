@@ -15,6 +15,7 @@ import { getUserImage } from '../../api';
 import { getAge, userPath } from '../../utils';
 import useStyles from './styles';
 import messages from './messages';
+import { equals } from 'ramda';
 
 const UserCard = ({ user, hasDistance, actions }) => {
   const classes = useStyles();
@@ -49,4 +50,4 @@ const UserCard = ({ user, hasDistance, actions }) => {
   );
 };
 
-export default UserCard;
+export default React.memo(UserCard, equals);
