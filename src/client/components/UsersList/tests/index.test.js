@@ -7,7 +7,7 @@ describe('UsersList', () => {
   it('should match snapshot', () => {
     const { container } = render(
       <TestProvider>
-        <Component />
+        <Component users={[]} />
       </TestProvider>
     );
     expect(container).toMatchSnapshot();
