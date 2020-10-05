@@ -1,4 +1,4 @@
-import { length, prop, propOr } from 'ramda';
+import { length, prop, propOr, pick, compose, assoc } from 'ramda';
 import { createSelector } from 'reselect';
 
 export const getAuth = prop('auth');
@@ -6,6 +6,19 @@ export const getAuth = prop('auth');
 export const getAuthId = createSelector(getAuth, prop('_id'));
 
 export const getAuthToken = createSelector(getAuth, prop('token'));
+
+export const getAuthForm = createSelector(
+  getAuth,
+  compose(
+    assoc('password', ''),
+    pick(['username', 'birthDate', 'email', 'gender', 'address'])
+  )
+);
+
+export const getAuthCard = createSelector(
+  getAuth,
+  pick(['_id', 'distance', 'username', 'birthDate'])
+);
 
 export const getAuthUsersBlocked = createSelector(
   getAuth,
