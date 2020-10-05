@@ -1,21 +1,19 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { Grid, Paper } from '@material-ui/core';
-import { useParams } from 'react-router';
 import UserForm from '../../components/UserForm';
-import { updateUser } from '../../actions';
 import useStyles from './styles';
+import { useConnect } from './hooks';
+import { initialValues } from './constants';
 
 const Reset = () => {
-  const dispatch = useDispatch();
-  const { token } = useParams();
+  const { updateUser } = useConnect();
   const classes = useStyles();
   return (
     <Grid container justify="center" className={classes.p3}>
       <Paper elevation={1} className={classes.paper}>
         <UserForm
-          initialValues={{ password: '' }}
-          submit={(user) => dispatch(updateUser(user, token))}
+          initialValues={initialValues}
+          submit={updateUser}
           newPasswordLabel
         />
       </Paper>
