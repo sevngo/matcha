@@ -13,7 +13,6 @@ import UsersList from '../../components/UsersList';
 const MyUser = () => {
   const classes = useStyles();
   const inputEl = useRef();
-  console.log(inputEl);
   const {
     authCard,
     authForm,
