@@ -6,11 +6,13 @@ import Component from '../index';
 global.google = {
   maps: {
     places: {
-      Autocomplete: jest.fn(() => ({
-        setTypes: jest.fn(),
-        setFields: jest.fn(),
-        addListener: jest.fn(),
-      })),
+      Autocomplete: function () {
+        return {
+          setTypes: jest.fn(),
+          setFields: jest.fn(),
+          addListener: jest.fn(),
+        };
+      },
     },
   },
 };
