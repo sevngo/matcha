@@ -23,7 +23,7 @@ exports.postUser = asyncHandler(async (req, res) => {
   } = await Users.insertOne(req.body);
   const { _id, email, username } = user;
   const token = createToken({ _id });
-  const url = `${req.headers.referer}verify/${token}`;
+  const url = `${req.headers.origin}/verify/${token}`;
   await sendEmail(
     email,
     'Email confirmation',
@@ -157,7 +157,7 @@ exports.postUserForgot = asyncHandler(async (req, res, next) => {
   if (!user) return next(new ErrorResponse(400, EMAIL_NOT_FOUND));
   const { _id, email, username } = user;
   const token = createToken({ _id });
-  const url = `${req.headers.referer}reset/${token}`;
+  const url = `${req.headers.origin}/reset/${token}`;
   await sendEmail(
     email,
     'Password reset',
