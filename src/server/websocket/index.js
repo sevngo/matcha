@@ -22,48 +22,48 @@ const socketEvents = (socket) => {
     }
   });
 
-  socket.on('reLogged', (_id) => {
+  socket.on('reLogged', async (_id) => {
     try {
-      addUserSocketId(_id, socket.id);
+      await addUserSocketId(_id, socket.id);
     } catch (err) {
       pino.logger.error(err.stack);
     }
   });
 
-  socket.on('userLiked', ({ user, userLikedId }) => {
+  socket.on('userLiked', async ({ user, userLikedId }) => {
     try {
-      emitToUserConnected(socket, user, userLikedId, 'gotLiked');
+      await emitToUserConnected(socket, user, userLikedId, 'gotLiked');
     } catch (err) {
       pino.logger.error(err.stack);
     }
   });
 
-  socket.on('userFriended', ({ user, userLikedId }) => {
+  socket.on('userFriended', async ({ user, userLikedId }) => {
     try {
-      emitToUserConnected(socket, user, userLikedId, 'gotFriended');
+      await emitToUserConnected(socket, user, userLikedId, 'gotFriended');
     } catch (err) {
       pino.logger.error(err.stack);
     }
   });
-  socket.on('userUnfriended', ({ user, userBlockedId }) => {
+  socket.on('userUnfriended', async ({ user, userBlockedId }) => {
     try {
-      emitToUserConnected(socket, user, userBlockedId, 'gotUnfriended');
-    } catch (err) {
-      pino.logger.error(err.stack);
-    }
-  });
-
-  socket.on('logout', () => {
-    try {
-      removeUserSocketId(socket.id);
+      await emitToUserConnected(socket, user, userBlockedId, 'gotUnfriended');
     } catch (err) {
       pino.logger.error(err.stack);
     }
   });
 
-  socket.on('disconnect', () => {
+  socket.on('logout', async () => {
     try {
-      removeUserSocketId(socket.id);
+      await removeUserSocketId(socket.id);
+    } catch (err) {
+      pino.logger.error(err.stack);
+    }
+  });
+
+  socket.on('disconnect', async () => {
+    try {
+      await removeUserSocketId(socket.id);
     } catch (err) {
       pino.logger.error(err.stack);
     }
