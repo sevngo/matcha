@@ -9,6 +9,7 @@ import messages from './messages';
 import UserCard from '../../components/UserCard';
 import { useConnect } from './hooks';
 import UsersList from '../../components/UsersList';
+import { split } from 'ramda';
 
 const MyUser = () => {
   const classes = useStyles();
@@ -63,7 +64,10 @@ const MyUser = () => {
         <Grid item xs={12} sm={6} md={5}>
           <Paper elevation={1} className={classes.p3}>
             <UserForm
-              initialValues={authForm}
+              initialValues={{
+                ...authForm,
+                birthDate: split('T')(authForm.birthDate)[0],
+              }}
               submit={updateUser}
               newPasswordLabel
             />

@@ -13,9 +13,3 @@ exports.matchIn = (key, value) => {
       $match: { [key]: { $in: value } },
     };
 };
-
-exports.addFieldBirthDate = {
-  $addFields: {
-    birthDate: { $dateToString: { format: '%Y-%m-%d', date: '$birthDate' } },
-  },
-};

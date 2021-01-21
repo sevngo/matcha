@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from 'react';
-import { isEmpty } from 'ramda';
+import { isEmpty, split } from 'ramda';
 import { Grid, IconButton, Paper, Grow, Tooltip } from '@material-ui/core';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import DoneAllIcon from '@material-ui/icons/DoneAll';
@@ -82,7 +82,13 @@ const User = ({ id }) => {
       <Grow in={true} timeout={400}>
         <Grid item xs={12} sm={6} md={5}>
           <Paper elevation={1} className={classes.p3}>
-            <UserForm initialValues={user} disabled />
+            <UserForm
+              initialValues={{
+                ...user,
+                birthDate: split('T')(user.birthDate)[0],
+              }}
+              disabled
+            />
           </Paper>
         </Grid>
       </Grow>

@@ -1,6 +1,6 @@
 const { split, path } = require('ramda');
 const sharp = require('sharp');
-const { match, matchIn, addFieldBirthDate } = require('../utils/stages');
+const { match, matchIn } = require('../utils/stages');
 const {
   userProjection,
   authProjection,
@@ -72,7 +72,7 @@ exports.getUsers = asyncHandler(async (req, res) => {
 
 exports.getUser = asyncHandler(async (req, res, next) => {
   const Users = getUsers();
-  const [data] = await Users.aggregate([addFieldBirthDate])
+  const [data] = await Users.aggregate()
     .match({ _id: req.params.id })
     .project(userProjection)
     .toArray();
@@ -93,7 +93,7 @@ exports.patchUser = asyncHandler(async (req, res, next) => {
   );
   if (!user) return next(new ErrorResponse(404, USER_NOT_FOUND));
   const { usersLiked, usersBlocked } = user;
-  const cursor = Users.aggregate([addFieldBirthDate]).match({ _id });
+  const cursor = Users.aggregate().match({ _id });
   if (usersLiked)
     cursor.lookup({
       from: 'users',
@@ -125,7 +125,7 @@ exports.postUserLogin = asyncHandler(async (req, res) => {
     token,
   } = req;
   const Users = getUsers();
-  const cursor = Users.aggregate([addFieldBirthDate]).match({ _id });
+  const cursor = Users.aggregate().match({ _id });
   if (usersLiked)
     cursor.lookup({
       from: 'users',
@@ -180,7 +180,7 @@ exports.postUserImage = asyncHandler(async (req, res, next) => {
     { $set: { image: buffer } }
   );
   if (!user) return next(new ErrorResponse(404, USER_NOT_FOUND));
-  const [data] = await Users.aggregate([addFieldBirthDate])
+  const [data] = await Users.aggregate()
     .match({ _id })
     .project(imageProjection)
     .toArray();
