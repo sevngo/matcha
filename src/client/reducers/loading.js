@@ -1,6 +1,6 @@
 import { DISPLAY_LOADER, HIDE_LOADER } from '../actions';
 
-export default (state = false, action) => {
+const reducer = (state = false, action) => {
   switch (action.type) {
     case DISPLAY_LOADER:
       return true;
@@ -10,3 +10,5 @@ export default (state = false, action) => {
       return state;
   }
 };
+
+export default reducer;

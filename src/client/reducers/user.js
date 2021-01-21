@@ -1,6 +1,6 @@
 import { LOADED_USER } from '../actions';
 
-export default (state = {}, action) => {
+const reducer = (state = {}, action) => {
   switch (action.type) {
     case LOADED_USER:
       return action.data;
@@ -8,3 +8,5 @@ export default (state = {}, action) => {
       return state;
   }
 };
+
+export default reducer;

@@ -12,7 +12,7 @@ import {
 } from '../actions';
 import { reject } from 'ramda';
 
-export default (state = {}, action) => {
+const reducer = (state = {}, action) => {
   switch (action.type) {
     case LOGGED:
       return { ...state, ...action.data };
@@ -49,3 +49,5 @@ export default (state = {}, action) => {
       return state;
   }
 };
+
+export default reducer;
