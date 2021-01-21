@@ -4,7 +4,9 @@ import store from './store';
 import { GOT_FRIENDED, GOT_UNDFRIENDED, ADD_NOTIFICATION } from './actions';
 import { getAuth } from './selectors';
 
-const socket = io(process.env.REACT_APP_API_URL);
+const ioUrl =
+  process.env.NODE_ENV === 'production' ? null : process.env.REACT_APP_API_URL;
+const socket = io(ioUrl);
 
 socket.on('connect', () => {
   const state = store.getState();

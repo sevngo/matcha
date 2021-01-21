@@ -1,6 +1,5 @@
 const express = require('express');
 const path = require('path');
-const helmet = require('helmet');
 const pino = require('./utils/logger');
 const usersRouter = require('./users/router');
 const { errorHandler } = require('./middlewares/error');
@@ -11,7 +10,6 @@ const app = express();
 app.use(express.json());
 
 if (NODE_ENV !== TEST) app.use(pino);
-app.use(helmet());
 
 app.use('/api/users', usersRouter);
 

@@ -67,6 +67,7 @@
     "create:admin": "NODE_ENV=development node scripts/createAdmin",
     "eject": "react-scripts eject"
   },
+  "homepage": "./",
   "browserslist": {
     "production": [
       ">0.2%",
