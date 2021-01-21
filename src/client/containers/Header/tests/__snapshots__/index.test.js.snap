@@ -60,9 +60,9 @@ exports[`Header should match snapshot 1`] = `
               />
             </svg>
             <span
-              class="MuiBadge-badge MuiBadge-anchorOriginTopRightRectangle MuiBadge-colorError MuiBadge-invisible"
+              class="MuiBadge-badge MuiBadge-anchorOriginTopRightRectangle MuiBadge-colorError"
             >
-              0
+              2
             </span>
           </span>
         </span>

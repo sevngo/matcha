@@ -27,6 +27,7 @@ const User = ({ id }) => {
   }, [id, userId, loadUser]);
   const classes = useStyles();
   if (isEmpty(user) || userId !== id) return false;
+  const birthDate = split('T')(user.birthDate)[0];
   return (
     <Grid container justify="center" spacing={2}>
       <Grow in={true} timeout={200}>
@@ -85,7 +86,7 @@ const User = ({ id }) => {
             <UserForm
               initialValues={{
                 ...user,
-                birthDate: split('T')(user.birthDate)[0],
+                birthDate,
               }}
               disabled
             />

@@ -15,7 +15,7 @@ exports[`MyUser should match snapshot 1`] = `
         <a
           aria-disabled="false"
           class="MuiButtonBase-root MuiCardActionArea-root"
-          href="/user/undefined"
+          href="/user/6008432b6ed92c2ac837ec6c"
           role="button"
           tabindex="0"
         >
@@ -31,12 +31,14 @@ exports[`MyUser should match snapshot 1`] = `
             >
               <h5
                 class="MuiTypography-root MuiTypography-h5"
-              />
+              >
+                asdasd
+              </h5>
               <h5
                 class="MuiTypography-root makeStyles-age-7 MuiTypography-h5"
               >
                 , 
-                NaN
+                30
               </h5>
             </div>
           </div>
@@ -104,6 +106,58 @@ exports[`MyUser should match snapshot 1`] = `
                 class="MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth"
               >
                 <label
+                  class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-filled"
+                  data-shrink="true"
+                >
+                  Username
+                </label>
+                <div
+                  class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedStart MuiOutlinedInput-adornedStart"
+                >
+                  <div
+                    class="MuiBox-root MuiBox-root-10 makeStyles-icon-9"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="MuiSvgIcon-root"
+                      focusable="false"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"
+                      />
+                    </svg>
+                  </div>
+                  <input
+                    aria-invalid="false"
+                    autocomplete="username"
+                    class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedStart MuiOutlinedInput-inputAdornedStart"
+                    name="username"
+                    type="text"
+                    value="asdasd"
+                  />
+                  <fieldset
+                    aria-hidden="true"
+                    class="PrivateNotchedOutline-root-11 MuiOutlinedInput-notchedOutline"
+                  >
+                    <legend
+                      class="PrivateNotchedOutline-legendLabelled-13 PrivateNotchedOutline-legendNotched-14"
+                    >
+                      <span>
+                        Username
+                      </span>
+                    </legend>
+                  </fieldset>
+                </div>
+              </div>
+            </div>
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <div
+                class="MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth"
+              >
+                <label
                   class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined"
                   data-shrink="true"
                 >
@@ -113,7 +167,7 @@ exports[`MyUser should match snapshot 1`] = `
                   class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedStart MuiOutlinedInput-adornedStart MuiInputBase-adornedEnd MuiOutlinedInput-adornedEnd"
                 >
                   <div
-                    class="MuiBox-root MuiBox-root-10 makeStyles-icon-9"
+                    class="MuiBox-root MuiBox-root-15 makeStyles-icon-9"
                   >
                     <svg
                       aria-hidden="true"
@@ -166,6 +220,293 @@ exports[`MyUser should match snapshot 1`] = `
                     >
                       <span>
                         New password
+                      </span>
+                    </legend>
+                  </fieldset>
+                </div>
+              </div>
+            </div>
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <div
+                class="MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth"
+              >
+                <label
+                  class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-filled"
+                  data-shrink="true"
+                >
+                  Email
+                </label>
+                <div
+                  class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedStart MuiOutlinedInput-adornedStart"
+                >
+                  <div
+                    class="MuiBox-root MuiBox-root-16 makeStyles-icon-9"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="MuiSvgIcon-root"
+                      focusable="false"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10h5v-2h-5c-4.34 0-8-3.66-8-8s3.66-8 8-8 8 3.66 8 8v1.43c0 .79-.71 1.57-1.5 1.57s-1.5-.78-1.5-1.57V12c0-2.76-2.24-5-5-5s-5 2.24-5 5 2.24 5 5 5c1.38 0 2.64-.56 3.54-1.47.65.89 1.77 1.47 2.96 1.47 1.97 0 3.5-1.6 3.5-3.57V12c0-5.52-4.48-10-10-10zm0 13c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"
+                      />
+                    </svg>
+                  </div>
+                  <input
+                    aria-invalid="false"
+                    class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedStart MuiOutlinedInput-inputAdornedStart"
+                    name="email"
+                    type="text"
+                    value="asdasd@asdasd.com"
+                  />
+                  <fieldset
+                    aria-hidden="true"
+                    class="PrivateNotchedOutline-root-11 MuiOutlinedInput-notchedOutline"
+                  >
+                    <legend
+                      class="PrivateNotchedOutline-legendLabelled-13 PrivateNotchedOutline-legendNotched-14"
+                    >
+                      <span>
+                        Email
+                      </span>
+                    </legend>
+                  </fieldset>
+                </div>
+              </div>
+            </div>
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <div
+                class="MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth"
+              >
+                <label
+                  class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-filled"
+                  data-shrink="true"
+                >
+                  Birth date
+                </label>
+                <div
+                  class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedStart MuiOutlinedInput-adornedStart"
+                >
+                  <div
+                    class="MuiBox-root MuiBox-root-17 makeStyles-icon-9"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="MuiSvgIcon-root"
+                      focusable="false"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"
+                      />
+                    </svg>
+                  </div>
+                  <input
+                    aria-invalid="false"
+                    class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedStart MuiOutlinedInput-inputAdornedStart"
+                    name="birthDate"
+                    type="date"
+                    value="1991-01-20"
+                  />
+                  <fieldset
+                    aria-hidden="true"
+                    class="PrivateNotchedOutline-root-11 MuiOutlinedInput-notchedOutline"
+                  >
+                    <legend
+                      class="PrivateNotchedOutline-legendLabelled-13 PrivateNotchedOutline-legendNotched-14"
+                    >
+                      <span>
+                        Birth date
+                      </span>
+                    </legend>
+                  </fieldset>
+                </div>
+              </div>
+            </div>
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <div
+                class="MuiFormControl-root"
+              >
+                <label
+                  class="MuiFormLabel-root"
+                >
+                  Gender
+                </label>
+                <div
+                  class="MuiFormGroup-root MuiFormGroup-row"
+                  role="radiogroup"
+                >
+                  <label
+                    class="MuiFormControlLabel-root"
+                  >
+                    <span
+                      aria-disabled="false"
+                      class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-18 MuiRadio-root MuiRadio-colorPrimary MuiIconButton-colorPrimary"
+                    >
+                      <span
+                        class="MuiIconButton-label"
+                      >
+                        <input
+                          class="PrivateSwitchBase-input-21"
+                          name="gender"
+                          type="radio"
+                          value="male"
+                        />
+                        <div
+                          class="PrivateRadioButtonIcon-root-22"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            class="MuiSvgIcon-root"
+                            focusable="false"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"
+                            />
+                          </svg>
+                          <svg
+                            aria-hidden="true"
+                            class="MuiSvgIcon-root PrivateRadioButtonIcon-layer-23"
+                            focusable="false"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              d="M8.465 8.465C9.37 7.56 10.62 7 12 7C14.76 7 17 9.24 17 12C17 13.38 16.44 14.63 15.535 15.535C14.63 16.44 13.38 17 12 17C9.24 17 7 14.76 7 12C7 10.62 7.56 9.37 8.465 8.465Z"
+                            />
+                          </svg>
+                        </div>
+                      </span>
+                      <span
+                        class="MuiTouchRipple-root"
+                      />
+                    </span>
+                    <span
+                      class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
+                    >
+                      Male
+                    </span>
+                  </label>
+                  <label
+                    class="MuiFormControlLabel-root"
+                  >
+                    <span
+                      aria-disabled="false"
+                      class="MuiButtonBase-root MuiIconButton-root PrivateSwitchBase-root-18 MuiRadio-root MuiRadio-colorPrimary PrivateSwitchBase-checked-19 Mui-checked MuiIconButton-colorPrimary"
+                    >
+                      <span
+                        class="MuiIconButton-label"
+                      >
+                        <input
+                          checked=""
+                          class="PrivateSwitchBase-input-21"
+                          name="gender"
+                          type="radio"
+                          value="female"
+                        />
+                        <div
+                          class="PrivateRadioButtonIcon-root-22 PrivateRadioButtonIcon-checked-24"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            class="MuiSvgIcon-root"
+                            focusable="false"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"
+                            />
+                          </svg>
+                          <svg
+                            aria-hidden="true"
+                            class="MuiSvgIcon-root PrivateRadioButtonIcon-layer-23"
+                            focusable="false"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              d="M8.465 8.465C9.37 7.56 10.62 7 12 7C14.76 7 17 9.24 17 12C17 13.38 16.44 14.63 15.535 15.535C14.63 16.44 13.38 17 12 17C9.24 17 7 14.76 7 12C7 10.62 7.56 9.37 8.465 8.465Z"
+                            />
+                          </svg>
+                        </div>
+                      </span>
+                      <span
+                        class="MuiTouchRipple-root"
+                      />
+                    </span>
+                    <span
+                      class="MuiTypography-root MuiFormControlLabel-label MuiTypography-body1"
+                    >
+                      Female
+                    </span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div
+              class="MuiGrid-root MuiGrid-item"
+            >
+              <div
+                class="MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth"
+              >
+                <label
+                  class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined Mui-disabled Mui-disabled MuiFormLabel-filled"
+                  data-shrink="true"
+                  for="address"
+                  id="address-label"
+                >
+                  Address
+                </label>
+                <div
+                  class="MuiInputBase-root MuiOutlinedInput-root Mui-disabled Mui-disabled MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd MuiOutlinedInput-adornedEnd"
+                >
+                  <input
+                    aria-invalid="false"
+                    class="MuiInputBase-input MuiOutlinedInput-input Mui-disabled Mui-disabled MuiInputBase-inputAdornedEnd MuiOutlinedInput-inputAdornedEnd"
+                    disabled=""
+                    id="address"
+                    name="address.name"
+                    type="text"
+                    value="5 Allée Claude Chastillon, 93290 Tremblay-en-France, France"
+                  />
+                  <button
+                    class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd"
+                    tabindex="0"
+                    type="button"
+                  >
+                    <span
+                      class="MuiIconButton-label"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        class="MuiSvgIcon-root"
+                        focusable="false"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                        />
+                      </svg>
+                    </span>
+                    <span
+                      class="MuiTouchRipple-root"
+                    />
+                  </button>
+                  <fieldset
+                    aria-hidden="true"
+                    class="PrivateNotchedOutline-root-11 MuiOutlinedInput-notchedOutline"
+                  >
+                    <legend
+                      class="PrivateNotchedOutline-legendLabelled-13 PrivateNotchedOutline-legendNotched-14"
+                    >
+                      <span>
+                        Address
                       </span>
                     </legend>
                   </fieldset>

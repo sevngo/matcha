@@ -3,13 +3,13 @@ import { FormattedMessage } from 'react-intl';
 import { Grid, Paper, Grow, IconButton, Box, Tooltip } from '@material-ui/core';
 import { useIntl } from 'react-intl';
 import CloudUpload from '@material-ui/icons/CloudUpload';
+import { split } from 'ramda';
 import UserForm from '../../components/UserForm';
 import useStyles from './styles';
 import messages from './messages';
 import UserCard from '../../components/UserCard';
 import { useConnect } from './hooks';
 import UsersList from '../../components/UsersList';
-import { split } from 'ramda';
 
 const MyUser = () => {
   const classes = useStyles();
@@ -24,6 +24,7 @@ const MyUser = () => {
   } = useConnect();
   const intl = useIntl();
   const openFile = useCallback(() => inputEl.current.click(), []);
+  const birthDate = split('T')(authForm.birthDate)[0];
   return (
     <Grid container spacing={2}>
       <Grow in={true} timeout={200}>
@@ -66,7 +67,7 @@ const MyUser = () => {
             <UserForm
               initialValues={{
                 ...authForm,
-                birthDate: split('T')(authForm.birthDate)[0],
+                birthDate,
               }}
               submit={updateUser}
               newPasswordLabel

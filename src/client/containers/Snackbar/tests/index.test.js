@@ -5,14 +5,8 @@ import Component from '../index';
 
 describe('Snackbar', () => {
   it('should match snapshot', () => {
-    const initialState = {
-      snackbar: {
-        variant: 'error',
-      },
-    };
-
     const { container } = render(
-      <TestProvider initialState={initialState}>
+      <TestProvider>
         <Component />
       </TestProvider>
     );

@@ -5,11 +5,8 @@ import Component from '../index';
 
 describe('Loader', () => {
   it('should match snapshot', () => {
-    const initialState = {
-      loading: true,
-    };
     const { container } = render(
-      <TestProvider initialState={initialState}>
+      <TestProvider>
         <Component />
       </TestProvider>
     );

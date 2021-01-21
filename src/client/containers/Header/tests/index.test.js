@@ -5,13 +5,8 @@ import Component from '../index';
 
 describe('Header', () => {
   it('should match snapshot', () => {
-    const initialState = {
-      auth: {
-        token: 'fakeToken',
-      },
-    };
     const { container } = render(
-      <TestProvider initialState={initialState}>
+      <TestProvider>
         <Component />
       </TestProvider>
     );
