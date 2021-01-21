@@ -11,7 +11,12 @@ const socketEvents = require('./websocket');
     const server = await app.listen(SERVER_PORT, () =>
       pino.logger.info(`Server listening on port ${SERVER_PORT}`)
     );
-    const io = socketIo(server, { pingTimeout: 60000 });
+    const io = socketIo(server, {
+      cors: {
+        origin: `http://localhost:3000`,
+        methods: ['GET', 'POST'],
+      },
+    });
     io.on('connect', socketEvents);
   } catch (err) {
     pino.logger.error(err.stack);
