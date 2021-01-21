@@ -22,5 +22,24 @@ Then run :
 docker-compose up -d mongo
 npm i
 npm run seed:db
-npm run dev
+npm start
+```
+
+## Production mode
+
+Create .env.production
+
+```
+SERVER_PORT=8080
+REACT_APP_GOOGLEMAPS_API_KEY=
+MONGODB_URI=mongodb://localhost:27017
+DATABASE_NAME=matcha
+SENDGRID_API_KEY=
+JWT_SECRET=mysecret
+```
+
+Then run :
+
+```
+docker-compose up
 ```

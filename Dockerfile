@@ -16,11 +16,11 @@ FROM node:14.12.0-slim
 WORKDIR /app
 
 COPY ./package.json ./package-lock.json ./
-RUN npm i --only=prod && npm cache clean --force
+RUN npm i --only=prod && npm cache clean
 
 COPY --from=builder /app/build ./build
 COPY ./.env.production ./
 COPY ./src/server ./src/server
 
 EXPOSE 8080
-CMD ["npm", "start"]
+CMD ["npm", "run", "production"]
