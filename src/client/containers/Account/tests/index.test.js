@@ -14,9 +14,10 @@ describe('Account', () => {
     expect(container).toMatchSnapshot();
   });
 
-  it('should open menu', () => {
-    const { getByTestId } = render(Component);
-    fireEvent.click(getByTestId('accountButton'));
-    expect(getByTestId('accountMenu')).toBeDefined();
+  it('should open and close menu', async () => {
+    const { queryByTestId } = render(Component);
+    expect(queryByTestId('accountMenu')).toBeNull();
+    fireEvent.click(queryByTestId('accountButton'));
+    expect(queryByTestId('accountMenu')).toBeDefined();
   });
 });

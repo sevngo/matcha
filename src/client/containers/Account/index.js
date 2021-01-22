@@ -36,6 +36,7 @@ const Account = () => {
           <FormattedMessage {...messages.myAccount} />
         </MenuItem>
         <MenuItem
+          data-testid="logout"
           onClick={() => {
             handleMenu();
             dispatch(logout());
