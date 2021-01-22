@@ -15,13 +15,13 @@ jest.mock('../../database', () => ({
   getUsers: () => ({ findOneAndUpdate: () => ({}) }),
 }));
 
-beforeAll(() => {
-  http.listen(0);
+beforeAll((done) => {
+  http.listen(0, done);
 });
 
-afterAll(() => {
+afterAll((done) => {
   sender.disconnect();
-  http.close();
+  http.close(done);
 });
 
 describe('Websocket', () => {
@@ -30,8 +30,6 @@ describe('Websocket', () => {
     serverIo.on('connect', socketEvents);
 
     sender = clientIo(`http://localhost:${port}`, ioOptions);
-    sender.on('connect', () => {
-      done();
-    });
+    sender.on('connect', done);
   });
 });
