@@ -16,11 +16,11 @@ const birthDateMax = new Date(
   today.getDate()
 );
 
-const userOnePassword = faker.internet.password();
-const userOneId = faker.random.alphaNumeric(12);
-const userOneToken = createToken({ _id: userOneId });
+const authUserPassword = faker.internet.password();
+const authUserId = faker.random.alphaNumeric(12);
+const authUserToken = createToken({ _id: authUserId });
 
-const userOne = {
+const authUser = {
   username: faker.internet.userName(),
   birthDate: faker.date.between(birthDateMin, birthDateMax),
   email: faker.internet.email(),
@@ -33,12 +33,33 @@ const userOne = {
       parseFloat(faker.address.latitude()),
     ],
   },
-  password: bcrypt.hashSync(userOnePassword, 8),
-  _id: ObjectID(userOneId),
+  password: bcrypt.hashSync(authUserPassword, 8),
+  _id: ObjectID(authUserId),
   emailVerified: true,
+  usersBlocked: [ObjectID()],
+  usersLiked: [ObjectID()],
 };
 
-const userTwo = {
+const unverifiedUserPassword = faker.internet.password();
+
+const unverifiedUser = {
+  username: faker.internet.userName(),
+  birthDate: faker.date.between(birthDateMin, birthDateMax),
+  email: faker.internet.email(),
+  gender: 'male',
+  address: {
+    type: 'Point',
+    name: faker.address.streetAddress(),
+    coordinates: [
+      parseFloat(faker.address.longitude()),
+      parseFloat(faker.address.latitude()),
+    ],
+  },
+  password: bcrypt.hashSync(unverifiedUserPassword, 8),
+  _id: ObjectID(),
+};
+
+const randomUser = () => ({
   username: faker.internet.userName(),
   birthDate: faker.date.between(birthDateMin, birthDateMax),
   email: faker.internet.email(),
@@ -54,7 +75,7 @@ const userTwo = {
   password: faker.internet.password(),
   _id: ObjectID(),
   emailVerified: true,
-};
+});
 
 const newUser = {
   username: faker.internet.userName(),
@@ -73,10 +94,12 @@ const newUser = {
 };
 
 module.exports = {
-  userOne,
-  userTwo,
-  userOnePassword,
+  authUser,
+  randomUser,
+  authUserPassword,
   newUser,
-  userOneId,
-  userOneToken,
+  authUserId,
+  authUserToken,
+  unverifiedUserPassword,
+  unverifiedUser,
 };

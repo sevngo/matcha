@@ -14,6 +14,7 @@ const {
   ErrorResponse,
   USER_NOT_FOUND,
   EMAIL_NOT_FOUND,
+  IMAGE_NOT_FOUND,
 } = require('../utils/error');
 
 exports.postUser = asyncHandler(async (req, res) => {
@@ -91,7 +92,6 @@ exports.patchUser = asyncHandler(async (req, res, next) => {
     { $set: body },
     { returnOriginal: false }
   );
-  if (!user) return next(new ErrorResponse(404, USER_NOT_FOUND));
   const { usersLiked, usersBlocked } = user;
   const cursor = Users.aggregate().match({ _id });
   if (usersLiked)
@@ -154,7 +154,7 @@ exports.postUserLogin = asyncHandler(async (req, res) => {
 exports.postUserForgot = asyncHandler(async (req, res, next) => {
   const Users = getUsers();
   const user = await Users.findOne({ email: req.body.email });
-  if (!user) return next(new ErrorResponse(400, EMAIL_NOT_FOUND));
+  if (!user) return next(new ErrorResponse(404, EMAIL_NOT_FOUND));
   const { _id, email, username } = user;
   const token = createToken({ _id });
   const url = `${req.headers.origin}/reset/${token}`;
@@ -175,11 +175,7 @@ exports.postUserImage = asyncHandler(async (req, res, next) => {
     .resize({ width: 500, fit: 'outside' })
     .png()
     .toBuffer();
-  const { value: user } = await Users.findOneAndUpdate(
-    { _id },
-    { $set: { image: buffer } }
-  );
-  if (!user) return next(new ErrorResponse(404, USER_NOT_FOUND));
+  await Users.findOneAndUpdate({ _id }, { $set: { image: buffer } });
   const [data] = await Users.aggregate()
     .match({ _id })
     .project(imageProjection)
@@ -193,6 +189,7 @@ exports.getUserImage = asyncHandler(async (req, res, next) => {
   const user = await Users.findOne({ _id: id });
   if (!user) return next(new ErrorResponse(404, USER_NOT_FOUND));
   const buffer = path(['image', 'buffer'])(user);
+  if (!buffer) return next(new ErrorResponse(404, IMAGE_NOT_FOUND));
   res.type('png');
   res.send(buffer);
 });

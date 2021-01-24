@@ -17,7 +17,7 @@ export const getAuthForm = createSelector(
 
 export const getAuthCard = createSelector(
   getAuth,
-  pick(['_id', 'distance', 'username', 'birthDate'])
+  pick(['_id', 'distance', 'username', 'birthDate', 'image'])
 );
 
 export const getAuthUsersBlocked = createSelector(
