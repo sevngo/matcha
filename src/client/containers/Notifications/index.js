@@ -27,13 +27,21 @@ const Notifications = () => {
   const [isDialogOpen, handleDialog] = useState(false);
   return (
     <Fragment>
-      <IconButton color="inherit" onClick={() => handleDialog(true)}>
+      <IconButton
+        data-testid="openNotifications"
+        color="inherit"
+        onClick={() => handleDialog(true)}
+      >
         <Badge badgeContent={notificationsLength} color="error">
           <NotificationsIcon />
         </Badge>
       </IconButton>
       {notificationsLength !== 0 && (
-        <Dialog open={isDialogOpen} onClose={() => handleDialog(false)}>
+        <Dialog
+          data-testid="notifications"
+          open={isDialogOpen}
+          onClose={() => handleDialog(false)}
+        >
           <DialogTitle>
             <FormattedMessage {...messages.title} />
           </DialogTitle>
@@ -56,6 +64,7 @@ const Notifications = () => {
                       />
                     </Typography>
                     <Icon
+                      data-testid={`remove-${notification._id}`}
                       onClick={() => removeNotification(notification._id)}
                       color="inherit"
                       className={classes.ml1}

@@ -29,7 +29,7 @@ const User = ({ id }) => {
   if (isEmpty(user) || userId !== id) return false;
   const birthDate = split('T')(user.birthDate)[0];
   return (
-    <Grid container justify="center" spacing={2}>
+    <Grid container justify="center" spacing={2} data-testid="otherUser">
       <Grow in={true} timeout={200}>
         <Grid item xs={12} sm={6} md={7}>
           <UserCard

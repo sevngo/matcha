@@ -1,5 +1,3 @@
-jest.mock('./client/socketEvents', () =>
-  jest.fn(() => ({
-    emit: jest.fn(),
-  }))
-);
+jest.mock('./client/socketEvents', () => ({
+  emit: jest.fn(),
+}));

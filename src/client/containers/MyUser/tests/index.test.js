@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import TestProvider from '../../../components/TestProvider';
 import Component from '../index';
 
@@ -18,12 +18,12 @@ global.google = {
 };
 
 describe('MyUser', () => {
-  it('should match snapshot', () => {
-    const { container } = render(
+  it('should be able to click on open file', async () => {
+    const { getByTestId } = render(
       <TestProvider>
         <Component />
       </TestProvider>
     );
-    expect(container).toMatchSnapshot();
+    fireEvent.click(getByTestId('openFile'));
   });
 });

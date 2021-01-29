@@ -41,7 +41,7 @@ const MyUser = () => {
                   className={classes.hide}
                 />
                 <Tooltip title={<FormattedMessage {...messages.uploadImage} />}>
-                  <IconButton onClick={openFile}>
+                  <IconButton data-testid="openFile" onClick={openFile}>
                     <CloudUpload color="primary" />
                   </IconButton>
                 </Tooltip>

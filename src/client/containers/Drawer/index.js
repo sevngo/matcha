@@ -10,6 +10,7 @@ const Drawer = ({ isDrawerOpen, toggleDrawer }) => {
   const filter = useSelector(getUsersFilter);
   return (
     <MDrawer
+      data-testid="drawer"
       open={isDrawerOpen}
       onClose={() => toggleDrawer(false)}
       onKeyDown={() => toggleDrawer(false)}

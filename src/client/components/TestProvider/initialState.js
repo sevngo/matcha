@@ -32,6 +32,8 @@ const initialState = {
     ],
     token:
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDA4NDMyYjZlZDkyYzJhYzgzN2VjNmMiLCJpYXQiOjE2MTEyNTc1MjQsImV4cCI6MTYxMTM0MzkyNH0.suG2IyrXwsI3bOcK1jG7XpasHfwQM1Fip3YrUzX01Pc',
+    usersBlocked: [{ _id: '6008432b6ed93c2ac837ec6c' }],
+    usersLiked: [{ _id: '6008432b6ed92c2ac837ec6c' }],
   },
   users: {
     filter: {

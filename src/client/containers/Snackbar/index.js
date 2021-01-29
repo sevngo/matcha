@@ -27,6 +27,7 @@ const MySnackbar = () => {
       open
       autoHideDuration={5000}
       onClose={() => dispatch(closeSnackbar())}
+      datatest-id="snackbar"
     >
       <SnackbarContent
         className={classes[variant]}
@@ -38,6 +39,7 @@ const MySnackbar = () => {
         }
         action={[
           <IconButton
+            data-testid="closeSnackbar"
             key="close"
             color="inherit"
             onClick={() => dispatch(closeSnackbar())}

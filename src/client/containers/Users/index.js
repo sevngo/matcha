@@ -43,7 +43,11 @@ const Users = () => {
   return (
     <Fragment>
       <Paper elevation={1} className={classes.paper}>
-        <IconButton color="inherit" onClick={() => toggleDrawer(true)}>
+        <IconButton
+          data-testid="openDrawer"
+          color="inherit"
+          onClick={() => toggleDrawer(true)}
+        >
           <SortIcon />
           <Typography className={classes.filter}>
             <FormattedMessage {...messages.filter} />

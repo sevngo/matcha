@@ -29,7 +29,7 @@ const Login = () => {
   if (token) return <Redirect to={usersPath} />;
   return (
     <Grow in={true} timeout={200}>
-      <Paper elevation={1} className={classes.paper}>
+      <Paper elevation={1} className={classes.paper} data-testid="loginForm">
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
@@ -43,6 +43,7 @@ const Login = () => {
             variant="body2"
             className={classes.cursorPointer}
             onClick={() => handleDialog(true)}
+            data-testid="forgotPasswordLink"
           >
             <FormattedMessage {...messages.forgotPassword} />
           </MuiLink>
@@ -50,7 +51,11 @@ const Login = () => {
             <FormattedMessage {...messages.redirectToRegister} />
           </Typography>
         </Grid>
-        <Dialog open={isDialogOpen} onClose={() => handleDialog(false)}>
+        <Dialog
+          data-testid="forgotPasswordForm"
+          open={isDialogOpen}
+          onClose={() => handleDialog(false)}
+        >
           <DialogTitle className={classes.dialogTitle}>
             <FormattedMessage {...messages.forgotPassword} />
           </DialogTitle>

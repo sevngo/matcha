@@ -1,5 +1,9 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import {
+  render,
+  fireEvent,
+  waitForElementToBeRemoved,
+} from '@testing-library/react';
 import TestProvider from '../../../components/TestProvider';
 import Account from '../index';
 
@@ -9,15 +13,22 @@ describe('Account', () => {
       <Account />
     </TestProvider>
   );
-  it('should match snapshot', () => {
-    const { container } = render(Component);
-    expect(container).toMatchSnapshot();
-  });
 
-  it('should open and close menu', async () => {
+  it('should open and close menu by clicking logout', async () => {
     const { queryByTestId } = render(Component);
     expect(queryByTestId('accountMenu')).toBeNull();
     fireEvent.click(queryByTestId('accountButton'));
     expect(queryByTestId('accountMenu')).toBeDefined();
+    fireEvent.click(queryByTestId('logout'));
+    await waitForElementToBeRemoved(() => queryByTestId('accountMenu'));
+  });
+
+  it('should open and close menu by clicking logout', async () => {
+    const { queryByTestId } = render(Component);
+    expect(queryByTestId('accountMenu')).toBeNull();
+    fireEvent.click(queryByTestId('accountButton'));
+    expect(queryByTestId('accountMenu')).toBeDefined();
+    fireEvent.click(queryByTestId('goToUsers'));
+    await waitForElementToBeRemoved(() => queryByTestId('accountMenu'));
   });
 });
