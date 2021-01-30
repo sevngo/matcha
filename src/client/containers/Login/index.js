@@ -37,7 +37,7 @@ const Login = () => {
           <FormattedMessage {...messages.login} />
         </Typography>
         <Box mt={3} />
-        <UserForm initialValues={initialValues} submit={login} />
+        <UserForm id="login" initialValues={initialValues} submit={login} />
         <Grid container className={classes.mt2} justify="space-between">
           <MuiLink
             variant="body2"
@@ -65,8 +65,12 @@ const Login = () => {
             </DialogContentText>
             <Box p={3}>
               <UserForm
+                id="forgotPassword"
                 initialValues={initialValuesEmail}
-                submit={forgotPassword}
+                submit={async (values) => {
+                  await forgotPassword(values);
+                  handleDialog(false);
+                }}
               />
             </Box>
           </DialogContent>

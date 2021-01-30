@@ -4,7 +4,7 @@ import TestProvider from '../../../components/TestProvider';
 import Component from '../index';
 
 describe('User', () => {
-  it('should render without crash', () => {
+  it('should render', () => {
     render(
       <TestProvider>
         <Component />

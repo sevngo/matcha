@@ -4,12 +4,11 @@ import TestProvider from '../../../components/TestProvider';
 import Component from '../index';
 
 describe('PointerEvents', () => {
-  it('should match snapshot', () => {
-    const { container } = render(
+  it('should render', () => {
+    render(
       <TestProvider>
         <Component />
       </TestProvider>
     );
-    expect(container).toMatchSnapshot();
   });
 });

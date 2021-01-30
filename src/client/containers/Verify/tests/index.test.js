@@ -4,13 +4,11 @@ import TestProvider from '../../../components/TestProvider';
 import Component from '../index';
 
 describe('Verify', () => {
-  it('should match snapshot', () => {
-    const props = { match: { params: {} } };
-    const { container } = render(
+  it('sould render', () => {
+    render(
       <TestProvider>
-        <Component {...props} />
+        <Component />
       </TestProvider>
     );
-    expect(container).toMatchSnapshot();
   });
 });

@@ -13,13 +13,9 @@ export const useConnect = () => {
     updateUser: useCallback((values) => dispatch(updateUser(compact(values))), [
       dispatch,
     ]),
-    uploadImage: useCallback(
-      (event) => {
-        const image = event.target.files[0];
-        if (image) dispatch(uploadImage(image));
-      },
-      [dispatch]
-    ),
+    uploadImage: useCallback((image) => dispatch(uploadImage(image)), [
+      dispatch,
+    ]),
     likeUser: useCallback((userId) => dispatch(likeUser(userId)), [dispatch]),
   };
 };

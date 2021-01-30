@@ -1,25 +1,18 @@
 import React from 'react';
 import { Drawer as MDrawer, Box } from '@material-ui/core';
-import { useSelector, useDispatch } from 'react-redux';
 import UserForm from '../../components/UserForm';
-import { getUsersFilter } from '../../selectors';
-import { handleFilter } from '../../actions';
+import { useConnect } from './hooks';
 
 const Drawer = ({ isDrawerOpen, toggleDrawer }) => {
-  const dispatch = useDispatch();
-  const filter = useSelector(getUsersFilter);
+  const { handleFilter, filter } = useConnect();
   return (
     <MDrawer
       data-testid="drawer"
       open={isDrawerOpen}
       onClose={() => toggleDrawer(false)}
-      onKeyDown={() => toggleDrawer(false)}
     >
       <Box p={3} width={300}>
-        <UserForm
-          initialValues={filter}
-          submit={(values) => dispatch(handleFilter(values))}
-        />
+        <UserForm id="drawer" initialValues={filter} submit={handleFilter} />
       </Box>
     </MDrawer>
   );

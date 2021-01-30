@@ -24,6 +24,10 @@ const MyUser = () => {
   } = useConnect();
   const intl = useIntl();
   const openFile = useCallback(() => inputEl.current.click(), []);
+  const uploadFile = (event) => {
+    const image = event.target.files[0];
+    if (image) uploadImage(image);
+  };
   const birthDate = split('T')(authForm.birthDate)[0];
   return (
     <Grid container spacing={2}>
@@ -34,9 +38,10 @@ const MyUser = () => {
             actions={
               <Fragment>
                 <input
+                  data-testid="uploadFile"
                   ref={inputEl}
                   type="file"
-                  onChange={uploadImage}
+                  onChange={uploadFile}
                   accept="image/png, image/jpeg"
                   className={classes.hide}
                 />

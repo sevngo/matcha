@@ -21,7 +21,13 @@ import { GENDER_OPTIONS, SORT_BY_OPTIONS } from './constants';
 import messages from './messages';
 import validate from './validate';
 
-const UserForm = ({ initialValues, disabled, submit, newPasswordLabel }) => {
+const UserForm = ({
+  initialValues,
+  disabled,
+  submit,
+  newPasswordLabel,
+  id,
+}) => {
   const hasInitialValue = has(__, initialValues);
   const {
     handleSubmit,
@@ -57,6 +63,7 @@ const UserForm = ({ initialValues, disabled, submit, newPasswordLabel }) => {
         {hasInitialValue('username') && (
           <Grid item>
             <Input
+              inputProps={{ 'data-testid': 'usernameInput' }}
               name="username"
               autoComplete="username"
               onChange={handleChange}
@@ -72,6 +79,7 @@ const UserForm = ({ initialValues, disabled, submit, newPasswordLabel }) => {
         {hasInitialValue('password') && (
           <Grid item>
             <Input
+              inputProps={{ 'data-testid': 'passwordInput' }}
               name="password"
               autoComplete="password"
               label={<FormattedMessage {...passwordMessage} />}
@@ -91,6 +99,7 @@ const UserForm = ({ initialValues, disabled, submit, newPasswordLabel }) => {
         {hasInitialValue('email') && (
           <Grid item>
             <Input
+              inputProps={{ 'data-testid': 'emailInput' }}
               name="email"
               label={<FormattedMessage {...messages.email} />}
               onChange={handleChange}
@@ -202,6 +211,7 @@ const UserForm = ({ initialValues, disabled, submit, newPasswordLabel }) => {
         {!disabled && (
           <Grid item>
             <Button
+              data-testid={`submitForm-${id}`}
               type="submit"
               variant="contained"
               color="primary"

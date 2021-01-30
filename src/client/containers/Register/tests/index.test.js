@@ -18,12 +18,11 @@ global.google = {
 };
 
 describe('Register', () => {
-  it('should match snapshot', () => {
-    const { container } = render(
+  it('should render', () => {
+    render(
       <TestProvider>
         <Component />
       </TestProvider>
     );
-    expect(container).toMatchSnapshot();
   });
 });
