@@ -29,8 +29,10 @@ const Users = () => {
   useEffect(() => {
     dispatch(loadUsers());
   }, [dispatch, filter]);
-  const { limit } = filter;
   const [page, setPage] = useState(0);
+  const [isDrawerOpen, toggleDrawer] = useState(false);
+  if (!users[0]) return false;
+  const { limit } = filter;
   const handleChangePage = (event, page) => {
     dispatch(handleFilter({ skip: limit * page }));
     setPage(page);
@@ -39,10 +41,9 @@ const Users = () => {
     dispatch(handleFilter({ limit: event.target.value, skip: 0 }));
     setPage(0);
   };
-  const [isDrawerOpen, toggleDrawer] = useState(false);
   return (
     <Fragment>
-      <Paper elevation={1} className={classes.paper}>
+      <Paper elevation={1} className={classes.paper} data-testid="users">
         <IconButton
           data-testid="openDrawer"
           color="inherit"

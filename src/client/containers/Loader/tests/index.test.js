@@ -6,7 +6,7 @@ import Component from '../index';
 describe('Loader', () => {
   it('should render', () => {
     render(
-      <TestProvider>
+      <TestProvider initialState={{ loading: true }}>
         <Component />
       </TestProvider>
     );

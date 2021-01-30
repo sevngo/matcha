@@ -27,7 +27,7 @@ const MySnackbar = () => {
       open
       autoHideDuration={5000}
       onClose={() => dispatch(closeSnackbar())}
-      datatest-id="snackbar"
+      data-testid="snackbar"
     >
       <SnackbarContent
         className={classes[variant]}

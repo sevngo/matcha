@@ -13,17 +13,8 @@ import Component from '..';
 jest.mock('axios');
 
 describe('Login', () => {
-  it('should not show login form', () => {
-    const { queryByTestId } = render(
-      <TestProvider>
-        <Component />
-      </TestProvider>
-    );
-    expect(queryByTestId('loginForm')).toBeNull();
-  });
-
   it('should fill login form then confirm', async () => {
-    const { getByTestId } = render(
+    const { getByTestId, queryByTestId } = render(
       <TestProvider initialState={{}}>
         <Component />
       </TestProvider>
@@ -35,19 +26,21 @@ describe('Login', () => {
     fireEvent.change(getByTestId('usernameInput'), {
       target: { value: username },
     });
-
     fireEvent.change(getByTestId('passwordInput'), {
       target: { value: password },
     });
+    axios.post.mockResolvedValue({ data: { token: 'token' } });
     await act(async () => {
       await waitFor(() => !getByTestId('submitForm-login').disabled);
       fireEvent.click(getByTestId('submitForm-login'));
-      await waitFor(() => expect(axios.post).toHaveBeenCalledTimes(1));
+      await waitFor(() =>
+        expect(axios.post).toHaveBeenCalledWith('/api/users/login', {
+          password,
+          username,
+        })
+      );
     });
-    expect(axios.post).toHaveBeenCalledWith('/api/users/login', {
-      password,
-      username,
-    });
+    expect(queryByTestId('loginForm')).toBeNull();
   });
 
   it('should open forgot password form then close it on outside click', async () => {
@@ -59,7 +52,7 @@ describe('Login', () => {
 
     expect(queryByTestId('forgotPasswordForm')).toBeNull();
     fireEvent.click(queryByTestId('forgotPasswordLink'));
-    await waitFor(() => getByTestId('forgotPasswordForm'));
+    getByTestId('forgotPasswordForm');
     fireEvent.click(getByRole('presentation').firstChild);
     await waitForElementToBeRemoved(queryByTestId('forgotPasswordForm'));
   });
@@ -74,7 +67,7 @@ describe('Login', () => {
 
     expect(queryByTestId('forgotPasswordForm')).toBeNull();
     fireEvent.click(queryByTestId('forgotPasswordLink'));
-    await waitFor(() => getByTestId('forgotPasswordForm'));
+    getByTestId('forgotPasswordForm');
     fireEvent.change(getByTestId('emailInput'), {
       target: { value: email },
     });

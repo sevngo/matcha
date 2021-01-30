@@ -25,7 +25,11 @@ const UserCard = ({ user, hasDistance, actions }) => {
   return (
     <Card className={classes.root} elevation={1}>
       <CardActionArea component={Link} to={userPath(user._id)}>
-        <CardMedia className={classes.media} image={imageSrc} />
+        <CardMedia
+          data-testid={image ? 'imageAvailable' : 'imageUnavailable'}
+          className={classes.media}
+          image={imageSrc}
+        />
         <CardContent>
           <Grid container>
             <Typography gutterBottom={hasDistance} variant="h5">

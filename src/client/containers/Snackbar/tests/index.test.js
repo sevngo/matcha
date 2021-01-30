@@ -14,11 +14,11 @@ describe('Snackbar', () => {
   });
   it('should show then close snackbar', () => {
     const { queryByTestId, getByTestId } = render(
-      <TestProvider>
+      <TestProvider initialState={{ snackbar: { variant: 'success' } }}>
         <Component />
       </TestProvider>
     );
-    expect(queryByTestId('snackbar')).toBeDefined();
+    getByTestId('snackbar');
     fireEvent.click(getByTestId('closeSnackbar'));
     expect(queryByTestId('snackbar')).toBeNull();
   });

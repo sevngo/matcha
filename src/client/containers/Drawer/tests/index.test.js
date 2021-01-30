@@ -4,10 +4,22 @@ import TestProvider from '../../../components/TestProvider';
 import Component from '../index';
 
 describe('Drawer', () => {
+  const initialState = {
+    users: {
+      filter: {
+        gender: 'male',
+        maxDistance: 20000,
+        ageRange: [18, 50],
+        sortBy: 'distance:asc',
+        limit: 10,
+        skip: 0,
+      },
+    },
+  };
   it('should close drawer on oustside click', async () => {
     const toggleDrawer = jest.fn();
     const { queryByTestId, getByRole } = render(
-      <TestProvider>
+      <TestProvider initialState={initialState}>
         <Component isDrawerOpen toggleDrawer={toggleDrawer} />
       </TestProvider>
     );
@@ -19,7 +31,7 @@ describe('Drawer', () => {
 
   it('should handle filter', async () => {
     const { getByRole, getByTestId } = render(
-      <TestProvider>
+      <TestProvider initialState={initialState}>
         <Component isDrawerOpen />
       </TestProvider>
     );
