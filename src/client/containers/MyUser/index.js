@@ -70,6 +70,7 @@ const MyUser = () => {
         <Grid item xs={12} sm={6} md={5}>
           <Paper elevation={1} className={classes.p3}>
             <UserForm
+              id="myUser"
               initialValues={{
                 ...authForm,
                 birthDate,

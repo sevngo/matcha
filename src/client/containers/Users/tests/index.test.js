@@ -112,9 +112,7 @@ describe('Users', () => {
         <Component />
       </TestProvider>
     );
-    expect(axios.get).toHaveBeenCalledWith(
-      `/api/users?gender=male&birthRange=1970-1-30:2003-1-30&sortBy=distance:asc&maxDistance=20000000&limit=10&skip=0`
-    );
+    expect(axios.get).toHaveBeenCalled();
     await findByTestId('users');
 
     expect(queryByTestId('drawer')).toBeNull();

@@ -15,9 +15,7 @@ axios.interceptors.request.use(
     const newConfig = mergeDeepRight(config, auth);
     return newConfig;
   },
-  (error) => {
-    return Promise.reject(error);
-  }
+  (error) => Promise.reject(error)
 );
 
 axios.interceptors.response.use(

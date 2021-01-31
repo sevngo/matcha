@@ -33,12 +33,12 @@ describe('MyUser', () => {
         type: 'Point',
         coordinates: [2.5654428, 48.955157299999996],
       },
-      token:
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDA4NDMyYjZlZDkyYzJhYzgzN2VjNmMiLCJpYXQiOjE2MTEyNTc1MjQsImV4cCI6MTYxMTM0MzkyNH0.suG2IyrXwsI3bOcK1jG7XpasHfwQM1Fip3YrUzX01Pc',
+      token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9',
       usersBlocked: [{ _id: '6008432b6ed93c2ac837ec6c' }],
       usersLiked: [{ _id: '6008432b6ed92c2ac837ec6c' }],
     },
   };
+
   it('should be able to click on open file', async () => {
     const { getByTestId } = render(
       <TestProvider initialState={initialState}>
@@ -55,7 +55,7 @@ describe('MyUser', () => {
       </TestProvider>
     );
     getByTestId('imageUnavailable');
-    axios.post.mockResolvedValue({ data: 'a' });
+    axios.post.mockResolvedValue({ data: { image: 'a' } });
     const file = new File(['(⌐□_□)'], 'chucknorris.png', { type: 'image/png' });
     fireEvent.change(getByTestId('uploadFile'), { target: { files: [file] } });
     await waitFor(() =>
@@ -64,6 +64,36 @@ describe('MyUser', () => {
         expect.any(FormData)
       )
     );
-    findByTestId('imageAvailable');
+    await findByTestId('imageAvailable');
+  });
+
+  it('should update my user', async () => {
+    const { getByTestId, getByRole } = render(
+      <TestProvider initialState={initialState}>
+        <Component />
+      </TestProvider>
+    );
+    fireEvent.click(getByRole('radio', { name: 'Male' }));
+    axios.patch.mockResolvedValue({ data: { gender: 'male' } });
+    fireEvent.click(getByTestId('submitForm-myUser'));
+
+    await waitFor(() =>
+      expect(axios.patch).toHaveBeenCalledWith(
+        '/api/users',
+        {
+          address: {
+            coordinates: [2.5654428, 48.955157299999996],
+            name: '5 Allée Claude Chastillon, 93290 Tremblay-en-France, France',
+            type: 'Point',
+          },
+          birthDate: '1991-01-20',
+          email: 'asdasd@asdasd.com',
+          gender: 'male',
+          username: 'asdasd',
+        },
+        { headers: { Authorization: 'Bearer undefined' } }
+      )
+    );
+    await waitFor(() => getByTestId('submitForm-myUser').disabled);
   });
 });
