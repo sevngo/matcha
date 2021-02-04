@@ -1,6 +1,6 @@
-const clientIo = require('socket.io-client');
-const http = require('http').createServer();
-const serverIo = require('socket.io')(http);
+const ioClient = require('socket.io-client');
+const http = require('http');
+const io = require('socket.io');
 const socketEvents = require('..');
 
 const ioOptions = {
@@ -9,27 +9,31 @@ const ioOptions = {
   reconnection: false,
 };
 
-let sender;
+let socketClient;
+let httpServer;
+let ioServer;
 
 jest.mock('../../database', () => ({
   getUsers: () => ({ findOneAndUpdate: () => ({}) }),
 }));
 
 beforeAll((done) => {
-  http.listen(0, done);
+  httpServer = http.createServer();
+  ioServer = io(httpServer);
+  httpServer.listen(0, done);
 });
 
 afterAll((done) => {
-  sender.disconnect();
-  http.close(done);
+  socketClient.disconnect();
+  httpServer.close(done);
 });
 
 describe('Websocket', () => {
   it('should connect client to server socket io', (done) => {
-    const { port } = http.address();
-    serverIo.on('connect', socketEvents);
+    const { port } = httpServer.address();
+    ioServer.on('connect', socketEvents);
 
-    sender = clientIo(`http://localhost:${port}`, ioOptions);
-    sender.on('connect', done);
+    socketClient = ioClient(`http://localhost:${port}`, ioOptions);
+    socketClient.on('connect', done);
   });
 });
