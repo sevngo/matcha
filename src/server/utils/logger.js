@@ -1,9 +1,12 @@
 import pino from 'pino-http';
-import { PRODUCTION, NODE_ENV } from './env.js';
 
 const logger = pino({
   prettyPrint: {
-    levelFirst: NODE_ENV !== PRODUCTION,
+    levelFirst: true,
+    translateTime: true,
+    messageKey: 'msg',
+    messageFormat: '{msg} {res.statusCode} {req.method} {req.url}',
+    ignore: 'res,req,pid,hostname',
   },
 });
 

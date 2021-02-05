@@ -9,7 +9,7 @@ import socketEvents from './websocket/index.js';
   try {
     await connectDb();
     const server = await app.listen(SERVER_PORT, () =>
-      pino.logger.info(`Server listening on port ${SERVER_PORT}`)
+      pino.logger.info(`server listening on port ${SERVER_PORT}`)
     );
     const io = new socketIo(server, {
       cors: {

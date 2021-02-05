@@ -13,7 +13,8 @@ export const connectDb = async () => {
     useUnifiedTopology: true,
   });
   db = client.db(process.env.DATABASE_NAME);
-  if (process.env.NODE_ENV !== TEST) pino.logger.info('Database connected'); // eslint-disable-line no-console
+  if (process.env.NODE_ENV !== TEST)
+    pino.logger.info(`database connected to ${process.env.MONGODB_URI}`); // eslint-disable-line no-console
   return usersModel(db);
 };
 
