@@ -1,10 +1,12 @@
+import { lazy } from 'react';
 import { find, prop } from 'ramda';
-import Users from '../containers/Users';
-import User from '../containers/User';
-import Reset from '../containers/Reset';
-import Verify from '../containers/Verify';
-import Login from '../containers/Login';
-import Register from '../containers/Register';
+
+const Users = lazy(() => import('../containers/Users'));
+const User = lazy(() => import('../containers/User'));
+const Reset = lazy(() => import('../containers/Reset'));
+const Verify = lazy(() => import('../containers/Verify'));
+const Login = lazy(() => import('../containers/Login'));
+const Register = lazy(() => import('../containers/Register'));
 
 export const usersPath = '/';
 export const userPath = (id) => `/user/${id}`;

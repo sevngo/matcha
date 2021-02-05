@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { map } from 'ramda';
 import { Box } from '@material-ui/core';
@@ -15,16 +15,18 @@ const App = () => {
     <Box className={classes.root}>
       <Header />
       <Loader />
-      <Box p={3}>
-        <Switch>
-          {map((route) => {
-            const { isPrivate, path } = route;
-            if (isPrivate) return <PrivateRoute key={path} {...route} />;
-            return <Route key={path} {...route} />;
-          })(routes)}
-          <Redirect to={defaultRoute.path} />
-        </Switch>
-      </Box>
+      <Suspense fallback={<Loader />}>
+        <Box p={3}>
+          <Switch>
+            {map((route) => {
+              const { isPrivate, path } = route;
+              if (isPrivate) return <PrivateRoute key={path} {...route} />;
+              return <Route key={path} {...route} />;
+            })(routes)}
+            <Redirect to={defaultRoute.path} />
+          </Switch>
+        </Box>
+      </Suspense>
       <Snackbar />
     </Box>
   );
