@@ -1,13 +1,13 @@
-const { is } = require('ramda');
+import { is } from 'ramda';
 
-exports.match = (key, value) => {
+export const match = (key, value) => {
   if (value)
     return {
       $match: { [key]: is(Array)(value) ? { $all: value } : value },
     };
 };
 
-exports.matchIn = (key, value) => {
+export const matchIn = (key, value) => {
   if (value)
     return {
       $match: { [key]: { $in: value } },

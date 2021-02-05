@@ -1,7 +1,16 @@
-const { Router } = require('express');
-const auth = require('../middlewares/auth');
-const controllers = require('./controllers');
-const sanatize = require('../middlewares/sanatize');
+import { Router } from 'express';
+import auth from '../middlewares/auth.js';
+import {
+  getUserController,
+  getUserImageController,
+  getUsersController,
+  patchUserController,
+  postUserController,
+  postUserForgotController,
+  postUserImageController,
+  postUserLoginController,
+} from './controllers.js';
+import sanatize from '../middlewares/sanatize.js';
 
 const router = new Router();
 
@@ -11,24 +20,24 @@ router.post(
   sanatize.toDate('birthDate'),
   sanatize.objectIds('usersLiked'),
   sanatize.objectIds('usersBlocked'),
-  controllers.postUser
+  postUserController
 );
 
 router.get(
   '/',
+  auth.authenticate,
   sanatize.toInt('maxDistance'),
   sanatize.toInt('skip'),
   sanatize.toInt('limit'),
   sanatize.dateRange('birthRange'),
-  auth.authenticate,
-  controllers.getUsers
+  getUsersController
 );
 
 router.get(
   '/:id',
-  sanatize.objectId('id'),
   auth.authenticate,
-  controllers.getUser
+  sanatize.objectId('id'),
+  getUserController
 );
 
 router.patch(
@@ -38,25 +47,25 @@ router.patch(
   sanatize.toDate('birthDate'),
   sanatize.objectIds('usersLiked'),
   sanatize.objectIds('usersBlocked'),
-  controllers.patchUser
+  patchUserController
 );
 
 router.post(
   '/login',
   auth.generateAuthToken,
   auth.emailVerified,
-  controllers.postUserLogin
+  postUserLoginController
 );
 
-router.post('/forgot', controllers.postUserForgot);
+router.post('/forgot', postUserForgotController);
 
 router.post(
   '/image',
   auth.authenticate,
   sanatize.image.single('image'),
-  controllers.postUserImage
+  postUserImageController
 );
 
-router.get('/:id/image', sanatize.objectId('id'), controllers.getUserImage);
+router.get('/:id/image', sanatize.objectId('id'), getUserImageController);
 
-module.exports = router;
+export default router;

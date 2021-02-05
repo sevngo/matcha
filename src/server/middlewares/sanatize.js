@@ -1,43 +1,43 @@
-const { check } = require('express-validator');
-const { map, all, split } = require('ramda');
-const bcrypt = require('bcryptjs');
-const { ObjectID } = require('mongodb');
-const multer = require('multer');
-const { ErrorResponse, INVALID_IMAGE_FORMAT } = require('../utils/error');
+import { check } from 'express-validator';
+import { map, all, split } from 'ramda';
+import bcrypt from 'bcryptjs';
+import mongodb from 'mongodb';
+import multer from 'multer';
+import { ErrorResponse, INVALID_IMAGE_FORMAT } from '../utils/error.js';
 
-exports.toDate = (field) => check(field).optional().toDate();
+const { ObjectID } = mongodb;
 
-exports.hash = (field) =>
-  check(field)
-    .isString()
-    .bail()
-    .customSanitizer((value) => bcrypt.hashSync(value, 8));
+const sanatize = {
+  toDate: (field) => check(field).optional().toDate(),
+  hash: (field) =>
+    check(field)
+      .isString()
+      .bail()
+      .customSanitizer((value) => bcrypt.hashSync(value, 8)),
+  objectIds: (field) =>
+    check(field)
+      .custom(all(ObjectID.isValid))
+      .bail()
+      .customSanitizer(map(ObjectID)),
+  objectId: (field) =>
+    check(field).custom(ObjectID.isValid).bail().customSanitizer(ObjectID),
+  toInt: (field) => check(field).optional().toInt(),
+  dateRange: (field) =>
+    check(field)
+      .isString()
+      .bail()
+      .customSanitizer(split(':'))
+      .customSanitizer(map((value) => new Date(value))),
+  image: multer({
+    limits: {
+      fileSize: 1000000,
+    },
+    fileFilter(req, file, cb) {
+      if (!file.originalname.match(/\.(png|jpg|jpeg)$/))
+        return cb(new ErrorResponse(400, INVALID_IMAGE_FORMAT));
+      cb(undefined, true);
+    },
+  }),
+};
 
-exports.objectIds = (field) =>
-  check(field)
-    .custom(all(ObjectID.isValid))
-    .bail()
-    .customSanitizer(map(ObjectID));
-
-exports.objectId = (field) =>
-  check(field).custom(ObjectID.isValid).bail().customSanitizer(ObjectID);
-
-exports.toInt = (field) => check(field).optional().toInt();
-
-exports.dateRange = (field) =>
-  check(field)
-    .isString()
-    .bail()
-    .customSanitizer(split(':'))
-    .customSanitizer(map((value) => new Date(value)));
-
-exports.image = multer({
-  limits: {
-    fileSize: 1000000,
-  },
-  fileFilter(req, file, cb) {
-    if (!file.originalname.match(/\.(png|jpg|jpeg)$/))
-      return cb(new ErrorResponse(400, INVALID_IMAGE_FORMAT));
-    cb(undefined, true);
-  },
-});
+export default sanatize;

@@ -1,7 +1,9 @@
-const faker = require('faker');
-const bcrypt = require('bcryptjs');
-const { ObjectID } = require('mongodb');
-const { createToken } = require('../../../utils/functions');
+import faker from 'faker';
+import bcrypt from 'bcryptjs';
+import mongodb from 'mongodb';
+import { createToken } from '../../../utils/functions';
+
+const { ObjectID } = mongodb;
 
 const genders = ['female', 'male'];
 const today = new Date();
@@ -16,11 +18,11 @@ const birthDateMax = new Date(
   today.getDate()
 );
 
-const authUserPassword = faker.internet.password();
-const authUserId = faker.random.alphaNumeric(12);
-const authUserToken = createToken({ _id: authUserId });
+export const authUserPassword = faker.internet.password();
+export const authUserId = faker.random.alphaNumeric(12);
+export const authUserToken = createToken({ _id: authUserId });
 
-const authUser = {
+export const authUser = {
   username: faker.internet.userName(),
   birthDate: faker.date.between(birthDateMin, birthDateMax),
   email: faker.internet.email(),
@@ -40,9 +42,9 @@ const authUser = {
   usersLiked: [ObjectID()],
 };
 
-const unverifiedUserPassword = faker.internet.password();
+export const unverifiedUserPassword = faker.internet.password();
 
-const unverifiedUser = {
+export const unverifiedUser = {
   username: faker.internet.userName(),
   birthDate: faker.date.between(birthDateMin, birthDateMax),
   email: faker.internet.email(),
@@ -59,7 +61,7 @@ const unverifiedUser = {
   _id: ObjectID(),
 };
 
-const randomUser = () => ({
+export const randomUser = () => ({
   username: faker.internet.userName(),
   birthDate: faker.date.between(birthDateMin, birthDateMax),
   email: faker.internet.email(),
@@ -77,7 +79,7 @@ const randomUser = () => ({
   emailVerified: true,
 });
 
-const newUser = {
+export const newUser = {
   username: faker.internet.userName(),
   birthDate: faker.date.past(),
   email: faker.internet.email(),
@@ -91,15 +93,4 @@ const newUser = {
     ],
   },
   password: faker.internet.password(),
-};
-
-module.exports = {
-  authUser,
-  randomUser,
-  authUserPassword,
-  newUser,
-  authUserId,
-  authUserToken,
-  unverifiedUserPassword,
-  unverifiedUser,
 };

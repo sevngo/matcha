@@ -1,23 +1,23 @@
-const { split, path } = require('ramda');
-const sharp = require('sharp');
-const { match, matchIn } = require('../utils/stages');
-const {
+import { split, path } from 'ramda';
+import sharp from 'sharp';
+import { match, matchIn } from '../utils/stages.js';
+import {
   userProjection,
   authProjection,
   imageProjection,
-} = require('./projections');
-const { getUsers } = require('../database');
-const { sendEmail } = require('../emails');
-const { asyncHandler } = require('../middlewares/error');
-const { createToken } = require('../utils/functions');
-const {
+} from './projections.js';
+import { getUsers } from '../database.js';
+import sendEmail from '../emails.js';
+import { asyncHandler } from '../middlewares/error.js';
+import { createToken } from '../utils/functions.js';
+import {
   ErrorResponse,
   USER_NOT_FOUND,
   EMAIL_NOT_FOUND,
   IMAGE_NOT_FOUND,
-} = require('../utils/error');
+} from '../utils/error.js';
 
-exports.postUser = asyncHandler(async (req, res) => {
+export const postUserController = asyncHandler(async (req, res) => {
   const Users = getUsers();
   const {
     ops: [user],
@@ -33,7 +33,7 @@ exports.postUser = asyncHandler(async (req, res) => {
   res.status(201).send();
 });
 
-exports.getUsers = asyncHandler(async (req, res) => {
+export const getUsersController = asyncHandler(async (req, res) => {
   const {
     query: { gender, birthRange, limit, skip, sortBy, maxDistance },
     auth: {
@@ -71,7 +71,7 @@ exports.getUsers = asyncHandler(async (req, res) => {
   res.status(200).send({ data, total });
 });
 
-exports.getUser = asyncHandler(async (req, res, next) => {
+export const getUserController = asyncHandler(async (req, res, next) => {
   const Users = getUsers();
   const [data] = await Users.aggregate()
     .match({ _id: req.params.id })
@@ -81,7 +81,7 @@ exports.getUser = asyncHandler(async (req, res, next) => {
   res.send(data);
 });
 
-exports.patchUser = asyncHandler(async (req, res, next) => {
+export const patchUserController = asyncHandler(async (req, res, next) => {
   const {
     auth: { _id },
     body,
@@ -119,7 +119,7 @@ exports.patchUser = asyncHandler(async (req, res, next) => {
   res.send(data);
 });
 
-exports.postUserLogin = asyncHandler(async (req, res) => {
+export const postUserLoginController = asyncHandler(async (req, res) => {
   const {
     auth: { _id, usersLiked, usersBlocked },
     token,
@@ -151,7 +151,7 @@ exports.postUserLogin = asyncHandler(async (req, res) => {
   res.send({ ...data, token });
 });
 
-exports.postUserForgot = asyncHandler(async (req, res, next) => {
+export const postUserForgotController = asyncHandler(async (req, res, next) => {
   const Users = getUsers();
   const user = await Users.findOne({ email: req.body.email });
   if (!user) return next(new ErrorResponse(404, EMAIL_NOT_FOUND));
@@ -166,7 +166,7 @@ exports.postUserForgot = asyncHandler(async (req, res, next) => {
   res.status(200).send();
 });
 
-exports.postUserImage = asyncHandler(async (req, res, next) => {
+export const postUserImageController = asyncHandler(async (req, res, next) => {
   const {
     auth: { _id },
   } = req;
@@ -183,7 +183,7 @@ exports.postUserImage = asyncHandler(async (req, res, next) => {
   res.send(data);
 });
 
-exports.getUserImage = asyncHandler(async (req, res, next) => {
+export const getUserImageController = asyncHandler(async (req, res, next) => {
   const Users = getUsers();
   const { id } = req.params;
   const user = await Users.findOne({ _id: id });

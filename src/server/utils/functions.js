@@ -1,19 +1,22 @@
-const { reduce } = require('ramda');
-const jwt = require('jsonwebtoken');
-const { ObjectID } = require('mongodb');
-const { JWT_SECRET } = require('./env');
+import { reduce } from 'ramda';
+import jwt from 'jsonwebtoken';
+import mongodb from 'mongodb';
+import { JWT_SECRET } from './env.js';
 
-exports.getIds = reduce((acc, object) => [...acc, object._id], []);
+export const getIds = reduce((acc, object) => [...acc, object._id], []);
 
-exports.getSocketIds = reduce((acc, object) => [...acc, object.socketId], []);
+export const getSocketIds = reduce(
+  (acc, object) => [...acc, object.socketId],
+  []
+);
 
-exports.createNotification = (user) => ({
+export const createNotification = (user) => ({
   user,
   createdAt: new Date(),
-  _id: ObjectID(),
+  _id: mongodb.ObjectID(),
 });
 
-exports.createToken = (value) =>
+export const createToken = (value) =>
   jwt.sign(value, JWT_SECRET, { expiresIn: '1d' });
 
-exports.verifyToken = (token) => jwt.verify(token, JWT_SECRET);
+export const verifyToken = (token) => jwt.verify(token, JWT_SECRET);

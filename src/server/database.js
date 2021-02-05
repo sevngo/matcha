@@ -1,22 +1,22 @@
-const { MongoClient } = require('mongodb');
-const { usersModel } = require('./users/model');
-const { MONGODB_URI, DATABASE_NAME, NODE_ENV, TEST } = require('./utils/env');
-const { USERS } = require('./users/model');
-const pino = require('./utils/logger');
+import mongodb from 'mongodb';
+import { usersModel } from './users/model.js';
+import { TEST } from './utils/env.js';
+import { USERS } from './users/model.js';
+import pino from './utils/logger.js';
 
 let db;
 let client;
 
-exports.connectDb = async () => {
-  client = await MongoClient.connect(MONGODB_URI, {
+export const connectDb = async () => {
+  client = await mongodb.MongoClient.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
-  db = client.db(DATABASE_NAME);
-  if (NODE_ENV !== TEST) pino.logger.info('Database connected'); // eslint-disable-line no-console
+  db = client.db(process.env.DATABASE_NAME);
+  if (process.env.NODE_ENV !== TEST) pino.logger.info('Database connected'); // eslint-disable-line no-console
   return usersModel(db);
 };
 
-exports.disconnectDb = () => client.close();
+export const disconnectDb = () => client.close();
 
-exports.getUsers = () => db.collection(USERS);
+export const getUsers = () => db.collection(USERS);

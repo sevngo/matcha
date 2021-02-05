@@ -1,9 +1,9 @@
-const socketIo = require('socket.io');
-const { connectDb } = require('./database');
-const app = require('./app');
-const { SERVER_PORT } = require('./utils/env');
-const pino = require('./utils/logger');
-const socketEvents = require('./websocket');
+import { Server as socketIo } from 'socket.io';
+import { connectDb } from './database.js';
+import app from './app.js';
+import pino from './utils/logger.js';
+import { SERVER_PORT } from './utils/env.js';
+import socketEvents from './websocket/index.js';
 
 (async () => {
   try {
@@ -11,7 +11,7 @@ const socketEvents = require('./websocket');
     const server = await app.listen(SERVER_PORT, () =>
       pino.logger.info(`Server listening on port ${SERVER_PORT}`)
     );
-    const io = socketIo(server, {
+    const io = new socketIo(server, {
       cors: {
         origin: `http://localhost:3000`,
         methods: ['GET', 'POST'],

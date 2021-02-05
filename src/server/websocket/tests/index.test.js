@@ -1,7 +1,7 @@
-const ioClient = require('socket.io-client');
-const http = require('http');
-const io = require('socket.io');
-const socketEvents = require('..');
+import ioClient from 'socket.io-client';
+import http from 'http';
+import { Server as io } from 'socket.io';
+import socketEvents from '..';
 
 const ioOptions = {
   transports: ['websocket'],
@@ -19,7 +19,7 @@ jest.mock('../../database', () => ({
 
 beforeAll((done) => {
   httpServer = http.createServer();
-  ioServer = io(httpServer);
+  ioServer = new io(httpServer);
   httpServer.listen(0, done);
 });
 

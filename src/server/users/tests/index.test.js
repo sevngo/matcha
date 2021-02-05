@@ -1,11 +1,11 @@
 /* eslint-env node, jest */
-const request = require('supertest');
-const faker = require('faker');
-const path = require('path');
-const { has } = require('ramda');
-const app = require('../../app');
-const { connectDb, disconnectDb, getUsers } = require('../../database');
-const {
+import request from 'supertest';
+import faker from 'faker';
+import path from 'path';
+import { has } from 'ramda';
+import app from '../../app';
+import { connectDb, disconnectDb, getUsers } from '../../database';
+import {
   newUser,
   authUserPassword,
   authUserId,
@@ -14,8 +14,8 @@ const {
   authUserToken,
   unverifiedUserPassword,
   unverifiedUser,
-} = require('./fixtures/db');
-const {
+} from './fixtures/db';
+import {
   IMAGE_NOT_FOUND,
   EMAIL_NOT_FOUND,
   IDENTIFICATION_FAILED,
@@ -23,9 +23,9 @@ const {
   UNVERIFIED_EMAIL,
   UNAUTHORIZED,
   INVALID_IMAGE_FORMAT,
-} = require('../../utils/error');
-const { createToken } = require('../../utils/functions');
-const { ObjectID } = require('mongodb');
+} from '../../utils/error';
+import { createToken } from '../../utils/functions';
+import mongodb from 'mongodb';
 
 jest.mock('@sendgrid/mail', () => ({
   setApiKey: () => {},
@@ -118,7 +118,7 @@ describe('/api/users', () => {
       expect(body.message).toEqual(UNAUTHORIZED);
     });
     test('should 401 token no user', async () => {
-      const randomToken = createToken({ _id: ObjectID() });
+      const randomToken = createToken({ _id: mongodb.ObjectID() });
       const { body } = await request(app)
         .get('/api/users')
         .set('Authorization', `Bearer ${randomToken}`)

@@ -1,5 +1,5 @@
-const pino = require('pino-http');
-const { NODE_ENV, PRODUCTION } = require('./env');
+import pino from 'pino-http';
+import { PRODUCTION, NODE_ENV } from './env.js';
 
 const logger = pino({
   prettyPrint: {
@@ -7,4 +7,4 @@ const logger = pino({
   },
 });
 
-module.exports = logger;
+export default logger;

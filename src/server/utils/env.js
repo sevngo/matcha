@@ -1,16 +1,16 @@
-const path = require('path');
+import dotenv from 'dotenv';
 
-const PRODUCTION = 'production';
-const DEVELOPMENT = 'development';
-const TEST = 'test';
+export const PRODUCTION = 'production';
+export const DEVELOPMENT = 'development';
+export const TEST = 'test';
 
-const { NODE_ENV } = process.env;
+export const { NODE_ENV } = process.env;
 
-require('dotenv').config({
-  path: path.resolve(__dirname, '..', '..', '..', `.env.${NODE_ENV}`),
+dotenv.config({
+  path: `.env.${NODE_ENV}`,
 });
 
-const {
+export const {
   JWT_SECRET = 'defaultSecret',
   MONGODB_URI,
   DATABASE_NAME,
@@ -19,15 +19,3 @@ const {
 } = process.env;
 
 // default values for testing environment
-
-module.exports = {
-  DEVELOPMENT,
-  PRODUCTION,
-  TEST,
-  JWT_SECRET,
-  NODE_ENV,
-  MONGODB_URI,
-  DATABASE_NAME,
-  SERVER_PORT,
-  SENDGRID_API_KEY,
-};

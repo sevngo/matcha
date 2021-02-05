@@ -1,23 +1,25 @@
-const { ObjectID } = require('mongodb');
-const { map } = require('ramda');
-const {
+import mongodb from 'mongodb';
+import map from 'ramda';
+import {
   getIds,
   createNotification,
   getSocketIds,
-} = require('../utils/functions');
-const { getUsers } = require('../database');
+} from '../utils/functions.js';
+import { getUsers } from '../database.js';
 
-exports.addUserSocketId = async (_id, socketId) => {
+const { ObjectID } = mongodb;
+
+export const addUserSocketId = async (_id, socketId) => {
   const Users = getUsers();
   await Users.findOneAndUpdate({ _id: ObjectID(_id) }, { $set: { socketId } });
 };
 
-exports.removeUserSocketId = async (socketId) => {
+export const removeUserSocketId = async (socketId) => {
   const Users = getUsers();
   await Users.findOneAndUpdate({ socketId }, { $unset: { socketId: '' } });
 };
 
-exports.emitToFriendsConnected = async (io, data, friends, eventName) => {
+export const emitToFriendsConnected = async (io, data, friends, eventName) => {
   const Users = getUsers();
   const friendsIds = map((id) => ObjectID(id))(getIds(friends));
   const friendsConnected = await Users.aggregate()
@@ -31,7 +33,7 @@ exports.emitToFriendsConnected = async (io, data, friends, eventName) => {
   });
 };
 
-exports.emitToUserConnected = async (io, data, receiverId, eventName) => {
+export const emitToUserConnected = async (io, data, receiverId, eventName) => {
   const _id = ObjectID(receiverId);
   const Users = getUsers();
   const [userConnected] = await Users.aggregate()

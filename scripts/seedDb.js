@@ -1,8 +1,8 @@
-const { ObjectID } = require('mongodb');
-const faker = require('faker');
-const { times } = require('ramda');
-const bcrypt = require('bcryptjs');
-const { connectDb, getUsers, disconnectDb } = require('../src/server/database');
+import mongodb from 'mongodb';
+import faker from 'faker';
+import { times } from 'ramda';
+import bcrypt from 'bcryptjs';
+import { connectDb, getUsers, disconnectDb } from '../src/server/database';
 
 const insertData = async () => {
   const genders = ['female', 'male'];
@@ -32,7 +32,7 @@ const insertData = async () => {
       ],
     },
     password: bcrypt.hashSync(faker.internet.password(), 8),
-    _id: ObjectID(),
+    _id: mongodb.ObjectID(),
     emailVerified: true,
   });
   const newUsers = times(makeRandomUser, 20);

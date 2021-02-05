@@ -1,9 +1,9 @@
-const express = require('express');
-const path = require('path');
-const pino = require('./utils/logger');
-const usersRouter = require('./users/router');
-const { errorHandler } = require('./middlewares/error');
-const { NODE_ENV, TEST, PRODUCTION } = require('./utils/env');
+import express from 'express';
+import path from 'path';
+import pino from './utils/logger.js';
+import usersRouter from './users/router.js';
+import { errorHandler } from './middlewares/error.js';
+import { TEST, PRODUCTION, NODE_ENV } from './utils/env.js';
 
 const app = express();
 
@@ -22,4 +22,4 @@ if (NODE_ENV === PRODUCTION) {
   );
 }
 
-module.exports = app;
+export default app;

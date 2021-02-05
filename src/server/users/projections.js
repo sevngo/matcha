@@ -1,4 +1,4 @@
-exports.userProjection = {
+export const userProjection = {
   _id: 1,
   username: 1,
   gender: 1,
@@ -8,7 +8,7 @@ exports.userProjection = {
   distance: 1,
 };
 
-exports.authProjection = {
+export const authProjection = {
   _id: 1,
   username: 1,
   gender: 1,
@@ -22,4 +22,4 @@ exports.authProjection = {
   'friends._id': 1,
 };
 
-exports.imageProjection = { image: 1 };
+export const imageProjection = { image: 1 };

@@ -1,8 +1,6 @@
-const USERS = 'users';
+export const USERS = 'users';
 
-exports.USERS = USERS;
-
-exports.usersModel = async (db) => {
+export const usersModel = async (db) => {
   await db
     .collection(USERS)
     .createIndex({ username: 1 }, { unique: true, sparse: true });

@@ -1,9 +1,9 @@
-const { INTERNAL_SERVER_ERROR } = require('../utils/error');
+import { INTERNAL_SERVER_ERROR } from '../utils/error.js';
 
-exports.asyncHandler = (fn) => (req, res, next) =>
+export const asyncHandler = (fn) => (req, res, next) =>
   Promise.resolve(fn(req, res, next)).catch(next);
 
-exports.errorHandler = (err, req, res, next) => {
+export const errorHandler = (err, req, res, next) => {
   let { statusCode, message } = err;
   if (!statusCode) {
     req.log.error(err.stack);

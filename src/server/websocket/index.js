@@ -1,10 +1,10 @@
-const {
+import {
   addUserSocketId,
   removeUserSocketId,
   emitToFriendsConnected,
   emitToUserConnected,
-} = require('./users');
-const pino = require('../utils/logger');
+} from './users.js';
+import pino from '../utils/logger.js';
 
 const socketEvents = (socket) => {
   socket.on('logged', async ({ friends, _id, username }) => {
@@ -70,4 +70,4 @@ const socketEvents = (socket) => {
   });
 };
 
-module.exports = socketEvents;
+export default socketEvents;
