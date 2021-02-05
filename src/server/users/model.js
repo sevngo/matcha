@@ -1,15 +1,15 @@
-export const USERS = 'users';
+import { USERS_COLLECTION } from '../utils/enums.js';
 
 export const usersModel = async (db) => {
   await db
-    .collection(USERS)
+    .collection(USERS_COLLECTION)
     .createIndex({ username: 1 }, { unique: true, sparse: true });
   await db
-    .collection(USERS)
+    .collection(USERS_COLLECTION)
     .createIndex({ email: 1 }, { unique: true, sparse: true });
-  await db.collection(USERS).createIndex({ address: '2dsphere' });
+  await db.collection(USERS_COLLECTION).createIndex({ address: '2dsphere' });
   return db.command({
-    collMod: USERS,
+    collMod: USERS_COLLECTION,
     validator: {
       $jsonSchema: {
         bsonType: 'object',

@@ -23,7 +23,7 @@ import {
   UNVERIFIED_EMAIL,
   UNAUTHORIZED,
   INVALID_IMAGE_FORMAT,
-} from '../../utils/error';
+} from '../../utils/enums';
 import { createToken } from '../../utils/functions';
 import mongodb from 'mongodb';
 

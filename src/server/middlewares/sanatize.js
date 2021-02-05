@@ -3,7 +3,8 @@ import { map, all, split } from 'ramda';
 import bcrypt from 'bcryptjs';
 import mongodb from 'mongodb';
 import multer from 'multer';
-import { ErrorResponse, INVALID_IMAGE_FORMAT } from '../utils/error.js';
+import { INVALID_IMAGE_FORMAT } from '../utils/enums.js';
+import { ErrorResponse } from '../utils/functions.js';
 
 const { ObjectID } = mongodb;
 

@@ -2,14 +2,13 @@ import { replace } from 'ramda';
 import mongodb from 'mongodb';
 import bcrypt from 'bcryptjs';
 import { getUsers } from '../database.js';
-import { createToken, verifyToken } from '../utils/functions.js';
+import { createToken, verifyToken, ErrorResponse } from '../utils/functions.js';
 import { asyncHandler } from './error.js';
 import {
-  ErrorResponse,
   IDENTIFICATION_FAILED,
   UNAUTHORIZED,
   UNVERIFIED_EMAIL,
-} from '../utils/error.js';
+} from '../utils/enums.js';
 
 const auth = {
   generateAuthToken: asyncHandler(async (req, res, next) => {

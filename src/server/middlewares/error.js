@@ -1,4 +1,4 @@
-import { INTERNAL_SERVER_ERROR } from '../utils/error.js';
+import { INTERNAL_SERVER_ERROR } from '../utils/enums.js';
 
 export const asyncHandler = (fn) => (req, res, next) =>
   Promise.resolve(fn(req, res, next)).catch(next);

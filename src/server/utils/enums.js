@@ -1,9 +1,8 @@
-export const ErrorResponse = class ErrorResponse extends Error {
-  constructor(statusCode, message) {
-    super(message);
-    this.statusCode = statusCode;
-  }
-};
+export const PRODUCTION = 'production';
+export const DEVELOPMENT = 'development';
+export const TEST = 'test';
+
+export const USERS_COLLECTION = 'users';
 
 export const INTERNAL_SERVER_ERROR = 'Internal Server Error';
 export const IDENTIFICATION_FAILED = 'Identification Failed';

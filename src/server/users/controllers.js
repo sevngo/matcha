@@ -9,13 +9,12 @@ import {
 import { getUsers } from '../database.js';
 import sendEmail from '../emails.js';
 import { asyncHandler } from '../middlewares/error.js';
-import { createToken } from '../utils/functions.js';
+import { createToken, ErrorResponse } from '../utils/functions.js';
 import {
-  ErrorResponse,
   USER_NOT_FOUND,
   EMAIL_NOT_FOUND,
   IMAGE_NOT_FOUND,
-} from '../utils/error.js';
+} from '../utils/enums.js';
 
 export const postUserController = asyncHandler(async (req, res) => {
   const Users = getUsers();
