@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { has, map, isNil, __, path } from 'ramda';
+import { has, map, isNil, __ } from 'ramda';
 import { useFormik } from 'formik';
 import { Button, MenuItem, Grid } from '@material-ui/core';
 import VisibilityIcon from '@material-ui/icons/Visibility';
@@ -47,7 +47,7 @@ const UserForm = ({
   });
   const [showPassword, toggleShowPassword] = useState(false);
   const address = values['address'];
-  const isValidAddress = !isNil(path(['address', 'coordinates'])(values));
+  const isValidAddress = !isNil(address?.coordinates);
   const handleAddress = useCallback(
     (address) => setFieldValue('address', address),
     [setFieldValue]
@@ -149,7 +149,7 @@ const UserForm = ({
               disabled={disabled || isValidAddress}
               onChange={handleChange}
               onBlur={handleBlur}
-              value={path(['address', 'name'])(values)}
+              value={values.address?.name}
               error={touched.address && errors.address}
               endAdornment={
                 (isValidAddress &&

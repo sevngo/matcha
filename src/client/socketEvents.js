@@ -1,4 +1,4 @@
-import { path, isEmpty } from 'ramda';
+import { isEmpty } from 'ramda';
 import io from 'socket.io-client';
 import store from './store';
 import { GOT_FRIENDED, GOT_UNDFRIENDED, ADD_NOTIFICATION } from './actions';
@@ -39,7 +39,7 @@ socket.on('gotFriended', (notification) => {
 socket.on('gotUnfriended', (notification) => {
   store.dispatch({
     type: GOT_UNDFRIENDED,
-    _id: path(['user', '_id'])(notification),
+    _id: notification.user?._id,
   });
   store.dispatch({
     type: ADD_NOTIFICATION,

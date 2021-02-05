@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { path, mergeDeepRight } from 'ramda';
+import { mergeDeepRight } from 'ramda';
 import { getAuthToken } from '../selectors';
 import { logout, openSnackbar, displayLoader, hideLoader } from '../actions';
 import { ERROR } from '../containers/Snackbar/constants';
@@ -25,8 +25,8 @@ axios.interceptors.response.use(
   },
   (error) => {
     store.dispatch(hideLoader());
-    const status = path(['response', 'status'])(error);
-    const message = path(['response', 'data', 'message'])(error);
+    const status = error.response?.status;
+    const message = error.response?.data?.message;
     if (status === 401) store.dispatch(logout());
     else store.dispatch(openSnackbar({ variant: ERROR, message }));
     return Promise.reject(error);

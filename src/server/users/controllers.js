@@ -1,4 +1,4 @@
-import { split, path } from 'ramda';
+import { split } from 'ramda';
 import sharp from 'sharp';
 import { match, matchIn } from '../utils/stages.js';
 import {
@@ -188,7 +188,7 @@ export const getUserImageController = asyncHandler(async (req, res, next) => {
   const { id } = req.params;
   const user = await Users.findOne({ _id: id });
   if (!user) return next(new ErrorResponse(404, USER_NOT_FOUND));
-  const buffer = path(['image', 'buffer'])(user);
+  const buffer = user.image?.buffer;
   if (!buffer) return next(new ErrorResponse(404, IMAGE_NOT_FOUND));
   res.type('png');
   res.send(buffer);

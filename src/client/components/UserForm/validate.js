@@ -1,4 +1,4 @@
-import { has, isNil, __, path } from 'ramda';
+import { has, isNil, __ } from 'ramda';
 import {
   composeValidators,
   isRequired,
@@ -43,7 +43,7 @@ const validate = (initialValues, values, newPasswordLabel) => {
   const genderError = hasInitialValue('gender') && isRequired(values.gender);
   const addressError =
     hasInitialValue('address') &&
-    isRequired(!isNil(path(['address', 'coordinates'])(values)));
+    isRequired(!isNil(values.address?.coordinates));
   if (usernameError) errors.username = usernameError;
   if (passwordError) errors.password = passwordError;
   if (emailError) errors.email = emailError;

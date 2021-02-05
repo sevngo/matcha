@@ -1,6 +1,5 @@
 /*global google*/
 import { useEffect } from 'react';
-import { path } from 'ramda';
 import { useDispatch } from 'react-redux';
 import { displayLoader, hideLoader } from '../actions/loading';
 
@@ -9,7 +8,7 @@ export const useAutocomplete = (inputId, onChange, isActive) => {
   const handlePlace = () => {
     const newAddress = autocomplete.getPlace();
     const { formatted_address } = newAddress;
-    const location = path(['geometry', 'location'])(newAddress);
+    const location = newAddress.geometry?.location;
     if (!location) return;
     const address = {
       name: formatted_address,

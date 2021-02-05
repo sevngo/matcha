@@ -1,5 +1,4 @@
 import React, { useState, Fragment } from 'react';
-import { path } from 'ramda';
 import { FormattedMessage } from 'react-intl';
 import {
   Typography,
@@ -59,7 +58,7 @@ const Notifications = () => {
                       <FormattedMessage
                         {...messages[notification.messageId]}
                         values={{
-                          username: path(['user', 'username'])(notification),
+                          username: notification.user?.username,
                         }}
                       />
                     </Typography>
