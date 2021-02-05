@@ -1,7 +1,11 @@
 import { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getAuthUsersBlocked, getAuthForm, getAuthCard } from '../../selectors';
-import { uploadImage, likeUser, updateUser } from '../../actions';
+import {
+  getAuthUsersBlocked,
+  getAuthForm,
+  getAuthCard,
+} from '../../selectors/auth';
+import { uploadImage, likeUser, updateUser } from '../../actions/auth';
 import { compact } from '../../utils';
 
 export const useConnect = () => {

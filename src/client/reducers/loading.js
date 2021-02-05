@@ -1,4 +1,4 @@
-import { DISPLAY_LOADER, HIDE_LOADER } from '../actions';
+import { DISPLAY_LOADER, HIDE_LOADER } from '../actions/loading';
 
 const reducer = (state = false, action) => {
   switch (action.type) {

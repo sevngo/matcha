@@ -1,4 +1,4 @@
-import { OPEN_SNACKBAR, CLOSE_SNACKBAR } from '../actions';
+import { OPEN_SNACKBAR, CLOSE_SNACKBAR } from '../actions/snackbar';
 
 const reducer = (state = {}, action) => {
   switch (action.type) {

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { updateUser } from '../../actions';
+import { updateUser } from '../../actions/auth';
 import { usersPath } from '../../utils';
 
 const Reset = () => {

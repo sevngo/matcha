@@ -1,5 +1,5 @@
 import { getUsers } from '../api';
-import { getUsersFilter } from '../selectors';
+import { getUsersFilter } from '../selectors/users';
 
 export const LOAD_USERS = 'LOAD_USERS';
 export const LOADED_USERS = 'LOADED_USERS';

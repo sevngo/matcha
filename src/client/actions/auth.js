@@ -1,5 +1,5 @@
 import { reject, compose, append, equals, pick, find } from 'ramda';
-import { openSnackbar } from '.';
+import { openSnackbar } from './snackbar';
 import {
   postUser,
   postUserLogin,
@@ -14,7 +14,7 @@ import {
   getAuthUsersLiked,
   getAuthUsersBlocked,
   getAuthFriends,
-} from '../selectors';
+} from '../selectors/auth';
 
 export const REGISTER = 'REGISTER';
 export const LOGIN = 'LOGIN';

@@ -1,8 +1,12 @@
 import { isEmpty } from 'ramda';
 import io from 'socket.io-client';
 import store from './store';
-import { GOT_FRIENDED, GOT_UNDFRIENDED, ADD_NOTIFICATION } from './actions';
-import { getAuth } from './selectors';
+import {
+  GOT_FRIENDED,
+  GOT_UNDFRIENDED,
+  ADD_NOTIFICATION,
+} from './actions/auth';
+import { getAuth } from './selectors/auth';
 
 const ioUrl =
   process.env.NODE_ENV === 'production' ? null : process.env.REACT_APP_API_URL;

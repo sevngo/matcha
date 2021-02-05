@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { getAuthToken } from '../../selectors';
+import { getAuthToken } from '../../selectors/auth';
 import { loginPath } from '../../utils';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {

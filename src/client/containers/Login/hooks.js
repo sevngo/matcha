@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getAuthToken } from '../../selectors';
-import { forgotPassword, login } from '../../actions';
+import { getAuthToken } from '../../selectors/auth';
+import { forgotPassword, login } from '../../actions/auth';
 
 export const useConnect = () => {
   const dispatch = useDispatch();

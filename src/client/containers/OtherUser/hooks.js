@@ -5,8 +5,9 @@ import {
   getIsUserFriended,
   getIsUserLiked,
   getIsUserBlocked,
-} from '../../selectors';
-import { likeUser, blockUser, loadUser } from '../../actions';
+} from '../../selectors/user';
+import { likeUser, blockUser } from '../../actions/auth';
+import { loadUser } from '../../actions/user';
 
 export const useConnect = () => {
   const dispatch = useDispatch();

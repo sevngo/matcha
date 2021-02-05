@@ -1,7 +1,9 @@
 import axios from 'axios';
 import { mergeDeepRight } from 'ramda';
-import { getAuthToken } from '../selectors';
-import { logout, openSnackbar, displayLoader, hideLoader } from '../actions';
+import { getAuthToken } from '../selectors/auth';
+import { displayLoader, hideLoader } from '../actions/loading';
+import { logout } from '../actions/auth';
+import { openSnackbar } from '../actions/snackbar';
 import { ERROR } from '../containers/Snackbar/constants';
 import store from '../store';
 

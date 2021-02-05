@@ -1,9 +1,9 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { removeNotification } from '../../actions';
+import { removeNotification } from '../../actions/auth';
 import {
   getAuthNotifications,
   getAuthNotificationsLength,
-} from '../../selectors';
+} from '../../selectors/auth';
 
 export const useConnect = () => {
   const dispatch = useDispatch();
