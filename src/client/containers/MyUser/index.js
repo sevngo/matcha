@@ -15,6 +15,7 @@ const MyUser = () => {
   const classes = useStyles();
   const inputEl = useRef();
   const {
+    authId,
     authCard,
     authForm,
     usersBlocked,
@@ -26,7 +27,7 @@ const MyUser = () => {
   const openFile = useCallback(() => inputEl.current.click(), []);
   const uploadFile = (event) => {
     const image = event.target.files[0];
-    if (image) uploadImage(image);
+    if (image) uploadImage(authId, image);
   };
   const birthDate = split('T')(authForm.birthDate)[0];
   return (
@@ -75,7 +76,7 @@ const MyUser = () => {
                 ...authForm,
                 birthDate,
               }}
-              submit={updateUser}
+              submit={(user) => updateUser(authId, user)}
               newPasswordLabel
             />
           </Paper>

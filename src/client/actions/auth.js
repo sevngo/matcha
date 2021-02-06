@@ -56,7 +56,7 @@ export const login = (user) => async (dispatch) => {
   } catch {}
 };
 
-export const updateUser = (auth, token) => async (dispatch) => {
+export const updateUser = (id, user, token) => async (dispatch) => {
   dispatch({ type: UPDATE_USER });
   try {
     const config = {
@@ -64,7 +64,7 @@ export const updateUser = (auth, token) => async (dispatch) => {
         Authorization: `Bearer ${token}`,
       },
     };
-    const { data } = await patchUser(auth, config);
+    const { data } = await patchUser(id, user, config);
     dispatch({ type: UPDATED_USER, data });
     dispatch(openSnackbar({ variant: SUCCESS }));
   } catch {}
@@ -136,10 +136,10 @@ export const blockUser = (userBlockedId) => async (dispatch, getState) => {
   } catch {}
 };
 
-export const uploadImage = (image) => async (dispatch) => {
+export const uploadImage = (id, image) => async (dispatch) => {
   dispatch({ type: UPLOAD_IMAGE });
   try {
-    const { data } = await postUserImage(image);
+    const { data } = await postUserImage(id, image);
     dispatch({ type: UPLOADED_IMAGE, data });
   } catch {}
 };

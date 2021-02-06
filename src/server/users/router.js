@@ -41,8 +41,10 @@ router.get(
 );
 
 router.patch(
-  '/',
+  '/:id',
   auth.authenticate,
+  auth.isMyUser,
+  sanatize.objectId('id'),
   sanatize.hash('password'),
   sanatize.toDate('birthDate'),
   sanatize.objectIds('usersLiked'),
@@ -60,12 +62,17 @@ router.post(
 router.post('/forgot', postUserForgotController);
 
 router.post(
-  '/image',
+  '/:id/image',
   auth.authenticate,
+  auth.isMyUser,
   sanatize.image.single('image'),
   postUserImageController
 );
 
-router.get('/:id/image', sanatize.objectId('id'), getUserImageController);
+router.get(
+  '/:id/image/:imageId',
+  sanatize.objectId('id'),
+  getUserImageController
+);
 
 export default router;

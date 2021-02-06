@@ -6,14 +6,14 @@ import { useConnect } from './hooks';
 import { initialValues } from './constants';
 
 const Reset = () => {
-  const { updateUser } = useConnect();
+  const { authId, updateUser } = useConnect();
   const classes = useStyles();
   return (
     <Grid container justify="center" className={classes.p3}>
       <Paper elevation={1} className={classes.paper}>
         <UserForm
           initialValues={initialValues}
-          submit={updateUser}
+          submit={(user) => updateUser(authId, user)}
           newPasswordLabel
         />
       </Paper>

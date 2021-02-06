@@ -34,7 +34,11 @@ export const usersModel = async (db) => {
             enum: ['male', 'female'],
           },
           image: {
-            bsonType: 'binData',
+            bsonType: 'object',
+            properties: {
+              buffer: { bsonType: 'binData' },
+              _id: { bsonType: 'objectId' },
+            },
           },
           address: {
             bsonType: 'object',

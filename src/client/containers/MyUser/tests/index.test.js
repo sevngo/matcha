@@ -21,9 +21,10 @@ global.google = {
 jest.mock('axios');
 
 describe('MyUser', () => {
+  const authId = '6008432b6ed92c2ac837ec6c';
   const initialState = {
     auth: {
-      _id: '6008432b6ed92c2ac837ec6c',
+      _id: authId,
       username: 'asdasd',
       email: 'asdasd@asdasd.com',
       gender: 'female',
@@ -60,7 +61,7 @@ describe('MyUser', () => {
     fireEvent.change(getByTestId('uploadFile'), { target: { files: [file] } });
     await waitFor(() =>
       expect(axios.post).toHaveBeenCalledWith(
-        '/api/users/image',
+        `/api/users/${authId}/image`,
         expect.any(FormData)
       )
     );
@@ -79,7 +80,7 @@ describe('MyUser', () => {
 
     await waitFor(() =>
       expect(axios.patch).toHaveBeenCalledWith(
-        '/api/users',
+        `/api/users/${authId}`,
         {
           address: {
             coordinates: [2.5654428, 48.955157299999996],

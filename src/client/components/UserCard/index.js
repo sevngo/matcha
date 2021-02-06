@@ -20,7 +20,7 @@ import { equals } from 'ramda';
 const UserCard = ({ user, hasDistance, actions }) => {
   const classes = useStyles();
   const { image } = user;
-  const imageSrc = image ? getUserImage(user._id) : emptyImage;
+  const imageSrc = image ? getUserImage(user._id, image._id) : emptyImage;
   const distance = parseInt(user.distance) || 1;
   return (
     <Card className={classes.root} elevation={1}>
@@ -28,7 +28,7 @@ const UserCard = ({ user, hasDistance, actions }) => {
         <CardMedia
           data-testid={image ? 'imageAvailable' : 'imageUnavailable'}
           className={classes.media}
-          image={imageSrc}
+          image={`${imageSrc}`}
         />
         <CardContent>
           <Grid container>

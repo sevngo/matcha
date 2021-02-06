@@ -1,5 +1,6 @@
 import { split } from 'ramda';
 import sharp from 'sharp';
+import mongodb from 'mongodb';
 import { match, matchIn } from '../utils/stages.js';
 import {
   userProjection,
@@ -82,8 +83,8 @@ export const getUserController = asyncHandler(async (req, res, next) => {
 
 export const patchUserController = asyncHandler(async (req, res, next) => {
   const {
-    auth: { _id },
     body,
+    params: { id: _id },
   } = req;
   const Users = getUsers();
   const { value: user } = await Users.findOneAndUpdate(
@@ -174,7 +175,10 @@ export const postUserImageController = asyncHandler(async (req, res, next) => {
     .resize({ width: 500, fit: 'outside' })
     .png()
     .toBuffer();
-  await Users.findOneAndUpdate({ _id }, { $set: { image: buffer } });
+  await Users.findOneAndUpdate(
+    { _id },
+    { $set: { image: { _id: mongodb.ObjectID(), buffer } } }
+  );
   const [data] = await Users.aggregate()
     .match({ _id })
     .project(imageProjection)
@@ -187,7 +191,7 @@ export const getUserImageController = asyncHandler(async (req, res, next) => {
   const { id } = req.params;
   const user = await Users.findOne({ _id: id });
   if (!user) return next(new ErrorResponse(404, USER_NOT_FOUND));
-  const buffer = user.image?.buffer;
+  const buffer = user.image?.buffer?.buffer;
   if (!buffer) return next(new ErrorResponse(404, IMAGE_NOT_FOUND));
   res.type('png');
   res.send(buffer);

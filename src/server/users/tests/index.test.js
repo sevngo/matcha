@@ -8,7 +8,7 @@ import { connectDb, disconnectDb, getUsers } from '../../database';
 import {
   newUser,
   authUserPassword,
-  authUserId,
+  authUserIdString,
   authUser,
   randomUser,
   authUserToken,
@@ -130,7 +130,7 @@ describe('/api/users', () => {
   describe('GET /api/users/:id', () => {
     test('should get specific user', async () => {
       const { body } = await request(app)
-        .get(`/api/users/${authUserId}`)
+        .get(`/api/users/${authUserIdString}`)
         .set('Authorization', `Bearer ${authUserToken}`)
         .expect(200);
       expect(body.username).toEqual(authUser.username);
@@ -143,15 +143,24 @@ describe('/api/users', () => {
       expect(body.message).toEqual(USER_NOT_FOUND);
     });
   });
-  describe('PATCH /api/users', () => {
-    test('should update user', async () => {
+  describe('PATCH /api/users/:id', () => {
+    test('should update my user', async () => {
       const newValue = { username: faker.internet.userName() };
       const { body } = await request(app)
-        .patch(`/api/users`)
+        .patch(`/api/users/${authUserIdString}`)
         .send(newValue)
         .set('Authorization', `Bearer ${authUserToken}`)
         .expect(200);
       expect(body).toMatchObject(newValue);
+    });
+    test('should not update other user', async () => {
+      const newValue = { username: faker.internet.userName() };
+      const { body } = await request(app)
+        .patch(`/api/users/fakeId`)
+        .send(newValue)
+        .set('Authorization', `Bearer ${authUserToken}`)
+        .expect(401);
+      expect(body.message).toEqual(UNAUTHORIZED);
     });
   });
   describe('POST /api/users/forgot', () => {
@@ -169,49 +178,49 @@ describe('/api/users', () => {
       expect(body.message).toEqual(EMAIL_NOT_FOUND);
     });
   });
-  describe('POST /api/users/image', () => {
+  describe('POST /api/users/:id/image', () => {
     test('should upload image', async () => {
       const { body } = await request(app)
-        .post(`/api/users/image`)
+        .post(`/api/users/${authUserIdString}/image`)
         .set('Authorization', `Bearer ${authUserToken}`)
         .attach('image', path.resolve(__dirname, 'fixtures', 'favicon.png'))
         .expect(200);
       expect(has('image')(body)).toBeTruthy();
       const userData = await getUsers().findOne({ _id: authUser._id });
-      expect(userData.image.buffer).toEqual(expect.any(Buffer));
+      expect(userData._id).toBeDefined();
     });
     test('should 400 invalid image format', async () => {
       const { body } = await request(app)
-        .post(`/api/users/image`)
+        .post(`/api/users/${authUserIdString}/image`)
         .set('Authorization', `Bearer ${authUserToken}`)
         .attach('image', path.resolve(__dirname, 'fixtures', 'favicon.ico'))
         .expect(400);
       expect(body.message).toEqual(INVALID_IMAGE_FORMAT);
     });
   });
-  describe('GET /api/users/:id/image', () => {
+  describe('GET /api/users/:id/image/:imageId', () => {
     test('should 404 image not found', async () => {
       const { body } = await request(app)
-        .get(`/api/users/${authUserId}/image`)
+        .get(`/api/users/${authUserIdString}/image/fakeImageId`)
         .expect(404);
       expect(body.message).toEqual(IMAGE_NOT_FOUND);
     });
     test('should 404 user not found', async () => {
       const { body } = await request(app)
-        .get(`/api/users/fakeId/image`)
+        .get(`/api/users/fakeId/image/fakeImageId`)
         .expect(404);
       expect(body.message).toEqual(USER_NOT_FOUND);
     });
     test('should upload and get image', async () => {
-      await request(app)
-        .post(`/api/users/image`)
+      const { body } = await request(app)
+        .post(`/api/users/${authUserIdString}/image`)
         .set('Authorization', `Bearer ${authUserToken}`)
         .attach('image', path.resolve(__dirname, 'fixtures', 'favicon.png'))
         .expect(200);
-      const { body } = await request(app)
-        .get(`/api/users/${authUserId}/image`)
+      const { body: imageBody } = await request(app)
+        .get(`/api/users/${authUserIdString}/image/${body.image._id}`)
         .expect(200);
-      expect(body).toEqual(expect.any(Buffer));
+      expect(imageBody).toEqual(expect.any(Buffer));
     });
   });
 });

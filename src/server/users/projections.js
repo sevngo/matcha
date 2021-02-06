@@ -4,7 +4,7 @@ export const userProjection = {
   gender: 1,
   birthDate: 1,
   'address.name': 1,
-  image: 1,
+  'image._id': 1,
   distance: 1,
 };
 
@@ -15,11 +15,13 @@ export const authProjection = {
   address: 1,
   email: 1,
   birthDate: 1,
-  image: 1,
+  'image._id': 1,
   'usersBlocked._id': 1,
   'usersBlocked.username': 1,
   'usersLiked._id': 1,
   'friends._id': 1,
 };
 
-export const imageProjection = { image: 1 };
+export const imageProjection = {
+  'image._id': 1,
+};

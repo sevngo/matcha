@@ -19,8 +19,9 @@ const birthDateMax = new Date(
 );
 
 export const authUserPassword = faker.internet.password();
-export const authUserId = faker.random.alphaNumeric(12);
-export const authUserToken = createToken({ _id: authUserId });
+const authUserId = ObjectID();
+export const authUserIdString = authUserId.toString();
+export const authUserToken = createToken({ _id: authUserIdString });
 
 export const authUser = {
   username: faker.internet.userName(),
@@ -36,7 +37,7 @@ export const authUser = {
     ],
   },
   password: bcrypt.hashSync(authUserPassword, 8),
-  _id: ObjectID(authUserId),
+  _id: authUserId,
   emailVerified: true,
   usersBlocked: [ObjectID()],
   usersLiked: [ObjectID()],

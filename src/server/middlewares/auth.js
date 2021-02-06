@@ -41,6 +41,11 @@ const auth = {
     req.auth = auth;
     next();
   }),
+  isMyUser: asyncHandler(async (req, res, next) => {
+    const isMyUser = req.auth._id.toString() === req.params.id;
+    if (!isMyUser) return next(new ErrorResponse(401, UNAUTHORIZED));
+    next();
+  }),
   emailVerified: (req, res, next) => {
     if (!req.auth.emailVerified)
       return next(new ErrorResponse(400, UNVERIFIED_EMAIL));
