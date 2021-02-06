@@ -2,10 +2,12 @@ import pino from 'pino-http';
 
 const logger = pino({
   prettyPrint: {
-    translateTime: true,
+    levelFirst: true,
+    translateTime: 'HH:MM:ss.l o',
     messageKey: 'msg',
     messageFormat: '{msg} {res.statusCode} {req.method} {req.url}',
-    ignore: 'res,req,pid,hostname',
+    ignore: 'pid,hostname',
+    hideObject: true,
   },
 });
 
