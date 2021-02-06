@@ -1,0 +1,15 @@
+{
+  "short_name": "Matcha",
+  "name": "My Boilerplate",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "type": "image/png",
+      "sizes": "256x256"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#4a148c",
+  "background_color": "#ffffff"
+}

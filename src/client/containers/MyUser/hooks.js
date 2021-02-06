@@ -16,10 +16,9 @@ export const useConnect = () => {
     authForm: useSelector(getAuthForm),
     authCard: useSelector(getAuthCard),
     usersBlocked: useSelector(getAuthUsersBlocked),
-    updateUser: useCallback(
-      (id, user) => dispatch(updateUser(id, compact(user))),
-      [dispatch]
-    ),
+    updateUser: useCallback((user) => dispatch(updateUser(compact(user))), [
+      dispatch,
+    ]),
     uploadImage: useCallback((id, image) => dispatch(uploadImage(id, image)), [
       dispatch,
     ]),

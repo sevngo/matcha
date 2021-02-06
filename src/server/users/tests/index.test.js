@@ -143,6 +143,17 @@ describe('/api/users', () => {
       expect(body.message).toEqual(USER_NOT_FOUND);
     });
   });
+  describe('PATCH /api/users', () => {
+    test('should update my user', async () => {
+      const newValue = { username: faker.internet.userName() };
+      const { body } = await request(app)
+        .patch(`/api/users`)
+        .send(newValue)
+        .set('Authorization', `Bearer ${authUserToken}`)
+        .expect(200);
+      expect(body).toMatchObject(newValue);
+    });
+  });
   describe('PATCH /api/users/:id', () => {
     test('should update my user', async () => {
       const newValue = { username: faker.internet.userName() };

@@ -24,7 +24,7 @@ describe('MyUser', () => {
   const authId = '6008432b6ed92c2ac837ec6c';
   const initialState = {
     auth: {
-      _id: authId,
+      _id: '6008432b6ed92c2ac837ec6c',
       username: 'asdasd',
       email: 'asdasd@asdasd.com',
       gender: 'female',
@@ -80,7 +80,7 @@ describe('MyUser', () => {
 
     await waitFor(() =>
       expect(axios.patch).toHaveBeenCalledWith(
-        `/api/users/${authId}`,
+        `/api/users`,
         {
           address: {
             coordinates: [2.5654428, 48.955157299999996],

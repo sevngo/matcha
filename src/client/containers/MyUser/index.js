@@ -76,7 +76,7 @@ const MyUser = () => {
                 ...authForm,
                 birthDate,
               }}
-              submit={(user) => updateUser(authId, user)}
+              submit={updateUser}
               newPasswordLabel
             />
           </Paper>

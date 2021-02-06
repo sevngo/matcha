@@ -82,10 +82,8 @@ export const getUserController = asyncHandler(async (req, res, next) => {
 });
 
 export const patchUserController = asyncHandler(async (req, res, next) => {
-  const {
-    body,
-    params: { id: _id },
-  } = req;
+  const { auth, body, params } = req;
+  const _id = params.id || auth._id;
   const Users = getUsers();
   const { value: user } = await Users.findOneAndUpdate(
     { _id },

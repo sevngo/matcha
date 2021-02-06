@@ -42,7 +42,9 @@ const auth = {
     next();
   }),
   isMyUser: asyncHandler(async (req, res, next) => {
-    const isMyUser = req.auth._id.toString() === req.params.id;
+    const { id } = req.params;
+    if (!id) return next();
+    const isMyUser = req.auth._id.toString() === id;
     if (!isMyUser) return next(new ErrorResponse(401, UNAUTHORIZED));
     next();
   }),

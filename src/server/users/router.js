@@ -41,7 +41,7 @@ router.get(
 );
 
 router.patch(
-  '/:id',
+  ['/', '/:id'],
   auth.authenticate,
   auth.isMyUser,
   sanatize.objectId('id'),

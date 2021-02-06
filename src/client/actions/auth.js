@@ -56,7 +56,7 @@ export const login = (user) => async (dispatch) => {
   } catch {}
 };
 
-export const updateUser = (id, user, token) => async (dispatch) => {
+export const updateUser = (user, token) => async (dispatch) => {
   dispatch({ type: UPDATE_USER });
   try {
     const config = {
@@ -64,7 +64,7 @@ export const updateUser = (id, user, token) => async (dispatch) => {
         Authorization: `Bearer ${token}`,
       },
     };
-    const { data } = await patchUser(id, user, config);
+    const { data } = await patchUser(user, config);
     dispatch({ type: UPDATED_USER, data });
     dispatch(openSnackbar({ variant: SUCCESS }));
   } catch {}
