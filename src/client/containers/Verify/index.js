@@ -1,17 +1,17 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router';
-import { useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { updateUser } from '../../actions/auth';
 import { usersPath } from '../../utils';
+import { useConnect } from './hooks';
 
-const Reset = () => {
-  const { token } = useParams();
-  const dispatch = useDispatch();
+const payload = { emailVerified: true };
+
+const Verify = () => {
+  const { isAuthEmpty, updateUser } = useConnect();
   useEffect(() => {
-    dispatch(updateUser({ emailVerified: true }, token));
-  }, [token, dispatch]);
-  return <Redirect to={usersPath} />;
+    updateUser(payload);
+  }, [updateUser]);
+  if (!isAuthEmpty) return <Redirect to={usersPath} />;
+  return false;
 };
 
-export default Reset;
+export default Verify;

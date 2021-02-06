@@ -1,7 +1,9 @@
-import { length, prop, propOr, pick, compose, assoc } from 'ramda';
+import { length, prop, propOr, pick, compose, assoc, isEmpty } from 'ramda';
 import { createSelector } from 'reselect';
 
 export const getAuth = prop('auth');
+
+export const getIsAuthEmpty = createSelector(getAuth, isEmpty);
 
 export const getAuthId = createSelector(getAuth, prop('_id'));
 

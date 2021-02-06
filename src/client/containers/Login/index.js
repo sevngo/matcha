@@ -17,16 +17,15 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import UserForm from '../../components/UserForm';
 import useStyles from './styles';
 import messages from './messages';
-import { Link, Redirect } from 'react-router-dom';
-import { registerPath, usersPath } from '../../utils';
+import { Link } from 'react-router-dom';
+import { registerPath } from '../../utils';
 import { useConnect } from './hooks';
 import { initialValuesEmail, initialValues } from './constants';
 
 const Login = () => {
-  const { token, login, forgotPassword } = useConnect();
+  const { login, forgotPassword } = useConnect();
   const classes = useStyles();
   const [isDialogOpen, handleDialog] = useState(false);
-  if (token) return <Redirect to={usersPath} />;
   return (
     <Grow in={true} timeout={200}>
       <Paper elevation={1} className={classes.paper} data-testid="loginForm">

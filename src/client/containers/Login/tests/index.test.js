@@ -14,7 +14,7 @@ jest.mock('axios');
 
 describe('Login', () => {
   it('should fill login form then confirm', async () => {
-    const { getByTestId, queryByTestId } = render(
+    const { getByTestId } = render(
       <TestProvider initialState={{}}>
         <Component />
       </TestProvider>
@@ -40,7 +40,6 @@ describe('Login', () => {
         })
       );
     });
-    expect(queryByTestId('loginForm')).toBeNull();
   });
 
   it('should open forgot password form then close it on outside click', async () => {

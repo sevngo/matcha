@@ -43,11 +43,13 @@ export const routes = [
     path: loginPath,
     exact: true,
     component: Login,
+    isUnPrivate: true,
   },
   {
     path: registerPath,
     exact: true,
     component: Register,
+    isUnPrivate: true,
   },
 ];
 
