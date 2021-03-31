@@ -14,6 +14,7 @@ import {
   getAuthUsersLiked,
   getAuthUsersBlocked,
   getAuthFriends,
+  getAuthId,
 } from '../selectors/auth';
 
 export const REGISTER = 'REGISTER';
@@ -34,9 +35,11 @@ export const GOT_UNDFRIENDED = 'GOT_UNDFRIENDED';
 export const ADD_NOTIFICATION = 'ADD_NOTIFICATION';
 export const REMOVE_NOTIFICATION = 'REMOVE_NOTIFICATION';
 
-export const logout = () => (dispatch) => {
+export const logout = () => (dispatch, getState) => {
+  const state = getState();
+  const authId = getAuthId(state)
   dispatch({ type: LOGOUT });
-  socket.emit('logout');
+  socket.emit('logout', authId);
 };
 
 export const register = (user) => async (dispatch) => {
@@ -44,7 +47,7 @@ export const register = (user) => async (dispatch) => {
   try {
     await postUser(user);
     dispatch(openSnackbar({ variant: SUCCESS }));
-  } catch {}
+  } catch { }
 };
 
 export const login = (user) => async (dispatch) => {
@@ -52,8 +55,10 @@ export const login = (user) => async (dispatch) => {
   try {
     const { data } = await postUserLogin(user);
     dispatch({ type: LOGGED, data });
-    socket.emit('logged', pick(['_id', 'username', 'friends'])(data));
-  } catch {}
+    const receiversIds = getIds(data.friends);
+    const sender = pick(['_id', 'username'])(data);
+    socket.emit('logged', { sender, receiversIds });
+  } catch { }
 };
 
 export const updateUser = (user, token) => async (dispatch) => {
@@ -67,7 +72,7 @@ export const updateUser = (user, token) => async (dispatch) => {
     const { data } = await patchUser(user, config);
     dispatch({ type: UPDATED_USER, data });
     dispatch(openSnackbar({ variant: SUCCESS }));
-  } catch {}
+  } catch { }
 };
 
 export const forgotPassword = (auth) => async (dispatch) => {
@@ -75,7 +80,7 @@ export const forgotPassword = (auth) => async (dispatch) => {
   try {
     await postUserForgot(auth);
     dispatch(openSnackbar({ variant: SUCCESS }));
-  } catch {}
+  } catch { }
 };
 
 export const likeUser = (userLikedId) => async (dispatch, getState) => {
@@ -92,17 +97,17 @@ export const likeUser = (userLikedId) => async (dispatch, getState) => {
     const { data } = await patchUser({ usersLiked, usersBlocked });
     dispatch({ type: LIKED_USER, data });
     socket.emit('userLiked', {
-      user: pick(['_id', 'username'])(data),
-      userLikedId,
+      sender: pick(['_id', 'username'])(data),
+      receiverId: userLikedId,
     });
     const friendsIds = getIds(data.friends);
     const isFriended = find((friendId) => userLikedId === friendId)(friendsIds);
     if (isFriended)
       socket.emit('userFriended', {
-        user: pick(['_id', 'username'])(data),
-        userLikedId,
+        sender: pick(['_id', 'username'])(data),
+        receiverId: userLikedId,
       });
-  } catch {}
+  } catch { }
 };
 
 export const blockUser = (userBlockedId) => async (dispatch, getState) => {
@@ -121,8 +126,8 @@ export const blockUser = (userBlockedId) => async (dispatch, getState) => {
     const { data } = await patchUser(user);
     dispatch({ type: BLOCKED_USER, data });
     socket.emit('userBlocked', {
-      user: pick(['_id', 'username'])(data),
-      userBlockedId,
+      sender: pick(['_id', 'username'])(data),
+      receiverId: userBlockedId,
     });
     const friendsIds = getIds(friends);
     const isUnfriended = find((friendId) => userBlockedId === friendId)(
@@ -130,10 +135,10 @@ export const blockUser = (userBlockedId) => async (dispatch, getState) => {
     );
     if (isUnfriended)
       socket.emit('userUnfriended', {
-        user: pick(['_id', 'username'])(data),
-        userBlockedId,
+        sender: pick(['_id', 'username'])(data),
+        receiverId: userBlockedId,
       });
-  } catch {}
+  } catch { }
 };
 
 export const uploadImage = (id, image) => async (dispatch) => {
@@ -141,7 +146,7 @@ export const uploadImage = (id, image) => async (dispatch) => {
   try {
     const { data } = await postUserImage(id, image);
     dispatch({ type: UPLOADED_IMAGE, data });
-  } catch {}
+  } catch { }
 };
 
 export const removeNotification = (_id) => ({ type: REMOVE_NOTIFICATION, _id });

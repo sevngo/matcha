@@ -1,69 +1,54 @@
-import {
-  addUserSocketId,
-  removeUserSocketId,
-  emitToFriendsConnected,
-  emitToUserConnected,
-} from './users.js';
 import pino from '../utils/logger.js';
+import { createNotification } from '../utils/functions.js';
 
 const socketEvents = (socket) => {
-  socket.on('logged', async ({ friends, _id, username }) => {
+  socket.on('logged', async ({ sender, receiversIds }) => {
     try {
-      await addUserSocketId(_id, socket.id);
-      if (friends)
-        await emitToFriendsConnected(
-          socket,
-          { _id, username },
-          friends,
-          'friendLogged'
-        );
+      socket.join(sender._id);
+      const notification = createNotification({ sender });
+      receiversIds.forEach((receiverId) => socket.to(receiverId).emit('friendLogged', notification));
     } catch (err) {
       pino.logger.error(err.stack);
     }
   });
 
-  socket.on('reLogged', async (_id) => {
+  socket.on('reLogged', async (senderId) => {
     try {
-      await addUserSocketId(_id, socket.id);
+      socket.join(senderId);
     } catch (err) {
       pino.logger.error(err.stack);
     }
   });
 
-  socket.on('userLiked', async ({ user, userLikedId }) => {
+  socket.on('userLiked', async ({ sender, receiverId }) => {
     try {
-      await emitToUserConnected(socket, user, userLikedId, 'gotLiked');
+      const notification = createNotification(sender);
+      socket.to(receiverId).emit('gotLiked', notification);
     } catch (err) {
       pino.logger.error(err.stack);
     }
   });
 
-  socket.on('userFriended', async ({ user, userLikedId }) => {
+  socket.on('userFriended', async ({ sender, receiverId }) => {
     try {
-      await emitToUserConnected(socket, user, userLikedId, 'gotFriended');
+      const notification = createNotification(sender);
+      socket.to(receiverId).emit('gotFriended', notification);
     } catch (err) {
       pino.logger.error(err.stack);
     }
   });
-  socket.on('userUnfriended', async ({ user, userBlockedId }) => {
+  socket.on('userUnfriended', async ({ sender, receiverId }) => {
     try {
-      await emitToUserConnected(socket, user, userBlockedId, 'gotUnfriended');
-    } catch (err) {
-      pino.logger.error(err.stack);
-    }
-  });
-
-  socket.on('logout', async () => {
-    try {
-      await removeUserSocketId(socket.id);
+      const notification = createNotification(sender);
+      socket.to(receiverId).emit('gotUnfriended', notification);
     } catch (err) {
       pino.logger.error(err.stack);
     }
   });
 
-  socket.on('disconnect', async () => {
+  socket.on('logout', async (senderId) => {
     try {
-      await removeUserSocketId(socket.id);
+      await socket.leave(senderId)
     } catch (err) {
       pino.logger.error(err.stack);
     }

@@ -62,7 +62,6 @@ export const usersModel = async (db) => {
             bsonType: 'array',
             items: { bsonType: 'objectId', uniqueItems: true },
           },
-          socketId: { bsonType: 'string' },
         },
       },
     },
