@@ -2,7 +2,7 @@ import mongodb from 'mongodb';
 import faker from 'faker';
 import { times } from 'ramda';
 import bcrypt from 'bcryptjs';
-import { connectDb, getUsers, disconnectDb } from '../src/server/database';
+import { connectDb, getUsers, disconnectDb } from '../src/server/database.js';
 
 const insertData = async () => {
   const genders = ['female', 'male'];
