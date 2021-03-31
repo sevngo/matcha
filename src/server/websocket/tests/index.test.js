@@ -13,10 +13,6 @@ let socketClient;
 let httpServer;
 let ioServer;
 
-jest.mock('../../database', () => ({
-  getUsers: () => ({ findOneAndUpdate: () => ({}) }),
-}));
-
 beforeAll((done) => {
   httpServer = http.createServer();
   ioServer = new io(httpServer);
