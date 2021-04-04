@@ -55,9 +55,7 @@ export const login = (user) => async (dispatch) => {
   try {
     const { data } = await postUserLogin(user);
     dispatch({ type: LOGGED, data });
-    const receiversIds = getIds(data.friends);
-    const sender = pick(['_id', 'username'])(data);
-    socket.emit('logged', sender, receiversIds);
+    socket.emit('logged', data._id);
   } catch { }
 };
 
