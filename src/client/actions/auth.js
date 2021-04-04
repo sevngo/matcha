@@ -57,7 +57,7 @@ export const login = (user) => async (dispatch) => {
     dispatch({ type: LOGGED, data });
     const receiversIds = getIds(data.friends);
     const sender = pick(['_id', 'username'])(data);
-    socket.emit('logged', { sender, receiversIds });
+    socket.emit('logged', sender, receiversIds);
   } catch { }
 };
 
@@ -96,17 +96,14 @@ export const likeUser = (userLikedId) => async (dispatch, getState) => {
   try {
     const { data } = await patchUser({ usersLiked, usersBlocked });
     dispatch({ type: LIKED_USER, data });
-    socket.emit('userLiked', {
-      sender: pick(['_id', 'username'])(data),
-      receiverId: userLikedId,
-    });
+    const sender = pick(['_id', 'username'])(data)
+    socket.emit('userLiked', sender, userLikedId);
     const friendsIds = getIds(data.friends);
     const isFriended = find((friendId) => userLikedId === friendId)(friendsIds);
-    if (isFriended)
-      socket.emit('userFriended', {
-        sender: pick(['_id', 'username'])(data),
-        receiverId: userLikedId,
-      });
+    if (isFriended) {
+      const sender = pick(['_id', 'username'])(data)
+      socket.emit('userFriended', sender, userLikedId);
+    }
   } catch { }
 };
 
@@ -125,19 +122,16 @@ export const blockUser = (userBlockedId) => async (dispatch, getState) => {
   try {
     const { data } = await patchUser(user);
     dispatch({ type: BLOCKED_USER, data });
-    socket.emit('userBlocked', {
-      sender: pick(['_id', 'username'])(data),
-      receiverId: userBlockedId,
-    });
+    const sender = pick(['_id', 'username'])(data);
+    socket.emit('userBlocked', sender, userBlockedId);
     const friendsIds = getIds(friends);
     const isUnfriended = find((friendId) => userBlockedId === friendId)(
       friendsIds
     );
-    if (isUnfriended)
-      socket.emit('userUnfriended', {
-        sender: pick(['_id', 'username'])(data),
-        receiverId: userBlockedId,
-      });
+    if (isUnfriended) {
+      const sender = pick(['_id', 'username'])(data)
+      socket.emit('userUnfriended', sender, userBlockedId);
+    }
   } catch { }
 };
 
