@@ -69,7 +69,6 @@ export const updateUser = (user, token) => async (dispatch) => {
     };
     const { data } = await patchUser(user, config);
     dispatch({ type: UPDATED_USER, data });
-    dispatch(openSnackbar({ variant: SUCCESS }));
   } catch { }
 };
 
