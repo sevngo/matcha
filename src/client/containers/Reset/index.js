@@ -14,11 +14,7 @@ const Reset = () => {
   return (
     <Grid container justify="center" className={classes.p3}>
       <Paper elevation={1} className={classes.paper}>
-        <UserForm
-          initialValues={initialValues}
-          submit={updateUser}
-          newPasswordLabel
-        />
+        <UserForm initialValues={initialValues} submit={updateUser} />
       </Paper>
     </Grid>
   );

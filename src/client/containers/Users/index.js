@@ -35,7 +35,6 @@ const Users = () => {
   }, [dispatch, filter]);
   const [page, setPage] = useState(0);
   const [isDrawerOpen, toggleDrawer] = useState(false);
-  if (!users[0]) return false;
   const { limit } = filter;
   const handleChangePage = (event, page) => {
     dispatch(handleFilter({ skip: limit * page }));
@@ -71,7 +70,7 @@ const Users = () => {
         />
       </Paper>
       <Box mb={2} />
-      <UserCards users={users} />
+      {users[0] && <UserCards users={users} />}
       <Drawer isDrawerOpen={isDrawerOpen} toggleDrawer={toggleDrawer} />
       <ScrollToTop />
     </Fragment>

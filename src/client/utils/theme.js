@@ -9,34 +9,4 @@ export const theme = createMuiTheme({
       main: '#e1bee7',
     },
   },
-  overrides: {
-    MuiInputBase: {
-      root: {
-        '&$disabled': {
-          color: '',
-        },
-      },
-    },
-    MuiFormLabel: {
-      root: {
-        '&$disabled': {
-          color: '',
-        },
-      },
-    },
-    MuiFormControlLabel: {
-      label: {
-        '&$disabled': {
-          color: '',
-        },
-      },
-    },
-    MuiIconButton: {
-      root: {
-        '&$disabled': {
-          color: '',
-        },
-      },
-    },
-  },
 });

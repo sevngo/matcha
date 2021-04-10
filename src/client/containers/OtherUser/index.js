@@ -88,7 +88,7 @@ const User = ({ id }) => {
                 ...user,
                 birthDate,
               }}
-              disabled
+              readOnly
             />
           </Paper>
         </Grid>

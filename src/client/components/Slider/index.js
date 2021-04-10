@@ -1,34 +1,26 @@
-import { Slider as MSlider, FormLabel, Box } from '@material-ui/core';
-import { is } from 'ramda';
-import useStyles from './styles';
+import { Box, FormLabel, Slider as MSlider } from '@material-ui/core';
 import React from 'react';
+import { useController } from 'react-hook-form';
+import useStyles from './styles';
 
-const Slider = ({
-  name,
-  value,
-  field,
-  label,
-  unitLabel,
-  setFieldValue,
-  className,
-  ...rest
-}) => {
+const Slider = ({ control, name, label, rules, ...rest }) => {
   const classes = useStyles();
+  const {
+    field: { onChange, ...fields },
+  } = useController({
+    name,
+    control,
+    rules,
+  });
   return (
-    <Box className={className}>
-      <FormLabel>
-        {label}{' '}
-        <Box color="black" display="inline">
-          {is(Array)(value) ? `${value[0]} - ${value[1]}` : value}
-        </Box>{' '}
-        {unitLabel}
-      </FormLabel>
-      <Box mt={1} />
+    <Box>
+      <FormLabel>{label}</FormLabel>
+      <Box mt={9 / 2} />
       <MSlider
         className={classes.m1}
-        value={value}
-        onChange={(e, value) => setFieldValue(name, value)}
+        {...fields}
         {...rest}
+        onChange={(_, value) => onChange(value)}
       />
     </Box>
   );

@@ -1,21 +1,21 @@
-import { reject, compose, append, equals, pick, find } from 'ramda';
-import { openSnackbar } from './snackbar';
+import { append, compose, equals, find, pick, reject } from 'ramda';
 import {
-  postUser,
-  postUserLogin,
   patchUser,
+  postUser,
   postUserForgot,
   postUserImage,
+  postUserLogin,
 } from '../api';
-import { getIds } from '../utils';
-import socket from '../socketEvents';
 import { SUCCESS } from '../containers/Snackbar/constants';
 import {
-  getAuthUsersLiked,
-  getAuthUsersBlocked,
   getAuthFriends,
   getAuthId,
+  getAuthUsersBlocked,
+  getAuthUsersLiked,
 } from '../selectors/auth';
+import socket from '../socketEvents';
+import { getIds } from '../utils';
+import { openSnackbar } from './snackbar';
 
 export const REGISTER = 'REGISTER';
 export const LOGIN = 'LOGIN';
@@ -37,47 +37,39 @@ export const REMOVE_NOTIFICATION = 'REMOVE_NOTIFICATION';
 
 export const logout = () => (dispatch, getState) => {
   const state = getState();
-  const authId = getAuthId(state)
+  const authId = getAuthId(state);
   dispatch({ type: LOGOUT });
   socket.emit('logout', authId);
 };
 
 export const register = (user) => async (dispatch) => {
   dispatch({ type: REGISTER });
-  try {
-    await postUser(user);
-    dispatch(openSnackbar({ variant: SUCCESS }));
-  } catch { }
+  await postUser(user);
+  dispatch(openSnackbar({ variant: SUCCESS }));
 };
 
 export const login = (user) => async (dispatch) => {
   dispatch({ type: LOGIN });
-  try {
-    const { data } = await postUserLogin(user);
-    dispatch({ type: LOGGED, data });
-    socket.emit('logged', data._id);
-  } catch { }
+  const { data } = await postUserLogin(user);
+  dispatch({ type: LOGGED, data });
+  socket.emit('logged', data._id);
 };
 
 export const updateUser = (user, token) => async (dispatch) => {
   dispatch({ type: UPDATE_USER });
-  try {
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
-    const { data } = await patchUser(user, config);
-    dispatch({ type: UPDATED_USER, data });
-  } catch { }
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const { data } = await patchUser(user, config);
+  dispatch({ type: UPDATED_USER, data });
 };
 
 export const forgotPassword = (auth) => async (dispatch) => {
   dispatch({ type: FORGOT_PASSWORD });
-  try {
-    await postUserForgot(auth);
-    dispatch(openSnackbar({ variant: SUCCESS }));
-  } catch { }
+  await postUserForgot(auth);
+  dispatch(openSnackbar({ variant: SUCCESS }));
 };
 
 export const likeUser = (userLikedId) => async (dispatch, getState) => {
@@ -90,18 +82,16 @@ export const likeUser = (userLikedId) => async (dispatch, getState) => {
     reject(equals(userLikedId)),
     getIds
   )(authUsersBlocked);
-  try {
-    const { data } = await patchUser({ usersLiked, usersBlocked });
-    dispatch({ type: LIKED_USER, data });
-    const sender = pick(['_id', 'username'])(data)
-    socket.emit('userLiked', sender, userLikedId);
-    const friendsIds = getIds(data.friends);
-    const isFriended = find((friendId) => userLikedId === friendId)(friendsIds);
-    if (isFriended) {
-      const sender = pick(['_id', 'username'])(data)
-      socket.emit('userFriended', sender, userLikedId);
-    }
-  } catch { }
+  const { data } = await patchUser({ usersLiked, usersBlocked });
+  dispatch({ type: LIKED_USER, data });
+  const sender = pick(['_id', 'username'])(data);
+  socket.emit('userLiked', sender, userLikedId);
+  const friendsIds = getIds(data.friends);
+  const isFriended = find((friendId) => userLikedId === friendId)(friendsIds);
+  if (isFriended) {
+    const sender = pick(['_id', 'username'])(data);
+    socket.emit('userFriended', sender, userLikedId);
+  }
 };
 
 export const blockUser = (userBlockedId) => async (dispatch, getState) => {
@@ -116,28 +106,24 @@ export const blockUser = (userBlockedId) => async (dispatch, getState) => {
   )(authUsersLiked);
   const usersBlocked = compose(append(userBlockedId), getIds)(authUsersBlocked);
   const user = { usersLiked, usersBlocked };
-  try {
-    const { data } = await patchUser(user);
-    dispatch({ type: BLOCKED_USER, data });
+  const { data } = await patchUser(user);
+  dispatch({ type: BLOCKED_USER, data });
+  const sender = pick(['_id', 'username'])(data);
+  socket.emit('userBlocked', sender, userBlockedId);
+  const friendsIds = getIds(friends);
+  const isUnfriended = find((friendId) => userBlockedId === friendId)(
+    friendsIds
+  );
+  if (isUnfriended) {
     const sender = pick(['_id', 'username'])(data);
-    socket.emit('userBlocked', sender, userBlockedId);
-    const friendsIds = getIds(friends);
-    const isUnfriended = find((friendId) => userBlockedId === friendId)(
-      friendsIds
-    );
-    if (isUnfriended) {
-      const sender = pick(['_id', 'username'])(data)
-      socket.emit('userUnfriended', sender, userBlockedId);
-    }
-  } catch { }
+    socket.emit('userUnfriended', sender, userBlockedId);
+  }
 };
 
 export const uploadImage = (id, image) => async (dispatch) => {
   dispatch({ type: UPLOAD_IMAGE });
-  try {
-    const { data } = await postUserImage(id, image);
-    dispatch({ type: UPLOADED_IMAGE, data });
-  } catch { }
+  const { data } = await postUserImage(id, image);
+  dispatch({ type: UPLOADED_IMAGE, data });
 };
 
 export const removeNotification = (_id) => ({ type: REMOVE_NOTIFICATION, _id });

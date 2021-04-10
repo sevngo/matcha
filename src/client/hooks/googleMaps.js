@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { displayLoader, hideLoader } from '../actions/loading';
 
-export const useAutocomplete = (inputId, onChange, isActive) => {
+export const useAutocomplete = (inputName, onChange, isActive) => {
   let autocomplete;
   const handlePlace = () => {
     const newAddress = autocomplete.getPlace();
@@ -19,7 +19,7 @@ export const useAutocomplete = (inputId, onChange, isActive) => {
   };
   useEffect(() => {
     if (isActive) {
-      const element = document.getElementById(inputId);
+      const [element] = document.getElementsByName(inputName);
       autocomplete = new google.maps.places.Autocomplete(element); // eslint-disable-line react-hooks/exhaustive-deps
       autocomplete.setTypes(['address']);
       autocomplete.setFields(['formatted_address', 'geometry']);

@@ -3,7 +3,7 @@ export const userProjection = {
   username: 1,
   gender: 1,
   birthDate: 1,
-  'address.name': 1,
+  address: 1,
   'image._id': 1,
   distance: 1,
 };

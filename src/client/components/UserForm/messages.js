@@ -39,7 +39,7 @@ export default defineMessages({
   },
   gender: {
     id: 'components.userForm.gender',
-    defaultMessage: 'Gender',
+    defaultMessage: 'Gender :',
   },
   male: {
     id: 'components.userForm.male',
@@ -48,10 +48,6 @@ export default defineMessages({
   maxDistance: {
     id: 'components.userForm.maxDistance',
     defaultMessage: 'Max distance :',
-  },
-  newPassword: {
-    id: 'components.userForm.newPassword',
-    defaultMessage: 'New password',
   },
   password: {
     id: 'components.userForm.password',

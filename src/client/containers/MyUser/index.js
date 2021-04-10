@@ -77,7 +77,6 @@ const MyUser = () => {
                 birthDate,
               }}
               submit={updateUser}
-              newPasswordLabel
             />
           </Paper>
         </Grid>

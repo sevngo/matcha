@@ -1,92 +1,106 @@
-import React, { useState, useCallback } from 'react';
-import { FormattedMessage } from 'react-intl';
-import { has, map, isNil, __ } from 'ramda';
-import { useFormik } from 'formik';
-import { Button, MenuItem, Grid } from '@material-ui/core';
-import VisibilityIcon from '@material-ui/icons/Visibility';
-import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
-import ClearIcon from '@material-ui/icons/Clear';
-import VpnKeyIcon from '@material-ui/icons/VpnKey';
+import { Box, Button, Grid, IconButton, MenuItem } from '@material-ui/core';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import AlternateEmailIcon from '@material-ui/icons/AlternateEmail';
+import ClearIcon from '@material-ui/icons/Clear';
 import DateRangeIcon from '@material-ui/icons/DateRange';
 import MyLocationIcon from '@material-ui/icons/MyLocation';
-
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
+import VpnKeyIcon from '@material-ui/icons/VpnKey';
+import { has, map, __ } from 'ramda';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { FormattedMessage } from 'react-intl';
+import { useAutocomplete, useGeolocation } from '../../hooks/googleMaps';
+import { isEmail, isOld, isTrimmed, isYoung } from '../../utils';
 import Input from '../Input';
 import Radio from '../Radio';
 import Select from '../Select';
 import Slider from '../Slider';
-import { useGeolocation, useAutocomplete } from '../../hooks/googleMaps';
 import { GENDER_OPTIONS, SORT_BY_OPTIONS } from './constants';
 import messages from './messages';
-import validate from './validate';
+import useStyles from './styles';
 
-const UserForm = ({
-  initialValues,
-  disabled,
-  submit,
-  newPasswordLabel,
-  id,
-}) => {
-  const hasInitialValue = has(__, initialValues);
-  const {
-    handleSubmit,
-    handleChange,
-    isValid,
-    dirty,
-    errors,
-    touched,
-    setFieldValue,
-    values,
-    handleBlur,
-  } = useFormik({
-    initialValues,
-    onSubmit: submit,
-    validate: (values) => validate(initialValues, values, newPasswordLabel),
-    enableReinitialize: true,
-  });
+const UserForm = ({ initialValues, readOnly = false, submit, id }) => {
   const [showPassword, toggleShowPassword] = useState(false);
-  const address = values['address'];
-  const isValidAddress = !isNil(address?.coordinates);
-  const handleAddress = useCallback(
-    (address) => setFieldValue('address', address),
-    [setFieldValue]
-  );
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { isDirty, errors },
+    control,
+    setValue,
+    reset,
+    trigger,
+  } = useForm({
+    defaultValues: initialValues,
+    mode: 'onTouched',
+  });
+  const hasInitialValue = has(__, initialValues);
+  const coordinates = watch('address.coordinates');
+
+  if (initialValues.address) {
+    register('address.coordinates', { required: true });
+    register('address.type', { required: true });
+  }
+  const handleAddress = (address) => {
+    setValue('address', address);
+    trigger('address.coordinates');
+  };
   const getGeolocation = useGeolocation(handleAddress);
-  useAutocomplete('address', handleAddress, !isNil(address));
-  const passwordMessage = newPasswordLabel
-    ? messages.newPassword
-    : messages.password;
+  useAutocomplete(
+    'address.name',
+    handleAddress,
+    hasInitialValue('address') && !readOnly
+  );
+  const classes = useStyles();
   return (
-    <form onSubmit={handleSubmit} style={{ width: '100%' }}>
+    <form
+      onSubmit={handleSubmit(async (values) => {
+        await submit(values);
+        reset(values);
+      })}
+      // style={{ width: '100%' }}
+      className={classes.width100}
+    >
       <Grid container direction="column" spacing={2}>
         {hasInitialValue('username') && (
           <Grid item>
             <Input
-              inputProps={{ 'data-testid': 'usernameInput' }}
               name="username"
-              autoComplete="username"
-              onChange={handleChange}
-              onBlur={handleBlur}
+              control={control}
+              inputProps={{ 'data-testid': 'usernameInput' }}
               label={<FormattedMessage {...messages.username} />}
-              error={touched.username && errors.username}
-              value={values.username}
+              autoComplete="username"
+              readOnly={readOnly}
+              rules={{
+                required: true,
+                minLength: 4,
+                maxLength: 40,
+                validate: {
+                  invalid: isTrimmed,
+                },
+              }}
               startAdornment={<AccountCircleIcon />}
-              disabled={disabled}
             />
           </Grid>
         )}
         {hasInitialValue('password') && (
           <Grid item>
             <Input
-              inputProps={{ 'data-testid': 'passwordInput' }}
               name="password"
+              control={control}
+              rules={{
+                required: true,
+                minLength: 4,
+                maxLength: 40,
+                validate: {
+                  invalid: isTrimmed,
+                },
+              }}
+              inputProps={{ 'data-testid': 'passwordInput' }}
+              label={<FormattedMessage {...messages.password} />}
               autoComplete="password"
-              label={<FormattedMessage {...passwordMessage} />}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.password}
-              error={touched.password && errors.password}
               type={showPassword ? 'text' : 'password'}
               startAdornment={<VpnKeyIcon />}
               endAdornment={{
@@ -99,15 +113,20 @@ const UserForm = ({
         {hasInitialValue('email') && (
           <Grid item>
             <Input
-              inputProps={{ 'data-testid': 'emailInput' }}
               name="email"
+              control={control}
+              rules={{
+                required: true,
+                maxLength: 40,
+                validate: {
+                  invalid: isEmail,
+                },
+              }}
+              inputProps={{ 'data-testid': 'emailInput' }}
               label={<FormattedMessage {...messages.email} />}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.email}
-              error={touched.email && errors.email}
+              autoComplete="email"
               startAdornment={<AlternateEmailIcon />}
-              disabled={disabled}
+              readOnly={readOnly}
             />
           </Grid>
         )}
@@ -115,14 +134,18 @@ const UserForm = ({
           <Grid item>
             <Input
               name="birthDate"
-              label={<FormattedMessage {...messages.birthDate} />}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.birthDate}
-              error={touched.birthDate && errors.birthDate}
+              control={control}
+              rules={{
+                required: true,
+                validate: {
+                  tooYoung: isYoung,
+                  tooOld: isOld,
+                },
+              }}
               type="date"
+              label={<FormattedMessage {...messages.birthDate} />}
               startAdornment={<DateRangeIcon />}
-              disabled={disabled}
+              readOnly={readOnly}
             />
           </Grid>
         )}
@@ -130,50 +153,55 @@ const UserForm = ({
           <Grid item>
             <Radio
               name="gender"
+              control={control}
+              rules={{ required: true }}
               label={<FormattedMessage {...messages.gender} />}
-              onChange={handleChange}
-              value={values.gender}
-              error={touched.gender && errors.gender}
               options={GENDER_OPTIONS}
               messages={messages}
-              disabled={disabled}
+              readOnly={readOnly}
             />
           </Grid>
         )}
         {hasInitialValue('address') && (
-          <Grid item>
+          <Grid
+            item
+            container
+            direction="row"
+            alignItems="flex-start"
+            style={{ flexWrap: 'nowrap' }}
+          >
             <Input
               name="address.name"
-              id="address"
+              control={control}
               label={<FormattedMessage {...messages.address} />}
-              disabled={disabled || isValidAddress}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.address?.name}
-              error={touched.address && errors.address}
-              endAdornment={
-                (isValidAddress &&
-                  !disabled && {
-                    icon: <ClearIcon />,
-                    action: () => setFieldValue('address', { name: '' }),
-                  }) ||
-                (!disabled && {
-                  icon: <MyLocationIcon />,
-                  action: getGeolocation,
-                })
-              }
+              otherError={errors.address?.coordinates?.type}
+              readOnly={readOnly || Boolean(coordinates)}
             />
+            <Box marginTop={5} />
+            {coordinates && !readOnly && (
+              <IconButton
+                onClick={() => handleAddress({ name: '', coordinates: null })}
+                className={classes.pt1}
+              >
+                <ClearIcon />
+              </IconButton>
+            )}
+            {!coordinates && !readOnly && (
+              <IconButton onClick={getGeolocation} className={classes.pt1}>
+                <MyLocationIcon />
+              </IconButton>
+            )}
           </Grid>
         )}
         {hasInitialValue('ageRange') && (
           <Grid item>
             <Slider
               name="ageRange"
+              control={control}
               label={<FormattedMessage {...messages.ageRange} />}
-              value={values.ageRange}
               min={18}
               max={50}
-              setFieldValue={setFieldValue}
+              valueLabelDisplay="on"
             />
           </Grid>
         )}
@@ -181,13 +209,12 @@ const UserForm = ({
           <Grid item>
             <Slider
               name="maxDistance"
+              control={control}
               label={<FormattedMessage {...messages.maxDistance} />}
-              unitLabel={<FormattedMessage {...messages.unitDistance} />}
-              value={values.maxDistance}
               min={50}
               max={20000}
               step={50}
-              setFieldValue={setFieldValue}
+              valueLabelDisplay="on"
             />
           </Grid>
         )}
@@ -195,9 +222,7 @@ const UserForm = ({
           <Grid item>
             <Select
               name="sortBy"
-              onChange={handleChange}
-              error={touched.sortBy && errors.sortBy}
-              value={values.sortBy}
+              control={control}
               label={<FormattedMessage {...messages.sortBy} />}
             >
               {map((option) => (
@@ -208,7 +233,7 @@ const UserForm = ({
             </Select>
           </Grid>
         )}
-        {!disabled && (
+        {!readOnly && (
           <Grid item>
             <Button
               data-testid={`submitForm-${id}`}
@@ -216,7 +241,7 @@ const UserForm = ({
               variant="contained"
               color="primary"
               size="large"
-              disabled={!isValid || !dirty}
+              disabled={!isDirty}
               fullWidth
             >
               <FormattedMessage {...messages.submit} />

@@ -1,6 +1,6 @@
 import { defineMessages } from 'react-intl';
 
-export default defineMessages({
+export const formMessages = defineMessages({
   required: {
     id: 'components.input.required',
     defaultMessage: 'Required',
@@ -9,11 +9,11 @@ export default defineMessages({
     id: 'components.input.invalid',
     defaultMessage: 'Invalid',
   },
-  tooShort: {
+  minLength: {
     id: 'components.input.tooShort',
     defaultMessage: 'Too short',
   },
-  tooLong: {
+  maxLength: {
     id: 'components.input.tooLong',
     defaultMessage: 'Too long',
   },

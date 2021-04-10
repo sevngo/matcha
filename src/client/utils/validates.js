@@ -1,19 +1,7 @@
-import { reduce, length, trim } from 'ramda';
-
-export const composeValidators = (...validators) => (value) =>
-  reduce(
-    (error, validator) => error || validator(value),
-    undefined
-  )(validators);
-
-export const isRequired = (value) => !value && 'required';
+import { trim } from 'ramda';
 
 export const isEmail = (value) =>
-  !/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) && 'invalid';
-
-export const minLength = (value) => value && length(value) < 3 && 'tooShort';
-
-export const maxLength = (max) => (value) => length(value) > max && 'tooLong';
+  !/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ? 'invalid' : null;
 
 export const isOld = (value) => {
   const today = new Date();
@@ -33,4 +21,4 @@ export const isYoung = (value) => {
     return 'tooYoung';
 };
 
-export const isTrimmed = (value) => value !== trim(value) && 'invalid';
+export const isTrimmed = (value) => (value !== trim(value) ? 'invalid' : null);
