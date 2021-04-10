@@ -205,14 +205,15 @@ const UserForm = ({ initialValues, readOnly = false, submit, id }) => {
         )}
         {hasInitialValue('maxDistance') && (
           <Grid item>
-            <Slider
+            <Input
               name="maxDistance"
               control={control}
               label={<FormattedMessage {...messages.maxDistance} />}
-              min={50}
-              max={20000}
-              step={50}
-              valueLabelDisplay="on"
+              type="number"
+              rules={{ required: true }}
+              InputProps={{
+                endAdornment: <FormattedMessage {...messages.unitDistance} />,
+              }}
             />
           </Grid>
         )}
