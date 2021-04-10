@@ -13,6 +13,8 @@ const Input = ({
   endAdornment,
   otherError,
   readOnly,
+  min,
+  max,
   ...rest
 }) => {
   const classes = useStyles();
@@ -32,6 +34,7 @@ const Input = ({
       helperText={error && <FormattedMessage {...formMessages[error]} />}
       fullWidth
       inputRef={ref}
+      inputProps={{ min, max }}
       InputProps={{
         startAdornment: startAdornment && (
           <Box className={classes.icon}>{startAdornment}</Box>

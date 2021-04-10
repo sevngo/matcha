@@ -9,7 +9,7 @@ describe('Drawer', () => {
       filter: {
         gender: 'male',
         maxDistance: 20000,
-        ageRange: [18, 50],
+        ageRange: [18, 80],
         sortBy: 'distance:asc',
         limit: 10,
         skip: 0,

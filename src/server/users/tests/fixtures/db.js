@@ -1,22 +1,14 @@
 import faker from 'faker';
 import bcrypt from 'bcryptjs';
 import mongodb from 'mongodb';
+import moment from 'moment';
 import { createToken } from '../../../utils/functions';
 
 const { ObjectID } = mongodb;
 
 const genders = ['female', 'male'];
-const today = new Date();
-const birthDateMin = new Date(
-  today.getFullYear() - 50,
-  today.getMonth(),
-  today.getDate()
-);
-const birthDateMax = new Date(
-  today.getFullYear() - 18,
-  today.getMonth(),
-  today.getDate()
-);
+const birthDateMin = moment().subtract(80, 'years').format('YYYY-MM-DD');
+const birthDateMax = moment().subtract(18, 'years').format('YYYY-MM-DD');
 
 export const authUserPassword = faker.internet.password();
 const authUserId = ObjectID();

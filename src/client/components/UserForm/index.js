@@ -12,7 +12,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 import { useAutocomplete, useGeolocation } from '../../hooks/googleMaps';
-import { isEmail, isOld, isTrimmed, isYoung } from '../../utils';
+import { isEmail, isTrimmed } from '../../utils';
 import Input from '../Input';
 import Radio from '../Radio';
 import Select from '../Select';
@@ -20,6 +20,7 @@ import Slider from '../Slider';
 import { GENDER_OPTIONS, SORT_BY_OPTIONS } from './constants';
 import messages from './messages';
 import useStyles from './styles';
+import moment from 'moment';
 
 const UserForm = ({ initialValues, readOnly = false, submit, id }) => {
   const [showPassword, toggleShowPassword] = useState(false);
@@ -54,13 +55,14 @@ const UserForm = ({ initialValues, readOnly = false, submit, id }) => {
     hasInitialValue('address') && !readOnly
   );
   const classes = useStyles();
+  const minDate = moment().subtract(80, 'years').format('YYYY-MM-DD');
+  const maxDate = moment().subtract(18, 'years').format('YYYY-MM-DD');
   return (
     <form
       onSubmit={handleSubmit(async (values) => {
         await submit(values);
         reset(values);
       })}
-      // style={{ width: '100%' }}
       className={classes.width100}
     >
       <Grid container direction="column" spacing={2}>
@@ -135,14 +137,10 @@ const UserForm = ({ initialValues, readOnly = false, submit, id }) => {
             <Input
               name="birthDate"
               control={control}
-              rules={{
-                required: true,
-                validate: {
-                  tooYoung: isYoung,
-                  tooOld: isOld,
-                },
-              }}
+              rules={{ required: true }}
               type="date"
+              min={minDate}
+              max={maxDate}
               label={<FormattedMessage {...messages.birthDate} />}
               startAdornment={<DateRangeIcon />}
               readOnly={readOnly}
@@ -200,7 +198,7 @@ const UserForm = ({ initialValues, readOnly = false, submit, id }) => {
               control={control}
               label={<FormattedMessage {...messages.ageRange} />}
               min={18}
-              max={50}
+              max={80}
               valueLabelDisplay="on"
             />
           </Grid>

@@ -1,22 +1,13 @@
 import mongodb from 'mongodb';
 import faker from 'faker';
 import bcrypt from 'bcryptjs';
+import moment from 'moment';
 import { connectDb, getUsers, disconnectDb } from '../src/server/database.js';
 
 const insertData = async () => {
   const genders = ['female', 'male'];
-  const today = new Date();
-  const birthDateMin = new Date(
-    today.getFullYear() - 50,
-    today.getMonth(),
-    today.getDate()
-  );
-  const birthDateMax = new Date(
-    today.getFullYear() - 18,
-    today.getMonth(),
-    today.getDate()
-  );
-
+  const birthDateMin = moment().subtract(80, 'years').format('YYYY-MM-DD');
+  const birthDateMax = moment().subtract(18, 'years').format('YYYY-MM-DD');
   const newUser = {
     username: 'admin',
     birthDate: faker.date.between(birthDateMin, birthDateMax),
