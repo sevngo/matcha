@@ -1,31 +1,31 @@
 /*global google*/
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { displayLoader, hideLoader } from '../actions/loading';
 
 export const useAutocomplete = (inputName, onChange, isActive) => {
-  let autocomplete;
-  const handlePlace = () => {
-    const newAddress = autocomplete.getPlace();
-    const { formatted_address } = newAddress;
-    const location = newAddress.geometry?.location;
-    if (!location) return;
-    const address = {
-      name: formatted_address,
-      type: 'Point',
-      coordinates: [location.lng(), location.lat()],
-    };
-    onChange(address);
-  };
+  const autocomplete = useRef();
   useEffect(() => {
     if (isActive) {
+      const handlePlace = () => {
+        const newAddress = autocomplete.current.getPlace();
+        const { formatted_address } = newAddress;
+        const location = newAddress.geometry?.location;
+        if (!location) return;
+        const address = {
+          name: formatted_address,
+          type: 'Point',
+          coordinates: [location.lng(), location.lat()],
+        };
+        onChange(address);
+      };
       const [element] = document.getElementsByName(inputName);
-      autocomplete = new google.maps.places.Autocomplete(element); // eslint-disable-line react-hooks/exhaustive-deps
-      autocomplete.setTypes(['address']);
-      autocomplete.setFields(['formatted_address', 'geometry']);
-      autocomplete.addListener('place_changed', handlePlace);
+      autocomplete.current = new google.maps.places.Autocomplete(element); // eslint-disable-line react-hooks/exhaustive-deps
+      autocomplete.current.setTypes(['address']);
+      autocomplete.current.setFields(['formatted_address', 'geometry']);
+      autocomplete.current.addListener('place_changed', handlePlace);
     }
-  }, [isActive]);
+  }, [isActive, onChange, inputName]);
 };
 
 export const useGeolocation = (onChange) => {

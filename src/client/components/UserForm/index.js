@@ -8,7 +8,7 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
 import { has, map, __ } from 'ramda';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 import { useAutocomplete, useGeolocation } from '../../hooks/googleMaps';
@@ -44,10 +44,13 @@ const UserForm = ({ initialValues, readOnly = false, submit, id }) => {
     register('address.coordinates', { required: true });
     register('address.type', { required: true });
   }
-  const handleAddress = (address) => {
-    setValue('address', address);
-    trigger('address.coordinates');
-  };
+  const handleAddress = useCallback(
+    (address) => {
+      setValue('address', address);
+      trigger('address.coordinates');
+    },
+    [setValue, trigger]
+  );
   const getGeolocation = useGeolocation(handleAddress);
   useAutocomplete(
     'address.name',
