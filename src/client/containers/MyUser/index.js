@@ -3,7 +3,6 @@ import { FormattedMessage } from 'react-intl';
 import { Grid, Paper, Grow, IconButton, Box, Tooltip } from '@material-ui/core';
 import { useIntl } from 'react-intl';
 import CloudUpload from '@material-ui/icons/CloudUpload';
-import { split } from 'ramda';
 import UserForm from '../../components/UserForm';
 import useStyles from './styles';
 import messages from './messages';
@@ -15,27 +14,30 @@ const MyUser = () => {
   const classes = useStyles();
   const inputEl = useRef();
   const {
-    authId,
-    authCard,
-    authForm,
+    _id,
     usersBlocked,
     updateUser,
     uploadImage,
     likeUser,
+    username,
+    birthDate,
+    email,
+    gender,
+    address,
+    image,
   } = useConnect();
   const intl = useIntl();
   const openFile = useCallback(() => inputEl.current.click(), []);
   const uploadFile = (event) => {
     const image = event.target.files[0];
-    if (image) uploadImage(authId, image);
+    if (image) uploadImage(_id, image);
   };
-  const birthDate = split('T')(authForm.birthDate)[0];
   return (
     <Grid container spacing={2}>
       <Grow in={true} timeout={200}>
         <Grid item xs={12} sm={6} md={7}>
           <UserCard
-            user={authCard}
+            user={{ _id, username, birthDate, image }}
             actions={
               <Fragment>
                 <input
@@ -73,8 +75,11 @@ const MyUser = () => {
             <UserForm
               id="myUser"
               initialValues={{
-                ...authForm,
+                username,
                 birthDate,
+                email,
+                gender,
+                address,
               }}
               submit={updateUser}
             />

@@ -1,4 +1,4 @@
-import { length, prop, propOr, pick, isEmpty } from 'ramda';
+import { length, prop, propOr, isEmpty, compose, split } from 'ramda';
 import { createSelector } from 'reselect';
 
 export const getAuth = prop('auth');
@@ -9,15 +9,17 @@ export const getAuthId = createSelector(getAuth, prop('_id'));
 
 export const getAuthToken = createSelector(getAuth, prop('token'));
 
-export const getAuthForm = createSelector(
+export const getAuthUsername = createSelector(getAuth, prop('username'));
+export const getAuthBirthDate = createSelector(
   getAuth,
-  pick(['username', 'birthDate', 'email', 'gender', 'address'])
+  compose(prop(0), split('T'), propOr('', 'birthDate'))
 );
+export const getAuthEmail = createSelector(getAuth, prop('email'));
+export const getAuthGender = createSelector(getAuth, prop('gender'));
+export const getAuthAddress = createSelector(getAuth, prop('address'));
 
-export const getAuthCard = createSelector(
-  getAuth,
-  pick(['_id', 'distance', 'username', 'birthDate', 'image'])
-);
+export const getAuthDistance = createSelector(getAuth, prop('distance'));
+export const getAuthImage = createSelector(getAuth, prop('image'));
 
 export const getAuthUsersBlocked = createSelector(
   getAuth,
