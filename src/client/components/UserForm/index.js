@@ -7,6 +7,7 @@ import MyLocationIcon from '@material-ui/icons/MyLocation';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
+import moment from 'moment';
 import { has, map, __ } from 'ramda';
 import React, { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -20,7 +21,6 @@ import Slider from '../Slider';
 import { GENDER_OPTIONS, SORT_BY_OPTIONS } from './constants';
 import messages from './messages';
 import useStyles from './styles';
-import moment from 'moment';
 
 const UserForm = ({ initialValues, readOnly = false, submit, id }) => {
   const [showPassword, toggleShowPassword] = useState(false);
@@ -39,7 +39,6 @@ const UserForm = ({ initialValues, readOnly = false, submit, id }) => {
   });
   const hasInitialValue = has(__, initialValues);
   const coordinates = watch('address.coordinates');
-
   if (initialValues.address) {
     register('address.coordinates', { required: true });
     register('address.type', { required: true });
@@ -144,6 +143,7 @@ const UserForm = ({ initialValues, readOnly = false, submit, id }) => {
               type="date"
               min={minDate}
               max={maxDate}
+              inputProps={{ 'data-testid': 'birthDateInput' }}
               label={<FormattedMessage {...messages.birthDate} />}
               startAdornment={<DateRangeIcon />}
               readOnly={readOnly}
@@ -188,7 +188,11 @@ const UserForm = ({ initialValues, readOnly = false, submit, id }) => {
               </IconButton>
             )}
             {!coordinates && !readOnly && (
-              <IconButton onClick={getGeolocation} className={classes.pt1}>
+              <IconButton
+                onClick={getGeolocation}
+                className={classes.pt1}
+                data-testid="geolocate"
+              >
                 <MyLocationIcon />
               </IconButton>
             )}
