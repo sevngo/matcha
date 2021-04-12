@@ -1,14 +1,13 @@
-import React, { Fragment, useRef, useCallback } from 'react';
-import { FormattedMessage } from 'react-intl';
-import { Grid, Paper, Grow, IconButton, Box, Tooltip } from '@material-ui/core';
-import { useIntl } from 'react-intl';
+import { Box, Grid, Grow, IconButton, Paper, Tooltip } from '@material-ui/core';
 import CloudUpload from '@material-ui/icons/CloudUpload';
-import UserForm from '../../components/UserForm';
-import useStyles from './styles';
-import messages from './messages';
+import React, { Fragment, useCallback, useRef } from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
 import UserCard from '../../components/UserCard';
-import { useConnect } from './hooks';
+import UserForm from '../../components/UserForm';
 import UsersList from '../../components/UsersList';
+import { useConnect } from './hooks';
+import messages from './messages';
+import useStyles from './styles';
 
 const MyUser = () => {
   const classes = useStyles();
@@ -73,7 +72,6 @@ const MyUser = () => {
         <Grid item xs={12} sm={6} md={5}>
           <Paper elevation={1} className={classes.p3}>
             <UserForm
-              id="myUser"
               initialValues={{
                 username,
                 birthDate,

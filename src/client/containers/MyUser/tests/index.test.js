@@ -1,6 +1,6 @@
-import React from 'react';
-import axios from 'axios';
 import { fireEvent, render, waitFor } from '@testing-library/react';
+import axios from 'axios';
+import React from 'react';
 import TestProvider from '../../../components/TestProvider';
 import Component from '../index';
 
@@ -69,14 +69,14 @@ describe('MyUser', () => {
   });
 
   it('should update my user', async () => {
-    const { getByTestId, getByRole } = render(
+    const { getByRole } = render(
       <TestProvider initialState={initialState}>
         <Component />
       </TestProvider>
     );
     fireEvent.click(getByRole('radio', { name: 'Male' }));
     axios.patch.mockResolvedValue({ data: { gender: 'male' } });
-    fireEvent.click(getByTestId('submitForm-myUser'));
+    fireEvent.click(getByRole('button', { name: 'Submit' }));
 
     await waitFor(() =>
       expect(axios.patch).toHaveBeenCalledWith(
@@ -95,6 +95,6 @@ describe('MyUser', () => {
         { headers: { Authorization: 'Bearer undefined' } }
       )
     );
-    await waitFor(() => getByTestId('submitForm-myUser').disabled);
+    await waitFor(() => getByRole('button', { name: 'Submit' }).disabled);
   });
 });

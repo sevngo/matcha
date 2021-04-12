@@ -1,5 +1,5 @@
-import React from 'react';
 import { fireEvent, render, waitFor } from '@testing-library/react';
+import React from 'react';
 import TestProvider from '../../../components/TestProvider';
 import Component from '../index';
 
@@ -30,14 +30,14 @@ describe('Drawer', () => {
   });
 
   it('should handle filter', async () => {
-    const { getByRole, getByTestId } = render(
+    const { getByRole } = render(
       <TestProvider initialState={initialState}>
         <Component isDrawerOpen />
       </TestProvider>
     );
     fireEvent.click(getByRole('radio', { name: 'Female' }));
-    await waitFor(() => !getByTestId('submitForm-drawer').disabled);
-    fireEvent.click(getByTestId('submitForm-drawer'));
-    await waitFor(() => getByTestId('submitForm-drawer').disabled);
+    await waitFor(() => !getByRole('button', { name: 'Submit' }).disabled);
+    fireEvent.click(getByRole('button', { name: 'Submit' }));
+    await waitFor(() => getByRole('button', { name: 'Submit' }).disabled);
   });
 });

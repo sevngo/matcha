@@ -1,26 +1,26 @@
-import React, { useState } from 'react';
-import { FormattedMessage } from 'react-intl';
 import {
+  Avatar,
   Box,
   Dialog,
-  DialogTitle,
   DialogContent,
   DialogContentText,
+  DialogTitle,
+  Grid,
+  Grow,
+  Link as MuiLink,
   Paper,
   Typography,
-  Link as MuiLink,
-  Grid,
-  Avatar,
-  Grow,
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import UserForm from '../../components/UserForm';
-import useStyles from './styles';
-import messages from './messages';
+import React, { useState } from 'react';
+import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
+import UserForm from '../../components/UserForm';
 import { registerPath } from '../../utils';
+import { initialValues, initialValuesEmail } from './constants';
 import { useConnect } from './hooks';
-import { initialValuesEmail, initialValues } from './constants';
+import messages from './messages';
+import useStyles from './styles';
 
 const Login = () => {
   const { login, forgotPassword } = useConnect();
@@ -36,7 +36,7 @@ const Login = () => {
           <FormattedMessage {...messages.login} />
         </Typography>
         <Box mt={3} />
-        <UserForm id="login" initialValues={initialValues} submit={login} />
+        <UserForm initialValues={initialValues} submit={login} />
         <Grid container className={classes.mt2} justify="space-between">
           <MuiLink
             variant="body2"
