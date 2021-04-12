@@ -1,20 +1,20 @@
-import React, { useState, Fragment } from 'react';
-import { FormattedMessage } from 'react-intl';
 import {
-  Typography,
-  Grid,
-  Icon,
-  Divider,
   Badge,
-  IconButton,
   Dialog,
-  DialogTitle,
   DialogContent,
+  DialogTitle,
+  Divider,
+  Grid,
+  IconButton,
+  Typography,
 } from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import useStyles from './styles';
-import messages from './messages';
+import React, { Fragment, useState } from 'react';
+import { FormattedMessage } from 'react-intl';
 import { useConnect } from './hooks';
+import messages from './messages';
+import useStyles from './styles';
 
 const Notifications = () => {
   const {
@@ -62,14 +62,12 @@ const Notifications = () => {
                         }}
                       />
                     </Typography>
-                    <Icon
+                    <DeleteIcon
                       data-testid={`remove-${notification._id}`}
                       onClick={() => removeNotification(notification._id)}
                       color="inherit"
                       className={classes.ml1}
-                    >
-                      delete
-                    </Icon>
+                    />
                   </Grid>
                   {notificationsLength - 1 !== index && <Divider />}
                 </Fragment>
