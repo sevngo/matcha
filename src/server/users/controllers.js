@@ -65,10 +65,11 @@ export const getUsersController = asyncHandler(async (req, res) => {
   cursor.project(userProjection);
   const totalUsers = await cursor.toArray();
   const total = totalUsers.length;
+  res.set('x-total-count', total);
   if (skip) cursor.skip(skip);
   if (limit) cursor.limit(limit);
   const data = await cursor.toArray();
-  res.status(200).send({ data, total });
+  res.status(200).send(data);
 });
 
 export const getUserController = asyncHandler(async (req, res, next) => {

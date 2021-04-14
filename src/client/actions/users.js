@@ -31,7 +31,11 @@ export const loadUsers = () => async (dispatch, getState) => {
 
   const query = `?${genderQuery}&${birthQuery}&${sortQuery}&${maxDistanceQuery}&${limitQuery}&${skipQuery}`;
   try {
-    const { data } = await getUsers(query);
-    dispatch({ type: LOADED_USERS, data });
+    const {
+      data,
+      headers: { 'x-total-count': total },
+    } = await getUsers(query);
+    const users = { data, total };
+    dispatch({ type: LOADED_USERS, users });
   } catch {}
 };

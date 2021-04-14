@@ -94,8 +94,9 @@ describe('/api/users', () => {
       const { body } = await request(app)
         .get('/api/users')
         .set('Authorization', `Bearer ${authUserToken}`)
+        .expect('x-total-count', '2')
         .expect(200);
-      expect(body.data).toHaveLength(2);
+      expect(body).toHaveLength(2);
     });
     test('should get all users with a full query', async () => {
       const { body } = await request(app)
@@ -103,8 +104,9 @@ describe('/api/users', () => {
           '/api/users?gender=male&birthRange=1900-7-18:2030-7-18&sortBy=distance:asc&limit=10&skip=1&maxDistance=20000000'
         )
         .set('Authorization', `Bearer ${authUserToken}`)
+        .expect('x-total-count', '2')
         .expect(200);
-      expect(body.data).toHaveLength(1);
+      expect(body).toHaveLength(1);
     });
     test('should 401 missing authorization header', async () => {
       const { body } = await request(app).get('/api/users').expect(401);
