@@ -145,10 +145,8 @@ describe('Users', () => {
       },
     };
     axios.get.mockResolvedValue({
-      data: {
-        data: users,
-        total,
-      },
+      data: users,
+      headers: { 'x-total-count': total },
     });
     const { getByTestId, queryByTestId, findByTestId } = render(
       <TestProvider initialState={initialState}>
@@ -177,10 +175,8 @@ describe('Users', () => {
       },
     };
     axios.get.mockResolvedValue({
-      data: {
-        data: users,
-        total,
-      },
+      data: users,
+      headers: { 'x-total-count': total },
     });
     const { findByTestId, getByRole, getByText } = render(
       <TestProvider initialState={initialState}>
