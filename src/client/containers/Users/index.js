@@ -67,6 +67,7 @@ const Users = () => {
           page={page}
           classes={{ input: classes.displayNone }}
           className={classes.pagination}
+          SelectProps={{ inputProps: { 'data-testid': 'rowsSelect' } }}
         />
       </Paper>
       <Box mb={2} />

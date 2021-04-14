@@ -30,12 +30,15 @@ describe('Drawer', () => {
   });
 
   it('should handle filter', async () => {
-    const { getByRole } = render(
+    const { getByRole, getAllByRole } = render(
       <TestProvider initialState={initialState}>
         <Component isDrawerOpen />
       </TestProvider>
     );
-    fireEvent.click(getByRole('radio', { name: 'Female' }));
+    fireEvent.mouseDown(getAllByRole('slider')[0], {
+      clientX: 19,
+      clientY: 20,
+    });
     await waitFor(() => !getByRole('button', { name: 'Submit' }).disabled);
     fireEvent.click(getByRole('button', { name: 'Submit' }));
     await waitFor(() => getByRole('button', { name: 'Submit' }).disabled);

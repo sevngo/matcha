@@ -62,6 +62,7 @@ describe('Register', () => {
     fireEvent.change(getByTestId('passwordInput'), {
       target: { value: password },
     });
+    fireEvent.click(getByTestId('passwordEndAdornment'));
     fireEvent.change(getByTestId('emailInput'), {
       target: { value: email },
     });
@@ -69,6 +70,10 @@ describe('Register', () => {
       target: { value: birthDate },
     });
     fireEvent.click(getByRole('radio', { name: 'Male' }));
+    fireEvent.click(getByTestId('geolocate'));
+    await waitFor(() => getByTestId('clearAddress'));
+    fireEvent.click(getByTestId('clearAddress'));
+    await waitFor(() => getByTestId('geolocate'));
     fireEvent.click(getByTestId('geolocate'));
     fireEvent.click(getByRole('button', { name: 'Submit' }));
     await waitFor(() =>

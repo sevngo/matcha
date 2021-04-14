@@ -183,6 +183,7 @@ const UserForm = ({ initialValues, readOnly = false, submit, id }) => {
               <IconButton
                 onClick={() => handleAddress({ name: '', coordinates: null })}
                 className={classes.pt1}
+                data-testid="clearAddress"
               >
                 <ClearIcon />
               </IconButton>

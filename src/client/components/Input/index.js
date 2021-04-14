@@ -15,6 +15,7 @@ const Input = ({
   readOnly,
   min,
   max,
+  InputProps,
   ...rest
 }) => {
   const classes = useStyles();
@@ -40,11 +41,16 @@ const Input = ({
           <Box className={classes.icon}>{startAdornment}</Box>
         ),
         endAdornment: endAdornment && (
-          <IconButton edge="end" onClick={endAdornment.action}>
+          <IconButton
+            edge="end"
+            data-testid={`${fields.name}EndAdornment`}
+            onClick={endAdornment.action}
+          >
             {endAdornment.icon}
           </IconButton>
         ),
         readOnly,
+        ...InputProps,
       }}
       {...fields}
       {...rest}
