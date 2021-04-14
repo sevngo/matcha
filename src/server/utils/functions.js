@@ -1,4 +1,3 @@
-import { reduce } from 'ramda';
 import jwt from 'jsonwebtoken';
 import mongodb from 'mongodb';
 
@@ -8,13 +7,6 @@ export const ErrorResponse = class ErrorResponse extends Error {
     this.statusCode = statusCode;
   }
 };
-
-export const getIds = reduce((acc, object) => [...acc, object._id], []);
-
-export const getSocketIds = reduce(
-  (acc, object) => [...acc, object.socketId],
-  []
-);
 
 export const createNotification = (user) => ({
   user,
