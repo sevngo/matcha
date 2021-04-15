@@ -1,4 +1,9 @@
-import { fireEvent, render, waitFor } from '@testing-library/react';
+import {
+  fireEvent,
+  render,
+  waitFor,
+  waitForElementToBeRemoved,
+} from '@testing-library/react';
 import axios from 'axios';
 import React from 'react';
 import TestProvider from '../../../components/TestProvider';
@@ -95,5 +100,17 @@ describe('MyUser', () => {
       )
     );
     await waitFor(() => getByRole('button', { name: 'Submit' }).disabled);
+  });
+
+  it('should dislike user', async () => {
+    const { getByRole } = render(
+      <TestProvider initialState={initialState}>
+        <Component />
+      </TestProvider>
+    );
+
+    axios.patch.mockResolvedValue({ data: { usersLiked: [] } });
+    fireEvent.click(getByRole('button', { name: 'Dislike' }));
+    await waitForElementToBeRemoved(getByRole('button', { name: 'Dislike' }));
   });
 });
