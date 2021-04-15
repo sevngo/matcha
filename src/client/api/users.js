@@ -1,24 +1,25 @@
-import axios from 'axios';
+import instance from './';
 
-export const postUser = (user) => axios.post('/api/users', user);
+export const postUser = (user) => instance.post('/api/users', user);
 
-export const postUserLogin = (user) => axios.post('/api/users/login', user);
+export const postUserLogin = (user) => instance.post('/api/users/login', user);
 
-export const getUsers = (query = '') => axios.get(`/api/users${query}`);
+export const getUsers = (query = '') => instance.get(`/api/users${query}`);
 
-export const getUser = (id) => axios.get(`/api/users/${id}`);
+export const getUser = (id) => instance.get(`/api/users/${id}`);
 
 export const patchUser = (user, config) => {
-  return axios.patch('/api/users', user, config);
+  return instance.patch('/api/users', user, config);
 };
 
 export const postUserImage = (id, image) => {
   let formData = new FormData();
   formData.append('image', image);
-  return axios.post(`/api/users/${id}/image`, formData);
+  return instance.post(`/api/users/${id}/image`, formData);
 };
 
 export const getUserImage = (userId, imageId) =>
   `/api/users/${userId}/image/${imageId}`;
 
-export const postUserForgot = (user) => axios.post('/api/users/forgot', user);
+export const postUserForgot = (user) =>
+  instance.post('/api/users/forgot', user);

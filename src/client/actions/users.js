@@ -1,4 +1,4 @@
-import { getUsers } from '../api';
+import { getUsers } from '../api/users';
 import { getUsersFilter } from '../selectors/users';
 
 export const LOAD_USERS = 'LOAD_USERS';

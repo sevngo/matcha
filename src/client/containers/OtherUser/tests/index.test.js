@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import axios from '../../../api';
 import { fireEvent, render } from '@testing-library/react';
 import TestProvider from '../../../components/TestProvider';
 import Component from '../index';
@@ -18,7 +18,7 @@ global.google = {
   },
 };
 
-jest.mock('axios');
+jest.mock('../../../api');
 
 describe('OtherUser', () => {
   it('should load user then like and dislike', async () => {

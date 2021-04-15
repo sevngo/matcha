@@ -11,7 +11,7 @@ import {
   Grid,
 } from '@material-ui/core';
 import emptyImage from '../../images/emptyImage.png';
-import { getUserImage } from '../../api';
+import { getUserImage } from '../../api/users';
 import { getAge, userPath } from '../../utils';
 import useStyles from './styles';
 import messages from './messages';

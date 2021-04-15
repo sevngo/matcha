@@ -4,12 +4,12 @@ import {
   waitFor,
   waitForElementToBeRemoved,
 } from '@testing-library/react';
-import axios from 'axios';
+import axios from '../../../api';
 import React from 'react';
 import Component from '..';
 import TestProvider from '../../../components/TestProvider';
 
-jest.mock('axios');
+jest.mock('../../../api');
 
 describe('Login', () => {
   it('should fill login form then confirm', async () => {

@@ -1,9 +1,9 @@
 import { fireEvent, render, waitFor } from '@testing-library/react';
-import axios from 'axios';
+import axios from '../../../api';
 import TestProvider from '../../../components/TestProvider';
 import Component from '../index';
 
-jest.mock('axios');
+jest.mock('../../../api');
 
 describe('Reset', () => {
   it('should render', async () => {

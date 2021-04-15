@@ -1,4 +1,4 @@
-import { getUser } from '../api';
+import { getUser } from '../api/users';
 
 export const LOAD_USER = 'LOAD_USER';
 export const LOADED_USER = 'LOADED_USER';

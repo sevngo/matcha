@@ -5,7 +5,7 @@ import {
   postUserForgot,
   postUserImage,
   postUserLogin,
-} from '../api';
+} from '../api/users';
 import { SUCCESS } from '../containers/Snackbar/constants';
 import {
   getAuthFriends,

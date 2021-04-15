@@ -7,7 +7,9 @@ import { openSnackbar } from '../actions/snackbar';
 import { ERROR } from '../containers/Snackbar/constants';
 import store from '../store';
 
-axios.interceptors.request.use(
+const instance = axios.create();
+
+instance.interceptors.request.use(
   (config) => {
     store.dispatch(displayLoader());
     const state = store.getState();
@@ -20,7 +22,7 @@ axios.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-axios.interceptors.response.use(
+instance.interceptors.response.use(
   (response) => {
     store.dispatch(hideLoader());
     return response;
@@ -35,4 +37,4 @@ axios.interceptors.response.use(
   }
 );
 
-export * from './users';
+export default instance;
