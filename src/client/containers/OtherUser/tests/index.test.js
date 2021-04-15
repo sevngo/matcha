@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import TestProvider from '../../../components/TestProvider';
 import Component from '../index';
 
@@ -21,11 +21,11 @@ global.google = {
 jest.mock('axios');
 
 describe('OtherUser', () => {
-  it('should load user then render', async () => {
-    const id = '60084a46203c4e342b13114c';
+  it('should load user then like and dislike', async () => {
+    const _id = '60084a46203c4e342b13114c';
     axios.get.mockResolvedValue({
       data: {
-        _id: id,
+        _id,
         username: 'Shanie21',
         birthDate: '1998-03-03T13:43:52.868Z',
         gender: 'male',
@@ -34,11 +34,28 @@ describe('OtherUser', () => {
         },
       },
     });
-    render(
-      <TestProvider initialState={{ user: { _id: 'asd' } }}>
-        <Component id={id} />
+    const { getByTestId, findByTestId } = render(
+      <TestProvider initialState={{}}>
+        <Component id={_id} />
       </TestProvider>
     );
-    expect(axios.get).toHaveBeenCalledWith(`/api/users/${id}`);
+    expect(axios.get).toHaveBeenCalledWith(`/api/users/${_id}`);
+    await findByTestId('likeUser');
+    axios.patch.mockResolvedValue({
+      data: {
+        usersLiked: [{ _id }],
+        friends: [{ _id }],
+      },
+    });
+    fireEvent.click(getByTestId('likeUser'));
+    await findByTestId('dislikeUser');
+    axios.patch.mockResolvedValue({
+      data: {
+        usersLiked: [],
+        friends: [],
+      },
+    });
+    fireEvent.click(getByTestId('dislikeUser'));
+    await findByTestId('likeUser');
   });
 });

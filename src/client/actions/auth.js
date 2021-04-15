@@ -81,7 +81,7 @@ export const likeUser = (userLikedId) => async (dispatch, getState) => {
   const sender = pick(['_id', 'username'])(data);
   socket.emit('userLiked', sender, userLikedId);
   const friendsIds = getIds(data.friends);
-  const isFriended = friendsIds.contains(userLikedId);
+  const isFriended = friendsIds.includes(userLikedId);
   if (isFriended) {
     const sender = pick(['_id', 'username'])(data);
     socket.emit('userFriended', sender, userLikedId);
@@ -101,7 +101,7 @@ export const dislikeUser = (userDislikedId) => async (dispatch, getState) => {
   const { data } = await patchUser(user);
   dispatch({ type: DISLIKED_USER, data });
   const friendsIds = getIds(friends);
-  const isUnfriended = friendsIds.contains(userDislikedId);
+  const isUnfriended = friendsIds.includes(userDislikedId);
   if (isUnfriended) {
     const sender = pick(['_id', 'username'])(data);
     socket.emit('userUnfriended', sender, userDislikedId);

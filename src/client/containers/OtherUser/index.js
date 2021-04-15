@@ -46,6 +46,7 @@ const User = ({ id }) => {
                   <IconButton
                     className={isUserLiked ? classes.red : ''}
                     onClick={() => (isUserLiked ? dislikeUser() : likeUser())}
+                    data-testid={isUserLiked ? 'dislikeUser' : 'likeUser'}
                   >
                     <FavoriteIcon />
                   </IconButton>
