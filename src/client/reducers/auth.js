@@ -3,7 +3,7 @@ import {
   LOGOUT,
   UPDATED_USER,
   UPLOADED_IMAGE,
-  BLOCKED_USER,
+  DISLIKED_USER,
   LIKED_USER,
   GOT_FRIENDED,
   GOT_UNDFRIENDED,
@@ -22,7 +22,7 @@ const reducer = (state = {}, action) => {
       return { ...state, ...action.data };
     case UPLOADED_IMAGE:
       return { ...state, ...action.data };
-    case BLOCKED_USER:
+    case DISLIKED_USER:
       return { ...state, ...action.data };
     case LIKED_USER:
       return { ...state, ...action.data };

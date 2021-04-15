@@ -1,7 +1,7 @@
 import { split } from 'ramda';
 import sharp from 'sharp';
 import mongodb from 'mongodb';
-import { match, matchIn } from '../utils/stages.js';
+import { lookupFriends, lookupUsersLiked } from '../utils/stages.js';
 import {
   userProjection,
   authProjection,
@@ -38,7 +38,6 @@ export const getUsersController = asyncHandler(async (req, res) => {
     query: { gender, birthRange, limit, skip, sortBy, maxDistance },
     auth: {
       _id,
-      usersBlocked,
       address: { coordinates },
     },
   } = req;
@@ -54,7 +53,6 @@ export const getUsersController = asyncHandler(async (req, res) => {
     });
   cursor.match({ emailVerified: { $eq: true } });
   if (gender) cursor.match({ gender });
-  if (usersBlocked) cursor.match({ _id: { $nin: usersBlocked } });
   if (_id) cursor.match({ _id: { $ne: _id } });
   if (birthRange)
     cursor.match({ birthDate: { $gt: birthRange[0], $lt: birthRange[1] } });
@@ -91,28 +89,12 @@ export const patchUserController = asyncHandler(async (req, res, next) => {
     { $set: body },
     { returnOriginal: false }
   );
-  const { usersLiked, usersBlocked } = user;
+  const { usersLiked } = user;
   const cursor = Users.aggregate().match({ _id });
-  if (usersLiked)
-    cursor.lookup({
-      from: 'users',
-      localField: 'usersLiked',
-      foreignField: '_id',
-      as: 'usersLiked',
-    });
-  if (usersBlocked)
-    cursor.lookup({
-      from: 'users',
-      localField: 'usersBlocked',
-      foreignField: '_id',
-      as: 'usersBlocked',
-    });
-  if (usersLiked)
-    cursor.lookup({
-      from: 'users',
-      pipeline: [matchIn('_id', usersLiked), match('usersLiked', _id)],
-      as: 'friends',
-    });
+  if (usersLiked) {
+    lookupUsersLiked(cursor);
+    lookupFriends(cursor, usersLiked, _id);
+  }
   cursor.project(authProjection);
   const [data] = await cursor.toArray();
   res.send(data);
@@ -120,31 +102,15 @@ export const patchUserController = asyncHandler(async (req, res, next) => {
 
 export const postUserLoginController = asyncHandler(async (req, res) => {
   const {
-    auth: { _id, usersLiked, usersBlocked },
+    auth: { _id, usersLiked },
     token,
   } = req;
   const Users = getUsers();
   const cursor = Users.aggregate().match({ _id });
-  if (usersLiked)
-    cursor.lookup({
-      from: 'users',
-      localField: 'usersLiked',
-      foreignField: '_id',
-      as: 'usersLiked',
-    });
-  if (usersBlocked)
-    cursor.lookup({
-      from: 'users',
-      localField: 'usersBlocked',
-      foreignField: '_id',
-      as: 'usersBlocked',
-    });
-  if (usersLiked)
-    cursor.lookup({
-      from: 'users',
-      pipeline: [matchIn('_id', usersLiked), match('usersLiked', _id)],
-      as: 'friends',
-    });
+  if (usersLiked) {
+    lookupUsersLiked(cursor);
+    lookupFriends(cursor, usersLiked, _id);
+  }
   cursor.project(authProjection);
   const [data] = await cursor.toArray();
   res.send({ ...data, token });

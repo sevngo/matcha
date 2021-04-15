@@ -58,10 +58,6 @@ export const usersModel = async (db) => {
             bsonType: 'array',
             items: { bsonType: 'objectId', uniqueItems: true },
           },
-          usersBlocked: {
-            bsonType: 'array',
-            items: { bsonType: 'objectId', uniqueItems: true },
-          },
         },
       },
     },

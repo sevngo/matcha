@@ -3,7 +3,6 @@ import { isEmpty, split } from 'ramda';
 import { Grid, IconButton, Paper, Grow, Tooltip } from '@material-ui/core';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import DoneAllIcon from '@material-ui/icons/DoneAll';
-import BlockIcon from '@material-ui/icons/Block';
 import { FormattedMessage } from 'react-intl';
 import UserForm from '../../components/UserForm';
 import useStyles from './styles';
@@ -16,10 +15,9 @@ const User = ({ id }) => {
     user,
     userId,
     isUserLiked,
-    isUserBlocked,
     isUserFriended,
     likeUser,
-    blockUser,
+    dislikeUser,
     loadUser,
   } = useConnect();
   useEffect(() => {
@@ -41,33 +39,15 @@ const User = ({ id }) => {
                     !isUserLiked ? (
                       <FormattedMessage {...messages.likeUser} />
                     ) : (
-                      ''
+                      <FormattedMessage {...messages.dislikeUser} />
                     )
                   }
                 >
                   <IconButton
                     className={isUserLiked ? classes.red : ''}
-                    onClick={likeUser}
-                    disabled={isUserLiked}
+                    onClick={() => (isUserLiked ? dislikeUser() : likeUser())}
                   >
                     <FavoriteIcon />
-                  </IconButton>
-                </Tooltip>
-                <Tooltip
-                  title={
-                    !isUserBlocked ? (
-                      <FormattedMessage {...messages.blockUser} />
-                    ) : (
-                      ''
-                    )
-                  }
-                >
-                  <IconButton
-                    className={isUserBlocked ? classes.red : ''}
-                    onClick={blockUser}
-                    disabled={isUserBlocked}
-                  >
-                    <BlockIcon />
                   </IconButton>
                 </Tooltip>
                 {isUserFriended && (

@@ -16,9 +16,8 @@ export const authProjection = {
   email: 1,
   birthDate: 1,
   'image._id': 1,
-  'usersBlocked._id': 1,
-  'usersBlocked.username': 1,
   'usersLiked._id': 1,
+  'usersLiked.username': 1,
   'friends._id': 1,
 };
 

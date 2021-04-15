@@ -35,7 +35,6 @@ describe('MyUser', () => {
         coordinates: [2.5654428, 48.955157299999996],
       },
       token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9',
-      usersBlocked: [{ _id: '6008432b6ed93c2ac837ec6c' }],
       usersLiked: [{ _id: '6008432b6ed92c2ac837ec6c' }],
     },
   };

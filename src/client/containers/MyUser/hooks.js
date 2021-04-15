@@ -1,7 +1,6 @@
 import { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
-  getAuthUsersBlocked,
   getAuthId,
   getAuthUsername,
   getAuthBirthDate,
@@ -9,8 +8,9 @@ import {
   getAuthGender,
   getAuthAddress,
   getAuthImage,
+  getAuthUsersLiked,
 } from '../../selectors/auth';
-import { uploadImage, likeUser, updateUser } from '../../actions/auth';
+import { uploadImage, updateUser, dislikeUser } from '../../actions/auth';
 import { compact } from '../../utils';
 
 export const useConnect = () => {
@@ -23,13 +23,15 @@ export const useConnect = () => {
     gender: useSelector(getAuthGender),
     address: useSelector(getAuthAddress),
     image: useSelector(getAuthImage),
-    usersBlocked: useSelector(getAuthUsersBlocked),
+    usersLiked: useSelector(getAuthUsersLiked),
+    dislikeUser: useCallback((userId) => dispatch(dislikeUser(userId)), [
+      dispatch,
+    ]),
     updateUser: useCallback((user) => dispatch(updateUser(compact(user))), [
       dispatch,
     ]),
     uploadImage: useCallback((id, image) => dispatch(uploadImage(id, image)), [
       dispatch,
     ]),
-    likeUser: useCallback((userId) => dispatch(likeUser(userId)), [dispatch]),
   };
 };

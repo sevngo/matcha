@@ -1,4 +1,4 @@
-import { append, compose, equals, find, pick, reject } from 'ramda';
+import { append, compose, equals, pick, reject } from 'ramda';
 import {
   patchUser,
   postUser,
@@ -10,7 +10,6 @@ import { SUCCESS } from '../containers/Snackbar/constants';
 import {
   getAuthFriends,
   getAuthId,
-  getAuthUsersBlocked,
   getAuthUsersLiked,
 } from '../selectors/auth';
 import socket from '../socketEvents';
@@ -26,8 +25,8 @@ export const UPDATED_USER = 'UPDATED_USER';
 export const FORGOT_PASSWORD = 'FORGOT_PASSWORD';
 export const LIKE_USER = 'LIKE_USER';
 export const LIKED_USER = 'LIKED_USER';
-export const BLOCK_USER = 'BLOCK_USER';
-export const BLOCKED_USER = 'BLOCKED_USER';
+export const DISLIKE_USER = 'DISLIKE_USER';
+export const DISLIKED_USER = 'DISLIKED_USER';
 export const UPLOAD_IMAGE = 'UPLOAD_IMAGE';
 export const UPLOADED_IMAGE = 'UPLOADED_IMAGE';
 export const GOT_FRIENDED = 'GOT_FRIENDED';
@@ -76,47 +75,36 @@ export const likeUser = (userLikedId) => async (dispatch, getState) => {
   dispatch({ type: LIKE_USER });
   const state = getState();
   const authUsersLiked = getAuthUsersLiked(state);
-  const authUsersBlocked = getAuthUsersBlocked(state);
   const usersLiked = compose(append(userLikedId), getIds)(authUsersLiked);
-  const usersBlocked = compose(
-    reject(equals(userLikedId)),
-    getIds
-  )(authUsersBlocked);
-  const { data } = await patchUser({ usersLiked, usersBlocked });
+  const { data } = await patchUser({ usersLiked });
   dispatch({ type: LIKED_USER, data });
   const sender = pick(['_id', 'username'])(data);
   socket.emit('userLiked', sender, userLikedId);
   const friendsIds = getIds(data.friends);
-  const isFriended = find((friendId) => userLikedId === friendId)(friendsIds);
+  const isFriended = friendsIds.contains(userLikedId);
   if (isFriended) {
     const sender = pick(['_id', 'username'])(data);
     socket.emit('userFriended', sender, userLikedId);
   }
 };
 
-export const blockUser = (userBlockedId) => async (dispatch, getState) => {
-  dispatch({ type: BLOCK_USER });
+export const dislikeUser = (userDislikedId) => async (dispatch, getState) => {
+  dispatch({ type: DISLIKE_USER });
   const state = getState();
   const authUsersLiked = getAuthUsersLiked(state);
-  const authUsersBlocked = getAuthUsersBlocked(state);
   const friends = getAuthFriends(state);
   const usersLiked = compose(
-    reject(equals(userBlockedId)),
+    reject(equals(userDislikedId)),
     getIds
   )(authUsersLiked);
-  const usersBlocked = compose(append(userBlockedId), getIds)(authUsersBlocked);
-  const user = { usersLiked, usersBlocked };
+  const user = { usersLiked };
   const { data } = await patchUser(user);
-  dispatch({ type: BLOCKED_USER, data });
-  const sender = pick(['_id', 'username'])(data);
-  socket.emit('userBlocked', sender, userBlockedId);
+  dispatch({ type: DISLIKED_USER, data });
   const friendsIds = getIds(friends);
-  const isUnfriended = find((friendId) => userBlockedId === friendId)(
-    friendsIds
-  );
+  const isUnfriended = friendsIds.contains(userDislikedId);
   if (isUnfriended) {
     const sender = pick(['_id', 'username'])(data);
-    socket.emit('userUnfriended', sender, userBlockedId);
+    socket.emit('userUnfriended', sender, userDislikedId);
   }
 };
 

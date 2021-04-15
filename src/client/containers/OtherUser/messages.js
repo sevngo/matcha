@@ -5,8 +5,8 @@ export default defineMessages({
     id: 'containers.otherUser.likeUser',
     defaultMessage: 'Like',
   },
-  blockUser: {
-    id: 'containers.otherUser.blockUser',
-    defaultMessage: 'Block',
+  dislikeUser: {
+    id: 'containers.otherUser.dislikeUser',
+    defaultMessage: 'Dislike',
   },
 });

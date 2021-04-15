@@ -4,9 +4,8 @@ import {
   getUser,
   getIsUserFriended,
   getIsUserLiked,
-  getIsUserBlocked,
 } from '../../selectors/user';
-import { likeUser, blockUser } from '../../actions/auth';
+import { likeUser, dislikeUser } from '../../actions/auth';
 import { loadUser } from '../../actions/user';
 
 export const useConnect = () => {
@@ -18,9 +17,8 @@ export const useConnect = () => {
     userId,
     isUserFriended: useSelector(getIsUserFriended),
     isUserLiked: useSelector(getIsUserLiked),
-    isUserBlocked: useSelector(getIsUserBlocked),
     likeUser: useCallback(() => dispatch(likeUser(userId)), [dispatch, userId]),
-    blockUser: useCallback(() => dispatch(blockUser(userId)), [
+    dislikeUser: useCallback(() => dispatch(dislikeUser(userId)), [
       dispatch,
       userId,
     ]),

@@ -21,11 +21,6 @@ export const getAuthAddress = createSelector(getAuth, prop('address'));
 export const getAuthDistance = createSelector(getAuth, prop('distance'));
 export const getAuthImage = createSelector(getAuth, prop('image'));
 
-export const getAuthUsersBlocked = createSelector(
-  getAuth,
-  propOr([], 'usersBlocked')
-);
-
 export const getAuthUsersLiked = createSelector(
   getAuth,
   propOr([], 'usersLiked')

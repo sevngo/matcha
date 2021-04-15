@@ -14,18 +14,19 @@ const MyUser = () => {
   const inputEl = useRef();
   const {
     _id,
-    usersBlocked,
     updateUser,
     uploadImage,
-    likeUser,
     username,
     birthDate,
     email,
     gender,
     address,
     image,
+    usersLiked,
+    dislikeUser,
   } = useConnect();
   const intl = useIntl();
+
   const openFile = useCallback(() => inputEl.current.click(), []);
   const uploadFile = (event) => {
     const image = event.target.files[0];
@@ -56,13 +57,13 @@ const MyUser = () => {
             }
           />
           <Box m={2} />
-          {usersBlocked[0] && (
+          {usersLiked[0] && (
             <Grow in={true} timeout={600}>
               <UsersList
-                users={usersBlocked}
-                action={likeUser}
-                title={intl.formatMessage(messages.usersBlocked)}
-                actionMessage={intl.formatMessage(messages.likeUser)}
+                users={usersLiked}
+                action={dislikeUser}
+                title={intl.formatMessage(messages.usersLiked)}
+                actionMessage={intl.formatMessage(messages.dislikeUser)}
               />
             </Grow>
           )}

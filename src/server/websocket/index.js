@@ -22,7 +22,7 @@ const socketEvents = (socket) => {
       socket.to(receiverId).emit('gotUnfriended', notification);
   });
 
-  socket.on('logout', (senderId) => socket.leave(senderId))
+  socket.on('logout', (senderId) => socket.leave(senderId));
 };
 
 export default socketEvents;

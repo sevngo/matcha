@@ -19,7 +19,6 @@ router.post(
   sanatize.hash('password'),
   sanatize.toDate('birthDate'),
   sanatize.objectIds('usersLiked'),
-  sanatize.objectIds('usersBlocked'),
   postUserController
 );
 
@@ -48,7 +47,6 @@ router.patch(
   sanatize.hash('password'),
   sanatize.toDate('birthDate'),
   sanatize.objectIds('usersLiked'),
-  sanatize.objectIds('usersBlocked'),
   patchUserController
 );
 

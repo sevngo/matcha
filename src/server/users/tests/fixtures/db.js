@@ -31,7 +31,6 @@ export const authUser = {
   password: bcrypt.hashSync(authUserPassword, 8),
   _id: authUserId,
   emailVerified: true,
-  usersBlocked: [ObjectID()],
   usersLiked: [ObjectID()],
 };
 

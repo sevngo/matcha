@@ -1,6 +1,6 @@
 import { compose, find, prop } from 'ramda';
 import { createSelector } from 'reselect';
-import { getAuthFriends, getAuthUsersBlocked, getAuthUsersLiked } from './auth';
+import { getAuthFriends, getAuthUsersLiked } from './auth';
 
 export const getUser = prop('user');
 
@@ -14,16 +14,6 @@ export const getIsUserLiked = createSelector(
       Boolean,
       find((userLiked) => userLiked._id === userId)
     )(usersLiked)
-);
-
-export const getIsUserBlocked = createSelector(
-  getUserId,
-  getAuthUsersBlocked,
-  (userId, usersBlocked) =>
-    compose(
-      Boolean,
-      find((userBlocked) => userBlocked._id === userId)
-    )(usersBlocked)
 );
 
 export const getIsUserFriended = createSelector(

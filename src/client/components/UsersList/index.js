@@ -7,9 +7,7 @@ const UsersList = ({ users, title, actionMessage, action }) => {
   const classes = useStyles();
   return (
     <Paper elevation={1} className={classes.p3}>
-      <Typography variant="subtitle1" className={classes.subtitle}>
-        {title}
-      </Typography>
+      <Typography variant="h6">{title}</Typography>
       <Divider className={classes.mt1} />
       {map((user) => (
         <Grid
