@@ -30,12 +30,9 @@ export const loadUsers = () => async (dispatch, getState) => {
   const skipQuery = `skip=${skip}`;
 
   const query = `?${genderQuery}&${birthQuery}&${sortQuery}&${maxDistanceQuery}&${limitQuery}&${skipQuery}`;
-  try {
-    const {
-      data,
-      headers: { 'x-total-count': total },
-    } = await getUsers(query);
-    const users = { data, total };
-    dispatch({ type: LOADED_USERS, users });
-  } catch {}
+
+  const { data, headers } = await getUsers(query);
+  const total = Number(headers['x-total-count']);
+  const users = { data, total };
+  dispatch({ type: LOADED_USERS, users });
 };

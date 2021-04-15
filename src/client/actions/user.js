@@ -5,8 +5,6 @@ export const LOADED_USER = 'LOADED_USER';
 
 export const loadUser = (id) => async (dispatch) => {
   dispatch({ type: LOAD_USER });
-  try {
-    const { data } = await getUser(id);
-    dispatch({ type: LOADED_USER, data });
-  } catch {}
+  const { data } = await getUser(id);
+  dispatch({ type: LOADED_USER, data });
 };
