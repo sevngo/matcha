@@ -25,6 +25,7 @@
     "http-proxy-middleware": "^1.1.2",
     "lint-staged": "^10.5.4",
     "moment": "^2.29.1",
+    "nock": "^13.0.11",
     "nodemon": "^2.0.7",
     "pino-pretty": "^4.7.1",
     "prettier": "^2.2.1",
