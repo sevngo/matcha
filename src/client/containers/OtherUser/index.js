@@ -52,7 +52,7 @@ const User = ({ id }) => {
                   </IconButton>
                 </Tooltip>
                 {isUserFriended && (
-                  <IconButton color="primary" disabled>
+                  <IconButton color="primary" data-testid="friend" disabled>
                     <DoneAllIcon />
                   </IconButton>
                 )}

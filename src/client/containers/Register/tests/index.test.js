@@ -43,7 +43,7 @@ global.navigator.geolocation = {
 jest.mock('../../../api');
 
 describe('Register', () => {
-  it('should render', async () => {
+  it('should register', async () => {
     const { getByTestId, getByRole } = render(
       <TestProvider>
         <Component />
@@ -90,5 +90,20 @@ describe('Register', () => {
         },
       })
     );
+  });
+  it('should not submit invalid form and show errors', async () => {
+    const { getByTestId, getByRole, findByTestId } = render(
+      <TestProvider>
+        <Component />
+      </TestProvider>
+    );
+
+    const username = 'nam';
+
+    fireEvent.change(getByTestId('usernameInput'), {
+      target: { value: username },
+    });
+    fireEvent.click(getByRole('button', { name: 'Submit' }));
+    await findByTestId('radioError');
   });
 });

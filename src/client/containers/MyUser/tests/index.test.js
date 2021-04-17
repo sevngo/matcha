@@ -72,6 +72,18 @@ describe('MyUser', () => {
     await findByTestId('imageAvailable');
   });
 
+  it('should not uploadFile', async () => {
+    const { getByTestId } = render(
+      <TestProvider initialState={initialState}>
+        <Component />
+      </TestProvider>
+    );
+    getByTestId('imageUnavailable');
+    axios.post.mockResolvedValue({ data: { image: 'a' } });
+    fireEvent.change(getByTestId('uploadFile'), { target: { files: [] } });
+    getByTestId('imageUnavailable');
+  });
+
   it('should update my user', async () => {
     const { getByRole } = render(
       <TestProvider initialState={initialState}>
@@ -80,7 +92,6 @@ describe('MyUser', () => {
     );
     fireEvent.click(getByRole('radio', { name: 'Male' }));
     axios.patch.mockResolvedValue({ data: { gender: 'male' } });
-    await waitFor(() => !getByRole('button', { name: 'Submit' }).disabled);
     fireEvent.click(getByRole('button', { name: 'Submit' }));
 
     await waitFor(() =>

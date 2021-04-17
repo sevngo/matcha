@@ -43,7 +43,7 @@ const Radio = ({
         ))(options)}
       </RadioGroup>
       {error && (
-        <FormHelperText>
+        <FormHelperText data-testid="radioError">
           <FormattedMessage {...formMessages[error]} />
         </FormHelperText>
       )}

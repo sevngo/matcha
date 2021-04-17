@@ -4,7 +4,7 @@ export const postUser = (user) => instance.post('/api/users', user);
 
 export const postUserLogin = (user) => instance.post('/api/users/login', user);
 
-export const getUsers = (query = '') => instance.get(`/api/users${query}`);
+export const getUsers = (query) => instance.get(`/api/users${query}`);
 
 export const getUser = (id) => instance.get(`/api/users/${id}`);
 

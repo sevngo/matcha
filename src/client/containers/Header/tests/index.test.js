@@ -5,8 +5,11 @@ import Component from '../index';
 
 describe('Header', () => {
   it('should render without crash', () => {
+    const initialState = {
+      auth: { token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9' },
+    };
     render(
-      <TestProvider>
+      <TestProvider initialState={initialState}>
         <Component />
       </TestProvider>
     );
