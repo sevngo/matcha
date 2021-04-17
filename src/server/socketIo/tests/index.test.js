@@ -33,7 +33,7 @@ describe('Socket Io Server', () => {
       user: { _id: '60084a46203c4e342b13117p', username: 'steven1' },
     };
     clientSocket1.on('notification', (newNotification) => {
-      expect(newNotification).toMatchObject(notification);
+      expect(newNotification).toEqual(notification);
       done();
     });
     clientSocket1.emit('logged', clientSocket1ID);
