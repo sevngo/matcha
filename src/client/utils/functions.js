@@ -1,4 +1,5 @@
 import { reduce, filter, isEmpty } from 'ramda';
+import faker from 'faker';
 
 export const getAge = (dateString) => {
   const today = new Date();
@@ -12,3 +13,9 @@ export const getAge = (dateString) => {
 export const getIds = reduce((acc, object) => [...acc, object._id], []);
 
 export const compact = filter((value) => value && !isEmpty(value));
+
+export const createNotification = (notification) => ({
+  ...notification,
+  createdAt: new Date(),
+  id: faker.datatype.uuid(),
+});

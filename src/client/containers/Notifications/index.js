@@ -20,7 +20,7 @@ const Notifications = () => {
   const {
     notifications,
     notificationsLength,
-    removeNotification,
+    deleteNotification,
   } = useConnect();
   const classes = useStyles();
   const [isDialogOpen, handleDialog] = useState(false);
@@ -47,7 +47,7 @@ const Notifications = () => {
           <DialogContent>
             <Grid container direction="column" spacing={2}>
               {notifications.map((notification, index) => (
-                <Fragment key={notification._id}>
+                <Fragment key={notification.id}>
                   <Grid
                     container
                     item
@@ -56,15 +56,15 @@ const Notifications = () => {
                   >
                     <Typography variant="subtitle1">
                       <FormattedMessage
-                        {...messages[notification.messageId]}
+                        {...messages[notification.event]}
                         values={{
                           username: notification.user?.username,
                         }}
                       />
                     </Typography>
                     <DeleteIcon
-                      data-testid={`remove-${notification._id}`}
-                      onClick={() => removeNotification(notification._id)}
+                      data-testid={`remove-${notification.id}`}
+                      onClick={() => deleteNotification(notification.id)}
                       color="inherit"
                       className={classes.ml1}
                     />

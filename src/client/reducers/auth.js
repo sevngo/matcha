@@ -8,7 +8,7 @@ import {
   GOT_FRIENDED,
   GOT_UNDFRIENDED,
   ADD_NOTIFICATION,
-  REMOVE_NOTIFICATION,
+  DELETE_NOTIFICATION,
 } from '../actions/auth';
 import { reject } from 'ramda';
 
@@ -38,12 +38,12 @@ const reducer = (state = {}, action) => {
         ...state,
         notifications: [action.notification, ...(state.notifications || [])],
       };
-    case REMOVE_NOTIFICATION:
+    case DELETE_NOTIFICATION:
       return {
         ...state,
-        notifications: reject(
-          (notification) => notification._id === action._id
-        )(state.notifications),
+        notifications: reject((notification) => notification.id === action.id)(
+          state.notifications
+        ),
       };
     default:
       return state;

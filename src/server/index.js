@@ -2,7 +2,7 @@ import { Server as socketIo } from 'socket.io';
 import { connectDb } from './database.js';
 import app from './app.js';
 import pino from './utils/logger.js';
-import socketEvents from './websocket/index.js';
+import socketEvents from './socketIo/index.js';
 
 (async () => {
   try {

@@ -7,9 +7,10 @@ import { BrowserRouter } from 'react-router-dom';
 import { IntlProvider } from 'react-intl';
 import { CssBaseline, ThemeProvider } from '@material-ui/core';
 import store from './store';
-import './socketEvents';
 import { locale, messages, theme } from './utils';
 import App from './components/App';
+import socketEvents from './socketIo/events';
+import socket from './socketIo';
 
 const ROOT = (
   <Provider store={store}>
@@ -23,5 +24,7 @@ const ROOT = (
     </IntlProvider>
   </Provider>
 );
+
+socketEvents(socket);
 
 render(ROOT, document.getElementById('root'));

@@ -12,8 +12,8 @@ import {
   getAuthId,
   getAuthUsersLiked,
 } from '../selectors/auth';
-import socket from '../socketEvents';
-import { getIds } from '../utils';
+import socket from '../socketIo';
+import { createNotification, getIds } from '../utils';
 import { openSnackbar } from './snackbar';
 
 export const REGISTER = 'REGISTER';
@@ -32,7 +32,7 @@ export const UPLOADED_IMAGE = 'UPLOADED_IMAGE';
 export const GOT_FRIENDED = 'GOT_FRIENDED';
 export const GOT_UNDFRIENDED = 'GOT_UNDFRIENDED';
 export const ADD_NOTIFICATION = 'ADD_NOTIFICATION';
-export const REMOVE_NOTIFICATION = 'REMOVE_NOTIFICATION';
+export const DELETE_NOTIFICATION = 'DELETE_NOTIFICATION';
 
 export const logout = () => (dispatch, getState) => {
   const state = getState();
@@ -78,13 +78,15 @@ export const likeUser = (userLikedId) => async (dispatch, getState) => {
   const usersLiked = compose(append(userLikedId), getIds)(authUsersLiked);
   const { data } = await patchUser({ usersLiked });
   dispatch({ type: LIKED_USER, data });
-  const sender = pick(['_id', 'username'])(data);
-  socket.emit('userLiked', sender, userLikedId);
+  const user = pick(['_id', 'username'])(data);
+  const notification = createNotification({ user, event: 'gotLiked' });
+  socket.emit('notification', notification, userLikedId);
   const friendsIds = getIds(data.friends);
   const isFriended = friendsIds.includes(userLikedId);
   if (isFriended) {
-    const sender = pick(['_id', 'username'])(data);
-    socket.emit('userFriended', sender, userLikedId);
+    const user = pick(['_id', 'username'])(data);
+    const notification = createNotification({ user, event: 'gotFriended' });
+    socket.emit('notification', notification, userLikedId);
   }
 };
 
@@ -103,8 +105,9 @@ export const dislikeUser = (userDislikedId) => async (dispatch, getState) => {
   const friendsIds = getIds(friends);
   const isUnfriended = friendsIds.includes(userDislikedId);
   if (isUnfriended) {
-    const sender = pick(['_id', 'username'])(data);
-    socket.emit('userUnfriended', sender, userDislikedId);
+    const user = pick(['_id', 'username'])(data);
+    const notification = createNotification({ user, event: 'gotUnfriended' });
+    socket.emit('notification', notification, userDislikedId);
   }
 };
 
@@ -114,4 +117,4 @@ export const uploadImage = (id, image) => async (dispatch) => {
   dispatch({ type: UPLOADED_IMAGE, data });
 };
 
-export const removeNotification = (_id) => ({ type: REMOVE_NOTIFICATION, _id });
+export const deleteNotification = (id) => ({ type: DELETE_NOTIFICATION, id });

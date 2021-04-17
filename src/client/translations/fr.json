@@ -17,7 +17,6 @@
   "components.input.tooYoung": "Trop jeune",
   "containers.header.title": "Matcha",
   "containers.myUser.uploadImage": "Uploader une image",
-  "containers.notifications.friendLogged": "{username} vient de se connecter",
   "containers.notifications.gotFriended": "{username} est votre nouvel ami",
   "containers.notifications.gotLiked": "{username} vous aime",
   "containers.notifications.gotUnfriended": "{username} n'est plus votre ami",

@@ -17,8 +17,8 @@ describe('Notifications', () => {
             username: 'qweqwe',
           },
           createdAt: '2020-01-23T14:10:55.857Z',
-          _id: '5e29a96f7e701b58a77dcdbb',
-          messageId: 'friendLogged',
+          id: '5e29a96f7e701b58a77dcdbb',
+          event: 'friendLogged',
         },
         {
           user: {
@@ -26,8 +26,8 @@ describe('Notifications', () => {
             username: 'asdasd',
           },
           createdAt: '2020-01-23T14:11:55.857Z',
-          _id: '5e29a96f7e701b58a77dcdba',
-          messageId: 'friendLogged',
+          id: '5e29a96f7e701b58a77dcdba',
+          event: 'friendLogged',
         },
       ],
     },
