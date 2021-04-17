@@ -80,6 +80,7 @@ describe('MyUser', () => {
     );
     fireEvent.click(getByRole('radio', { name: 'Male' }));
     axios.patch.mockResolvedValue({ data: { gender: 'male' } });
+    await waitFor(() => !getByRole('button', { name: 'Submit' }).disabled);
     fireEvent.click(getByRole('button', { name: 'Submit' }));
 
     await waitFor(() =>
