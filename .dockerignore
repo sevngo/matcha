@@ -1,10 +1,14 @@
+.dockerignore
+Dockerfile
+docker-compose.yml
+.travis.yml
+README.md
+.gitignore 
+
 node_modules
 build
 coverage
 scripts
 .git
 .vscode
-
-README.md
 .DS_Store
-.gitignore 
