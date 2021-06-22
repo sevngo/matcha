@@ -1,8 +1,8 @@
 import socketEvents from '..';
 
-const { createServer } = require('http');
-const { Server } = require('socket.io');
-const Client = require('socket.io-client');
+import { createServer } from 'http';
+import { Server } from 'socket.io';
+import Client from 'socket.io-client';
 
 describe('Socket Io Server', () => {
   let io, clientSocket1, clientSocket2;
