@@ -1,4 +1,4 @@
-# Matcha &middot; [![Build Status](https://travis-ci.com/sevngo/matcha.svg?branch=master)](https://travis-ci.com/sevngo/matcha) [![Coverage Status](https://coveralls.io/repos/github/sevngo/matcha/badge.svg?branch=master)](https://coveralls.io/github/sevngo/matcha?branch=master) [![dependencies Status](https://david-dm.org/sevngo/matcha/status.svg)](https://david-dm.org/sevngo/matcha) [![devDependencies Status](https://david-dm.org/sevngo/matcha/dev-status.svg)](https://david-dm.org/sevngo/matcha?type=dev)
+# Matcha &middot; [![Run Tests](https://github.com/sevngo/matcha/actions/workflows/node.js.yml/badge.svg?branch=master)](https://github.com/sevngo/matcha/actions/workflows/node.js.yml) [![Coverage Status](https://coveralls.io/repos/github/sevngo/matcha/badge.svg?branch=master)](https://coveralls.io/github/sevngo/matcha?branch=master)
 
 My boilerplate for a React Redux Node.js MongoDB Socket.IO web application
 
