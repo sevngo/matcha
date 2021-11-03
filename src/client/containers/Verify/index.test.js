@@ -1,10 +1,10 @@
 import { render, waitFor } from '@testing-library/react';
-import axios from '../../../api';
-import TestProvider from '../../../components/TestProvider';
-import { verifyPath } from '../../../utils';
-import Component from '../index';
+import axios from '../../api';
+import TestProvider from '../../components/TestProvider';
+import { verifyPath } from '../../utils';
+import Component from './index';
 
-jest.mock('../../../api');
+jest.mock('../../api');
 
 describe('Verify', () => {
   it('should render', async () => {

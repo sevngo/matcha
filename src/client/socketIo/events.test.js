@@ -1,12 +1,9 @@
 import { createServer } from 'http';
 import { Server } from 'socket.io';
 import Client from 'socket.io-client';
-import {
-  getAuthFriends,
-  getAuthNotifications,
-} from '../../store/auth/selectors';
-import store from '../../store';
-import socketEvents from '../events';
+import { getAuthFriends, getAuthNotifications } from '../store/auth/selectors';
+import store from '../store';
+import socketEvents from './events';
 
 const initialState = {
   auth: {
@@ -15,7 +12,7 @@ const initialState = {
   },
 };
 
-jest.mock('../../api/localStorage', () => ({
+jest.mock('../api/localStorage', () => ({
   loadState: () => initialState,
   saveState: jest.fn(),
 }));

@@ -1,8 +1,8 @@
 import { render } from '@testing-library/react';
 import React from 'react';
-import TestProvider from '../../../components/TestProvider';
-import { userPath } from '../../../utils';
-import Component from '../index';
+import TestProvider from '../../components/TestProvider';
+import { userPath } from '../../utils';
+import Component from './index';
 
 global.google = {
   maps: {

@@ -1,8 +1,8 @@
 import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
-import TestProvider from '../../../components/TestProvider';
-import Component from '../index';
-import { SUCCESS } from '../constants';
+import TestProvider from '../../components/TestProvider';
+import Component from './index';
+import { SUCCESS } from './constants';
 
 describe('Snackbar', () => {
   it('should return false', () => {

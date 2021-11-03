@@ -1,10 +1,10 @@
 import React from 'react';
-import axios from '../../../api';
+import axios from '../../api';
 import { fireEvent, render } from '@testing-library/react';
-import TestProvider from '../../../components/TestProvider';
-import Component from '../index';
+import TestProvider from '../../components/TestProvider';
+import Component from './index';
 
-jest.mock('../../../api');
+jest.mock('../../api');
 
 describe('Users', () => {
   const users = [

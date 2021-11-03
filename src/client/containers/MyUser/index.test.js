@@ -4,10 +4,10 @@ import {
   waitFor,
   waitForElementToBeRemoved,
 } from '@testing-library/react';
-import axios from '../../../api';
+import axios from '../../api';
 import React from 'react';
-import TestProvider from '../../../components/TestProvider';
-import Component from '../index';
+import TestProvider from '../../components/TestProvider';
+import Component from './index';
 
 global.google = {
   maps: {
@@ -23,7 +23,7 @@ global.google = {
   },
 };
 
-jest.mock('../../../api');
+jest.mock('../../api');
 
 describe('MyUser', () => {
   const authId = '6008432b6ed92c2ac837ec6c';

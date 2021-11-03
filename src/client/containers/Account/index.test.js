@@ -4,8 +4,8 @@ import {
   fireEvent,
   waitForElementToBeRemoved,
 } from '@testing-library/react';
-import TestProvider from '../../../components/TestProvider';
-import Account from '../index';
+import TestProvider from '../../components/TestProvider';
+import Account from '.';
 
 describe('Account', () => {
   const Component = (

@@ -4,8 +4,8 @@ import {
   render,
   waitForElementToBeRemoved,
 } from '@testing-library/react';
-import TestProvider from '../../../components/TestProvider';
-import Component from '../index';
+import TestProvider from '../../components/TestProvider';
+import Component from '.';
 
 describe('Notifications', () => {
   const initialState = {

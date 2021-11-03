@@ -1,11 +1,11 @@
 import { fireEvent, render, waitFor } from '@testing-library/react';
-import axios from '../../../api';
+import axios from '../../api';
 import moment from 'moment';
 import React from 'react';
-import TestProvider from '../../../components/TestProvider';
-import Component from '../index';
+import TestProvider from '../../components/TestProvider';
+import Component from './index';
 
-jest.mock('../../../api');
+jest.mock('../../api');
 
 const formatted_address = 'formatted_address';
 const longitude = 45.3;
@@ -39,8 +39,6 @@ global.navigator.geolocation = {
       },
     }),
 };
-
-jest.mock('../../../api');
 
 describe('Register', () => {
   it('should register', async () => {

@@ -1,7 +1,7 @@
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import React from 'react';
-import TestProvider from '../../../components/TestProvider';
-import Component from '../index';
+import TestProvider from '../../components/TestProvider';
+import Component from '.';
 
 describe('Drawer', () => {
   const initialState = {
