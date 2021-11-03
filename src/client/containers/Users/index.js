@@ -61,9 +61,9 @@ const Users = () => {
           component="div"
           rowsPerPage={limit}
           rowsPerPageOptions={[10, 25, 100]}
-          onChangeRowsPerPage={handleChangeRowsPerPage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
           count={total}
-          onChangePage={handleChangePage}
+          onPageChange={handleChangePage}
           page={page}
           classes={{ input: classes.displayNone }}
           className={classes.pagination}

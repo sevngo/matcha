@@ -13,7 +13,7 @@ const UsersList = ({ users, title, actionMessage, action }) => {
         <Grid
           key={user._id}
           container
-          justify="space-between"
+          justifyContent="space-between"
           alignItems="center"
           className={classes.mt1}
         >

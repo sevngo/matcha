@@ -87,7 +87,7 @@ export const patchUserController = asyncHandler(async (req, res, next) => {
   const { value: user } = await Users.findOneAndUpdate(
     { _id },
     { $set: body },
-    { returnOriginal: false }
+    { returnNewDocument: true }
   );
   const { usersLiked } = user;
   const cursor = Users.aggregate().match({ _id });

@@ -17,11 +17,8 @@ import messages from './messages';
 import useStyles from './styles';
 
 const Notifications = () => {
-  const {
-    notifications,
-    notificationsLength,
-    deleteNotification,
-  } = useConnect();
+  const { notifications, notificationsLength, deleteNotification } =
+    useConnect();
   const classes = useStyles();
   const [isDialogOpen, handleDialog] = useState(false);
   return (
@@ -51,7 +48,7 @@ const Notifications = () => {
                   <Grid
                     container
                     item
-                    justify="space-between"
+                    justifyContent="space-between"
                     alignItems="center"
                   >
                     <Typography variant="subtitle1">

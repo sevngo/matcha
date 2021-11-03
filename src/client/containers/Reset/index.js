@@ -12,7 +12,7 @@ const Reset = () => {
   const classes = useStyles();
   if (!isAuthEmpty) return <Redirect to={usersPath} />;
   return (
-    <Grid container justify="center" className={classes.p3}>
+    <Grid container justifyContent="center" className={classes.p3}>
       <Paper elevation={1} className={classes.paper}>
         <UserForm initialValues={initialValues} submit={updateUser} />
       </Paper>

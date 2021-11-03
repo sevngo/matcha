@@ -24,7 +24,7 @@ const Register = () => {
         </Typography>
         <Box mt={3} />
         <UserForm initialValues={initialValues} submit={register} />
-        <Grid container className={classes.mt2} justify="flex-end">
+        <Grid container className={classes.mt2} justifyContent="flex-end">
           <Typography variant="body2" component={Link} to={loginPath}>
             <FormattedMessage {...messages.redirectToLogin} />
           </Typography>

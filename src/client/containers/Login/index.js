@@ -37,7 +37,7 @@ const Login = () => {
         </Typography>
         <Box mt={3} />
         <UserForm initialValues={initialValues} submit={login} />
-        <Grid container className={classes.mt2} justify="space-between">
+        <Grid container className={classes.mt2} justifyContent="space-between">
           <MuiLink
             variant="body2"
             className={classes.cursorPointer}
