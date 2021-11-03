@@ -10,7 +10,7 @@ import {
   CardActions,
   Grid,
 } from '@material-ui/core';
-import emptyImage from '../../images/emptyImage.png';
+import emptyImage from '../../assets/images/emptyImage.png';
 import { getUserImage } from '../../api/users';
 import { getAge, userPath } from '../../utils';
 import useStyles from './styles';
