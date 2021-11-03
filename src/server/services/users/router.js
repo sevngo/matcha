@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import auth from '../middlewares/auth.js';
+import auth from '../../middlewares/auth.js';
 import {
   getUserController,
   getUserImageController,
@@ -10,7 +10,7 @@ import {
   postUserImageController,
   postUserLoginController,
 } from './controllers.js';
-import sanatize from '../middlewares/sanatize.js';
+import sanatize from '../../middlewares/sanatize.js';
 
 const router = new Router();
 

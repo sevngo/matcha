@@ -4,7 +4,7 @@ import bcrypt from 'bcryptjs';
 import mongodb from 'mongodb';
 import multer from 'multer';
 import { INVALID_IMAGE_FORMAT } from '../utils/enums.js';
-import { ErrorResponse } from '../utils/functions.js';
+import { ErrorResponse } from '../utils/helpers.js';
 
 const { ObjectID } = mongodb;
 

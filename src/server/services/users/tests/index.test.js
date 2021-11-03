@@ -3,8 +3,8 @@ import request from 'supertest';
 import faker from 'faker';
 import path from 'path';
 import { has } from 'ramda';
-import app from '../../app';
-import { connectDb, disconnectDb, getUsers } from '../../database';
+import app from '../../../app';
+import { connectDb, disconnectDb, getUsers } from '../../../database';
 import {
   newUser,
   authUserPassword,
@@ -23,8 +23,8 @@ import {
   UNVERIFIED_EMAIL,
   UNAUTHORIZED,
   INVALID_IMAGE_FORMAT,
-} from '../../utils/enums';
-import { createToken } from '../../utils/functions';
+} from '../../../utils/enums';
+import { createToken } from '../../../utils/helpers';
 import mongodb from 'mongodb';
 
 jest.mock('@sendgrid/mail', () => ({

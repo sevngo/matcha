@@ -2,7 +2,7 @@ import faker from 'faker';
 import bcrypt from 'bcryptjs';
 import mongodb from 'mongodb';
 import moment from 'moment';
-import { createToken } from '../../../utils/functions';
+import { createToken } from '../../../../utils/helpers';
 
 const { ObjectID } = mongodb;
 

@@ -1,5 +1,5 @@
 import mongodb from 'mongodb';
-import { usersModel } from './users/model.js';
+import { usersModel } from './services/users/model.js';
 import { TEST } from './utils/enums.js';
 import { USERS_COLLECTION } from './utils/enums.js';
 import pino from './utils/logger.js';

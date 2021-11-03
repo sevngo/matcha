@@ -1,4 +1,4 @@
-import { USERS_COLLECTION } from '../utils/enums.js';
+import { USERS_COLLECTION } from '../../utils/enums.js';
 
 export const usersModel = async (db) => {
   await db

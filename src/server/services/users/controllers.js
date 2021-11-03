@@ -1,21 +1,21 @@
 import { split } from 'ramda';
 import sharp from 'sharp';
 import mongodb from 'mongodb';
-import { lookupFriends, lookupUsersLiked } from '../utils/stages.js';
+import { lookupFriends, lookupUsersLiked } from '../../utils/stages.js';
 import {
   userProjection,
   authProjection,
   imageProjection,
 } from './projections.js';
-import { getUsers } from '../database.js';
-import sendEmail from '../emails.js';
-import { asyncHandler } from '../middlewares/error.js';
-import { createToken, ErrorResponse } from '../utils/functions.js';
+import { getUsers } from '../../database.js';
+import sendEmail from '../../emails.js';
+import { asyncHandler } from '../../middlewares/error.js';
+import { createToken, ErrorResponse } from '../../utils/helpers.js';
 import {
   USER_NOT_FOUND,
   EMAIL_NOT_FOUND,
   IMAGE_NOT_FOUND,
-} from '../utils/enums.js';
+} from '../../utils/enums.js';
 
 export const postUserController = asyncHandler(async (req, res) => {
   const Users = getUsers();

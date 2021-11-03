@@ -1,7 +1,7 @@
 import express from 'express';
 import path from 'path';
 import pino from './utils/logger.js';
-import usersRouter from './users/router.js';
+import usersRouter from './services/users/router.js';
 import { errorHandler } from './middlewares/error.js';
 import { TEST, PRODUCTION } from './utils/enums.js';
 

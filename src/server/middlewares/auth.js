@@ -2,7 +2,7 @@ import { replace } from 'ramda';
 import mongodb from 'mongodb';
 import bcrypt from 'bcryptjs';
 import { getUsers } from '../database.js';
-import { createToken, verifyToken, ErrorResponse } from '../utils/functions.js';
+import { createToken, verifyToken, ErrorResponse } from '../utils/helpers.js';
 import { asyncHandler } from './error.js';
 import {
   IDENTIFICATION_FAILED,
