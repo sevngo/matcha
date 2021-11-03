@@ -1,10 +1,10 @@
 import instance from '../';
-import { getAuthToken } from '../../selectors/auth';
-import * as authActions from '../../actions/auth';
-import * as snackbarActions from '../../actions/snackbar';
+import { getAuthToken } from '../../store/auth/selectors';
+import * as authActions from '../../store/auth/actions';
+import * as snackbarActions from '../../store/snackbar/actions';
 import nock from 'nock';
 
-jest.mock('../../selectors/auth', () => ({
+jest.mock('../../store/auth/selectors', () => ({
   getAuthToken: jest.fn(),
   getAuth: jest.fn(),
 }));

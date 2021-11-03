@@ -9,7 +9,7 @@ import Notifications from '../Notifications';
 import { usersPath } from '../../utils';
 import useStyles from './styles';
 import messages from './messages';
-import { getAuthToken } from '../../selectors/auth';
+import { getAuthToken } from '../../store/auth/selectors';
 
 const Header = (props) => {
   const classes = useStyles();

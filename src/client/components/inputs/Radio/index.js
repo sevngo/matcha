@@ -10,7 +10,7 @@ import { map } from 'ramda';
 import React from 'react';
 import { useController } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
-import { formMessages } from '../../utils/messages';
+import { formMessages } from '../../../utils/messages';
 
 const Radio = ({
   name,

@@ -1,7 +1,7 @@
 /*global google*/
 import { useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import { displayLoader, hideLoader } from '../actions/loading';
+import { displayLoader, hideLoader } from '../store/loading/actions';
 
 export const useAutocomplete = (inputName, onChange, isActive) => {
   const autocomplete = useRef();

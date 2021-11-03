@@ -12,12 +12,12 @@ import { FormattedMessage } from 'react-intl';
 import UserCards from '../../components/UserCards';
 import ScrollToTop from '../../components/ScrollToTop';
 import Drawer from '../Drawer';
-import { handleFilter, loadUsers } from '../../actions/users';
+import { handleFilter, loadUsers } from '../../store/users/actions';
 import {
   getUsersData,
   getUsersTotal,
   getUsersFilter,
-} from '../../selectors/users';
+} from '../../store/users/selectors';
 import useStyles from './styles';
 import messages from './messages';
 

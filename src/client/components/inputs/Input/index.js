@@ -2,7 +2,7 @@ import { Box, IconButton, TextField } from '@material-ui/core';
 import React from 'react';
 import { useController } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
-import { formMessages } from '../../utils/messages';
+import { formMessages } from '../../../utils/messages';
 import useStyles from './styles';
 
 const Input = ({

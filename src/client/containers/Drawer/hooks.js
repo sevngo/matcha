@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { getUsersFilter } from '../../selectors/users';
-import { handleFilter } from '../../actions/users';
+import { getUsersFilter } from '../../store/users/selectors';
+import { handleFilter } from '../../store/users/actions';
 
 export const useConnect = () => {
   const dispatch = useDispatch();

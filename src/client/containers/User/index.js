@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import MyUser from '../MyUser';
 import OtherUser from '../OtherUser';
-import { getAuthId } from '../../selectors/auth';
+import { getAuthId } from '../../store/auth/selectors';
 
 const User = () => {
   const { id } = useParams();

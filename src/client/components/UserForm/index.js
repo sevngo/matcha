@@ -14,10 +14,10 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 import { useAutocomplete, useGeolocation } from '../../hooks/googleMaps';
 import { isEmail, isTrimmed } from '../../utils';
-import Input from '../Input';
-import Radio from '../Radio';
-import Select from '../Select';
-import Slider from '../Slider';
+import Input from '../inputs/Input';
+import Radio from '../inputs/Radio';
+import Select from '../inputs/Select';
+import Slider from '../inputs/Slider';
 import { GENDER_OPTIONS, SORT_BY_OPTIONS } from './constants';
 import messages from './messages';
 import useStyles from './styles';
@@ -41,11 +41,12 @@ const UserForm = ({ initialValues, readOnly = false, submit, id }) => {
   const coordinates = watch('address.coordinates');
   if (initialValues.address) {
     register('address.coordinates', { required: true });
-    register('address.type', { required: true });
   }
   const handleAddress = useCallback(
     (address) => {
-      setValue('address', address);
+      setValue('address.name', address.name);
+      setValue('address.type', address.type);
+      setValue('address.coordinates', address.coordinates);
       trigger('address.coordinates');
     },
     [setValue, trigger]

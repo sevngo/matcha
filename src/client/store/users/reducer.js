@@ -1,4 +1,4 @@
-import { LOADED_USERS, HANDLE_FILTER } from '../actions/users';
+import { LOADED_USERS, HANDLE_FILTER } from './actions';
 
 const reducer = (state = {}, action) => {
   switch (action.type) {

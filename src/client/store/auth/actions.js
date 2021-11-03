@@ -5,16 +5,12 @@ import {
   postUserForgot,
   postUserImage,
   postUserLogin,
-} from '../api/users';
-import { SUCCESS } from '../containers/Snackbar/constants';
-import {
-  getAuthFriends,
-  getAuthId,
-  getAuthUsersLiked,
-} from '../selectors/auth';
-import socket from '../socketIo';
-import { createNotification, getIds } from '../utils';
-import { openSnackbar } from './snackbar';
+} from '../../api/users';
+import { SUCCESS } from '../../containers/Snackbar/constants';
+import { getAuthFriends, getAuthId, getAuthUsersLiked } from './selectors';
+import socket from '../../socketIo';
+import { createNotification, getIds } from '../../utils';
+import { openSnackbar } from '../snackbar/actions';
 
 export const REGISTER = 'REGISTER';
 export const LOGIN = 'LOGIN';

@@ -3,10 +3,10 @@ import ErrorIcon from '@material-ui/icons/Error';
 import InfoIcon from '@material-ui/icons/Info';
 import WarningIcon from '@material-ui/icons/Warning';
 
-export const SUCCESS = 'success';
-export const WARNING = 'warning';
-export const ERROR = 'error';
-export const INFO = 'info';
+export const SUCCESS = 'SUCCESS';
+export const WARNING = 'WARNING';
+export const ERROR = 'ERROR';
+export const INFO = 'INFO';
 
 export const variantIcon = {
   [SUCCESS]: CheckCircleIcon,

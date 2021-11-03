@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { MemoryRouter, Route } from 'react-router-dom';
 import { applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk';
-import reducer from '../../reducers';
+import reducer from '../../store/reducer';
 import { theme } from '../../utils/theme';
 
 jest.mock('../../store');

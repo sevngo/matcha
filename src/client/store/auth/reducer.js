@@ -9,7 +9,7 @@ import {
   GOT_UNDFRIENDED,
   ADD_NOTIFICATION,
   DELETE_NOTIFICATION,
-} from '../actions/auth';
+} from './actions';
 import { reject } from 'ramda';
 
 const reducer = (state = {}, action) => {

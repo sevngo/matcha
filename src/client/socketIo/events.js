@@ -4,8 +4,8 @@ import {
   GOT_FRIENDED,
   GOT_UNDFRIENDED,
   ADD_NOTIFICATION,
-} from '../actions/auth';
-import { getAuth } from '../selectors/auth';
+} from '../store/auth/actions';
+import { getAuth } from '../store/auth/selectors';
 
 const socketEvents = (socket) => {
   socket.on('connect', () => {

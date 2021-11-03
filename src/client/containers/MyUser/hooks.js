@@ -9,8 +9,8 @@ import {
   getAuthAddress,
   getAuthImage,
   getAuthUsersLiked,
-} from '../../selectors/auth';
-import { uploadImage, updateUser, dislikeUser } from '../../actions/auth';
+} from '../../store/auth/selectors';
+import { uploadImage, updateUser, dislikeUser } from '../../store/auth/actions';
 import { compact } from '../../utils';
 
 export const useConnect = () => {
@@ -24,14 +24,17 @@ export const useConnect = () => {
     address: useSelector(getAuthAddress),
     image: useSelector(getAuthImage),
     usersLiked: useSelector(getAuthUsersLiked),
-    dislikeUser: useCallback((userId) => dispatch(dislikeUser(userId)), [
-      dispatch,
-    ]),
-    updateUser: useCallback((user) => dispatch(updateUser(compact(user))), [
-      dispatch,
-    ]),
-    uploadImage: useCallback((id, image) => dispatch(uploadImage(id, image)), [
-      dispatch,
-    ]),
+    dislikeUser: useCallback(
+      (userId) => dispatch(dislikeUser(userId)),
+      [dispatch]
+    ),
+    updateUser: useCallback(
+      (user) => dispatch(updateUser(compact(user))),
+      [dispatch]
+    ),
+    uploadImage: useCallback(
+      (id, image) => dispatch(uploadImage(id, image)),
+      [dispatch]
+    ),
   };
 };

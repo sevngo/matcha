@@ -6,8 +6,8 @@ import { MenuItem, Menu, IconButton } from '@material-ui/core';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { userPath } from '../../utils';
 import messages from './messages.js';
-import { getAuthId } from '../../selectors/auth';
-import { logout } from '../../actions/auth';
+import { getAuthId } from '../../store/auth/selectors';
+import { logout } from '../../store/auth/actions';
 
 const Account = () => {
   const [anchorEl, handleMenu] = useState();

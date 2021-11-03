@@ -1,7 +1,8 @@
 import React from 'react';
-import { fireEvent, render, waitFor } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import TestProvider from '../../../components/TestProvider';
 import Component from '../index';
+import { SUCCESS } from '../constants';
 
 describe('Snackbar', () => {
   it('should return false', () => {
@@ -14,7 +15,7 @@ describe('Snackbar', () => {
   });
   it('should show then close snackbar', () => {
     const { queryByTestId, getByTestId } = render(
-      <TestProvider initialState={{ snackbar: { variant: 'success' } }}>
+      <TestProvider initialState={{ snackbar: { variant: SUCCESS } }}>
         <Component />
       </TestProvider>
     );

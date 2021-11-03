@@ -1,4 +1,4 @@
-import { LOADED_USER } from '../actions/user';
+import { LOADED_USER } from './actions';
 
 const reducer = (state = {}, action) => {
   switch (action.type) {

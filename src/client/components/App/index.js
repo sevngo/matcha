@@ -5,8 +5,8 @@ import { Box } from '@material-ui/core';
 import Header from '../../containers/Header';
 import Snackbar from '../../containers/Snackbar';
 import Loader from '../../containers/Loader';
-import PrivateRoute from '../PrivateRoute';
-import UnPrivateRoute from '../UnPrivateRoute';
+import PrivateRoute from '../routing/PrivateRoute';
+import UnPrivateRoute from '../routing/UnPrivateRoute';
 import useStyles from './styles';
 import { routes, defaultRoute } from '../../utils';
 

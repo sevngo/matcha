@@ -1,6 +1,6 @@
 import { compose, find, prop } from 'ramda';
 import { createSelector } from 'reselect';
-import { getAuthFriends, getAuthUsersLiked } from './auth';
+import { getAuthFriends, getAuthUsersLiked } from '../auth/selectors';
 
 export const getUser = prop('user');
 
