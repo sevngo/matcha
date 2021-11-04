@@ -27,7 +27,7 @@ const auth = {
   }),
   authenticate: asyncHandler(async (req, res, next) => {
     const authHeader = req.header('Authorization');
-    if (!authHeader) next(new ErrorResponse(401, UNAUTHORIZED));
+    if (!authHeader) return next(new ErrorResponse(401, UNAUTHORIZED));
     const token = replace('Bearer ', '')(authHeader);
     let data;
     try {
