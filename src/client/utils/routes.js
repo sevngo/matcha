@@ -17,38 +17,44 @@ export const registerPath = '/register';
 
 export const routes = [
   {
+    key: usersPath,
     path: usersPath,
     exact: true,
-    component: Users,
+    Component: Users,
     isPrivate: true,
     isDefault: true,
   },
   {
+    key: userPath(':id'),
     path: userPath(':id'),
     exact: true,
-    component: User,
+    Component: User,
     isPrivate: true,
   },
   {
+    key: resetPath(':token'),
     path: resetPath(':token'),
     exact: true,
-    component: Reset,
+    Component: Reset,
   },
   {
+    key: verifyPath(':token'),
     path: verifyPath(':token'),
     exact: true,
-    component: Verify,
+    Component: Verify,
   },
   {
+    key: loginPath,
     path: loginPath,
     exact: true,
-    component: Login,
+    Component: Login,
     isUnPrivate: true,
   },
   {
+    key: registerPath,
     path: registerPath,
     exact: true,
-    component: Register,
+    Component: Register,
     isUnPrivate: true,
   },
 ];

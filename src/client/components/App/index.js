@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import { map } from 'ramda';
 import { Box } from '@material-ui/core';
 import Header from '../../containers/Header';
@@ -18,15 +18,35 @@ const App = () => {
       <Loader />
       <Suspense fallback={<Loader />}>
         <Box p={3}>
-          <Switch>
+          <Routes>
             {map((route) => {
-              const { isPrivate, isUnPrivate, path } = route;
-              if (isPrivate) return <PrivateRoute key={path} {...route} />;
-              if (isUnPrivate) return <UnPrivateRoute key={path} {...route} />;
-              return <Route key={path} {...route} />;
+              const { isPrivate, isUnPrivate, Component, ...rest } = route;
+              if (isPrivate)
+                return (
+                  <Route
+                    element={
+                      <PrivateRoute>
+                        <Component />
+                      </PrivateRoute>
+                    }
+                    {...rest}
+                  />
+                );
+              if (isUnPrivate)
+                return (
+                  <Route
+                    element={
+                      <UnPrivateRoute>
+                        <Component />
+                      </UnPrivateRoute>
+                    }
+                    {...rest}
+                  />
+                );
+              return <Route element={<Component />} {...rest} />;
             })(routes)}
-            <Redirect to={defaultRoute.path} />
-          </Switch>
+            <Navigate to={defaultRoute.path} />
+          </Routes>
         </Box>
       </Suspense>
       <Snackbar />

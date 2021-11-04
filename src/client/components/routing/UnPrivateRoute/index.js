@@ -1,23 +1,12 @@
 import React from 'react';
-import { Redirect, Route } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { getAuthToken } from '../../../store/auth/selectors';
 import { usersPath } from '../../../utils';
 
-const UnPrivateRoute = ({ component: Component, ...rest }) => {
+const UnPrivateRoute = ({ children }) => {
   const token = useSelector(getAuthToken);
-  return (
-    <Route
-      {...rest}
-      render={(props) =>
-        token ? (
-          <Redirect to={{ pathname: usersPath }} />
-        ) : (
-          <Component {...props} />
-        )
-      }
-    />
-  );
+  return token ? <Navigate to={{ pathname: usersPath }} replace /> : children;
 };
 
 export default UnPrivateRoute;

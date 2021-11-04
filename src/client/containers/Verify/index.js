@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { usersPath } from '../../utils';
 import { useConnect } from './hooks';
 
@@ -10,7 +10,7 @@ const Verify = () => {
   useEffect(() => {
     updateUser(payload);
   }, [updateUser]);
-  if (!isAuthEmpty) return <Redirect to={usersPath} />;
+  if (!isAuthEmpty) return <Navigate to={usersPath} replace />;
   return false;
 };
 
