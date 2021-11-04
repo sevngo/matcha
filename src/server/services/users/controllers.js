@@ -64,6 +64,7 @@ export const getUsersController = asyncHandler(async (req, res) => {
   const totalUsers = await cursor.toArray();
   const total = totalUsers.length;
   res.set('x-total-count', total);
+  cursor.rewind();
   if (skip) cursor.skip(skip);
   if (limit) cursor.limit(limit);
   const data = await cursor.toArray();
