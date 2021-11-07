@@ -8,7 +8,7 @@ import { IntlProvider } from 'react-intl';
 import { CssBaseline, ThemeProvider } from '@material-ui/core';
 import store from './store';
 import { locale, messages, theme } from './utils';
-import App from './components/App';
+import App from './containers/App';
 import socketEvents from './socketIo/events';
 import socket from './socketIo';
 
