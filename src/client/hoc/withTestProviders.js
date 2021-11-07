@@ -6,6 +6,7 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import reducer from '../store/reducer';
+import { messages } from '../utils';
 import { theme } from '../utils/theme';
 
 jest.mock('../store');
@@ -19,7 +20,7 @@ const withTestProviders =
     const store = createStore(reducer, initialState, applyMiddleware(thunk));
     return (
       <Provider store={store}>
-        <IntlProvider locale="en" messages={{}}>
+        <IntlProvider locale="en" messages={messages}>
           <MuiThemeProvider theme={theme}>
             <MemoryRouter initialEntries={initialEntries}>
               <Routes>
