@@ -1,4 +1,4 @@
-import React from 'react';
+import '@testing-library/jest-dom';
 import {
   render,
   fireEvent,
@@ -12,9 +12,9 @@ describe('Account', () => {
   it('should open and close menu by clicking logout', async () => {
     const Component = withTestProviders(Account);
     const { queryByTestId } = render(<Component />);
-    expect(queryByTestId('accountMenu')).toBeNull();
+    expect(queryByTestId('accountMenu')).not.toBeInTheDocument();
     fireEvent.click(queryByTestId('accountButton'));
-    expect(queryByTestId('accountMenu')).toBeDefined();
+    expect(queryByTestId('accountMenu')).toBeInTheDocument();
     fireEvent.click(queryByTestId('logout'));
     await waitForElementToBeRemoved(queryByTestId('accountMenu'));
   });
@@ -25,11 +25,11 @@ describe('Account', () => {
     const Component = withTestProviders(Account, { initialState, aimedPath });
 
     const { queryByTestId, getByTestId } = render(<Component />);
-    expect(queryByTestId('accountMenu')).toBeNull();
+    expect(queryByTestId('accountMenu')).not.toBeInTheDocument();
     fireEvent.click(queryByTestId('accountButton'));
-    expect(queryByTestId('accountMenu')).toBeDefined();
+    expect(queryByTestId('accountMenu')).toBeInTheDocument();
     fireEvent.click(queryByTestId('goToMyUser'));
-    expect(queryByTestId('accountMenu')).toBeNull();
+    expect(queryByTestId('accountMenu')).not.toBeInTheDocument();
     getByTestId('aimedPath');
   });
 
@@ -37,9 +37,9 @@ describe('Account', () => {
     const Component = withTestProviders(Account);
 
     const { queryByTestId, getByRole } = render(<Component />);
-    expect(queryByTestId('accountMenu')).toBeNull();
+    expect(queryByTestId('accountMenu')).not.toBeInTheDocument();
     fireEvent.click(queryByTestId('accountButton'));
-    expect(queryByTestId('accountMenu')).toBeDefined();
+    expect(queryByTestId('accountMenu')).toBeInTheDocument();
     fireEvent.click(getByRole('presentation').firstChild);
     await waitForElementToBeRemoved(queryByTestId('accountMenu'));
   });

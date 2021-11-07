@@ -1,6 +1,7 @@
+import '@testing-library/jest-dom';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import React from 'react';
-import withTestProviders from '../../hoc/withTestProviders';
+import withProviders from '../../hoc/withTestProviders';
 import Drawer from '.';
 
 describe('Drawer', () => {
@@ -16,14 +17,14 @@ describe('Drawer', () => {
       },
     },
   };
-  const Component = withTestProviders(Drawer, { initialState });
+  const Component = withProviders(Drawer, { initialState });
 
   it('should close drawer on oustside click', async () => {
     const toggleDrawer = jest.fn();
-    const { queryByTestId, getByRole } = render(
+    const { queryByTestId, getByTestId, getByRole } = render(
       <Component isDrawerOpen toggleDrawer={toggleDrawer} />
     );
-    expect(queryByTestId('drawer')).toBeDefined();
+    getByTestId('drawer');
     fireEvent.click(getByRole('presentation').firstChild);
     expect(toggleDrawer).toHaveBeenCalledTimes(1);
     expect(toggleDrawer).toHaveBeenCalledWith(false);
@@ -35,8 +36,14 @@ describe('Drawer', () => {
       clientX: 19,
       clientY: 20,
     });
-    await waitFor(() => !getByRole('button', { name: 'Submit' }).disabled);
+    fireEvent.click(getByRole('radio', { name: 'Female' }));
+
+    await waitFor(() =>
+      expect(getByRole('button', { name: 'Submit' })).not.toBeDisabled()
+    );
     fireEvent.click(getByRole('button', { name: 'Submit' }));
-    await waitFor(() => getByRole('button', { name: 'Submit' }).disabled);
+    await waitFor(() =>
+      expect(getByRole('button', { name: 'Submit' })).toBeDisabled()
+    );
   });
 });

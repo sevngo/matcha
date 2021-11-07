@@ -4,6 +4,7 @@ import {
   waitFor,
   waitForElementToBeRemoved,
 } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import axios from '../../api';
 import React from 'react';
 import withTestProviders from '../../hoc/withTestProviders';
@@ -96,7 +97,9 @@ describe('MyUser', () => {
         { headers: { Authorization: 'Bearer undefined' } }
       )
     );
-    await waitFor(() => getByRole('button', { name: 'Submit' }).disabled);
+    await waitFor(() =>
+      expect(getByRole('button', { name: 'Submit' })).toBeDisabled()
+    );
   });
 
   it('should dislike user', async () => {

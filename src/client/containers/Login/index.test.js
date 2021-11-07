@@ -4,6 +4,7 @@ import {
   waitFor,
   waitForElementToBeRemoved,
 } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import axios from '../../api';
 import React from 'react';
 import Login from '.';
@@ -38,7 +39,7 @@ describe('Login', () => {
   it('should open forgot password form then close it on outside click', async () => {
     const { queryByTestId, getByRole, getByTestId } = render(<Component />);
 
-    expect(queryByTestId('forgotPasswordForm')).toBeNull();
+    expect(queryByTestId('forgotPasswordForm')).not.toBeInTheDocument();
     fireEvent.click(queryByTestId('forgotPasswordLink'));
     getByTestId('forgotPasswordForm');
     fireEvent.click(getByRole('presentation').firstChild);
@@ -49,13 +50,17 @@ describe('Login', () => {
     const { queryByTestId, getByTestId } = render(<Component />);
     const email = 'email@email.com';
 
-    expect(queryByTestId('forgotPasswordForm')).toBeNull();
+    expect(queryByTestId('forgotPasswordForm')).not.toBeInTheDocument();
     fireEvent.click(queryByTestId('forgotPasswordLink'));
     getByTestId('forgotPasswordForm');
     fireEvent.change(getByTestId('emailInput'), {
       target: { value: email },
     });
-    await waitFor(() => !getByTestId('submitForm-forgotPassword').disabled);
+    await waitFor(() =>
+      expect(
+        getByTestId('submitForm-forgotPassword', { name: 'Submit' })
+      ).not.toBeDisabled()
+    );
     fireEvent.click(getByTestId('submitForm-forgotPassword'));
     await waitForElementToBeRemoved(queryByTestId('forgotPasswordForm'));
     expect(axios.post).toHaveBeenCalledWith('/api/users/forgot', {

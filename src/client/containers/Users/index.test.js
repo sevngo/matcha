@@ -1,4 +1,4 @@
-import React from 'react';
+import '@testing-library/jest-dom';
 import axios from '../../api';
 import { fireEvent, render } from '@testing-library/react';
 import withTestProviders from '../../hoc/withTestProviders';
@@ -154,7 +154,7 @@ describe('Users', () => {
     expect(axios.get).toHaveBeenCalled();
     await findByTestId('users');
 
-    expect(queryByTestId('drawer')).toBeNull();
+    expect(queryByTestId('drawer')).not.toBeInTheDocument();
     fireEvent.click(getByTestId('openDrawer'));
     getByTestId('drawer');
   });

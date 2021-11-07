@@ -1,4 +1,4 @@
-import React from 'react';
+import '@testing-library/jest-dom';
 import { fireEvent, render } from '@testing-library/react';
 import withTestProviders from '../../hoc/withTestProviders';
 import Snackbar from './index';
@@ -9,7 +9,7 @@ describe('Snackbar', () => {
     const initialState = { snackbar: {} };
     const Component = withTestProviders(Snackbar, { initialState });
     const { queryByTestId } = render(<Component />);
-    expect(queryByTestId('snackbar')).toBeNull();
+    expect(queryByTestId('snackbar')).not.toBeInTheDocument();
   });
   it('should show then close snackbar', () => {
     const initialState = { snackbar: { variant: SUCCESS } };
@@ -17,6 +17,6 @@ describe('Snackbar', () => {
     const { queryByTestId, getByTestId } = render(<Component />);
     getByTestId('snackbar');
     fireEvent.click(getByTestId('closeSnackbar'));
-    expect(queryByTestId('snackbar')).toBeNull();
+    expect(queryByTestId('snackbar')).not.toBeInTheDocument();
   });
 });

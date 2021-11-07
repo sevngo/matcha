@@ -8,7 +8,7 @@ import { messages, theme } from '../../utils';
 import store from '../../store';
 import { BrowserRouter } from 'react-router-dom';
 
-describe('Header', () => {
+describe('App', () => {
   it('should render without crash', () => {
     const Component = () => (
       <Provider store={store}>

@@ -1,4 +1,4 @@
-import React from 'react';
+import '@testing-library/jest-dom';
 import {
   fireEvent,
   render,
@@ -37,18 +37,20 @@ describe('Notifications', () => {
 
   it('should open notifications then remove one', () => {
     const { getByTestId, queryByTestId } = render(<Component />);
-    expect(queryByTestId('notifications')).toBeNull();
+    expect(queryByTestId('notifications')).not.toBeInTheDocument();
 
     fireEvent.click(getByTestId('openNotifications'));
     getByTestId('notifications');
 
     fireEvent.click(getByTestId('remove-5e29a96f7e701b58a77dcdbb'));
-    expect(queryByTestId('remove-5e29a96f7e701b58a77dcdbb')).toBeNull();
+    expect(
+      queryByTestId('remove-5e29a96f7e701b58a77dcdbb')
+    ).not.toBeInTheDocument();
   });
 
   it('should open then close notifications', async () => {
     const { getByTestId, queryByTestId, getByRole } = render(<Component />);
-    expect(queryByTestId('notifications')).toBeNull();
+    expect(queryByTestId('notifications')).not.toBeInTheDocument();
 
     fireEvent.click(getByTestId('openNotifications'));
     getByTestId('notifications');
