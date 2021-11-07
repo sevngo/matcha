@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import { Route, Routes, Navigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { map } from 'ramda';
 import { Box } from '@material-ui/core';
 import Header from '../Header';
@@ -8,7 +8,7 @@ import Loader from '../Loader';
 import PrivateRoute from '../../components/routing/PrivateRoute';
 import UnPrivateRoute from '../../components/routing/UnPrivateRoute';
 import useStyles from './styles';
-import { routes, defaultRoute } from '../../utils';
+import { routes } from '../../utils';
 
 const App = () => {
   const classes = useStyles();
@@ -45,7 +45,6 @@ const App = () => {
                 );
               return <Route element={<Component />} {...rest} />;
             })(routes)}
-            <Navigate to={defaultRoute.path} />
           </Routes>
         </Box>
       </Suspense>

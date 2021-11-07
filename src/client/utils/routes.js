@@ -1,5 +1,4 @@
 import { lazy } from 'react';
-import { find, prop } from 'ramda';
 
 const Users = lazy(() => import('../containers/Users'));
 const User = lazy(() => import('../containers/User'));
@@ -18,11 +17,10 @@ export const registerPath = '/register';
 export const routes = [
   {
     key: usersPath,
-    path: usersPath,
+    path: '*',
     exact: true,
     Component: Users,
     isPrivate: true,
-    isDefault: true,
   },
   {
     key: userPath(':id'),
@@ -58,5 +56,3 @@ export const routes = [
     isUnPrivate: true,
   },
 ];
-
-export const defaultRoute = find(prop('isDefault'))(routes);
