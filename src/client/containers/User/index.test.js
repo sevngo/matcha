@@ -29,11 +29,11 @@ describe('User', () => {
     const _id = '60084a46203c4e342b14114c';
     const initialState = { auth: { _id } };
     const initialEntries = [`/user/${_id}`];
-    const path = userPath(':id');
+    const initialPath = userPath(':id');
     const Component = withTestProviders(User, {
       initialState,
       initialEntries,
-      path,
+      initialPath,
     });
 
     render(<Component />);

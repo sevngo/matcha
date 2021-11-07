@@ -23,11 +23,11 @@ describe('Verify', () => {
     });
     const _id = '60084a46203c4e342b131140';
     const initialEntries = [`/verify/${_id}`];
-    const path = verifyPath(':token');
+    const initialPath = verifyPath(':token');
     const Component = withTestProviders(Verify, {
       initialEntries,
-      path,
-      secondRoute: usersPath,
+      initialPath,
+      aimedPath: usersPath,
     });
 
     const { getByTestId } = render(<Component />);
@@ -38,6 +38,6 @@ describe('Verify', () => {
         { headers: { Authorization: `Bearer ${_id}` } }
       )
     );
-    getByTestId('secondRoute');
+    getByTestId('aimedPath');
   });
 });

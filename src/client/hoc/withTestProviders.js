@@ -13,7 +13,7 @@ jest.mock('../store');
 const withTestProviders =
   (
     Component,
-    { initialState = {}, initialEntries, path = '/', secondRoute } = {}
+    { initialState = {}, initialEntries, initialPath = '/', aimedPath } = {}
   ) =>
   (props) => {
     const store = createStore(reducer, initialState, applyMiddleware(thunk));
@@ -23,11 +23,11 @@ const withTestProviders =
           <MuiThemeProvider theme={theme}>
             <MemoryRouter initialEntries={initialEntries}>
               <Routes>
-                <Route path={path} element={<Component {...props} />} />
-                {secondRoute && (
+                <Route path={initialPath} element={<Component {...props} />} />
+                {aimedPath && (
                   <Route
-                    path={secondRoute}
-                    element={<div data-testid="secondRoute" />}
+                    path={aimedPath}
+                    element={<div data-testid="aimedPath" />}
                   />
                 )}
               </Routes>

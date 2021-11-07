@@ -21,8 +21,8 @@ describe('Account', () => {
 
   it('should open menu and redirect to userPath by clicking on goToMyUser', async () => {
     const initialState = { auth: { _id: '60084a46203c4e342b14114c' } };
-    const secondRoute = userPath(':id');
-    const Component = withTestProviders(Account, { initialState, secondRoute });
+    const aimedPath = userPath(':id');
+    const Component = withTestProviders(Account, { initialState, aimedPath });
 
     const { queryByTestId, getByTestId } = render(<Component />);
     expect(queryByTestId('accountMenu')).toBeNull();
@@ -30,7 +30,7 @@ describe('Account', () => {
     expect(queryByTestId('accountMenu')).toBeDefined();
     fireEvent.click(queryByTestId('goToMyUser'));
     expect(queryByTestId('accountMenu')).toBeNull();
-    getByTestId('secondRoute');
+    getByTestId('aimedPath');
   });
 
   it('should open and close menu by clicking outside', async () => {

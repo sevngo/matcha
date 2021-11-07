@@ -9,9 +9,9 @@ jest.mock('../../api');
 describe('Reset', () => {
   const _id = '60084a46203c4e342b14114c';
   const Component = withTestProviders(Reset, {
-    path: resetPath(':id'),
+    initialPath: resetPath(':id'),
     initialEntries: [resetPath(_id)],
-    secondRoute: usersPath,
+    aimedPath: usersPath,
   });
 
   it('should pathUser then redirect to usersPath', async () => {
@@ -43,6 +43,6 @@ describe('Reset', () => {
         { headers: { Authorization: 'Bearer undefined' } }
       )
     );
-    getByTestId('secondRoute');
+    getByTestId('aimedPath');
   });
 });
