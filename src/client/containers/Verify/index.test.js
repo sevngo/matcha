@@ -1,13 +1,13 @@
 import { render, waitFor } from '@testing-library/react';
 import axios from '../../api';
-import TestProvider from '../../components/TestProvider';
-import { verifyPath } from '../../utils';
-import Component from './index';
+import withTestProviders from '../../hoc/withTestProviders';
+import { usersPath, verifyPath } from '../../utils';
+import Verify from './index';
 
 jest.mock('../../api');
 
 describe('Verify', () => {
-  it('should render', async () => {
+  it('should path user then go to usersPath', async () => {
     axios.patch.mockResolvedValue({
       data: {
         address: {
@@ -24,11 +24,13 @@ describe('Verify', () => {
     const _id = '60084a46203c4e342b131140';
     const initialEntries = [`/verify/${_id}`];
     const path = verifyPath(':token');
-    render(
-      <TestProvider router={{ initialEntries, path }}>
-        <Component />
-      </TestProvider>
-    );
+    const Component = withTestProviders(Verify, {
+      initialEntries,
+      path,
+      secondRoute: usersPath,
+    });
+
+    const { getByTestId } = render(<Component />);
     await waitFor(() =>
       expect(axios.patch).toHaveBeenCalledWith(
         `/api/users`,
@@ -36,5 +38,6 @@ describe('Verify', () => {
         { headers: { Authorization: `Bearer ${_id}` } }
       )
     );
+    getByTestId('secondRoute');
   });
 });

@@ -4,8 +4,8 @@ import {
   render,
   waitForElementToBeRemoved,
 } from '@testing-library/react';
-import TestProvider from '../../components/TestProvider';
-import Component from '.';
+import withTestProviders from '../../hoc/withTestProviders';
+import Notifications from '.';
 
 describe('Notifications', () => {
   const initialState = {
@@ -32,12 +32,11 @@ describe('Notifications', () => {
       ],
     },
   };
+
+  const Component = withTestProviders(Notifications, { initialState });
+
   it('should open notifications then remove one', () => {
-    const { getByTestId, queryByTestId } = render(
-      <TestProvider initialState={initialState}>
-        <Component />
-      </TestProvider>
-    );
+    const { getByTestId, queryByTestId } = render(<Component />);
     expect(queryByTestId('notifications')).toBeNull();
 
     fireEvent.click(getByTestId('openNotifications'));
@@ -48,11 +47,7 @@ describe('Notifications', () => {
   });
 
   it('should open then close notifications', async () => {
-    const { getByTestId, queryByTestId, getByRole } = render(
-      <TestProvider initialState={initialState}>
-        <Component />
-      </TestProvider>
-    );
+    const { getByTestId, queryByTestId, getByRole } = render(<Component />);
     expect(queryByTestId('notifications')).toBeNull();
 
     fireEvent.click(getByTestId('openNotifications'));

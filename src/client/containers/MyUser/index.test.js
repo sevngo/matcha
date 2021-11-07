@@ -6,8 +6,8 @@ import {
 } from '@testing-library/react';
 import axios from '../../api';
 import React from 'react';
-import TestProvider from '../../components/TestProvider';
-import Component from './index';
+import withTestProviders from '../../hoc/withTestProviders';
+import MyUser from './index';
 
 global.google = {
   maps: {
@@ -43,22 +43,15 @@ describe('MyUser', () => {
       usersLiked: [{ _id: '6008432b6ed92c2ac837ec6c' }],
     },
   };
+  const Component = withTestProviders(MyUser, { initialState });
 
   it('should be able to click on open file', async () => {
-    const { getByTestId } = render(
-      <TestProvider initialState={initialState}>
-        <Component />
-      </TestProvider>
-    );
+    const { getByTestId } = render(<Component />);
     fireEvent.click(getByTestId('openFile'));
   });
 
   it('should uploadFile', async () => {
-    const { getByTestId, findByTestId } = render(
-      <TestProvider initialState={initialState}>
-        <Component />
-      </TestProvider>
-    );
+    const { getByTestId, findByTestId } = render(<Component />);
     getByTestId('imageUnavailable');
     axios.post.mockResolvedValue({ data: { image: 'a' } });
     const file = new File(['(⌐□_□)'], 'chucknorris.png', { type: 'image/png' });
@@ -73,11 +66,7 @@ describe('MyUser', () => {
   });
 
   it('should not uploadFile', async () => {
-    const { getByTestId } = render(
-      <TestProvider initialState={initialState}>
-        <Component />
-      </TestProvider>
-    );
+    const { getByTestId } = render(<Component />);
     getByTestId('imageUnavailable');
     axios.post.mockResolvedValue({ data: { image: 'a' } });
     fireEvent.change(getByTestId('uploadFile'), { target: { files: [] } });
@@ -85,11 +74,7 @@ describe('MyUser', () => {
   });
 
   it('should update my user', async () => {
-    const { getByRole } = render(
-      <TestProvider initialState={initialState}>
-        <Component />
-      </TestProvider>
-    );
+    const { getByRole } = render(<Component />);
     fireEvent.click(getByRole('radio', { name: 'Male' }));
     axios.patch.mockResolvedValue({ data: { gender: 'male' } });
     fireEvent.click(getByRole('button', { name: 'Submit' }));
@@ -115,11 +100,7 @@ describe('MyUser', () => {
   });
 
   it('should dislike user', async () => {
-    const { getByRole } = render(
-      <TestProvider initialState={initialState}>
-        <Component />
-      </TestProvider>
-    );
+    const { getByRole } = render(<Component />);
 
     axios.patch.mockResolvedValue({ data: { usersLiked: [] } });
     fireEvent.click(getByRole('button', { name: 'Dislike' }));

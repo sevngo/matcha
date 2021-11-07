@@ -5,8 +5,8 @@ import {
   render,
   waitForElementToBeRemoved,
 } from '@testing-library/react';
-import TestProvider from '../../components/TestProvider';
-import Component from './index';
+import withTestProviders from '../../hoc/withTestProviders';
+import OtherUser from './index';
 
 global.google = {
   maps: {
@@ -25,6 +25,8 @@ global.google = {
 jest.mock('../../api');
 
 describe('OtherUser', () => {
+  const Component = withTestProviders(OtherUser);
+
   it('should like and dislike user who has not became a friend', async () => {
     const _id = '60084a46203c4e342b13114c';
     axios.get.mockResolvedValue({
@@ -38,11 +40,7 @@ describe('OtherUser', () => {
         },
       },
     });
-    const { getByTestId, findByTestId } = render(
-      <TestProvider initialState={{}}>
-        <Component id={_id} />
-      </TestProvider>
-    );
+    const { getByTestId, findByTestId } = render(<Component id={_id} />);
     expect(axios.get).toHaveBeenCalledWith(`/api/users/${_id}`);
     await findByTestId('likeUser');
     axios.patch.mockResolvedValue({
@@ -76,11 +74,7 @@ describe('OtherUser', () => {
         },
       },
     });
-    const { getByTestId, findByTestId } = render(
-      <TestProvider initialState={{}}>
-        <Component id={_id} />
-      </TestProvider>
-    );
+    const { getByTestId, findByTestId } = render(<Component id={_id} />);
     expect(axios.get).toHaveBeenCalledWith(`/api/users/${_id}`);
     await findByTestId('likeUser');
     axios.patch.mockResolvedValue({

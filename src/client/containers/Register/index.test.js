@@ -2,8 +2,8 @@ import { fireEvent, render, waitFor } from '@testing-library/react';
 import axios from '../../api';
 import moment from 'moment';
 import React from 'react';
-import TestProvider from '../../components/TestProvider';
-import Component from './index';
+import withTestProviders from '../../hoc/withTestProviders';
+import Register from './index';
 
 jest.mock('../../api');
 
@@ -41,12 +41,10 @@ global.navigator.geolocation = {
 };
 
 describe('Register', () => {
+  const Component = withTestProviders(Register);
+
   it('should register', async () => {
-    const { getByTestId, getByRole } = render(
-      <TestProvider>
-        <Component />
-      </TestProvider>
-    );
+    const { getByTestId, getByRole } = render(<Component />);
 
     const username = 'username';
     const password = 'password';
@@ -90,11 +88,7 @@ describe('Register', () => {
     );
   });
   it('should not submit invalid form and show errors', async () => {
-    const { getByTestId, getByRole, findByTestId } = render(
-      <TestProvider>
-        <Component />
-      </TestProvider>
-    );
+    const { getByTestId, getByRole, findByTestId } = render(<Component />);
 
     const username = 'nam';
 

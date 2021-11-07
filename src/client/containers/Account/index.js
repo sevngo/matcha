@@ -29,7 +29,7 @@ const Account = () => {
         onClose={() => handleMenu()}
       >
         <MenuItem
-          data-testid="goToUsers"
+          data-testid="goToMyUser"
           onClick={() => handleMenu()}
           component={Link}
           to={userPath(authId)}

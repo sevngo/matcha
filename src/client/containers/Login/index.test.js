@@ -6,18 +6,16 @@ import {
 } from '@testing-library/react';
 import axios from '../../api';
 import React from 'react';
-import Component from '.';
-import TestProvider from '../../components/TestProvider';
+import Login from '.';
+import withTestProviders from '../../hoc/withTestProviders';
 
 jest.mock('../../api');
 
 describe('Login', () => {
+  const Component = withTestProviders(Login);
+
   it('should fill login form then confirm', async () => {
-    const { getByTestId, getByRole } = render(
-      <TestProvider initialState={{}}>
-        <Component />
-      </TestProvider>
-    );
+    const { getByTestId, getByRole } = render(<Component />);
 
     const username = 'steven1';
     const password = 'steven2';
@@ -38,11 +36,7 @@ describe('Login', () => {
   });
 
   it('should open forgot password form then close it on outside click', async () => {
-    const { queryByTestId, getByRole, getByTestId } = render(
-      <TestProvider initialState={{}}>
-        <Component />
-      </TestProvider>
-    );
+    const { queryByTestId, getByRole, getByTestId } = render(<Component />);
 
     expect(queryByTestId('forgotPasswordForm')).toBeNull();
     fireEvent.click(queryByTestId('forgotPasswordLink'));
@@ -52,11 +46,7 @@ describe('Login', () => {
   });
 
   it('should fill forgot password form then confirm', async () => {
-    const { queryByTestId, getByTestId } = render(
-      <TestProvider initialState={{}}>
-        <Component />
-      </TestProvider>
-    );
+    const { queryByTestId, getByTestId } = render(<Component />);
     const email = 'email@email.com';
 
     expect(queryByTestId('forgotPasswordForm')).toBeNull();

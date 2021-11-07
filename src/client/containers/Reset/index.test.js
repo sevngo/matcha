@@ -1,17 +1,21 @@
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import axios from '../../api';
-import TestProvider from '../../components/TestProvider';
-import Component from './index';
+import withTestProviders from '../../hoc/withTestProviders';
+import Reset from '.';
+import { resetPath, usersPath } from '../../utils';
 
 jest.mock('../../api');
 
 describe('Reset', () => {
-  it('should render', async () => {
-    const { getByTestId, getByRole } = render(
-      <TestProvider>
-        <Component />
-      </TestProvider>
-    );
+  const _id = '60084a46203c4e342b14114c';
+  const Component = withTestProviders(Reset, {
+    path: resetPath(':id'),
+    initialEntries: [resetPath(_id)],
+    secondRoute: usersPath,
+  });
+
+  it('should pathUser then redirect to usersPath', async () => {
+    const { getByTestId, getByRole } = render(<Component />);
 
     const password = 'password';
 
@@ -39,5 +43,6 @@ describe('Reset', () => {
         { headers: { Authorization: 'Bearer undefined' } }
       )
     );
+    getByTestId('secondRoute');
   });
 });

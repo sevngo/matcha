@@ -1,8 +1,8 @@
 import { render } from '@testing-library/react';
 import React from 'react';
-import TestProvider from '../../components/TestProvider';
+import withTestProviders from '../../hoc/withTestProviders';
 import { userPath } from '../../utils';
-import Component from './index';
+import User from './index';
 
 global.google = {
   maps: {
@@ -20,25 +20,22 @@ global.google = {
 
 describe('User', () => {
   it('should render OtherUser', async () => {
-    render(
-      <TestProvider
-        initialState={{ auth: { _id: '60084a46203c4e342b14114c' } }}
-      >
-        <Component />
-      </TestProvider>
-    );
+    const initialState = { auth: { _id: '60084a46203c4e342b14114c' } };
+    const Component = withTestProviders(User, { initialState });
+
+    render(<Component />);
   });
   it('should render MyUser', async () => {
     const _id = '60084a46203c4e342b14114c';
+    const initialState = { auth: { _id } };
     const initialEntries = [`/user/${_id}`];
     const path = userPath(':id');
-    render(
-      <TestProvider
-        initialState={{ auth: { _id } }}
-        router={{ initialEntries, path }}
-      >
-        <Component />
-      </TestProvider>
-    );
+    const Component = withTestProviders(User, {
+      initialState,
+      initialEntries,
+      path,
+    });
+
+    render(<Component />);
   });
 });

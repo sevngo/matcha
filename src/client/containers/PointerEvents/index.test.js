@@ -1,14 +1,12 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import TestProvider from '../../components/TestProvider';
-import Component from './index';
+import withTestProviders from '../../hoc/withTestProviders';
+import PointerEvents from './index';
 
 describe('PointerEvents', () => {
+  const Component = withTestProviders(PointerEvents);
+
   it('should render', () => {
-    render(
-      <TestProvider>
-        <Component />
-      </TestProvider>
-    );
+    render(<Component />);
   });
 });

@@ -1,7 +1,7 @@
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import React from 'react';
-import TestProvider from '../../components/TestProvider';
-import Component from '.';
+import withTestProviders from '../../hoc/withTestProviders';
+import Drawer from '.';
 
 describe('Drawer', () => {
   const initialState = {
@@ -16,12 +16,12 @@ describe('Drawer', () => {
       },
     },
   };
+  const Component = withTestProviders(Drawer, { initialState });
+
   it('should close drawer on oustside click', async () => {
     const toggleDrawer = jest.fn();
     const { queryByTestId, getByRole } = render(
-      <TestProvider initialState={initialState}>
-        <Component isDrawerOpen toggleDrawer={toggleDrawer} />
-      </TestProvider>
+      <Component isDrawerOpen toggleDrawer={toggleDrawer} />
     );
     expect(queryByTestId('drawer')).toBeDefined();
     fireEvent.click(getByRole('presentation').firstChild);
@@ -30,11 +30,7 @@ describe('Drawer', () => {
   });
 
   it('should handle filter', async () => {
-    const { getByRole, getAllByRole } = render(
-      <TestProvider initialState={initialState}>
-        <Component isDrawerOpen />
-      </TestProvider>
-    );
+    const { getByRole, getAllByRole } = render(<Component isDrawerOpen />);
     fireEvent.mouseDown(getAllByRole('slider')[0], {
       clientX: 19,
       clientY: 20,

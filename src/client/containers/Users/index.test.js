@@ -1,8 +1,8 @@
 import React from 'react';
 import axios from '../../api';
 import { fireEvent, render } from '@testing-library/react';
-import TestProvider from '../../components/TestProvider';
-import Component from './index';
+import withTestProviders from '../../hoc/withTestProviders';
+import Users from './index';
 
 jest.mock('../../api');
 
@@ -148,11 +148,9 @@ describe('Users', () => {
       data: users,
       headers: { 'x-total-count': total },
     });
-    const { getByTestId, queryByTestId, findByTestId } = render(
-      <TestProvider initialState={initialState}>
-        <Component />
-      </TestProvider>
-    );
+    const Component = withTestProviders(Users, { initialState });
+
+    const { getByTestId, queryByTestId, findByTestId } = render(<Component />);
     expect(axios.get).toHaveBeenCalled();
     await findByTestId('users');
 
@@ -178,11 +176,9 @@ describe('Users', () => {
       data: users,
       headers: { 'x-total-count': total },
     });
-    const { findByTestId, getByRole, getByText } = render(
-      <TestProvider initialState={initialState}>
-        <Component />
-      </TestProvider>
-    );
+
+    const Component = withTestProviders(Users, { initialState });
+    const { findByTestId, getByRole, getByText } = render(<Component />);
     expect(axios.get).toHaveBeenCalled();
     await findByTestId('users');
 
