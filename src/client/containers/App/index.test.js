@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import App from '.';
 import { Provider } from 'react-redux';
 import { IntlProvider } from 'react-intl';
-import { MuiThemeProvider } from '@material-ui/core';
+import { ThemeProvider, StyledEngineProvider } from '@mui/material';
 import { messages, theme } from '../../utils';
 import store from '../../store';
 import { BrowserRouter } from 'react-router-dom';
@@ -13,11 +13,13 @@ describe('App', () => {
     const Component = () => (
       <Provider store={store}>
         <IntlProvider locale="en" messages={messages}>
-          <MuiThemeProvider theme={theme}>
-            <BrowserRouter>
-              <App />
-            </BrowserRouter>
-          </MuiThemeProvider>
+          <StyledEngineProvider injectFirst>
+            <ThemeProvider theme={theme}>
+              <BrowserRouter>
+                <App />
+              </BrowserRouter>
+            </ThemeProvider>
+          </StyledEngineProvider>
         </IntlProvider>
       </Provider>
     );

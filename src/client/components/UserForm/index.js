@@ -1,12 +1,12 @@
-import { Box, Button, Grid, IconButton, MenuItem } from '@material-ui/core';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import AlternateEmailIcon from '@material-ui/icons/AlternateEmail';
-import ClearIcon from '@material-ui/icons/Clear';
-import DateRangeIcon from '@material-ui/icons/DateRange';
-import MyLocationIcon from '@material-ui/icons/MyLocation';
-import VisibilityIcon from '@material-ui/icons/Visibility';
-import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
-import VpnKeyIcon from '@material-ui/icons/VpnKey';
+import { Box, Button, Grid, IconButton, MenuItem } from '@mui/material';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
+import ClearIcon from '@mui/icons-material/Clear';
+import DateRangeIcon from '@mui/icons-material/DateRange';
+import MyLocationIcon from '@mui/icons-material/MyLocation';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import moment from 'moment';
 import { has, map, __ } from 'ramda';
 import React, { useCallback, useState } from 'react';
@@ -185,6 +185,7 @@ const UserForm = ({ initialValues, readOnly = false, submit, id }) => {
                 onClick={() => handleAddress({ name: '', coordinates: null })}
                 className={classes.pt1}
                 data-testid="clearAddress"
+                size="large"
               >
                 <ClearIcon />
               </IconButton>
@@ -194,6 +195,7 @@ const UserForm = ({ initialValues, readOnly = false, submit, id }) => {
                 onClick={getGeolocation}
                 className={classes.pt1}
                 data-testid="geolocate"
+                size="large"
               >
                 <MyLocationIcon />
               </IconButton>

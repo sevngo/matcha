@@ -1,4 +1,4 @@
-import { Box, Drawer as MDrawer } from '@material-ui/core';
+import { Box, Drawer as MDrawer } from '@mui/material';
 import React from 'react';
 import UserForm from '../../components/UserForm';
 import { useConnect } from './hooks';

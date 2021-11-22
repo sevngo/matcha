@@ -1,4 +1,4 @@
-import { Box, FormLabel, Slider as MSlider } from '@material-ui/core';
+import { Box, FormLabel, Slider as MSlider } from '@mui/material';
 import React from 'react';
 import { useController } from 'react-hook-form';
 import useStyles from './styles';

@@ -7,9 +7,9 @@ import {
   Grid,
   IconButton,
   Typography,
-} from '@material-ui/core';
-import DeleteIcon from '@material-ui/icons/Delete';
-import NotificationsIcon from '@material-ui/icons/Notifications';
+} from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import NotificationsIcon from '@mui/icons-material/Notifications';
 import React, { Fragment, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useConnect } from './hooks';
@@ -27,6 +27,7 @@ const Notifications = () => {
         data-testid="openNotifications"
         color="inherit"
         onClick={() => handleDialog(true)}
+        size="large"
       >
         <Badge badgeContent={notificationsLength} color="error">
           <NotificationsIcon />

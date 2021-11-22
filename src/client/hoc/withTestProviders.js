@@ -1,4 +1,4 @@
-import { MuiThemeProvider } from '@material-ui/core';
+import { ThemeProvider, StyledEngineProvider } from '@mui/material';
 import React from 'react';
 import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
@@ -21,19 +21,24 @@ const withTestProviders =
     return (
       <Provider store={store}>
         <IntlProvider locale="en" messages={messages}>
-          <MuiThemeProvider theme={theme}>
-            <MemoryRouter initialEntries={initialEntries}>
-              <Routes>
-                <Route path={initialPath} element={<Component {...props} />} />
-                {aimedPath && (
+          <StyledEngineProvider injectFirst>
+            <ThemeProvider theme={theme}>
+              <MemoryRouter initialEntries={initialEntries}>
+                <Routes>
                   <Route
-                    path={aimedPath}
-                    element={<div data-testid="aimedPath" />}
+                    path={initialPath}
+                    element={<Component {...props} />}
                   />
-                )}
-              </Routes>
-            </MemoryRouter>
-          </MuiThemeProvider>
+                  {aimedPath && (
+                    <Route
+                      path={aimedPath}
+                      element={<div data-testid="aimedPath" />}
+                    />
+                  )}
+                </Routes>
+              </MemoryRouter>
+            </ThemeProvider>
+          </StyledEngineProvider>
         </IntlProvider>
       </Provider>
     );

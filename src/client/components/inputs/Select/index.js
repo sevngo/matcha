@@ -1,9 +1,4 @@
-import {
-  FormControl,
-  InputLabel,
-  OutlinedInput,
-  Select as MSelect,
-} from '@material-ui/core';
+import { FormControl, InputLabel, Select as MSelect } from '@mui/material';
 import React from 'react';
 import { useController } from 'react-hook-form';
 
@@ -14,9 +9,9 @@ const Select = ({ label, control, name, children, rules, ...rest }) => {
     rules,
   });
   return (
-    <FormControl fullWidth variant="outlined">
+    <FormControl fullWidth>
       <InputLabel>{label}</InputLabel>
-      <MSelect input={<OutlinedInput labelWidth={65} />} {...field} {...rest}>
+      <MSelect label={label} {...field} {...rest}>
         {children}
       </MSelect>
     </FormControl>

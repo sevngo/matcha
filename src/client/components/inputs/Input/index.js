@@ -1,4 +1,4 @@
-import { Box, IconButton, TextField } from '@material-ui/core';
+import { Box, IconButton, TextField } from '@mui/material';
 import React from 'react';
 import { useController } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
@@ -45,6 +45,7 @@ const Input = ({
             edge="end"
             data-testid={`${fields.name}EndAdornment`}
             onClick={endAdornment.action}
+            size="large"
           >
             {endAdornment.icon}
           </IconButton>

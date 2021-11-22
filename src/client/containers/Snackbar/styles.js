@@ -1,6 +1,6 @@
-import { amber, green } from '@material-ui/core/colors';
+import { amber, green } from '@mui/material/colors';
 import { SUCCESS, ERROR, INFO, WARNING } from './constants';
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 
 export default makeStyles((theme) => ({
   [SUCCESS]: {

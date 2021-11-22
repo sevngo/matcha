@@ -9,7 +9,7 @@ import {
   Typography,
   CardActions,
   Grid,
-} from '@material-ui/core';
+} from '@mui/material';
 import emptyImage from '../../assets/images/emptyImage.png';
 import { getUserImage } from '../../api/users';
 import { getAge, userPath } from '../../utils';

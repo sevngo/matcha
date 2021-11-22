@@ -49,13 +49,13 @@ describe('Notifications', () => {
   });
 
   it('should open then close notifications', async () => {
-    const { getByTestId, queryByTestId, getByRole } = render(<Component />);
+    const { getByTestId, queryByTestId, getAllByRole } = render(<Component />);
     expect(queryByTestId('notifications')).not.toBeInTheDocument();
 
     fireEvent.click(getByTestId('openNotifications'));
     getByTestId('notifications');
 
-    fireEvent.click(getByRole('presentation').firstChild);
+    fireEvent.click(getAllByRole('presentation')[0].firstChild);
     await waitForElementToBeRemoved(queryByTestId('notifications'));
   });
 });

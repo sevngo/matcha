@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import { map, equals } from 'ramda';
-import { Grid, Button, Typography, Divider, Paper } from '@material-ui/core';
+import { Grid, Button, Typography, Divider, Paper } from '@mui/material';
 import useStyles from './styles';
 
 const UsersList = ({ users, title, actionMessage, action }) => {

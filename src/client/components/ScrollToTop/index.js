@@ -1,5 +1,5 @@
-import { Fab } from '@material-ui/core';
-import NavigationIcon from '@material-ui/icons/Navigation';
+import { Fab } from '@mui/material';
+import NavigationIcon from '@mui/icons-material/Navigation';
 import React, { useEffect, useState } from 'react';
 import useStyles from './styles';
 

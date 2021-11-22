@@ -5,7 +5,7 @@ import {
   FormLabel,
   Radio as MRadio,
   RadioGroup,
-} from '@material-ui/core';
+} from '@mui/material';
 import { map } from 'ramda';
 import React from 'react';
 import { useController } from 'react-hook-form';

@@ -6,8 +6,8 @@ import {
   Paper,
   IconButton,
   Typography,
-} from '@material-ui/core';
-import SortIcon from '@material-ui/icons/Sort';
+} from '@mui/material';
+import SortIcon from '@mui/icons-material/Sort';
 import { FormattedMessage } from 'react-intl';
 import UserCards from '../../components/UserCards';
 import ScrollToTop from '../../components/ScrollToTop';
@@ -51,6 +51,7 @@ const Users = () => {
           data-testid="openDrawer"
           color="inherit"
           onClick={() => toggleDrawer(true)}
+          size="large"
         >
           <SortIcon />
           <Typography className={classes.filter}>
@@ -65,7 +66,7 @@ const Users = () => {
           count={total}
           onPageChange={handleChangePage}
           page={page}
-          classes={{ input: classes.displayNone }}
+          classes={{ select: classes.displayNone }}
           className={classes.pagination}
           SelectProps={{ inputProps: { 'data-testid': 'rowsSelect' } }}
         />

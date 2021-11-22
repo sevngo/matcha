@@ -1,8 +1,8 @@
 import React, { Fragment, useEffect } from 'react';
 import { isEmpty, split } from 'ramda';
-import { Grid, IconButton, Paper, Grow, Tooltip } from '@material-ui/core';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import DoneAllIcon from '@material-ui/icons/DoneAll';
+import { Grid, IconButton, Paper, Tooltip } from '@mui/material';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import DoneAllIcon from '@mui/icons-material/DoneAll';
 import { FormattedMessage } from 'react-intl';
 import UserForm from '../../components/UserForm';
 import useStyles from './styles';
@@ -28,52 +28,54 @@ const User = ({ id }) => {
   const birthDate = split('T')(user.birthDate)[0];
   return (
     <Grid container justifyContent="center" spacing={2} data-testid="otherUser">
-      <Grow in={true} timeout={200}>
-        <Grid item xs={12} sm={6} md={7}>
-          <UserCard
-            user={user}
-            actions={
-              <Fragment>
-                <Tooltip
-                  title={
-                    !isUserLiked ? (
-                      <FormattedMessage {...messages.likeUser} />
-                    ) : (
-                      <FormattedMessage {...messages.dislikeUser} />
-                    )
-                  }
+      <Grid item xs={12} sm={6} md={7}>
+        <UserCard
+          user={user}
+          actions={
+            <Fragment>
+              <Tooltip
+                title={
+                  !isUserLiked ? (
+                    <FormattedMessage {...messages.likeUser} />
+                  ) : (
+                    <FormattedMessage {...messages.dislikeUser} />
+                  )
+                }
+              >
+                <IconButton
+                  className={isUserLiked ? classes.red : ''}
+                  onClick={() => (isUserLiked ? dislikeUser() : likeUser())}
+                  data-testid={isUserLiked ? 'dislikeUser' : 'likeUser'}
+                  size="large"
                 >
-                  <IconButton
-                    className={isUserLiked ? classes.red : ''}
-                    onClick={() => (isUserLiked ? dislikeUser() : likeUser())}
-                    data-testid={isUserLiked ? 'dislikeUser' : 'likeUser'}
-                  >
-                    <FavoriteIcon />
-                  </IconButton>
-                </Tooltip>
-                {isUserFriended && (
-                  <IconButton color="primary" data-testid="friend" disabled>
-                    <DoneAllIcon />
-                  </IconButton>
-                )}
-              </Fragment>
-            }
+                  <FavoriteIcon />
+                </IconButton>
+              </Tooltip>
+              {isUserFriended && (
+                <IconButton
+                  color="primary"
+                  data-testid="friend"
+                  disabled
+                  size="large"
+                >
+                  <DoneAllIcon />
+                </IconButton>
+              )}
+            </Fragment>
+          }
+        />
+      </Grid>
+      <Grid item xs={12} sm={6} md={5}>
+        <Paper elevation={1} className={classes.p3}>
+          <UserForm
+            initialValues={{
+              ...user,
+              birthDate,
+            }}
+            readOnly
           />
-        </Grid>
-      </Grow>
-      <Grow in={true} timeout={400}>
-        <Grid item xs={12} sm={6} md={5}>
-          <Paper elevation={1} className={classes.p3}>
-            <UserForm
-              initialValues={{
-                ...user,
-                birthDate,
-              }}
-              readOnly
-            />
-          </Paper>
-        </Grid>
-      </Grow>
+        </Paper>
+      </Grid>
     </Grid>
   );
 };

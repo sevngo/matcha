@@ -1,10 +1,10 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { isEmpty } from 'ramda';
-import { Typography, IconButton } from '@material-ui/core';
-import Snackbar from '@material-ui/core/Snackbar';
-import SnackbarContent from '@material-ui/core/SnackbarContent';
-import CloseIcon from '@material-ui/icons/Close';
+import { Typography, IconButton } from '@mui/material';
+import Snackbar from '@mui/material/Snackbar';
+import SnackbarContent from '@mui/material/SnackbarContent';
+import CloseIcon from '@mui/icons-material/Close';
 import { variantIcon } from './constants';
 import useStyles from './styles';
 import { closeSnackbar } from '../../store/snackbar/actions';
@@ -43,6 +43,7 @@ const MySnackbar = () => {
             key="close"
             color="inherit"
             onClick={() => dispatch(closeSnackbar())}
+            size="large"
           >
             <CloseIcon />
           </IconButton>,

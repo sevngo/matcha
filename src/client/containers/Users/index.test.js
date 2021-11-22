@@ -183,7 +183,7 @@ describe('Users', () => {
     await findByTestId('users');
 
     getByText('1-10 of 11');
-    fireEvent.click(getByRole('button', { name: 'Next page' }));
+    fireEvent.click(getByRole('button', { name: 'Go to next page' }));
     getByText('11-11 of 11');
 
     getByRole('button', { name: 'Rows per page: 10' });

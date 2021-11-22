@@ -21,7 +21,7 @@ describe('Drawer', () => {
 
   it('should close drawer on oustside click', async () => {
     const toggleDrawer = jest.fn();
-    const { queryByTestId, getByTestId, getByRole } = render(
+    const { getByTestId, getByRole } = render(
       <Component isDrawerOpen toggleDrawer={toggleDrawer} />
     );
     getByTestId('drawer');

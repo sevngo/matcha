@@ -2,8 +2,8 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { useSelector } from 'react-redux';
-import { AppBar, Toolbar, Typography, IconButton } from '@material-ui/core';
-import HomeIcon from '@material-ui/icons/Home';
+import { AppBar, Toolbar, Typography, IconButton } from '@mui/material';
+import HomeIcon from '@mui/icons-material/Home';
 import Account from '../Account';
 import Notifications from '../Notifications';
 import { usersPath } from '../../utils';
@@ -23,6 +23,7 @@ const Header = (props) => {
             className={classes.icon}
             component={Link}
             to={usersPath}
+            size="large"
           >
             <HomeIcon />
           </IconButton>

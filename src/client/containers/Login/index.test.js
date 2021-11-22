@@ -37,12 +37,12 @@ describe('Login', () => {
   });
 
   it('should open forgot password form then close it on outside click', async () => {
-    const { queryByTestId, getByRole, getByTestId } = render(<Component />);
+    const { queryByTestId, getAllByRole, getByTestId } = render(<Component />);
 
     expect(queryByTestId('forgotPasswordForm')).not.toBeInTheDocument();
     fireEvent.click(queryByTestId('forgotPasswordLink'));
     getByTestId('forgotPasswordForm');
-    fireEvent.click(getByRole('presentation').firstChild);
+    fireEvent.click(getAllByRole('presentation')[0].firstChild);
     await waitForElementToBeRemoved(queryByTestId('forgotPasswordForm'));
   });
 

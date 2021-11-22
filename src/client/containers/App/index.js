@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { map } from 'ramda';
-import { Box } from '@material-ui/core';
+import { Box } from '@mui/material';
 import Header from '../Header';
 import Snackbar from '../Snackbar';
 import Loader from '../Loader';
