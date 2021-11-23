@@ -182,9 +182,9 @@ describe('Users', () => {
     expect(axios.get).toHaveBeenCalled();
     await findByTestId('users');
 
-    getByText('1-10 of 11');
+    getByText('1–10 of 11');
     fireEvent.click(getByRole('button', { name: 'Go to next page' }));
-    getByText('11-11 of 11');
+    getByText('11–11 of 11');
 
     getByRole('button', { name: 'Rows per page: 10' });
     fireEvent.mouseDown(getByRole('button', { name: 'Rows per page: 10' }));
