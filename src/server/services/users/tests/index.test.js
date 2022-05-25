@@ -10,10 +10,11 @@ import {
   authUserPassword,
   authUserIdString,
   authUser,
-  randomUser,
+  randomUser1,
   authUserToken,
   unverifiedUserPassword,
   unverifiedUser,
+  randomUser2,
 } from './fixtures/db';
 import {
   IMAGE_NOT_FOUND,
@@ -37,12 +38,7 @@ beforeAll(connectDb);
 beforeEach(async () => {
   const Users = getUsers();
   await Users.deleteMany();
-  await Users.insertMany([
-    authUser,
-    unverifiedUser,
-    randomUser(),
-    randomUser(),
-  ]);
+  await Users.insertMany([authUser, unverifiedUser, randomUser1, randomUser2]);
 });
 
 afterAll(disconnectDb);

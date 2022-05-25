@@ -6,20 +6,19 @@ import { createToken } from '../../../../utils/helpers';
 
 const { ObjectID } = mongodb;
 
-const genders = ['female', 'male'];
 const birthDateMin = moment().subtract(80, 'years').format('YYYY-MM-DD');
 const birthDateMax = moment().subtract(18, 'years').format('YYYY-MM-DD');
 
-export const authUserPassword = faker.internet.password();
+export const authUserPassword = 'password';
 const authUserId = ObjectID();
 export const authUserIdString = authUserId.toString();
 export const authUserToken = createToken({ _id: authUserIdString });
 
 export const authUser = {
-  username: faker.internet.userName(),
+  username: 'authUser',
   birthDate: faker.date.between(birthDateMin, birthDateMax),
-  email: faker.internet.email(),
-  gender: faker.random.arrayElement(genders),
+  email: 'authUser@email.com',
+  gender: 'female',
   address: {
     type: 'Point',
     name: faker.address.streetAddress(),
@@ -34,16 +33,16 @@ export const authUser = {
   usersLiked: [ObjectID()],
 };
 
-export const unverifiedUserPassword = faker.internet.password();
+export const unverifiedUserPassword = 'password';
 
 export const unverifiedUser = {
-  username: faker.internet.userName(),
+  username: 'unverifiedUser',
   birthDate: faker.date.between(birthDateMin, birthDateMax),
-  email: faker.internet.email(),
+  email: 'unverifiedUser@email.com',
   gender: 'male',
   address: {
     type: 'Point',
-    name: faker.address.streetAddress(),
+    name: '1 street road',
     coordinates: [
       parseFloat(faker.address.longitude()),
       parseFloat(faker.address.latitude()),
@@ -53,36 +52,54 @@ export const unverifiedUser = {
   _id: ObjectID(),
 };
 
-export const randomUser = () => ({
-  username: faker.internet.userName(),
+export const randomUser1 = {
+  username: 'randomUser1',
   birthDate: faker.date.between(birthDateMin, birthDateMax),
-  email: faker.internet.email(),
+  email: 'randomUser1@email.com',
   gender: 'male',
   address: {
     type: 'Point',
-    name: faker.address.streetAddress(),
+    name: '1 street road',
     coordinates: [
       parseFloat(faker.address.longitude()),
       parseFloat(faker.address.latitude()),
     ],
   },
-  password: faker.internet.password(),
+  password: 'password',
   _id: ObjectID(),
   emailVerified: true,
-});
+};
 
-export const newUser = {
-  username: faker.internet.userName(),
-  birthDate: faker.date.past(),
-  email: faker.internet.email(),
-  gender: faker.random.arrayElement(genders),
+export const randomUser2 = {
+  username: 'randomUser2',
+  birthDate: faker.date.between(birthDateMin, birthDateMax),
+  email: 'randomUser2@email.com',
+  gender: 'male',
   address: {
     type: 'Point',
-    name: faker.address.streetAddress(),
+    name: '1 street road',
     coordinates: [
       parseFloat(faker.address.longitude()),
       parseFloat(faker.address.latitude()),
     ],
   },
-  password: faker.internet.password(),
+  password: 'password',
+  _id: ObjectID(),
+  emailVerified: true,
+};
+
+export const newUser = {
+  username: 'newUser',
+  birthDate: faker.date.past(),
+  email: 'newUser@email.com',
+  gender: 'female',
+  address: {
+    type: 'Point',
+    name: '1 street road',
+    coordinates: [
+      parseFloat(faker.address.longitude()),
+      parseFloat(faker.address.latitude()),
+    ],
+  },
+  password: 'password',
 };
