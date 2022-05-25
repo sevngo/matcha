@@ -9,7 +9,7 @@ import store from '../../store';
 import { BrowserRouter } from 'react-router-dom';
 
 describe('App', () => {
-  it('should render without crash', () => {
+  it('should render without crash', async () => {
     const Component = () => (
       <Provider store={store}>
         <IntlProvider locale="en" messages={messages}>
@@ -23,6 +23,7 @@ describe('App', () => {
         </IntlProvider>
       </Provider>
     );
-    render(<Component />);
+    const { findByText } = render(<Component />);
+    await findByText('Login');
   });
 });

@@ -2,8 +2,8 @@ import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
 import React from 'react';
 import { Provider } from 'react-redux';
-import { render } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
+import { createRoot } from 'react-dom/client';
 import { IntlProvider } from 'react-intl';
 import {
   CssBaseline,
@@ -31,6 +31,8 @@ const ROOT = (
   </Provider>
 );
 
-socketEvents(socket);
+const container = document.getElementById('container');
+const root = createRoot(container); // createRoot(container!) if you use TypeScript
+root.render(ROOT);
 
-render(ROOT, document.getElementById('root'));
+socketEvents(socket);

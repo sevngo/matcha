@@ -156,7 +156,7 @@ describe('Users', () => {
 
     expect(queryByTestId('drawer')).not.toBeInTheDocument();
     fireEvent.click(getByTestId('openDrawer'));
-    getByTestId('drawer');
+    await findByTestId('drawer');
   });
 
   it('should load users then change page and rows', async () => {
@@ -178,13 +178,13 @@ describe('Users', () => {
     });
 
     const Component = withTestProviders(Users, { initialState });
-    const { findByTestId, getByRole, getByText } = render(<Component />);
+    const { findByTestId, getByRole, findByText } = render(<Component />);
     expect(axios.get).toHaveBeenCalled();
     await findByTestId('users');
 
-    getByText('1–10 of 11');
+    await findByText('1–10 of 11');
     fireEvent.click(getByRole('button', { name: 'Go to next page' }));
-    getByText('11–11 of 11');
+    await findByText('11–11 of 11');
 
     getByRole('button', { name: 'Rows per page: 10' });
     fireEvent.mouseDown(getByRole('button', { name: 'Rows per page: 10' }));

@@ -30,7 +30,7 @@ describe('Verify', () => {
       aimedPath: usersPath,
     });
 
-    const { getByTestId } = render(<Component />);
+    const { findByTestId } = render(<Component />);
     await waitFor(() =>
       expect(axios.patch).toHaveBeenCalledWith(
         `/api/users`,
@@ -38,6 +38,6 @@ describe('Verify', () => {
         { headers: { Authorization: `Bearer ${_id}` } }
       )
     );
-    getByTestId('aimedPath');
+    await findByTestId('aimedPath');
   });
 });
