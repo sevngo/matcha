@@ -46,7 +46,7 @@ const Users = () => {
   };
   return (
     <Fragment>
-      <Paper elevation={1} className={classes.paper} data-testid="users">
+      <Paper elevation={1} className={classes.paper}>
         <IconButton
           data-testid="openDrawer"
           color="inherit"

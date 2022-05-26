@@ -15,7 +15,7 @@ describe('Reset', () => {
   });
 
   it('should pathUser then redirect to usersPath', async () => {
-    const { getByTestId, getByRole } = render(<Component />);
+    const { getByTestId, getByRole, findByTestId } = render(<Component />);
 
     const password = 'password';
 
@@ -43,6 +43,6 @@ describe('Reset', () => {
         { headers: { Authorization: 'Bearer undefined' } }
       )
     );
-    getByTestId('aimedPath');
+    await findByTestId('aimedPath');
   });
 });
