@@ -4,7 +4,7 @@ import { getAuthToken } from '../store/auth/selectors';
 import { displayLoader, hideLoader } from '../store/loading/actions';
 import { logout } from '../store/auth/actions';
 import { openSnackbar } from '../store/snackbar/actions';
-import { ERROR } from '../containers/Snackbar/constants';
+import { ERROR } from '../containers/Snackbar/utils';
 import store from '../store';
 
 const instance = axios.create();

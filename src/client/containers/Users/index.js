@@ -1,28 +1,26 @@
-import React, { useEffect, useState, Fragment } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import SortIcon from '@mui/icons-material/Sort';
 import {
   Box,
-  TablePagination,
-  Paper,
   IconButton,
+  Paper,
+  TablePagination,
   Typography,
 } from '@mui/material';
-import SortIcon from '@mui/icons-material/Sort';
+import React, { Fragment, useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
-import UserCards from '../../components/UserCards';
+import { useDispatch, useSelector } from 'react-redux';
 import ScrollToTop from '../../components/ScrollToTop';
-import Drawer from '../Drawer';
+import UserCards from '../../components/UserCards';
 import { handleFilter, loadUsers } from '../../store/users/actions';
 import {
   getUsersData,
-  getUsersTotal,
   getUsersFilter,
+  getUsersTotal,
 } from '../../store/users/selectors';
-import useStyles from './styles';
+import Drawer from '../Drawer';
 import messages from './messages';
 
 const Users = () => {
-  const classes = useStyles();
   const dispatch = useDispatch();
   const users = useSelector(getUsersData);
   const total = useSelector(getUsersTotal);
@@ -46,7 +44,13 @@ const Users = () => {
   };
   return (
     <Fragment>
-      <Paper elevation={1} className={classes.paper}>
+      <Paper
+        elevation={1}
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+        }}
+      >
         <IconButton
           data-testid="openDrawer"
           color="inherit"
@@ -54,7 +58,7 @@ const Users = () => {
           size="large"
         >
           <SortIcon />
-          <Typography className={classes.filter}>
+          <Typography sx={{ ml: 1.5 }}>
             <FormattedMessage {...messages.filter} />
           </Typography>
         </IconButton>
@@ -66,8 +70,6 @@ const Users = () => {
           count={total}
           onPageChange={handleChangePage}
           page={page}
-          classes={{ select: classes.displayNone }}
-          className={classes.pagination}
           SelectProps={{ inputProps: { 'data-testid': 'rowsSelect' } }}
         />
       </Paper>

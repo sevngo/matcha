@@ -6,7 +6,7 @@ import {
   postUserImage,
   postUserLogin,
 } from '../../api/users';
-import { SUCCESS } from '../../containers/Snackbar/constants';
+import { SUCCESS } from '../../containers/Snackbar/utils';
 import { getAuthFriends, getAuthId, getAuthUsersLiked } from './selectors';
 import socket from '../../socketIo';
 import { createNotification, getIds } from '../../utils';

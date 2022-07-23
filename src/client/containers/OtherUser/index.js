@@ -1,14 +1,13 @@
-import React, { Fragment, useEffect } from 'react';
-import { isEmpty, split } from 'ramda';
-import { Grid, IconButton, Paper, Tooltip } from '@mui/material';
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import { Grid, IconButton, Paper, Tooltip } from '@mui/material';
+import { isEmpty, split } from 'ramda';
+import React, { Fragment, useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
-import UserForm from '../../components/UserForm';
-import useStyles from './styles';
 import UserCard from '../../components/UserCard';
-import messages from './messages';
+import UserForm from '../../components/UserForm';
 import { useConnect } from './hooks';
+import messages from './messages';
 
 const User = ({ id }) => {
   const {
@@ -23,7 +22,6 @@ const User = ({ id }) => {
   useEffect(() => {
     if (id !== userId) loadUser(id);
   }, [id, userId, loadUser]);
-  const classes = useStyles();
   if (isEmpty(user) || userId !== id) return false;
   const birthDate = split('T')(user.birthDate)[0];
   return (
@@ -43,7 +41,10 @@ const User = ({ id }) => {
                 }
               >
                 <IconButton
-                  className={isUserLiked ? classes.red : ''}
+                  sx={{
+                    color: (theme) =>
+                      isUserLiked ? 'red' : theme.palette.grey,
+                  }}
                   onClick={() => (isUserLiked ? dislikeUser() : likeUser())}
                   data-testid={isUserLiked ? 'dislikeUser' : 'likeUser'}
                   size="large"
@@ -66,7 +67,7 @@ const User = ({ id }) => {
         />
       </Grid>
       <Grid item xs={12} sm={6} md={5}>
-        <Paper elevation={1} className={classes.p3}>
+        <Paper elevation={1} sx={{ p: 3 }}>
           <UserForm
             initialValues={{
               ...user,

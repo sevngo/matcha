@@ -20,7 +20,6 @@ import Select from '../inputs/Select';
 import Slider from '../inputs/Slider';
 import { GENDER_OPTIONS, SORT_BY_OPTIONS } from './constants';
 import messages from './messages';
-import useStyles from './styles';
 
 const UserForm = ({ initialValues, readOnly = false, submit, id }) => {
   const [showPassword, toggleShowPassword] = useState(false);
@@ -57,16 +56,16 @@ const UserForm = ({ initialValues, readOnly = false, submit, id }) => {
     handleAddress,
     hasInitialValue('address') && !readOnly
   );
-  const classes = useStyles();
   const minDate = moment().subtract(80, 'years').format('YYYY-MM-DD');
   const maxDate = moment().subtract(18, 'years').format('YYYY-MM-DD');
   return (
-    <form
+    <Box
+      component="form"
+      sx={{ width: '100%' }}
       onSubmit={handleSubmit(async (values) => {
         await submit(values);
         reset(values);
       })}
-      className={classes.width100}
     >
       <Grid container direction="column" spacing={2}>
         {hasInitialValue('username') && (
@@ -183,7 +182,7 @@ const UserForm = ({ initialValues, readOnly = false, submit, id }) => {
             {coordinates && !readOnly && (
               <IconButton
                 onClick={() => handleAddress({ name: '', coordinates: null })}
-                className={classes.pt1}
+                sx={{ pt: 1.875 }}
                 data-testid="clearAddress"
                 size="large"
               >
@@ -193,7 +192,7 @@ const UserForm = ({ initialValues, readOnly = false, submit, id }) => {
             {!coordinates && !readOnly && (
               <IconButton
                 onClick={getGeolocation}
-                className={classes.pt1}
+                sx={{ pt: 1.875 }}
                 data-testid="geolocate"
                 size="large"
               >
@@ -259,7 +258,7 @@ const UserForm = ({ initialValues, readOnly = false, submit, id }) => {
           </Grid>
         )}
       </Grid>
-    </form>
+    </Box>
   );
 };
 

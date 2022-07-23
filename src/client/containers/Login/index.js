@@ -19,15 +19,29 @@ import { registerPath } from '../../utils';
 import { initialValues, initialValuesEmail } from './constants';
 import { useConnect } from './hooks';
 import messages from './messages';
-import useStyles from './styles';
 
 const Login = () => {
   const { login, forgotPassword } = useConnect();
-  const classes = useStyles();
   const [isDialogOpen, handleDialog] = useState(false);
   return (
-    <Paper elevation={1} className={classes.paper} data-testid="loginForm">
-      <Avatar className={classes.avatar}>
+    <Paper
+      elevation={1}
+      sx={{
+        padding: 3,
+        display: 'flex',
+        alignItems: 'center',
+        flexDirection: 'column',
+        maxWidth: 500,
+        margin: 'auto',
+      }}
+      data-testid="loginForm"
+    >
+      <Avatar
+        sx={{
+          backgroundColor: (theme) => theme.palette.primary.main,
+          marginBottom: 2,
+        }}
+      >
         <LockOutlinedIcon />
       </Avatar>
       <Typography variant="h6">
@@ -35,10 +49,10 @@ const Login = () => {
       </Typography>
       <Box mt={3} />
       <UserForm initialValues={initialValues} submit={login} />
-      <Grid container className={classes.mt2} justifyContent="space-between">
+      <Grid container sx={{ mt: 1 }} justifyContent="space-between">
         <MuiLink
           variant="body2"
-          className={classes.cursorPointer}
+          href="#"
           onClick={() => handleDialog(true)}
           data-testid="forgotPasswordLink"
         >
@@ -53,7 +67,7 @@ const Login = () => {
         open={isDialogOpen}
         onClose={() => handleDialog(false)}
       >
-        <DialogTitle className={classes.dialogTitle}>
+        <DialogTitle sx={{ textAlign: 'center' }}>
           <FormattedMessage {...messages.forgotPassword} />
         </DialogTitle>
         <DialogContent>

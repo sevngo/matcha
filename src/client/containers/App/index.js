@@ -7,50 +7,52 @@ import Snackbar from '../Snackbar';
 import Loader from '../Loader';
 import PrivateRoute from '../../components/routing/PrivateRoute';
 import UnPrivateRoute from '../../components/routing/UnPrivateRoute';
-import useStyles from './styles';
 import { routes } from '../../utils';
 
-const App = () => {
-  const classes = useStyles();
-  return (
-    <div className={classes.root}>
-      <Header />
-      <Loader />
-      <Suspense fallback={<Loader />}>
-        <Box p={3}>
-          <Routes>
-            {map((route) => {
-              const { isPrivate, isUnPrivate, Component, ...rest } = route;
-              if (isPrivate)
-                return (
-                  <Route
-                    element={
-                      <PrivateRoute>
-                        <Component />
-                      </PrivateRoute>
-                    }
-                    {...rest}
-                  />
-                );
-              if (isUnPrivate)
-                return (
-                  <Route
-                    element={
-                      <UnPrivateRoute>
-                        <Component />
-                      </UnPrivateRoute>
-                    }
-                    {...rest}
-                  />
-                );
-              return <Route element={<Component />} {...rest} />;
-            })(routes)}
-          </Routes>
-        </Box>
-      </Suspense>
-      <Snackbar />
-    </div>
-  );
-};
+const App = () => (
+  <Box
+    sx={{
+      backgroundImage:
+        'url(//www.gstatic.com/pantheon/images/marketplace/cameo_banner-1x.png)',
+      minHeight: '100%',
+    }}
+  >
+    <Header />
+    <Loader />
+    <Suspense fallback={<Loader />}>
+      <Box p={3}>
+        <Routes>
+          {map((route) => {
+            const { isPrivate, isUnPrivate, Component, ...rest } = route;
+            if (isPrivate)
+              return (
+                <Route
+                  element={
+                    <PrivateRoute>
+                      <Component />
+                    </PrivateRoute>
+                  }
+                  {...rest}
+                />
+              );
+            if (isUnPrivate)
+              return (
+                <Route
+                  element={
+                    <UnPrivateRoute>
+                      <Component />
+                    </UnPrivateRoute>
+                  }
+                  {...rest}
+                />
+              );
+            return <Route element={<Component />} {...rest} />;
+          })(routes)}
+        </Routes>
+      </Box>
+    </Suspense>
+    <Snackbar />
+  </Box>
+);
 
 export default App;

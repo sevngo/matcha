@@ -14,12 +14,10 @@ import React, { Fragment, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useConnect } from './hooks';
 import messages from './messages';
-import useStyles from './styles';
 
 const Notifications = () => {
   const { notifications, notificationsLength, deleteNotification } =
     useConnect();
-  const classes = useStyles();
   const [isDialogOpen, handleDialog] = useState(false);
   return (
     <Fragment>
@@ -64,7 +62,7 @@ const Notifications = () => {
                       data-testid={`remove-${notification.id}`}
                       onClick={() => deleteNotification(notification.id)}
                       color="inherit"
-                      className={classes.ml1}
+                      sx={{ ml: 2 }}
                     />
                   </Grid>
                   {notificationsLength - 1 !== index && <Divider />}

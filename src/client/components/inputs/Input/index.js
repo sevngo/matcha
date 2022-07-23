@@ -3,7 +3,6 @@ import React from 'react';
 import { useController } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 import { formMessages } from '../../../utils/messages';
-import useStyles from './styles';
 
 const Input = ({
   name,
@@ -18,7 +17,6 @@ const Input = ({
   InputProps,
   ...rest
 }) => {
-  const classes = useStyles();
   const {
     field: { ref, ...fields },
     fieldState,
@@ -38,7 +36,7 @@ const Input = ({
       inputProps={{ min, max }}
       InputProps={{
         startAdornment: startAdornment && (
-          <Box className={classes.icon}>{startAdornment}</Box>
+          <Box sx={{ ml: 0.5, mr: 1.5 }}>{startAdornment}</Box>
         ),
         endAdornment: endAdornment && (
           <IconButton

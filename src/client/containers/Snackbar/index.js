@@ -1,19 +1,17 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { isEmpty } from 'ramda';
-import { Typography, IconButton } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+import { IconButton, Typography } from '@mui/material';
 import Snackbar from '@mui/material/Snackbar';
 import SnackbarContent from '@mui/material/SnackbarContent';
-import CloseIcon from '@mui/icons-material/Close';
-import { variantIcon } from './constants';
-import useStyles from './styles';
+import { isEmpty } from 'ramda';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { closeSnackbar } from '../../store/snackbar/actions';
 import { getSnackbar } from '../../store/snackbar/selectors';
+import { variantIcon, variantColor } from './utils';
 
 const MySnackbar = () => {
   const snackbar = useSelector(getSnackbar);
   const dispatch = useDispatch();
-  const classes = useStyles();
   const isSnackbarOpen = !isEmpty(snackbar);
   if (!isSnackbarOpen) return false;
   const { variant, message } = snackbar;
@@ -30,10 +28,16 @@ const MySnackbar = () => {
       data-testid="snackbar"
     >
       <SnackbarContent
-        className={classes[variant]}
+        sx={variantColor(variant)}
         message={
-          <Typography variant="body2" className={classes.message}>
-            <Icon className={classes.iconVariant} />
+          <Typography
+            variant="body2"
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          >
+            <Icon sx={{ opacity: 0.9, mr: 1 }} />
             {message}
           </Typography>
         }

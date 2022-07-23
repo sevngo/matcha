@@ -2,7 +2,7 @@ import '@testing-library/jest-dom';
 import { fireEvent, render } from '@testing-library/react';
 import withTestProviders from '../../hoc/withTestProviders';
 import Snackbar from './index';
-import { SUCCESS } from './constants';
+import { SUCCESS } from './utils';
 
 describe('Snackbar', () => {
   it('should return false', () => {
