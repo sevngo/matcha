@@ -39,15 +39,19 @@ export const logout = () => (dispatch, getState) => {
 
 export const register = (user) => async (dispatch) => {
   dispatch({ type: REGISTER });
-  await postUser(user);
-  dispatch(openSnackbar({ variant: SUCCESS }));
+  try {
+    await postUser(user);
+    dispatch(openSnackbar({ variant: SUCCESS }));
+  } catch {}
 };
 
 export const login = (user) => async (dispatch) => {
   dispatch({ type: LOGIN });
-  const { data } = await postUserLogin(user);
-  dispatch({ type: LOGGED, data });
-  socket.emit('logged', data._id);
+  try {
+    const { data } = await postUserLogin(user);
+    dispatch({ type: LOGGED, data });
+    socket.emit('logged', data._id);
+  } catch {}
 };
 
 export const updateUser = (user, token) => async (dispatch) => {
@@ -57,14 +61,18 @@ export const updateUser = (user, token) => async (dispatch) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  const { data } = await patchUser(user, config);
-  dispatch({ type: UPDATED_USER, data });
+  try {
+    const { data } = await patchUser(user, config);
+    dispatch({ type: UPDATED_USER, data });
+  } catch {}
 };
 
 export const forgotPassword = (auth) => async (dispatch) => {
   dispatch({ type: FORGOT_PASSWORD });
-  await postUserForgot(auth);
-  dispatch(openSnackbar({ variant: SUCCESS }));
+  try {
+    await postUserForgot(auth);
+    dispatch(openSnackbar({ variant: SUCCESS }));
+  } catch {}
 };
 
 export const likeUser = (userLikedId) => async (dispatch, getState) => {
@@ -72,18 +80,20 @@ export const likeUser = (userLikedId) => async (dispatch, getState) => {
   const state = getState();
   const authUsersLiked = getAuthUsersLiked(state);
   const usersLiked = compose(append(userLikedId), getIds)(authUsersLiked);
-  const { data } = await patchUser({ usersLiked });
-  dispatch({ type: LIKED_USER, data });
-  const user = pick(['_id', 'username'])(data);
-  const notification = createNotification({ user, event: 'gotLiked' });
-  socket.emit('notification', notification, userLikedId);
-  const friendsIds = getIds(data.friends);
-  const isFriended = friendsIds.includes(userLikedId);
-  if (isFriended) {
+  try {
+    const { data } = await patchUser({ usersLiked });
+    dispatch({ type: LIKED_USER, data });
     const user = pick(['_id', 'username'])(data);
-    const notification = createNotification({ user, event: 'gotFriended' });
+    const notification = createNotification({ user, event: 'gotLiked' });
     socket.emit('notification', notification, userLikedId);
-  }
+    const friendsIds = getIds(data.friends);
+    const isFriended = friendsIds.includes(userLikedId);
+    if (isFriended) {
+      const user = pick(['_id', 'username'])(data);
+      const notification = createNotification({ user, event: 'gotFriended' });
+      socket.emit('notification', notification, userLikedId);
+    }
+  } catch {}
 };
 
 export const dislikeUser = (userDislikedId) => async (dispatch, getState) => {
@@ -96,21 +106,25 @@ export const dislikeUser = (userDislikedId) => async (dispatch, getState) => {
     getIds
   )(authUsersLiked);
   const user = { usersLiked };
-  const { data } = await patchUser(user);
-  dispatch({ type: DISLIKED_USER, data });
-  const friendsIds = getIds(friends);
-  const isUnfriended = friendsIds.includes(userDislikedId);
-  if (isUnfriended) {
-    const user = pick(['_id', 'username'])(data);
-    const notification = createNotification({ user, event: 'gotUnfriended' });
-    socket.emit('notification', notification, userDislikedId);
-  }
+  try {
+    const { data } = await patchUser(user);
+    dispatch({ type: DISLIKED_USER, data });
+    const friendsIds = getIds(friends);
+    const isUnfriended = friendsIds.includes(userDislikedId);
+    if (isUnfriended) {
+      const user = pick(['_id', 'username'])(data);
+      const notification = createNotification({ user, event: 'gotUnfriended' });
+      socket.emit('notification', notification, userDislikedId);
+    }
+  } catch {}
 };
 
 export const uploadImage = (id, image) => async (dispatch) => {
   dispatch({ type: UPLOAD_IMAGE });
-  const { data } = await postUserImage(id, image);
-  dispatch({ type: UPLOADED_IMAGE, data });
+  try {
+    const { data } = await postUserImage(id, image);
+    dispatch({ type: UPLOADED_IMAGE, data });
+  } catch {}
 };
 
 export const deleteNotification = (id) => ({ type: DELETE_NOTIFICATION, id });
