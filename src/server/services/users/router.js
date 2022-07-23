@@ -11,11 +11,13 @@ import {
   postUserLoginController,
 } from './controllers.js';
 import sanatize from '../../middlewares/sanatize.js';
+import { apiLimiter, createUserLimiter } from '../../middlewares/limiter.js';
 
 const router = new Router();
 
 router.post(
   '/',
+  createUserLimiter,
   sanatize.hash('password'),
   sanatize.toDate('birthDate'),
   sanatize.objectIds('usersLiked'),
@@ -24,6 +26,7 @@ router.post(
 
 router.get(
   '/',
+  apiLimiter,
   auth.authenticate,
   sanatize.toInt('maxDistance'),
   sanatize.toInt('skip'),
@@ -34,6 +37,7 @@ router.get(
 
 router.get(
   '/:id',
+  apiLimiter,
   auth.authenticate,
   sanatize.objectId('id'),
   getUserController
@@ -41,6 +45,7 @@ router.get(
 
 router.patch(
   ['/', '/:id'],
+  apiLimiter,
   auth.authenticate,
   auth.isMyUser,
   sanatize.objectId('id'),
@@ -52,15 +57,17 @@ router.patch(
 
 router.post(
   '/login',
+  apiLimiter,
   auth.generateAuthToken,
   auth.emailVerified,
   postUserLoginController
 );
 
-router.post('/forgot', postUserForgotController);
+router.post('/forgot', apiLimiter, postUserForgotController);
 
 router.post(
   '/:id/image',
+  apiLimiter,
   auth.authenticate,
   auth.isMyUser,
   sanatize.image.single('image'),
@@ -69,6 +76,7 @@ router.post(
 
 router.get(
   '/:id/image/:imageId',
+  apiLimiter,
   sanatize.objectId('id'),
   getUserImageController
 );
