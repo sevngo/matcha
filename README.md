@@ -1,7 +1,5 @@
 # Matcha &middot; [![tests](https://github.com/sevngo/matcha/actions/workflows/tests.yml/badge.svg?branch=master)](https://github.com/sevngo/matcha/actions/workflows/tests.yml) [![Coverage Status](https://coveralls.io/repos/github/sevngo/matcha/badge.svg?branch=master)](https://coveralls.io/github/sevngo/matcha?branch=master)
 
-My boilerplate for a React Redux Node.js MongoDB Socket.IO web application
-
 ## Development mode
 
 Create .env.development
